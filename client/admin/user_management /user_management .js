@@ -30,7 +30,7 @@ Template.user_management.onRendered(function () {
     $.getScript("https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.19/js/jquery.dataTables.min.js",function(){
       $.getScript("https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css",function(){
             $('#show_book_listing').DataTable();
-            $('#loading_div').addClass("loader_visiblity_block");
+            
     });  
     });  
 
@@ -38,6 +38,7 @@ Template.user_management.onRendered(function () {
 
 	book_listing = Meteor.subscribe("fetch_user_listing");
 	setTimeout(function () {
+    $('#loading_div').addClass("loader_visiblity_block");
 		click_events();
 		// $('#loading_div').addClass('loader_visiblity_block');
 	}, 2000);

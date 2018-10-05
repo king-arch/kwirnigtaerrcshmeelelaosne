@@ -27,7 +27,7 @@ Template.create_user.onRendered(function () {
     $.getScript('https://cdnjs.cloudflare.com/ajax/libs/geocomplete/1.7.0/jquery.geocomplete.min.js', function () {
       // alert('Here: ');
       $("#location").geocomplete();
-      $('#loading_div').addClass("loader_visiblity_block");
+      
     });
   });
   
@@ -36,6 +36,7 @@ Template.create_user.onRendered(function () {
 	// admin_detailed = Meteor.subscribe('admin_details');
 	// click_events();
 	setTimeout(function () {
+		$('#loading_div').addClass("loader_visiblity_block");
 		click_events();
 		// $('#loading_div').addClass('loader_visiblity_block');
 	}, 2000);

@@ -24,7 +24,7 @@ Template.edit_book_details.onRendered(function () {
 	$.getScript("https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/pikaday.min.js",function(){
 	
 		    var picker = new Pikaday({ field: document.getElementById('date_picker') });
- 			$('#loading_div').addClass("loader_visiblity_block");
+
 
 	})
 
@@ -35,6 +35,7 @@ Template.edit_book_details.onRendered(function () {
 	$('select').selectpicker();
 })*/
 	setTimeout(function () {
+		$('#loading_div').addClass("loader_visiblity_block");
 		click_events();
 	}, 2000);
 

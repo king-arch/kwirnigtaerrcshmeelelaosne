@@ -35,6 +35,7 @@ Template.edit_user_details.onRendered(function () {
 	// admin_detailed = Meteor.subscribe('admin_details');
 	// click_events();
 	setTimeout(function () {
+		$('#loading_div').addClass("loader_visiblity_block");
 		click_events();
 		// $('#loading_div').addClass('loader_visiblity_block');
 	}, 2000);
@@ -52,7 +53,7 @@ Template.edit_user_details.onRendered(function () {
       console.log("Some error occured.");
     } else {
     
-      $('#loading_div').addClass("loader_visiblity_block");
+      // $('#loading_div').addClass("loader_visiblity_block");
       
       console.log('result: ');
       console.log(result);
