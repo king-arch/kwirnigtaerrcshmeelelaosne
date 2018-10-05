@@ -1,0 +1,112 @@
+
+<template name="edit_book_details">
+<body>
+<div class="loading"  id="loading_div" ></div>
+<div class="container">
+	<div class="row">
+	
+		<div class="col col-lg-12 col-md-12 col-sm-12 col-12">
+			<h2 class="presentation-margin">Edit book</h2>
+
+			<div class="ui-block">
+
+				<div class="ui-block-content">
+					<div class="row">
+						<div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+
+								<label class="control-label">Book Name</label>
+								<input class="form-control" type="text" placeholder="" id="book_name" >
+
+								<label class="control-label">Book Summary</label>
+								<textarea class="form-control" type="text" placeholder="" id="book_summary" ></textarea>
+
+
+								<label class="control-label">Book's price</label>
+								<input class="form-control" type="text" placeholder="" id="book_price" onkeypress="return isNumberKey(event)" maxlength="10" minlength="1" >
+
+
+							<label class="control-label">Book Catagries</label>
+							
+								<select  id="book_catagries" >
+									<option value="" >--Select Type--</option>
+									<option value="Self help">Self help</option>
+									<option value="Health">Health</option>
+									<option value="Guide">Guide</option>
+									<option value="Travel">Travel</option>
+									<option value="Children's">Children's</option>
+									<option value="Religion, Spirituality & New Age">Religion, Spirituality & New Age</option>
+									<option value="History">History</option>
+									<option value="Anthology">Anthology</option>
+									<option value="Poetry">Poetry</option>
+									<option value="Encyclopedias">Encyclopedias</option>
+									<option value="Dictionaries">Dictionaries</option>
+									<option value="Art">Art</option>
+									<option value="Cookbooks">Cookbooks</option>
+									<option value="Diaries">Diaries</option>
+									<option value="Journals">Journals</option>
+									<option value="Prayer books">Prayer books</option>
+									<option value="Series">Series</option>
+									<option value="Trilogy">Trilogy</option>
+									<option value="Biographies">Biographies</option>
+									<option value="Autobiographies">Autobiographies</option>
+									<option value="Fantasy">Fantasy</option>
+								</select>
+						
+
+								<label class="control-label">Author's Name</label>
+								<input class="form-control" type="text" placeholder="" id="author_name" >
+
+								<label class="control-label">Author's description</label>
+								<textarea class="form-control" type="text" placeholder="" id="author_description" ></textarea>
+
+								<label class="control-label">Amazon affliated links</label>
+								<input class="form-control" type="text" placeholder="" id="amazon_link" >
+							
+                            
+                            <label class="control-label">Release date</label>
+								<input type="text" id="date_picker"   />
+
+
+                            	<label class="control-label">Upload cover</label>
+								<input type="file" id="book_cover" >
+								<input type="hidden" id="hidden_book_id" >
+				
+				<img src="{{book_cover}}" >
+
+						<button class="btn btn-purple btn-lg pull-right" id="add_book" >
+                           <i class="fa fa-spinner fa-pulse fa-fw div_hide_class" id="loader_gif"></i>
+                           <span id="save_text"> Submit Book</span></button>
+<br>
+<br>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</div>
+
+
+
+
+<a class="back-to-top" href="#">
+	<img src="svg-icons/back-to-top.svg" alt="arrow" class="back-icon">
+</a>
+
+
+
+</body>	
+
+  <script type="text/javascript">
+     function isNumberKey(evt)
+      {
+         var charCode = (evt.which) ? evt.which : event.keyCode
+         if (charCode != 46 && charCode > 31 && (charCode < 48 || charCode > 57))
+            return false;
+
+         return true;
+      }
+  </script>
+
+</template>

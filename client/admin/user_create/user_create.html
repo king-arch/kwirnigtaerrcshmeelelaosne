@@ -1,0 +1,131 @@
+
+<template name="create_user">
+
+<head>
+
+	<title>Components - Forms</title>
+
+	<!-- Required meta tags always come first -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+
+
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" type="text/css" href="Bootstrap/dist/css/bootstrap-reboot.css">
+	<link rel="stylesheet" type="text/css" href="Bootstrap/dist/css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="Bootstrap/dist/css/bootstrap-grid.css">
+
+	<!-- Main Styles CSS -->
+	<link rel="stylesheet" type="text/css" href="css/main.min.css">
+	<link rel="stylesheet" type="text/css" href="css/fonts.min.css">
+
+</head>
+<body>
+
+
+<div class="container">
+	<div class="row">
+		<div class="col col-lg-12 col-md-12 col-sm-12 col-12">
+			<h2 class="presentation-margin">Add a user</h2>
+
+			<div class="ui-block">
+
+				<div class="ui-block-content">
+					<div class="row">
+						<div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+
+								<label class="control-label">First name</label>
+								<input class="form-control" type="text" placeholder="" id="first_name" >
+
+								<label class="control-label">Last name</label>
+								<input class="form-control" type="text" placeholder="" id="last_name" >
+
+								<label class="control-label">Email</label>
+								<input class="form-control" type="text" placeholder="" id="user_email" >
+
+								<label class="control-label">Contact</label>
+								<input class="form-control" type="text" placeholder="" id="user_contact" onkeypress="return isNumberKey(event)"  maxlength="15" minlength="5">
+
+							<label class="control-label">Interest</label>
+								<select id="interest" >
+									<option value="" >--Select Type--</option>
+									<option value="Self help">Self help</option>
+									<option value="Health">Health</option>
+									<option value="Guide">Guide</option>
+									<option value="Travel">Travel</option>
+									<option value="Children's">Children's</option>
+									<option value="Religion, Spirituality & New Age">Religion, Spirituality & New Age</option>
+									<option value="History">History</option>
+									<option value="Anthology">Anthology</option>
+									<option value="Poetry">Poetry</option>
+									<option value="Encyclopedias">Encyclopedias</option>
+									<option value="Dictionaries">Dictionaries</option>
+									<option value="Art">Art</option>
+									<option value="Cookbooks">Cookbooks</option>
+									<option value="Diaries">Diaries</option>
+									<option value="Journals">Journals</option>
+									<option value="Prayer books">Prayer books</option>
+									<option value="Series">Series</option>
+									<option value="Trilogy">Trilogy</option>
+									<option value="Biographies">Biographies</option>
+									<option value="Autobiographies">Autobiographies</option>
+									<option value="Fantasy">Fantasy</option>
+								</select>
+
+							<label class="control-label">User role</label>
+								<select id="user_role" >
+									<option value="" >--Select Type--</option>
+									<option value="Editor">Editor</option>
+									<option value="User">User</option>
+								</select>
+
+								<label class="control-label">Location</label>
+								<input class="form-control" type="text" placeholder="" id="location" >	
+
+								<label class="control-label">password</label>
+								<input class="form-control" type="password" placeholder="" id="password" >	
+
+								<label class="control-label">Upload user profile pic</label>
+								<input type="file" id="user_cover" >
+
+						<img src="{{user_cover}}" >
+
+
+<br>
+						   <button class="btn btn-purple btn-lg pull-right" id="add_user" >
+                           <i class="fa fa-spinner fa-pulse fa-fw div_hide_class" id="loader_gif" ></i>
+                           <span id="save_text"> Add User</span></button>
+
+<br>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+
+<a class="back-to-top" href="#">
+	<img src="svg-icons/back-to-top.svg" alt="arrow" class="back-icon">
+</a>
+
+<script src="js/jquery-3.2.1.js"></script>
+
+</body>	
+
+  <script type="text/javascript">
+     function isNumberKey(evt)
+      {
+         var charCode = (evt.which) ? evt.which : event.keyCode
+         if (charCode != 46 && charCode > 31 && (charCode < 48 || charCode > 57))
+            return false;
+
+         return true;
+      }
+  </script>
+
+</template>
