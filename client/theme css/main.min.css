@@ -3854,9 +3854,10 @@ button:hover {
 }
 
 .btn-primary {
-    background-color: #9aaf59;
-    border-color: #9aaf59;
-    opacity: 1
+    background-color: #ff5e3a;
+    border-color: #ff5e3a;
+    opacity: 1;
+    color:#fff !important;
 }
 
 .btn-primary:hover {
@@ -9796,7 +9797,7 @@ ol ol li {
 
 .forums-table thead,
 .open-topic-table thead {
-    background-color: #38a9ff
+    background-color: #fff
 }
 
 @media (max-width:420px) {
@@ -10160,7 +10161,7 @@ ol ol li {
     font-size: 12px;
     font-weight: 700;
     padding: 15px 25px;
-    color: #fff;
+    color: #ff5e3a;
     text-align: center
 }
 
@@ -18222,7 +18223,7 @@ screen and (max-height:300px) {
     height: 100%
 }
 
-.mejs-postroll-layer {
+.mejs-pFostroll-layer {
     position: absolute;
     bottom: 0;
     left: 0;

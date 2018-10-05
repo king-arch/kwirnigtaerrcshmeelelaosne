@@ -141,6 +141,22 @@ function click_events() {
 		Router.go('/forget_password');
 	});
 
+		$('#go_back').click(function (e) {
+		history.go(-1);
+	});
+
+
+
+  $('#user_management').click(function(e){
+      Router.go("/user_management");
+  });
+
+
+
+  $('#book_management').click(function(e){
+  		Router.go("/book_management");
+  });
+
 	// $('#add_book').click(function (e) {
 	// 	Router.go('/add_book');
 	// });
