@@ -1,0 +1,456 @@
+
+<template name="index">
+ {{> header}}
+ {{> index_content}}
+</template>
+
+<template name="index_content">
+<body class="body-bg-white" >
+    <!-- Header-BP-logout -->
+<div class="stunning-header bg-primary-opacity">
+
+    <header class="header header--logout" id="site-header">
+
+        <div class="page-title wm_logo">
+            <img src="img/logo_wm.png">
+        </div>
+
+        <div class="header-content-wrapper">
+
+            <div class="form--login-logout">
+                <form class="form-inline">
+                    <div class="form-group md-form  label-floating is-empty" style="width: 200px;">
+                        <label for="Email" class="control-label" data-success="right" data-error="wrong">Email</label>
+
+                        <input id="login_email" required="required" class="form-control validate" placeholder="" type="text">
+                    </div>
+                    <div class="form-group md-form  label-floating is-empty with-button c-white" style="width: 200px;">
+                        <label for="Email" class="control-label c-light-grey" data-success="right" data-error="wrong">Password</label>
+
+                        <input id="login_password" class="form-control validate c-white" type="password" placeholder="">
+                        
+                        <a href="#"><span class="trans_bg show_signup_password_2" > <i class="fa fa-eye"> </i> </span></a>
+
+                    </div>
+                    <br/>
+
+                    <button class="btn btn-breez btn-md-2 " style="margin-bottom: 0px !important;" id="login_submit">Sign in</button>
+                    <a href="#">
+                        <label for="Email" class="control-label" data-success="right" data-error="wrong" style="font-size: 11px;">Forgot password?</label>
+                    </a>
+                </form>
+
+                <button class="btn btn-mdb-color btn-md-2 login-btn-responsive btn-rounded float-right button" type="button" style="margin-bottom: 0px !important;"><span>Join Now </span></button>
+            </div>
+        </div>
+
+    </header>
+
+    <!-- ... end Header-BP-logout -->
+
+    <!-- Top Header-Profile Logout -->
+
+    <!-- ... end Top Header-Profile Logout -->
+    <div class="header-spacer"></div>
+
+    <div class="stunning-header-content">
+        <div class="logout-content text-left">
+            <div class="d-flex justify-content-left">
+                <!-- Grid row -->
+                <div class="row " style="padding:0 4%; ">
+
+                    <!-- Grid column -->
+                    <div class="col col-xl-7 col-lg-7 col-md-12 col-sm-12 col-12 pl-md-0">
+
+                        <div class="landing-content c-grey my-4">
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <h1 class="c-darkgray" style="font-size: 45px; margin-bottom: 15px;"><strong>Welcome to WritersMelon </strong></h1>
+                            <h5 class="c-darkgray" style="font-size: 22px; font-weight: 400;     line-height: 29px;"> Discover great Books & Authors.  And Engage in ‘real’ conversation <br/>around  BOOKS , AUTHORS & WRITING. </h5>
+                        </div>
+                    </div>
+                    <!-- Grid column -->
+
+                    <!-- Grid column -->
+                    <div class="col col-xl-5 col-lg-5 col-md-12 col-sm-12 col-12 pl-md-0">
+
+                        <form role="form" action="" method="post">
+                            <!-- First Step -->
+                            <div class="row setup-content-3" id="step-5" style="background-color: rgba(203, 18, 48, 1);   padding: 5%; border: 1px solid #cb1230;     border-radius: 10px;">
+                                <div class="col-md-12">
+                                    <h3 class="font-weight-bold pl-0 c-white" style="margin-bottom: 20px !important;"><strong>Join now</strong></h3>
+
+                                    <div class="form-group md-form  label-floating has-success">
+                                        <label for="Name" class="control-label c-light-grey" data-success="right" data-error="wrong">Full Name </label>
+
+                                        <input id="signup_name" required="required" class="form-control validate c-white" placeholder="" type="text" maxlength="40" >
+
+                                    </div>
+
+                                    <div class="form-group md-form  label-floating is-empty has-error">
+                                        <label for="Email" class="control-label c-light-grey" data-success="right" data-error="wrong">Email</label>
+
+                                        <input id="signup_email" required="required" class="form-control validate c-white" placeholder="" type="text">
+                                    </div>
+
+                                    <div class="form-group md-form  label-floating is-empty with-button c-white" >
+                                        <label for="Email" class="control-label c-light-grey" data-success="right" data-error="wrong">Password (atleast 8 chars.)</label>
+                                        <input class="form-control validate c-white" type="password" id="signup_password" >
+
+                                        <a href="#"><span class="trans_bg show_signup_password"> <i class="fa fa-eye"> </i> </span></a>
+
+                                    </div>
+                                    <div class="form-group md-form label-floating is-empty c-white">
+                                        By clicking <a>Sign up </a>, you agree to<b> WritersMelon's </b><a href="#" class="c-white"><u>User Agreement</u></a>, <a href="#" class="c-white"><u>Privacy </u></a> and <a href="#" class="c-white"><u>Cookie Policies </u></a>.
+                                    </div>
+                                    <span>
+                                        <button class="btn btn-mdb-color btn-rounded float-right button" type="button" id="submit_signup" ><span> Sign up </span></button>
+                                    </span>
+
+                                </div>
+
+                                <div class="col-lg-12 col-md-12 col-sm-12 text-center">
+                                    <p class="c-white" style="font-size: 20px;">or Sign in with</p>
+
+                                </div>
+                                <div class="col-lg-6 col-md-12 col-sm-12 text-center">
+                                    <a href="#" class="btn btn-md btn-border c-white" style="width: 100%;">
+                                        <img src="img/facebook.png" style="width: 20px;"> </a>
+
+                                </div>
+                                <div class="col-lg-6 col-md-12 col-sm-12 text-center">
+                                    <a href="#" class="btn btn-md btn-border c-white" style="width: 100%;">
+                                        <img src="img/google-plus.png" style="width: 20px;"> </a>
+                                </div>
+
+                            </div>
+
+                        </form>
+
+                    </div>
+                    <!-- Grid column -->
+
+                </div>
+
+                <!-- Grid row -->
+            </div>
+        </div>
+    </div>
+
+    <div class="content-bg-wrap stunning-header-bg1"></div>
+</div> 
+<section class="pt20">
+    <div class="container">
+        <div class="row">
+            <div class="col col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12">
+              <div class="ui-block responsive-flex1200 bg_trans">
+                <div class="ui-block-title pad_0">
+                  <h1 style="font-size: 30px; font-weight: 500;">Book</h1>
+                </div>
+              </div>
+            </div>
+        </div>
+        <hr class="new4">
+        <div class="row">
+            <div class="col col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
+                 <article class="hentry blog-post ui-block">
+                    <div class="post-thumb"><img src="img/post1.jpg" alt="photo">                   
+                    </div>
+                    <div class="post-content"><a href="#" class="h4 post-title">Here's the Featured Urban photo of August!</a>
+                      
+                    </div>
+                 </article>
+            </div>
+            <div class="col col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
+                 <article class="hentry blog-post ui-block">
+                    <div class="post-thumb"><img src="img/post1.jpg" alt="photo">
+                    </div>
+                    <div class="post-content"><a href="#" class="h4 post-title">Here's the Featured Urban photo of August!</a>
+                      </div>
+                 </article>
+            </div>
+            <div class="col col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
+                 <article class="hentry blog-post ui-block">
+                    <div class="post-thumb"><img src="img/post1.jpg" alt="photo">
+                    </div>
+                    <div class="post-content"><a href="#" class="h4 post-title">Here's the Featured Urban photo of August!</a> </div>
+                 </article>
+            </div>
+            <div class="col col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
+                 <article class="hentry blog-post ui-block">
+                    <div class="post-thumb"><img src="img/post1.jpg" alt="photo">
+                    </div>
+                    <div class="post-content"><a href="#" class="h4 post-title">Here's the Featured Urban photo of August!</a>
+                    </div>
+                 </article>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12">
+              <div class="ui-block responsive-flex1200 bg_trans">
+                <div class="ui-block-title pad_0">
+                  <h1 style="font-size: 30px; font-weight: 500;">Blog</h1>
+                </div>
+              </div>
+            </div>
+        </div>
+        <hr class="new4">
+        <div class="row">
+            <div class="col col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
+                 <article class="hentry blog-post ui-block">
+                    <div class="post-thumb"><img src="img/post1.jpg" alt="photo">
+                      <div class="bottom-right"><a href="#" class="post-add-icon inline-items"><img src="img/comment_white.png"><span>56</span></a></div>
+                      <div class="bottom-left"><a href="#" class="post-add-icon inline-items"><img src="img/heart_white.png"><span>27</span></a></div>
+                    </div>
+                    <div class="post-content"><a href="#" class="h4 post-title">Here's the Featured Urban photo of August!</a>
+                      <div class="post__author author vcard inline-items"><img src="img/author-page.jpeg" alt="author">
+                        <div class="author-date"><a class="h5 post__author-name fn" href="02-ProfilePage.html">James Spiegel</a><br/>
+                          <div class="post__date">
+                            <time class="published" datetime="2017-03-24T18:18">Headine</time>
+                          </div>
+                        </div>
+                        
+                      </div>
+                    </div>
+                 </article>
+            </div>
+            <div class="col col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
+                 <article class="hentry blog-post ui-block">
+                    <div class="post-thumb"><img src="img/post1.jpg" alt="photo">
+                      <div class="bottom-right"><a href="#" class="post-add-icon inline-items"><img src="img/comment_white.png"><span>56</span></a></div>
+                      <div class="bottom-left"><a href="#" class="post-add-icon inline-items"><img src="img/heart_white.png"><span>27</span></a></div>
+                    </div>
+                    <div class="post-content"><a href="#" class="h4 post-title">Here's the Featured Urban photo of August!</a>
+                      <div class="post__author author vcard inline-items"><img src="img/author-page.jpeg" alt="author">
+                        <div class="author-date"><a class="h5 post__author-name fn" href="02-ProfilePage.html">James Spiegel</a><br/>
+                          <div class="post__date">
+                            <time class="published" datetime="2017-03-24T18:18">Headine</time>
+                          </div>
+                        </div>
+                        
+                      </div>
+                    </div>
+                 </article>
+            </div>
+            <div class="col col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
+                 <article class="hentry blog-post ui-block">
+                    <div class="post-thumb"><img src="img/post1.jpg" alt="photo">
+                      <div class="bottom-right"><a href="#" class="post-add-icon inline-items"><img src="img/comment_white.png"><span>56</span></a></div>
+                      <div class="bottom-left"><a href="#" class="post-add-icon inline-items"><img src="img/heart_white.png"><span>27</span></a></div>
+                    </div>
+                    <div class="post-content"><a href="#" class="h4 post-title">Here's the Featured Urban photo of August!</a>
+                      <div class="post__author author vcard inline-items"><img src="img/author-page.jpeg" alt="author">
+                        <div class="author-date"><a class="h5 post__author-name fn" href="02-ProfilePage.html">James Spiegel</a><br/>
+                          <div class="post__date">
+                            <time class="published" datetime="2017-03-24T18:18">Headine</time>
+                          </div>
+                        </div>
+                        
+                      </div>
+                    </div>
+                 </article>
+            </div>
+            <div class="col col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
+                 <article class="hentry blog-post ui-block">
+                    <div class="post-thumb"><img src="img/post1.jpg" alt="photo">
+                      <div class="bottom-right"><a href="#" class="post-add-icon inline-items"><img src="img/comment_white.png"><span>56</span></a></div>
+                      <div class="bottom-left"><a href="#" class="post-add-icon inline-items"><img src="img/heart_white.png"><span>27</span></a></div>
+                    </div>
+                    <div class="post-content"><a href="#" class="h4 post-title">Here's the Featured Urban photo of August!</a>
+                      <div class="post__author author vcard inline-items"><img src="img/author-page.jpeg" alt="author">
+                        <div class="author-date"><a class="h5 post__author-name fn" href="02-ProfilePage.html">James Spiegel</a><br/>
+                          <div class="post__date">
+                            <time class="published" datetime="2017-03-24T18:18">Headine</time>
+                          </div>
+                        </div>
+                        
+                      </div>
+                    </div>
+                 </article>
+            </div>
+        </div> 
+        <div class="swiper-container pagination-bottom" data-slide="fade">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide swiper-slide-weather" data-swiper-parallax="-500">
+              <div class="day-wethear-item" data-mh="wethear-item">
+                     <div class="col col-lg-8 m-auto col-md-8 col-sm-12 col-12">
+              <div class="main-header-content">
+                                  <h1 class="c-darkgray" style="font-size: 30px; font-weight: 500;">Testimonial</h1>
+
+                <h1 class="c-darkgray"></h1>
+                <p class="c-darkgray">The campaign was well planned and managed professionally. I was able to present my novel to book lovers through a detailed author interview. Insightful reviews of my novel gave the book a significant amount of online visibility. The live chat session on Twitter was extremely engaging. On the whole, it was an excellent book marketing campaign. My best wishes to Team Writersmelon. </p>
+                <br/> <br/>
+                 <p class="c-darkgray">"DICRUZA VILSIYA"</p>
+              </div>
+            </div>
+        
+                
+                
+            </div>
+            
+          </div>
+        
+          <!-- If we need pagination -->
+          <div class="swiper-pagination pagination-blue"></div>
+        </div>
+        
+ </div>
+ <div class="related-products pt60 ">
+      <div class="row">
+        <div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+          <div class="crumina-module crumina-heading with-title-decoration">
+  <h1 class="c-darkgray align-center" style="font-size: 30px; font-weight: 500;">We work with</h1>          </div>
+        </div>
+        <div class="col col-xl-2 col-lg-2 col-md-6 col-sm-12 col-12">
+
+          
+          <!-- Product Item -->
+          
+          <div class="shop-product-item">
+            <div class="product-thumb">
+              <img src="http://www.writersmelon.com/wm/wp-content/uploads/2017/06/aleph-100x100.jpg" alt="product">
+            </div>
+           
+          </div>
+          
+          <!-- ... end Product Item -->
+
+        </div>
+        <div class="col col-xl-2 col-lg-2 col-md-6 col-sm-12 col-12">
+
+          
+          <!-- Product Item -->
+          
+          <div class="shop-product-item">
+            <div class="product-thumb">
+              <img src="http://www.writersmelon.com/wm/wp-content/uploads/2017/06/HV-100x100.png" alt="product">
+            </div>
+           
+          </div>
+          
+          <!-- ... end Product Item -->
+
+        </div>
+        <div class="col col-xl-2 col-lg-2 col-md-6 col-sm-12 col-12">
+
+          
+          <!-- Product Item -->
+          
+          <div class="shop-product-item">
+            <div class="product-thumb">
+              <img src="http://www.writersmelon.com/wm/wp-content/uploads/2017/06/HV-100x100.png" alt="product">
+            </div>
+           
+          </div>
+          
+          <!-- ... end Product Item -->
+
+        </div>
+        <div class="col col-xl-2 col-lg-2 col-md-6 col-sm-12 col-12">
+
+          
+          <!-- Product Item -->
+          
+          <div class="shop-product-item">
+            <div class="product-thumb">
+              <img src="http://www.writersmelon.com/wm/wp-content/uploads/2017/06/aleph-100x100.jpg" alt="product">
+            </div>
+           
+          </div>
+          
+          <!-- ... end Product Item -->
+
+        </div>
+        <div class="col col-xl-2 col-lg-2 col-md-6 col-sm-12 col-12">
+
+          
+          <!-- Product Item -->
+          
+          <div class="shop-product-item">
+            <div class="product-thumb">
+              <img src="http://www.writersmelon.com/wm/wp-content/uploads/2017/06/aleph-100x100.jpg" alt="product">
+            </div>
+           
+          </div>
+          
+          <!-- ... end Product Item -->
+
+        </div>
+        <div class="col col-xl-2 col-lg-2 col-md-6 col-sm-12 col-12">
+
+          
+          <!-- Product Item -->
+          
+          <div class="shop-product-item">
+            <div class="product-thumb">
+              <img src="http://www.writersmelon.com/wm/wp-content/uploads/2017/06/aleph-100x100.jpg" alt="product">
+            </div>
+           
+          </div>
+          
+          <!-- ... end Product Item -->
+
+        </div>
+
+      </div>
+    </div>
+
+    </div>
+    <div class="sub-footer-copyright">
+        <div class="container">
+             <div class="row  ">
+               <span class="col-md-12 col-lg-3 col-sm-12">@2018 Copyright </span>
+               <span class="col-md-12 col-lg-6 col-sm-12"> <a href="#" class="c-white"> Preview Policy </a> &nbsp; &nbsp; | &nbsp; &nbsp;<a href="#"  class="c-white">Privacy Policy </a> &nbsp; &nbsp;| &nbsp; &nbsp; <a href="#"  class="c-white">Copyright Policy </a>  &nbsp; &nbsp;| &nbsp; &nbsp;  <a href="#"  class="c-white"> Testimonial </a>  </span>
+               <span class="col-md-12 col-lg-3 col-sm-12 align-right"> Powered by <a href="index.html">BITOVN</a> The neural network  </span>
+             </div>
+        </div>
+    </div>
+</section>
+    <!-- JS Scripts -->
+
+    <!-- 
+
+    <script src="js/jquery-3.2.1.js"></script>
+    <script src="js/jquery.appear.js"></script>
+    <script src="js/jquery.mousewheel.js"></script>
+    <script src="js/perfect-scrollbar.js"></script>
+    <script src="js/jquery.matchHeight.js"></script>
+    <script src="js/svgxuse.js"></script>
+    <script src="js/imagesloaded.pkgd.js"></script>
+    <script src="js/Headroom.js"></script>
+    <script src="js/velocity.js"></script>
+    <script src="js/ScrollMagic.js"></script>
+    <script src="js/jquery.waypoints.js"></script>
+    <script src="js/jquery.countTo.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/material.min.js"></script>
+    <script src="js/bootstrap-select.js"></script>
+    <script src="js/smooth-scroll.js"></script>
+    <script src="js/selectize.js"></script>
+    <script src="js/swiper.jquery.js"></script>
+    <script src="js/moment.js"></script>
+    <script src="js/daterangepicker.js"></script>
+    <script src="js/simplecalendar.js"></script>
+    <script src="js/fullcalendar.js"></script>
+    <script src="js/isotope.pkgd.js"></script>
+    <script src="js/ajax-pagination.js"></script>
+    <script src="js/Chart.js"></script>
+    <script src="js/chartjs-plugin-deferred.js"></script>
+    <script src="js/circle-progress.js"></script>
+    <script src="js/loader.js"></script>
+    <script src="js/run-chart.js"></script>
+    <script src="js/jquery.magnific-popup.js"></script>
+    <script src="js/jquery.gifplayer.js"></script>
+    <script src="js/mediaelement-and-player.js"></script>
+    <script src="js/mediaelement-playlist-plugin.min.js"></script>
+
+    <script src="js/base-init.js"></script>
+    <script defer src="fonts/fontawesome-all.js"></script>
+
+    <script src="Bootstrap/dist/js/bootstrap.bundle.js"></script> -->
+
+</body>
+
+</template>

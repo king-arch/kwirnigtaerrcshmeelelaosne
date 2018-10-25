@@ -1,0 +1,283 @@
+<template name="signup">
+ {{> header}}
+ <body class="landing-page" >
+  {{> signup_content}}
+  {{> footer}}
+</body>
+</template>
+
+
+
+<template name="signup_content">  
+<div class="content-bg-wrap"></div>
+<!-- Header-BP-logout -->
+<header class="header header--logout" id="site-header">
+  
+  <div class="page-title wm_logo">
+    <img src="img/logo_wm.png">
+  </div>
+
+  <div class="header-content-wrapper">
+    
+  </div>
+
+</header>
+
+<!-- Header-BP-logout -->
+<section class="medium-padding80">
+  <div class="container">
+    <div class="row">
+      <div class="col col-xl-12 col-lg-12 col-md-12 m-auto">
+        <div class="logout-content text-left">
+          <!-- Grid row -->
+<div class="row d-flex justify-content-left">
+
+    <!-- Grid column -->
+    <div class="col col-xl-7 col-lg-7 col-md-12 col-sm-12 col-12pl-md-0 pb-5" style="display: none;">
+      
+      
+    
+    <!-- Stepper -->
+        <div class="steps-form-3" >
+            <div class="steps-row-3 setup-panel-3 d-flex justify-content-between">
+                <div class="steps-step-3">
+                    <a href="#step-5" type="button" class="btn btn-info btn-circle-3 waves-effect ml-0" data-toggle="tooltip" data-placement="top" title="Basic Information"><i class="fa fa-folder-open-o" aria-hidden="true"></i>
+                    </a>
+                </div>
+                <div class="steps-step-3">
+                    <a href="#step-6" type="button" class="btn btn-pink btn-circle-3 waves-effect p-3" data-toggle="tooltip" data-placement="top" title="Basic Information"><i class="fa fa-user" aria-hidden="true"></i></a>
+                </div>
+                <div class="steps-step-3">
+                    <a href="#step-7" type="button" class="btn btn-pink btn-circle-3 waves-effect" data-toggle="tooltip" data-placement="top" title="Basic Information"><i class="fa fa-heart-o" aria-hidden="true"></i></a>
+                </div>
+                <div class="steps-step-3 no-height">
+                    <a href="#step-8" type="button" class="btn btn-pink btn-circle-3 waves-effect p-3" data-toggle="tooltip" data-placement="top" title="Basic Information"><i class="fa fa-check" aria-hidden="true"></i></a>
+                </div>
+                <div class="steps-step-3 no-height">
+                    <a href="#step-9" type="button" class="btn btn-pink btn-circle-3 waves-effect p-3" data-toggle="tooltip" data-placement="top" title="Basic Information"><i class="fa fa-check" aria-hidden="true"></i></a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- Grid column -->
+
+    <!-- Grid column -->
+    <div class="col-md-12">
+
+        <form role="form" action="" method="post">
+          <div class="row setup-content-3" id="step_5">
+                <div class="col-md-12">                    
+                   <h5 class="font-weight-bold pl-0 my-4 c-darkgray">
+                    <strong>Upload your picture </strong></h5>
+                   <div class="row">
+                      <div class="col col-xl-5 col-lg-5 col-md-12 col-sm-12 col-12">
+                        <label class=newbtn>
+                          <p></p>
+                  <img id="blah2" src="{{show_profile_image}}" style="height:400px; width: 400px">
+                  <input id="signup_profile_pic" class='pis user_profile_pic' onchange="readURL(this);" type="file" >
+              </label>
+              <p class="c-darkgray">You can upload a JPG, GIF or PNG file (Image size should be 500*500) </p>
+            </div>
+            <div class="col col-xl-7 col-lg-7 col-md-12 col-sm-12 col-12">
+              <div class="form-group label-floating">
+                <label class="control-label c-darkgray">  Headline works as a brief biography of who you are and what you do </label>
+                
+                <textarea class="form-control c-darkgray" placeholder="" style="border-bottom: 1px solid #333;" id="signup_headline" maxlength="110" ></textarea>
+
+              <span class="material-input"></span></div>
+            </div>
+                    </div>
+                   <button class="btn btn-mdb-color btn-rounded nextBtn-3 float-right button-gry submit_headline_and_profile_pic" type="button" id="submit_headline_and_profile_pic" ><span> Next </span></button>
+
+                </div>
+            </div>
+           
+      <!-- First Step -->
+            <div class="row setup-content-3 hide_object" id="step_6">
+                <div class="col-md-12 ">
+                    <h5 class="font-weight-bold pl-0 my-4 c-darkgray"><strong>Add Location</strong> <br/>
+
+                    <span class="sub_head"> The people, events, stories and news we show you will be more relevant if you add your location. </span>
+                    </h5>
+                   
+                    <div class="form-group md-form  label-floating is-empty has-error has-success">
+            
+            <!-- <label for="Name" class="control-label c-darkgray" data-success="right" data-error="wrong" >Location  </label> -->
+
+            <input id="signup_location" class="form-control " required="required"  placeholder="Location" type="text" style="color: black">
+          </div>
+           
+          <button class="btn btn-mdb-color btn-rounded nextBtn-3 float-right button-gry" type="button" id="submit_signup_location" ><span> Next </span></button>
+
+                </div>
+            </div>
+
+
+            <!-- Second Step -->
+            <div class="row setup-content-3 hide_object" id="step_7">
+                <div class="col-md-12">
+
+                    <h5 class="font-weight-bold pl-0 my-4 c-darkgray">
+
+                     <strong>Add Category </strong><br/>
+                     <span class="sub_head">What are you interested in.</span>
+                    </h5>
+
+                    <div class="row">
+          {{#each show_interest_list}}
+            <div class="col col-lg-2 col-md-6 col-sm-12 col-12">
+                <div class="ui-block">
+                    <div class="available-widget">  
+                  <div class="checkbox" >                    
+                   <label class="control  control--checkbox">
+                      <input type="checkbox" id="checkbox_{{interest_id}}" />
+                      <span class="control__indicator"></span>
+                      <span class="spanclass">{{interest_title}}</span>
+                   </label>
+                   </div>
+                </div>
+              </div>
+            </div>
+          {{/each}}
+
+
+          </div>
+
+        <button class="btn btn-mdb-color btn-rounded nextBtn-3 float-right button-gry" type="button" id="signup_catagries" ><span> Next </span></button>
+
+                </div>
+            </div>
+
+  <!--             <div class="row setup-content-3 hide_object" id="step_7">
+                <div class="col-md-12">
+
+                    <h5 class="font-weight-bold pl-0 my-4 c-darkgray">
+
+                     <strong>Add Category </strong><br/>
+                     <span class="sub_head">What are you interested in.</span>
+                    </h5>
+
+                    <div class="row">
+            <div class="col col-lg-2 col-md-6 col-sm-12 col-12">
+
+            <div class="ui-block">
+                <div class="available-widget">  
+              <div class="checkbox " >
+                <label>
+                  <input type="checkbox" name="optionsCheckboxes" id="science" >
+                  Science fiction
+                </label>
+              </div>
+            </div>
+          </div>
+
+            </div>
+
+            <div class="col col-lg-2 col-md-6 col-sm-12 col-12">
+              <div class="ui-block">
+                <div class="available-widget">
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" name="optionsCheckboxes" id="math" >
+                  Math
+                </label>
+              </div>
+            </div>
+              </div>
+            </div>      
+                        
+            <div class="col col-lg-2 col-md-6 col-sm-12 col-12">
+              <div class="ui-block">
+                <div class="available-widget">
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" name="optionsCheckboxes" id="anthology" >
+                  Anthology
+                </label>
+              </div>
+            </div>
+              </div>
+            </div>
+
+          </div>
+
+        <button class="btn btn-mdb-color btn-rounded nextBtn-3 float-right button-gry" type="button" id="signup_catagries" ><span> Next </span></button>
+
+                </div>
+            </div> -->
+
+
+            <!-- Third Step -->
+            <div class="row setup-content-3 hide_object" id="step_8">
+                <div class="col-md-12">
+                    <h5 class="font-weight-bold pl-0 my-4 c-darkgray"><strong> Follow People</strong><br/>
+<!--                       <span class="sub_head">Search for people, list by common interest and followership. </span> -->
+                                <span class="sub_head">Follow people to see what they are doing on writer's melon </span>
+                    </h5>
+                    <h5 class="font-weight-bold pl-0 my-4 c-darkgray"><strong> </strong></h5>
+
+                    <div class="row">
+                      <div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+
+<!--           <form class="w-search">
+            <div class="form-group with-button c-darkgray">
+
+              <input class="form-control" type="text" placeholder="Know people by name? Search them here">
+
+              <button class="trans_bg">
+                <img src="img/search_gray.png">
+              </button>
+
+            <span class="material-input"></span></div>
+          </form> -->
+                      </div>
+                    </div>
+
+          <div class="row">
+          {{#each show_user_info}} 
+          {{#if check_if_already_following}} 
+
+            <div class="col col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+                  
+                  <div class="ui-block">    
+                    <div class="birthday-item inline-items">
+                          <div class="author-thumb">
+                            <img src="{{user_profile_pic}}" alt="author">
+                          </div>
+                          <div class="birthday-author-name">
+                            <a href="#" class="h6 author-name">{{user_name}} </a>
+                            <div class="birthday-date">{{user_headline}}</div>
+                          </div>
+
+          <a href="#" class="btn btn-sm bg-blue green_follow_btn click_on_follow" id="{{user_id}}" >Follow</a>
+
+                    </div>
+                  </div>
+
+            </div> 
+
+            {{/if}}
+            {{/each}}
+          </div>  
+
+                     <button class="btn btn-mdb-color btn-rounded nextBtn-3 float-right button-gry" type="button" id="signup_complete" > 
+                      <span>Finish </span></button>
+                  
+                </div>
+            </div>
+        </form>
+    </div>
+    <!-- Grid column -->
+
+</div>
+<!-- Grid row -->
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- <script src="./../js/base-init.js"></script> -->
+
+</template>

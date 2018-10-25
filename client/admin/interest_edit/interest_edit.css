@@ -1,0 +1,50 @@
+
+
+
+element.style {
+}
+.form-group .bootstrap-select.btn-group, .form-horizontal .bootstrap-select.btn-group, .form-inline .bootstrap-select.btn-group {
+    margin-bottom: 0;
+    margin-left: 1px;
+}
+.bootstrap-select.btn-group:not(.input-group-btn), .bootstrap-select.btn-group[class*=col-] {
+    float: none;
+    display: inline-block;
+    margin-left: 0;
+}
+.bootstrap-select.btn-group[class*=col-] .dropdown-toggle, .bootstrap-select.form-control:not([class*=col-]), .form-inline .bootstrap-select.btn-group .form-control {
+    width: 100%;
+}
+.bootstrap-select.form-control {
+    margin-bottom: 0;
+    padding: 0;
+    border: none;
+}
+.bootstrap-select {
+    width: 220px\9;
+}
+.form-control, input {
+    color: #515365;
+    line-height: inherit;
+    font-size: .875rem;
+}
+.form-control, input, select {
+    background-color: transparent;
+}
+.btn-group, .btn-group-vertical {
+    position: relative;
+    display: inline-flex;
+    vertical-align: middle;
+}
+.form-control {
+    display: block;
+    width: 100%;
+    padding: 1.1rem;
+    font-size: .812rem;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    border: 1px solid #e6ecf5;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}

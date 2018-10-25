@@ -72,7 +72,7 @@ Template.edit_user_details.onRendered(function () {
 
       var user_interest = result[0].user_interest;
       var user_location = result[0].user_location;
-      var user_cover = result[0].user_cover;
+      var user_cover = result[0].user_profile_pic;
       var user_password = result[0].user_password;
 
       $('#hidden_user_id').val(user_id);

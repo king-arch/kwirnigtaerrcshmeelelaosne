@@ -1,0 +1,56 @@
+<template name="email">
+
+
+ {{> header}}
+ <body class="landing-page" >
+  {{> email_content}}
+
+
+
+  {{> footer}}
+</body>
+</template>
+
+
+
+<template name="email_content">  
+  {{email_checker}}
+<div class="content-bg-wrap">
+<section class="medium-padding20">
+  <div class="container">
+    <div class="row">
+      <div class="col col-xl-12 col-lg-12 col-md-12 m-auto">
+        <div class="logout-content text-left">
+          <!-- Grid row -->
+          <div class="row  justify-content-left">
+              <!-- Grid column -->
+              <div class="col-md-12 medium-padding120">
+                <!-- First Step -->
+                    <div class="row setup-content-3" id="step-5">
+                          <div class="col-md-12">
+                              <div class="logout-content">
+                                <h2 class="c-darkgray"> <i class="fa fa-check-circle"></i><br/> We're glad you are here.</h2>
+
+                                <h4 class="c-darkgray">Sent email to <span> <strong>{{logged_in_user_email}}</strong> </span>. Click on continue to proceed with Sign-Up.</h4>
+
+                              <span><button class="btn btn-mdb-color btn-rounded float-left button-gry" type="button" id="send_mail" ><span>Resend</span></button></span>
+
+                                <a href="/signup"><button class="btn btn-mdb-color btn-rounded float-right button-gry" type="button"><span>Continue</span></button></a>
+                              </div>                             
+                          </div>
+                     </div>                
+              </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    
+  </div>
+</section>
+</div>
+
+
+
+
+</template>
