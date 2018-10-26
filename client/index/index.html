@@ -19,10 +19,10 @@
 
             <div class="form--login-logout">
                 <form class="form-inline">
-                    <div class="form-group md-form  label-floating is-empty" style="width: 200px;">
-                        <label for="Email" class="control-label" data-success="right" data-error="wrong">Email</label>
+                    <div class="form-group md-form label-floating has-success label-floating " style="width: 200px;">
+                        <label for="Email" class="control-label " data-success="right" data-error="wrong">Email</label>
 
-                        <input id="login_email" required="required" class="form-control validate" placeholder="" type="text">
+                        <input id="login_email" required="required" class="form-control validate " placeholder="" type="text">
                     </div>
                     <div class="form-group md-form  label-floating is-empty with-button c-white" style="width: 200px;">
                         <label for="Email" class="control-label c-light-grey" data-success="right" data-error="wrong">Password</label>
@@ -89,10 +89,12 @@
 
                                     </div>
 
-                                    <div class="form-group md-form  label-floating is-empty has-error">
+                                    <div class="form-group md-form" id="show_response" >
                                         <label for="Email" class="control-label c-light-grey" data-success="right" data-error="wrong">Email</label>
 
-                                        <input id="signup_email" required="required" class="form-control validate c-white" placeholder="" type="text">
+                                        <input id="signup_email" required="required" class="form-control validate c-white" placeholder="" type="text" >
+                                        <!-- 
+                                        <input id="signup_email" required="required" class="form-control validate c-white" placeholder="" type="text"  onkeyup="ValidateEmail(event)" > -->
                                     </div>
 
                                     <div class="form-group md-form  label-floating is-empty with-button c-white" >
@@ -452,5 +454,30 @@
     <script src="Bootstrap/dist/js/bootstrap.bundle.js"></script> -->
 
 </body>
+<script type="text/javascript">
+
+  // function ValidateEmail(mail) {
+
+  //   var email = $('#signup_email').val();
+
+  //   if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
+  //     $('#show_response').addClass('label-floating has-success');
+  //   $('#show_response').removeClass('label-floating is-empty has-error');
+  //     return (true);
+  //   }
+
+  //   // swal({
+  //   //   text: 'Please enter a valid email ID',
+  //   //   button: "ok",
+  //   //   icon: "warning",
+  //   //   dangerMode: true,
+  //   // });
+
+  //   $('#show_response').addClass('label-floating is-empty has-error');
+  //     $('#show_response').removeClass('label-floating has-success');
+  //   return (false)
+  // }
+
+</script>
 
 </template>

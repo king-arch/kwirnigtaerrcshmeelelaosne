@@ -475,6 +475,43 @@ if(check_if_exist[0]){
             });
           }
           return result;
+        }, 
+
+    unfollow_people:function(follow_user_id,logged_in_user){
+
+    console.log(follow_user_id+' & '+logged_in_user);
+    
+    var newUser = following_list.find({ $and: [{ "following": follow_user_id},{"follower": logged_in_user} ] }).fetch();
+                 console.log('newUser'); 
+                 console.log(newUser); 
+          if(newUser[0]){
+          var result =  following_list.update({
+              _id: newUser[0]._id,
+            }, {
+              $set: {
+                following :follow_user_id,
+                follower :logged_in_user,
+                current_follow_status: 0,
+                updated_at: Date.now()
+              }
+            });
+          }else{
+
+        var follow_id = 'follow_id_'+Math.floor((Math.random() * 2465789) + 1);
+            
+            var result =  following_list.insert({
+
+                follow_id :follow_id,
+                following :follow_user_id,
+                follower :logged_in_user,
+                current_follow_status: 1,
+                created_at: Date.now()
+
+              });
+
+          }
+
+          return result;
         },    
 
       "user_login":function(user_email,user_password){  
@@ -552,6 +589,52 @@ if(check_if_exist[0]){
           return message;
 
 },
+
+        upload_cover_image: function(user_id,imagePath)
+      {
+
+    var result = user_details.update({
+        user_id: user_id,
+      }, {
+        $set: {
+               "user_cover_pic": imagePath,
+               "updated_at": Date.now()
+        }
+      });
+    return result;
+    },
+
+    upload_profile_image: function(user_id,imagePath)
+      {
+    var result = user_details.update({
+        user_id: user_id,
+      }, {
+        $set: {
+               "user_profile_pic": imagePath,
+               "updated_at": Date.now()
+        }
+      });
+    return result;
+    },
+
+  user_details_update: function(user_id,user_name,user_email,user_contact,user_location,user_headline)
+      {   
+      var result = user_details.update(
+              {
+                'user_id': user_id
+              },{
+                  $set: {
+                          'user_name': user_name,
+                          'user_email': user_email,
+                          'user_contact': user_contact,
+                          'user_location': user_location,
+                          'user_headline': user_headline,
+                          'updated_at': Date.now()
+                        }
+                      });
+    return result;
+    },
+
 
 });
 

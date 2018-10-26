@@ -252,25 +252,14 @@ Template.signup_content.events({
 
     'click .click_on_follow':function(){
 
-      // alert(JSON.stringify(this) );
-
     var follow_user_id = this.user_id; 
-    // alert('follow_user_id: ' + follow_user_id);
-    // return false;
-
     var logged_in_user = Session.get("userId");  
 
       Meteor.call('follow_people',follow_user_id,logged_in_user,function(error,result){
               if(error){
                 alert("Some error occure.");
               }else{
-                // alert('success: ');
-
-                // $('#step_5').addClass("hide_object");
-                // $('#step_6').addClass("hide_object");
-
-                // $('#step_7').removeClass("hide_object");
-                // $('#step_8').addClass("hide_object");
+                console('successfully following ');
               }
           });
   },
