@@ -12,12 +12,9 @@ var user_info_list_all;
 var user_info_based_on_email;
 var follow_list_all;
 
+
+
 Template.signup_content.onRendered(function(){
-
-//   $.getScript("https://cdnjs.cloudflare.com/ajax/libs/webfont/1.6.28/webfontloader.js",function(){
-//   alert('loaded');
-//   });
-
   Meteor.subscribe("user_info_based_on_id",Session.get("userId"));
 
     setTimeout(function(){

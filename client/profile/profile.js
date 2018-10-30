@@ -143,7 +143,7 @@ Template.profile_content.helpers({
       var user_id = Session.get("userId");
 
       user_info_list_all = Meteor.subscribe("user_info_all");
-      var result = user_details.find({},{limit: 5}).fetch();
+      var result = user_details.find({user_id: {$ne: user_id} },{limit: 5}).fetch();
 
       console.log('showing user list all');
       console.log(result);
@@ -541,7 +541,6 @@ viewMode: 1,
 
 
 function dataURItoBlob(dataURI) {
-
     // convert base64/URLEncoded data component to raw binary data held in a string
     var byteString;
     if (dataURI.split(',')[0].indexOf('base64') >= 0)

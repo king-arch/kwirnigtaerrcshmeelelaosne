@@ -161,12 +161,16 @@ alert('inside: ');
 
        if(login_email == null || login_email == "")
         {
-          $('#login_email').addClass('emptyfield').focus();
+          $('#email_validation').addClass('label-floating is-empty has-error');
+          $('#login_email').focus();
           return false; 
         } 
         else{
-          $('#login_email').removeClass('emptyfield');
+          $('#email_validation').removeClass('label-floating is-empty has-error');
+          $('#email_validation').addClass('label-floating has-success');
         }
+
+        var check_validity = ValidateEmail(login_email);
 
          if(login_password == null || login_password == "")
         {
@@ -390,10 +394,13 @@ function check_login(source){
 
   function ValidateEmail(mail) {
 
-    var email = $('#signup_email').val();
+    // var email = $('#signup_email').val();
 
-    if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
+    if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail)) {
+      $('#email_validation').addClass('label-floating has-success');
+      $('#email_validation').removeClass('label-floating is-empty has-error');
       return (true)
+
     }
 
     swal({
@@ -402,6 +409,7 @@ function check_login(source){
       icon: "warning",
       dangerMode: true,
     });
-
+    $('#email_validation').removeClass('label-floating has-success');
+    $('#email_validation').addClass('label-floating is-empty has-error');
     return (false)
   }

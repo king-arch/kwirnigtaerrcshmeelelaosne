@@ -1,3 +1,4 @@
+
 <template name="email">
 
 
@@ -11,10 +12,12 @@
 </body>
 </template>
 
-
-
 <template name="email_content">  
+
   {{email_checker}}
+
+<div class="loading"  id="loading_div" ></div>
+
 <div class="content-bg-wrap">
 <section class="medium-padding20">
   <div class="container">
@@ -33,9 +36,12 @@
 
                                 <h4 class="c-darkgray">Sent email to <span> <strong>{{logged_in_user_email}}</strong> </span>. Click on continue to proceed with Sign-Up.</h4>
 
-                              <span><button class="btn btn-mdb-color btn-rounded float-left button-gry" type="button" id="send_mail" ><span>Resend</span></button></span>
+                              <span><button class="btn btn-mdb-color btn-rounded float-right button-gry" type="button" id="send_mail" >
+                              <i class="fa fa-spinner fa-pulse fa-fw div_hide_class" id="loader_gif"></i>
+                           <span id="save_text"> Resend</span></button></span>
 
-                                <a href="/signup"><button class="btn btn-mdb-color btn-rounded float-right button-gry" type="button"><span>Continue</span></button></a>
+
+<!--                                 <a href="/signup"><button class="btn btn-mdb-color btn-rounded float-right button-gry" type="button"><span>Continue</span></button></a> -->
                               </div>                             
                           </div>
                      </div>                

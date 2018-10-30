@@ -92,9 +92,8 @@
                                     <div class="form-group md-form" id="show_response" >
                                         <label for="Email" class="control-label c-light-grey" data-success="right" data-error="wrong">Email</label>
 
-                                        <input id="signup_email" required="required" class="form-control validate c-white" placeholder="" type="text" >
-                                        <!-- 
-                                        <input id="signup_email" required="required" class="form-control validate c-white" placeholder="" type="text"  onkeyup="ValidateEmail(event)" > -->
+<!--                                         <input id="signup_email" required="required" class="form-control validate c-white" placeholder="" type="text" > -->
+                                        <input id="signup_email" required="required" class="form-control validate c-white" placeholder="" type="text"  onfocusout="ValidateEmail(event)" >
                                     </div>
 
                                     <div class="form-group md-form  label-floating is-empty with-button c-white" >
@@ -456,27 +455,27 @@
 </body>
 <script type="text/javascript">
 
-  // function ValidateEmail(mail) {
+  function ValidateEmail(mail) {
 
-  //   var email = $('#signup_email').val();
+    var email = $('#signup_email').val();
 
-  //   if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
-  //     $('#show_response').addClass('label-floating has-success');
-  //   $('#show_response').removeClass('label-floating is-empty has-error');
-  //     return (true);
-  //   }
+    if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
+      $('#show_response').addClass('label-floating has-success');
+    $('#show_response').removeClass('label-floating is-empty has-error');
+      return (true);
+    }
 
-  //   // swal({
-  //   //   text: 'Please enter a valid email ID',
-  //   //   button: "ok",
-  //   //   icon: "warning",
-  //   //   dangerMode: true,
-  //   // });
+    swal({
+      text: 'Please enter a valid email ID',
+      button: "ok",
+      icon: "warning",
+      dangerMode: true,
+    });
 
-  //   $('#show_response').addClass('label-floating is-empty has-error');
-  //     $('#show_response').removeClass('label-floating has-success');
-  //   return (false)
-  // }
+    $('#show_response').addClass('label-floating is-empty has-error');
+      $('#show_response').removeClass('label-floating has-success');
+    return (false)
+  }
 
 </script>
 

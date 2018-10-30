@@ -3,7 +3,6 @@
     {{> header}}
  <body class="landing-page">
     <!-- {{> headeroptions}} -->
-
   {{> profile_content}}
   {{> footer}}
 
@@ -11,15 +10,16 @@
 </template>
 
 <template name="profile_content">  
+
 {{#each show_logged_in_user_info}}
-<!-- Fixed Sidebar Left -->
+
 <div class="container">
   <div class="row">
     <div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
       <div class="ui-block">
         <div class="top-header">
           <div class="top-header-thumb">
-            <img src="{{user_cover_pic}}" alt="nature">
+            <img src="{{user_cover_pic_display}}" alt="nature">
           </div>
 
           <div class="profile-section">

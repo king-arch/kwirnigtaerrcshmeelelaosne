@@ -7,6 +7,7 @@ import { user_details } from './../import/collections/insert.js';
 import { categories_selection } from './../import/collections/insert.js';
 import { following_list } from './../import/collections/insert.js';
 import { interest_list } from './../import/collections/insert.js';
+import { feed } from './../import/collections/insert.js';
 
 import { Base64 } from 'meteor/ostrio:base64';
 
@@ -46,6 +47,10 @@ import { Base64 } from 'meteor/ostrio:base64';
       return  interest_list.find({});
     });
 
+     Meteor.publish('fetch_feed_content', function() {
+      return  feed.find({});
+    });
+
 Meteor.startup(() => {
   // code to run on server at startup
 });
@@ -64,13 +69,13 @@ Meteor.methods({
 
   Check_admin_login_auth(email,password){
 
-    console.log(email + ' & ' + password);
+    // console.log(email + ' & ' + password);
 
     var result = admin_details.find({
       admin_email: email,
       admin_password: password
     }).fetch();
-    console.log(result);
+    // console.log(result);
 
     // console.log('case 1');
     if (result[0]) {
@@ -81,7 +86,7 @@ Meteor.methods({
         "login_type": "admin",
         "active_user": result[0].user_id
       };
-      console.log(message);
+      // console.log(message);
       return message;
     } else {
           // console.log('case 4');
@@ -89,7 +94,7 @@ Meteor.methods({
             "msg": 'Wrong email or password',
             "status": "0"
           };
-          console.log(message);
+          // console.log(message);
           return message;
         }
   },
@@ -258,14 +263,14 @@ if(check_if_exist[0]){
   },
 
     "change_user_details_status": function (user_id, status) {
-    console.log(user_id + ' & ' + status);
+    // console.log(user_id + ' & ' + status);
     var newUser = user_details.find({
       "user_id": user_id
     }).fetch();
 
     if (newUser[0]) {
 
-      console.log(newUser[0]);
+      // console.log(newUser[0]);
       var result = user_details.update({
         _id: newUser[0]._id,
       }, {
@@ -280,7 +285,7 @@ if(check_if_exist[0]){
 
     "change_interest_details_status": function (interest_id, status) {
 
-    console.log(interest_id + ' & ' + status);
+    // console.log(interest_id + ' & ' + status);
 
     var newUser = interest_list.find({
       "interest_id": interest_id
@@ -288,7 +293,7 @@ if(check_if_exist[0]){
 
     if (newUser[0]) {
 
-      console.log(newUser[0]);
+      // console.log(newUser[0]);
       var result = interest_list.update({
         _id: newUser[0]._id,
       }, {
@@ -314,7 +319,7 @@ if(check_if_exist[0]){
     check_signup_status:function(user_id){
 
       var result = user_details.find({user_id: user_id}).fetch();
-      console.log(result);
+      // console.log(result);
 
       if(result[0].user_location){
         var user_location = result[0].user_location;
@@ -368,8 +373,8 @@ if(check_if_exist[0]){
         "follow_people_status": follow_people_status,
       };
 
-      console.log('-------------------------------------------');
-      console.log(message);
+      // console.log('-------------------------------------------');
+      // console.log(message);
       return message;
     },
 
@@ -404,12 +409,12 @@ if(check_if_exist[0]){
     },
 
     insert_catagries:function(catagries_array,user_id){
-        console.log(catagries_array+' & '+user_id);
+        // console.log(catagries_array+' & '+user_id);
         for(var i=0; i<catagries_array.length;i++){
 
         var categorie_id = 'categorie_id_'+Math.floor((Math.random() * 2465789) + 1);
 
-        console.log(catagries_array[i]);
+        // console.log(catagries_array[i]);
           var result =  categories_selection.insert({
                       categorie_id: categorie_id,
                       user_id: user_id,
@@ -433,8 +438,7 @@ if(check_if_exist[0]){
 
     follow_people:function(follow_user_id,logged_in_user){
 
-    console.log(follow_user_id+' & '+logged_in_user);
-    
+    // console.log(follow_user_id+' & '+logged_in_user);
     var newUser = following_list.find({ $and: [{ "following": follow_user_id},{"follower": logged_in_user} ] }).fetch();
                   
           if(newUser[0]){
@@ -479,11 +483,11 @@ if(check_if_exist[0]){
 
     unfollow_people:function(follow_user_id,logged_in_user){
 
-    console.log(follow_user_id+' & '+logged_in_user);
+    // console.log(follow_user_id+' & '+logged_in_user);
     
     var newUser = following_list.find({ $and: [{ "following": follow_user_id},{"follower": logged_in_user} ] }).fetch();
-                 console.log('newUser'); 
-                 console.log(newUser); 
+                 // console.log('newUser'); 
+                 // console.log(newUser); 
           if(newUser[0]){
           var result =  following_list.update({
               _id: newUser[0]._id,
@@ -516,7 +520,7 @@ if(check_if_exist[0]){
 
       "user_login":function(user_email,user_password){  
       var result =  user_details.find({user_email: user_email, user_password: user_password}).fetch(); 
-      console.log("result: " + result);
+      // console.log("result: " + result);
       if(result[0]){
              return result;
       }else{ 
@@ -540,7 +544,7 @@ if(check_if_exist[0]){
         },
 
     "save_interest":function(interest_text){  
-    console.log(' interest_text : '+interest_text);
+    // console.log(' interest_text : '+interest_text);
     var newUser = interest_list.find({interest_title: interest_text}).fetch(); 
                   
           if(newUser[0]){
@@ -567,8 +571,8 @@ if(check_if_exist[0]){
 
       "update_interest":function(interest_id,interest_text){  
 
-    console.log(' interest_text : '+interest_text);
-    console.log(' interest_id : '+interest_id);
+    // console.log(' interest_text : '+interest_text);
+    // console.log(' interest_id : '+interest_id);
 
     var newUser = interest_list.find({interest_id: interest_id}).fetch(); 
                   
@@ -617,6 +621,51 @@ if(check_if_exist[0]){
     return result;
     },
 
+    save_feed_post: function(post_text,logged_in_user)
+      {
+    var post_id = 'post_id_'+Math.floor((Math.random() * 2465789) + 1);
+    var result = feed.insert({
+
+               "post_id": post_id,
+               "post_type": 'post',
+               "post_content_type": 'Text',
+               "post_text": post_text,
+               "post_by": logged_in_user,
+               "post_status": 1,
+               "created_at": Date.now()
+      });
+    return result;
+    },
+
+    save_updated_feed_post: function(post_id,post_text,logged_in_user)
+      {
+    var newUser = feed.find({post_id: post_id}).fetch();
+          if(newUser[0]){
+          var result =  feed.update({
+              _id: newUser[0]._id,
+            }, {
+              $set: {
+                       post_text: post_text,
+                       updated_at: Date.now()
+                    }
+            });
+          }
+          return result;
+    },
+
+    remove_post_from_feed:function(currentUserId,post_id){
+        console.log(post_id);
+
+        var result = feed.update({ 
+            post_id: post_id,
+          }, {  
+            $set: {                
+                     post_status: 0,
+                }
+          });
+        return result;
+      },  
+
   user_details_update: function(user_id,user_name,user_email,user_contact,user_location,user_headline)
       {   
       var result = user_details.update(
@@ -635,6 +684,59 @@ if(check_if_exist[0]){
     return result;
     },
 
+      update_hub_like: function(post_id,liked_by){
+
+      var checkForAlreadyExists = feed.find({
+                                              parent_id: post_id,
+                                              parent_post_type: 'post',
+                                              liked_by: liked_by,
+                                              post_type: 'like',
+
+                                  }).fetch();
+          console.log('checkForAlreadyExists: ');
+          console.log(checkForAlreadyExists);
+
+          if(checkForAlreadyExists[0]){
+          if(checkForAlreadyExists[0].like_status == 0){
+                      var result = feed.update({
+                      like_id: checkForAlreadyExists[0].like_id
+                    },
+                    {
+                      $set:
+                      {
+                      like_status: 1,
+                      updated_at: Date.now() 
+                    
+                    }
+                  });
+          }
+          else{
+          var result = feed.update({
+                      like_id: checkForAlreadyExists[0].like_id
+                    },
+                    {
+                      $set:
+                      {
+                      like_status: 0,
+                      updated_at: Date.now() 
+                    
+                    }
+                  });
+        }
+        }else{
+          var like_id = 'like_id_'+Math.floor((Math.random() * 2465789) + 1);
+
+                    var result = feed.insert({
+                      like_id: like_id,
+                      parent_id: post_id,
+                      parent_post_type: 'post',
+                      post_type: 'like',
+                      like_status: 1,
+                      liked_by: liked_by,
+                      created_at: Date.now() 
+                    });
+        }
+},
 
 });
 
@@ -643,11 +745,11 @@ if(check_if_exist[0]){
 //******************** email functions Start ***********************
  function send_email_for_varification(user_id,userEmail){
 
-  console.log('entring send mail function');
-  console.log('user_id: '+user_id+' userEmail: '+userEmail);
+  // console.log('entring send mail function');
+  // console.log('user_id: '+user_id+' userEmail: '+userEmail);
   var result = user_details.find({ user_id: user_id }).fetch();
-  console.log('result: ');
-  console.log(result);
+  // console.log('result: ');
+  // console.log(result);
 var name = result[0].user_name;
 var userID = Base64.encode(user_id);;
 
@@ -666,23 +768,23 @@ var div_style12= "width:100%; border:0";
 var div_style13= "color:#414850;line-height:30px";
 var div_style14= "color:#414850;line-height:30px";
 var div_style15= "width:100%;float:left;background-color:#fff;;margin-top:6px";
-var image_url="http://www.writersmelon.com/wm/wp-content/uploads/2017/05/cropped-Writersmelon-Logo.png";
+var image_url="http://writersmelon.com/wm/wp-content/uploads/2017/05/cropped-Writersmelon-Logo.png";
 var style="width:150px; height:150px";
 var spacing="2";
 var email = "writersmelonteam@gmail.com";
 var htmlCode="<html><head><title>Email</title></head><body><div style="+div_style+"><div style="+div_style2 +"><table style="+div_style3+"><tbody><tr><td><div style="+div_style4+"><table style="+div_style6+"><tbody><tr><td><div style="+div_style7+"><a> <img src="+image_url+" style="+style+"/></a></div></td><td><p style="+div_style10+"><p></td>"+
 "</tr></tbody></table></div><div style="+div_style11+"><table style ="+div_style12 +" cellspacing="+spacing+" cellpadding="+spacing+"><tbody><tr><td "+
-"colspan="+spacing+">&nbsp;</td></tr><tr><td colspan="+spacing+">&nbsp;</td></tr><tr><td colspan="+spacing+" style="+div_style14+">Hi "+name +",</td></tr><tr><td colspan="+spacing+">Welcome to the Writers"+
-" Melon Family!</td></tr><tr><td colspan="+spacing+">Your account is almost ready, but before you can login you need to complete a brief account verification process.</td></tr><tr><td colspan="+div_style11
-+"><br/><a href=http://writersmelon.com/activate_email/"+userID + ">Click here</a> to verify your email ID.  (if you are using the mobile application, after you press on the previous link close the mobile browser and continue from the application).<br/></td></tr><tr><td colspan="+spacing+">&nbsp;</td></tr><tr><td colspan="+spacing
+"colspan="+spacing+">&nbsp;</td></tr><tr><td colspan="+spacing+">&nbsp;</td></tr><tr><td colspan="+spacing+" style="+div_style14+">Hi "+name +",</td></tr><tr><td colspan="+spacing+">Welcome to the Writersmelon"+
+" Family!</td></tr><tr><td colspan="+spacing+">Your account is almost ready, but before you can login you need to complete a brief account verification process.</td></tr><tr><td colspan="+div_style11
++"><br/><a href=http://localhost:3000/activate_email/"+userID + ">Click here</a> to verify your email ID.  (if you are using the mobile application, after you press on the previous link close the mobile browser and continue from the application).<br/></td></tr><tr><td colspan="+spacing+">&nbsp;</td></tr><tr><td colspan="+spacing
 +">P.S. If you did not sign up for writersmelon, just ignore this email; we will never again send you an email.</td></tr><tr><td colspan="+spacing
 +">&nbsp;</td></tr><tr><td colspan="+spacing+">Regards</td></tr><tr><td colspan="+spacing
-+">The Writers Melon Team</td></tr><tr><td colspan="+spacing+">&nbsp;</td></tr><tr><td colspan="+spacing+">&nbsp;</td></tr></tbody></table></div><div style="+div_style15+"><table style="+div_style6+"><tbody><tr><td><center><small style="+div_style6+">This email was intended for "+name+".<br/>Copyright Writers Melon, 2018.</small></center></td></tr></tbody></table></div></td></tr></tbody></table></div></div></body></html>";
++">The Writersmelon Team</td></tr><tr><td colspan="+spacing+">&nbsp;</td></tr><tr><td colspan="+spacing+">&nbsp;</td></tr></tbody></table></div><div style="+div_style15+"><table style="+div_style6+"><tbody><tr><td><center><small style="+div_style6+">This email was intended for "+name+".<br/>Copyright Writersmelon, 2018.</small></center></td></tr></tbody></table></div></td></tr></tbody></table></div></div></body></html>";
 
  var email = {
             to: userEmail,
             from: 'writersmelonteam@gmail.com',
-            subject: "Writers melon | Email Verification",
+            subject: "Writersmelon | Email Verification",
             html: htmlCode,
         };
 

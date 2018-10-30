@@ -8,10 +8,13 @@ import {  Email } from 'meteor/email';
 
 Template.email_content.onRendered(function(){
 
+
+
   Meteor.subscribe("user_info_based_on_id",Session.get("userId"));
 
     setTimeout(function(){
-      alert('call sending mail function');
+
+      // alert('call sending mail function');
        $("#send_mail").click();
     },3000);
 
@@ -70,6 +73,9 @@ Template.email_content.events({
 
   'click #send_mail':function(event){
 
+$('#loading_div').removeClass("loader_visiblity_block");
+$('#save_text').addClass("loader_visiblity_block");
+
       var userEmail = Session.get("userEmail");
     Meteor.call('send_email_for_confirmation',Session.get("userId"),userEmail,function(error,result){
     if(error)
@@ -80,6 +86,10 @@ Template.email_content.events({
         console.log('sucess: '+result);
           }
     });
+
+    $('#loading_div').addClass("loader_visiblity_block");
+    $('#save_text').removeClass("loader_visiblity_block");
+
   },
 
   });
