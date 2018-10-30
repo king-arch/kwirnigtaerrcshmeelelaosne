@@ -3659,7 +3659,7 @@ img {
 }
 
 .btn {
-    color: #fff;
+    color: #fff !important;
     margin-bottom: 15px !important;
     position: relative
 }
@@ -6866,8 +6866,8 @@ fieldset[disabled] .checkbox input[type=checkbox] {
     margin-bottom: 0;
     float: right;
     margin-top: 5px;
-    max-width: 35%
-}
+/*    max-width: 35%
+*/}
 
 .birthday-item.badges .author-thumb {
     width: 38px;
@@ -8433,8 +8433,8 @@ ol ol li {
 .post-add-icon img,
 .post-add-icon svg {
     margin-right: 8px;
-    width: 15px;
-    height: 15px
+    width: 20px;
+    height: 20px
 }
 
 .post-add-icon .olymp-speech-balloon-icon {
@@ -19987,3 +19987,10 @@ box-shadow: rgba(255,255,255, 0.75) 1.5em 0 0 0, rgba(255,255,255, 0.75) 1.1em 1
 }
 
 /*loader class akhilesh end*/
+
+.pad_5px{
+    padding: 5px !important;
+}
+.pad_10px{
+  padding: 10px 0;
+}
