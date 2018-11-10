@@ -22,7 +22,8 @@
     "npm": "^6.4.1",
     "outlayer": "^2.1.1",
     "sifter": "^0.5.3",
-    "sweetalert": "^2.1.0"
+    "sweetalert": "^2.1.0",
+    "url-metadata": "^2.1.7"
   },
   "meteor": {
     "mainModule": {
