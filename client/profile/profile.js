@@ -95,6 +95,17 @@ Template.profile_content.onRendered(function(){
 
 Template.profile_content.helpers({
 
+
+      user_cover_pic_display(){
+      if(this.user_cover_pic){
+        return this.user_cover_pic;
+      }
+      else{
+        return 'img/top-header1.jpg';
+      }
+    },
+    
+
     'logged_in_user_email' : function(){
       var email = Session.get("userEmail");
       return email;
@@ -169,14 +180,14 @@ Template.profile_content.helpers({
       follow_list_all = Meteor.subscribe("follow_list_all");
       var result = following_list.find({ $and: [{ "following": follow_user_id },{ "follower": logged_in_user },{current_follow_status: 1} ] }).fetch();    
 
-      console.log('showing user list all with check');
-      console.log(result);
+      // console.log('showing user list all with check');
+      // console.log(result);
 
       if(result[0]){
-        console.log('case 1');
+        // console.log('case 1');
         return false;
       }else{
-        console.log('case 2');
+        // console.log('case 2');
         return true;
       }
 
@@ -641,7 +652,7 @@ function upload_profile_pic(e,template){
     // e.preventDefault();
     // var files = e.currentTarget.files;
     if (e.currentTarget.files && e.currentTarget.files[0]) {
-     var file = e.currentTarget.files[0];ValValidateEmailidateEmail
+     var file = e.currentTarget.files[0];
       if (file) {
    
         var reader = new FileReader();

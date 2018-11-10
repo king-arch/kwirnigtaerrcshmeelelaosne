@@ -1,3 +1,4 @@
+
 <template name="header">
       <head>
      <link rel="icon" sizes="16x16 32x32" href="img/writersmelon_favicon.ico">
@@ -46,16 +47,12 @@
       </div>
     </form>
 
-     <a href="feed.html" class="link-find-friend">Feed</a>
-    <a href="book_listing.html" class="link-find-friend">Book</a>
-     <a href="authors-listing.html" class="link-find-friend">Author</a>
-      <a href="blog_lisring.html" class="link-find-friend">Blog</a>
-        
-    
-       
+     <a class="link-find-friend" id="go_to_feed" >Feed</a>
+    <a class="link-find-friend" id="go_to_book" >Book</a>
+     <a class="link-find-friend" id="go_to_author" >Author</a>
+      <a class="link-find-friend" id="go_to_blog" >Blog</a>
 
     <div class="control-block">      
-     
       <div class="control-icon more has-items">
       <img src="img/notification_white.png" alt="arrow" class="back-icon" style="width: 21px;">
         <!--   <i class="fa fa-bell-o"> </i> -->
@@ -188,7 +185,7 @@
                   </a>
                 </li>
                 <li>
-                  <a href="profile.html">
+                  <a id="go_to_profile" >
                     <span>Profile</span>
                   </a>
                 </li>
@@ -198,8 +195,8 @@
                   </a>
                 </li>
                 <li>
-                  <a href="#">
-                   <span>Sign Out</span>
+                  <a id="sign_out" >
+                     <span>Sign Out</span>
                   </a>
                 </li>
               </ul>           

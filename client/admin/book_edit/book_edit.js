@@ -11,7 +11,6 @@ import {
 
 import { Base64 } from 'meteor/ostrio:base64';
 import swal from 'sweetalert';
-import { admin_details } from './../../../import/collections/insert.js';
 import { book_details } from './../../../import/collections/insert.js';
 
 var admin_detailed;
@@ -20,16 +19,13 @@ Template.edit_book_details.onDestroyed(function () {
 });
 
 Template.edit_book_details.onRendered(function () {
-
 	$.getScript("https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/pikaday.min.js",function(){
 	
 		    var picker = new Pikaday({ field: document.getElementById('date_picker') });
-
-
 	})
 
 
-	// admin_detailed = Meteor.subscribe("fetch_admin_details");
+
 /*$.getScript("https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.2/js/bootstrap-select.min.js",function(){
 	alert("bootstrap-select");
 	$('select').selectpicker();
@@ -50,6 +46,7 @@ Template.edit_book_details.onRendered(function () {
     if (error) {
       console.log("Some error occured.");
     } else {
+
       console.log('result: ');
       console.log(result);
       // alert("book details successfully fetched!");

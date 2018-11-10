@@ -10,7 +10,6 @@ import {
 } from 'meteor/session';
 
 import swal from 'sweetalert';
-import { admin_details } from './../../../import/collections/insert.js';
 import { book_details } from './../../../import/collections/insert.js';
 import { interest_list } from './../../../import/collections/insert.js';
 
@@ -18,15 +17,15 @@ import { Base64 } from 'meteor/ostrio:base64';
 
 var book_listing;
 
-Template.interest_management.onDestroyed(function () {
+Template.interest_management_details.onDestroyed(function () {
 	book_listing.stop();
 });
 
-Template.interest_management.onCreated(function eventlistOnCreated(){
+Template.interest_management_details.onCreated(function eventlistOnCreated(){
 
 });
 
-Template.interest_management.onRendered(function () {
+Template.interest_management_details.onRendered(function () {
 
 
 
@@ -51,7 +50,7 @@ Template.interest_management.onRendered(function () {
 
 
 
- Template.interest_management.helpers({
+ Template.interest_management_details.helpers({
 
     show_dates(){
       var array = new Array;
@@ -115,7 +114,7 @@ Template.interest_management.onRendered(function () {
 });
 
 
-Template.interest_management.events({
+Template.interest_management_details.events({
 
     'click #add_interest': function(){
     	  // alert('here: ');

@@ -10,18 +10,17 @@ import {
 } from 'meteor/session';
 
 import swal from 'sweetalert';
-import { admin_details } from './../../../import/collections/insert.js';
 import { book_details } from './../../../import/collections/insert.js';
 import { Base64 } from 'meteor/ostrio:base64';
 
 
 var admin_detailed;
 
-Template.create_user.onDestroyed(function () {
+Template.create_user_details.onDestroyed(function () {
 	admin_detailed.stop();
 });
 
-Template.create_user.onRendered(function () {
+Template.create_user_details.onRendered(function () {
 
   $.getScript('https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyCiTVlNvc4XoKjbmX4FDSyWhFLWP8_U1_k', function () {
     $.getScript('https://cdnjs.cloudflare.com/ajax/libs/geocomplete/1.7.0/jquery.geocomplete.min.js', function () {
@@ -31,10 +30,6 @@ Template.create_user.onRendered(function () {
     });
   });
   
-	admin_detailed = Meteor.subscribe("fetch_admin_details");
-	// $('#loading_div').removeClass('loader_visiblity_block');
-	// admin_detailed = Meteor.subscribe('admin_details');
-	// click_events();
 	setTimeout(function () {
 		$('#loading_div').addClass("loader_visiblity_block");
 		click_events();
@@ -45,7 +40,7 @@ Template.create_user.onRendered(function () {
 });
 
 
- Template.create_user.helpers({
+ Template.create_user_details.helpers({
     show_dates(){
       var array = new Array;
       for(var i=1;i<32;i++){

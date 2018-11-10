@@ -38,21 +38,14 @@ border: 0px;
     border-bottom: 1px solid #ccc;
 }
 </style>
-<body>
+		<body>
+			{{> interest_management_details}}
+		</body>
 
+</template>
+
+<template name="interest_management_details" >
 <div class="loading"  id="loading_div" ></div>
-
-<!-- Fixed Sidebar Left -->
-
-
-<!-- ... end Fixed Sidebar Right-Responsive -->
-
-
-<!-- Header-BP -->
-
-
-<!-- ... end Header-BP -->
-
 
 {{> left_panel_admin}}
 
@@ -513,14 +506,10 @@ border: 0px;
 				
 					</tbody>
 				</table>
-				
-				<!-- ... end Forums Table -->
 			</div>
 
 		</div>
 
 	</div>
 </div> 
-
-</body>
 </template>

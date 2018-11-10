@@ -10,18 +10,17 @@ import {
 } from 'meteor/session';
 
 import swal from 'sweetalert';
-import { admin_details } from './../../../import/collections/insert.js';
 import { book_details } from './../../../import/collections/insert.js';
 import { Base64 } from 'meteor/ostrio:base64';
 
 
 var admin_detailed;
 
-Template.edit_user_details.onDestroyed(function () {
+Template.edit_user.onDestroyed(function () {
 	admin_detailed.stop();
 });
 
-Template.edit_user_details.onRendered(function () {
+Template.edit_user.onRendered(function () {
 
 
   $.getScript('https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyCiTVlNvc4XoKjbmX4FDSyWhFLWP8_U1_k', function () {
@@ -31,9 +30,6 @@ Template.edit_user_details.onRendered(function () {
     });
   });
   
-	// $('#loading_div').removeClass('loader_visiblity_block');
-	// admin_detailed = Meteor.subscribe('admin_details');
-	// click_events();
 	setTimeout(function () {
 		$('#loading_div').addClass("loader_visiblity_block");
 		click_events();
@@ -97,7 +93,7 @@ Template.edit_user_details.onRendered(function () {
 });
 
 
- Template.edit_user_details.helpers({
+ Template.edit_user.helpers({
     show_dates(){
       var array = new Array;
       for(var i=1;i<32;i++){

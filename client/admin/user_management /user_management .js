@@ -10,22 +10,17 @@ import {
 } from 'meteor/session';
 
 import swal from 'sweetalert';
-import { admin_details } from './../../../import/collections/insert.js';
 import { book_details } from './../../../import/collections/insert.js';
 import { user_details } from './../../../import/collections/insert.js';
 import { Base64 } from 'meteor/ostrio:base64';
 
 var book_listing;
 
-Template.user_management.onDestroyed(function () {
+Template.user_management_details.onDestroyed(function () {
 	book_listing.stop();
 });
 
-// Template.user_management.onCreated(function eventlistOnCreated(){
-
-// });
-
-Template.user_management.onRendered(function () {
+Template.user_management_details.onRendered(function () {
 
     $.getScript("https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.19/js/jquery.dataTables.min.js",function(){
       $.getScript("https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css",function(){
@@ -47,7 +42,7 @@ Template.user_management.onRendered(function () {
 
 
 
- Template.user_management.helpers({
+ Template.user_management_details.helpers({
 
     show_dates(){
       var array = new Array;

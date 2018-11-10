@@ -5,6 +5,8 @@ import { Session } from 'meteor/session';
 import swal from 'sweetalert';
 
 import { user_details }  from './../../import/collections/insert.js';
+import { book_details }  from './../../import/collections/insert.js';
+import { blog }  from './../../import/collections/insert.js';
 
 // import { ServiceConfiguration } from 'meteor/service-configuration';
 
@@ -22,6 +24,53 @@ Template.index_content.onDestroyed(function () {
 
 var tracker;
 Template.index_content.onRendered(function () {
+
+});
+
+Template.index_content.helpers({
+
+
+    show_book_details(){
+
+      Meteor.subscribe("fetch_book_listing");
+      var result = book_details.find({},{ limit: 4 }).fetch();
+
+    console.log('show result: ');
+    console.log(result);
+    return result;
+
+},
+
+    show_blog_details(){
+      console.log('https://en.wikipedia.org/wiki/Greece');
+          Meteor.subscribe("fetch_blog_content");
+          var result = blog.find({},{ limit: 4 }).fetch();
+
+          console.log('show result: ');
+          console.log(result);
+          return result;
+    },
+
+    fetch_user_info(){
+      console.log('ok');
+         var user_id = this.blog_author;  
+         console.log(user_id);            
+         Meteor.subscribe("user_info_based_on_id",user_id);
+         var result = user_details.find({user_id: user_id}).fetch();
+         console.log('show author details');
+         console.log(result);
+         return result;
+    },
+
+    book_name_with_trim(){
+      var book_name = this.book_name;
+      if(book_name.length > 40){ 
+        return book_name.slice(0, 40)+'...';
+      }
+      else{
+        return book_name;
+      }
+    },
 
 });
 
@@ -153,8 +202,13 @@ Template.index_content.events({
           });
       },
 
+  'click .redirect_to_login':function(event){
+    swal("we need to sign-in first.");
+    $('#login_email').focus();
+  },
+
   'click #login_submit':function(event){
-alert('inside: ');
+// alert('inside: ');
       event.preventDefault();
       var login_email = $('#login_email').val();         
       var login_password = $('#login_password').val();         
@@ -181,7 +235,7 @@ alert('inside: ');
           $('#login_password').removeClass('emptyfield');
         }
 
-     alert('login_email'+login_email+' & login_password '+login_password);
+     // alert('login_email'+login_email+' & login_password '+login_password);
         // return false;
 
           Meteor.call("user_login",login_email,login_password, function(error,result){

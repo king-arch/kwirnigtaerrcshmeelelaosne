@@ -154,40 +154,21 @@
             </div>
         </div>
         <hr class="new4">
+
         <div class="row">
-            <div class="col col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
-                 <article class="hentry blog-post ui-block">
-                    <div class="post-thumb"><img src="img/post1.jpg" alt="photo">                   
+{{#each show_book_details}} 
+            <div class="col col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12 redirect_to_login">
+                 <article class="hentry blog-post ui-block" style="height: 300px; ">
+                    <div class="post-thumb"><img src="{{book_cover}}" alt="photo" style="height: 190px" >                   
                     </div>
-                    <div class="post-content"><a href="#" class="h4 post-title">Here's the Featured Urban photo of August!</a>
+                    <div class="post-content"><a href="#" class="h4 post-title">{{book_name_with_trim}}</a>
                       
                     </div>
                  </article>
             </div>
-            <div class="col col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
-                 <article class="hentry blog-post ui-block">
-                    <div class="post-thumb"><img src="img/post1.jpg" alt="photo">
-                    </div>
-                    <div class="post-content"><a href="#" class="h4 post-title">Here's the Featured Urban photo of August!</a>
-                      </div>
-                 </article>
-            </div>
-            <div class="col col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
-                 <article class="hentry blog-post ui-block">
-                    <div class="post-thumb"><img src="img/post1.jpg" alt="photo">
-                    </div>
-                    <div class="post-content"><a href="#" class="h4 post-title">Here's the Featured Urban photo of August!</a> </div>
-                 </article>
-            </div>
-            <div class="col col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
-                 <article class="hentry blog-post ui-block">
-                    <div class="post-thumb"><img src="img/post1.jpg" alt="photo">
-                    </div>
-                    <div class="post-content"><a href="#" class="h4 post-title">Here's the Featured Urban photo of August!</a>
-                    </div>
-                 </article>
-            </div>
+  {{/each}}
         </div>
+
         <div class="row">
             <div class="col col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12">
               <div class="ui-block responsive-flex1200 bg_trans">
@@ -199,78 +180,28 @@
         </div>
         <hr class="new4">
         <div class="row">
-            <div class="col col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
+{{#each show_blog_details}}        
+            <div class="col col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12 redirect_to_login">
                  <article class="hentry blog-post ui-block">
-                    <div class="post-thumb"><img src="img/post1.jpg" alt="photo">
+                    <div class="post-thumb"><img src="{{blog_cover}}" alt="photo" style="height: 190px" >
                       <div class="bottom-right"><a href="#" class="post-add-icon inline-items"><img src="img/comment_white.png"><span>56</span></a></div>
                       <div class="bottom-left"><a href="#" class="post-add-icon inline-items"><img src="img/heart_white.png"><span>27</span></a></div>
                     </div>
-                    <div class="post-content"><a href="#" class="h4 post-title">Here's the Featured Urban photo of August!</a>
-                      <div class="post__author author vcard inline-items"><img src="img/author-page.jpeg" alt="author">
-                        <div class="author-date"><a class="h5 post__author-name fn" href="02-ProfilePage.html">James Spiegel</a><br/>
-                          <div class="post__date">
-                            <time class="published" datetime="2017-03-24T18:18">Headine</time>
-                          </div>
-                        </div>
-                        
+                    <div class="post-content"><a href="#" class="h4 post-title">{{blog_title}}</a>
+             {{#each fetch_user_info}}
+                      <div class="post__author author vcard inline-items"><img src="{{user_profile_pic}}" alt="author">
+       
+                                      <div class="author-date"><a class="h5 post__author-name fn" href="02-ProfilePage.html">{{user_name}}</a><br/>
+                                          <div class="post__date">
+                                            <time class="published" datetime="2017-03-24T18:18">{{user_headline}}</time>
+                                          </div>
+                                      </div>
                       </div>
+             {{/each}}      
                     </div>
                  </article>
             </div>
-            <div class="col col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
-                 <article class="hentry blog-post ui-block">
-                    <div class="post-thumb"><img src="img/post1.jpg" alt="photo">
-                      <div class="bottom-right"><a href="#" class="post-add-icon inline-items"><img src="img/comment_white.png"><span>56</span></a></div>
-                      <div class="bottom-left"><a href="#" class="post-add-icon inline-items"><img src="img/heart_white.png"><span>27</span></a></div>
-                    </div>
-                    <div class="post-content"><a href="#" class="h4 post-title">Here's the Featured Urban photo of August!</a>
-                      <div class="post__author author vcard inline-items"><img src="img/author-page.jpeg" alt="author">
-                        <div class="author-date"><a class="h5 post__author-name fn" href="02-ProfilePage.html">James Spiegel</a><br/>
-                          <div class="post__date">
-                            <time class="published" datetime="2017-03-24T18:18">Headine</time>
-                          </div>
-                        </div>
-                        
-                      </div>
-                    </div>
-                 </article>
-            </div>
-            <div class="col col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
-                 <article class="hentry blog-post ui-block">
-                    <div class="post-thumb"><img src="img/post1.jpg" alt="photo">
-                      <div class="bottom-right"><a href="#" class="post-add-icon inline-items"><img src="img/comment_white.png"><span>56</span></a></div>
-                      <div class="bottom-left"><a href="#" class="post-add-icon inline-items"><img src="img/heart_white.png"><span>27</span></a></div>
-                    </div>
-                    <div class="post-content"><a href="#" class="h4 post-title">Here's the Featured Urban photo of August!</a>
-                      <div class="post__author author vcard inline-items"><img src="img/author-page.jpeg" alt="author">
-                        <div class="author-date"><a class="h5 post__author-name fn" href="02-ProfilePage.html">James Spiegel</a><br/>
-                          <div class="post__date">
-                            <time class="published" datetime="2017-03-24T18:18">Headine</time>
-                          </div>
-                        </div>
-                        
-                      </div>
-                    </div>
-                 </article>
-            </div>
-            <div class="col col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
-                 <article class="hentry blog-post ui-block">
-                    <div class="post-thumb"><img src="img/post1.jpg" alt="photo">
-                      <div class="bottom-right"><a href="#" class="post-add-icon inline-items"><img src="img/comment_white.png"><span>56</span></a></div>
-                      <div class="bottom-left"><a href="#" class="post-add-icon inline-items"><img src="img/heart_white.png"><span>27</span></a></div>
-                    </div>
-                    <div class="post-content"><a href="#" class="h4 post-title">Here's the Featured Urban photo of August!</a>
-                      <div class="post__author author vcard inline-items"><img src="img/author-page.jpeg" alt="author">
-                        <div class="author-date"><a class="h5 post__author-name fn" href="02-ProfilePage.html">James Spiegel</a><br/>
-                          <div class="post__date">
-                            <time class="published" datetime="2017-03-24T18:18">Headine</time>
-                          </div>
-                        </div>
-                        
-                      </div>
-                    </div>
-                 </article>
-            </div>
+{{/each}}
         </div> 
         <div class="swiper-container pagination-bottom" data-slide="fade">
           <div class="swiper-wrapper">

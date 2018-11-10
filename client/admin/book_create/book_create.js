@@ -10,7 +10,6 @@ import {
 } from 'meteor/session';
 
 import swal from 'sweetalert';
-import { admin_details } from './../../../import/collections/insert.js';
 import { book_details } from './../../../import/collections/insert.js';
 
 // import { daterangepicker } from './../../theme js/daterangepicker.js';
@@ -20,11 +19,11 @@ import { book_details } from './../../../import/collections/insert.js';
 
 var admin_detailed;
 
-Template.create_book.onDestroyed(function () {
+Template.create_book_details.onDestroyed(function () {
 	admin_detailed.stop();
 });
 
-Template.create_book.onRendered(function () {
+Template.create_book_details.onRendered(function () {
 	$.getScript("https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/pikaday.min.js",function(){
 	
 		    var picker = new Pikaday({ field: document.getElementById('date_picker') });
@@ -39,8 +38,7 @@ Template.create_book.onRendered(function () {
 });
 
 
- Template.create_book.helpers({
-
+ Template.create_book_details.helpers({
     show_dates(){
       var array = new Array;
       for(var i=1;i<32;i++){

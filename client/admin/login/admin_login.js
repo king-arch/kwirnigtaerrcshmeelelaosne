@@ -10,20 +10,16 @@ import {
 } from 'meteor/session';
 
 import swal from 'sweetalert';
-import { admin_details } from './../../../import/collections/insert.js';
+import { user_details } from './../../../import/collections/insert.js';
 
 var admin_detailed;
 
-Template.admin_login.onDestroyed(function () {
+Template.admin_login_details.onDestroyed(function () {
 	admin_detailed.stop();
 });
 
-Template.admin_login.onRendered(function () {
-
-	admin_detailed = Meteor.subscribe("fetch_admin_details");
-	// $('#loading_div').removeClass('loader_visiblity_block');
-	// admin_detailed = Meteor.subscribe('admin_details');
-	// click_events();
+Template.admin_login_details.onRendered(function () {
+	// admin_detailed = Meteor.subscribe("fetch_admin_details");
 	setTimeout(function () {
 		click_events();
 		// $('#loading_div').addClass('loader_visiblity_block');

@@ -10,7 +10,6 @@ import {
 } from 'meteor/session';
 
 import swal from 'sweetalert';
-import { admin_details } from './../../../import/collections/insert.js';
 import { book_details } from './../../../import/collections/insert.js';
 
 // import { daterangepicker } from './../../theme js/daterangepicker.js';
@@ -20,11 +19,11 @@ import { book_details } from './../../../import/collections/insert.js';
 
 var admin_detailed;
 
-Template.create_interest.onDestroyed(function () {
+Template.create_interest_details.onDestroyed(function () {
 	admin_detailed.stop();
 });
 
-Template.create_interest.onRendered(function () {
+Template.create_interest_details.onRendered(function () {
 
 
 	$.getScript("https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/pikaday.min.js",function(){
@@ -38,7 +37,7 @@ Template.create_interest.onRendered(function () {
 });
 
 
- Template.create_interest.helpers({
+ Template.create_interest_details.helpers({
 
     show_dates(){
       var array = new Array;
@@ -59,7 +58,7 @@ Template.create_interest.onRendered(function () {
 
 });
 
- Template.create_interest.events({
+ Template.create_interest_details.events({
 
  	'click #go_back': function(){
     	  // alert('here: ');

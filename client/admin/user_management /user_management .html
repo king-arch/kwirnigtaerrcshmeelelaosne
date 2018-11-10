@@ -1,25 +1,12 @@
 
 <template name="user_management" >
 <head>
-
 	<title>Forums</title>
-
-	<!-- Required meta tags always come first -->
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
 
-	<!-- Bootstrap CSS -->
-	<link rel="stylesheet" type="text/css" href="Bootstrap/dist/css/bootstrap-reboot.css">
-	<link rel="stylesheet" type="text/css" href="Bootstrap/dist/css/bootstrap.css">
-	<link rel="stylesheet" type="text/css" href="Bootstrap/dist/css/bootstrap-grid.css">
 		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
-
-	<!-- Main Styles CSS -->
-	<link rel="stylesheet" type="text/css" href="css/main.min.css">
-	<link rel="stylesheet" type="text/css" href="css/fonts.min.css">
-
-	<!-- Main Font -->
 
 </head>
 
@@ -48,23 +35,16 @@ border: 0px;
     border-bottom: 1px solid #ccc;
 }	
 </style>
-<body>
+
+		<body>
+			{{> user_management_details}}
+		</body>
+
+</template>
+<template name="user_management_details" >
+
  <div class="loading"  id="loading_div" ></div>
 
-
-<!-- Fixed Sidebar Left -->
-
-
-<!-- ... end Fixed Sidebar Right-Responsive -->
-
-
-<!-- Header-BP -->
-
-
-<!-- ... end Header-BP -->
-
-
-<!-- Responsive Header-BP -->
 {{> left_panel_admin}}
 
 
@@ -574,56 +554,11 @@ border: 0px;
 					
 					</tbody>
 				</table>
-				
-				<!-- ... end Forums Table -->
+			
 			</div>
 
 		</div>
 
 	</div>
 </div> 
-
-<!-- ... end Window-popup-CHAT for responsive min-width: 768px -->
-
-<!-- JS Scripts -->
-<script src="js/jquery-3.2.1.js"></script>
-<script src="js/jquery.appear.js"></script>
-<script src="js/jquery.mousewheel.js"></script>
-<script src="js/perfect-scrollbar.js"></script>
-<script src="js/jquery.matchHeight.js"></script>
-<script src="js/svgxuse.js"></script>
-<script src="js/imagesloaded.pkgd.js"></script>
-<script src="js/Headroom.js"></script>
-<script src="js/velocity.js"></script>
-<script src="js/ScrollMagic.js"></script>
-<script src="js/jquery.waypoints.js"></script>
-<script src="js/jquery.countTo.js"></script>
-<script src="js/popper.min.js"></script>
-<script src="js/material.min.js"></script>
-<script src="js/bootstrap-select.js"></script>
-<script src="js/smooth-scroll.js"></script>
-<script src="js/selectize.js"></script>
-<script src="js/swiper.jquery.js"></script>
-<script src="js/moment.js"></script>
-<script src="js/daterangepicker.js"></script>
-<script src="js/simplecalendar.js"></script>
-<script src="js/fullcalendar.js"></script>
-<script src="js/isotope.pkgd.js"></script>
-<script src="js/ajax-pagination.js"></script>
-<script src="js/Chart.js"></script>
-<script src="js/chartjs-plugin-deferred.js"></script>
-<script src="js/circle-progress.js"></script>
-<script src="js/loader.js"></script>
-<script src="js/run-chart.js"></script>
-<script src="js/jquery.magnific-popup.js"></script>
-<script src="js/jquery.gifplayer.js"></script>
-<script src="js/mediaelement-and-player.js"></script>
-<script src="js/mediaelement-playlist-plugin.min.js"></script>
-
-<script src="js/base-init.js"></script>
-<script defer src="fonts/fontawesome-all.js"></script>
-
-<script src="Bootstrap/dist/js/bootstrap.bundle.js"></script>
-
-</body>
 </template>

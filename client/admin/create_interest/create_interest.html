@@ -10,22 +10,17 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
 
-
-	<!-- Bootstrap CSS -->
-	<link rel="stylesheet" type="text/css" href="Bootstrap/dist/css/bootstrap-reboot.css">
-	<link rel="stylesheet" type="text/css" href="Bootstrap/dist/css/bootstrap.css">
-	<link rel="stylesheet" type="text/css" href="Bootstrap/dist/css/bootstrap-grid.css">
 		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
 
-
-	<!-- Main Styles CSS -->
-	<link rel="stylesheet" type="text/css" href="css/main.min.css">
-	<link rel="stylesheet" type="text/css" href="css/fonts.min.css">
 </head>
-<body>
+		<body>
+			{{> create_interest_details}}
+		</body>
 
+</template>
+
+<template name="create_interest_details" >
 {{> left_panel_admin}}
-
 
 <header class="header header-responsive" id="site-header-responsive">
 
@@ -434,9 +429,6 @@
 <a class="back-to-top" href="#">
 	<img src="svg-icons/back-to-top.svg" alt="arrow" class="back-icon">
 </a>
-
-</body>	
-
   <script type="text/javascript">
      function isNumberKey(evt)
       {

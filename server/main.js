@@ -5,18 +5,30 @@ import { book_details } from './../import/collections/insert.js';
 
 import { user_details } from './../import/collections/insert.js';
 import { categories_selection } from './../import/collections/insert.js';
+import { promotion } from './../import/collections/insert.js';
+
 import { following_list } from './../import/collections/insert.js';
 import { interest_list } from './../import/collections/insert.js';
 import { feed } from './../import/collections/insert.js';
+import { blog } from './../import/collections/insert.js';
 
 import { Base64 } from 'meteor/ostrio:base64';
+import urlMetadata from 'url-metadata';
 
      Meteor.publish('fetch_admin_details', function() {
-      return admin_details.find({});
+      return user_details.find({user_id: "user_admin"});
     });
 
      Meteor.publish('fetch_book_listing', function() {
       return book_details.find({});
+    });
+
+     Meteor.publish('fetch_promotion_listing', function() {
+      return promotion.find({});
+    });
+
+     Meteor.publish('fetch_promotion_listing_with_id', function(promotion_id) {
+      return promotion.find({promotion_id: promotion_id});
     });
 
      Meteor.publish('fetch_user_listing', function() {
@@ -51,6 +63,10 @@ import { Base64 } from 'meteor/ostrio:base64';
       return  feed.find({});
     });
 
+     Meteor.publish('fetch_blog_content', function() {
+      return  blog.find({});
+    });
+
 Meteor.startup(() => {
   // code to run on server at startup
 });
@@ -71,13 +87,15 @@ Meteor.methods({
 
     // console.log(email + ' & ' + password);
 
-    var result = admin_details.find({
-      admin_email: email,
-      admin_password: password
+    var result = user_details.find({
+      user_id: "user_admin",
+      user_email: email,
+      user_password: password
     }).fetch();
-    // console.log(result);
 
+    // console.log(result);
     // console.log('case 1');
+
     if (result[0]) {
       // console.log('case 1.1');
       var message = {
@@ -248,6 +266,13 @@ if(check_if_exist[0]){
 
   },
 
+  fetch_blog_details(blog_id){
+
+   var result = blog.find({ "blog_id": blog_id }).fetch();
+   return result;
+
+  },
+
   fetch_interest_list(interest_id){
 
    var result = interest_list.find({ "interest_id": interest_id }).fetch();
@@ -299,6 +324,48 @@ if(check_if_exist[0]){
       }, {
         $set: {
           interest_status: status,
+          updated_at: Date.now,
+        }
+      });
+      return result;
+    }
+  },
+
+    "change_blog_details_status": function (blog_id, status) {
+
+    // console.log(interest_id + ' & ' + status);
+    var newUser = blog.find({
+      "blog_id": blog_id
+    }).fetch();
+
+    if (newUser[0]) {
+      // console.log(newUser[0]);
+      var result = blog.update({
+        _id: newUser[0]._id,
+      }, {
+        $set: {
+          blog_status: status,
+          updated_at: Date.now,
+        }
+      });
+      return result;
+    }
+  },
+
+    "change_blog_approval_status": function (blog_id, status) {
+
+    // console.log(interest_id + ' & ' + status);
+    var newUser = blog.find({
+      "blog_id": blog_id
+    }).fetch();
+
+    if (newUser[0]) {
+      // console.log(newUser[0]);
+      var result = blog.update({
+        _id: newUser[0]._id,
+      }, {
+        $set: {
+          blog_approval_status: status,
           updated_at: Date.now,
         }
       });
@@ -637,6 +704,45 @@ if(check_if_exist[0]){
     return result;
     },
 
+    save_feed_post_with_image: function(post_text,logged_in_user,post_image)
+      {
+    var post_id = 'post_id_'+Math.floor((Math.random() * 2465789) + 1);
+    var result = feed.insert({
+
+               "post_id": post_id,
+               "post_type": 'post',
+               "post_content_type": 'Image',
+               "post_text": post_text,
+               "post_image": post_image,
+               "post_by": logged_in_user,
+               "post_status": 1,
+               "created_at": Date.now()
+      });
+    return result;
+    },
+
+    'save_metadata_post':function(post_text,featured_image,featured_title,source,posted_url,logged_in_user)
+      {
+    var post_id = 'post_id_'+Math.floor((Math.random() * 2465789) + 1);
+    var result = feed.insert({
+
+               "post_id": post_id,
+               "post_text": post_text,
+               "post_type": 'post',
+               "post_content_type": 'url_metadata',
+               "post_by": logged_in_user,
+
+               "featured_image":featured_image,
+               "featured_title":featured_title,
+               "source":source,
+               "posted_url":posted_url,
+
+               "post_status": 1,
+               "created_at": Date.now()
+      });
+    return result;
+    },
+
     save_updated_feed_post: function(post_id,post_text,logged_in_user)
       {
     var newUser = feed.find({post_id: post_id}).fetch();
@@ -646,6 +752,38 @@ if(check_if_exist[0]){
             }, {
               $set: {
                        post_text: post_text,
+                       updated_at: Date.now()
+                    }
+            });
+          }
+          return result;
+    },
+
+    save_updated_comment_lvl0: function(comment_id,comment_text)
+      {
+    var newUser = feed.find({comment_id: comment_id}).fetch();
+          if(newUser[0]){
+          var result =  feed.update({
+              _id: newUser[0]._id,
+            }, {
+              $set: {
+                       comment_text: comment_text,
+                       updated_at: Date.now()
+                    }
+            });
+          }
+          return result;
+    },
+
+    save_updated_comment_lvl1: function(comment_id,comment_text)
+      {
+    var newUser = feed.find({comment_id: comment_id}).fetch();
+          if(newUser[0]){
+          var result =  feed.update({
+              _id: newUser[0]._id,
+            }, {
+              $set: {
+                       comment_text: comment_text,
                        updated_at: Date.now()
                     }
             });
@@ -665,6 +803,33 @@ if(check_if_exist[0]){
           });
         return result;
       },  
+
+    remove_comment_from_lvl0:function(currentUserId,comment_id){
+        console.log(comment_id);
+
+        var result = feed.update({ 
+            comment_id: comment_id,
+          }, {  
+            $set: {                
+                     comment_status: 0,
+                }
+          });
+        return result;
+      },  
+
+  remove_comment_from_lvl1:function(currentUserId,comment_id){
+        console.log(comment_id);
+
+        var result = feed.update({ 
+            comment_id: comment_id,
+          }, {  
+            $set: {                
+                     comment_status: 0,
+                }
+          });
+        return result;
+      },  
+
 
   user_details_update: function(user_id,user_name,user_email,user_contact,user_location,user_headline)
       {   
@@ -738,9 +903,226 @@ if(check_if_exist[0]){
         }
 },
 
+      update_hub_like_comment_lvl_0: function(comment_id,liked_by){
+      var checkForAlreadyExists = feed.find({
+                                              parent_id: comment_id,
+                                              parent_post_type: 'comment_lvl_0',
+                                              liked_by: liked_by,
+                                              post_type: 'like',
+
+                                  }).fetch();
+          console.log('checkForAlreadyExists: ');
+          console.log(checkForAlreadyExists);
+
+          if(checkForAlreadyExists[0]){
+          if(checkForAlreadyExists[0].like_status == 0){
+                      var result = feed.update({
+                      like_id: checkForAlreadyExists[0].like_id
+                    },
+                    {
+                      $set:
+                      {
+                      like_status: 1,
+                      updated_at: Date.now() 
+                    
+                    }
+                  });
+          }
+          else{
+          var result = feed.update({
+                      like_id: checkForAlreadyExists[0].like_id
+                    },
+                    {
+                      $set:
+                      {
+                      like_status: 0,
+                      updated_at: Date.now() 
+                    
+                    }
+                  });
+        }
+        }else{
+          var like_id = 'like_id_'+Math.floor((Math.random() * 2465789) + 1);
+
+                    var result = feed.insert({
+                      like_id: like_id,
+                      parent_id: comment_id,
+                      parent_post_type: 'comment_lvl_0',
+                      post_type: 'like',
+                      like_status: 1,
+                      liked_by: liked_by,
+                      created_at: Date.now() 
+                    });
+        }
+},
+
+
+      async fetch_url_information(url){
+       const data = await urlMetadata(url).then(
+          function (metadata) { // success handler
+       console.log(metadata);
+       return metadata;
+        },
+        function (error) { // failure handler
+          console.log(error)
+         return error;
+        }).then(
+        function(success){
+         return success;
+        },function(error){
+          console.log("log");
+        })
+        return data;
+      },
+
+//***************** promotion ( For admin ) Starting **************************//
+                          
+       save_promotion: function(promotion_title,promotion_type,promotion_url,promotion_content,promotion_start_date,promotion_end_date )
+      {
+        var promotion_id = 'promotion_id_'+Math.floor((Math.random() * 2465789) + 1);
+        // console.log('i am here');
+var result = promotion.insert({
+                      promotion_id: promotion_id,
+                      promotion_title: promotion_title,
+                      promotion_start_date: promotion_start_date,
+                      promotion_end_date: promotion_end_date,
+
+                      promotion_type: promotion_type,
+                      promotion_url: promotion_url,
+
+                      promotion_content: promotion_content,
+                      promotion_status: 1,
+                      clicks_count: 0,
+
+                      created_at: Date.now(),
+                });
+            
+return result;
+    },       
+                                   
+       save_blog: function(blog_title,blog_type,blog_discription,blog_publish_date,logged_in_user )
+      {
+        var blog_id = 'blog_id_'+Math.floor((Math.random() * 2465789) + 1);
+        // console.log('i am here');
+var result = blog.insert({
+                      blog_id: blog_id,
+                      blog_title: blog_title,
+                      blog_type: blog_type,
+                      blog_discription: blog_discription,
+
+                      blog_publish_date: blog_publish_date,
+                      blog_status: 1,
+                      blog_approval_status: 1,
+                      blog_author: logged_in_user,
+
+                      created_at: Date.now(),
+                });
+                return result;
+              },
+                                   
+       update_blog: function(blog_id,blog_cover,blog_title,blog_type,blog_discription,blog_publish_date,logged_in_user )
+      {
+console.log(blog_cover+blog_id+blog_title+blog_type+blog_discription+blog_publish_date+logged_in_user);
+    var newUser = blog.find({blog_id: blog_id}).fetch();
+          if(newUser[0]){
+console.log("case 1");
+          var result =  blog.update({
+              _id: newUser[0]._id,
+            }, {
+              $set: {
+
+                      blog_title: blog_title,
+                      blog_type: blog_type,
+                      blog_discription: blog_discription,
+                      blog_cover: blog_cover,
+
+                      blog_publish_date: blog_publish_date,
+                      blog_status: 1,
+                      blog_approval_status: 1,
+                      blog_author: logged_in_user,
+
+                      updated_at: Date.now(),
+                }});
+                return result;
+
+              }
+              else{
+console.log("case 2");
+                return false;
+              }
+            },  
+                                          
+       update_promotion: function( promotion_id,promotion_title,promotion_type,promotion_url,promotion_content,promotion_start_date,promotion_end_date )
+      { 
+  // console.log(promotion_id+promotion_title+promotion_type+promotion_url+promotion_start_date+promotion_end_date);
+
+    var newUser = promotion.find({promotion_id: promotion_id}).fetch();
+          if(newUser[0]){
+
+          var result =  promotion.update({
+              _id: newUser[0]._id,
+            }, {
+              $set: {
+                      promotion_title: promotion_title,
+                      promotion_start_date: promotion_start_date,
+                      promotion_end_date: promotion_end_date,
+
+                      promotion_type: promotion_type,
+                      promotion_url: promotion_url,
+
+                      promotion_content: promotion_content,
+                      promotion_status: 1,
+                      clicks_count: 0,
+
+                      updated_at: Date.now(),
+                    }
+            });
+          }
+          return result;
+    },
+                          
+       fetch_promotion_details: function(promotion_id )
+      { 
+        var result = promotion.find({ promotion_id: promotion_id }).fetch()
+        return result;
+    },
+                        
+       submit_lvl_0_comment: function(logged_in_user,post_id,comment_text )
+      { 
+        var comment_id = 'comment_id_'+Math.floor((Math.random() * 2465789) + 1);
+        
+                    var result = feed.insert({                
+                      comment_id: comment_id,
+                      comment_text: comment_text,
+                      parent_id: post_id,
+                      parent_post_type: 'Image',
+                      post_type: 'comment_lvl_0',
+                      comment_status: 1,
+                      comment_by: logged_in_user,
+                      created_at: Date.now() 
+      });
+            return result;
+    },
+                       
+       submit_lvl_1_comment: function(logged_in_user,parent_id,comment_text )
+      { 
+
+        var comment_id = 'comment_id_'+Math.floor((Math.random() * 2465789) + 1);
+       
+                    var result = feed.insert({
+                      comment_id: comment_id,
+                      comment_text: comment_text,
+                      parent_id: parent_id,
+                      parent_post_type: 'Image',
+                      post_type: 'comment_lvl_1',
+                      comment_status: 1,
+                      comment_by: logged_in_user,
+                      created_at: Date.now()
+      });
+            return result;
+    },
+//****************** promotion ( For admin ) Ending **************************//
 });
-
-
 
 //******************** email functions Start ***********************
  function send_email_for_varification(user_id,userEmail){

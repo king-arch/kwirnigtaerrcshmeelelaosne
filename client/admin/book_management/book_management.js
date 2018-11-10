@@ -10,21 +10,20 @@ import {
 } from 'meteor/session';
 
 import swal from 'sweetalert';
-import { admin_details } from './../../../import/collections/insert.js';
 import { book_details } from './../../../import/collections/insert.js';
 import { Base64 } from 'meteor/ostrio:base64';
 
 var book_listing;
 
-Template.book_management.onDestroyed(function () {
+Template.book_management_details.onDestroyed(function () {
 	book_listing.stop();
 });
 
-Template.book_management.onCreated(function eventlistOnCreated(){
+Template.book_management_details.onCreated(function eventlistOnCreated(){
 
 });
 
-Template.book_management.onRendered(function () {
+Template.book_management_details.onRendered(function () {
 
 
 
@@ -49,7 +48,7 @@ Template.book_management.onRendered(function () {
 
 
 
- Template.book_management.helpers({
+ Template.book_management_details.helpers({
 
     show_dates(){
       var array = new Array;

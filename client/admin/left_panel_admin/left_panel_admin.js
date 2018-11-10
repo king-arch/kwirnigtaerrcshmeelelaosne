@@ -2,15 +2,16 @@
 import {
 	Template
 } from 'meteor/templating';
+
 import {
 	ReactiveVar
 } from 'meteor/reactive-var';
+
 import {
 	Session
 } from 'meteor/session';
 
 import swal from 'sweetalert';
-import { admin_details } from './../../../import/collections/insert.js';
 import { book_details } from './../../../import/collections/insert.js';
 import { Base64 } from 'meteor/ostrio:base64';
 
@@ -33,6 +34,14 @@ Template.left_panel_admin.onDestroyed(function () {
 
     'click #interest_management':function(){
   		Router.go("/interest_management");
+  },
+
+    'click #advertisement_management':function(){
+  		Router.go("/promotion_listing");
+  },
+
+    'click #blog_management':function(){
+  		Router.go("/blog_listing");
   },
 
  });
