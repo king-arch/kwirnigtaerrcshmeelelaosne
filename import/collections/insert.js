@@ -9,5 +9,6 @@ export const interest_list = new Mongo.Collection('interest_list');
 
 export const feed = new Mongo.Collection('feed');                                 
 export const promotion = new Mongo.Collection('promotion');                                 
+export const content = new Mongo.Collection('content');                                 
 export const blog = new Mongo.Collection('blog');                                 
 

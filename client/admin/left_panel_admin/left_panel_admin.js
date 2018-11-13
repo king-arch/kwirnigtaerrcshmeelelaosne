@@ -31,7 +31,6 @@ Template.left_panel_admin.onDestroyed(function () {
   		Router.go("/book_management");
   },
 
-
     'click #interest_management':function(){
   		Router.go("/interest_management");
   },
@@ -42,6 +41,14 @@ Template.left_panel_admin.onDestroyed(function () {
 
     'click #blog_management':function(){
   		Router.go("/blog_listing");
+  },
+
+    'click #admin_settings':function(){
+      Router.go("/admin_settings");
+  },
+
+    'click #report_display':function(){
+  		Router.go("/report_settings");
   },
 
  });
