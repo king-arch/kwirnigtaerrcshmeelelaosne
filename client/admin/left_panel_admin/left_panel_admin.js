@@ -24,32 +24,40 @@ Template.left_panel_admin.onDestroyed(function () {
  Template.left_panel_admin.events({
 
     'click #user_management':function(){
-  		Router.go("/user_management");
+  		  Router.go("/user_management");
   },
 
     'click #book_management':function(){
-  		Router.go("/book_management");
+  		  Router.go("/book_management");
   },
 
     'click #interest_management':function(){
-  		Router.go("/interest_management");
+  		  Router.go("/interest_management");
   },
 
     'click #advertisement_management':function(){
-  		Router.go("/promotion_listing");
+  		  Router.go("/promotion_listing");
   },
 
     'click #blog_management':function(){
-  		Router.go("/blog_listing");
+  		  Router.go("/blog_listing");
   },
 
     'click #admin_settings':function(){
-      Router.go("/admin_settings");
+        Router.go("/admin_settings");
   },
 
     'click #report_display':function(){
-  		Router.go("/report_settings");
-  },
+        Router.go("/report_analyze");
+      },
+
+    'click #sign_out':function(){
+        Session.clear("active_user");
+        Session.clear("active_user_type");
+  		  Session.clear("userEmail");
+
+        Router.go("/");
+      },
 
  });
 
@@ -87,6 +95,7 @@ Template.left_panel_admin.onDestroyed(function () {
     return result;
 
 },
+
 	book_summary(){
 		var book_summary = this.book_summary;
 		if(book_summary.length > 10){

@@ -1,9 +1,8 @@
 
-<template name="admin_settings" >
+<template name="report_analyze" >
 <head>
 
 	<title>Forums</title>
-
 	<!-- Required meta tags always come first -->
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -39,12 +38,12 @@ border: 0px;
 }
 </style>
 		<body>
-			{{> admin_settings_details}}
+			{{> report_analyze_details}}
 		</body>
 
 </template>
 
-<template name="admin_settings_details" >
+<template name="report_analyze_details" >
 <div class="loading"  id="loading_div" ></div>
 	{{> left_panel_admin}}
 
@@ -423,8 +422,9 @@ border: 0px;
 		<div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
 			<div class="ui-block responsive-flex">
 				<div class="ui-block-title">
+
 					<div class="">
-						<p> Admin Setting Panel</p>
+						<p> Report Analysis</p>
 					</div>
 
 					<a href="#" class="more"><svg class="olymp-three-dots-icon"><use xlink:href="#olymp-three-dots-icon"></use></svg></a>
@@ -440,24 +440,17 @@ border: 0px;
 		<div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
 
 			<div class="ui-block">
-			
 				<ul class="left-menu" style="background-color: #333 !important;">
 					
 					<li>
-						<a id="point_management" class="pointer js-sidebar-open" title="Book Management" >
-							<p> Point Manager </p>
+						<a class="pointer js-sidebar-open" title="terms & service" >
+							<p> New user count (Last 10 Days):  {{show_new_user_count}} </p>
 						</a>
 					</li>
-
+					
 					<li>
-						<a id="invoice_management" class="pointer js-sidebar-open" title="Book Management" >
-							<p> Invoice management </p>
-						</a>
-					</li>
-
-					<li>
-						<a id="change_content" class="pointer js-sidebar-open" title="Book Management" >
-							<p> Change content </p>
+						<a href="https://analytics.google.com/analytics/web/" class="pointer js-sidebar-open" title="terms & service" target="_blank" >
+							<p> See Google Analytics </p>
 						</a>
 					</li>
 
@@ -468,4 +461,16 @@ border: 0px;
 
 	</div>
 </div> 
+
+<script>
+      function isNumberKey(evt)
+      {
+         var charCode = (evt.which) ? evt.which : event.keyCode
+         if (charCode != 46 && charCode > 31 && (charCode < 48 || charCode > 57))
+            return false;
+
+         return true;
+      }
+  </script>         
+
 </template>
