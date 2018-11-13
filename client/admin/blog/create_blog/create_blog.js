@@ -9,6 +9,7 @@ import { Session } from 'meteor/session';
 		    alert("loaded: ");
 		    var picker = new Pikaday({ field: document.getElementById('blog_publish_date') });
 	});
+		
 	Session.set("blog_cover_session","");
 		// $('#blog_discription').trumbowyg();
   });

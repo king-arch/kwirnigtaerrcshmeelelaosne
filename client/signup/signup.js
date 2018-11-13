@@ -115,7 +115,7 @@ Template.signup_content.helpers({
       var user_id = Session.get("userId");
 
       user_info_list_all = Meteor.subscribe("user_info_all");
-      var result = user_details.find({},{limit: 6}).fetch();
+      var result = user_details.find({},{limit: 10}).fetch();
 
       console.log('showing user list all');
       console.log(result);
@@ -143,15 +143,6 @@ Template.signup_content.helpers({
     },
 
         show_interest_list(){
-     //     var query = new RegExp(Session.get("search_txt"),'i'); 
-     //     if(Session.get("search_txt")){
-     //       // alert('case2');
-     //     var result = interest_list.find({}).fetch();
-
-    // }
-    // else{
-    //  var result = interest_list.find({}).fetch();
-    // }
 
     Meteor.subscribe("fetch_result_interest");
       var result = interest_list.find({interest_status: 1}).fetch();
@@ -160,10 +151,51 @@ Template.signup_content.helpers({
     return result;
 },
 
+    user_name_to_follow(){
+      var user_name = this.user_name;
+      if(user_name.length > 8){
+        return user_name.slice(0, 8)+'...';
+      }
+      else{
+        return user_name;
+      }
+
+    },
+
+
 
 });
 
 Template.signup_content.events({
+
+  'click .click_on_follow':function(){
+    // alert('here');
+    var follow_user_id = this.user_id; 
+    var logged_in_user = Session.get("userId");  
+    
+      Meteor.call('follow_people',follow_user_id,logged_in_user,function(error,result){
+              if(error){
+                alert("Some error occure.");
+              }else{
+                console.log('successfully following ');
+              }
+          });
+  },
+
+  'click .click_on_unfollow':function(){
+    // alert('here');
+    var follow_user_id = this.user_id; 
+    var logged_in_user = Session.get("userId");  
+    // alert('follow_user_id: '+follow_user_id+' logged_in_user: '+logged_in_user);
+
+          Meteor.call('unfollow_people',follow_user_id,logged_in_user,function(error,result){
+              if(error){
+                alert("Some error occure.");
+              }else{
+                console.log('successfully following ');
+              }
+          });
+  },
 
   'change .user_profile_pic':function(e, template){
       upload_cover_pic(e, template);
@@ -256,7 +288,7 @@ Template.signup_content.events({
               if(error){
                 alert("Some error occure.");
               }else{
-                console('successfully following ');
+                console.log('successfully following ');
               }
           });
   },

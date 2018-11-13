@@ -210,8 +210,7 @@ Template.profile_content.events({
     // alert('here');
     var follow_user_id = this.user_id; 
     var logged_in_user = Session.get("userId");  
-    // alert('follow_user_id: '+follow_user_id+' logged_in_user: '+logged_in_user);
-
+    
       Meteor.call('follow_people',follow_user_id,logged_in_user,function(error,result){
               if(error){
                 alert("Some error occure.");

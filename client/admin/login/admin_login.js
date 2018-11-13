@@ -93,16 +93,14 @@ function click_events() {
 						});
 					}
 
-					if (result.login_type == 'admin') {
+					if (result.login_type == 'admin'){
 						Session.setPersistent("active_user", result.active_user);
+						Session.setPersistent("userId", result.active_user);
 						Session.setPersistent("active_user_type", result.login_type);
 						Router.go('/book_management');
-
 					}
 				}
 			}
 		});
-
 	});
-
 }

@@ -235,9 +235,9 @@
                     </div>
 
           <div class="row">
-          {{#each show_user_info}} 
-          {{#if check_if_already_following}} 
 
+                {{#each show_user_info}} 
+       
             <div class="col col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
                   
                   <div class="ui-block">    
@@ -246,18 +246,40 @@
                             <img src="{{user_profile_pic}}" alt="author">
                           </div>
                           <div class="birthday-author-name">
-                            <a href="#" class="h6 author-name">{{user_name}} </a>
+                            <a href="#" class="h6 author-name">{{user_name_to_follow}} </a>
                             <div class="birthday-date">{{user_headline}}</div>
                           </div>
 
-          <a href="#" class="btn btn-sm bg-blue green_follow_btn click_on_follow" id="{{user_id}}" >Follow</a>
+       {{#if check_if_already_following}} 
+                  <button class="btn btn-sm bg-blue click_on_follow" id={{user_id}} > Follow</button>
+          {{else}}
+                  <button class="btn btn-sm bg-blue click_on_unfollow" id={{user_id}} > Following</button>
+        {{/if}}
+
 
                     </div>
                   </div>
-            </div> 
+            </div>
+<!-- 
+                <div class="birthday-item inline-items">
+                  <div class="author-thumb">
+                    <img src="{{user_profile_pic}}" alt="author">
+                  </div>
+                  <div class="birthday-author-name">
+                    <a href="#" class="h6 author-name">{{user_name_to_follow}}  </a>
+                    <div class="birthday-date">Author</div>
+                  </div>
 
-            {{/if}}
-            {{/each}}
+        {{#if check_if_already_following}} 
+                  <button class="btn btn-sm bg-blue click_on_follow" id={{user_id}} > Follow</button>
+          {{else}}
+                  <button class="btn btn-sm bg-blue click_on_unfollow" id={{user_id}} > Following</button>
+        {{/if}}
+                </div> -->
+
+
+    {{/each}}
+
           </div>  
 
                      <button class="btn btn-mdb-color btn-rounded nextBtn-3 float-right button-gry" type="button" id="signup_complete" > 

@@ -139,7 +139,7 @@ Template.interest_management_details.events({
 
     var interest_id = this.interest_id;
         // alert(interest_id);
-    var status = '1';
+    var status = 1;
     console.log('status');
     console.log(status);
     swal("Sure you want to Activate this detail ?", {
@@ -179,7 +179,7 @@ Template.interest_management_details.events({
     // var interest_id = this.id;
     var interest_id = this.interest_id;
         // alert(interest_id);
-    var status = '0';
+    var status = 0;
     console.log('status');
     console.log(status);
 

@@ -6,7 +6,7 @@ import { Session } from 'meteor/session';
 
    Template.edit_blog_details.onRendered(function(){
 		$.getScript("https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/pikaday.min.js",function(){
-		    alert("loaded: ");
+		    // alert("loaded: ");
 		    var picker = new Pikaday({ field: document.getElementById('blog_publish_date') });
 	});
 	Session.set("blog_cover_session","");
@@ -150,15 +150,14 @@ Template.edit_blog_details.events({
 
 		var blog_id = $("#blog_hidden_id").val();
 
-
-		alert('blog_title: '+blog_title+' blog_type: '+blog_type+' blog_discription: '+blog_discription+' blog_publish_date: '+blog_publish_date);
 		var logged_in_user = Session.get('userId');
+		// alert('logged_in_user: '+logged_in_user+'blog_title: '+blog_title+' blog_type: '+blog_type+' blog_publish_date: '+blog_publish_date);
 
     Meteor.call('update_blog',blog_id,blog_cover,blog_title,blog_type,blog_discription,blog_publish_date,logged_in_user,blog_cover,function(error,result){
               if(error){
                 console.log("Some error occured.");
               }else{ 
-               	alert("blog sucessfully saved!");
+               	console.log("blog sucessfully saved!");
                 window.location.href="/blog_listing";            
               }
           });	
