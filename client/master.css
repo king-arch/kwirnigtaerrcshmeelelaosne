@@ -95,7 +95,7 @@ ul {
 
 .header-spacer {
     display: block;
-    height: 110px
+    height: 80px
 }
 
 .header-spacer-small {
@@ -235,10 +235,11 @@ ul {
 
 .link-find-friend {
     padding: 25px 15px;
-    color: #fff;
-    font-size: 13px;
-    font-weight: 500;
+    color: #fff !important;
+    font-size: 14px;
+    font-weight: 600;
     display: inline-block;
+    cursor: pointer;
     text-transform: uppercase;
 }
 
@@ -2337,7 +2338,7 @@ section {
 }
 
 .stunning-header .content-bg-wrap {
-    z-index: -1
+   /* z-index: -1*/
 }
 
 .stunning-header-content {
@@ -2356,7 +2357,7 @@ section {
 }
 
 .stunning-header-bg1 {
-    background-image: url(../img/landing-users.png)
+    background-image: url(img/landing-users.png)
 }
 
 .has-error .form-control-danger,
@@ -3727,7 +3728,7 @@ button:hover {
 }
 
 .btn-md {
-   padding: 5px 40px;
+   padding: 12px 40px;
     font-size: .75rem
 }
 
@@ -3829,7 +3830,7 @@ button:hover {
 }
 
 .btn-border {
-    border: 2px solid
+    border: 1px solid
 }
 
 .btn-border-think {
@@ -4198,7 +4199,7 @@ input {
     height: 20px;
     border-radius: 100%;
     font-size: 9px;
-    right: 20px;
+    right: 0px;
     top: 50%;
     margin-top: -10px;
     display: block;
@@ -4217,6 +4218,7 @@ input {
     border: 0px;
     border-bottom: 1px solid #e6ecf5;
     padding-left: 0px !important;
+    padding-right: 0px !important;
 }
 .form-contro2{
    
@@ -4243,7 +4245,7 @@ input {
 .label-floating.with-icon .form-control,
 .label-floating.with-icon input,
 .label-floating.with-icon textarea {
-    padding-left: 70px
+    padding-left: 20px !important;
 }
 
 .form-group.has-error:after {
@@ -4332,7 +4334,7 @@ select.form-control {
 
 .label-floating.with-icon label.control-label,
 .label-placeholder.with-icon label.control-label {
-    left: 70px
+    left: 20px
 }
 
 .date-time-picker input {
@@ -4345,7 +4347,7 @@ select.form-control {
     right: 0;
     top: 0;
     background-color: transparent;
-    border: none;
+    border: none;   
     height: 100%;
     padding: 1.1rem;
     display: -webkit-box;
@@ -5574,8 +5576,8 @@ fieldset[disabled] .checkbox input[type=checkbox] {
 }
 .friend-avatar .author-thumb img{
     margin: 0 auto 10px;
-    height: 80px;
-    width: 80px
+    height: 80px !important;
+    width: 80px !important;
 }
 
 .friend-avatar .author-thumb img {
@@ -8391,7 +8393,7 @@ ol ol li {
 }
 
 .post-additional-info {
-    padding: 10px  0;
+   padding: 20px 0 0;
     border-top: 1px solid #e6ecf5;
     display: -webkit-box;
     display: -ms-flexbox;
@@ -8726,8 +8728,8 @@ ol ol li {
 
 .comment-form {
     padding: 25px;
-    border-top: 1px solid #e6ecf5;
-    overflow: hidden
+/*    border-top: 1px solid #e6ecf5;
+*/    overflow: hidden
 }
 
 .comment-form .add-options-message {
@@ -19343,7 +19345,7 @@ margin-top: 0.5rem; }
   text-align: center;
   font-size: 16px;
   padding: 20px;
-  border: 2px solid #fff !important;
+  border: 1px solid #fff !important;
   transition: all 0.5s;
   cursor: pointer;
   margin: 5px;
@@ -19429,13 +19431,13 @@ margin-top: 0.5rem; }
 .green_follow_btn{
     background-color: #fff !important;
   border: 1px solid #9BAF5A;
-  color: #9BAF5A;
+  color: #9BAF5A !important;
 }
 
 .green_follow_btn:hover{
     background-color: #9BAF5A !important;
   border: 1px solid #9BAF5A;
-  color: #fff;
+  color: #fff !important;
 }
 
 @media (min-width: 1199px){
@@ -19679,7 +19681,7 @@ margin-bottom:0 !important;
 }
 
 .friend-count{
-    margin-bottom: 30px !important;
+    margin-bottom: 10px !important;
 }
 
 /*===============================CSS Oct 1========================*/
@@ -20002,4 +20004,7 @@ box-shadow: rgba(255,255,255, 0.75) 1.5em 0 0 0, rgba(255,255,255, 0.75) 1.1em 1
 }
 .pad_10px{
   padding: 10px 0;
+}
+.justify{
+    text-align: justify !important;
 }

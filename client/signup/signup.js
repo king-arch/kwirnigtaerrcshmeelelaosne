@@ -105,7 +105,7 @@ Template.signup_content.helpers({
         // alert(profile_pic);
         var result = profile_pic;
       }else{
-        var result = "img/focus.png"
+        var result = "/img/focus.png"
       }
       return result;
     },

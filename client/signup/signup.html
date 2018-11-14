@@ -9,12 +9,12 @@
 
 
 <template name="signup_content">  
-<div class="content-bg-wrap"></div>
+  <div class="content-bg-wrap"></div>
 <!-- Header-BP-logout -->
 <header class="header header--logout" id="site-header">
   
   <div class="page-title wm_logo">
-    <img src="img/logo_wm.png">
+    <img src="/img/logo_wm.png">
   </div>
 
   <div class="header-content-wrapper">
@@ -88,7 +88,7 @@
               <span class="material-input"></span></div>
             </div>
                     </div>
-                   <button class="btn btn-mdb-color btn-rounded nextBtn-3 float-right button-gry submit_headline_and_profile_pic" type="button" id="submit_headline_and_profile_pic" ><span> Next </span></button>
+                   <button class="btn btn-mdb-color btn-rounded nextBtn-3 float-right button-gry submit_headline_and_profile_pic" type="button" id="submit_headline_and_profile_pic" ><span class="c-darkgray"> Next </span></button>
 
                 </div>
             </div>
@@ -108,7 +108,8 @@
             <input id="signup_location" class="form-control " required="required"  placeholder="Location" type="text" style="color: black">
           </div>
            
-          <button class="btn btn-mdb-color btn-rounded nextBtn-3 float-right button-gry" type="button" id="submit_signup_location" ><span> Next </span></button>
+          <button class="btn btn-mdb-color btn-rounded nextBtn-3 float-right button-gry" type="button" id="submit_signup_location" >
+            <span class="c-darkgray"> Next </span></button>
 
                 </div>
             </div>
@@ -144,7 +145,7 @@
 
           </div>
 
-        <button class="btn btn-mdb-color btn-rounded nextBtn-3 float-right button-gry" type="button" id="signup_catagries" ><span> Next </span></button>
+        <button class="btn btn-mdb-color btn-rounded nextBtn-3 float-right button-gry" type="button" id="signup_catagries" ><span class="c-darkgray">Next </span></button>
 
                 </div>
             </div>
@@ -233,7 +234,6 @@
           </form> -->
                       </div>
                     </div>
-
           <div class="row">
 
                 {{#each show_user_info}} 
@@ -260,30 +260,13 @@
                     </div>
                   </div>
             </div>
-<!-- 
-                <div class="birthday-item inline-items">
-                  <div class="author-thumb">
-                    <img src="{{user_profile_pic}}" alt="author">
-                  </div>
-                  <div class="birthday-author-name">
-                    <a href="#" class="h6 author-name">{{user_name_to_follow}}  </a>
-                    <div class="birthday-date">Author</div>
-                  </div>
-
-        {{#if check_if_already_following}} 
-                  <button class="btn btn-sm bg-blue click_on_follow" id={{user_id}} > Follow</button>
-          {{else}}
-                  <button class="btn btn-sm bg-blue click_on_unfollow" id={{user_id}} > Following</button>
-        {{/if}}
-                </div> -->
-
 
     {{/each}}
 
           </div>  
 
                      <button class="btn btn-mdb-color btn-rounded nextBtn-3 float-right button-gry" type="button" id="signup_complete" > 
-                      <span>Finish </span></button>
+                      <span class="c-darkgray">Finish </span></button>
                   
                 </div>
             </div>

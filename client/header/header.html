@@ -4,25 +4,8 @@
      <link rel="icon" sizes="16x16 32x32" href="img/writersmelon_favicon.ico">
        <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
-<!-- 
-<link rel="stylesheet" type="text/css" href="Bootstrap/dist/css/bootstrap-reboot.css">
-   <link rel="stylesheet" type="text/css" href="Bootstrap/dist/css/bootstrap-grid.css">
-  <link rel="stylesheet" type="text/css" href="Bootstrap/dist/css/bootstrap.css"> 
-    <link rel="stylesheet" type="text/css" href="css/fonts.min.css">
-   <link rel="stylesheet" type="text/css" href="css/main.min.css">  -->
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-     <link rel="stylesheet" type="text/css" href="Bootstrap/dist/css/bootstrap-reboot.css">
-  <link rel="stylesheet" type="text/css" href="Bootstrap/dist/css/bootstrap.css">
-  <link rel="stylesheet" type="text/css" href="Bootstrap/dist/css/bootstrap-grid.css">
    
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-128993678-1"></script>
-<!--  <script>
-    WebFont.load({
-      google: {
-        families: ['Roboto:300,400,500,700:latin']
-      }
-    });
-  </script> -->
 </head>
 </template>
 
@@ -34,7 +17,7 @@
 
 
   <div class="page-title">
-    <img src="img/logo_wm.png" style="width: 150px !important;">
+    <img src="/img/logo_wm.png" style="width: 150px !important;">
   </div>
 
   <div class="header-content-wrapper">
@@ -42,19 +25,20 @@
       <div class="form-group with-button">
         <input class="form-control js-user-search" placeholder="Search here Books & authors ..." type="text">
         <button>
-         <img src="img/search_gray.png" style="padding-top: 15px;">
+         <img src="/img/search_gray.png" style="padding-top: 15px;">
         </button>
       </div>
     </form>
 
      <a class="link-find-friend" id="go_to_feed" >Feed</a>
-    <a class="link-find-friend" id="go_to_book" >Book</a>
+    <a class="link-find-friend" id="go_to_book" href="/book" >Book</a>
      <a class="link-find-friend" id="go_to_author" >Author</a>
       <a class="link-find-friend" id="go_to_blog" >Blog</a>
 
     <div class="control-block">      
+      
       <div class="control-icon more has-items">
-      <img src="img/notification_white.png" alt="arrow" class="back-icon" style="width: 21px;">
+      <img src="/img/notification_white.png" alt="arrow" class="back-icon" style="width: 21px;">
         <!--   <i class="fa fa-bell-o"> </i> -->
 
         <div class="label-avatar bg-primary">80</div>
@@ -69,7 +53,7 @@
             <ul class="notification-list">
               <li>
                 <div class="author-thumb">
-                  <img src="img/avatar62-sm.jpeg" alt="author">
+                  <img src="/img/avatar62-sm.jpeg" alt="author">
                 </div>
                 <div class="notification-event">
                   <div><a href="#" class="h6 notification-friend">Mathilda Brinker</a> commented on your new <a href="#" class="notification-link">profile status</a>.</div>
@@ -87,7 +71,7 @@
 
               <li class="un-read">
                 <div class="author-thumb">
-                  <img src="img/avatar63-sm.jpeg" alt="author">
+                  <img src="/img/avatar63-sm.jpeg" alt="author">
                 </div>
                 <div class="notification-event">
                   <div>You and <a href="#" class="h6 notification-friend">Nicholas Grissom</a> just became friends. Write on <a href="#" class="notification-link">his wall</a>.</div>
@@ -105,7 +89,7 @@
 
               <li class="with-comment-photo">
                 <div class="author-thumb">
-                  <img src="img/avatar64-sm.jpeg" alt="author">
+                  <img src="/img/avatar64-sm.jpeg" alt="author">
                 </div>
                 <div class="notification-event">
                   <div><a href="#" class="h6 notification-friend">Sarah Hetfield</a> commented on your <a href="#" class="notification-link">photo</a>.</div>
@@ -116,7 +100,7 @@
                   </span>
 
                 <div class="comment-photo">
-                  <img src="img/comment-photo1.jpeg" alt="photo">
+                  <img src="/img/comment-photo1.jpeg" alt="photo">
                   <span>“She looks incredible in that outfit! We should see each...”</span>
                 </div>
 
@@ -128,7 +112,7 @@
 
               <li>
                 <div class="author-thumb">
-                  <img src="img/avatar65-sm.jpeg" alt="author">
+                  <img src="/img/avatar65-sm.jpeg" alt="author">
                 </div>
                 <div class="notification-event">
                   <div><a href="#" class="h6 notification-friend">Green Goo Rock</a> invited you to attend to his event Goo in <a href="#" class="notification-link">Gotham Bar</a>.</div>
@@ -146,7 +130,7 @@
 
               <li>
                 <div class="author-thumb">
-                  <img src="img/avatar66-sm.jpeg" alt="author">
+                  <img src="/img/avatar66-sm.jpeg" alt="author">
                 </div>
                 <div class="notification-event">
                   <div><a href="#" class="h6 notification-friend">James Summers</a> commented on your new <a href="#" class="notification-link">profile status</a>.</div>
@@ -167,10 +151,17 @@
           <a href="#" class="view-all bg-primary">View All Notifications</a>
         </div>
       </div>
-
+      <div class="control-icon more has-items">
+        <img src="/img/briefcase.png" alt="arrow" class="back-icon" style="width: 21px;">     
+        <div class="label-avatar bg-primary">80</div>
+      </div>
+      <div class="control-icon more has-items">
+        <img src="/img/medal.png" alt="arrow" class="back-icon" style="width: 21px;">     
+        <div class="label-avatar bg-primary">80</div>
+      </div> 
       <div class="author-page author vcard inline-items more">
         <div class="author-thumb">
-          <img alt="author" src="img/author-page.jpeg" class="avatar">
+          <img alt="author" src="/img/author-page.jpeg" class="avatar">
           <span class="icon-status online"></span>
           <div class="more-dropdown more-with-triangle">
             <div class="mCustomScrollbar" data-mcs-theme="dark">
@@ -185,8 +176,8 @@
                   </a>
                 </li>
                 <li>
-                  <a id="go_to_profile" >
-                    <span>Profile</span>
+                  <a href="#">
+                    <span id="go_to_profile" >Profile</span>
                   </a>
                 </li>
                  <li>
@@ -195,7 +186,7 @@
                   </a>
                 </li>
                 <li>
-                  <a id="sign_out" >
+                  <a id="sign_out" href="#">
                      <span>Sign Out</span>
                   </a>
                 </li>
@@ -236,7 +227,7 @@
       <li class="nav-item">
         <a class="nav-link" data-toggle="tab" href="#chat" role="tab">
           <div class="control-icon has-items">
-            <img src="svg-icons/back-to-top.svg" alt="arrow" class="back-icon">
+            <img src="/svg-icons/back-to-top.svg" alt="arrow" class="back-icon">
             <div class="label-avatar bg-purple">2</div>
           </div>
         </a>
@@ -245,7 +236,7 @@
       <li class="nav-item">
         <a class="nav-link" data-toggle="tab" href="#notification" role="tab">
           <div class="control-icon has-items">
-             <img src="svg-icons/back-to-top.svg" alt="arrow" class="back-icon">
+             <img src="/svg-icons/back-to-top.svg" alt="arrow" class="back-icon">
 
             <div class="label-avatar bg-primary">8898</div>
           </div>
@@ -275,7 +266,7 @@
         <ul class="notification-list friend-requests">
           <li>
             <div class="author-thumb">
-              <img src="img/avatar55-sm.jpeg" alt="author">
+              <img src="/img/avatar55-sm.jpeg" alt="author">
             </div>
             <div class="notification-event">
               <a href="#" class="h6 notification-friend">Tamara Romanoff</a>
@@ -302,7 +293,7 @@
           </li>
           <li>
             <div class="author-thumb">
-              <img src="img/avatar56-sm.jpeg" alt="author">
+              <img src="/img/avatar56-sm.jpeg" alt="author">
             </div>
             <div class="notification-event">
               <a href="#" class="h6 notification-friend">Tony Stevens</a>
@@ -329,7 +320,7 @@
           </li>
           <li class="accepted">
             <div class="author-thumb">
-              <img src="img/avatar57-sm.jpeg" alt="author">
+              <img src="/img/avatar57-sm.jpeg" alt="author">
             </div>
             <div class="notification-event">
               You and <a href="#" class="h6 notification-friend">Mary Jane Stark</a> just became friends. Write on <a href="#" class="notification-link">her wall</a>.
@@ -345,7 +336,7 @@
           </li>
           <li>
             <div class="author-thumb">
-              <img src="img/avatar58-sm.jpeg" alt="author">
+              <img src="/img/avatar58-sm.jpeg" alt="author">
             </div>
             <div class="notification-event">
               <a href="#" class="h6 notification-friend">Stagg Clothing</a>
@@ -388,7 +379,7 @@
         <ul class="notification-list chat-message">
           <li class="message-unread">
             <div class="author-thumb">
-              <img src="img/avatar59-sm.jpeg" alt="author">
+              <img src="/img/avatar59-sm.jpeg" alt="author">
             </div>
             <div class="notification-event">
               <a href="#" class="h6 notification-friend">Diana Jameson</a>
@@ -405,7 +396,7 @@
 
           <li>
             <div class="author-thumb">
-              <img src="img/avatar60-sm.jpeg" alt="author">
+              <img src="/img/avatar60-sm.jpeg" alt="author">
             </div>
             <div class="notification-event">
               <a href="#" class="h6 notification-friend">Jake Parker</a>
@@ -422,7 +413,7 @@
           </li>
           <li>
             <div class="author-thumb">
-              <img src="img/avatar61-sm.jpeg" alt="author">
+              <img src="/img/avatar61-sm.jpeg" alt="author">
             </div>
             <div class="notification-event">
               <a href="#" class="h6 notification-friend">Elaine Dreyfuss</a>
@@ -439,10 +430,10 @@
 
           <li class="chat-group">
             <div class="author-thumb">
-              <img src="img/avatar11-sm.jpeg" alt="author">
-              <img src="img/avatar12-sm.jpeg" alt="author">
-              <img src="img/avatar13-sm.jpeg" alt="author">
-              <img src="img/avatar10-sm.jpeg" alt="author">
+              <img src="/img/avatar11-sm.jpeg" alt="author">
+              <img src="/img/avatar12-sm.jpeg" alt="author">
+              <img src="/img/avatar13-sm.jpeg" alt="author">
+              <img src="/img/avatar10-sm.jpeg" alt="author">
             </div>
             <div class="notification-event">
               <a href="#" class="h6 notification-friend">You, Faye, Ed &amp; Jet +3</a>
@@ -476,7 +467,7 @@
         <ul class="notification-list">
           <li>
             <div class="author-thumb">
-              <img src="img/avatar62-sm.jpeg" alt="author">
+              <img src="/img/avatar62-sm.jpeg" alt="author">
             </div>
             <div class="notification-event">
               <div><a href="#" class="h6 notification-friend">Mathilda Brinker</a> commented on your new <a href="#" class="notification-link">profile status</a>.</div>
@@ -494,7 +485,7 @@
 
           <li class="un-read">
             <div class="author-thumb">
-              <img src="img/avatar63-sm.jpeg" alt="author">
+              <img src="/img/avatar63-sm.jpeg" alt="author">
             </div>
             <div class="notification-event">
               <div>You and <a href="#" class="h6 notification-friend">Nicholas Grissom</a> just became friends. Write on <a href="#" class="notification-link">his wall</a>.</div>
@@ -512,7 +503,7 @@
 
           <li class="with-comment-photo">
             <div class="author-thumb">
-              <img src="img/avatar64-sm.jpeg" alt="author">
+              <img src="/img/avatar64-sm.jpeg" alt="author">
             </div>
             <div class="notification-event">
               <div><a href="#" class="h6 notification-friend">Sarah Hetfield</a> commented on your <a href="#" class="notification-link">photo</a>.</div>
@@ -523,7 +514,7 @@
                     </span>
 
             <div class="comment-photo">
-              <img src="img/comment-photo1.jpeg" alt="photo">
+              <img src="/img/comment-photo1.jpeg" alt="photo">
               <span>“She looks incredible in that outfit! We should see each...”</span>
             </div>
 
@@ -535,7 +526,7 @@
 
           <li>
             <div class="author-thumb">
-              <img src="img/avatar65-sm.jpeg" alt="author">
+              <img src="/img/avatar65-sm.jpeg" alt="author">
             </div>
             <div class="notification-event">
               <div><a href="#" class="h6 notification-friend">Green Goo Rock</a> invited you to attend to his event Goo in <a href="#" class="notification-link">Gotham Bar</a>.</div>
@@ -551,9 +542,9 @@
             </div>
           </li>
 
-          <li>
+          <li>s
             <div class="author-thumb">
-              <img src="img/avatar66-sm.jpeg" alt="author">
+              <img src="/img/avatar66-sm.jpeg" alt="author">
             </div>
             <div class="notification-event">
               <div><a href="#" class="h6 notification-friend">James Summers</a> commented on your new <a href="#" class="notification-link">profile status</a>.</div>
@@ -592,51 +583,38 @@
 
 </header>
 
+
 <!-- ... end Responsive Header-BP -->
+
 <div class="header-spacer"></div>
+<div class="container">
+<div class="onoffswitch3">
+    <input type="checkbox" name="onoffswitch3" class="onoffswitch3-checkbox" id="myonoffswitch3" checked>
+    <label class="onoffswitch3-label" for="myonoffswitch3">
+        <span class="onoffswitch3-inner">
+            <span class="onoffswitch3-active">
+<div id="ticker">
+                <marquee class="scroll-text" > 
+  {{#each change_textual_ads}}
+
+
+  
+       <a href={{promotion_url}} style="color: #333 !important;" class="update_count" id="OpenNewTab" target="_blank" > <span class="update_count" >{{promotion_content}}</span></a>
+
+   {{/each}}
+                  </marquee>
+</div>
+
+                <span class="onoffswitch3-switch">Latest </span>
+            </span>
+            <span class="onoffswitch3-inactive"><span class="onoffswitch3-switch">SHOW BREAKING NEWS</span></span>
+        </span>
+    </label>
+</div>
+</div>
 
 </template>
 
 <template name="footer">
-<!-- <script src="js/jquery-3.2.1.js"></script>
-<script src="js/jquery.appear.js"></script>
-<script src="js/jquery.mousewheel.js"></script>
-<script src="js/perfect-scrollbar.js"></script>
-<script src="js/jquery.matchHeight.js"></script>
-<script src="js/svgxuse.js"></script>
-<script src="js/imagesloaded.pkgd.js"></script>
-<script src="js/Headroom.js"></script>
-<script src="js/velocity.js"></script>
-<script src="js/ScrollMagic.js"></script>
-<script src="js/jquery.waypoints.js"></script>
-<script src="js/jquery.countTo.js"></script>
-<script src="js/popper.min.js"></script>
-<script src="js/material.min.js"></script>
-<script src="js/bootstrap-select.js"></script>
-<script src="js/smooth-scroll.js"></script>
-<script src="js/selectize.js"></script>
-<script src="js/swiper.jquery.js"></script>
-<script src="js/moment.js"></script>
-<script src="js/daterangepicker.js"></script>
-<script src="js/simplecalendar.js"></script>
-<script src="js/fullcalendar.js"></script>
-<script src="js/isotope.pkgd.js"></script>
-<script src="js/ajax-pagination.js"></script>
-<script src="js/Chart.js"></script>
-<script src="js/chartjs-plugin-deferred.js"></script>
-<script src="js/circle-progress.js"></script>
-<script src="js/loader.js"></script>
-<script src="js/run-chart.js"></script>
-<script src="js/jquery.magnific-popup.js"></script>
-<script src="js/jquery.gifplayer.js"></script>
-<script src="js/mediaelement-and-player.js"></script>
-<script src="js/mediaelement-playlist-plugin.min.js"></script>
-
-<script src="js/base-init.js"></script>
-<script defer src="fonts/fontawesome-all.js"></script>
-
-<script src="Bootstrap/dist/js/bootstrap.bundle.js"></script> -->
-
-<!-- <script src="//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js"></script> -->
 
 </template>

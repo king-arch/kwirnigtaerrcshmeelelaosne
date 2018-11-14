@@ -126,144 +126,89 @@
 
     <!-- Main Content -->
 
-    <div class="col col-xl-6 order-xl-2 col-lg-12 order-lg-1 col-md-12 col-sm-12 col-12">
+
+ <!-- middle feed ends here -->
+    <div class="col col-xl-6 order-xl-2 col-lg-6 order-lg-1 col-sm-12 col-12 ">
       <div id="newsfeed-items-grid">
 
+         {{#each fetch_feed_posts}}
+         {{#if equals post_content_type 'Text'}} 
+                   
         <div class="ui-block">
-          <!-- Post -->
-          <article class="hentry post video">
+
+          
+          <article class="hentry post">
           
             <div class="post__author author vcard inline-items">
-              <img src="img/avatar5-sm.jpeg" alt="author">
           
+          {{#each fetch_user_info}}
+
+              <img src="{{user_profile_pic}}"  alt="author" class="view_profile" >
               <div class="author-date">
-                <a class="h6 post__author-name fn" href="#">Gren Goo Rock</a> published a <a href="#">photo</a>
+                <a class="h6 post__author-name fn view_profile" href="#">{{user_name}}</a>
                 <div class="post__date">
                   <time class="published" datetime="2017-03-24T18:18">
-                    March 4 at 2:05pm
+                    {{calculate_time_difference ../created_at}}
                   </time>
                 </div>
               </div>
-          
-              <div class="more"><i class="fa fa-ellipsis-h"></i>
+
+        {{/each}}  
+        
+         {{#if check_if_logged_in_user}}
+              <div class="more"><svg class="olymp-three-dots-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-three-dots-icon"></use></svg>
                 <ul class="more-dropdown">
                   <li>
-                    <a href="#">Edit Post</a>
+                      <a href="javascript:void(0)" style="text-align:left !important;"  class="invitation_response editHubPost" id="{{post_id}}" > Edit</a>
                   </li>
                   <li>
-                    <a href="#">Delete Post</a>
-                  </li>
-                 
+                      <a href="javascript:void(0)" style="text-align:left !important;" class="remove_post" id="{{post_id}}"> Delete</a>
+                 </li>
                 </ul>
-              </div>
-          
-            </div>
-          
-            <div class="post-thumb">
-            <img src="img/post__thumb4.jpg" alt="photo">
-          </div>
-          
-           
-          
-            <div class="post-additional-info inline-items">
-          
-              <a href="#" class="post-add-icon inline-items">
-               <img src="img/heart_gray.png">
-                <span>18</span>
-              </a>
-          
-              <ul class="friends-harmonic">
-                <li>
-                  <a href="#">
-                    <img src="img/friend-harmonic9.jpeg" alt="friend">
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <img src="img/friend-harmonic10.jpeg" alt="friend">
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <img src="img/friend-harmonic7.jpeg" alt="friend">
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <img src="img/friend-harmonic8.jpeg" alt="friend">
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <img src="img/friend-harmonic11.jpeg" alt="friend">
-                  </a>
-                </li>
-              </ul>
-          
-              <div class="names-people-likes">
-                <a href="#">Jenny</a>, <a href="#">Robert</a> and
-                <br>18 more liked this
-              </div>
-          
-              <div class="comments-shared">
-                <a href="#" class="post-add-icon inline-items">
-                 <img src="img/comment_gray.png">
-                  <span>0</span>
-                </a>
-          
-                </div>
-          
-          
-            </div>
-          
-                      
-          </article>
-       
-          <!-- .. end Post -->        
+              </div> 
+         {{/if}}
+      </div>
+
+        <p id="post_text_{{post_id}}" class="justify">
+                {{#if check_summary_for_br_tag}}
+                  {{#each BreakAsArrayfull}}
+                  {{tag}}<br/>  
+                  {{/each}}
+                  {{else}}
+                  {{post_text}}
+                  {{/if}}
+
+            <!-- <p>{{post_text}}
+            </p> -->
+        </p>
+        <div id="edit_post_text_{{post_id}}" class="loader_visiblity_block" > 
+
+        <textarea class="loader_visiblity_block updateHiddenPost" id="hidden_hub_post_{{post_id}}" resize="none" placeholder="Edit ..." style="padding: 5px; border: 1px solid #e4e4e4; border-radius: 5px; width: 100%; height: auto !important;" >{{post_text}}</textarea>
+
+
+        <button class="btn btn-primary btn-md-2 pull-right" id="submit_edited_post" ><i class="fa fa-spinner fa-pulse fa-fw div_hide_class" id="loader_gif"></i>
+                           <span id="save_text"> Post Status</span></button>   
         </div>
-         <div class="ui-block">
-               <article class="hentry post">
-          
-            <div class="post__author author vcard inline-items">
-              <img src="img/avatar5-sm.jpeg" alt="author">
-          
-              <div class="author-date">
-              <a class="h6 post__author-name fn" href="02-ProfilePage.html">James Spiegel</a> published a <a href="#">Update</a>
-                <div class="post__date">
-                  <time class="published" datetime="2017-03-24T18:18">
-                    4 hours ago
-                  </time>
-                </div>
-              </div>
-          
-              <div class="more"><i class="fa fa-ellipsis-h"></i>
-                <ul class="more-dropdown">
-                  <li>
-                    <a href="#">Edit Post</a>
-                  </li>
-                  <li>
-                    <a href="#">Delete Post</a>
-                  </li>
-                  
-                </ul>
-              </div>
-          
-            </div>
-          
-            <p>Hi guys! We just wanted to let everyone know that we are currently recording
-              our new album “News of the Goo”. We’ll be playing one of our new songs this Friday at 8pm in
-              our Fake Street 320 recording studio, come and join us!
-            </p>
+
 
           
             <div class="post-additional-info inline-items">
-          
-              <a href="#" class="post-add-icon inline-items">
-                <img src="img/heart_gray.png">
-                <span>36</span>
+           {{#if check_for_user_already_liked}} 
+              <a href="#" class="like_event post-add-icon inline-items">
+                <svg class="olymp-heart-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-heart-icon"></use></svg>
               </a>
+                <span><a data-toggle="modal" data-target="#show_like_count_on_feed_post_text" class=" get_all_liked_users"><span>{{total_liked_on_post post_id}} </span> </a></span>
+            
+               &nbsp;  &nbsp;
+               {{else }}
+            <a href="#" class="like_event post-add-icon inline-items">
+            <svg class="olymp-heart-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-heart-icon"></use></svg>
+               </a>
+                <span><a data-toggle="modal" data-target="#show_like_count_on_feed_post_text" class=" get_all_liked_users"><span>{{total_liked_on_post post_id}} </span> </a></span>
+           
+      {{/if}}    
           
-              <ul class="friends-harmonic">
+<!--               <ul class="friends-harmonic">
                 <li>
                   <a href="#">
                     <img src="img/friend-harmonic7.jpeg" alt="friend">
@@ -294,88 +239,423 @@
               <div class="names-people-likes">
                 <a href="#">You</a>, <a href="#">Elaine</a> and
                 <br>34 more liked this
-              </div>
+              </div> -->
           
           
               <div class="comments-shared">
                 <a href="#" class="post-add-icon inline-items">
                   <img src="img/comment_gray.png">
 
-                  <span>17</span>
+                  <span>{{show_comment_count}}</span>
                 </a>
-          
-               
               </div>
-          
-          
             </div>
-          
-          
           </article>
 
-         </div>
 
-        <div class="ui-block">
-          <article class="hentry post video">
+
+                    <ul class="comments-list">
+    {{#each display_lvl_0_commenting}}
+            <li class="comment-item">
+              <div class="post__author author vcard inline-items">
+          {{#each fetch_user_info_for_comment}}  
+
+                <img src="{{user_profile_pic}}" class="view_profile" alt="author">
+                <div class="author-date">
+                  <a class="h6 post__author-name fn view_profile" href="#">{{user_name}}</a>
+                  <div class="post__date">
+                  <time class="published" datetime="2017-03-24T18:18">
+                      {{calculate_time_difference ../created_at}}
+                    </time>
+                  </div>
+                </div>
+
+          {{/each}}
+          
+         {{#if check_if_current_user_is_commenter}}        
+              <div class="more"><svg class="olymp-three-dots-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-three-dots-icon"></use></svg>
+                <ul class="more-dropdown">
+
+                  <li>
+                      <a href="javascript:void(0)" style="text-align:left !important;"  class="invitation_response edit_comment_lvl0" id="{{comment_by}}" > Edit</a>
+                  </li>
+
+                  <li>
+                      <a href="javascript:void(0)" style="text-align:left !important;" class="remove_comment_lvl0" id="{{comment_by}}"> Delete</a>
+                 </li>
+
+                </ul>
+              </div>
+          {{/if}}  
+          
+              </div>
+          
+              <p id="comment_lvl0_text_{{comment_id}}" >{{comment_text}}</p>
+
+                        <div id="edit_comment_lvl0_text_{{comment_id}}" class="loader_visiblity_block" > 
+
+        <textarea class="loader_visiblity_block updateHiddenPost" id="hidden_comment_lvl0_post_{{comment_id}}" resize="none" placeholder="Edit ..." style="padding: 5px; border: 1px solid #e4e4e4; border-radius: 5px; width: 100%; height: auto !important;" >{{comment_text}}</textarea>
+
+
+        <button class="btn btn-primary btn-md-2 pull-right" id="submit_edited_comment_lvl0" ><i class="fa fa-spinner fa-pulse fa-fw div_hide_class" id="loader_gif"></i>
+                           <span id="save_text"> Post Status</span></button>   
+        </div>
+
+          
+<!--               <a class="post-add-icon inline-items " >
+               <svg class="olymp-heart-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-heart-icon"></use></svg>
+                <span>61</span>
+              </a> -->
+          {{#if check_for_user_already_liked_on_comment_lvl_0}}    
+
+              <a class="like_event_comment_lvl_0 post-add-icon inline-items">
+               <img src="img/heart_gray.png">
+              </a>
+                                <span><a data-toggle="modal" data-target="#show_like_count_on_feed_comment_lvl_0_text" class=" get_all_liked_users show_like_count_on_feed_comment_lvl_0_text"><span>{{total_liked_on_comment_lvl_0 comment_id}}
+                </span>
+                </a>
+                </span>
+              
+               &nbsp;  &nbsp;
+               {{else }}
+                    <a class="like_event_comment_lvl_0 post-add-icon inline-items">
+               <img src="img/heart_gray.png">
+               </a>  
+                                <span><a data-toggle="modal" data-target="#show_like_count_on_feed_comment_lvl_0_text" class=" get_all_liked_users show_like_count_on_feed_comment_lvl_0_text"><span>{{total_liked_on_comment_lvl_0 comment_id}}
+                </span>
+                </a>
+                </span>
+                     
+               &nbsp;  &nbsp;
+               {{/if}}  
+  
+  <div class="modal fade" new_post="{{post_id}}" id="show_like_count_on_feed_comment_lvl_0_text" tabindex="-1" role="dialog" aria-labelledby="show_like_count_on_feed_comment_lvl_0_text" aria-hidden="true">
+
+  <div class="modal-dialog window-popup create-friend-group show_like_count_on_feed_comment_lvl_0_text" role="document">
+
+    <div class="modal-content">
+      <a href="#" class="close icon-close" data-dismiss="modal" aria-label="Close">
+        <svg class="olymp-close-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-close-icon"></use></svg>
+      </a>
+
+
+      <div class="modal-header">
+        <h6 class="title">Likes</h6>
+      </div>
+{{#each show_users_liked_on_comment_lvl_0}}
+      
+      <div class="modal-body" style="padding: 0px;">
+      <div class="mCustomScrollbar ps ps--theme_default ps--active-y" data-mcs-theme="dark" data-ps-id="a00a8796-727b-f827-6a40-6bc549e16254">
+            <ul class="notification-list friend-requests">
+                {{#each fetch_like_user_info}}
+                    <li>
+                      <div class="author-thumb">
+                        <img src="{{user_profile_pic}}" class="view_profile" alt="author">
+                      </div>
+                      <div class="notification-event">
+                        <a href="#" class="h6 notification-friend view_profile">{{user_name}}</a>
+
+                      </div>
+                    </li>
+                  {{/each}}
+
+            </ul>
+          <div class="ps__scrollbar-x-rail" style="left: 0px; bottom: 0px;"><div class="ps__scrollbar-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps__scrollbar-y-rail" style="top: 0px; height: 300px; right: 0px;"><div class="ps__scrollbar-y" tabindex="0" style="top: 0px; height: 241px;"></div></div></div>
+    </div>
+
+      {{/each}}  
+    </div>
+  </div>
+</div>
+              <a href="#" class="reply_to_lvl0" id="{{comment_id}}" >Reply</a>
+            </li>
+
+          
+          <li class="comment-item loader_visiblity_block" id="reply_lvl0_{{comment_id}}" >
+               <form class="comment-form inline-items">
+            <div class="post__author author vcard inline-items">
+
+
+              <img src="{{show_logged_inuser_profile_pic}}" alt="author" class="view_profile" >
+              <div class="form-group with-icon-right is-empty">
+
+                <textarea class="form-control c-gray" placeholder="Enter your reply here ..." id="comment_lvl_1_{{comment_id}}" ></textarea>
+
+                <div class="add-options-message">
+                </div>
+              <span class="material-input"></span></div>
+            </div>
+            <button class="btn btn-md-2 btn-primary lvl_1_comment_submitted" id="{{comment_id}}">Reply</button>
+          </form>
+
+        </li>
+
+    {{#each display_lvl_1_commenting}}
+      <li class="comment-item" style="padding-left: 80px;" >
+              <div class="post__author author vcard inline-items">
+          {{#each fetch_user_info_for_comment}}  
+
+                <img src="{{user_profile_pic}}" alt="author" class="view_profile" >
+                <div class="author-date">
+                  <a class="h6 post__author-name fn view_profile" href="#">{{user_name}}</a>
+                  <div class="post__date">
+                  <time class="published" datetime="2017-03-24T18:18">
+                      {{calculate_time_difference ../created_at}}
+                    </time>
+                  </div>
+                </div>
+
+          {{/each}}
+          
+         {{#if check_if_current_user_is_commenter}}        
+              <div class="more"><svg class="olymp-three-dots-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-three-dots-icon"></use></svg>
+                <ul class="more-dropdown">
+                  <li>
+                      <a href="javascript:void(0)" style="text-align:left !important;"  class="invitation_response edit_comment_lvl1" id="{{comment_by}}" > Edit</a>
+                  </li>
+                  <li>
+                      <a href="javascript:void(0)" style="text-align:left !important;" class="remove_comment_lvl1" id="{{comment_by}}"> Delete</a>
+                 </li>
+                </ul>
+              </div>
+          {{/if}}  
+
+              </div>
+
+    <p id="comment_lvl1_text_{{comment_id}}" >{{comment_text}}</p>
+          
+       <div id="edit_comment_lvl1_text_{{comment_id}}" class="loader_visiblity_block" > 
+
+       <textarea class="loader_visiblity_block updateHiddenPost" id="hidden_comment_lvl1_post_{{comment_id}}" resize="none" placeholder="Edit ..." style="padding: 5px; border: 1px solid #e4e4e4; border-radius: 5px; width: 100%; height: auto !important;" >{{comment_text}}</textarea>
+
+
+        <button class="btn btn-primary btn-md-2 pull-right" id="submit_edited_comment_lvl1" ><i class="fa fa-spinner fa-pulse fa-fw div_hide_class" id="loader_gif"></i>
+                           <span id="save_text"> Post Status</span></button>   
+        </div>
+
+          {{#if check_for_user_already_liked_on_comment_lvl_1}}    
+
+              <a class="like_event_comment_lvl_0 post-add-icon inline-items">
+               <img src="img/heart_gray.png">
+              </a>
+                <span><a data-toggle="modal" data-target="#show_like_count_on_feed_comment_lvl_1_text" class=" get_all_liked_users show_like_count_on_feed_comment_lvl_1_text"><span>{{total_liked_on_comment_lvl_1 comment_id}}
+                </span>
+                </a>
+                </span>
+              
+               &nbsp;  &nbsp;
+               {{else }}
+                    <a class="like_event_comment_lvl_0 post-add-icon inline-items">
+               <img src="img/heart_gray.png">
+               </a>  
+                                <span><a data-toggle="modal" data-target="#show_like_count_on_feed_comment_lvl_1_text" class=" get_all_liked_users show_like_count_on_feed_comment_lvl_1_text"><span>{{total_liked_on_comment_lvl_1 comment_id}}
+                </span>
+                </a>
+                </span>
+                     
+               &nbsp;  &nbsp;
+               {{/if}}  
+
+  <div class="modal fade" new_pos="{{post_id}}" id="show_like_count_on_feed_comment_lvl_1_text" tabindex="-1" role="dialog" aria-labelledby="show_like_count_on_feed_comment_lvl_1_text" aria-hidden="true">
+
+  <div class="modal-dialog window-popup create-friend-group show_like_count_on_feed_comment_lvl_1_text" role="document">
+
+    <div class="modal-content">
+      <a href="#" class="close icon-close" data-dismiss="modal" aria-label="Close">
+        <svg class="olymp-close-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-close-icon"></use></svg>
+      </a>
+
+
+      <div class="modal-header">
+        <h6 class="title">Likes</h6>
+      </div>
+{{#each show_users_liked_on_comment_lvl_1}}
+      
+      <div class="modal-body" style="padding: 0px;">
+      <div class="mCustomScrollbar ps ps--theme_default ps--active-y" data-mcs-theme="dark" data-ps-id="a00a8796-727b-f827-6a40-6bc549e16254">
+            <ul class="notification-list friend-requests">
+                {{#each fetch_like_user_info}}
+                    <li>
+                      <div class="author-thumb">
+                        <img src="{{user_profile_pic}}" alt="author" class="view_profile" >
+                      </div>
+                      <div class="notification-event">
+                        <a href="#" class="h6 notification-friend view_profile">{{user_name}}</a>
+
+                      </div>
+                    </li>
+                  {{/each}}
+
+            </ul>
+          <div class="ps__scrollbar-x-rail" style="left: 0px; bottom: 0px;"><div class="ps__scrollbar-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps__scrollbar-y-rail" style="top: 0px; height: 300px; right: 0px;"><div class="ps__scrollbar-y" tabindex="0" style="top: 0px; height: 241px;"></div></div></div>
+    </div>
+
+      {{/each}}  
+    </div>
+  </div>
+</div>
+
+            </li>
+
+
+        {{/each}}
+
+    {{/each}}
+
+          </ul>
+
+<!--           {{#if check_if_comments_exist}}
+      <a href="#" class="more-comments show_more_comments" id="comment_box_{{post_id}}" >View more comments <span>+</span></a>         
+{{/if}} -->
+
+          <form class="comment-form inline-items pad_5px">
           
             <div class="post__author author vcard inline-items">
-              <img src="img/avatar5-sm.jpeg" alt="author">
+              <img src="{{show_logged_inuser_profile_pic}}" alt="author" class="view_profile" >
           
+              <div class="form-group with-icon-right is-empty">
+                <textarea class="form-control c-gray" placeholder="Enter your comment here ..." id="comment_lvl_0_{{post_id}}" ></textarea>
+                <div class="add-options-message">
+                 <!--  <a href="#" class="options-message" data-toggle="modal" data-target="#update-header-photo">
+                    <svg class="olymp-camera-icon">
+                      <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="svg-icons/sprites/icons.svg#olymp-camera-icon"></use>
+                    </svg>
+                  </a> -->
+                </div>
+              <span class="material-input"></span></div>
+            </div>
+
+
+        <button class="btn btn-md-2 btn-primary lvl_0_comment_submitted" id="comment_lvl_0_{{post_id}}" >Post Comment</button>
+          </form>
+        </div>
+
+  <div class="modal fade" new_post="{{post_id}}" id="show_like_count_on_feed_post_text" tabindex="-1" role="dialog" aria-labelledby="show_like_count_on_feed_post_text" aria-hidden="true">
+
+  <div class="modal-dialog window-popup create-friend-group show_like_count_on_feed_post_text" role="document">
+
+    <div class="modal-content">
+      <a href="#" class="close icon-close" data-dismiss="modal" aria-label="Close">
+        <svg class="olymp-close-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-close-icon"></use></svg>
+      </a>
+
+
+      <div class="modal-header">
+        <h6 class="title">Likes</h6>
+      </div>
+{{#each show_users_liked_on_post}}
+      
+
+      <div class="modal-body" style="padding: 0px;">
+      <div class="mCustomScrollbar ps ps--theme_default ps--active-y" data-mcs-theme="dark" data-ps-id="a00a8796-727b-f827-6a40-6bc549e16254">
+            <ul class="notification-list friend-requests">
+                {{#each fetch_like_user_info}}
+                    <li>
+                      <div class="author-thumb">
+                        <img src="{{user_profile_pic}}" alt="author" class="view_profile" >
+                      </div>
+                      <div class="notification-event">
+                        <a href="#" class="h6 notification-friend view_profile">{{user_name}}</a>
+
+                      </div>
+                    </li>
+                  {{/each}}
+
+            </ul>
+          <div class="ps__scrollbar-x-rail" style="left: 0px; bottom: 0px;"><div class="ps__scrollbar-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps__scrollbar-y-rail" style="top: 0px; height: 300px; right: 0px;"><div class="ps__scrollbar-y" tabindex="0" style="top: 0px; height: 241px;"></div></div></div>
+
+<!--       <a href="#" class="btn btn-blue btn-lg full-width">Save Changes</a>
+ -->    </div>
+
+      {{/each}}  
+    </div>
+  </div>
+</div>
+
+         {{else if equals post_content_type 'Image'}} 
+
+        <div class="ui-block">
+          
+          <article class="hentry post has-post-thumbnail">
+          
+            <div class="post__author author vcard inline-items">
+  {{#each fetch_user_info}}        
+              <img src="{{user_profile_pic}}"  alt="author" class="view_profile">
               <div class="author-date">
-                <a class="h6 post__author-name fn" href="#">Gren Goo Rock</a> shared a <a href="#">link</a>
+                <a class="h6 post__author-name fn view_profile view_profile" href="#"> {{user_name}}</a>
                 <div class="post__date">
                   <time class="published" datetime="2017-03-24T18:18">
-                    March 4 at 2:05pm
+                    {{calculate_time_difference ../created_at}}
                   </time>
                 </div>
               </div>
+          {{/each}}  
           
-              <div class="more"><i class="fa fa-ellipsis-h"></i>
+         {{#if check_if_logged_in_user}}        
+              <div class="more"><svg class="olymp-three-dots-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-three-dots-icon"></use></svg>
                 <ul class="more-dropdown">
                   <li>
-                    <a href="#">Edit Post</a>
+                      <a href="javascript:void(0)" style="text-align:left !important;"  class="invitation_response editHubPost" id="{{post_id}}" > Edit</a>
                   </li>
                   <li>
-                    <a href="#">Delete Post</a>
-                  </li>
-                  <li>
-                    <a href="#">Turn Off Notifications</a>
-                  </li>
-                  <li>
-                    <a href="#">Select as Featured</a>
-                  </li>
+                      <a href="javascript:void(0)" style="text-align:left !important;" class="remove_post" id="{{post_id}}"> Delete</a>
+                 </li>
                 </ul>
               </div>
-          
+          {{/if}}        
             </div>
           
-            <p>Hey <a href="#">Cindi</a>, you should really check out this new song by Iron Maid. The next time they come to the city we should totally go!</p>
+        <p id="post_text_{{post_id}}" >
+                {{#if check_summary_for_br_tag}}
+                  {{#each BreakAsArrayfull}}
+                  {{tag}}<br/>  
+                  {{/each}}
+                  {{else}}
+                  {{post_text}}
+                  {{/if}}
+
+            <!-- <p>{{post_text}}
+            </p> -->
+        </p>
+          <div id="edit_post_text_{{post_id}}" class="loader_visiblity_block" > 
+
+        <textarea class="loader_visiblity_block updateHiddenPost" id="hidden_hub_post_{{post_id}}" resize="none" placeholder="Edit ..." style="padding: 5px; border: 1px solid #e4e4e4; border-radius: 5px; width: 100%; height: auto !important;" >{{post_text}}</textarea>
+
+
+        <button class="btn btn-primary btn-md-2 pull-right" id="submit_edited_post" ><i class="fa fa-spinner fa-pulse fa-fw div_hide_class" id="loader_gif"></i>
+                           <span id="save_text"> Post Status</span></button>   
+        </div>
           
-            <div class="post-video">
-              <div class="video-thumb">
-                <img src="img/video-youtube.jpeg" alt="photo">
-                <a href="https://youtube.com/watch?v=excVFQ2TWig" class="play-video">
-                  <i class="fa fa-play"></i>
-                </a>
-              </div>
-          
-              <div class="video-content">
-                <a href="#" class="h4 title">Killer Queen - Archiduke</a>
-                <p>Lorem ipsum dolor sit amet, consectetur ipisicing elit, sed do eiusmod tempor incididunt
-                  ut labore et dolore magna aliqua...
-                </p>
-                <a href="#" class="link-site">YOUTUBE.COM</a>
-              </div>
+            <div class="post-thumb">
+              <img src="{{post_image}}" alt="photo">
             </div>
           
             <div class="post-additional-info inline-items">
-          
-              <a href="#" class="post-add-icon inline-items">
-               <img src="img/heart_gray.png">
-                <span>18</span>
+          {{#if check_for_user_already_liked}} 
+              <a class="like_event post-add-icon inline-items modal_kholo get_all_liked_users" >
+                    <img src="img/heart_gray.png">
+               </a>
+                <span><a data-toggle="modal" data-target="#show_like_count_on_feed_post_image" class=" get_all_liked_users"><span>{{total_liked_on_post post_id}}
+                </span>
+                </a>
+                </span>
+             
+               
+               &nbsp;  &nbsp;
+               {{else }}      
+              <a class="like_event post-add-icon inline-items">
+               
+              <svg class="olymp-heart-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-heart-icon"></use></svg>
               </a>
-          
-              <ul class="friends-harmonic">
+                                <span><a data-toggle="modal" data-target="#show_like_count_on_feed_post_image" class=" get_all_liked_users"><span>{{total_liked_on_post post_id}}
+                </span>
+                </a>
+                </span>
+             
+              &nbsp;  &nbsp;
+               {{/if}}
+
+<!--               <ul class="friends-harmonic">
                 <li>
                   <a href="#">
                     <img src="img/friend-harmonic9.jpeg" alt="friend">
@@ -404,14 +684,394 @@
               </ul>
           
               <div class="names-people-likes">
+                <a href="#">Jimmy</a>, <a href="#">Andrea</a> and
+                <br>47 more liked this
+              </div> -->
+          
+              <div class="comments-shared">
+                <a href="#" class="post-add-icon inline-items">
+                                  <img src="img/comment_gray.png">
+
+                  <span>{{show_comment_count}}</span>
+                </a>
+          
+               
+              </div>
+          
+            </div>
+          
+          </article>
+
+                    <ul class="comments-list">
+    {{#each display_lvl_0_commenting}}
+            <li class="comment-item">
+              <div class="post__author author vcard inline-items">
+          {{#each fetch_user_info_for_comment}}  
+
+                <img src="{{user_profile_pic}}" class="view_profile" alt="author">
+                <div class="author-date">
+                  <a class="h6 post__author-name fn view_profile" href="#">{{user_name}}</a>
+                  <div class="post__date">
+                  <time class="published" datetime="2017-03-24T18:18">
+                      {{calculate_time_difference ../created_at}}
+                    </time>
+                  </div>
+                </div>
+
+          {{/each}}
+          
+         {{#if check_if_current_user_is_commenter}}        
+              <div class="more"><svg class="olymp-three-dots-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-three-dots-icon"></use></svg>
+                <ul class="more-dropdown">
+
+                  <li>
+                      <a href="javascript:void(0)" style="text-align:left !important;"  class="invitation_response edit_comment_lvl0" id="{{comment_by}}" > Edit</a>
+                  </li>
+
+                  <li>
+                      <a href="javascript:void(0)" style="text-align:left !important;" class="remove_comment_lvl0" id="{{comment_by}}"> Delete</a>
+                 </li>
+
+                </ul>
+              </div>
+          {{/if}}  
+          
+              </div>
+          
+              <p id="comment_lvl0_text_{{comment_id}}" >{{comment_text}}</p>
+
+                        <div id="edit_comment_lvl0_text_{{comment_id}}" class="loader_visiblity_block" > 
+
+        <textarea class="loader_visiblity_block updateHiddenPost" id="hidden_comment_lvl0_post_{{comment_id}}" resize="none" placeholder="Edit ..." style="padding: 5px; border: 1px solid #e4e4e4; border-radius: 5px; width: 100%; height: auto !important;" >{{comment_text}}</textarea>
+
+
+        <button class="btn btn-primary btn-md-2 pull-right" id="submit_edited_comment_lvl0" ><i class="fa fa-spinner fa-pulse fa-fw div_hide_class" id="loader_gif"></i>
+                           <span id="save_text"> Post Status</span></button>   
+        </div>
+
+    {{#if check_for_user_already_liked_on_comment_lvl_0}}    
+
+              <a class="like_event_comment_lvl_0 post-add-icon inline-items">
+               <img src="img/heart_gray.png">
+              </a>
+                                <span><a data-toggle="modal" data-target="#show_like_count_on_feed_comment_lvl_0_text" class=" get_all_liked_users show_like_count_on_feed_comment_lvl_0_text"><span>{{total_liked_on_comment_lvl_0 comment_id}}
+                </span>
+                </a>
+                </span>
+              
+               &nbsp;  &nbsp;
+               {{else }}
+                    <a class="like_event_comment_lvl_0 post-add-icon inline-items">
+               <img src="img/heart_gray.png">
+               </a>  
+                                <span><a data-toggle="modal" data-target="#show_like_count_on_feed_comment_lvl_0_text" class=" get_all_liked_users show_like_count_on_feed_comment_lvl_0_text"><span>{{total_liked_on_comment_lvl_0 comment_id}}
+                </span>
+                </a>
+                </span>
+                     
+               &nbsp;  &nbsp;
+               {{/if}}  
+
+              <a href="#" class="reply_to_lvl0" id="{{comment_id}}" >Reply</a>
+            </li>
+
+          
+          <li class="comment-item loader_visiblity_block" id="reply_lvl0_{{comment_id}}" >
+               <form class="comment-form inline-items">
+            <div class="post__author author vcard inline-items">
+
+
+              <img src="{{show_logged_inuser_profile_pic}}" class="view_profile" alt="author">
+              <div class="form-group with-icon-right is-empty">
+
+                <textarea class="form-control c-gray" placeholder="Enter your reply here ..." id="comment_lvl_1_{{comment_id}}" ></textarea>
+
+                <div class="add-options-message">
+                </div>
+              <span class="material-input"></span></div>
+            </div>
+            <button class="btn btn-md-2 btn-primary lvl_1_comment_submitted" id="{{comment_id}}">Reply</button>
+          </form>
+        </li>
+
+    {{#each display_lvl_1_commenting}}
+      <li class="comment-item" style="padding-left: 80px;" >
+              <div class="post__author author vcard inline-items">
+          {{#each fetch_user_info_for_comment}}  
+
+                <img src="{{user_profile_pic}}" class="view_profile" alt="author">
+                <div class="author-date">
+                  <a class="h6 post__author-name fn view_profile" href="#">{{user_name}}</a>
+                  <div class="post__date">
+                  <time class="published" datetime="2017-03-24T18:18">
+                      {{calculate_time_difference ../created_at}}
+                    </time>
+                  </div>
+                </div>
+
+          {{/each}}
+          
+         {{#if check_if_current_user_is_commenter}}        
+              <div class="more"><svg class="olymp-three-dots-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-three-dots-icon"></use></svg>
+                <ul class="more-dropdown">
+                  <li>
+                      <a href="javascript:void(0)" style="text-align:left !important;"  class="invitation_response edit_comment_lvl1" id="{{comment_by}}" > Edit</a>
+                  </li>
+                  <li>
+                      <a href="javascript:void(0)" style="text-align:left !important;" class="remove_comment_lvl1" id="{{comment_by}}"> Delete</a>
+                 </li>
+                </ul>
+              </div>
+          {{/if}}  
+
+          
+              </div>
+          <!-- padding-left: 80px; padding-left: 80px; padding-left: 80px; -->
+              <p id="comment_lvl1_text_{{comment_id}}" >{{comment_text}}</p>
+          
+
+       <div id="edit_comment_lvl1_text_{{comment_id}}" class="loader_visiblity_block" > 
+
+        <textarea class="loader_visiblity_block updateHiddenPost" id="hidden_comment_lvl1_post_{{comment_id}}" resize="none" placeholder="Edit ..." style="padding: 5px; border: 1px solid #e4e4e4; border-radius: 5px; width: 100%; height: auto !important;" >{{comment_text}}</textarea>
+
+
+        <button class="btn btn-primary btn-md-2 pull-right" id="submit_edited_comment_lvl1" ><i class="fa fa-spinner fa-pulse fa-fw div_hide_class" id="loader_gif"></i>
+                           <span id="save_text"> Post Status</span></button>
+       </div>
+          {{#if check_for_user_already_liked_on_comment_lvl_1}}    
+
+              <a class="like_event_comment_lvl_0 post-add-icon inline-items">
+               <img src="img/heart_gray.png">
+              </a>
+                <span><a data-toggle="modal" data-target="#show_like_count_on_feed_comment_lvl_1_text" class=" get_all_liked_users show_like_count_on_feed_comment_lvl_1_text"><span>{{total_liked_on_comment_lvl_1 comment_id}}
+                </span>
+                </a>
+                </span>
+              
+               &nbsp;  &nbsp;
+               {{else }}
+                    <a class="like_event_comment_lvl_0 post-add-icon inline-items">
+               <img src="img/heart_gray.png">
+               </a>  
+                                <span><a data-toggle="modal" data-target="#show_like_count_on_feed_comment_lvl_1_text" class=" get_all_liked_users show_like_count_on_feed_comment_lvl_1_text"><span>{{total_liked_on_comment_lvl_1 comment_id}}
+                </span>
+                </a>
+                </span>
+                     
+               &nbsp;  &nbsp;
+               {{/if}}  
+   
+ 
+
+            </li>
+        {{/each}}
+    {{/each}}
+          </ul>
+          
+<!--          {{#if check_if_comments_exist}}
+      <a href="#" class="more-comments show_more_comments" id="comment_box_{{post_id}}" >View more comments <span>+</span></a>         
+{{/if}} -->
+          <form class="comment-form inline-items pad_5px">
+            <div class="post__author author vcard inline-items">
+              <img src="{{show_logged_inuser_profile_pic}}" class="view_profile" alt="author">
+              <div class="form-group with-icon-right is-empty">
+
+                <textarea class="form-control c-gray" placeholder="Enter your comment here ..." id="comment_lvl_0_{{post_id}}" ></textarea>
+                <div class="add-options-message">
+                 <!--  <a href="#" class="options-message" data-toggle="modal" data-target="#update-header-photo">
+                    <svg class="olymp-camera-icon">
+                      <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="svg-icons/sprites/icons.svg#olymp-camera-icon"></use>
+                    </svg>
+                  </a> -->
+                </div>
+              <span class="material-input"></span></div>
+            </div>
+          
+            <button class="btn btn-md-2 btn-primary lvl_0_comment_submitted" id="comment_lvl_0_{{post_id}}" >Post Comment</button>
+
+          </form>
+          
+        </div>
+
+          <div class="modal fade" new_post="{{post_id}}" id="show_like_count_on_feed_post_image" tabindex="-1" role="dialog" aria-labelledby="show_like_count_on_feed_post_image" aria-hidden="true">
+
+  <div class="modal-dialog window-popup create-friend-group show_like_count_on_feed_post_image" role="document">
+
+    <div class="modal-content">
+      <a href="#" class="close icon-close" data-dismiss="modal" aria-label="Close">
+        <svg class="olymp-close-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-close-icon"></use></svg>
+      </a>
+
+
+      <div class="modal-header">
+        <h6 class="title">Likes</h6>
+      </div>
+{{#each show_users_liked_on_post}}
+      
+
+      <div class="modal-body" style="padding: 0px;">
+      <div class="mCustomScrollbar ps ps--theme_default ps--active-y" data-mcs-theme="dark" data-ps-id="a00a8796-727b-f827-6a40-6bc549e16254">
+            <ul class="notification-list friend-requests">
+                {{#each fetch_like_user_info}}
+                    <li>
+                      <div class="author-thumb">
+                        <img src="{{user_profile_pic}}" class="view_profile" alt="author">
+                      </div>
+                      <div class="notification-event">
+                        <a href="#" class="h6 notification-friend view_profile">{{user_name}}</a>
+
+                      </div>
+                    </li>
+                  {{/each}}
+
+            </ul>
+          <div class="ps__scrollbar-x-rail" style="left: 0px; bottom: 0px;"><div class="ps__scrollbar-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps__scrollbar-y-rail" style="top: 0px; height: 300px; right: 0px;"><div class="ps__scrollbar-y" tabindex="0" style="top: 0px; height: 241px;"></div></div></div>
+
+<!--       <a href="#" class="btn btn-blue btn-lg full-width">Save Changes</a>
+ -->    </div>
+
+      {{/each}}  
+    </div>
+  </div>
+</div>
+
+
+         {{else if equals post_content_type 'url_metadata'}} 
+
+        <div class="ui-block">
+          
+          <article class="hentry post video">
+          
+            <div class="post__author author vcard inline-items">
+
+           {{#each fetch_user_info}}
+              <img src="{{user_profile_pic}}" class="view_profile" alt="author">
+          
+              <div class="author-date">
+                <a class="h6 post__author-name fn view_profile" href="#">{{user_name}}</a>
+                <div class="post__date">
+                  <time class="published" datetime="2017-03-24T18:18">
+                   {{calculate_time_difference ../created_at}}
+                  </time>
+                </div>
+              </div>
+      {{/each}}  
+        
+         {{#if check_if_logged_in_user}}
+              <div class="more"><svg class="olymp-three-dots-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-three-dots-icon"></use></svg>
+                <ul class="more-dropdown">
+
+                  <li>
+                      <a href="javascript:void(0)" style="text-align:left !important;"  class="invitation_response editHubPost" id="{{post_id}}" > Edit</a>
+                  </li>
+                  <li>
+                      <a href="javascript:void(0)" style="text-align:left !important;" class="remove_post" id="{{post_id}}"> Delete</a>
+                 </li>
+
+                </ul>
+              </div>
+       {{/if}}    
+            </div>
+          
+           <p id="post_text_{{post_id}}" >
+                {{#if check_summary_for_br_tag}}
+                  {{#each BreakAsArrayfull}}
+                  {{tag}}<br/>  
+                  {{/each}}
+                  {{else}}
+                  {{post_text}}
+                  {{/if}}
+           </p>
+ 
+          <div id="edit_post_text_{{post_id}}" class="loader_visiblity_block" > 
+
+        <textarea class="loader_visiblity_block updateHiddenPost" id="hidden_hub_post_{{post_id}}" resize="none" placeholder="Edit ..." style="padding: 5px; border: 1px solid #e4e4e4; border-radius: 5px; width: 100%; height: auto !important;" >{{post_text}}</textarea>
+
+
+        <button class="btn btn-primary btn-md-2 pull-right" id="submit_edited_post" ><i class="fa fa-spinner fa-pulse fa-fw div_hide_class" id="loader_gif"></i>
+                           <span id="save_text"> Post Status</span></button>   
+        </div>
+
+            <div class="post-video">
+              <div class="video-thumb">
+                <img src="{{featured_image}}" alt="photo" target="_blank" >
+                <a href="{{posted_url}}" class="play-video" target="_blank">
+                  <svg class="olymp-play-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-play-icon"></use></svg>
+                </a>
+              </div>
+          
+              <div class="video-content">
+                <a href="{{posted_url}}" class="h4 title" target="_blank" >{{featured_title}}</a>
+<!--                 <p>Lorem ipsum dolor sit amet, consectetur ipisicing elit, sed do eiusmod tempor incididunt
+                  ut labore et dolore magna aliqua...
+                </p> -->
+                <a href="#" class="link-site">{{source}}</a>
+              </div>
+            </div>
+
+            <div class="post-additional-info inline-items">
+    {{#if check_for_user_already_liked}}    
+
+              <a class="like_event post-add-icon inline-items">
+               <img src="img/heart_gray.png">
+               </a>
+                                <span><a data-toggle="modal" data-target="#show_like_count_on_feed_post_url" class=" get_all_liked_users"><span>{{total_liked_on_post post_id}}
+                </span>
+                </a>
+                </span>
+              
+               &nbsp;  &nbsp;
+               {{else }}
+                    <a class="like_event post-add-icon inline-items">
+               <img src="img/heart_gray.png">
+               </a>  
+                                <span><a data-toggle="modal" data-target="#show_like_count_on_feed_post_url" class=" get_all_liked_users"><span>{{total_liked_on_post post_id}}
+                </span>
+                </a>
+                </span>
+                     
+               &nbsp;  &nbsp;
+               {{/if}}  
+
+<!--               <ul class="friends-harmonic">
+
+                <li>
+                  <a href="#">
+                    <img src="img/friend-harmonic7.jpeg" alt="friend">
+                  </a>
+                </li>
+                <li>
+                  <a href="#">
+                    <img src="img/friend-harmonic8.jpeg" alt="friend">
+                  </a>
+                </li>
+                <li>
+                  <a href="#">
+                    <img src="img/friend-harmonic9.jpeg" alt="friend">
+                  </a>
+                </li>
+                <li>
+                  <a href="#">
+                    <img src="img/friend-harmonic10.jpeg" alt="friend">
+                  </a>
+                </li>
+                <li>
+                  <a href="#">
+                    <img src="img/friend-harmonic11.jpeg" alt="friend">
+                  </a>
+                </li>
+
+              </ul>
+          
+              <div class="names-people-likes">
                 <a href="#">Jenny</a>, <a href="#">Robert</a> and
                 <br>18 more liked this
-              </div>
+              </div> -->
           
               <div class="comments-shared">
                 <a href="#" class="post-add-icon inline-items">
                  <img src="img/comment_gray.png">
-                  <span>0</span>
+                  <span>{{show_comment_count}}</span>
                 </a>
           
                 </div>
@@ -419,20 +1079,262 @@
           
             </div>
           
-           
+            
           
           </article>
 
 
+
+                    <ul class="comments-list">
+    {{#each display_lvl_0_commenting}}
+            <li class="comment-item">
+              <div class="post__author author vcard inline-items">
+          {{#each fetch_user_info_for_comment}}  
+
+                <img src="{{user_profile_pic}}" class="view_profile" alt="author">
+                <div class="author-date">
+                  <a class="h6 post__author-name fn view_profile" href="#">{{user_name}}</a>
+                  <div class="post__date">
+                  <time class="published" datetime="2017-03-24T18:18">
+                      {{calculate_time_difference ../created_at}}
+                    </time>
+                  </div>
+                </div>
+
+          {{/each}}
+          
+         {{#if check_if_current_user_is_commenter}}        
+              <div class="more"><svg class="olymp-three-dots-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-three-dots-icon"></use></svg>
+                <ul class="more-dropdown">
+
+                  <li>
+                      <a href="javascript:void(0)" style="text-align:left !important;"  class="invitation_response edit_comment_lvl0" id="{{comment_by}}" > Edit</a>
+                  </li>
+
+                  <li>
+                      <a href="javascript:void(0)" style="text-align:left !important;" class="remove_comment_lvl0" id="{{comment_by}}"> Delete</a>
+                 </li>
+
+                </ul>
+              </div>
+          {{/if}}  
+          
+              </div>
+          
+              <p id="comment_lvl0_text_{{comment_id}}" >{{comment_text}}</p>
+
+                        <div id="edit_comment_lvl0_text_{{comment_id}}" class="loader_visiblity_block" > 
+
+        <textarea class="loader_visiblity_block updateHiddenPost" id="hidden_comment_lvl0_post_{{comment_id}}" resize="none" placeholder="Edit ..." style="padding: 5px; border: 1px solid #e4e4e4; border-radius: 5px; width: 100%; height: auto !important;" >{{comment_text}}</textarea>
+
+
+        <button class="btn btn-primary btn-md-2 pull-right" id="submit_edited_comment_lvl0" ><i class="fa fa-spinner fa-pulse fa-fw div_hide_class" id="loader_gif"></i>
+                           <span id="save_text"> Post Status</span></button>   
         </div>
-        
-      </div>
-      <a id="load-more-button" href="#" class="btn btn-control btn-more" data-load-link="items-to-load.html" data-container="newsfeed-items-grid">
-        <svg class="olymp-three-dots-icon">
-          <use xlink:href="svg-icons/sprites/icons.svg#olymp-three-dots-icon"></use>
-        </svg>
+
+          
+    {{#if check_for_user_already_liked_on_comment_lvl_0}}    
+
+              <a class="like_event_comment_lvl_0 post-add-icon inline-items">
+               <img src="img/heart_gray.png">
+              </a>
+                                <span><a data-toggle="modal" data-target="#show_like_count_on_feed_comment_lvl_0_text" class=" get_all_liked_users show_like_count_on_feed_comment_lvl_0_text"><span>{{total_liked_on_comment_lvl_0 comment_id}}
+                </span>
+                </a>
+                </span>
+              
+               &nbsp;  &nbsp;
+               {{else }}
+                    <a class="like_event_comment_lvl_0 post-add-icon inline-items">
+               <img src="img/heart_gray.png">
+               </a>  
+                                <span><a data-toggle="modal" data-target="#show_like_count_on_feed_comment_lvl_0_text" class=" get_all_liked_users show_like_count_on_feed_comment_lvl_0_text"><span>{{total_liked_on_comment_lvl_0 comment_id}}
+                </span>
+                </a>
+                </span>
+                     
+               &nbsp;  &nbsp;
+               {{/if}} 
+
+              <a href="#" class="reply_to_lvl0" id="{{comment_id}}" >Reply</a>
+            </li>
+
+          
+          <li class="comment-item loader_visiblity_block" id="reply_lvl0_{{comment_id}}" >
+               <form class="comment-form inline-items">
+            <div class="post__author author vcard inline-items">
+
+
+              <img src="{{show_logged_inuser_profile_pic}}" class="view_profile" alt="author">
+              <div class="form-group with-icon-right is-empty">
+
+                <textarea class="form-control c-gray" placeholder="Enter your reply here ..." id="comment_lvl_1_{{comment_id}}" ></textarea>
+
+                <div class="add-options-message">
+                </div>
+              <span class="material-input"></span></div>
+            </div>
+            <button class="btn btn-md-2 btn-primary lvl_1_comment_submitted" id="{{comment_id}}">Reply</button>
+          </form>
+        </li>
+
+    {{#each display_lvl_1_commenting}}
+      <li class="comment-item" style="padding-left: 80px;" >
+              <div class="post__author author vcard inline-items">
+          {{#each fetch_user_info_for_comment}}  
+
+                <img src="{{user_profile_pic}}" class="view_profile" alt="author">
+                <div class="author-date">
+                  <a class="h6 post__author-name fn view_profile" href="#">{{user_name}}</a>
+                  <div class="post__date">
+                  <time class="published" datetime="2017-03-24T18:18">
+                      {{calculate_time_difference ../created_at}}
+                    </time>
+                  </div>
+                </div>
+
+          {{/each}}
+          
+         {{#if check_if_current_user_is_commenter}}        
+              <div class="more"><svg class="olymp-three-dots-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-three-dots-icon"></use></svg>
+                <ul class="more-dropdown">
+                  <li>
+                      <a href="javascript:void(0)" style="text-align:left !important;"  class="invitation_response edit_comment_lvl1" id="{{comment_by}}" > Edit</a>
+                  </li>
+                  <li>
+                      <a href="javascript:void(0)" style="text-align:left !important;" class="remove_comment_lvl1" id="{{comment_by}}"> Delete</a>
+                 </li>
+                </ul>
+              </div>
+          {{/if}}  
+
+          
+              </div>
+          <!-- padding-left: 80px; padding-left: 80px; padding-left: 80px; -->
+              <p id="comment_lvl1_text_{{comment_id}}" >{{comment_text}}</p>
+          
+
+       <div id="edit_comment_lvl1_text_{{comment_id}}" class="loader_visiblity_block" > 
+
+        <textarea class="loader_visiblity_block updateHiddenPost" id="hidden_comment_lvl1_post_{{comment_id}}" resize="none" placeholder="Edit ..." style="padding: 5px; border: 1px solid #e4e4e4; border-radius: 5px; width: 100%; height: auto !important;" >{{comment_text}}</textarea>
+
+
+        <button class="btn btn-primary btn-md-2 pull-right" id="submit_edited_comment_lvl1" ><i class="fa fa-spinner fa-pulse fa-fw div_hide_class" id="loader_gif"></i>
+                           <span id="save_text"> Post Status</span></button>
+
+        </div>                  
+          {{#if check_for_user_already_liked_on_comment_lvl_1}}    
+
+              <a class="like_event_comment_lvl_0 post-add-icon inline-items">
+               <img src="img/heart_gray.png">
+              </a>
+                <span><a data-toggle="modal" data-target="#show_like_count_on_feed_comment_lvl_1_text" class=" get_all_liked_users show_like_count_on_feed_comment_lvl_1_text"><span>{{total_liked_on_comment_lvl_1 comment_id}}
+                </span>
+                </a>
+                </span>
+              
+               &nbsp;  &nbsp;
+               {{else }}
+                    <a class="like_event_comment_lvl_0 post-add-icon inline-items">
+               <img src="img/heart_gray.png">
+               </a>  
+                                <span><a data-toggle="modal" data-target="#show_like_count_on_feed_comment_lvl_1_text" class=" get_all_liked_users show_like_count_on_feed_comment_lvl_1_text"><span>{{total_liked_on_comment_lvl_1 comment_id}}
+                </span>
+                </a>
+                </span>
+                     
+               &nbsp;  &nbsp;
+               {{/if}}  
+   
+
+            </li>
+
+
+        {{/each}}
+
+    {{/each}}
+
+          </ul>
+
+          
+<!-- {{#if check_if_comments_exist}}
+      <a href="#" class="more-comments show_more_comments" id="comment_box_{{post_id}}" >View more comments <span>+</span></a>         
+{{/if}} -->
+          <form class="comment-form inline-items">
+          
+            <div class="post__author author vcard inline-items">
+              <img src="{{show_logged_inuser_profile_pic}}" class="view_profile" alt="author">
+          
+              <div class="form-group with-icon-right is-empty">
+                <textarea class="form-control c-gray" placeholder="Enter your comment here ..." id="comment_lvl_0_{{post_id}}" ></textarea>
+                <div class="add-options-message">
+                 <!--  <a href="#" class="options-message" data-toggle="modal" data-target="#update-header-photo">
+                    <svg class="olymp-camera-icon">
+                      <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="svg-icons/sprites/icons.svg#olymp-camera-icon"></use>
+                    </svg>
+                  </a> -->
+                </div>
+              <span class="material-input"></span></div>
+            </div>
+          
+       <button class="btn btn-md-2 btn-primary lvl_0_comment_submitted" id="comment_lvl_0_{{post_id}}" >Post Comment</button>
+          
+          
+          </form>
+        </div>
+
+                  <div class="modal fade" new_post="{{post_id}}" id="show_like_count_on_feed_post_url" tabindex="-1" role="dialog" aria-labelledby="show_like_count_on_feed_post_url" aria-hidden="true">
+
+  <div class="modal-dialog window-popup create-friend-group show_like_count_on_feed_post_url" role="document">
+
+    <div class="modal-content">
+      <a href="#" class="close icon-close" data-dismiss="modal" aria-label="Close">
+        <svg class="olymp-close-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-close-icon"></use></svg>
       </a>
+
+
+      <div class="modal-header">
+        <h6 class="title">Likes</h6>
+      </div>
+{{#each show_users_liked_on_post}}
+      
+
+      <div class="modal-body" style="padding: 0px;">
+      <div class="mCustomScrollbar ps ps--theme_default ps--active-y" data-mcs-theme="dark" data-ps-id="a00a8796-727b-f827-6a40-6bc549e16254">
+            <ul class="notification-list friend-requests">
+                {{#each fetch_like_user_info}}
+                    <li>
+                      <div class="author-thumb">
+                        <img src="{{user_profile_pic}}" class="view_profile" alt="author">
+                      </div>
+                      <div class="notification-event">
+                        <a href="#" class="h6 notification-friend view_profile">{{user_name}}</a>
+
+                      </div>
+                    </li>
+                  {{/each}}
+
+            </ul>
+          <div class="ps__scrollbar-x-rail" style="left: 0px; bottom: 0px;"><div class="ps__scrollbar-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps__scrollbar-y-rail" style="top: 0px; height: 300px; right: 0px;"><div class="ps__scrollbar-y" tabindex="0" style="top: 0px; height: 241px;"></div></div></div>
     </div>
+
+      {{/each}}  
+    </div>
+  </div>
+</div>
+
+    {{/if}}
+
+    {{else}}
+    <p> You haven't posted anything yet. </p>
+{{/each}}
+      </div>
+
+      <a id="load_more_button" class="load_more_button btn btn-control btn-more" ><svg class="olymp-three-dots-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-three-dots-icon"></use></svg></a>
+
+    </div>
+<!-- middle feed ends here -->
+
 
     <!-- ... end Main Content -->
 
@@ -472,8 +1374,11 @@
               </div>
 
             </div></article>
-         <div class="modal fade" id="edit_user_details" tabindex="-1" role="dialog" aria-labelledby="edit_user_details" aria-hidden="true">
-  <div class="modal-dialog window-popup edit_user_details" role="document">
+
+  <div class="modal fade" new_post="{{post_id}}" id="edit_user_details" tabindex="-1" role="dialog" aria-labelledby="edit_user_details" aria-hidden="true">
+
+  <div class="modal-dialog window-popup create-friend-group edit_user_details" role="document">
+
     <div class="modal-content">
       <a href="#" class="close icon-close" data-dismiss="modal" aria-label="Close">
         <svg class="olymp-close-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-close-icon"></use></svg>
@@ -505,7 +1410,9 @@
         <div class="col col-xl-12 col-lg-12 col-md-12">
           <div class="form-group label-floating">
             <label class="control-label c-grey">Contact No.</label>
-            <input class="form-control" placeholder="" type="text" value="{{user_contact}}"  style="color: #515365"  id="user_contact" onkeypress="return isNumberKey(event)" maxlength="16" minlength="4" >
+
+            <input class="form-control" placeholder="" type="text" value="{{user_contact}}"  style="color: #515365"  id="user_contact" onkeypress="return isNumberKey(event)" maxlength="10" minlength="4" >
+
           </div>
         </div>
 
@@ -518,8 +1425,7 @@
 
         <div class="col col-xl-12 col-lg-12 col-md-12">
             <label class="control-label" style="color: #515365" >Headline</label>
-            <textarea class="form-control c-grey" placeholder="" style="color: #515365" value="" id="user_headline" >{{user_headline}}
-            </textarea>
+            <textarea class="form-control c-grey" placeholder="" style="color: #515365" value="" id="user_headline" >{{user_headline}}</textarea>
         </div>
 
           <button class="btn btn-primary btn-lg full-width" id="save_user_info" >Post your Review</button>
@@ -529,8 +1435,10 @@
       </div>
 
     </div>
+
   </div>
 </div>
+
                
           <div class="friend-item-content">    
 
@@ -614,21 +1522,25 @@
     <!-- Right Sidebar -->
 
     <div class="col col-xl-3 order-xl-3 col-lg-6 order-lg-3 col-md-6 col-sm-12 col-12">
-       <div class="ui-block">
-         
+
+        <div class="ui-block">
+         <div class="ui-block-title">
+          <h6 class="title">Up for review </h6>
+          
+        </div>
           <div class="friend-item">
             <div class="friend-item-content">      
             <div class="swiper-container" data-slide="fade">
               <div class="swiper-wrapper">
                 <div class="swiper-slide">
                   <div class="friend-count" data-swiper-parallax="-500">
-                    <img src="http://www.writersmelon.com/wm/wp-content/uploads/2018/07/The-Fisher-Queens-Dynasty-By-Kavita-Kane-325x457.jpg">
+                    <img src="http://www.writersmelon.com/wm/wp-content/uploads/2018/08/the_heartful_fb_01a-800x509.jpg">
                   </div>                 
                 </div>
         
                 <div class="swiper-slide">
                   <p class="friend-about" data-swiper-parallax="-500">
-                      <img src="http://www.writersmelon.com/wm/wp-content/uploads/2018/08/The-heartfulness-way_Kamlesh-Patel-314x441.jpg"> 
+                      <img src="http://www.writersmelon.com/wm/wp-content/uploads/2018/08/the_heartful_fb_01a-800x509.jpg"> 
                     </p>     
                </div>
               </div>
@@ -673,23 +1585,19 @@
     {{/each}}
 </div>
 
-
       <div class="ui-block">
         <div class="ui-block-title">
           <h6 class="title">New Release book </h6>
-          <a href="#" class="more">
-            <span class="c-green">
-              <svg class="olymp-remove-playlist-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-remove-playlist-icon"></use></svg>
-            </span>
-          </a>
+          
         </div>
 
         <!-- W-Playlist -->
         
         <ol class="widget w-playlist">
+    {{#each display_books}}
           <li class="js-open-popup" data-popup-target=".playlist-popup">
             <div class="playlist-thumb">
-              <img src="img/playlist6.jpeg" alt="thumb-composition">
+              <img src="{{book_cover}}" alt="thumb-composition">
               <div class="overlay"></div>
               <a href="#" class="play-icon">
                 <svg class="olymp-music-play-icon-big">
@@ -699,79 +1607,18 @@
             </div>
         
             <div class="composition">
-              <a href="#" class="composition-name">The Past Starts Slow...</a>
-              <a href="#" class="composition-author">System of a Revenge</a>
-            </div>
-          </li>
-        
-          <li class="js-open-popup" data-popup-target=".playlist-popup">
-            <div class="playlist-thumb">
-              <img src="img/playlist7.jpeg" alt="thumb-composition">
-              <div class="overlay"></div>
-              <a href="#" class="play-icon">
-                <svg class="olymp-music-play-icon-big">
-                  <use xlink:href="svg-icons/sprites/icons-music.svg#olymp-music-play-icon-big"></use>
-                </svg>
-              </a>
-            </div>
-        
-            <div class="composition">
-              <a href="#" class="composition-name">The Pretender</a>
-              <a href="#" class="composition-author">Kung Fighters</a>
+              <a href="#" class="composition-name">{{book_name_trimmed}}</a>
+              <a href="#" class="composition-author">{{author_name}}</a>
             </div>
         
           </li>
-          <li class="js-open-popup" data-popup-target=".playlist-popup">
-            <div class="playlist-thumb">
-              <img src="img/playlist8.jpeg" alt="thumb-composition">
-              <div class="overlay"></div>
-              <a href="#" class="play-icon">
-                <svg class="olymp-music-play-icon-big">
-                  <use xlink:href="svg-icons/sprites/icons-music.svg#olymp-music-play-icon-big"></use>
-                </svg>
-              </a>
-            </div>
-        
-            <div class="composition">
-              <a href="#" class="composition-name">Blood Brothers</a>
-              <a href="#" class="composition-author">Iron Maid</a>
-            </div>
-        
+          {{else}}
+          <li>
+            
+               <p> No book to display.</p>
+            
           </li>
-          <li class="js-open-popup" data-popup-target=".playlist-popup">
-            <div class="playlist-thumb">
-              <img src="img/playlist9.jpeg" alt="thumb-composition">
-              <div class="overlay"></div>
-              <a href="#" class="play-icon">
-                <svg class="olymp-music-play-icon-big">
-                  <use xlink:href="svg-icons/sprites/icons-music.svg#olymp-music-play-icon-big"></use>
-                </svg>
-              </a>
-            </div>
-        
-            <div class="composition">
-              <a href="#" class="composition-name">Seven Nation Army</a>
-              <a href="#" class="composition-author">The Black Stripes</a>
-            </div>
-        
-          </li>
-          <li class="js-open-popup" data-popup-target=".playlist-popup">
-            <div class="playlist-thumb">
-              <img src="img/playlist10.jpeg" alt="thumb-composition">
-              <div class="overlay"></div>
-              <a href="#" class="play-icon">
-                <svg class="olymp-music-play-icon-big">
-                  <use xlink:href="svg-icons/sprites/icons-music.svg#olymp-music-play-icon-big"></use>
-                </svg>
-              </a>
-            </div>
-        
-            <div class="composition">
-              <a href="#" class="composition-name">Killer Queen</a>
-              <a href="#" class="composition-author">Archiduke</a>
-            </div>
-        
-          </li>
+    {{/each}}
         </ol>
         
         <!-- .. end W-Playlist -->
@@ -791,17 +1638,14 @@
 </div>   
     </div>
 
-
-
-    <!-- ... end Right Sidebar -->
-
   </div>
 </div>
 
-<!-- Window-popup Update cover pic -->
 
-<div class="modal fade" id="update_cover_pic_modal" tabindex="-1" role="dialog" aria-labelledby="update_cover_pic_modal" aria-hidden="true">
-  <div class="modal-dialog window-popup update_cover_pic_modal" role="document">
+  <div class="modal fade" new_post="{{post_id}}" id="update_cover_pic_modal" tabindex="-1" role="dialog" aria-labelledby="update_cover_pic_modal" aria-hidden="true">
+
+  <div class="modal-dialog window-popup create-friend-group update_cover_pic_modal" role="document">
+
     <div class="modal-content">
       <a href="#" class="close icon-close" data-dismiss="modal" aria-label="Close">
         <svg class="olymp-close-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-close-icon"></use></svg>
@@ -822,14 +1666,19 @@
                   Crop </button>
                </div>
     </div>
+
   </div>
 </div>
+
 <!-- ... end Window-popup Update Header Photo -->
 
 <!-- Window-popup Update profile pic -->
-<div class="modal fade" id="update_profile_pic_modal" tabindex="-1" role="dialog" aria-labelledby="update_profile_pic_modal" aria-hidden="true">
-  <div class="modal-dialog window-popup update_profile_pic_modal" role="document">
-   
+
+
+  <div class="modal fade" new_post="{{post_id}}" id="update_profile_pic_modal" tabindex="-1" role="dialog" aria-labelledby="update_profile_pic_modal" aria-hidden="true">
+
+  <div class="modal-dialog window-popup create-friend-group update_profile_pic_modal" role="document">
+
     <div class="modal-content">
       <a href="#" class="close icon-close" data-dismiss="modal" aria-label="Close">
         <svg class="olymp-close-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-close-icon"></use></svg>
@@ -848,7 +1697,6 @@
 
   </div>
 </div>
-
 
 <!-- ... end Window-popup Update Header Photo -->
 
@@ -1544,6 +2392,16 @@
   </div>
 
 </div>
+
+<!-- ... end Window-popup-CHAT for responsive min-width: 768px -->
+
+
+<!-- JS Scripts -->
+
+
+
+
+<!-- Mirrored from theme.crumina.net/html-olympus/98-StickySidebars.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 11 Sep 2018 07:40:29 GMT -->
 {{/each}}         
 
 <script>

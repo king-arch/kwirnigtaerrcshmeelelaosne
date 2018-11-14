@@ -1,13 +1,6 @@
-
+  
 <template name="feed">
-   <head>
-         <link rel="icon" sizes="16x16 32x32" href="img/writersmelon_favicon.ico">
-         <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-</head>
+  
  {{> headeroptions}}
  {{> feed_design}}
 </template>
@@ -16,6 +9,7 @@
 
 <div class="container">
  <div class="row">
+ <!-- middle feed ends here -->
     <div class="col col-xl-6 order-xl-2 col-lg-6 order-lg-1 col-sm-12 col-12 ">
       <div id="newsfeed-items-grid">
         <div class="ui-block">
@@ -25,44 +19,40 @@
         <div class="news-feed-form">
           <div class="tab-content">
             <div class="tab-pane active" id="home-1" role="tabpanel" aria-expanded="true">
-            <!--   <form> -->
-                <!-- <div class="author-thumb">
-                  <img src="../img/author-page.jpeg" alt="author">
-                </div> -->
-
-               <div class="form-group with-icon label-floating is-empty "  >
-                  <label class="control-label" >Share what you are thinking here...</label>
-
-                  <textarea class="form-control col m12 s12 l12 c-gray" placeholder="" style="color: #9a9fbf !important" id="post_text" ></textarea>
-                </div>
-
-                  <div class="add-options-message">
-                  <a class="options-message" data-toggle="tooltip" data-placement="top" data-original-title="Add Photos" id="image_selection_clicked" >
-                    <img src ="img/camera.png">
+              <form>
+               
+                <div class="form-group with-icon label-floating is-empty">
+<!--                   <label class="control-label c-grey">Share what you are thinking here...</label>
+ -->                  <textarea class="form-control c-grey" id="post_text" placeholder="Share what you are thinking here..."></textarea>
+                <span class="material-input"></span></div>
+                <div class="add-options-message">
+                  <a href="#" class="options-message" id="image_selection_clicked" data-toggle="tooltip" data-placement="top" data-original-title="ADD PHOTOS">
+                    <svg class="olymp-camera-icon" data-toggle="modal" data-target="#update-header-photo"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="svg-icons/sprites/icons.svg#olymp-camera-icon"></use></svg>
                   </a>
 
-          <input id="post_image" class="pis user_profile_pic" onchange="readURL(this);" type="file" accept="image/x-png,image/gif,image/jpeg" style="display:none !important">
-
-            <div class="clearfix"></div>
+                  <img id="display_selected_image" src="{{show_profile_image}}" style="height:400px; width: 400px" class="loader_visiblity_block" >
+        
+                    <!-- <div class="clearfix"></div> -->
                   <div class="summary new_headline_hub_para div_hide_class" id="url_metadata_div" style="border:1px solid #ccc !important;">
                      <img id="metadata_info_image"  class="link_image" >
                      <h4 class="h5_hub" style="margin: 10px 10px 10px 0px !important;" id="metadata_info_heading"> </h4>
                      <p class="h5_hub_para" style="margin: 10px 10px 10px 0px !important; text-align: left !important;" 
                         id="metadata_info_sub_heading"></p>
             </div>
+            
 
-                  <span>
-                    
-                  <img id="display_selected_image" src="{{show_profile_image}}" style="height:400px; width: 400px" class="loader_visiblity_block" >
-                  </span>
-
-                <button class="btn btn-primary btn-md-2" id="submit_post" ><i class="fa fa-spinner fa-pulse fa-fw div_hide_class" id="loader_gif"></i>
-                           <span id="save_text"> Post Status</span></button>   
+          <input type="file" style="display: none !important" id="post_image" >
+        
+                  <button class="btn btn-primary btn-md-2"  id="submit_post"> <i class="fa fa-spinner fa-pulse fa-fw div_hide_class" id="loader_gif"></i> <span id="save_text"> Post Status</span></button>
+        
                 </div>
-              <!-- </form> -->
+        
+              </form>
             </div>
         
+           
           </div>
+
         </div>
       </div>
 
@@ -78,7 +68,7 @@
           
           {{#each fetch_user_info}}
 
-              <img src="{{user_profile_pic}}" alt="author" class="view_profile" >
+              <img src="{{user_profile_pic}}"  alt="author" class="view_profile" >
               <div class="author-date">
                 <a class="h6 post__author-name fn view_profile" href="#">{{user_name}}</a>
                 <div class="post__date">
@@ -104,7 +94,7 @@
          {{/if}}
       </div>
 
-        <p id="post_text_{{post_id}}" >
+        <p id="post_text_{{post_id}}" class="justify">
                 {{#if check_summary_for_br_tag}}
                   {{#each BreakAsArrayfull}}
                   {{tag}}<br/>  
@@ -195,9 +185,9 @@
               <div class="post__author author vcard inline-items">
           {{#each fetch_user_info_for_comment}}  
 
-                <img src="{{user_profile_pic}}" alt="author">
+                <img src="{{user_profile_pic}}" class="view_profile" alt="author">
                 <div class="author-date">
-                  <a class="h6 post__author-name fn" href="#">{{user_name}}</a>
+                  <a class="h6 post__author-name fn view_profile" href="#">{{user_name}}</a>
                   <div class="post__date">
                   <time class="published" datetime="2017-03-24T18:18">
                       {{calculate_time_difference ../created_at}}
@@ -285,10 +275,10 @@
                 {{#each fetch_like_user_info}}
                     <li>
                       <div class="author-thumb">
-                        <img src="{{user_profile_pic}}" alt="author">
+                        <img src="{{user_profile_pic}}" class="view_profile" alt="author">
                       </div>
                       <div class="notification-event">
-                        <a href="#" class="h6 notification-friend">{{user_name}}</a>
+                        <a href="#" class="h6 notification-friend view_profile">{{user_name}}</a>
 
                       </div>
                     </li>
@@ -311,7 +301,7 @@
             <div class="post__author author vcard inline-items">
 
 
-              <img src="{{show_logged_inuser_profile_pic}}" alt="author">
+              <img src="{{show_logged_inuser_profile_pic}}" alt="author" class="view_profile" >
               <div class="form-group with-icon-right is-empty">
 
                 <textarea class="form-control c-gray" placeholder="Enter your reply here ..." id="comment_lvl_1_{{comment_id}}" ></textarea>
@@ -330,9 +320,9 @@
               <div class="post__author author vcard inline-items">
           {{#each fetch_user_info_for_comment}}  
 
-                <img src="{{user_profile_pic}}" alt="author">
+                <img src="{{user_profile_pic}}" alt="author" class="view_profile" >
                 <div class="author-date">
-                  <a class="h6 post__author-name fn" href="#">{{user_name}}</a>
+                  <a class="h6 post__author-name fn view_profile" href="#">{{user_name}}</a>
                   <div class="post__date">
                   <time class="published" datetime="2017-03-24T18:18">
                       {{calculate_time_difference ../created_at}}
@@ -412,10 +402,10 @@
                 {{#each fetch_like_user_info}}
                     <li>
                       <div class="author-thumb">
-                        <img src="{{user_profile_pic}}" alt="author">
+                        <img src="{{user_profile_pic}}" alt="author" class="view_profile" >
                       </div>
                       <div class="notification-event">
-                        <a href="#" class="h6 notification-friend">{{user_name}}</a>
+                        <a href="#" class="h6 notification-friend view_profile">{{user_name}}</a>
 
                       </div>
                     </li>
@@ -439,14 +429,14 @@
 
           </ul>
 
-          {{#if check_if_comments_exist}}
+<!--           {{#if check_if_comments_exist}}
       <a href="#" class="more-comments show_more_comments" id="comment_box_{{post_id}}" >View more comments <span>+</span></a>         
-{{/if}}
+{{/if}} -->
 
           <form class="comment-form inline-items pad_5px">
           
             <div class="post__author author vcard inline-items">
-              <img src="{{show_logged_inuser_profile_pic}}" alt="author">
+              <img src="{{show_logged_inuser_profile_pic}}" alt="author" class="view_profile" >
           
               <div class="form-group with-icon-right is-empty">
                 <textarea class="form-control c-gray" placeholder="Enter your comment here ..." id="comment_lvl_0_{{post_id}}" ></textarea>
@@ -487,10 +477,10 @@
                 {{#each fetch_like_user_info}}
                     <li>
                       <div class="author-thumb">
-                        <img src="{{user_profile_pic}}" alt="author">
+                        <img src="{{user_profile_pic}}" alt="author" class="view_profile" >
                       </div>
                       <div class="notification-event">
-                        <a href="#" class="h6 notification-friend">{{user_name}}</a>
+                        <a href="#" class="h6 notification-friend view_profile">{{user_name}}</a>
 
                       </div>
                     </li>
@@ -515,9 +505,9 @@
           
             <div class="post__author author vcard inline-items">
   {{#each fetch_user_info}}        
-              <img src="{{user_profile_pic}}" alt="author">
+              <img src="{{user_profile_pic}}"  alt="author" class="view_profile">
               <div class="author-date">
-                <a class="h6 post__author-name fn" href="#"> {{user_name}}</a>
+                <a class="h6 post__author-name fn view_profile view_profile" href="#"> {{user_name}}</a>
                 <div class="post__date">
                   <time class="published" datetime="2017-03-24T18:18">
                     {{calculate_time_difference ../created_at}}
@@ -644,9 +634,9 @@
               <div class="post__author author vcard inline-items">
           {{#each fetch_user_info_for_comment}}  
 
-                <img src="{{user_profile_pic}}" alt="author">
+                <img src="{{user_profile_pic}}" class="view_profile" alt="author">
                 <div class="author-date">
-                  <a class="h6 post__author-name fn" href="#">{{user_name}}</a>
+                  <a class="h6 post__author-name fn view_profile" href="#">{{user_name}}</a>
                   <div class="post__date">
                   <time class="published" datetime="2017-03-24T18:18">
                       {{calculate_time_difference ../created_at}}
@@ -717,7 +707,7 @@
             <div class="post__author author vcard inline-items">
 
 
-              <img src="{{show_logged_inuser_profile_pic}}" alt="author">
+              <img src="{{show_logged_inuser_profile_pic}}" class="view_profile" alt="author">
               <div class="form-group with-icon-right is-empty">
 
                 <textarea class="form-control c-gray" placeholder="Enter your reply here ..." id="comment_lvl_1_{{comment_id}}" ></textarea>
@@ -735,9 +725,9 @@
               <div class="post__author author vcard inline-items">
           {{#each fetch_user_info_for_comment}}  
 
-                <img src="{{user_profile_pic}}" alt="author">
+                <img src="{{user_profile_pic}}" class="view_profile" alt="author">
                 <div class="author-date">
-                  <a class="h6 post__author-name fn" href="#">{{user_name}}</a>
+                  <a class="h6 post__author-name fn view_profile" href="#">{{user_name}}</a>
                   <div class="post__date">
                   <time class="published" datetime="2017-03-24T18:18">
                       {{calculate_time_difference ../created_at}}
@@ -804,12 +794,12 @@
     {{/each}}
           </ul>
           
-         {{#if check_if_comments_exist}}
+<!--          {{#if check_if_comments_exist}}
       <a href="#" class="more-comments show_more_comments" id="comment_box_{{post_id}}" >View more comments <span>+</span></a>         
-{{/if}}
+{{/if}} -->
           <form class="comment-form inline-items pad_5px">
             <div class="post__author author vcard inline-items">
-              <img src="{{show_logged_inuser_profile_pic}}" alt="author">
+              <img src="{{show_logged_inuser_profile_pic}}" class="view_profile" alt="author">
               <div class="form-group with-icon-right is-empty">
 
                 <textarea class="form-control c-gray" placeholder="Enter your comment here ..." id="comment_lvl_0_{{post_id}}" ></textarea>
@@ -851,10 +841,10 @@
                 {{#each fetch_like_user_info}}
                     <li>
                       <div class="author-thumb">
-                        <img src="{{user_profile_pic}}" alt="author">
+                        <img src="{{user_profile_pic}}" class="view_profile" alt="author">
                       </div>
                       <div class="notification-event">
-                        <a href="#" class="h6 notification-friend">{{user_name}}</a>
+                        <a href="#" class="h6 notification-friend view_profile">{{user_name}}</a>
 
                       </div>
                     </li>
@@ -881,10 +871,10 @@
             <div class="post__author author vcard inline-items">
 
            {{#each fetch_user_info}}
-              <img src="{{user_profile_pic}}" alt="author">
+              <img src="{{user_profile_pic}}" class="view_profile" alt="author">
           
               <div class="author-date">
-                <a class="h6 post__author-name fn" href="#">{{user_name}}</a>
+                <a class="h6 post__author-name fn view_profile" href="#">{{user_name}}</a>
                 <div class="post__date">
                   <time class="published" datetime="2017-03-24T18:18">
                    {{calculate_time_difference ../created_at}}
@@ -1027,9 +1017,9 @@
               <div class="post__author author vcard inline-items">
           {{#each fetch_user_info_for_comment}}  
 
-                <img src="{{user_profile_pic}}" alt="author">
+                <img src="{{user_profile_pic}}" class="view_profile" alt="author">
                 <div class="author-date">
-                  <a class="h6 post__author-name fn" href="#">{{user_name}}</a>
+                  <a class="h6 post__author-name fn view_profile" href="#">{{user_name}}</a>
                   <div class="post__date">
                   <time class="published" datetime="2017-03-24T18:18">
                       {{calculate_time_difference ../created_at}}
@@ -1101,7 +1091,7 @@
             <div class="post__author author vcard inline-items">
 
 
-              <img src="{{show_logged_inuser_profile_pic}}" alt="author">
+              <img src="{{show_logged_inuser_profile_pic}}" class="view_profile" alt="author">
               <div class="form-group with-icon-right is-empty">
 
                 <textarea class="form-control c-gray" placeholder="Enter your reply here ..." id="comment_lvl_1_{{comment_id}}" ></textarea>
@@ -1119,9 +1109,9 @@
               <div class="post__author author vcard inline-items">
           {{#each fetch_user_info_for_comment}}  
 
-                <img src="{{user_profile_pic}}" alt="author">
+                <img src="{{user_profile_pic}}" class="view_profile" alt="author">
                 <div class="author-date">
-                  <a class="h6 post__author-name fn" href="#">{{user_name}}</a>
+                  <a class="h6 post__author-name fn view_profile" href="#">{{user_name}}</a>
                   <div class="post__date">
                   <time class="published" datetime="2017-03-24T18:18">
                       {{calculate_time_difference ../created_at}}
@@ -1193,13 +1183,13 @@
           </ul>
 
           
-{{#if check_if_comments_exist}}
+<!-- {{#if check_if_comments_exist}}
       <a href="#" class="more-comments show_more_comments" id="comment_box_{{post_id}}" >View more comments <span>+</span></a>         
-{{/if}}
-          <form class="comment-form inline-items pad_5px">
+{{/if}} -->
+          <form class="comment-form inline-items">
           
             <div class="post__author author vcard inline-items">
-              <img src="{{show_logged_inuser_profile_pic}}" alt="author">
+              <img src="{{show_logged_inuser_profile_pic}}" class="view_profile" alt="author">
           
               <div class="form-group with-icon-right is-empty">
                 <textarea class="form-control c-gray" placeholder="Enter your comment here ..." id="comment_lvl_0_{{post_id}}" ></textarea>
@@ -1241,10 +1231,10 @@
                 {{#each fetch_like_user_info}}
                     <li>
                       <div class="author-thumb">
-                        <img src="{{user_profile_pic}}" alt="author">
+                        <img src="{{user_profile_pic}}" class="view_profile" alt="author">
                       </div>
                       <div class="notification-event">
-                        <a href="#" class="h6 notification-friend">{{user_name}}</a>
+                        <a href="#" class="h6 notification-friend view_profile">{{user_name}}</a>
 
                       </div>
                     </li>
@@ -1269,7 +1259,7 @@
       <a id="load_more_button" class="load_more_button btn btn-control btn-more" ><svg class="olymp-three-dots-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-three-dots-icon"></use></svg></a>
 
     </div>
-
+<!-- middle feed ends here -->
     <div class="col col-xl-3 order-xl-1 col-lg-3 order-lg-2 col-md-6 col-sm-12 col-12 visible-lg">
       <div class="ui-block">
         
@@ -1284,10 +1274,10 @@
            
             <div class="friend-avatar">
               <div class="author-thumb">
-                <img src="{{user_profile_pic}}" alt="author">
+                <img src="{{user_profile_pic}}" class="view_profile" alt="author">
               </div>
               <div class="author-content">
-                <a href="#" class="h5 author-name">{{user_name}}</a>
+                <a href="#" class="h5 author-name view_profile">{{user_name}}</a>
                  <p class="friend-about text-center" data-swiper-parallax="-500">
                   Author
                   </p>
@@ -1317,11 +1307,8 @@
                       </div>
                       <div class="title">Followers</div>
                     </a>
-                    
                   </div>
-                  
                 </div>       
-                
               </div>
               
             </div>
@@ -1389,28 +1376,16 @@
           <h6 class="title"> You may follow </h6>
          
         </div>
-<!--         <div class="birthday-item inline-items">
-          <div class="author-thumb">
-            <img src="img/avatar7-sm.jpg" alt="author">
-          </div>
-          <div class="birthday-author-name">
-            <a href="#" class="h6 author-name">Marina  </a>
-            <div class="birthday-date">Author</div>
-          </div>
-          <a id="click_on_follow" class="btn btn-sm bg-breez"> Follow</a>
-        </div> -->
-
-
 
             {{#each show_user_info}} 
        
 
                 <div class="birthday-item inline-items">
                   <div class="author-thumb">
-                    <img src="{{check_user_profile_pic}}" alt="author">
+                    <img src="{{check_user_profile_pic}}" class="view_profile" alt="author">
                   </div>
                   <div class="birthday-author-name">
-                    <a href="#" class="h6 author-name">{{user_name_to_follow}}  </a>
+                    <a href="#" class="h6 author-name view_profile">{{user_name_to_follow}}  </a>
                     <!-- <div class="birthday-date">Author</div> -->
                   </div>
 
@@ -1430,11 +1405,7 @@
       <div class="ui-block">
         <div class="ui-block-title">
           <h6 class="title">New Release book </h6>
-          <a href="#" class="more">
-            <span class="c-green">
-              <svg class="olymp-remove-playlist-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-remove-playlist-icon"></use></svg>
-            </span>
-          </a>
+          
         </div>
 
         <!-- W-Playlist -->

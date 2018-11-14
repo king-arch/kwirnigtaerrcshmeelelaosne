@@ -28,6 +28,10 @@ import urlMetadata from 'url-metadata';
       return promotion.find({});
     });
 
+     Meteor.publish('fetch_text_promotion_listing', function() {
+      return promotion.find({"promotion_type": "Textual",});
+    });
+
      Meteor.publish('fetch_promotion_listing_with_id', function(promotion_id) {
       return promotion.find({promotion_id: promotion_id});
     });

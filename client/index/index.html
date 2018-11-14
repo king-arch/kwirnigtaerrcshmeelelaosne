@@ -89,8 +89,9 @@
 
                                     </div>
 
-                                    <div class="form-group md-form" id="show_response" >
-                                        <label for="Email" class="control-label c-light-grey" data-success="right" data-error="wrong">Email</label>
+                                    <div class="form-group md-form label-floating has-success">
+                                       <!-- <div class="form-group md-form label-floating has-success" id="show_response" > -->
+                                        <label for="Email" class="control-label c-light-grey" data-success="right">Email</label>
 
 <!--                                         <input id="signup_email" required="required" class="form-control validate c-white" placeholder="" type="text" > -->
                                         <input id="signup_email" required="required" class="form-control validate c-white" placeholder="" type="text"  onfocusout="ValidateEmail(event)" >
@@ -118,12 +119,12 @@
                                 </div>
                                 <div class="col-lg-6 col-md-12 col-sm-12 text-center">
                                     <a href="#" class="btn btn-md btn-border c-white" style="width: 100%;">
-                                        <img src="img/facebook.png" style="width: 20px;"> </a>
+                                        <img src="img/facebook.png" style="width: 16px;"> </a>
 
                                 </div>
                                 <div class="col-lg-6 col-md-12 col-sm-12 text-center">
                                     <a href="#" class="btn btn-md btn-border c-white" style="width: 100%;">
-                                        <img src="img/google-plus.png" style="width: 20px;"> </a>
+                                        <img src="img/google-plus.png" style="width: 16px;"> </a>
                                 </div>
 
                             </div>
@@ -166,6 +167,8 @@
                     </div>
                  </article>
             </div>
+            {{else}}
+            <p> No blogs to display.</p>
   {{/each}}
         </div>
 
@@ -201,6 +204,9 @@
                     </div>
                  </article>
             </div>
+
+            {{else}}
+            <p> No blogs to display.</p>
 {{/each}}
         </div> 
         <div class="swiper-container pagination-bottom" data-slide="fade">

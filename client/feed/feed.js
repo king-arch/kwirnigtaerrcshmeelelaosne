@@ -64,6 +64,7 @@ $(function() {
   
 
     $("#post_text").on('paste', function(e) {
+      alert('klkdslklkds');
       $(e.target).keyup();
     });
 
@@ -167,7 +168,7 @@ Template.feed_design.helpers({
         return this.user_cover_pic;
       }
       else{
-        return 'img/top-header1.jpg';
+        return '/img/top-header1.jpg';
       }
     },
 
@@ -176,7 +177,7 @@ Template.feed_design.helpers({
         return this.user_cover_pic;
       }
       else{
-        return 'img/top-header1.jpg';
+        return '/img/top-header1.jpg';
       }
     },
 
@@ -196,10 +197,40 @@ Template.feed_design.helpers({
 	    show_user_info(){
       var user_id = Session.get("userId");
       user_info_list_all = Meteor.subscribe("user_info_all");
-      var result = user_details.find({user_id: {$ne: user_id} },{limit: 50}).fetch();
-      // console.log('showing user list all');
-      // console.log(result);
-      return result;
+      var admin_id = "user_admin";
+      
+            var result = user_details.find({ user_id: {  $ne: user_id  }},{ limit: 10 }).fetch();
+
+        // var result = user_details.find({
+                                      // $or: [{ 
+                                      //         user_id:
+                                      //              {
+                                      //                $ne: user_id 
+                                      //              }
+                                      //       },
+                                      //       {
+                                      //         user_id:
+                                      //              {
+                                      //                $ne: admin_id 
+                                      //              }
+                                      //       }] },{limit: 50}).fetch();
+      console.log('showing user list all');
+      console.log(result);
+
+      var new_result = new Array();
+      for(var i=0;i< result.length; i++){
+        if(result[i].user_id != admin_id){
+          // console.log('case 1');
+          console.log(result[i].user_id);
+          new_result.push(result[i]);
+        }
+      }
+
+      console.log('new array');
+      console.log(new_result);
+                                
+
+      return new_result;
     },
 
     user_name_to_follow(){
@@ -651,7 +682,7 @@ Template.feed_design.events({
     },  
 
   'click .view_profile':function(){      
-      alert('captured');  
+      // alert('captured');  
                   // console.log('captured');  
                   // console.log("this.post_by");  
             // console.log(JSON.stringify(this));
@@ -712,7 +743,7 @@ Template.feed_design.events({
 // alert(' post_id '+post_id+' & comment_text '+comment_text);
     Meteor.call('submit_lvl_0_comment',Session.get("userId"),post_id,comment_text,function(error,result){
       if(error){
-          alert("Error");
+          alert("Error44444");
       }else{
         // console.log('successfully removed');
         $("#comment_lvl_0_"+post_id).val("")
@@ -752,6 +783,7 @@ Template.feed_design.events({
     },  
    
   'click #image_selection_clicked':function(){ 
+    alert('here i am');
       $('#post_image').click();  
     },  
     
@@ -994,6 +1026,7 @@ Template.feed_design.events({
     $('#comment_lvl0_text_'+this.comment_id).removeClass("loader_visiblity_block");
     
   },
+
   'click #submit_edited_comment_lvl1':function(){
 
     var comment_text = $('#hidden_comment_lvl1_post_'+this.comment_id).val().replace(/\r?\n/g,'<br/>');
@@ -1041,7 +1074,7 @@ function handle_like_comment_lvl_0_event(comment_id)
   var liked_by = Session.get("userId");
   Meteor.call('update_hub_like_comment_lvl_0',comment_id,liked_by, function(error,result){
               if(error){
-                    alert('error');
+                    alert('shhh');
                 }else{
                     // console.log('hub post sucessfully liked');
                     }
