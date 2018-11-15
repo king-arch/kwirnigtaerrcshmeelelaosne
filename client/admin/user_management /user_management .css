@@ -1,2 +1,24 @@
 
 
+#show_book_listing_wrapper label{
+		float: left;
+    margin-right: 20px;
+	}
+	#show_book_listing_wrapper{
+		padding: 2%;
+	}
+	#show_book_listing_filter{
+		margin-left: 7%;
+	}
+	#show_book_listing_filter input{
+		border: 0px;
+    border-bottom: 1px solid #ccc;
+	}
+	.book_cover_image{
+	height: 93px !important;
+    width: 500px !important;
+}	
+#show_book_listing_length select{
+border: 0px;
+    border-bottom: 1px solid #ccc;
+}	
