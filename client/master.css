@@ -4219,6 +4219,7 @@ input {
     border-bottom: 1px solid #e6ecf5;
     padding-left: 0px !important;
     padding-right: 0px !important;
+    margin-bottom: 10px;
 }
 .form-contro2{
    
@@ -6267,7 +6268,8 @@ fieldset[disabled] .checkbox input[type=checkbox] {
     background-color: transparent;
     border-bottom: 1px solid #fff;
     border: 0;
-    color: #fff
+    color: #fff;
+   
 }
 
 .form-inline .md-form{
@@ -6411,7 +6413,7 @@ fieldset[disabled] .checkbox input[type=checkbox] {
     text-align: center;
     color: #fff;
     background-color: #3f4257;
-    margin: 0 auto 35px
+    margin: 10px auto 15px
 }
 
 .items-round-little {
@@ -8375,7 +8377,11 @@ ol ol li {
 }
 
 .post__author {
-    margin-bottom: 15px
+    margin-bottom: 10px;
+}
+
+p {
+    margin-bottom: 10px !important;
 }
 
 .post__author img {
@@ -8389,7 +8395,7 @@ ol ol li {
 .post__author .more {
     float: right;
     font-size: 16px;
-    margin-right: 20px
+    margin-right: 0px
 }
 
 .post-additional-info {
@@ -8588,7 +8594,7 @@ ol ol li {
 }
 
 .comments-list .comment-item {
-    padding: 25px;
+    padding: 15px;
     border-bottom: 1px solid #e6ecf5;
     background-color: #fafbfd;
     position: relative
@@ -19841,6 +19847,13 @@ hr.new4 {
 .c-darkgray{
     color: #333 !important;
 }
+.c-lightgray{
+    color: #888da8 !important;
+}
+.c-orange{
+    color: #FF5E3A !important;
+}
+
 .chip {
     display: inline-block;
     height: 32px;
