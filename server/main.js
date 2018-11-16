@@ -68,6 +68,11 @@ import urlMetadata from 'url-metadata';
       return  feed.find({});
     });
 
+
+     Meteor.publish('fetch_feed_content_details', function(post_id) {
+      return  feed.find({post_id: post_id});
+    });
+
      Meteor.publish('fetch_blog_content', function() {
       return  blog.find({});
     });
@@ -1387,16 +1392,115 @@ console.log("case 2");
             return result;
     },
 
-       update_reward_rates: function(reward_rates)
+       update_reward_management: function(field_name,points_value)
       { 
+        // console.log(field_name+' & '+points_value);
+
             var newUser = content.find({content_type: "reward_points"}).fetch();
+          if(newUser[0]){
+// console.log('case 1');
+
+if(field_name == 'review_submition'){
+          var result =  content.update({
+              _id: newUser[0]._id,
+            }, {
+              $set: {
+                      review_submition: points_value,
+                      updated_at: Date.now(),
+                    }
+            });
+}
+else if(field_name == 'book_purchase'){
+            var result =  content.update({
+              _id: newUser[0]._id,
+            }, {
+              $set: {
+                      book_purchase: points_value,
+                      updated_at: Date.now(),
+                    }
+            });
+}
+else if(field_name == 'blog_approval'){
+            var result =  content.update({
+              _id: newUser[0]._id,
+            }, {
+              $set: {
+                      blog_approval: points_value,
+                      updated_at: Date.now(),
+                    }
+            });
+}
+else if(field_name == 'signup_completion'){
+            var result =  content.update({
+              _id: newUser[0]._id,
+            }, {
+              $set: {
+                      signup_completion: points_value,
+                      updated_at: Date.now(),
+                    }
+            });
+}
+else if(field_name == 'socail_media_handle_shared'){
+            var result =  content.update({
+              _id: newUser[0]._id,
+            }, {
+              $set: {
+                      socail_media_handle_shared: points_value,
+                      updated_at: Date.now(),
+                    }
+            });
+}
+else if(field_name == 'socail_media_handle_shared'){
+          var result =  content.update({
+              _id: newUser[0]._id,
+            }, {
+              $set: {
+                      socail_media_handle_shared: points_value,
+                      updated_at: Date.now(),
+                    }
+            });
+}
+
+          }
+
+      else{
+        // console.log('case 2');
+        var reward_id = 'reward_id_'+Math.floor((Math.random() * 2465789) + 1);
+                    var result = content.insert({
+                      reward_id: reward_id,
+                      content_type: "reward_points",
+                      review_submition: 200,
+
+                      book_purchase: 50,
+                      blog_approval: 500,
+                      signup_completion: 50,
+
+                      socail_media_handle_shared: 50,
+                      profile_completion: 50,
+                      created_at: Date.now()
+      });
+     }
+            return result;
+    },
+
+       reset_reward_management: function()
+      { 
+
+          var newUser = content.find({content_type: "reward_points"}).fetch();
           if(newUser[0]){
 
           var result =  content.update({
               _id: newUser[0]._id,
             }, {
               $set: {
-                      reward_rates: reward_rates,
+                      review_submition: 200,
+
+                      book_purchase: 50,
+                      blog_approval: 500,
+                      signup_completion: 50,
+
+                      socail_media_handle_shared: 50,
+                      profile_completion: 50,
                       updated_at: Date.now(),
                     }
             });
@@ -1407,12 +1511,20 @@ console.log("case 2");
                     var result = content.insert({
                       reward_id: reward_id,
                       content_type: "reward_points",
-                      reward_rates: reward_rates,
+                      review_submition: 200,
+
+                      book_purchase: 50,
+                      blog_approval: 500,
+                      signup_completion: 50,
+
+                      socail_media_handle_shared: 50,
+                      profile_completion: 50,
                       created_at: Date.now()
       });
      }
             return result;
     },
+
 });
 
 //******************** email functions Start ***********************

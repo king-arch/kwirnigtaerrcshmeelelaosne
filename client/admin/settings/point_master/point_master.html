@@ -428,6 +428,10 @@ border: 0px;
 						<p> Point Master</p>
 					</div>
 
+							<div class="align-right">
+								<a class="js-open-popupbtn btn-primary btn-md-2 c-grey" data-popup-target=".playlist-popup" id="reset_points_to_default" ><span id="save_text" class="c-white pointer"> Reset points to default</span></a>
+							</div>
+
 					<a href="#" class="more"><svg class="olymp-three-dots-icon"><use xlink:href="#olymp-three-dots-icon"></use></svg></a>
 				</div>
 			</div>
@@ -437,59 +441,71 @@ border: 0px;
 
 </div>
 <div class="container">
+
 	<div class="row">
 		<div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+			<div class="ui-block ">		
+				<div class="container">		
+					<!-- Forums Table -->				
+					<table class="forums-table table datatable " id="show_book_listing" >				
+						<thead>				
+						<tr>
 
-			<div class="ui-block">
-			
-				<ul class="left-menu" style="background-color: #333 !important;">
-					
-					<li>
-						<a class="pointer js-sidebar-open" title="Book Management" >
-							<p> Point Master </p>
-						</a>
-					</li>
+							<th class="forum">
+								Points Triggers
+							</th>	
 
-	     			<li>
-						<a class="pointer js-sidebar-open" title="Book Management" >
-							<p> Current Point Rate: </p>
-						</a>
-					</li>
+							<th class="forum">
+								Points to be released
+							</th>	
 
-	     			<li>
-						<a class="pointer js-sidebar-open" title="Book Management" id="display_reward_rate_frame" >
-							<p> 1 point <i class="fa fa-balance-scale fa-4x" style="color: #fff;" ></i>
-							<span id="display_current_reward_rate" > {{display_current_reward_rate}} </span>
-							<i class="fa fa-inr" style="color: #fff;" ></i> (INR) </p> </a>
+							<th class="freshness">
+								Action
+							</th>
 
-						<a class="pointer js-sidebar-open loader_visiblity_block" title="Book Management" id="edit_reward_rate_frame" >
-							<span> 1 point <i class="fa fa-balance-scale fa-4x" style="color: #fff;" ></i>
+						</tr>
+					</thead>
+					<tbody>
+						{{#each show_reward_points}}				
+						<tr>
+
+							<td class="topics">
+								<p class="text">{{reward_release_points}}</p>
+<span class="loader_visiblity_block" id="disaply_edit_box_{{index}}" >
+			<input type="text" id="new_value_{{index}}" onkeypress="return isNumberKey(event)" maxlength="3" >
+			<button class="submit_reward_points btn-breez btn"> Edit </button></span>
+
+
+							</td>
+
+							<td class="posts">
+								{{points_value}}
+							</td>
+
+
+
+							<td class="freshness">
+								<div class="author-freshness">
+									<button class="edit_reward_points btn-breez btn" id="{{index}}" > Edit </button>
+								</div>
+							</td>
+
+						</tr>
+					  {{/each}}
 						
-							<textarea class="form-control c-gray" placeholder="Enter Points" id="reward_rates" onkeypress="return isNumberKey(event)" maxlength="2" ></textarea>
+					
+						</tbody>
+					</table>
 
-							<i class="fa fa-inr" style="color: #fff;" ></i> (INR) </span>
-							
-                            <button class="btn btn-md-2 btn-primary" id="submit_reward_rate">
-                             <i class="fa fa-spinner fa-pulse fa-fw div_hide_class" id="loader_gif"></i>
-                           <span id="save_text"> Submit New Rates </span>
-							</button>
-					    </a>
+					<!-- ... end Forums Table -->
+				</div>
+		</div>
 
-
-					</li>
-
-					<li>
-						<a id="reset_reward_point_rate" class="pointer js-sidebar-open" title="Book Management" >
-							<p> Reset Current Rate </p>
-						</a>
-					</li>
-
-				</ul>
-
-			</div>
 		</div>
 
 	</div>
+
+
 </div> 
 
 <script>
