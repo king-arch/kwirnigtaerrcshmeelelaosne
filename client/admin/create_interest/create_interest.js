@@ -61,13 +61,13 @@ Template.create_interest_details.onRendered(function () {
  Template.create_interest_details.events({
 
  	'click #go_back': function(){
-    	  // alert('here: ');
+    	  // swal('here: ');
     	window.history.go(-1);
     },
 
 
     'click #add_interest': function(){
-    	// alert('ddd');
+    	// swal('ddd');
     		$('#loader_gif').removeClass('div_hide_class');
 			$('#save_text').addClass('div_hide_class');
 
@@ -94,7 +94,7 @@ Template.create_interest_details.onRendered(function () {
 					dangerMode: true,
 				});
 			} else {
-				alert(result.msg);
+				swal(result.msg);
 				$('#interest_text').val("");
 		}
 		});

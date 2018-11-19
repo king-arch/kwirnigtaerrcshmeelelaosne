@@ -3,6 +3,7 @@ import { Template } from 'meteor/templating';
 import { Base64 } from 'meteor/ostrio:base64';
 
 import { Session } from 'meteor/session';
+import swal from 'sweetalert';
 
    Template.create_ads.onRendered(function(){
 		$.getScript("https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/pikaday.min.js",function(){
@@ -47,21 +48,21 @@ Template.create_ads.helpers({
 Template.create_ads.events({
 
 		"change #promotion_image":function(e, template) {
-			alert('ok');
+			swal('ok');
 			upload_cover_pic(e, template);
 		},
 
 		"change #promotion_type":function(){
         
-        // alert('here i am');
+        // swal('here i am');
 		var promotion_type = $("#promotion_type").val();
 		if(promotion_type == 'Textual'){
-			// alert('case 1');
+			// swal('case 1');
 			$('#promotion_discription_box').removeClass('loader_visiblity_block');
 			$('#promotion_picture_box').addClass('loader_visiblity_block');
 		}
    		else if(promotion_type == 'Picture'){
-			// alert('case 2');
+			// swal('case 2');
    			$('#promotion_discription_box').addClass('loader_visiblity_block');
    			$('#promotion_picture_box').removeClass('loader_visiblity_block')
 
@@ -70,7 +71,7 @@ Template.create_ads.events({
 
 	'click #create_promotion':function()
 	{
-		// alert('here: - ');
+		// swal('here: - ');
 		var promotion_type = $("#promotion_type").val();
 		var promotion_start_date = $("#promotion_start_date").val();
 		var promotion_end_date = $("#promotion_end_date").val();
@@ -103,7 +104,7 @@ Template.create_ads.events({
 
    			if(promotion_content == '' || promotion_content == null)
 				{	
-					alert('Cover image cannot be empty for cover_image');
+					swal('Cover image cannot be empty for cover_image');
 					$("#cover_image").addClass('emptyfield3');
 					$("#cover_image").focus();
 					return false;
@@ -162,7 +163,7 @@ Template.create_ads.events({
               if(error){
                 console.log("Some error occured.");
               }else{ 
-               	alert("promotions sucessfully added to ads list!");
+               	swal("promotions sucessfully added to ads list!");
                 window.location.href="/promotion_listing";            
               }
           });	

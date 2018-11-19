@@ -15,45 +15,6 @@
         <div class="ui-block">
         
         <!-- News Feed Form  -->
-        
-        <div class="news-feed-form">
-          <div class="tab-content">
-            <div class="tab-pane active" id="home-1" role="tabpanel" aria-expanded="true">
-              <form>
-               
-                <div class="form-group with-icon label-floating is-empty">
-<!--                   <label class="control-label c-grey">Share what you are thinking here...</label>
- -->                  <textarea class="form-control c-grey" id="post_text" placeholder="Share what you are thinking here..."></textarea>
-                <span class="material-input"></span></div>
-                <div class="add-options-message">
-                  <a href="#" class="options-message" id="image_selection_clicked" data-toggle="tooltip" data-placement="top" data-original-title="ADD PHOTOS">
-                    <svg class="olymp-camera-icon" data-toggle="modal" data-target="#update-header-photo"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="svg-icons/sprites/icons.svg#olymp-camera-icon"></use></svg>
-                  </a>
-
-                  <img id="display_selected_image" src="{{show_profile_image}}" style="height:400px; width: 400px" class="loader_visiblity_block" >
-        
-                    <!-- <div class="clearfix"></div> -->
-                  <div class="summary new_headline_hub_para div_hide_class" id="url_metadata_div" style="border:1px solid #ccc !important;">
-                     <img id="metadata_info_image"  class="link_image" >
-                     <h4 class="h5_hub" style="margin: 10px 10px 10px 0px !important;" id="metadata_info_heading"> </h4>
-                     <p class="h5_hub_para" style="margin: 10px 10px 10px 0px !important; text-align: left !important;" 
-                        id="metadata_info_sub_heading"></p>
-            </div>
-            
-
-          <input type="file" style="display: none !important" id="post_image" >
-        
-                  <button class="btn btn-primary btn-md-2"  id="submit_post"> <i class="fa fa-spinner fa-pulse fa-fw div_hide_class" id="loader_gif"></i> <span id="save_text"> Post Status</span></button>
-        
-                </div>
-        
-              </form>
-            </div>
-        
-           
-          </div>
-
-        </div>
       </div>
 
          {{#each fetch_feed_posts}}
@@ -108,7 +69,7 @@
         </p>
         <div id="edit_post_text_{{post_id}}" class="loader_visiblity_block" > 
 
-        <textarea class="loader_visiblity_block updateHiddenPost" id="hidden_hub_post_{{post_id}}" resize="none" placeholder="Edit ..." style="padding: 5px; border: 1px solid #e4e4e4; border-radius: 5px; width: 100%; height: auto !important;" >{{post_text}}</textarea>
+        <textarea class="loader_visiblity_block updateHiddenPost c-darkgray" id="hidden_hub_post_{{post_id}}" resize="none" placeholder="Edit ..." style="padding: 5px; border: 1px solid #e4e4e4; border-radius: 5px; width: 100%; height: auto !important;" >{{post_text}}</textarea>
 
 
         <button class="btn btn-primary btn-md-2 pull-right" id="submit_edited_post" ><i class="fa fa-spinner fa-pulse fa-fw div_hide_class" id="loader_gif"></i>
@@ -133,38 +94,38 @@
            
       {{/if}}    
           
-<!--               <ul class="friends-harmonic">
+              <ul class="friends-harmonic">
                 <li>
                   <a href="#">
-                    <img src="img/friend-harmonic7.jpeg" alt="friend">
+                    <img src="/img/friend-harmonic9.jpeg" alt="friend">
                   </a>
                 </li>
                 <li>
                   <a href="#">
-                    <img src="img/friend-harmonic8.jpeg" alt="friend">
+                    <img src="/img/friend-harmonic10.jpeg" alt="friend">
                   </a>
                 </li>
                 <li>
                   <a href="#">
-                    <img src="img/friend-harmonic9.jpeg" alt="friend">
+                    <img src="/img/friend-harmonic7.jpeg" alt="friend">
                   </a>
                 </li>
                 <li>
                   <a href="#">
-                    <img src="img/friend-harmonic10.jpeg" alt="friend">
+                    <img src="/img/friend-harmonic8.jpeg" alt="friend">
                   </a>
                 </li>
                 <li>
                   <a href="#">
-                    <img src="img/friend-harmonic11.jpeg" alt="friend">
+                    <img src="/img/friend-harmonic11.jpeg" alt="friend">
                   </a>
                 </li>
               </ul>
           
               <div class="names-people-likes">
-                <a href="#">You</a>, <a href="#">Elaine</a> and
-                <br>34 more liked this
-              </div> -->
+                <a href="#">Jimmy</a>, <a href="#">Andrea</a> and
+                <br>47 more liked this
+              </div>
           
           
               <div class="comments-shared">
@@ -174,6 +135,7 @@
                   <span>{{show_comment_count}}</span>
                 </a>
               </div>
+
             </div>
           </article>
 
@@ -219,7 +181,7 @@
 
                         <div id="edit_comment_lvl0_text_{{comment_id}}" class="loader_visiblity_block" > 
 
-        <textarea class="loader_visiblity_block updateHiddenPost" id="hidden_comment_lvl0_post_{{comment_id}}" resize="none" placeholder="Edit ..." style="padding: 5px; border: 1px solid #e4e4e4; border-radius: 5px; width: 100%; height: auto !important;" >{{comment_text}}</textarea>
+        <textarea class="loader_visiblity_block updateHiddenPost c-darkgray" id="hidden_comment_lvl0_post_{{comment_id}}" resize="none" placeholder="Edit ..." style="padding: 5px; border: 1px solid #e4e4e4; border-radius: 5px; width: 100%; height: auto !important;" >{{comment_text}}</textarea>
 
 
         <button class="btn btn-primary btn-md-2 pull-right" id="submit_edited_comment_lvl0" ><i class="fa fa-spinner fa-pulse fa-fw div_hide_class" id="loader_gif"></i>
@@ -304,7 +266,7 @@
               <img src="{{show_logged_inuser_profile_pic}}" alt="author" class="view_profile" >
               <div class="form-group with-icon-right is-empty">
 
-                <textarea class="form-control c-gray" placeholder="Enter your reply here ..." id="comment_lvl_1_{{comment_id}}" ></textarea>
+                <textarea class="form-control c-darkgray" placeholder="Enter your reply here ..." id="comment_lvl_1_{{comment_id}}" ></textarea>
 
                 <div class="add-options-message">
                 </div>
@@ -351,7 +313,7 @@
           
        <div id="edit_comment_lvl1_text_{{comment_id}}" class="loader_visiblity_block" > 
 
-       <textarea class="loader_visiblity_block updateHiddenPost" id="hidden_comment_lvl1_post_{{comment_id}}" resize="none" placeholder="Edit ..." style="padding: 5px; border: 1px solid #e4e4e4; border-radius: 5px; width: 100%; height: auto !important;" >{{comment_text}}</textarea>
+       <textarea class="loader_visiblity_block updateHiddenPost c-darkgray" id="hidden_comment_lvl1_post_{{comment_id}}" resize="none" placeholder="Edit ..." style="padding: 5px; border: 1px solid #e4e4e4; border-radius: 5px; width: 100%; height: auto !important;" >{{comment_text}}</textarea>
 
 
         <button class="btn btn-primary btn-md-2 pull-right" id="submit_edited_comment_lvl1" ><i class="fa fa-spinner fa-pulse fa-fw div_hide_class" id="loader_gif"></i>
@@ -439,7 +401,7 @@
               <img src="{{show_logged_inuser_profile_pic}}" alt="author" class="view_profile" >
           
               <div class="form-group with-icon-right is-empty">
-                <textarea class="form-control c-gray" placeholder="Enter your comment here ..." id="comment_lvl_0_{{post_id}}" ></textarea>
+                <textarea class="form-control c-darkgray" placeholder="Enter your comment here ..." id="comment_lvl_0_{{post_id}}" ></textarea>
                 <div class="add-options-message">
                  <!--  <a href="#" class="options-message" data-toggle="modal" data-target="#update-header-photo">
                     <svg class="olymp-camera-icon">
@@ -544,7 +506,7 @@
         </p>
           <div id="edit_post_text_{{post_id}}" class="loader_visiblity_block" > 
 
-        <textarea class="loader_visiblity_block updateHiddenPost" id="hidden_hub_post_{{post_id}}" resize="none" placeholder="Edit ..." style="padding: 5px; border: 1px solid #e4e4e4; border-radius: 5px; width: 100%; height: auto !important;" >{{post_text}}</textarea>
+        <textarea class="loader_visiblity_block updateHiddenPost c-darkgray" id="hidden_hub_post_{{post_id}}" resize="none" placeholder="Edit ..." style="padding: 5px; border: 1px solid #e4e4e4; border-radius: 5px; width: 100%; height: auto !important;" >{{post_text}}</textarea>
 
 
         <button class="btn btn-primary btn-md-2 pull-right" id="submit_edited_post" ><i class="fa fa-spinner fa-pulse fa-fw div_hide_class" id="loader_gif"></i>
@@ -580,30 +542,30 @@
               &nbsp;  &nbsp;
                {{/if}}
 
-<!--               <ul class="friends-harmonic">
+              <ul class="friends-harmonic">
                 <li>
                   <a href="#">
-                    <img src="img/friend-harmonic9.jpeg" alt="friend">
+                    <img src="/img/friend-harmonic9.jpeg" alt="friend">
                   </a>
                 </li>
                 <li>
                   <a href="#">
-                    <img src="img/friend-harmonic10.jpeg" alt="friend">
+                    <img src="/img/friend-harmonic10.jpeg" alt="friend">
                   </a>
                 </li>
                 <li>
                   <a href="#">
-                    <img src="img/friend-harmonic7.jpeg" alt="friend">
+                    <img src="/img/friend-harmonic7.jpeg" alt="friend">
                   </a>
                 </li>
                 <li>
                   <a href="#">
-                    <img src="img/friend-harmonic8.jpeg" alt="friend">
+                    <img src="/img/friend-harmonic8.jpeg" alt="friend">
                   </a>
                 </li>
                 <li>
                   <a href="#">
-                    <img src="img/friend-harmonic11.jpeg" alt="friend">
+                    <img src="/img/friend-harmonic11.jpeg" alt="friend">
                   </a>
                 </li>
               </ul>
@@ -611,7 +573,7 @@
               <div class="names-people-likes">
                 <a href="#">Jimmy</a>, <a href="#">Andrea</a> and
                 <br>47 more liked this
-              </div> -->
+              </div>
           
           
               <div class="comments-shared">
@@ -668,7 +630,7 @@
 
                         <div id="edit_comment_lvl0_text_{{comment_id}}" class="loader_visiblity_block" > 
 
-        <textarea class="loader_visiblity_block updateHiddenPost" id="hidden_comment_lvl0_post_{{comment_id}}" resize="none" placeholder="Edit ..." style="padding: 5px; border: 1px solid #e4e4e4; border-radius: 5px; width: 100%; height: auto !important;" >{{comment_text}}</textarea>
+        <textarea class="loader_visiblity_block updateHiddenPost c-darkgray" id="hidden_comment_lvl0_post_{{comment_id}}" resize="none" placeholder="Edit ..." style="padding: 5px; border: 1px solid #e4e4e4; border-radius: 5px; width: 100%; height: auto !important;" >{{comment_text}}</textarea>
 
 
         <button class="btn btn-primary btn-md-2 pull-right" id="submit_edited_comment_lvl0" ><i class="fa fa-spinner fa-pulse fa-fw div_hide_class" id="loader_gif"></i>
@@ -710,7 +672,7 @@
               <img src="{{show_logged_inuser_profile_pic}}" class="view_profile" alt="author">
               <div class="form-group with-icon-right is-empty">
 
-                <textarea class="form-control c-gray" placeholder="Enter your reply here ..." id="comment_lvl_1_{{comment_id}}" ></textarea>
+                <textarea class="form-control c-darkgray" placeholder="Enter your reply here ..." id="comment_lvl_1_{{comment_id}}" ></textarea>
 
                 <div class="add-options-message">
                 </div>
@@ -758,7 +720,7 @@
 
        <div id="edit_comment_lvl1_text_{{comment_id}}" class="loader_visiblity_block" > 
 
-        <textarea class="loader_visiblity_block updateHiddenPost" id="hidden_comment_lvl1_post_{{comment_id}}" resize="none" placeholder="Edit ..." style="padding: 5px; border: 1px solid #e4e4e4; border-radius: 5px; width: 100%; height: auto !important;" >{{comment_text}}</textarea>
+        <textarea class="loader_visiblity_block updateHiddenPost c-darkgray" id="hidden_comment_lvl1_post_{{comment_id}}" resize="none" placeholder="Edit ..." style="padding: 5px; border: 1px solid #e4e4e4; border-radius: 5px; width: 100%; height: auto !important;" >{{comment_text}}</textarea>
 
 
         <button class="btn btn-primary btn-md-2 pull-right" id="submit_edited_comment_lvl1" ><i class="fa fa-spinner fa-pulse fa-fw div_hide_class" id="loader_gif"></i>
@@ -802,7 +764,7 @@
               <img src="{{show_logged_inuser_profile_pic}}" class="view_profile" alt="author">
               <div class="form-group with-icon-right is-empty">
 
-                <textarea class="form-control c-gray" placeholder="Enter your comment here ..." id="comment_lvl_0_{{post_id}}" ></textarea>
+                <textarea class="form-control c-darkgray" placeholder="Enter your comment here ..." id="comment_lvl_0_{{post_id}}" ></textarea>
                 <div class="add-options-message">
                  <!--  <a href="#" class="options-message" data-toggle="modal" data-target="#update-header-photo">
                     <svg class="olymp-camera-icon">
@@ -911,7 +873,7 @@
  
           <div id="edit_post_text_{{post_id}}" class="loader_visiblity_block" > 
 
-        <textarea class="loader_visiblity_block updateHiddenPost" id="hidden_hub_post_{{post_id}}" resize="none" placeholder="Edit ..." style="padding: 5px; border: 1px solid #e4e4e4; border-radius: 5px; width: 100%; height: auto !important;" >{{post_text}}</textarea>
+        <textarea class="loader_visiblity_block updateHiddenPost c-darkgray" id="hidden_hub_post_{{post_id}}" resize="none" placeholder="Edit ..." style="padding: 5px; border: 1px solid #e4e4e4; border-radius: 5px; width: 100%; height: auto !important;" >{{post_text}}</textarea>
 
 
         <button class="btn btn-primary btn-md-2 pull-right" id="submit_edited_post" ><i class="fa fa-spinner fa-pulse fa-fw div_hide_class" id="loader_gif"></i>
@@ -959,40 +921,38 @@
                &nbsp;  &nbsp;
                {{/if}}  
 
-<!--               <ul class="friends-harmonic">
-
+              <ul class="friends-harmonic">
                 <li>
                   <a href="#">
-                    <img src="img/friend-harmonic7.jpeg" alt="friend">
+                    <img src="/img/friend-harmonic9.jpeg" alt="friend">
                   </a>
                 </li>
                 <li>
                   <a href="#">
-                    <img src="img/friend-harmonic8.jpeg" alt="friend">
+                    <img src="/img/friend-harmonic10.jpeg" alt="friend">
                   </a>
                 </li>
                 <li>
                   <a href="#">
-                    <img src="img/friend-harmonic9.jpeg" alt="friend">
+                    <img src="/img/friend-harmonic7.jpeg" alt="friend">
                   </a>
                 </li>
                 <li>
                   <a href="#">
-                    <img src="img/friend-harmonic10.jpeg" alt="friend">
+                    <img src="/img/friend-harmonic8.jpeg" alt="friend">
                   </a>
                 </li>
                 <li>
                   <a href="#">
-                    <img src="img/friend-harmonic11.jpeg" alt="friend">
+                    <img src="/img/friend-harmonic11.jpeg" alt="friend">
                   </a>
                 </li>
-
               </ul>
           
               <div class="names-people-likes">
-                <a href="#">Jenny</a>, <a href="#">Robert</a> and
-                <br>18 more liked this
-              </div> -->
+                <a href="#">Jimmy</a>, <a href="#">Andrea</a> and
+                <br>47 more liked this
+              </div>
           
               <div class="comments-shared">
                 <a href="#" class="post-add-icon inline-items">
@@ -1051,7 +1011,7 @@
 
                         <div id="edit_comment_lvl0_text_{{comment_id}}" class="loader_visiblity_block" > 
 
-        <textarea class="loader_visiblity_block updateHiddenPost" id="hidden_comment_lvl0_post_{{comment_id}}" resize="none" placeholder="Edit ..." style="padding: 5px; border: 1px solid #e4e4e4; border-radius: 5px; width: 100%; height: auto !important;" >{{comment_text}}</textarea>
+        <textarea class="loader_visiblity_block updateHiddenPost c-darkgray" id="hidden_comment_lvl0_post_{{comment_id}}" resize="none" placeholder="Edit ..." style="padding: 5px; border: 1px solid #e4e4e4; border-radius: 5px; width: 100%; height: auto !important;" >{{comment_text}}</textarea>
 
 
         <button class="btn btn-primary btn-md-2 pull-right" id="submit_edited_comment_lvl0" ><i class="fa fa-spinner fa-pulse fa-fw div_hide_class" id="loader_gif"></i>
@@ -1094,7 +1054,7 @@
               <img src="{{show_logged_inuser_profile_pic}}" class="view_profile" alt="author">
               <div class="form-group with-icon-right is-empty">
 
-                <textarea class="form-control c-gray" placeholder="Enter your reply here ..." id="comment_lvl_1_{{comment_id}}" ></textarea>
+                <textarea class="form-control c-darkgray" placeholder="Enter your reply here ..." id="comment_lvl_1_{{comment_id}}" ></textarea>
 
                 <div class="add-options-message">
                 </div>
@@ -1142,7 +1102,7 @@
 
        <div id="edit_comment_lvl1_text_{{comment_id}}" class="loader_visiblity_block" > 
 
-        <textarea class="loader_visiblity_block updateHiddenPost" id="hidden_comment_lvl1_post_{{comment_id}}" resize="none" placeholder="Edit ..." style="padding: 5px; border: 1px solid #e4e4e4; border-radius: 5px; width: 100%; height: auto !important;" >{{comment_text}}</textarea>
+        <textarea class="loader_visiblity_block updateHiddenPost c-darkgray" id="hidden_comment_lvl1_post_{{comment_id}}" resize="none" placeholder="Edit ..." style="padding: 5px; border: 1px solid #e4e4e4; border-radius: 5px; width: 100%; height: auto !important;" >{{comment_text}}</textarea>
 
 
         <button class="btn btn-primary btn-md-2 pull-right" id="submit_edited_comment_lvl1" ><i class="fa fa-spinner fa-pulse fa-fw div_hide_class" id="loader_gif"></i>
@@ -1192,7 +1152,7 @@
               <img src="{{show_logged_inuser_profile_pic}}" class="view_profile" alt="author">
           
               <div class="form-group with-icon-right is-empty">
-                <textarea class="form-control c-gray" placeholder="Enter your comment here ..." id="comment_lvl_0_{{post_id}}" ></textarea>
+                <textarea class="form-control c-darkgray" placeholder="Enter your comment here ..." id="comment_lvl_0_{{post_id}}" ></textarea>
                 <div class="add-options-message">
                  <!--  <a href="#" class="options-message" data-toggle="modal" data-target="#update-header-photo">
                     <svg class="olymp-camera-icon">
@@ -1372,9 +1332,9 @@
       </div>
       
  <div class="ui-block">
+
         <div class="ui-block-title">
           <h6 class="title"> You may follow </h6>
-         
         </div>
 
             {{#each show_user_info}} 
@@ -1389,13 +1349,8 @@
                     <!-- <div class="birthday-date">Author</div> -->
                   </div>
 
-        {{#if check_if_already_following}} 
                   <a class="btn btn-sm bg-breez click_on_follow" id={{user_id}} > Follow</a>
-          {{else}}
-                  <a class="btn btn-sm bg-breez click_on_unfollow" id={{user_id}} > Following</a>
-        {{/if}}
                 </div>
-
 
     {{/each}}
 

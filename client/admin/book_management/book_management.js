@@ -63,7 +63,7 @@ Template.book_management_details.onRendered(function () {
     show_book_details(){
 	       var query = new RegExp(Session.get("search_txt"),'i'); 
 	       if(Session.get("search_txt")){
-	       	// alert('case2');
+	       	// swal('case2');
 	       var result = book_details.find({
 	                               $or: 
 	                                [ {
@@ -110,22 +110,22 @@ function click_events() {
 
   $('#submit_search_text').click(function(e){
   	e.preventDefault();
-  	// alert('search ');
+  	// swal('search ');
     var search_txt = $('#search_text').val();
     Session.set("search_txt",search_txt);
-    // alert('Ok...');
+    // swal('Ok...');
 
     return false;
   });
 
   $('#user_management').click(function(e){
-  	// alert("here");
+  	// swal("here");
   		Router.go("/user_management");
   });
 
 
   $('#book_management').click(function(e){
-  	// alert("here");
+  	// swal("here");
   		Router.go("/book_management");
   });
 
@@ -136,7 +136,7 @@ function click_events() {
 
 
 	$('.edit_book_details').click(function (e) {
-// alert('here: ');
+// swal('here: ');
 		var book_id= Base64.encode(this.id);    
         var url = '/edit_book_details/'+book_id;
 		Router.go(url);
@@ -165,7 +165,7 @@ function click_events() {
 		$('#loader_gif').removeClass('div_hide_class');
 		$('#save_text').addClass('div_hide_class');
 
-		// alert('email: '+email+'password: '+password);
+		// swal('email: '+email+'password: '+password);
 
 		Meteor.call('Check_admin_login_auth', email, password, function (error, result) {
 

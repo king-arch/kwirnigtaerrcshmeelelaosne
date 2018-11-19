@@ -576,6 +576,12 @@ if(check_if_exist[0]){
               });
 
           }
+
+        }, 
+
+    change_follow_status:function(logged_in_user){
+
+    // console.log(follow_user_id+' & '+logged_in_user);
       var user_id = logged_in_user;
       var newUser = user_details.find({"user_id":user_id}).fetch();
           if(newUser[0]){
@@ -873,17 +879,22 @@ if(check_if_exist[0]){
       },  
 
 
-  user_details_update: function(user_id,user_name,user_email,user_contact,user_location,user_headline)
+  user_details_update: function(user_id,user_name,fb_handler,twitter_handler,goodreads_handler,user_contact,user_location,user_headline)
       {   
+
       var result = user_details.update(
               {
                 'user_id': user_id
               },{
                   $set: {
                           'user_name': user_name,
-                          'user_email': user_email,
                           'user_contact': user_contact,
                           'user_location': user_location,
+
+                          'fb_handler': fb_handler,
+                          'twitter_handler': twitter_handler,
+                          'goodreads_handler': goodreads_handler,
+
                           'user_headline': user_headline,
                           'updated_at': Date.now()
                         }
@@ -900,11 +911,13 @@ if(check_if_exist[0]){
                                               post_type: 'like',
 
                                   }).fetch();
+
           console.log('checkForAlreadyExists: ');
           console.log(checkForAlreadyExists);
 
           if(checkForAlreadyExists[0]){
           if(checkForAlreadyExists[0].like_status == 0){
+
                       var result = feed.update({
                       like_id: checkForAlreadyExists[0].like_id
                     },
@@ -918,6 +931,7 @@ if(check_if_exist[0]){
                   });
           }
           else{
+            
           var result = feed.update({
                       like_id: checkForAlreadyExists[0].like_id
                     },
@@ -1562,7 +1576,7 @@ var htmlCode="<html><head><title>Email</title></head><body><div style="+div_styl
 "colspan="+spacing+">&nbsp;</td></tr><tr><td colspan="+spacing+">&nbsp;</td></tr><tr><td colspan="+spacing+" style="+div_style14+">Hi "+name +",</td></tr><tr><td colspan="+spacing+">Welcome to the Writersmelon"+
 " Family!</td></tr><tr><td colspan="+spacing+">Your account is almost ready, but before you can login you need to complete a brief account verification process.</td></tr><tr><td colspan="+div_style11
 +"><br/><a href=http://localhost:3000/activate_email/"+userID + ">Click here</a> to verify your email ID.  (if you are using the mobile application, after you press on the previous link close the mobile browser and continue from the application).<br/></td></tr><tr><td colspan="+spacing+">&nbsp;</td></tr><tr><td colspan="+spacing
-+">P.S. If you did not sign up for writersmelon, just ignore this email; we will never again send you an email.</td></tr><tr><td colspan="+spacing
++">P.S. If you did not sign up for Writersmelon, just ignore this email; we will never again send you an email.</td></tr><tr><td colspan="+spacing
 +">&nbsp;</td></tr><tr><td colspan="+spacing+">Regards</td></tr><tr><td colspan="+spacing
 +">The Writersmelon Team</td></tr><tr><td colspan="+spacing+">&nbsp;</td></tr><tr><td colspan="+spacing+">&nbsp;</td></tr></tbody></table></div><div style="+div_style15+"><table style="+div_style6+"><tbody><tr><td><center><small style="+div_style6+">This email was intended for "+name+".<br/>Copyright Writersmelon, 2018.</small></center></td></tr></tbody></table></div></td></tr></tbody></table></div></div></body></html>";
 

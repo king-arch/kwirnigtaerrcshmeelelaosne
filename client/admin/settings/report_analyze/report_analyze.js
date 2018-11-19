@@ -131,7 +131,7 @@ Template.report_analyze_details.events({
               {
                 $("#reward_rates").removeClass('emptyfield2');
               }
-// alert(' reward_rates '+reward_rates);
+// swal(' reward_rates '+reward_rates);
     $('#loader_gif').removeClass('div_hide_class');
     $('#save_text').addClass('div_hide_class');
 

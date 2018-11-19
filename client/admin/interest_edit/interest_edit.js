@@ -30,7 +30,7 @@ Template.edit_interest_details.onRendered(function () {
 
 
 /*$.getScript("https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.2/js/bootstrap-select.min.js",function(){
-	alert("bootstrap-select");
+	swal("bootstrap-select");
 	$('select').selectpicker();
 })*/
 	setTimeout(function () {
@@ -38,12 +38,12 @@ Template.edit_interest_details.onRendered(function () {
 		click_events();
 	}, 2000);
 
-// alert('start');
+// swal('start');
   var url = window.location.href;
   var new_url = url.split("/");
   url = new_url[new_url.length - 1];
   var interest_id = Base64.decode(url);
-// alert('interest_id: '+ interest_id);
+// swal('interest_id: '+ interest_id);
 
   Meteor.call('fetch_interest_list', interest_id, function (error, result) {
     if (error) {
@@ -51,7 +51,7 @@ Template.edit_interest_details.onRendered(function () {
     } else {
       console.log('result: ');
       console.log(result);
-      // alert("book details successfully fetched!");
+      // swal("book details successfully fetched!");
       console.log("interest details successfully fetched!");
 
       var interest_title = result[0].interest_title;
@@ -90,10 +90,10 @@ Template.edit_interest_details.onRendered(function () {
 function click_events() {
 
 	$('#book_cover').change(function (e, template) {
-		// alert('click');
+		// swal('click');
 	    upload_cover_pic(e, template);
 
-	    // alert(Session.get("book_cover_session"));
+	    // swal(Session.get("book_cover_session"));
 	});
 
 	$('#send_to_cookies').click(function (e) {
@@ -135,7 +135,7 @@ function click_events() {
 	// });
 
 	$('#update_book').click(function (e) {
-// alert('here: ');
+// swal('here: ');
 		var interest_text = $('#interest_text').val();
 
 		if (interest_text == '' || interest_text == null) {
@@ -166,8 +166,8 @@ function click_events() {
 					dangerMode: true,
 				});
 			} else {
-				alert(result.msg);
-				// alert(result.interest_text);
+				swal(result.msg);
+				// swal(result.interest_text);
 				window.location.href="/interest_management";
 		}
 		});

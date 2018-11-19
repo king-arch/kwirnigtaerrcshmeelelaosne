@@ -83,7 +83,7 @@ Template.edit_cancellation_policy_details.events({
     },
 
     'click #reset_reward_point_rate': function(){
-      // alert('here i am');
+      // swal('here i am');
        $('#edit_reward_rate_frame').removeClass("loader_visiblity_block");
        $('#display_reward_rate_frame').addClass("loader_visiblity_block");
     },
@@ -112,7 +112,7 @@ Template.edit_cancellation_policy_details.events({
               {
                 $("#cancellation_policy").removeClass('emptyfield2');
               }
-// alert(' cancellation_policy '+cancellation_policy);
+// swal(' cancellation_policy '+cancellation_policy);
     $('#loader_gif').removeClass('div_hide_class');
     $('#save_text').addClass('div_hide_class');
 

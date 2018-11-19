@@ -20,27 +20,20 @@ Template.edit_book_details.onDestroyed(function () {
 
 Template.edit_book_details.onRendered(function () {
 	$.getScript("https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/pikaday.min.js",function(){
-	
-		    var picker = new Pikaday({ field: document.getElementById('date_picker') });
-	})
-
-
-
-/*$.getScript("https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.2/js/bootstrap-select.min.js",function(){
-	alert("bootstrap-select");
-	$('select').selectpicker();
-})*/
+    var picker = new Pikaday({ field: document.getElementById('date_picker') });
+  })
+/
 	setTimeout(function () {
 		$('#loading_div').addClass("loader_visiblity_block");
 		click_events();
 	}, 2000);
 
-// alert('start');
+// swal('start');
   var url = window.location.href;
   var new_url = url.split("/");
   url = new_url[new_url.length - 1];
   var book_id = Base64.decode(url);
-// alert('book_id: '+ book_id);
+// swal('book_id: '+ book_id);
 
   Meteor.call('fetch_book_details', book_id, function (error, result) {
     if (error) {
@@ -49,7 +42,7 @@ Template.edit_book_details.onRendered(function () {
 
       console.log('result: ');
       console.log(result);
-      // alert("book details successfully fetched!");
+      // swal("book details successfully fetched!");
       console.log("book details successfully fetched!");
 
       var book_name = result[0].book_name;
@@ -86,7 +79,7 @@ Template.edit_book_details.onRendered(function () {
       // var day = day_and_month[1].trim();
       // var month = day_and_month[0].trim();
 
-      // // alert(day+' '+month+' '+year);
+      // // swal(day+' '+month+' '+year);
       // $('#release_date').val(day);
       // $('#release_month').val(month);
       $('#date_picker').val(final_release_date);
@@ -123,10 +116,10 @@ Template.edit_book_details.onRendered(function () {
 function click_events() {
 
 	$('#book_cover').change(function (e, template) {
-		// alert('click');
+		// swal('click');
 	    upload_cover_pic(e, template);
 
-	    // alert(Session.get("book_cover_session"));
+	    // swal(Session.get("book_cover_session"));
 	});
 
 	$('#send_to_cookies').click(function (e) {
@@ -168,7 +161,7 @@ function click_events() {
 	// });
 
 	$('#add_book').click(function (e) {
-// alert('here: ');
+// swal('here: ');
 		var book_name = $('#book_name').val();
 		var book_summary = $('#book_summary').val();
 		var book_price = $('#book_price').val();
@@ -262,7 +255,7 @@ function click_events() {
 
     // var mydate = new Date();
     // var str = moment(mydate).format('YYYY');
-    // // alert(str);
+    // // swal(str);
 
     // if (release_year > str) {
     //   swal(' Last used year value cannot be greater then the current year');
@@ -284,7 +277,7 @@ function click_events() {
     //   var mydate = new Date();
     //   var current_month = moment(mydate).format('MM');
     //   // var current_month2=moment(mydate).format('MMMM');
-    //   // alert(current_month +' & '+current_month2);
+    //   // swal(current_month +' & '+current_month2);
 
     //   var selected_month;
 

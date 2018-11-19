@@ -65,7 +65,7 @@ Template.admin_settings_details.onRendered(function () {
     show_interest_list(){
      //     var query = new RegExp(Session.get("search_txt"),'i'); 
      //     if(Session.get("search_txt")){
-     //       // alert('case2');
+     //       // swal('case2');
      //     var result = interest_list.find({}).fetch();
 
     // }
@@ -134,7 +134,7 @@ Template.admin_settings_details.events({
 
  'click .edit_book_details': function(){
 		var interest_id= Base64.encode(this.interest_id);    
-		alert(interest_id); 
+		swal(interest_id); 
         var url = '/edit_interest/'+interest_id;
 		Router.go(url);
 	},

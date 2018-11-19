@@ -83,7 +83,7 @@ Template.edit_review_policy_details.events({
     },
 
     'click #reset_reward_point_rate': function(){
-      // alert('here i am');
+      // swal('here i am');
        $('#edit_reward_rate_frame').removeClass("loader_visiblity_block");
        $('#display_reward_rate_frame').addClass("loader_visiblity_block");
     },
@@ -112,7 +112,7 @@ Template.edit_review_policy_details.events({
               {
                 $("#review_policy").removeClass('emptyfield2');
               }
-// alert(' review_policy '+review_policy);
+// swal(' review_policy '+review_policy);
     $('#loader_gif').removeClass('div_hide_class');
     $('#save_text').addClass('div_hide_class');
 

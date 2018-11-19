@@ -12,6 +12,7 @@ import {
 } from 'meteor/session';
 
 import swal from 'sweetalert';
+
 import { book_details } from './../../../import/collections/insert.js';
 import { Base64 } from 'meteor/ostrio:base64';
 
@@ -76,7 +77,7 @@ Template.left_panel_admin.onDestroyed(function () {
     show_book_details(){
 	       var query = new RegExp(Session.get("search_txt"),'i'); 
 	       if(Session.get("search_txt")){
-	       	// alert('case2');
+	       	// swal('case2');
 	       var result = book_details.find({
 	                               $or: 
 	                                [ {

@@ -57,7 +57,7 @@ Template.user_management_details.onRendered(function () {
     show_user_details(){
 	       var query = new RegExp(Session.get("search_txt"),'i'); 
 	       if(Session.get("search_txt")){
-	       	// alert('case2');
+	       	// swal('case2');
 	       var result = user_details.find({
 	                               $or: 
 	                                [ {
@@ -94,10 +94,10 @@ function click_events() {
 
   $('#submit_search_text').click(function(e){
   	e.preventDefault();
-  	// alert('search ');
+  	// swal('search ');
     var search_txt = $('#search_text').val();
     Session.set("search_txt",search_txt);
-    // alert('Ok...');
+    // swal('Ok...');
 
     return false;
   });
@@ -125,7 +125,7 @@ function click_events() {
 	$('.edit_user_details').click(function (e) {
 
 		var book_id= Base64.encode(this.id);    
-		// alert(book_id); 
+		// swal(book_id); 
         var url = '/edit_user_details/'+book_id;
 		Router.go(url);
 
@@ -153,7 +153,7 @@ function click_events() {
 		$('#loader_gif').removeClass('div_hide_class');
 		$('#save_text').addClass('div_hide_class');
 
-		// alert('email: '+email+'password: '+password);
+		// swal('email: '+email+'password: '+password);
 
 		Meteor.call('Check_admin_login_auth', email, password, function (error, result) {
 

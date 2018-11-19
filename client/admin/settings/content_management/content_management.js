@@ -8,8 +8,8 @@ import {
 import {
 	Session
 } from 'meteor/session';
-
 import swal from 'sweetalert';
+
 import { book_details } from './../../../../import/collections/insert.js';
 import { interest_list } from './../../../../import/collections/insert.js';
 
@@ -91,7 +91,7 @@ Template.content_management_details.events({
     },
 
     'click #reset_reward_point_rate': function(){
-      // alert('here i am');
+      // swal('here i am');
        $('#edit_reward_rate_frame').removeClass("loader_visiblity_block");
        $('#display_reward_rate_frame').addClass("loader_visiblity_block");
     },
@@ -136,7 +136,7 @@ Template.content_management_details.events({
               {
                 $("#reward_rates").removeClass('emptyfield2');
               }
-// alert(' reward_rates '+reward_rates);
+// swal(' reward_rates '+reward_rates);
     $('#loader_gif').removeClass('div_hide_class');
     $('#save_text').addClass('div_hide_class');
 

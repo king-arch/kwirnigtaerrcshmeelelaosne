@@ -3,10 +3,11 @@ import { Template } from 'meteor/templating';
 import { Base64 } from 'meteor/ostrio:base64';
 
 import { Session } from 'meteor/session';
+import swal from 'sweetalert';
 
    Template.display_create_blog.onRendered(function(){
 		$.getScript("https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/pikaday.min.js",function(){
-		    alert("loaded: ");
+		    swal("loaded: ");
 		    var picker = new Pikaday({ field: document.getElementById('blog_publish_date') });
 	});
 		
@@ -117,7 +118,7 @@ Template.display_create_blog.events({
 		}
 
 
-		alert('blog_title: '+blog_title+' blog_type: '+blog_type+' blog_discription: '+blog_discription+' blog_publish_date: '+blog_publish_date);
+		swal('blog_title: '+blog_title+' blog_type: '+blog_type+' blog_discription: '+blog_discription+' blog_publish_date: '+blog_publish_date);
 // return false;
 		var logged_in_user = Session.get('userId');
 
@@ -125,7 +126,7 @@ Template.display_create_blog.events({
               if(error){
                 console.log("Some error occured.");
               }else{ 
-               	alert("blog sucessfully saved!");
+               	swal("blog sucessfully saved!");
                 window.location.href="/blog_listing";            
               }
           });	

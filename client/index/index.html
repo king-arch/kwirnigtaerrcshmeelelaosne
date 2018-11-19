@@ -85,7 +85,7 @@
                                     <div class="form-group md-form  label-floating has-success">
                                         <label for="Name" class="control-label c-light-grey" data-success="right" data-error="wrong">Full Name </label>
 
-                                        <input id="signup_name" required="required" class="form-control validate c-white" placeholder="" type="text" maxlength="40" >
+                                        <input id="signup_name" required="required" class="form-control validate c-white" placeholder="" type="text" maxlength="40" autocomplete="off" >
 
                                     </div>
 
@@ -94,12 +94,12 @@
                                         <label for="Email" class="control-label c-light-grey" data-success="right">Email</label>
 
 <!--                                         <input id="signup_email" required="required" class="form-control validate c-white" placeholder="" type="text" > -->
-                                        <input id="signup_email" required="required" class="form-control validate c-white" placeholder="" type="text"  onfocusout="ValidateEmail(event)" >
+                                        <input id="signup_email" required="required" class="form-control validate c-white" placeholder="" type="text"  onfocusout="ValidateEmail(event)" autocomplete="off" >
                                     </div>
 
                                     <div class="form-group md-form  label-floating is-empty with-button c-white" >
                                         <label for="Email" class="control-label c-light-grey" data-success="right" data-error="wrong">Password (atleast 8 chars.)</label>
-                                        <input class="form-control validate c-white" type="password" id="signup_password" >
+                                        <input class="form-control validate c-white" type="password" id="signup_password" autocomplete="off" >
 
                                         <a href="#"><span class="trans_bg show_signup_password"> <i class="fa fa-eye"> </i> </span></a>
 

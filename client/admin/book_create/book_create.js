@@ -61,10 +61,10 @@ Template.create_book_details.onRendered(function () {
 function click_events() {
 	
 	$('#book_cover').change(function (e, template) {
-		// alert('click');
+		// swal('click');
 	    upload_cover_pic(e, template);
 
-	    // alert(Session.get("book_cover_session"));
+	    // swal(Session.get("book_cover_session"));
 	});
 
 	$('#send_to_cookies').click(function (e) {
@@ -105,7 +105,7 @@ function click_events() {
 	// });
 
 	$('#add_book').click(function (e) {
-// alert('here: ');
+// swal('here: ');
 		var book_name = $('#book_name').val();
 		var book_summary = $('#book_summary').val();
 		var book_price = $('#book_price').val();
@@ -201,7 +201,7 @@ function click_events() {
 
     book_price = Math.round(book_price * 100) / 100;
 
-    // // alert(str);
+    // // swal(str);
 
     // if (release_year > str) {
     //   swal(' Last used year value cannot be greater then the current year');
@@ -223,7 +223,7 @@ function click_events() {
     //   var mydate = new Date();
     //   var current_month = moment(mydate).format('MM');
     //   // var current_month2=moment(mydate).format('MMMM');
-    //   // alert(current_month +' & '+current_month2);
+    //   // swal(current_month +' & '+current_month2);
 
     //   var selected_month;
 

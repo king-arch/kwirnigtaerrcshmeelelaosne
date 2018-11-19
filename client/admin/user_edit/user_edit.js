@@ -25,7 +25,7 @@ Template.edit_user.onRendered(function () {
 
   $.getScript('https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyCiTVlNvc4XoKjbmX4FDSyWhFLWP8_U1_k', function () {
     $.getScript('https://cdnjs.cloudflare.com/ajax/libs/geocomplete/1.7.0/jquery.geocomplete.min.js', function () {
-      // alert('Here: ');
+      // swal('Here: ');
       $("#location").geocomplete();
     });
   });
@@ -40,7 +40,7 @@ Template.edit_user.onRendered(function () {
   var new_url = url.split("/");
   url = new_url[new_url.length - 1];
   var user_id = Base64.decode(url);
-// alert('user_id: '+ user_id);
+// swal('user_id: '+ user_id);
 
 	admin_detailed = Meteor.subscribe("fetch_user_details",user_id);
 
@@ -53,7 +53,7 @@ Template.edit_user.onRendered(function () {
       
       console.log('result: ');
       console.log(result);
-      // alert("book details successfully fetched!");
+      // swal("book details successfully fetched!");
       console.log("book details successfully fetched!");
       console.log('user_name:');
       var user_name = result[0].user_name;
@@ -84,7 +84,7 @@ Template.edit_user.onRendered(function () {
       password = Base64.decode(password);
 
       $('#password').val(user_password);
-      // alert();
+      // swal();
 
       Session.set("user_cover_session",user_cover);
 }
@@ -116,10 +116,10 @@ Template.edit_user.onRendered(function () {
 function click_events() {
 
 	$('#user_cover').change(function (e, template) {
-		// alert('click');
+		// swal('click');
 	    upload_cover_pic(e, template);
 
-	    // alert(Session.get("user_cover_session"));
+	    // swal(Session.get("user_cover_session"));
 	});
 
 	$('#send_to_cookies').click(function (e) {
@@ -159,7 +159,7 @@ function click_events() {
 	// });
 
 	$('#add_user').click(function (e) {
-// alert('here: ');
+// swal('here: ');
 		var first_name = $('#first_name').val();
 		var last_name = $('#last_name').val();
 		var user_email = $('#user_email').val();

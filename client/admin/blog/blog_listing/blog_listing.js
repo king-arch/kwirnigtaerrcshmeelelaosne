@@ -10,6 +10,7 @@ import {
 } from 'meteor/session';
 
 import swal from 'sweetalert';
+
 import { user_details } from './../../../../import/collections/insert.js';
 import { promotion } from './../../../../import/collections/insert.js';
 import { blog } from './../../../../import/collections/insert.js';
@@ -133,7 +134,7 @@ Template.display_blog_listing.events({
 
     event.preventDefault();
     var blog_id = this.blog_id;
-        // alert(interest_id);
+        // swal(interest_id);
     var status = 1;
     console.log('status');
     console.log(status);
@@ -170,10 +171,10 @@ Template.display_blog_listing.events({
 
     'click .deactivate_status_blog': function(event){
     event.preventDefault();
-        // alert(JSON.stringify(this));
+        // swal(JSON.stringify(this));
     // var interest_id = this.id;
     var blog_id = this.blog_id;
-        // alert(interest_id);
+        // swal(interest_id);
     var status = 0;
     console.log('status');
     console.log(status);
@@ -211,10 +212,10 @@ Template.display_blog_listing.events({
 
     'click .disapproval_status_blog': function(event){
     event.preventDefault();
-        // alert(JSON.stringify(this));
+        // swal(JSON.stringify(this));
     // var interest_id = this.id;
     var blog_id = this.blog_id;
-        // alert(interest_id);
+        // swal(interest_id);
     var status = 2;
     console.log('status');
     console.log(status);
@@ -252,10 +253,10 @@ Template.display_blog_listing.events({
 
     'click .approval_status_blog': function(event){
     event.preventDefault();
-        // alert(JSON.stringify(this));
+        // swal(JSON.stringify(this));
     // var interest_id = this.id;
     var blog_id = this.blog_id;
-        // alert(interest_id);
+        // swal(interest_id);
     var status = 1;
     console.log('status');
     console.log(status);

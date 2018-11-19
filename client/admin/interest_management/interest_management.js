@@ -65,7 +65,7 @@ Template.interest_management_details.onRendered(function () {
     show_interest_list(){
      //     var query = new RegExp(Session.get("search_txt"),'i'); 
      //     if(Session.get("search_txt")){
-     //       // alert('case2');
+     //       // swal('case2');
      //     var result = interest_list.find({}).fetch();
 
     // }
@@ -117,14 +117,14 @@ Template.interest_management_details.onRendered(function () {
 Template.interest_management_details.events({
 
     'click #add_interest': function(){
-    	  // alert('here: ');
+    	  // swal('here: ');
     	window.location.href="/create_interest";
     },
 
  'click .edit_book_details': function(){
 
 		var interest_id= Base64.encode(this.interest_id);    
-		alert(interest_id); 
+		swal(interest_id); 
         var url = '/edit_interest/'+interest_id;
 		Router.go(url);
 
@@ -134,11 +134,11 @@ Template.interest_management_details.events({
 
     event.preventDefault();
     // swal("here");
-    // alert(JSON.stringify(this));
+    // swal(JSON.stringify(this));
     // var interest_id = this.id;
 
     var interest_id = this.interest_id;
-        // alert(interest_id);
+        // swal(interest_id);
     var status = 1;
     console.log('status');
     console.log(status);
@@ -175,10 +175,10 @@ Template.interest_management_details.events({
 
     'click .deactivate_status_interest': function(event){
     event.preventDefault();
-        // alert(JSON.stringify(this));
+        // swal(JSON.stringify(this));
     // var interest_id = this.id;
     var interest_id = this.interest_id;
-        // alert(interest_id);
+        // swal(interest_id);
     var status = 0;
     console.log('status');
     console.log(status);

@@ -4,7 +4,7 @@ import { promotion } from './../../../../import/collections/insert.js';
 import { Base64 } from 'meteor/ostrio:base64';
 
 import { Session } from 'meteor/session';
-
+import swal from 'sweetalert';
 
 var book_listing;
 
@@ -19,7 +19,7 @@ Template.edit_promotion_details.onDestroyed(function () {
         var new_url = url.split("/");
         url = new_url[new_url.length-1];
         var promotion_id = Base64.decode(url); 
-        // alert(promotion_id);
+        // swal(promotion_id);
 
         Session.set("promotion_id",promotion_id);
         book_listing = Meteor.subscribe("fetch_promotion_listing_with_id",promotion_id);
@@ -40,14 +40,14 @@ Template.edit_promotion_details.onDestroyed(function () {
 	 var promotion_url = result[0].promotion_url;
 	 var promotion_title = result[0].promotion_title;
 	 var promotion_content = result[0].promotion_content;
-	 //alert(s1);
+	 //swal(s1);
 	
 	 // $("#promotion_content").val(promotion_content);
 	 $("#promotion_start_date").val(promotion_start_date);
 	 $("#promotion_end_date").val(promotion_end_date);
 	 $("#promotion_url").val(promotion_url);
 	 $("#promotion_title").val(promotion_title);
-	 // alert('promotion_id'+promotion_id);
+	 // swal('promotion_id'+promotion_id);
 	 $("#hidden_promotion_id").val(promotion_id);
 
 
@@ -77,9 +77,9 @@ Template.edit_promotion_details.onDestroyed(function () {
   });
 // Template.ads_create.onRendered(function(){
 // //GoogleMaps.load();
-// 	alert(GoogleMaps);
+// 	swal(GoogleMaps);
 //  if (GoogleMaps.loaded()) {
-//  	alert("aa gaya");
+//  	swal("aa gaya");
 //       $("#location").geocomplete({ details: "form" });
 
 //     }
@@ -108,7 +108,7 @@ Template.edit_promotion_details.helpers({
   var user_id = Session.get("userId");
     var image_Name = Session.get("imagePath_admin_ads");
   if(image_Name){    
-    // alert(image_Name);
+    // swal(image_Name);
   var display_image = image_Name;
     return display_image;
   }   
@@ -124,7 +124,7 @@ Template.edit_promotion_details.helpers({
 		var sent_to=this.sent_to;
 		var sent_by=this.sent_by;
 		
-		//alert(sent_to);
+		//swal(sent_to);
 		if(userid!=sent_to)
 		{
 			var sent_too=this.sent_to;
@@ -133,7 +133,7 @@ Template.edit_promotion_details.helpers({
 		{
 			var sent_too=this.sent_by;
 		}
-		//alert(sent_too);
+		//swal(sent_too);
 		return UserInfo.find({user_id:sent_too}).fetch();
 	},
 });
@@ -141,21 +141,21 @@ Template.edit_promotion_details.helpers({
 Template.edit_promotion_details.events({
 
 		"change #promotion_image":function(e, template) {
-			alert('ok');
+			swal('ok');
 			upload_cover_pic(e, template);
 		},
 
 		"change #promotion_type":function(){
         
-        // alert('here i am');
+        // swal('here i am');
 		var promotion_type = $("#promotion_type").val();
 		if(promotion_type == 'Textual'){
-			// alert('case 1');
+			// swal('case 1');
 			$('#promotion_discription_box').removeClass('loader_visiblity_block');
 			$('#promotion_picture_box').addClass('loader_visiblity_block');
 		}
    		else if(promotion_type == 'Picture'){
-			// alert('case 2');
+			// swal('case 2');
    			$('#promotion_discription_box').addClass('loader_visiblity_block');
    			$('#promotion_picture_box').removeClass('loader_visiblity_block')
 
@@ -196,7 +196,7 @@ Template.edit_promotion_details.events({
 
    			if(promotion_content == '' || promotion_content == null)
 				{	
-					alert('Cover image cannot be empty for cover_image');
+					swal('Cover image cannot be empty for cover_image');
 					$("#cover_image").addClass('emptyfield3');
 					$("#cover_image").focus();
 					return false;
@@ -252,14 +252,14 @@ Template.edit_promotion_details.events({
 
 		var promotion_id = $('#hidden_promotion_id').val();
     
-    // alert(promotion_id+promotion_title+promotion_type+promotion_url+promotion_content+promotion_start_date+promotion_end_date);
+    // swal(promotion_id+promotion_title+promotion_type+promotion_url+promotion_content+promotion_start_date+promotion_end_date);
 
     Meteor.call('update_promotion',promotion_id,promotion_title,promotion_type,promotion_url,
     	promotion_content,promotion_start_date,promotion_end_date,function(error,result){
               if(error){
                 console.log("Some error occured.");
               }else{ 
-               	alert("promotions sucessfully updated!");
+               	swal("promotions sucessfully updated!");
                 window.location.href="/promotion_listing";            
               }
           });	

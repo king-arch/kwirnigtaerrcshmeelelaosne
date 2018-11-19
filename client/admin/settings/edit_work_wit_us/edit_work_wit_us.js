@@ -83,7 +83,7 @@ Template.edit_work_with_us_details.events({
     },
 
     'click #reset_reward_point_rate': function(){
-      // alert('here i am');
+      // swal('here i am');
        $('#edit_reward_rate_frame').removeClass("loader_visiblity_block");
        $('#display_reward_rate_frame').addClass("loader_visiblity_block");
     },
@@ -112,7 +112,7 @@ Template.edit_work_with_us_details.events({
               {
                 $("#work_with_us").removeClass('emptyfield2');
               }
-// alert(' work_with_us '+work_with_us);
+// swal(' work_with_us '+work_with_us);
     $('#loader_gif').removeClass('div_hide_class');
     $('#save_text').addClass('div_hide_class');
 

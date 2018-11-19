@@ -66,7 +66,7 @@ function click_events() {
 		$('#loader_gif').removeClass('div_hide_class');
 		$('#save_text').addClass('div_hide_class');
 
-		// alert('email: '+email+'password: '+password);
+		// swal('email: '+email+'password: '+password);
 
 		Meteor.call('Check_admin_login_auth', email, password, function (error, result) {
 

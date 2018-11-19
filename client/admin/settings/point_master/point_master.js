@@ -113,7 +113,7 @@ Template.point_master_details.events({
     },
 
     'click #reset_reward_point_rate': function(){
-      // alert('here i am');
+      // swal('here i am');
        $('#edit_reward_rate_frame').removeClass("loader_visiblity_block");
        $('#display_reward_rate_frame').addClass("loader_visiblity_block");
     },
@@ -140,9 +140,9 @@ Template.point_master_details.events({
  'click .submit_reward_points': function(){
 
 
-    // alert(' index: '+ this.index);
+    // swal(' index: '+ this.index);
     var new_value = $("#new_value_"+this.index).val();
-    // alert(' index: '+ new_value);
+    // swal(' index: '+ new_value);
 
     if (new_value == '' || new_value == undefined) {
 

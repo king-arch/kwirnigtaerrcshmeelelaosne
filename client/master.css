@@ -2357,7 +2357,7 @@ section {
 }
 
 .stunning-header-bg1 {
-    background-image: url(img/landing-users.png)
+    /*background-image: url(img/landing-users.png)*/
 }
 
 .has-error .form-control-danger,

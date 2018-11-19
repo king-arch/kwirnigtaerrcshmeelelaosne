@@ -24,7 +24,7 @@ Template.create_user_details.onRendered(function () {
 
   $.getScript('https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyCiTVlNvc4XoKjbmX4FDSyWhFLWP8_U1_k', function () {
     $.getScript('https://cdnjs.cloudflare.com/ajax/libs/geocomplete/1.7.0/jquery.geocomplete.min.js', function () {
-      // alert('Here: ');
+      // swal('Here: ');
       $("#location").geocomplete();
       
     });
@@ -63,10 +63,10 @@ Template.create_user_details.onRendered(function () {
 function click_events() {
 
 	$('#user_cover').change(function (e, template) {
-		// alert('click');
+		// swal('click');
 	    upload_cover_pic(e, template);
 
-	    // alert(Session.get("user_cover_session"));
+	    // swal(Session.get("user_cover_session"));
 	});
 
 	$('#send_to_cookies').click(function (e) {
@@ -107,7 +107,7 @@ function click_events() {
 	// });
 
 	$('#add_user').click(function (e) {
-// alert('here: ');
+// swal('here: ');
 		var first_name = $('#first_name').val();
 		var last_name = $('#last_name').val();
 		var user_email = $('#user_email').val();
