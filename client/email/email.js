@@ -5,6 +5,7 @@ import { user_details }  from './../../import/collections/insert.js';
 import { Base64 } from 'meteor/ostrio:base64';
 import { Session } from 'meteor/session';
 import {  Email } from 'meteor/email';
+import swal from 'sweetalert';
 
 Template.email_content.onRendered(function(){
 
@@ -14,7 +15,7 @@ Template.email_content.onRendered(function(){
 
     setTimeout(function(){
 
-      // alert('call sending mail function');
+      // swal('call sending mail function');
        $("#send_mail").click();
     },3000);
 
@@ -61,7 +62,7 @@ var user_id = Session.get("userId");
 },
 
     'logged_in_user_email' : function(){
-      // alert('hi :');
+      // swal('hi :');
       var email = Session.get("userEmail");
       return email;
     },

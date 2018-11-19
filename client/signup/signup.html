@@ -1,3 +1,4 @@
+
 <template name="signup">
  {{> header}}
  <body class="landing-page" >
@@ -221,25 +222,13 @@
                     <div class="row">
                       <div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
 
-<!--           <form class="w-search">
-            <div class="form-group with-button c-darkgray">
-
-              <input class="form-control" type="text" placeholder="Know people by name? Search them here">
-
-              <button class="trans_bg">
-                <img src="img/search_gray.png">
-              </button>
-
-            <span class="material-input"></span></div>
-          </form> -->
                       </div>
                     </div>
           <div class="row">
 
-                {{#each show_user_info}} 
+{{#each show_user_info}} 
        
             <div class="col col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
-                  
                   <div class="ui-block">    
                     <div class="birthday-item inline-items">
                           <div class="author-thumb">
@@ -249,18 +238,14 @@
                             <a href="#" class="h6 author-name">{{user_name_to_follow}} </a>
                             <div class="birthday-date">{{user_headline}}</div>
                           </div>
-
-       {{#if check_if_already_following}} 
                   <button class="btn btn-sm bg-blue click_on_follow" id={{user_id}} > Follow</button>
-          {{else}}
-                  <button class="btn btn-sm bg-blue click_on_unfollow" id={{user_id}} > Following</button>
-        {{/if}}
-
-
                     </div>
                   </div>
             </div>
-
+{{else}}
+  <center>
+    <span class="sub_head"> You can follow more people once we are done with Signup. </span>
+  </center>
     {{/each}}
 
           </div>  

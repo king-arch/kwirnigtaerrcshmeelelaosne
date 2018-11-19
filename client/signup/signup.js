@@ -7,6 +7,7 @@ import { interest_list }  from './../../import/collections/insert.js';
 import { Base64 } from 'meteor/ostrio:base64';
 import { Session } from 'meteor/session';
 import {  Email } from 'meteor/email';
+import swal from 'sweetalert';
 
 var user_info_list_all;
 var user_info_based_on_email;
@@ -18,27 +19,27 @@ Template.signup_content.onRendered(function(){
   Meteor.subscribe("user_info_based_on_id",Session.get("userId"));
 
     setTimeout(function(){
-       // alert('call sending mail function');
+       // swal('call sending mail function');
        // $("#send_mail").click();
     },3000);
 
     var user_id = Session.get("userId");
     user_info_based_on_email = Meteor.subscribe("user_info_based_on_id",user_id);
 
-      // alert('here: ');
-      // alert('user_id: '+user_id );
+      // swal('here: ');
+      // swal('user_id: '+user_id );
        Meteor.call('check_signup_status',user_id,function(error,result){
               if(error){
-                alert("Some error occure.");
+                swal("Some error occure.");
               
               }else{
 
-                // alert('ssshhsh');
+                // swal('ssshhsh');
                 console.log(result);
             console.log("inside  Signup"  );
 
               if(result.email_status == 0){
-                alert();
+                swal();
                 window.location.href("/email");
                 // Router.go('/email');
                  // Router.go('/signup');
@@ -55,7 +56,7 @@ Template.signup_content.onRendered(function(){
               }
 
               else if(!result.user_location){
-                // alert("location empty");
+                // swal("location empty");
                 console.log("case 2");
                 $('#step_5').addClass("hide_object");
                 $('#step_6').removeClass("hide_object");
@@ -102,7 +103,7 @@ Template.signup_content.helpers({
     'show_profile_image' : function(){
       var profile_pic = Session.get("profile_pic_session");
       if(profile_pic){
-        // alert(profile_pic);
+        // swal(profile_pic);
         var result = profile_pic;
       }else{
         var result = "/img/focus.png"
@@ -110,17 +111,50 @@ Template.signup_content.helpers({
       return result;
     },
 
+        show_interest_list(){
+
+    Meteor.subscribe("fetch_result_interest");
+      var result = interest_list.find({interest_status: 1}).fetch();
+    console.log('show result interest: ');
+    console.log(result);
+    return result;
+},
+
+
+
+//START - for showing and validating the User listing to follow
     show_user_info(){
 
-      var user_id = Session.get("userId");
+      var follow_user_id = this.user_id;
+      var logged_in_user = Session.get("userId");
+      var admin_id = "user_admin";
 
-      user_info_list_all = Meteor.subscribe("user_info_all");
-      var result = user_details.find({},{limit: 10}).fetch();
+      follow_list_all = Meteor.subscribe("follow_list_all");
+      follow_list_all = Meteor.subscribe("fetch_user_listing");
+          Meteor.subscribe("fetch_user_listing");
+       var result = user_details.find({ user_id: {  $ne: logged_in_user  }}).fetch();
 
-      console.log('showing user list all');
-      console.log(result);
+      var new_result = new Array();
+      var count = 1;
+      for(var i = 0; i < result.length; i++){
+        console.log(result[i]);
 
-      return result;
+          if(count <= 6 && result[i].user_id != admin_id){
+            var result2 = following_list.find({ $and: [{ "following": result[i].user_id },{ "follower": logged_in_user },{current_follow_status: 1} ] }).fetch();
+             if(result2[0]){
+
+             }else{
+              new_result.push(result[i]);
+              count = count + 1;
+             }    
+          }
+        }
+
+      console.log('new array');
+      console.log(new_result);
+                                
+
+      return new_result;
     },
 
     check_if_already_following(){
@@ -142,16 +176,7 @@ Template.signup_content.helpers({
       return result;
     },
 
-        show_interest_list(){
-
-    Meteor.subscribe("fetch_result_interest");
-      var result = interest_list.find({interest_status: 1}).fetch();
-    console.log('show result interest: ');
-    console.log(result);
-    return result;
-},
-
-    user_name_to_follow(){
+        user_name_to_follow(){
       var user_name = this.user_name;
       if(user_name.length > 8){
         return user_name.slice(0, 8)+'...';
@@ -162,35 +187,49 @@ Template.signup_content.helpers({
 
     },
 
-
+//END - for showing and validating the User listing to follow
 
 });
 
 Template.signup_content.events({
 
   'click .click_on_follow':function(){
-    // alert('here');
+    // swal('here');
     var follow_user_id = this.user_id; 
     var logged_in_user = Session.get("userId");  
     
       Meteor.call('follow_people',follow_user_id,logged_in_user,function(error,result){
               if(error){
-                alert("Some error occure.");
+                swal("Some error occure.");
               }else{
                 console.log('successfully following ');
               }
           });
   },
 
+    'click #signup_complete':function(e, template){
+      
+      var logged_in_user = Session.get("userId");  
+      Meteor.call('change_follow_status',logged_in_user,function(error,result){
+              if(error){
+                swal("Some error occure.");
+              }else{
+                console.log('Follow status update!');
+              }
+          });
+
+    Router.go("/profile");
+  },
+
   'click .click_on_unfollow':function(){
-    // alert('here');
+    // swal('here');
     var follow_user_id = this.user_id; 
     var logged_in_user = Session.get("userId");  
-    // alert('follow_user_id: '+follow_user_id+' logged_in_user: '+logged_in_user);
+    // swal('follow_user_id: '+follow_user_id+' logged_in_user: '+logged_in_user);
 
           Meteor.call('unfollow_people',follow_user_id,logged_in_user,function(error,result){
               if(error){
-                alert("Some error occure.");
+                swal("Some error occure.");
               }else{
                 console.log('successfully following ');
               }
@@ -201,10 +240,6 @@ Template.signup_content.events({
       upload_cover_pic(e, template);
   },
 
-  'click #signup_complete':function(e, template){
-    // alert('show');
-    Router.go("/profile");
-  },
 
   'click #submit_headline_and_profile_pic':function(){
     
@@ -235,7 +270,7 @@ Template.signup_content.events({
 
       Meteor.call('insert_headline_and_profile_pic',signup_headline,signup_profile_pic,user_id,function(error,result){
               if(error){
-                alert("Some error occure.");
+                swal("Some error occure.");
               
               }else{
 
@@ -266,7 +301,7 @@ Template.signup_content.events({
 
       Meteor.call('insert_location',signup_location,user_id,function(error,result){
               if(error){
-                alert("Some error occure.");
+                swal("Some error occure.");
               
               }else{
                 $('#step_5').addClass("hide_object");
@@ -279,23 +314,7 @@ Template.signup_content.events({
           });
   },
 
-    'click .click_on_follow':function(){
-
-    var follow_user_id = this.user_id; 
-    var logged_in_user = Session.get("userId");  
-
-      Meteor.call('follow_people',follow_user_id,logged_in_user,function(error,result){
-              if(error){
-                alert("Some error occure.");
-              }else{
-                console.log('successfully following ');
-              }
-          });
-  },
-
     'click #signup_catagries':function(){
-      // alert('catagriey submition clicked');
-    // var signup_location = $('#signup_location').val().trim(); 
 
     Meteor.subscribe("fetch_result_interest");
 
@@ -306,9 +325,7 @@ Template.signup_content.events({
     console.log(' showfull list of checkbox for interest.');
 
     var catagries_array = new Array();
-
     for(var i=0; i< result.length; i++){
-
         console.log(result[i].interest_id);
 
         if(document.getElementById('checkbox_'+result[i].interest_id).checked){
@@ -318,38 +335,11 @@ Template.signup_content.events({
 
       catagries_array.push(result[i].interest_id); 
     } 
-
     }
-// return false;
-    // var catagries_array = new Array();
-    // if(document.getElementById('science').checked){
-    //   console.log('science is checked');
-    //   $("#end_month").removeClass('emptyfield'); 
-    //   $("#end_year").removeClass('emptyfield');
-
-    //   catagries_array.push('science'); 
-    // } 
-
-    // if(document.getElementById('math').checked){
-    //   console.log('math is checked');
-    //   $("#end_month").removeClass('emptyfield'); 
-    //   $("#end_year").removeClass('emptyfield'); 
-
-    //   catagries_array.push('math');
-    // } 
-
-    // if(document.getElementById('anthology').checked){
-    //   console.log('anthology is checked');
-    //   $("#end_month").removeClass('emptyfield'); 
-    //   $("#end_year").removeClass('emptyfield'); 
-
-    //   catagries_array.push('anthology');
-    // } 
 
     if(catagries_array.length <  1)
     {
-      // $("#signup_location").addClass('emptyfield2').focus();
-      alert("we need to select at least one catagry");
+      swal("we need to select at least one catagry");
       return false;
     }
       console.log('catagries_array: ');
@@ -360,7 +350,7 @@ Template.signup_content.events({
 
       Meteor.call('insert_catagries',catagries_array,user_id,function(error,result){
               if(error){
-                alert("Some error occure.");
+                swal("Some error occure.");
               
               }else{
               
@@ -373,13 +363,11 @@ Template.signup_content.events({
               }
           });
   },
-
-
   });
 
-
+//START image uploading functionalities
 function upload_cover_pic(e,template){
-// alert('ok');
+// swal('ok');
         if (e.currentTarget.files && e.currentTarget.files[0]) {
          var file = e.currentTarget.files[0];
           if (file) {
@@ -393,7 +381,7 @@ function upload_cover_pic(e,template){
        console.log(base64data);
 
      Session.set("profile_pic_session",base64data);
-     alert(profile_pic_session);
+     swal(profile_pic_session);
     };
     
    }

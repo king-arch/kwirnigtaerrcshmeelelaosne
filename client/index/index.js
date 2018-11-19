@@ -165,7 +165,7 @@ Template.index_content.events({
 
     if(signup_password.length <= 7)
     {
-      //alert("Password should be of 6 digits at least");
+      //swal("Password should be of 6 digits at least");
       swal("Password should be of 8 digits at least");
       return false;
     }
@@ -185,7 +185,7 @@ Template.index_content.events({
       signup_name =  signup_name.charAt(0).toUpperCase()+ signup_name.slice(1);
       Meteor.call('create_user_signup',signup_name,signup_password,signup_email,function(error,result){
               if(error){
-                alert("Some error occure.");
+                swal("Some error occure.");
               
               }else{
                 // swal('result.response_status '+result.response_status);
@@ -208,7 +208,7 @@ Template.index_content.events({
   },
 
   'click #login_submit':function(event){
-// alert('inside: ');
+// swal('inside: ');
       event.preventDefault();
       var login_email = $('#login_email').val();         
       var login_password = $('#login_password').val();         
@@ -235,29 +235,29 @@ Template.index_content.events({
           $('#login_password').removeClass('emptyfield');
         }
 
-     // alert('login_email'+login_email+' & login_password '+login_password);
+     // swal('login_email'+login_email+' & login_password '+login_password);
         // return false;
 
           Meteor.call("user_login",login_email,login_password, function(error,result){
       
         if(error){
-          alert("Something went wrong, Please try again");          
+          swal("Something went wrong, Please try again");          
         }else{
 
-          // alert(JSON.stringify(result));
+          // swal(JSON.stringify(result));
           if(result == "No User"){
              var msg='Wrong email or Password';
-            alert(msg+""); 
+            swal(msg+""); 
           }
           else if(result.length == 1){
 
             if(result[0].user_status == 0){
 
           var name = result[0].user_name;
-            alert(' Your account has been Blocked by Admin');
+            swal(' Your account has been Blocked by Admin');
             return false;
         }
-            alert("Logged in Successfully");
+            swal("Logged in Successfully");
             var userId = result[0].user_id;
 
           Session.setPersistent("userId",userId);
@@ -269,11 +269,11 @@ Template.index_content.events({
           storeToken();
          Meteor.call("update_login_status",login_status,userId,function(error,result){
               if(error){
-                //alert('user login status updation error');
+                //swal('user login status updation error');
                 console.log('error');
               }
               else{
-                //alert('user is now online');
+                //swal('user is now online');
                  console.log('result');
               }
 
@@ -283,19 +283,19 @@ Template.index_content.events({
               if(result[0].email_status==0){
                 Router.go('/email');
               }else if(!result[0].user_location){
-                // alert("location empty");
+                // swal("location empty");
                     Session.set("emptyField","location");
                   Router.go("/signup");
               }else if(!result[0].phone){
-                // alert("phone empty");
+                // swal("phone empty");
                    Session.set("emptyField","phone");
                    Router.go("/signup") 
               }else if(!result[0].disablities){
-                // alert("speech empty");
+                // swal("speech empty");
                       Session.set("emptyField","speech");
                       Router.go("/signup")
               }else if(!result[0].profile_pic){
-                    // alert("profile pic empty");
+                    // swal("profile pic empty");
                        Session.set("emptyField","profile_pic");
                        Router.go("/signup");                       
               }else if(!result[0].user_headline){
@@ -322,9 +322,9 @@ function storeToken(){
         if(Meteor.isCordova){
             Meteor.call("update_user_token",Session.get("userToken"),Session.get("userId"),function(error,result){
               if(error){
-                alert("Token not updated");
+                swal("Token not updated");
               }else{
-                alert("Token updated");
+                swal("Token updated");
               }
             });
           }
@@ -364,11 +364,11 @@ function check_login(source){
         Session.setPersistent("nammaval",1);
       }
       var picture = show12.services.linkedin.pictureUrl; 
-           //alert(email);
+           //swal(email);
         }
            }
      // console.log(show12);return false;
-       // alert(show12);      
+       // swal(show12);      
       if(check_existance == 0){
          var userID = 'user_'+Math.floor((Math.random() * 2465789) + 1);  
          Session.setPersistent("userId",userID);
@@ -385,7 +385,7 @@ function check_login(source){
         var users = UserInfo.find({email: email}).fetch();
         var userID = users[0].user_id;
         console.log(users);
-        //alert(userID);
+        //swal(userID);
 
         if(userID){
         Session.setPersistent("userId",userID);
@@ -403,7 +403,7 @@ function check_login(source){
                  // Router.go('/signup');
                  console.log("case 1");
               }else if(!users[0].location){
-                // alert("location empty");
+                // swal("location empty");
                 console.log("case 2");
                    Session.set("emptyField","location");
 
@@ -411,21 +411,21 @@ function check_login(source){
                    // Router.go('/signup');
               }else if(!users[0].phone){
                 console.log("case 3");
-                // alert("phone empty");
+                // swal("phone empty");
                    Session.set("emptyField","phone"); 
 
                    window.location.replace("/signup");
                    // Router.go('/signup');
               }else if(!users[0].disablities){
                 console.log("case 4");
-                // alert("speech empty");
+                // swal("speech empty");
                       Session.set("emptyField","speech");
 
                       window.location.replace("/signup");
                       // Router.go('/signup');
               }else if(!users[0].profile_pic){
                 console.log("case 5");
-                    // alert("profile pic empty");
+                    // swal("profile pic empty");
                        Session.set("emptyField","profile_pic");                       
               }else if(!users[0].headline){
                    Session.set("emptyField","headline");
