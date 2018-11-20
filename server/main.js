@@ -109,6 +109,10 @@ import urlMetadata from 'url-metadata';
       return  content.find({content_type: "work_with_us"});
     });
 
+     Meteor.publish('categories_selection_for_user', function(user_id) {
+      return  categories_selection.find({user_id: user_id});
+    });
+
 Meteor.startup(() => {
   // code to run on server at startup
 });
@@ -518,16 +522,17 @@ if(check_if_exist[0]){
     },
 
     insert_catagries:function(catagries_array,user_id){
-        // console.log(catagries_array+' & '+user_id);
+        console.log(catagries_array+' & '+user_id);
+
         for(var i=0; i<catagries_array.length;i++){
 
-        var categorie_id = 'categorie_id_'+Math.floor((Math.random() * 2465789) + 1);
+        var category_selection_id = 'category_selection_id_'+Math.floor((Math.random() * 2465789) + 1);
 
         // console.log(catagries_array[i]);
           var result =  categories_selection.insert({
-                      categorie_id: categorie_id,
+                      categorie_id: category_selection_id,
                       user_id: user_id,
-                      catagrie_name: catagries_array[i],
+                      selected_category_id: catagries_array[i],
                       created_at: Date.now(),
             });
         }
@@ -543,6 +548,89 @@ if(check_if_exist[0]){
             });
           }
           return result;
+        },   
+
+    update_catagries:function(catagries_array,user_id){
+        console.log(catagries_array+' & '+user_id);
+
+        var array1 = catagries_array;
+        categories_selection.remove({user_id: user_id});
+
+        var array2 = categories_selection.find({user_id: user_id}).fetch();
+
+        console.log('array2');
+        console.log(array2);
+
+        var array_update_1 = new Array();
+        var array_insert_1 = new Array();
+
+        for(var i=0; i < array1.length; i++){
+
+        var category_selection_id = 'category_selection_id_'+Math.floor((Math.random() * 2465789) + 1);
+        var result =  categories_selection.insert({
+
+                      categorie_id: category_selection_id,
+                      user_id: user_id,
+                      selection_status: 1,
+                      selected_category_id: catagries_array[i],
+                      created_at: Date.now(),
+
+            });
+        }
+
+
+        // for(var i = 0; i < array_update_1.length; i++){
+
+        //   var result =  categories_selection.update({
+        //       selected_category_id: array_update_1[i],
+        //       user_id: user_id,
+        //     }, {
+        //       $set: {
+        //         selection_status: 1,
+        //         updated_at: Date.now(),
+        //       }
+        //     });
+        
+        // }
+
+        // for(var i = 0; i < array_update_0.length; i++){
+
+        //   var result =  categories_selection.update({
+        //       selected_category_id: array_update_0[i],
+        //       user_id: user_id,
+        //     }, {
+        //       $set: {
+        //         selection_status: 0,
+        //         updated_at: Date.now(),
+        //       }
+        //     });
+        
+        // }
+
+        // for(var i = 0; i < array_update_0.length; i++){
+
+        // var category_selection_id = 'category_selection_id_'+Math.floor((Math.random() * 2465789) + 1);
+        // var result =  categories_selection.insert({
+
+        //               categorie_id: category_selection_id,
+        //               user_id: user_id,
+        //               selection_status: 1,
+        //               selected_category_id: catagries_array[i],
+        //               created_at: Date.now(),
+
+        //     });
+        
+        // }
+
+        console.log('array_update_1');
+        console.log(array_update_1);
+
+        console.log('array_insert_1');
+        console.log(array_insert_1);
+
+        var message = { msg: 'success' };
+        return message;
+
         },   
 
     follow_people:function(follow_user_id,logged_in_user){
@@ -1537,6 +1625,13 @@ else if(field_name == 'socail_media_handle_shared'){
       });
      }
             return result;
+    },
+
+
+    fetch_categories_selection: function(user_id)
+    { 
+     var result = categories_selection.find({"user_id": user_id}).fetch();
+     return result;
     },
 
 });

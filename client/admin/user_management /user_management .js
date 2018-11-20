@@ -21,14 +21,30 @@ Template.user_management_details.onDestroyed(function () {
 });
 
 Template.user_management_details.onRendered(function () {
+  book_listing = Meteor.subscribe("fetch_user_listing");
+     var result  = user_details.find({}).fetch();
+     result = JSON.parse(result);
 
     $.getScript("https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.19/js/jquery.dataTables.min.js",function(){
       $.getScript("https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css",function(){
             $('#show_book_listing').DataTable();
-            
+            //             $('#show_book_listing').DataTable({
+            //   "paging": true,
+            //   "processing": true,
+            //   "serverSide": true,
+            //   "ajax": result,
+            //   "columns":[
+            //   {"data": "user_name"},
+            //   {"data": "user_name"},
+            //   {"data": "user_name"},
+            //   {"data": "user_name"},
+            //   {"data": "user_name"},
+            //   {"data": "user_name"},
+            //   {"data": "user_name"},
+            //   ] 
+            // });
     });  
     });  
-
 
 
 	book_listing = Meteor.subscribe("fetch_user_listing");
@@ -41,6 +57,18 @@ Template.user_management_details.onRendered(function () {
 
 
 
+function fetch_data(){
+      book_listing = Meteor.subscribe("fetch_user_listing");
+     var result  = user_details.find({}).fetch();
+     // return JSON.parse(result);
+     console.log(result);
+     var new_array = new Array();
+     for(var i=0; i<result.length; i++){
+        new_array.push({_id: "wfvxRp4Xmu5ieBqzC", user_id: "user_679668", user_name: "Sss", user_email: "cos2@mailinator.com", user_password: "12345678"})
+     }  
+     console.log(new_array);
+     return new_array;
+}
 
  Template.user_management_details.helpers({
 

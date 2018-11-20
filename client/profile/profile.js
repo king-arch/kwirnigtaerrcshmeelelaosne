@@ -6,18 +6,60 @@ import { following_list }  from './../../import/collections/insert.js';
 import { interest_list }  from './../../import/collections/insert.js';
 import { feed }  from './../../import/collections/insert.js';
 import { book_details }  from './../../import/collections/insert.js';
+import { categories_selection }  from './../../import/collections/insert.js';
+   // import { categories_selection } from './../../import/collections/insert.js';
 import { Base64 } from 'meteor/ostrio:base64';
 
 import { Session } from 'meteor/session';
 import {  Email } from 'meteor/email';
+import swal from 'sweetalert';
 
 var user_info_list_all;
 var user_info_based_on_email;
 var follow_list_all;
+var categories_selected;
+var result_interested;
+
+Template.profile_content.onDestroyed(function(){
+  user_info_list_all.stop();
+  user_info_based_on_email.stop();
+  follow_list_all.stop();
+  result_interested.stop();
+  categories_selected.stop();
+
+});
 
 Template.profile_content.onRendered(function(){
+
+   Session.set("intrest_array","");
+   result_interested = Meteor.subscribe('fetch_result_interest');
+   categories_selected = Meteor.subscribe('categories_selection_for_user',Session.get("userId"));
+
+   // var results = categories_selection.find({"user_id": Session.get("userId")}).fetch();
+
+
+
+       // if(result[i]){
+         // console.log(results[i].selected_category_id);
+         // new_array.push(results[i].selected_category_id);
+
+         Meteor.call('fetch_categories_selection',Session.get("userId"),function(error,result){
+              if(error){
+                console.log("Some error occure.");
+              }else{    
+              var new_array = new Array();
+              for(var i=0; i<result.length; i++){
+   console.log('show new on render selected: ');
+   console.log(result);
+                new_array.push(result[i].selected_category_id);
+              }
+                Session.set("intrest_array",new_array);
+            }
+        });
+
+  $('#loading_div').addClass("loader_visiblity_block");
   // $.getScript("https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.4.3/cropper.min.js",function(){
-  // alert('loaded');
+  // swal('loaded');
   // });
 
    Session.set("set_feed_content_limit",3);
@@ -56,25 +98,25 @@ $(document).ready(function() {
   Meteor.subscribe("user_info_based_on_id",Session.get("userId"));
 
     setTimeout(function(){
-       // alert('call sending mail function');
+       // swal('call sending mail function');
        // $("#send_mail").click();
     },3000);
 
     var user_id = Session.get("userId");
     user_info_based_on_email = Meteor.subscribe("user_info_based_on_id",user_id);
 
-      // alert('here: ');
-      // alert('user_id: '+user_id );
+      // swal('here: ');
+      // swal('user_id: '+user_id );
        Meteor.call('check_signup_statusss',user_id,function(error,result){
               if(error){
                 console.log("Some error occure.");
               }else{
-                // alert('ssshhsh');
+                // swal('ssshhsh');
                 console.log(result);
             console.log("inside  Signup"  );
 
               if(result.email_status == 0){
-                alert();
+                swal();
                 window.location.href("/email");
                 // Router.go('/email');
                  // Router.go('/signup');
@@ -91,7 +133,7 @@ $(document).ready(function() {
               }
 
               else if(!result.user_location){
-                // alert("location empty");
+                // swal("location empty");
                 console.log("case 2");
                 $('#step_5').addClass("hide_object");
                 $('#step_6').removeClass("hide_object");
@@ -158,7 +200,7 @@ Template.profile_content.helpers({
     'show_profile_image' : function(){
       var profile_pic = Session.get("profile_pic_session");
       if(profile_pic){
-        // alert(profile_pic);
+        // swal(profile_pic);
         var result = profile_pic;
       }else{
         var result = "img/focus.png"
@@ -175,7 +217,6 @@ Template.profile_content.helpers({
       }
     },
 
-
         show_interest_list(){
             Meteor.subscribe("fetch_result_interest");
               var result = interest_list.find({interest_status: 1}).fetch();
@@ -184,18 +225,54 @@ Template.profile_content.helpers({
             return result;
 },
 
-    show_user_info(){
+        show_categories_selection(){
+           
+              var result = categories_selection.find({"user_id": Session.get("userId")}).fetch();
+            console.log('show catagries selected: ');
+            console.log(result);
+            return result;
+},
 
-      var user_id = Session.get("userId");
+        show_interest_details(selected_category_id){
+            console.log(JSON.stringify(this));
+            console.log(this.selected_category_id);
+              var result = interest_list.find({"interest_id": this.selected_category_id}).fetch();
+            console.log('show Intrest selected: ');
+            console.log(result);
+            return result;
+},
 
-      user_info_list_all = Meteor.subscribe("user_info_all");
-      var result = user_details.find({user_id: {$ne: user_id} },{limit: 5}).fetch();
+        show_interest_details_all(){
+            // console.log(JSON.stringify(this));
+            // console.log(this.selected_category_id);
+              var result = interest_list.find({"interest_status": 1}).fetch();
+            console.log('show Intrested selected: ');
+            console.log(result);
+            return result;
+},
 
-      console.log('showing user list all');
-      console.log(result);
+        validate_categories_selection(){
+    
+            var result = categories_selection.find({"user_id": Session.get("userId"),selected_category_id: this.interest_id}).fetch();
+            console.log('show catagries selected: ');
+            console.log(result);
+            if(result[0]){
+                // var new_array = new Array();
+                //   if(Session.get("intrest_array") != ""){
+                //     console.log(Session.get("intrest_array"));
+                //     new_array = Session.get("intrest_array");
+                //    }
+                // new_array = new_array.push(this.interest_id);
+                // Session.set("intrest_array",new_array);
+                // console.log(new_array);
+              
+              return true;
+            }
+            else{
+              return false;
+            }
+  },
 
-      return result;
-    },
 
     user_name_to_follow(){
       var user_name = this.user_name;
@@ -259,13 +336,38 @@ Template.profile_content.helpers({
       return result;
   },
 
-      show_user_info(){
-      var user_id = Session.get("userId");
-      user_info_list_all = Meteor.subscribe("user_info_all");
-      var result = user_details.find({user_id: {$ne: user_id} },{limit: 50}).fetch();
-      // console.log('showing user list all');
-      // console.log(result);
-      return result;
+      show_user_info(){ 
+
+      var follow_user_id = this.user_id;
+      var logged_in_user = Session.get("userId");
+      var admin_id = "user_admin";
+
+      follow_list_all = Meteor.subscribe("follow_list_all");
+      follow_list_all = Meteor.subscribe("fetch_user_listing");
+          Meteor.subscribe("fetch_user_listing");
+       var result = user_details.find({ user_id: {  $ne: logged_in_user  }}).fetch();
+
+      var new_result = new Array();
+      var count = 1;
+      for(var i = 0; i < result.length; i++){
+        // console.log(result[i]);
+
+          if(count <= 5 && result[i].user_id != admin_id){
+            var result2 = following_list.find({ $and: [{ "following": result[i].user_id },{ "follower": logged_in_user },{current_follow_status: 1} ] }).fetch();
+             if(result2[0]){
+
+             }else{
+              new_result.push(result[i]);
+              count = count + 1;
+             }    
+          }
+        }
+
+      // console.log('new array');
+      // console.log(new_result);
+                                
+
+      return new_result;
     },
 
     user_name_to_follow(){
@@ -405,7 +507,7 @@ Template.profile_content.helpers({
 
       check_if_logged_in_user(){
       var logged_in_user = Session.get("userId");
-      // alert(this.post_by+' '+logged_in_user);
+      // swal(this.post_by+' '+logged_in_user);
       if(this.post_by == logged_in_user){
         return true;
       }
@@ -417,7 +519,7 @@ Template.profile_content.helpers({
       check_if_current_user_is_commenter(){
         // console.log(JSON.stringify(this));
       var logged_in_user = Session.get("userId");
-      // alert(logged_in_user +' & '+this.comment_by);
+      // swal(logged_in_user +' & '+this.comment_by);
       if(this.comment_by == logged_in_user){
         return true;
       }
@@ -679,19 +781,26 @@ Template.profile_content.helpers({
           }
     },
 
-
 });
 
 Template.profile_content.events({
 
+    'click .go_to_detail_page':function(){      
+
+            var post_id = Base64.encode(this.post_id);  
+              var url = '/feed_detail/'+post_id;
+            console.log(url);
+            window.location.href = url;
+    },  
+
   'click .click_on_follow':function(){
-    // alert('here');
+    // swal('here');
     var follow_user_id = this.user_id; 
     var logged_in_user = Session.get("userId");  
     
       Meteor.call('follow_people',follow_user_id,logged_in_user,function(error,result){
               if(error){
-                alert("Some error occure.");
+                swal("Some error occure.");
               }else{
                 console.log('successfully following ');
               }
@@ -699,14 +808,14 @@ Template.profile_content.events({
   },
 
   'click .click_on_unfollow':function(){
-    // alert('here');
+    // swal('here');
     var follow_user_id = this.user_id; 
     var logged_in_user = Session.get("userId");  
-    // alert('follow_user_id: '+follow_user_id+' logged_in_user: '+logged_in_user);
+    // swal('follow_user_id: '+follow_user_id+' logged_in_user: '+logged_in_user);
 
           Meteor.call('unfollow_people',follow_user_id,logged_in_user,function(error,result){
               if(error){
-                alert("Some error occure.");
+                swal("Some error occure.");
               }else{
                 console.log('successfully following ');
               }
@@ -719,7 +828,7 @@ Template.profile_content.events({
   },
 
   'click #signup_complete':function(e, template){
-    // alert('show');
+    // swal('show');
     Router.go("/profile");
   },
 
@@ -752,7 +861,7 @@ Template.profile_content.events({
 
       Meteor.call('insert_headline_and_profile_pic',signup_headline,signup_profile_pic,user_id,function(error,result){
               if(error){
-                alert("Some error occure.");
+                swal("Some error occure.");
               
               }else{
 
@@ -783,7 +892,7 @@ Template.profile_content.events({
 
       Meteor.call('insert_location',signup_location,user_id,function(error,result){
               if(error){
-                alert("Some error occure.");
+                swal("Some error occure.");
               
               }else{
                 $('#step_5').addClass("hide_object");
@@ -797,7 +906,7 @@ Template.profile_content.events({
   },
 
     'click #signup_catagries':function(){
-      // alert('catagriey submition clicked');
+      // swal('catagriey submition clicked');
     // var signup_location = $('#signup_location').val().trim(); 
 
     Meteor.subscribe("fetch_result_interest");
@@ -823,36 +932,9 @@ Template.profile_content.events({
     } 
 
     }
-// return false;
-    // var catagries_array = new Array();
-    // if(document.getElementById('science').checked){
-    //   console.log('science is checked');
-    //   $("#end_month").removeClass('emptyfield'); 
-    //   $("#end_year").removeClass('emptyfield');
-
-    //   catagries_array.push('science'); 
-    // } 
-
-    // if(document.getElementById('math').checked){
-    //   console.log('math is checked');
-    //   $("#end_month").removeClass('emptyfield'); 
-    //   $("#end_year").removeClass('emptyfield'); 
-
-    //   catagries_array.push('math');
-    // } 
-
-    // if(document.getElementById('anthology').checked){
-    //   console.log('anthology is checked');
-    //   $("#end_month").removeClass('emptyfield'); 
-    //   $("#end_year").removeClass('emptyfield'); 
-
-    //   catagries_array.push('anthology');
-    // } 
-
     if(catagries_array.length <  1)
     {
-      // $("#signup_location").addClass('emptyfield2').focus();
-      alert("we need to select at least one catagry");
+      swal("we need to select at least one category");
       return false;
     }
       console.log('catagries_array: ');
@@ -863,7 +945,7 @@ Template.profile_content.events({
 
       Meteor.call('insert_catagries',catagries_array,user_id,function(error,result){
               if(error){
-                alert("Some error occure.");
+                swal("Some error occure.");
               
               }else{
               
@@ -901,7 +983,7 @@ viewMode: 1,
 },   
 
 'click #crop_cover_image_selection':function(){
-  // alert('1');
+  // swal('1');
   crop_image_cover();
   $('#update_cover_pic_modal').modal('toggle');
 },
@@ -941,11 +1023,15 @@ viewMode: 1,
         event.preventDefault();
 
         var user_name = $('#user_name').val().trim();
-        var user_email = $('#user_email').val().trim();
+        // var user_email = $('#user_email').val().trim();
         var user_contact = $('#user_contact').val().trim();
 
         var user_location = $('#user_location').val().trim();
         var user_headline = $('#user_headline').val().trim(); 
+
+        var fb_handler = $('#fb_handler').val().trim(); 
+        var twitter_handler = $('#twitter_handler').val().trim(); 
+        var goodreads_handler = $('#goodreads_handler').val().trim(); 
 
         if(user_name == null || user_name == "")
         {
@@ -954,15 +1040,6 @@ viewMode: 1,
         }
         else{
           $('#user_name').removeClass('emptyfield');
-        }
-        
-        if(user_email == null || user_email == "")
-        {
-          $('#user_email').addClass('emptyfield').focus();
-          return false;
-        }
-        else{
-          $('#user_email').removeClass('emptyfield');
         }
         
         if(user_contact == null || user_contact == "")
@@ -993,25 +1070,25 @@ viewMode: 1,
         }
 
         if ( !(user_contact+"").match(/^\d+$/) ) {
-           alert('phone number can only have digits');
+           swal('phone number can only have digits');
            return false;
         }
-        // alert('above update');
+        // swal('above update');
 
         var check_len = user_contact.length;
         var user_contact = parseFloat(user_contact);
-        // alert(check_len);  
+        // swal(check_len);  
         if(check_len != 10 )
         {
-          alert('Phone number should be of 10 degits only');
+          swal('Phone number should be of 10 degits only');
           return false;   
         }
         var user_id = Session.get("userId");
 
         user_name = user_name.charAt(0).toUpperCase()+ user_name.slice(1);
-        // alert(name+gender+marital_status+phone+datepicker+autocomplete+user_id);
+        // swal(name+gender+marital_status+phone+datepicker+autocomplete+user_id);
         // user_contact_with_check
-        Meteor.call('user_details_update',user_id,user_name,user_email,user_contact,user_location,user_headline,function(){
+        Meteor.call('user_details_update',user_id,user_name,fb_handler,twitter_handler,goodreads_handler,user_contact,user_location,user_headline,function(){
           if(result){
              console.log('error');
           }else{
@@ -1020,6 +1097,46 @@ viewMode: 1,
         });
 
         $('#edit_user_details').modal('toggle');
+    },
+
+
+  'change .make_interest_array': function(event){
+
+    console.log('intrest array creation');
+    // alert(this.interest_id);
+    var new_array = new Array();
+
+    if(Session.get("intrest_array") != ""){
+      console.log(Session.get("intrest_array"));
+      new_array = Session.get("intrest_array");
+     }
+        if(document.getElementById('check_id_'+this.interest_id).checked){
+              // alert('case 1');
+              new_array.push(this.interest_id);
+            }
+            else{
+              new_array.pop(this.interest_id);
+            }
+            Session.set("intrest_array",new_array);
+  },  
+
+  'click #save_categories': function(event){
+        event.preventDefault();
+
+        var catagries_array = Session.get("intrest_array");
+        // alert(catagries_array);
+        var user_id = Session.get("userId");
+        // user_name = user_name.charAt(0).toUpperCase()+ user_name.slice(1);
+
+        Meteor.call('update_catagries',catagries_array,user_id,function(error,result){
+          if(error){
+             console.log('error');
+          }else{
+             console.log('User details successfully updated');
+          }
+        });
+
+        $('#edit_user_interest').modal('toggle');
     },
 
 
@@ -1057,7 +1174,7 @@ viewMode: 1,
     },  
 
   'click .view_profile':function(){      
-      alert('captured');  
+      swal('captured');  
                   // console.log('captured');  
                   // console.log("this.post_by");  
             // console.log(JSON.stringify(this));
@@ -1073,7 +1190,7 @@ viewMode: 1,
     },  
 
   'click .show_more_comments':function(){
-    alert(Session.get("load_lvl1_comments"));
+    swal(Session.get("load_lvl1_comments"));
 
     if(Session.get("load_lvl1_comments") != 0){
         Session.set("get_comment_id_to_view_all",this.post_id);
@@ -1098,11 +1215,11 @@ viewMode: 1,
     },
 
   'click .lvl_0_comment_submitted':function(event){
-    // alert('cool');
+    // swal('cool');
       event.preventDefault();
       var post_id = this.post_id;
 
-// alert(' post_id '+post_id+' & comment_text '+comment_text);
+// swal(' post_id '+post_id+' & comment_text '+comment_text);
 
       var comment_text = $("#comment_lvl_0_"+post_id).val();
 
@@ -1115,10 +1232,10 @@ viewMode: 1,
               {
                 $("#comment_lvl_0_"+post_id).removeClass('emptyfield2');
               }
-// alert(' post_id '+post_id+' & comment_text '+comment_text);
+// swal(' post_id '+post_id+' & comment_text '+comment_text);
     Meteor.call('submit_lvl_0_comment',Session.get("userId"),post_id,comment_text,function(error,result){
       if(error){
-          alert("Error44444");
+          swal("Error44444");
       }else{
         // console.log('successfully removed');
         $("#comment_lvl_0_"+post_id).val("")
@@ -1130,10 +1247,10 @@ viewMode: 1,
   'click .lvl_1_comment_submitted':function(event){ 
       event.preventDefault(); 
 
-      // alert("lvk 1 commenting"); 
+      // swal("lvk 1 commenting"); 
       var comment_id = this.comment_id;
       var comment_text = $("#comment_lvl_1_"+comment_id).val(); 
-      // alert(comment_text); 
+      // swal(comment_text); 
  
             if(comment_text == null || comment_text == '') 
               { 
@@ -1148,7 +1265,7 @@ viewMode: 1,
               parent_id = comment_id; 
     Meteor.call('submit_lvl_1_comment',Session.get("userId"),parent_id,comment_text,function(error,result){
         if(error){ 
-            alert("Error"); 
+            swal("Error"); 
         }else{ 
           // console.log('successfully removed');   
           $("#comment_lvl_1_"+comment_id).val("");  
@@ -1168,11 +1285,11 @@ viewMode: 1,
 
     'click .remove_post':function(event){
     var post_id = this.post_id;
-    // alert(post_id);
+    // swal(post_id);
     if(confirm("Sure, You want to remove this post ?")){
       Meteor.call('remove_post_from_feed',Session.get("userId"),post_id,function(error,result){
       if(error){
-          alert("Error");
+          swal("Error");
       }else{
         console.log('successfully removed');
       }
@@ -1182,11 +1299,11 @@ viewMode: 1,
 
     'click .remove_comment_lvl0':function(event){
     var comment_id = this.comment_id;
-    // alert(post_id);
+    // swal(post_id);
     if(confirm("Sure, You want to remove this comment ?")){
       Meteor.call('remove_comment_from_lvl0',Session.get("userId"),comment_id,function(error,result){
       if(error){
-          alert("Error");
+          swal("Error");
       }else{
         console.log('successfully removed');
       }
@@ -1197,11 +1314,11 @@ viewMode: 1,
 
     'click .remove_comment_lvl1':function(event){
     var comment_id = this.comment_id;
-    // alert(post_id);
+    // swal(post_id);
     if(confirm("Sure, You want to remove this comment ?")){
       Meteor.call('remove_comment_from_lvl1',Session.get("userId"),comment_id,function(error,result){
       if(error){
-          alert("Error");
+          swal("Error");
       }else{
         console.log('successfully removed');
       }
@@ -1211,7 +1328,7 @@ viewMode: 1,
 
     'click .editHubPost':function(event){
       var post_id = this.post_id;
-      // alert(post_id);
+      // swal(post_id);
     $('#edit_post_text_'+post_id).removeClass("loader_visiblity_block");
     $('#post_text_'+post_id).addClass("loader_visiblity_block");
     
@@ -1223,9 +1340,9 @@ viewMode: 1,
   },
 
       'click .edit_comment_lvl0':function(event){
-        // alert('cool');
+        // swal('cool');
       var comment_id = this.comment_id;
-      // alert(comment_id);
+      // swal(comment_id);
     $('#edit_comment_lvl0_text_'+comment_id).removeClass("loader_visiblity_block");
     $('#comment_lvl0_text_'+comment_id).addClass("loader_visiblity_block");
     
@@ -1237,9 +1354,9 @@ viewMode: 1,
   },
 
       'click .edit_comment_lvl1':function(event){
-        alert('cool');
+        swal('cool');
       var comment_id = this.comment_id;
-      alert(comment_id);
+      swal(comment_id);
     $('#edit_comment_lvl1_text_'+comment_id).removeClass("loader_visiblity_block");
     $('#comment_lvl0_text_'+comment_id).addClass("loader_visiblity_block");
     
@@ -1252,14 +1369,14 @@ viewMode: 1,
 
 
   'click .click_on_follow':function(){
-    // alert('here');
+    // swal('here');
     var follow_user_id = this.user_id; 
     var logged_in_user = Session.get("userId");  
-    // alert('follow_user_id: '+follow_user_id+' logged_in_user: '+logged_in_user);
+    // swal('follow_user_id: '+follow_user_id+' logged_in_user: '+logged_in_user);
 
       Meteor.call('follow_people',follow_user_id,logged_in_user,function(error,result){
               if(error){
-                alert("Some error occure.");
+                swal("Some error occure.");
               }else{
                 // console.log('successfully following ');
               }
@@ -1267,14 +1384,14 @@ viewMode: 1,
   },
 
   'click .click_on_unfollow':function(){
-    // alert('here');
+    // swal('here');
     var follow_user_id = this.user_id; 
     var logged_in_user = Session.get("userId");  
-    // alert('follow_user_id: '+follow_user_id+' logged_in_user: '+logged_in_user);
+    // swal('follow_user_id: '+follow_user_id+' logged_in_user: '+logged_in_user);
 
           Meteor.call('unfollow_people',follow_user_id,logged_in_user,function(error,result){
               if(error){
-                alert("Some error occure.");
+                swal("Some error occure.");
               }else{
                 // console.log('successfully following ');
               }
@@ -1307,7 +1424,7 @@ viewMode: 1,
 
         Meteor.call('save_feed_post_with_image',post_text,logged_in_user,post_image,function(error,result){
               if(error){
-                alert("Some error occure.");
+                swal("Some error occure.");
               }else{
                 // console.log('successfully following ');
                 Session.set("post_image_session","");
@@ -1318,7 +1435,7 @@ viewMode: 1,
         else{        
             Meteor.call('save_feed_post',post_text,logged_in_user,function(error,result){
                 if(error){
-                  alert("Some error occure.");
+                  swal("Some error occure.");
                 }else{
                   // console.log('successfully following ');
                 }
@@ -1332,11 +1449,11 @@ viewMode: 1,
          Meteor.call('save_metadata_post',post_text,Session.get("metadata_image"),Session.get("metadata_title"),Session.get("metadata_source")
         ,Session.get("metadata_url"),logged_in_user,function(error,result){
         if(error){
-          alert("error");
+          swal("error");
         }else{
            $("#hub_posting_text").val("");
           $("#url_metadata_div").addClass("div_hide_class");
-          // alert("success");
+          // swal("success");
           Session.clear("metadata_image");
           Session.clear("metadata_url");
           Session.clear("metadata_title");
@@ -1365,7 +1482,7 @@ viewMode: 1,
 
           Meteor.call('save_updated_feed_post',this.post_id,post_text,logged_in_user,function(error,result){
               if(error){
-                alert("Some error occure.");
+                swal("Some error occure.");
               }else{
                 // console.log('successfully following ');
               }
@@ -1390,7 +1507,7 @@ viewMode: 1,
     var logged_in_user = Session.get("userId");  
           Meteor.call('save_updated_comment_lvl0',this.comment_id,comment_text,function(error,result){
               if(error){
-                alert("Some error occure.");
+                swal("Some error occure.");
               }else{
                 // console.log('successfully following ');
               }
@@ -1417,7 +1534,7 @@ viewMode: 1,
     var logged_in_user = Session.get("userId");  
           Meteor.call('save_updated_comment_lvl1',this.comment_id,comment_text,function(error,result){
               if(error){
-                alert("Some error occure.");
+                swal("Some error occure.");
               }else{
                 // console.log('successfully following ');
               }
@@ -1509,14 +1626,17 @@ var blob = dataURItoBlob(dataURL);
 // console.log(blob);
 var file = new FormData(document.forms[0]);
 file.append("canvasImage", blob);
-// alert(dataURL);
+// swal(dataURL);
 base64data = dataURL;
 console.log(base64data);
 
   Session.setPersistent("new_cover_image_url",base64data);
 
   var user_id = Session.get("userId");
+
+  $('#loading_div').removeClass("loader_visiblity_block");
    Meteor.call("upload_cover_image",user_id,base64data,function(error,result){
+    $('#loading_div').addClass("loader_visiblity_block");
         if(error){
           console.log("Error");
         }else{
@@ -1582,12 +1702,15 @@ var blob = dataURItoBlob(dataURL);
 console.log(blob);
 var file = new FormData(document.forms[0]);
 file.append("canvasImage", blob);
-// alert(dataURL);
+// swal(dataURL);
 base64data = dataURL;
 console.log(base64data);
 Session.setPersistent("new_profile_image_url",base64data);
 var user_id = Session.get("userId");
+
+$('#loading_div').removeClass("loader_visiblity_block");
    Meteor.call("upload_profile_image",user_id,base64data,function(error,result){
+    $('#loading_div').addClass("loader_visiblity_block");
         if(error){
           console.log("Error");
         }else{
@@ -1605,7 +1728,7 @@ function handle_like_event(post_id)
   var liked_by = Session.get("userId");
   Meteor.call('update_hub_like',post_id,liked_by, function(error,result){
               if(error){
-                    alert('error');
+                    swal('error');
                 }else{
                     // console.log('hub post sucessfully liked');
                     }
@@ -1617,7 +1740,7 @@ function handle_like_comment_lvl_0_event(comment_id)
   var liked_by = Session.get("userId");
   Meteor.call('update_hub_like_comment_lvl_0',comment_id,liked_by, function(error,result){
               if(error){
-                    alert('shhh');
+                    swal('shhh');
                 }else{
                     // console.log('hub post sucessfully liked');
                     }

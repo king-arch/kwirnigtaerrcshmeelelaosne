@@ -1,7 +1,8 @@
-
 <template name="index">
- {{> header}}
- {{> index_content}}
+
+   {{> header}}
+   {{> index_content}}
+
 </template>
 
 <template name="index_content">
@@ -67,8 +68,8 @@
                             <br/>
                             <br/>
                             <br/>
-                            <h1 class="c-darkgray" style="font-size: 45px; margin-bottom: 15px;"><strong>Welcome to WritersMelon </strong></h1>
-                            <h5 class="c-darkgray" style="font-size: 22px; font-weight: 400;     line-height: 29px;"> Discover great Books & Authors.  And Engage in ‘real’ conversation <br/>around  BOOKS , AUTHORS & WRITING. </h5>
+                            <h1 class="c-darkgray" style="font-size: 45px; margin-bottom: 15px; font-weight: 600;"><strong>Welcome to WritersMelon </strong></h1>
+                            <h5 class="c-darkgray" style="font-size: 19px; font-weight: 400;     line-height: 29px;"> Discover great Books & Authors.  <br/>And Engage in ‘real’ conversation around  BOOKS , AUTHORS & WRITING. </h5>
                         </div>
                     </div>
                     <!-- Grid column -->
@@ -148,8 +149,9 @@
         <div class="row">
             <div class="col col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12">
               <div class="ui-block responsive-flex1200 bg_trans">
-                <div class="ui-block-title pad_0">
-                  <h1 style="font-size: 30px; font-weight: 500;">Book</h1>
+                <div class="row ui-block-title pad_0">
+                  <h1 class="col-lg-8 col-md-8 col-xs-6 text-right" style="font-size: 30px; font-weight: 600; float: left;">Book</h1>
+                   <h1 class="col-lg-4 col-md-4 col-xs-6 text-right" style="font-size: 15px; font-weight: 600;">View all</h1>
                 </div>
               </div>
             </div>
@@ -159,10 +161,10 @@
         <div class="row">
 {{#each show_book_details}} 
             <div class="col col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12 redirect_to_login">
-                 <article class="hentry blog-post ui-block" style="height: 300px; ">
-                    <div class="post-thumb"><img src="{{book_cover}}" alt="photo" style="height: 190px" >                   
+                 <article class="hentry blog-post ui-block" >
+                    <div class="post-thumb" style="height: 200px;"><img src="{{book_cover}}" alt="photo" style="height: 100%;" >                   
                     </div>
-                    <div class="post-content"><a href="#" class="h4 post-title">{{book_name_with_trim}}</a>
+                    <div class="post-content padd_10_both"><a href="#" class="h5 post-title margin_btm">{{book_name_with_trim}}</a>
                       
                     </div>
                  </article>
@@ -186,11 +188,11 @@
 {{#each show_blog_details}}        
             <div class="col col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12 redirect_to_login">
                  <article class="hentry blog-post ui-block">
-                    <div class="post-thumb"><img src="{{blog_cover}}" alt="photo" style="height: 190px" >
+                    <div class="post-thumb"><img src="{{blog_cover}}" alt="photo">
                       <div class="bottom-right"><a href="#" class="post-add-icon inline-items"><img src="img/comment_white.png"><span>56</span></a></div>
                       <div class="bottom-left"><a href="#" class="post-add-icon inline-items"><img src="img/heart_white.png"><span>27</span></a></div>
                     </div>
-                    <div class="post-content"><a href="#" class="h4 post-title">{{blog_title}}</a>
+                    <div class="post-content"><a href="#" class="h5 post-title">{{blog_title}}</a>
              {{#each fetch_user_info}}
                       <div class="post__author author vcard inline-items"><img src="{{user_profile_pic}}" alt="author">
        

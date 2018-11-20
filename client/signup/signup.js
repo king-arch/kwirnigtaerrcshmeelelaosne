@@ -113,7 +113,7 @@ Template.signup_content.helpers({
 
         show_interest_list(){
 
-    Meteor.subscribe("fetch_result_interest");
+    Meteor.subscribe("fetch_result_interest_listing");
       var result = interest_list.find({interest_status: 1}).fetch();
     console.log('show result interest: ');
     console.log(result);
@@ -316,7 +316,7 @@ Template.signup_content.events({
 
     'click #signup_catagries':function(){
 
-    Meteor.subscribe("fetch_result_interest");
+    Meteor.subscribe("fetch_result_interest_listing");
 
     var result = interest_list.find({interest_status: 1}).fetch();
     console.log('show result interest: ');

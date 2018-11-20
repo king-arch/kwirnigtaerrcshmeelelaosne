@@ -1,3 +1,4 @@
+
 import { Mongo } from 'meteor/mongo';
                                
 export const book_details = new Mongo.Collection('book_details');                                 
