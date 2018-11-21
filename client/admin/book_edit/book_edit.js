@@ -20,7 +20,7 @@ Template.edit_book_details.onDestroyed(function () {
 
 Template.edit_book_details.onRendered(function () {
 	$.getScript("https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/pikaday.min.js",function(){
-    var picker = new Pikaday({ field: document.getElementById('date_picker') });
+    var picker = new Pikaday({ field: document.getElementById('date_picker'),minDate: new Date() });
   })
 /
 	setTimeout(function () {

@@ -108,6 +108,10 @@ Template.point_master_details.onRendered(function () {
 
 Template.point_master_details.events({
 
+    'click #go_back': function(){
+      window.history.go(-1);
+    },
+    
     'click #add_interest': function(){
       window.location.href="/create_interest";
     },

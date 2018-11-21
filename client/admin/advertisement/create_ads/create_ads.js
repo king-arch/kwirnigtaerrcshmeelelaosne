@@ -7,8 +7,8 @@ import swal from 'sweetalert';
 
    Template.create_ads.onRendered(function(){
 		$.getScript("https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/pikaday.min.js",function(){
-		    var picker = new Pikaday({ field: document.getElementById('promotion_start_date') });
-		    var picker = new Pikaday({ field: document.getElementById('promotion_end_date') });
+		    var picker = new Pikaday({ field: document.getElementById('promotion_start_date'),minDate: new Date(), });
+		    var picker = new Pikaday({ field: document.getElementById('promotion_end_date'),minDate: new Date(), });
 	});
   });
 
@@ -144,8 +144,6 @@ Template.create_ads.events({
 		{
 			$("#promotion_end_date").removeClass('emptyfield_focus');
 		}		
-
-
 
 		var promotion_url = $("#promotion_url").val();
 		if(promotion_url == '')

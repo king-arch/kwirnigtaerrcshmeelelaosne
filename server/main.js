@@ -131,7 +131,7 @@ Meteor.methods({
 
   Check_admin_login_auth(email,password){
 
-    // console.log(email + ' & ' + password);
+    console.log(email + ' & ' + password);
 
     var result = user_details.find({
       user_id: "user_admin",
@@ -139,28 +139,48 @@ Meteor.methods({
       user_password: password
     }).fetch();
 
-    // console.log(result);
+    console.log(result);
     // console.log('case 1');
 
-    if (result[0]) {
-      // console.log('case 1.1');
+    if(result[0]){
+
+      console.log('case 1.1');
       var message = {
         "msg": 'Welcome back',
-        "status": "1",
-        "login_type": "admin",
+        "status": 1,
+        "login_type": "Admin",
         "active_user": result[0].user_id
       };
       // console.log(message);
       return message;
     } else {
-          // console.log('case 4');
-          var message = {
+
+      console.log('case 2.1');
+    var result2 = user_details.find({
+      user_email: email,
+      user_password: password,
+      user_role: 'Editor',
+    }).fetch();
+
+        if(result2[0]) {
+      console.log('case 3.1');
+      var message = {
+        "msg": 'Editor Login',
+        "status": 1,
+        "login_type": "Editor",
+        "active_user": result2[0].user_id
+      };
+      // console.log(message);
+      return message;
+    } 
+      console.log('case 1.2');
+        var message = {
             "msg": 'Wrong email or password',
-            "status": "0"
+            "status": 0
           };
           // console.log(message);
           return message;
-        }
+      }
   },
 
   save_book_details(book_id, book_name, book_summary, book_catagries, author_name,
@@ -184,7 +204,7 @@ Meteor.methods({
   },
 
 
-  save_user_details(user_id, user_name, user_email,user_role, user_contact, interest, location, password,user_cover){
+  save_user_details( user_id, user_name, user_email,user_role, password, user_cover){
       var check_if_email_exist = user_details.find({user_email: user_email}).fetch();
 if(check_if_email_exist[0]){
     var message = { "msg" : "email already exist" ,"response_status": 0 };
@@ -197,9 +217,6 @@ else{
       "user_name": user_name,
       "user_email": user_email,
       "user_role": user_role,
-      "user_contact": user_contact,
-      "user_interest": interest,
-      "user_location": location,
       "user_password": password,
       "user_profile_pic": user_cover,
       "user_status": 1,
@@ -207,7 +224,9 @@ else{
       "created_at": Date.now(),
     });
 
-   var message = { "msg" : result ,"response_status": 1 };
+
+var result = send_email_user_created_by_admin(user_id,user_name,user_email,password);
+   var message = { "msg" : result.msg ,"response_status": 1 };
     return message;
 
 }
@@ -243,6 +262,7 @@ var check_if_email_exist = user_details.find({user_email: signup_email}).fetch()
       "user_name": signup_name,
       "user_email": signup_email,
       "user_password": signup_password,
+      "user_role": "User",
       "user_status": 1,
       "email_status": 0,
             "created_at": Date.now(),
@@ -281,7 +301,7 @@ if(check_if_exist[0]){
       return result;
   },
 
-  edit_save_user_details(user_id, user_name, user_email,user_role, user_contact, interest, location, password,user_cover){
+  edit_save_user_details(user_id, user_name, user_email,user_role, password, user_cover){
     var check_if_exist = user_details.find({ user_id: user_id }).fetch();
 if(check_if_exist[0]){
    var result = user_details.update({
@@ -293,9 +313,6 @@ if(check_if_exist[0]){
       "user_name": user_name,
       "user_email": user_email,
       "user_role": user_role,
-      "user_contact": user_contact,
-      "user_interest": interest,
-      "user_location": location,
       "user_password": password,
       "user_profile_pic": user_cover,
       "updated_at": Date.now(),
@@ -334,7 +351,7 @@ if(check_if_exist[0]){
   },
 
     "change_user_details_status": function (user_id, status) {
-    // console.log(user_id + ' & ' + status);
+    console.log(user_id + ' & ' + status);
     var newUser = user_details.find({
       "user_id": user_id
     }).fetch();
@@ -1144,7 +1161,7 @@ var result = promotion.insert({
 return result;
     },       
                                    
-       save_blog: function(blog_title,blog_type,blog_discription,blog_publish_date,logged_in_user )
+       save_blog: function(blog_title,blog_type,blog_discription,logged_in_user )
       {
         var blog_id = 'blog_id_'+Math.floor((Math.random() * 2465789) + 1);
         // console.log('i am here');
@@ -1154,7 +1171,6 @@ var result = blog.insert({
                       blog_type: blog_type,
                       blog_discription: blog_discription,
 
-                      blog_publish_date: blog_publish_date,
                       blog_status: 1,
                       blog_approval_status: 1,
                       blog_author: logged_in_user,
@@ -1164,12 +1180,13 @@ var result = blog.insert({
                 return result;
               },
                                    
-       update_blog: function(blog_id,blog_cover,blog_title,blog_type,blog_discription,blog_publish_date,logged_in_user )
+       update_blog: function(blog_id,blog_cover,blog_title,blog_type,blog_discription,logged_in_user )
       {
-console.log(blog_cover+blog_id+blog_title+blog_type+blog_discription+blog_publish_date+logged_in_user);
+console.log(blog_cover+blog_id+blog_title+blog_type+blog_discription+logged_in_user);
     var newUser = blog.find({blog_id: blog_id}).fetch();
+        
           if(newUser[0]){
-console.log("case 1");
+          console.log("case 1");
           var result =  blog.update({
               _id: newUser[0]._id,
             }, {
@@ -1180,7 +1197,6 @@ console.log("case 1");
                       blog_discription: blog_discription,
                       blog_cover: blog_cover,
 
-                      blog_publish_date: blog_publish_date,
                       blog_status: 1,
                       blog_approval_status: 1,
                       blog_author: logged_in_user,
@@ -1634,6 +1650,25 @@ else if(field_name == 'socail_media_handle_shared'){
      return result;
     },
 
+    send_email_for_forgot_password:function(email_addr){
+      var result = send_email_for_forgot_password(email_addr);
+      return result;
+    },
+
+        change_password:function(userid,pass){
+
+          var result =  user_details.update({
+              user_id: userid,
+            }, {
+              $set: {
+                "user_password": pass}
+            });
+
+          var result = send_email_for_changed_password(userid);
+          return result;
+      },
+
+
 });
 
 //******************** email functions Start ***********************
@@ -1685,5 +1720,157 @@ var htmlCode="<html><head><title>Email</title></head><body><div style="+div_styl
   Email.send(email);
 
   }
+
+ function send_email_for_forgot_password(email_addr){
+
+  var result = user_details.find({ user_email: email_addr }).fetch();
+
+var name = result[0].user_name;
+var user_id = result[0].user_id;
+var userId = Base64.encode(user_id);
+var url = 'http://localhost:3000';
+
+var div_style= "width:600px;height:auto;margin:auto;font-family:sans-serif;font-weight:normal;font-size:12px; border:10px solid red";
+var div_style2= "width:600px;height:auto;float:left;background-color:#efefef;border:10px solid red !important";
+var div_style3= "background-color:#fff;border-spacing:0px;width:100%";
+var div_style4= "width:100%;height:50px;float:left;background-color:#fff";
+var div_style5= "background-color:#fff;width:100%";
+var div_style6= "background-color:#fff;width:100%";
+var div_style7= "width:150px;height:auto;float:left;vertical-align: middle;";
+var div_style8= "height: 50px";
+var div_style9= "height: 50px";
+var div_style10= "float: right; margin-right: 15px; color: #666";
+var div_style11= "width:96%;height:auto;float:left;padding:10px";
+var div_style12= "width:100%; border:0";
+var div_style13= "color:#414850;line-height:30px";
+var div_style14= "color:#414850;line-height:30px";
+var div_style15= "width:100%;float:left;background-color:#fff;;margin-top:6px";
+var image_url="http://writersmelon.com/wm/wp-content/uploads/2017/05/cropped-Writersmelon-Logo.png";
+var style="width:150px; height:150px";
+var spacing="2";
+var email = "writersmelonteam@gmail.com";
+var htmlCode="<html><head><title>Email</title></head><body><div style="+div_style+"><div style="+div_style2 +"><table style="+div_style3+"><tbody><tr><td><div style="+div_style4+"><table style="+div_style6+"><tbody><tr><td><div style="+div_style7+"><a> <img src="+image_url+" style="+style+"/></a></div></td><td><p style="+div_style10+"><p></td>"+
+"</tr></tbody></table></div><div style="+div_style11+"><table style ="+div_style12 +" cellspacing="+spacing+" cellpadding="+spacing+"><tbody><tr><td "+
+"colspan="+spacing+">&nbsp;</td></tr><tr><td colspan="+spacing+">&nbsp;</td></tr><tr><td colspan="+spacing+" style="+div_style14+">Hi "+name +",</td></tr><tr><td colspan="+spacing+">Your request for Password reset has been processed successfully."+
+"</td></tr><tr><td colspan="+div_style11
++"><br/><p>Please click on the link below to reset your password</p>"+
+"<a href="+url+"/change_forgot_password/"+userId +" </a>Reset Password link</td></tr><tr><td colspan="+spacing+">&nbsp;</td></tr><tr><td colspan="+spacing
++">P.S. If you did not sign up for Writersmelon, just ignore this email; we will never again send you an email.</td></tr><tr><td colspan="+spacing
++">&nbsp;</td></tr><tr><td colspan="+spacing+">Regards</td></tr><tr><td colspan="+spacing
++">The Writersmelon Team</td></tr><tr><td colspan="+spacing+">&nbsp;</td></tr><tr><td colspan="+spacing+">&nbsp;</td></tr></tbody></table></div><div style="+div_style15+"><table style="+div_style6+"><tbody><tr><td><center><small style="+div_style6+">This email was intended for "+name+".<br/>Copyright Writersmelon, 2018.</small></center></td></tr></tbody></table></div></td></tr></tbody></table></div></div></body></html>";
+
+          var email = {
+                to: email_addr,
+                from: 'writersmelonteam@gmail.com',
+                subject: "Writersmelon | Forgot Password",
+                html: htmlCode,
+            };
+               Email.send(email);
+               var message = {"msg": "We have sent a password reset email to your registered email address."};
+               return message;
+    }
+
+ function send_email_for_changed_password(userid){
+
+var result = user_details.find({ user_id: userid }).fetch();
+var name = result[0].user_name;
+var user_email = result[0].user_email;
+var password = result[0].user_password;
+console.log('Password: ');
+console.log(password);
+var userId = Base64.encode(userid);
+var url = 'http://localhost:3000';
+
+var div_style= "width:600px;height:auto;margin:auto;font-family:sans-serif;font-weight:normal;font-size:12px; border:10px solid red";
+var div_style2= "width:600px;height:auto;float:left;background-color:#efefef;border:10px solid red !important";
+var div_style3= "background-color:#fff;border-spacing:0px;width:100%";
+var div_style4= "width:100%;height:50px;float:left;background-color:#fff";
+var div_style5= "background-color:#fff;width:100%";
+var div_style6= "background-color:#fff;width:100%";
+var div_style7= "width:150px;height:auto;float:left;vertical-align: middle;";
+var div_style8= "height: 50px";
+var div_style9= "height: 50px";
+var div_style10= "float: right; margin-right: 15px; color: #666";
+var div_style11= "width:96%;height:auto;float:left;padding:10px";
+var div_style12= "width:100%; border:0";
+var div_style13= "color:#414850;line-height:30px";
+var div_style14= "color:#414850;line-height:30px";
+var div_style15= "width:100%;float:left;background-color:#fff;;margin-top:6px";
+var image_url="http://writersmelon.com/wm/wp-content/uploads/2017/05/cropped-Writersmelon-Logo.png";
+var style="width:150px; height:150px";
+var spacing="2";
+var email = "writersmelonteam@gmail.com";
+var htmlCode="<html><head><title>Email</title></head><body><div style="+div_style+"><div style="+div_style2 +"><table style="+div_style3+"><tbody><tr><td><div style="+div_style4+"><table style="+div_style6+"><tbody><tr><td><div style="+div_style7+"><a> <img src="+image_url+" style="+style+"/></a></div></td><td><p style="+div_style10+"><p></td>"+
+"</tr></tbody></table></div><div style="+div_style11+"><table style ="+div_style12 +" cellspacing="+spacing+" cellpadding="+spacing+"><tbody><tr><td "+
+"colspan="+spacing+">&nbsp;</td></tr><tr><td colspan="+spacing+">&nbsp;</td></tr><tr><td colspan="+spacing+" style="+div_style14+">Hi "+name +",</td></tr><tr><td colspan="+spacing+">Your password has been changed Sucessfully and below are your login details"+
+"!</td></tr><tr><td colspan="+div_style11
++"><br/><p>Email: "+user_email+" </p></br><p>Password : "+password+"</td></tr><tr><td colspan="+spacing+">&nbsp;</td></tr><tr><td colspan="+spacing
++">P.S. If you did not sign up for Writersmelon, just ignore this email; we will never again send you an email.</td></tr><tr><td colspan="+spacing
++">&nbsp;</td></tr><tr><td colspan="+spacing+">Regards</td></tr><tr><td colspan="+spacing
++">The Writersmelon Team</td></tr><tr><td colspan="+spacing+">&nbsp;</td></tr><tr><td colspan="+spacing+">&nbsp;</td></tr></tbody></table></div><div style="+div_style15+"><table style="+div_style6+"><tbody><tr><td><center><small style="+div_style6+">This email was intended for "+name+".<br/>Copyright Writersmelon, 2018.</small></center></td></tr></tbody></table></div></td></tr></tbody></table></div></div></body></html>";
+
+ var email = {
+            to: user_email,
+            from: 'writersmelonteam@gmail.com',
+            subject: "Writersmelon | Password Sucessfully Changed",
+            html: htmlCode,
+        };
+
+               Email.send(email);
+               // console.log(htmlCode);
+var message = { "msg": "Password succesfully changed. We also sent your new password on an email to your registered email for future referance."}
+          return message;
+}
+
+ function send_email_user_created_by_admin(user_id,user_name,user_email,password){
+
+var name = user_name;
+var user_email = user_email;
+var password = password;
+console.log('Password: ');
+console.log(password);
+var userId = Base64.encode(user_id);
+var url = 'http://localhost:3000';
+
+var div_style= "width:600px;height:auto;margin:auto;font-family:sans-serif;font-weight:normal;font-size:12px; border:10px solid red";
+var div_style2= "width:600px;height:auto;float:left;background-color:#efefef;border:10px solid red !important";
+var div_style3= "background-color:#fff;border-spacing:0px;width:100%";
+var div_style4= "width:100%;height:50px;float:left;background-color:#fff";
+var div_style5= "background-color:#fff;width:100%";
+var div_style6= "background-color:#fff;width:100%";
+var div_style7= "width:150px;height:auto;float:left;vertical-align: middle;";
+var div_style8= "height: 50px";
+var div_style9= "height: 50px";
+var div_style10= "float: right; margin-right: 15px; color: #666";
+var div_style11= "width:96%;height:auto;float:left;padding:10px";
+var div_style12= "width:100%; border:0";
+var div_style13= "color:#414850;line-height:30px";
+var div_style14= "color:#414850;line-height:30px";
+var div_style15= "width:100%;float:left;background-color:#fff;;margin-top:6px";
+var image_url="http://writersmelon.com/wm/wp-content/uploads/2017/05/cropped-Writersmelon-Logo.png";
+var style="width:150px; height:150px";
+var spacing="2";
+var email = "writersmelonteam@gmail.com";
+var htmlCode="<html><head><title>Email</title></head><body><div style="+div_style+"><div style="+div_style2 +"><table style="+div_style3+"><tbody><tr><td><div style="+div_style4+"><table style="+div_style6+"><tbody><tr><td><div style="+div_style7+"><a> <img src="+image_url+" style="+style+"/></a></div></td><td><p style="+div_style10+"><p></td>"+
+"</tr></tbody></table></div><div style="+div_style11+"><table style ="+div_style12 +" cellspacing="+spacing+" cellpadding="+spacing+"><tbody><tr><td "+
+"colspan="+spacing+">&nbsp;</td></tr><tr><td colspan="+spacing+">&nbsp;</td></tr><tr><td colspan="+spacing+" style="+div_style14+">Hi "+name +",</td></tr><tr><td colspan="+spacing+">Congrats!!! your account has been created and down below are your login details"+
+"!</td></tr><tr><td colspan="+div_style11
++"><br/><p>Email: "+user_email+" </p></br><p>Password : "+password+"</td></tr><tr><td colspan="+spacing+">&nbsp;</td></tr><tr><td colspan="+spacing
++">P.S. If you are not "+name+", just ignore this email; we will never again send you an email.</td></tr><tr><td colspan="+spacing
++">&nbsp;</td></tr><tr><td colspan="+spacing+">Regards</td></tr><tr><td colspan="+spacing
++">The Writersmelon Team</td></tr><tr><td colspan="+spacing+">&nbsp;</td></tr><tr><td colspan="+spacing+">&nbsp;</td></tr></tbody></table></div><div style="+div_style15+"><table style="+div_style6+"><tbody><tr><td><center><small style="+div_style6+">This email was intended for "+name+".<br/>Copyright Writersmelon, 2018.</small></center></td></tr></tbody></table></div></td></tr></tbody></table></div></div></body></html>";
+
+ var email = {
+            to: user_email,
+            from: 'writersmelonteam@gmail.com',
+            subject: "Writersmelon | Writermelon New Account credentials",
+            html: htmlCode,
+        };
+
+               Email.send(email);
+               // console.log(htmlCode);
+var message = { "msg": "User succesfully created. "}
+          return message;
+}
 
 //******************** email functions End *************************

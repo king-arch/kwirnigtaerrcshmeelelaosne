@@ -25,7 +25,11 @@ Template.left_panel_admin.onDestroyed(function () {
  Template.left_panel_admin.events({
 
     'click #user_management':function(){
-  		  Router.go("/user_management");
+        Router.go("/user_management");
+  },
+
+    'click #edit_profile':function(){
+  		  Router.go("/edit_profile");
   },
 
     'click #book_management':function(){
@@ -107,13 +111,23 @@ Template.left_panel_admin.onDestroyed(function () {
 		}
 	},
 
-	author_description(){
-		var book_summary = this.author_description;
-		if(book_summary.length > 10){
-			book_summary = book_summary.substr(0,10);
-			return book_summary+'...';
+  author_description(){
+    var book_summary = this.author_description;
+    if(book_summary.length > 10){
+      book_summary = book_summary.substr(0,10);
+      return book_summary+'...';
+    }else{
+      return book_summary;
+    }
+  },
+
+	check_if_editor_or_admin(){
+		var book_summary = Session.get("userId");  
+
+		if(book_summary == "user_admin" ){
+			return true;
 		}else{
-			return book_summary;
+			return false;
 		}
 	},
 

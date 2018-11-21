@@ -19,6 +19,7 @@
 					</a>
 				</li>
 
+{{#if check_if_editor_or_admin}}
 				<li>
 					<a id="user_management" class="pointer js-sidebar-open" title="User Management" >
 						<i class="fa fa-user fa-2x" style="color: #fff;"></i>
@@ -37,22 +38,79 @@
 					</a>
 				</li>
 
+{{/if}}
+
 				<li>
 					<a id="blog_management" class="pointer js-sidebar-open" title="Blog Management" >
 						<i class="fa fa-rss fa-2x" style="color: #fff;"></i>
 					</a>
 				</li>
+
+{{#if check_if_editor_or_admin}}
 				<li>
-					<a id="admin_settings" class="pointer js-sidebar-open" title="Blog Management" >
+					<a id="admin_settings" class="pointer js-sidebar-open" title="Settings" >
 						<i class="fa fa-cog fa-2x" style="color: #fff;"></i>
 					</a>
 				</li>
+
 				<li>
-					<a id="report_display" class="pointer js-sidebar-open" title="Blog Management" >
+					<a id="report_display" class="pointer js-sidebar-open" title="Reports" >
 						<i class="far fa-chart-bar fa-2x" style="color: #fff;"></i>
 					</a>
 				</li>
+{{else}}
 
+				<li>
+					<a id="edit_profile" class="pointer js-sidebar-open" title="Edit Profile" >
+						<i class="far fa-edit fa-2x" style="color: #fff;"></i>
+					</a>
+				</li>
+
+				<li>
+					&nbsp;
+				</li>
+				
+				<li>
+					&nbsp;
+				</li>
+
+				<li>
+					&nbsp;
+				</li>
+
+				<li>
+					&nbsp;
+				</li>
+				
+				<li>
+					&nbsp;
+				</li>
+
+				<li>
+					&nbsp;
+				</li>
+				
+				<li>
+					&nbsp;
+				</li>
+
+				<li>
+					&nbsp;
+				</li>
+
+				<li>
+					&nbsp;
+				</li>
+
+				<li>
+					&nbsp;
+				</li>
+
+				<li>
+					&nbsp;
+				</li>
+
+{{/if}}
 				<li>
 					<a id="sign_out" class="js-sidebar-open">
 					<i class="fas fa-sign-out-alt fa-2x" style="color: #fff;"></i>

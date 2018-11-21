@@ -6,10 +6,10 @@ import { Session } from 'meteor/session';
 import swal from 'sweetalert';
 
    Template.edit_blog_details.onRendered(function(){
-		$.getScript("https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/pikaday.min.js",function(){
-		    // swal("loaded: ");
-		    var picker = new Pikaday({ field: document.getElementById('blog_publish_date') });
-	});
+	// 	$.getScript("https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/pikaday.min.js",function(){
+	// 	    // swal("loaded: ");
+	// 	    var picker = new Pikaday({ field: document.getElementById('blog_publish_date'),minDate: new Date(), });
+	// });
 	Session.set("blog_cover_session","");
 
 	  var url = window.location.href;
@@ -30,14 +30,14 @@ import swal from 'sweetalert';
       var blog_type = result[0].blog_type;
       var blog_id = result[0].blog_id;
       var blog_discription = result[0].blog_discription;
-      var blog_publish_date = result[0].blog_publish_date;
+      // var blog_publish_date = result[0].blog_publish_date;
       var blog_cover = result[0].blog_cover;
 
       $('#blog_title').val(blog_title);
       $('#blog_type').val(blog_type);
 
       $('#blog_discription').trumbowyg('html',blog_discription);
-      $('#blog_publish_date').val(blog_publish_date);
+      // $('#blog_publish_date').val(blog_publish_date);
 
       Session.set("blog_cover_session",blog_cover);
       $("#blog_hidden_id").val(blog_id);
@@ -94,12 +94,16 @@ Template.edit_blog_details.events({
 	    upload_cover_pic(e, template);
 	},
 
+	"click #go_back":function (e, template) {
+	    window.history.go(-1);
+	},
+
 	'click #update_blog':function()
 	{   
 		var blog_title = $("#blog_title").val();
 		var blog_type = $("#blog_type").val();
 		var blog_discription = $("#blog_discription").val();
-		var blog_publish_date = $("#blog_publish_date").val();
+		// var blog_publish_date = $("#blog_publish_date").val();
 
 		if(blog_title == '' || blog_title == null)
 		{
@@ -131,15 +135,15 @@ Template.edit_blog_details.events({
 			$("#blog_discription").removeClass('emptyfield_focus');
 		}
 
-		if(blog_publish_date == '' || blog_publish_date == null)
-		{
-			$("#blog_publish_date").addClass('emptyfield_focus');
-			$("#blog_publish_date").focus();
-			return false;
-		}else
-		{
-			$("#blog_publish_date").removeClass('emptyfield_focus');
-		}		
+		// if(blog_publish_date == '' || blog_publish_date == null)
+		// {
+		// 	$("#blog_publish_date").addClass('emptyfield_focus');
+		// 	$("#blog_publish_date").focus();
+		// 	return false;
+		// }else
+		// {
+		// 	$("#blog_publish_date").removeClass('emptyfield_focus');
+		// }		
 
 	    if(Session.get("blog_cover_session")){
 		  var blog_cover = Session.get("blog_cover_session");
@@ -154,7 +158,7 @@ Template.edit_blog_details.events({
 		var logged_in_user = Session.get('userId');
 		// swal('logged_in_user: '+logged_in_user+'blog_title: '+blog_title+' blog_type: '+blog_type+' blog_publish_date: '+blog_publish_date);
 
-    Meteor.call('update_blog',blog_id,blog_cover,blog_title,blog_type,blog_discription,blog_publish_date,logged_in_user,blog_cover,function(error,result){
+    Meteor.call('update_blog',blog_id,blog_cover,blog_title,blog_type,blog_discription,logged_in_user,blog_cover,function(error,result){
               if(error){
                 console.log("Some error occured.");
               }else{ 

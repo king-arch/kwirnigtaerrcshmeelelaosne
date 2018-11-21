@@ -14,6 +14,11 @@ Template.edit_promotion_details.onDestroyed(function () {
 
    Template.edit_promotion_details.onRendered(function(){
 
+		$.getScript("https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/pikaday.min.js",function(){
+		    var picker = new Pikaday({ field: document.getElementById('promotion_start_date'),minDate: new Date() });
+		    var picker = new Pikaday({ field: document.getElementById('promotion_end_date'),minDate: new Date()});
+	});
+
    	   var url = window.location.href;
 
         var new_url = url.split("/");
@@ -136,12 +141,23 @@ Template.edit_promotion_details.helpers({
 		//swal(sent_too);
 		return UserInfo.find({user_id:sent_too}).fetch();
 	},
+
+	promotion_image()
+	{ 
+
+		var promotion_image = Session.get("promotion_image_session");
+		if(promotion_image){
+			return promotion_image;
+		}else{
+			return promotion_image;
+		}
+	},
 });
 
 Template.edit_promotion_details.events({
 
 		"change #promotion_image":function(e, template) {
-			swal('ok');
+			// swal('ok');
 			upload_cover_pic(e, template);
 		},
 

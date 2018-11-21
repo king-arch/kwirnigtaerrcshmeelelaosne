@@ -78,6 +78,9 @@ Template.edit_copyright_policy_details.onRendered(function () {
 
 Template.edit_copyright_policy_details.events({
 
+    'click #go_back': function(){
+      window.history.go(-1);
+    },
     'click #add_interest': function(){
       window.location.href="/create_interest";
     },

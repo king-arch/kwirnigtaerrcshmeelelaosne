@@ -3,13 +3,11 @@
 <head>
 
 	<title>Forums</title>
-
 	<!-- Required meta tags always come first -->
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
-
 </head>
 <style type="text/css">
 	
@@ -433,18 +431,18 @@ border: 0px;
 					<div class="row">
 						<div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
 
-								<label class="control-label">Book Name</label>
-								<input class="form-control" type="text" placeholder="" id="book_name" >
+								<label class="control-label c-darkgray">Book Name</label>
+								<input class="form-control c-darkgray" type="text" placeholder="" id="book_name" >
 
-								<label class="control-label">Book Summary</label>
-								<textarea class="form-control" type="text" placeholder="" id="book_summary" ></textarea>
-
-
-								<label class="control-label">Book's price</label>
-								<input class="form-control" type="text" placeholder="" id="book_price" onkeypress="return isNumberKey(event)" maxlength="10" minlength="1" >
+								<label class="control-label c-darkgray">Book Summary</label>
+								<textarea class="form-control c-darkgray" type="text" placeholder="" id="book_summary" ></textarea>
 
 
-							<label class="control-label">Book Catagries</label>
+								<label class="control-label c-darkgray">Book's price</label>
+								<input class="form-control c-darkgray" type="text" placeholder="" id="book_price" onkeypress="return isNumberKey(event)" maxlength="10" minlength="1" >
+
+
+							<label class="control-label c-darkgray">Book Catagries</label>
 							
 								<select  id="book_catagries" >
 									<option value="" >--Select Type--</option>
@@ -472,21 +470,21 @@ border: 0px;
 								</select>
 						
 
-								<label class="control-label">Author's Name</label>
-								<input class="form-control" type="text" placeholder="" id="author_name" >
+								<label class="control-label c-darkgray">Author's Name</label>
+								<input class="form-control c-darkgray" type="text" placeholder="" id="author_name" >
 
-								<label class="control-label">Author's description</label>
-								<textarea class="form-control" type="text" placeholder="" id="author_description" ></textarea>
+								<label class="control-label c-darkgray">Author's description</label>
+								<textarea class="form-control c-darkgray" type="text" placeholder="" id="author_description" ></textarea>
 
-								<label class="control-label">Amazon affliated links</label>
-								<input class="form-control" type="text" placeholder="" id="amazon_link" >
+								<label class="control-label c-darkgray">Amazon affliated links</label>
+								<input class="form-control c-darkgray" type="text" placeholder="" id="amazon_link" >
 							
                             
-                            <label class="control-label">Release date</label>
+                            <label class="control-label c-darkgray">Release date</label>
 								<input type="text" id="date_picker"   />
 
 
-                            	<label class="control-label">Upload cover</label>
+                            	<label class="control-label c-darkgray">Upload cover</label>
 								<input type="file" id="book_cover" >
 								<input type="hidden" id="hidden_book_id" >
 				
@@ -496,8 +494,7 @@ border: 0px;
 						<button class="btn btn-primary btn-lg pull-right" id="add_book" >
                            <i class="fa fa-spinner fa-pulse fa-fw div_hide_class" id="loader_gif"></i>
                            <span id="save_text"> update Book Details</span></button>
-
-                                                   <button class="btn btn-grey btn-lg pull-right" id="go_back" style="margin-right: 14px !important;">
+    <button class="btn btn-grey btn-lg pull-right" id="go_back" style="margin-right: 14px !important;">
                             Cancel</button>
 
 <br>

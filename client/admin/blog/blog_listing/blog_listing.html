@@ -45,7 +45,7 @@
             </th>
 
             <th class="posts">
-              Blog type
+              Blog Category
             </th>
 
             <th class="topics">
@@ -57,7 +57,7 @@
             </th>
         
             <th class="posts">
-              Approval System
+              Blog Status
             </th>
         
             <th class="freshness">
@@ -90,7 +90,7 @@
 
               <img src="{{user_profile_pic}}" alt="author" class="make_it_circle" > 
               <div class="author-date">
-                <a class="h6 post__author-name fn" href="#">{{user_name}}</a>
+                <a class="h6 post__author-name fn" href="#" style="font-weight: 100; font-size: 14px !important;" >{{user_name}}</a>
               </div>
 
         {{/each}}
@@ -111,7 +111,7 @@
         </button> 
 
         <button  id="{{blog_id}}" class="approval_status_blog btn  btn-success" value="1"  >
-          Approve
+          Approved
         </button> 
 
       {{else if equals blog_approval_status 1 }}
@@ -122,7 +122,7 @@
       {{else}}
 
         <button  id="{{blog_id}}" class="approval_status_blog btn  btn-success" value="1"  >
-          Approve
+          Approved
         </button> 
 
       {{/if}}  
@@ -135,15 +135,19 @@
               <button class="edit_blog_details btn-breez btn" id="{{blog_id}}" > Edit </button>
                      {{#if check_interest_activation_status blog_status}}
                                     <button  id="{{blog_id}}" class="deactivate_status_blog btn btn-danger" value="0">  
-                                    Deactivate
+                                    Make It Inactive
                                     </button> 
                                     {{else}}
                                     <button  id="{{blog_id}}" class="activate_status_blog btn  btn-success" value="1"  >
-                                    Activate
+                                    Make It Active
                                     </button> 
                                     {{/if}}  
                         </td>
 
+            <td class="freshness">
+              <button class="btn-breez btn" > view </button>
+            </td>
+            
           </tr>
           {{/each}}
           

@@ -51,10 +51,12 @@ Template.create_user_details.onRendered(function () {
       return array;
     },
 
-    user_cover(){
-	    if(Session.get("user_cover_session")){
+    user_profile_pic(){
+	    if(Session.get("user_cover_session") != ""){
 		  var user_cover = Session.get("user_cover_session");
 		  return user_cover;
+		}else{
+		  return "/img/avatar1.jpeg";
 		}
     },
 
@@ -111,11 +113,11 @@ function click_events() {
 		var first_name = $('#first_name').val();
 		var last_name = $('#last_name').val();
 		var user_email = $('#user_email').val();
-		var user_contact = $('#user_contact').val();
-		var interest = $('#interest').val();
+		// var user_contact = $('#user_contact').val();
+		// var interest = $('#interest').val();
 		var user_role = $('#user_role').val();
 
-		var location = $('#location').val();
+		// var location = $('#location').val();
 		var password = $('#password').val();
 
 		    if (first_name == '' || first_name == undefined) {
@@ -142,33 +144,33 @@ function click_events() {
 
 		var email_validation = ValidateEmail(user_email);
 
-		if (user_contact == '' || user_contact == undefined) {
-			$('#user_contact').addClass('empty_field').focus();
-			return false;
-		} else {
-			$('#user_contact').removeClass('empty_field').blur();
-		}
+		// if (user_contact == '' || user_contact == undefined) {
+		// 	$('#user_contact').addClass('empty_field').focus();
+		// 	return false;
+		// } else {
+		// 	$('#user_contact').removeClass('empty_field').blur();
+		// }
 
-		if (interest == '' || interest == undefined) {
-			$('#interest').addClass('empty_field').focus();
-			return false;
-		} else {
-			$('#interest').removeClass('empty_field').blur();
-		}
+		// if (interest == '' || interest == undefined) {
+		// 	$('#interest').addClass('empty_field').focus();
+		// 	return false;
+		// } else {
+		// 	$('#interest').removeClass('empty_field').blur();
+		// }
 
 		if (user_role == '' || user_role == undefined) {
 			$('#user_role').addClass('empty_field').focus();
 			return false;
 		} else {
 			$('#user_role').removeClass('empty_field').blur();
+		}
 
-		if (location == '' || location == undefined) {
-			$('#location').addClass('empty_field').focus();
-			return false;
-		} else {
-			$('#location').removeClass('empty_field').blur();
-		}
-		}
+		// if (location == '' || location == undefined) {
+		// 	$('#location').addClass('empty_field').focus();
+		// 	return false;
+		// } else {
+		// 	$('#location').removeClass('empty_field').blur();
+		// }
 
 		if (password == '' || password == undefined) {
 			$('#password').addClass('empty_field').focus();
@@ -185,13 +187,13 @@ function click_events() {
 					return false;
 		}
 
-		var check_length = user_contact/10;
+		// var check_length = user_contact/10;
 
-		if(check_length < 6){
-			swal("Phone's length should be at least 5 digit");
-		   $('#user_contact').addClass('empty_field').focus();
-		   return false;
-		}
+		// if(check_length < 6){
+		// 	swal("Phone's length should be at least 5 digit");
+		//    $('#user_contact').addClass('empty_field').focus();
+		//    return false;
+		// }
 
 		var first_name = first_name.trim();
         var last_name = last_name.trim();
@@ -204,15 +206,13 @@ function click_events() {
 
 		swal(
 			' user_name: '+user_name+' user_email: '+user_email+
-			' user_contact: '+user_contact+
-			' interest: '+interest+' user_role: '+user_role+
-			' location: '+location+'  password: '+password
+			' user_role: '+user_role+
+			' password: '+password
 			);
 
 		var user_id = 'user_id_' + Math.floor((Math.random() * 2465789) + 1);
 		
-		Meteor.call('save_user_details', user_id, user_name, user_email,user_role, user_contact, interest,
-		 location, password, user_cover, function (error, result) {
+		Meteor.call('save_user_details', user_id, user_name, user_email,user_role, password, user_cover, function (error, result) {
 
 			$('#loader_gif').addClass('div_hide_class');
 			$('#save_text').removeClass('div_hide_class');

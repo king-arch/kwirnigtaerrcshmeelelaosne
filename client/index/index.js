@@ -76,6 +76,10 @@ Template.index_content.helpers({
 
 Template.index_content.events({
 
+'click #forgot_password': function(){
+    window.location.href = "/forgot_password";
+},
+
 'click .show_signup_password': function(){
   
   var input = $('#signup_password').attr("type");

@@ -124,7 +124,7 @@ Template.interest_management_details.events({
  'click .edit_book_details': function(){
 
 		var interest_id= Base64.encode(this.interest_id);    
-		swal(interest_id); 
+		// swal(interest_id); 
         var url = '/edit_interest/'+interest_id;
 		Router.go(url);
 

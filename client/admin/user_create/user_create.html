@@ -435,21 +435,21 @@ border: 0px;
 					<div class="row">
 						<div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
 
-								<label class="control-label">First name</label>
-								<input class="form-control" type="text" placeholder="" id="first_name" >
+								<label class="control-label  c-darkgray">First name</label>
+								<input class="form-control  c-darkgray" type="text" placeholder="" id="first_name" >
 
-								<label class="control-label">Last name</label>
-								<input class="form-control" type="text" placeholder="" id="last_name" >
+								<label class="control-label  c-darkgray">Last name</label>
+								<input class="form-control  c-darkgray" type="text" placeholder="" id="last_name" >
 
-								<label class="control-label">Email</label>
-								<input class="form-control" type="text" placeholder="" id="user_email" >
+								<label class="control-label  c-darkgray">Email</label>
+								<input class="form-control  c-darkgray" type="text" placeholder="" id="user_email" >
 
-								<label class="control-label">Contact</label>
-								<input class="form-control" type="text" placeholder="" id="user_contact" onkeypress="return isNumberKey(event)"  maxlength="15" minlength="5">
+<!-- 								<label class="control-label">Contact</label>
+								<input class="form-control" type="text" placeholder="" id="user_contact" onkeypress="return isNumberKey(event)"  maxlength="15" minlength="5"> -->
 
-							<label class="control-label">Interest</label>
+<!-- 							<label class="control-label">Interest</label>
 								<select id="interest" >
-									<option value="" >--Select Type--</option>
+									<option value="" >Select Type</option>
 									<option value="Self help">Self help</option>
 									<option value="Health">Health</option>
 									<option value="Guide">Guide</option>
@@ -471,29 +471,29 @@ border: 0px;
 									<option value="Biographies">Biographies</option>
 									<option value="Autobiographies">Autobiographies</option>
 									<option value="Fantasy">Fantasy</option>
-								</select>
+								</select> -->
 
-							<label class="control-label">User role</label>
+							<label class="control-label c-darkgray">User role</label>
 								<select id="user_role" >
 									<option value="" >--Select Type--</option>
 									<option value="Editor">Editor</option>
 									<option value="User">User</option>
 								</select>
 
-								<label class="control-label">Location</label>
-								<input class="form-control" type="text" placeholder="" id="location" >	
+<!-- 								<label class="control-label">Location</label>
+								<input class="form-control" type="text" placeholder="" id="location" > -->	
 
-								<label class="control-label">password</label>
-								<input class="form-control" type="password" placeholder="" id="password" >	
+								<label class="control-label  c-darkgray">password</label>
+								<input class="form-control  c-darkgray" type="password" placeholder="" id="password" >	
 
-								<label class="control-label">Upload user profile pic</label>
-								<input type="file" id="user_cover" >
+								<label class="control-label  c-darkgray">Upload user profile pic</label>
+								<input type="file" id="user_cover" class="c-darkgray" >
 
-						<img src="{{user_profile_pic}}" >
+						<img src="{{user_profile_pic}}" style="height: 250px  !important; width: 250px !important;" >
 <br>                
-						   <button class="btn btn-lg pull-right btn-primary" id="add_user" >
+						   <button class=" c-darkgray btn btn-lg pull-right btn-primary" id="add_user" >
                            <i class="fa fa-spinner fa-pulse fa-fw div_hide_class" id="loader_gif" ></i>
-                           <span id="save_text"> Add User</span></button>
+                           <span id="save_text" class="c-darkgray" > Add User</span></button>
 
                                                    <button class="btn btn-grey btn-lg pull-right" id="go_back" style="margin-right: 14px !important;">
                             Cancel</button>

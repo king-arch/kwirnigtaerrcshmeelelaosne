@@ -27,8 +27,8 @@ Template.create_interest_details.onRendered(function () {
 
 
 	$.getScript("https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/pikaday.min.js",function(){
-    var picker = new Pikaday({ field: document.getElementById('date_picker') });
-	})
+    var picker = new Pikaday({ field: document.getElementById('date_picker'),minDate: new Date() });
+	});
 
 	Session.set("book_cover_session","");
 	setTimeout(function () {
@@ -96,6 +96,7 @@ Template.create_interest_details.onRendered(function () {
 			} else {
 				swal(result.msg);
 				$('#interest_text').val("");
+				window.history.go(-1);
 		}
 		});
 

@@ -20,31 +20,33 @@ Template.admin_login_details.onDestroyed(function () {
 
 Template.admin_login_details.onRendered(function () {
 	// admin_detailed = Meteor.subscribe("fetch_admin_details");
+	        admin_detailed = Meteor.subscribe("fetch_user_listing");
 	setTimeout(function () {
-		click_events();
+		// click_events();
 		// $('#loading_div').addClass('loader_visiblity_block');
 	}, 2000);
 });
 
-function click_events() {
 
-	$('#send_to_cookies').click(function (e) {
+Template.admin_login_details.events({
+
+'click #send_to_cookies':function(){   
 		Router.go('/cookies_display');
-	});
+	},
 
-	$('#send_to_user_aggrement').click(function (e) {
+'click #send_to_user_aggrement':function(){  
 		Router.go('/user_agreement_display');
-	});
+	},
 
-	$('#send_to_privacy').click(function (e) {
+'click #send_to_privacy':function(){  
 		Router.go('/user_policy_display');
-	});
+	},
 
-	$('#send_to_forget_password').click(function (e) {
+'click #send_to_forget_password':function(){  
 		Router.go('/forget_password');
-	});
+	},
 
-	$('#Check_auth_for_admin_login').click(function (e) {
+'click #Check_auth_for_admin_login':function(){  
 
 		var email = $('#email').val();
 		var password = $('#password').val();
@@ -82,6 +84,7 @@ function click_events() {
 				});
 
 			} else {
+				// swal("sucess");
 				if (result) {
 
 					if (result.status == 0) {
@@ -93,7 +96,13 @@ function click_events() {
 						});
 					}
 
-					if (result.login_type == 'admin'){
+					if (result.login_type == 'Admin'){
+						Session.setPersistent("active_user", result.active_user);
+						Session.setPersistent("userId", result.active_user);
+						Session.setPersistent("active_user_type", result.login_type);
+						Router.go('/book_management');
+					}
+					else if(result.login_type == 'Editor'){
 						Session.setPersistent("active_user", result.active_user);
 						Session.setPersistent("userId", result.active_user);
 						Session.setPersistent("active_user_type", result.login_type);
@@ -102,5 +111,5 @@ function click_events() {
 				}
 			}
 		});
-	});
-}
+	},
+});

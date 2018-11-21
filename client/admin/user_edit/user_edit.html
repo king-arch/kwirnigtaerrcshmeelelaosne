@@ -45,7 +45,7 @@
 								<input class="form-control c-darkgray" type="text" placeholder="Email" id="user_email" >
 							</div>
 </div>
-						<div class="col col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
+<!-- 						<div class="col col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
 
 							<div class="form-group label-floating is-empty">
 								<input class="form-control c-darkgray" type="text" placeholder="Contact" id="user_contact" onkeypress="return isNumberKey(event)"  maxlength="15" >
@@ -53,10 +53,9 @@
 
 						</div>	
 												<div class="col col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
-
-							<label class="control-label c-dark">Interest</label>
+						<label class="control-label c-dark">Interest</label>
 								<select id="interest" >
-									<option value="" >--Select Interest--</option>
+									<option value="" >Select Interest</option>
 									<option value="Self help">Self help</option>
 									<option value="Health">Health</option>
 									<option value="Guide">Guide</option>
@@ -79,7 +78,7 @@
 									<option value="Autobiographies">Autobiographies</option>
 									<option value="Fantasy">Fantasy</option>
 								</select>
-</div>
+</div> -->
 						<div class="col col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
 
 
@@ -89,10 +88,10 @@
 									<option value="User">User</option>
 								</select>
 							</div>
-													<div class="col col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
+<!-- 													<div class="col col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
 
 								<input class="form-control c-darkgray" type="text" placeholder="Location" id="location" >	
-							</div>
+							</div> -->
 													<div class="col col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
 
 
@@ -107,11 +106,13 @@
 
 						<input type="hidden" id="hidden_user_id" >
 
-						<img src="{{user_profile_pic}}" >
+						<img src="{{user_profile_pic}}" style="height: 250px  !important; width: 250px !important;" >
 					</div>
 
 						<div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+
 						   <button class="btn btn-primary btn-lg pull-right" id="add_user" >
+
                            <i class="fa fa-spinner fa-pulse fa-fw div_hide_class" id="loader_gif" ></i>
                            <span id="save_text"> Update</span></button>
 

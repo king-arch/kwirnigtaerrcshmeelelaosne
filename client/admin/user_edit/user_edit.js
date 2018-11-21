@@ -64,10 +64,10 @@ Template.edit_user.onRendered(function () {
       var user_id = result[0].user_id;
       var user_email = result[0].user_email;
       var user_role = result[0].user_role;
-      var user_contact = result[0].user_contact;
+      // var user_contact = result[0].user_contact;
 
-      var user_interest = result[0].user_interest;
-      var user_location = result[0].user_location;
+      // var user_interest = result[0].user_interest;
+      // var user_location = result[0].user_location;
       var user_cover = result[0].user_profile_pic;
       var user_password = result[0].user_password;
 
@@ -76,10 +76,10 @@ Template.edit_user.onRendered(function () {
       $('#last_name').val(name[1]);
       $('#user_email').val(user_email);
       $('#user_role').val(user_role);
-      $('#user_contact').val(user_contact);
+      // $('#user_contact').val(user_contact);
 
-      $('#interest').val(user_interest);
-      $('#location').val(user_location);
+      // $('#interest').val(user_interest);
+      // $('#location').val(user_location);
 
       password = Base64.decode(password);
 
@@ -104,10 +104,12 @@ Template.edit_user.onRendered(function () {
       return array;
     },
 
-    user_cover(){
-	    if(Session.get("user_cover_session")){
+    user_profile_pic(){
+	    if(Session.get("user_cover_session") != ""){
 		  var user_cover = Session.get("user_cover_session");
 		  return user_cover;
+		}else{
+		  return "/img/avatar1.jpeg";
 		}
     },
 
@@ -163,11 +165,11 @@ function click_events() {
 		var first_name = $('#first_name').val();
 		var last_name = $('#last_name').val();
 		var user_email = $('#user_email').val();
-		var user_contact = $('#user_contact').val();
-		var interest = $('#interest').val();
+		// var user_contact = $('#user_contact').val();
+		// var interest = $('#interest').val();
 		var user_role = $('#user_role').val();
 
-		var location = $('#location').val();
+		// var location = $('#location').val();
 		var password = $('#password').val();
 
 		    if (first_name == '' || first_name == undefined) {
@@ -194,33 +196,33 @@ function click_events() {
 
 		var email_validation = ValidateEmail(user_email);
 
-		if (user_contact == '' || user_contact == undefined) {
-			$('#user_contact').addClass('empty_field').focus();
-			return false;
-		} else {
-			$('#user_contact').removeClass('empty_field').blur();
-		}
+		// if (user_contact == '' || user_contact == undefined) {
+		// 	$('#user_contact').addClass('empty_field').focus();
+		// 	return false;
+		// } else {
+		// 	$('#user_contact').removeClass('empty_field').blur();
+		// }
 
-		if (interest == '' || interest == undefined) {
-			$('#interest').addClass('empty_field').focus();
-			return false;
-		} else {
-			$('#interest').removeClass('empty_field').blur();
-		}
+		// if (interest == '' || interest == undefined) {
+		// 	$('#interest').addClass('empty_field').focus();
+		// 	return false;
+		// } else {
+		// 	$('#interest').removeClass('empty_field').blur();
+		// }
 
 		if (user_role == '' || user_role == undefined) {
 			$('#user_role').addClass('empty_field').focus();
 			return false;
 		} else {
 			$('#user_role').removeClass('empty_field').blur();
-
-		if (location == '' || location == undefined) {
-			$('#location').addClass('empty_field').focus();
-			return false;
-		} else {
-			$('#location').removeClass('empty_field').blur();
 		}
-		}
+    
+		// if (location == '' || location == undefined) {
+		// 	$('#location').addClass('empty_field').focus();
+		// 	return false;
+		// } else {
+		// 	$('#location').removeClass('empty_field').blur();
+		// }
 
 		if (password == '' || password == undefined) {
 			$('#password').addClass('empty_field').focus();
@@ -258,8 +260,7 @@ function click_events() {
 
 		var user_id = $('#hidden_user_id').val();
 
-		Meteor.call('edit_save_user_details', user_id, user_name, user_email,user_role, user_contact, interest,
-		 location, password, user_cover, function (error, result) {
+		Meteor.call('edit_save_user_details', user_id, user_name, user_email,user_role, password, user_cover, function (error, result) {
 
 			$('#loader_gif').addClass('div_hide_class');
 			$('#save_text').removeClass('div_hide_class');
@@ -268,7 +269,6 @@ function click_events() {
 				swal('Some error occured!');
 
 			} else {
-				
 						swal('User successfully edited. ');
 						Router.go('/user_management');
 				}

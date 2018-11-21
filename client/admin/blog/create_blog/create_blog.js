@@ -6,10 +6,10 @@ import { Session } from 'meteor/session';
 import swal from 'sweetalert';
 
    Template.display_create_blog.onRendered(function(){
-		$.getScript("https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/pikaday.min.js",function(){
-		    swal("loaded: ");
-		    var picker = new Pikaday({ field: document.getElementById('blog_publish_date') });
-	});
+	// 	$.getScript("https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/pikaday.min.js",function(){
+	// 	    swal("loaded: ");
+	// 	    var picker = new Pikaday({ field: document.getElementById('blog_publish_date'),minDate: new Date() });
+	// });
 		
 	Session.set("blog_cover_session","");
 		// $('#blog_discription').trumbowyg();
@@ -67,7 +67,7 @@ Template.display_create_blog.events({
 		var blog_title = $("#blog_title").val();
 		var blog_type = $("#blog_type").val();
 		var blog_discription = $("#blog_discription").val();
-		var blog_publish_date = $("#blog_publish_date").val();
+		// var blog_publish_date = $("#blog_publish_date").val();
 
 		if(blog_title == '' || blog_title == null)
 		{
@@ -99,15 +99,15 @@ Template.display_create_blog.events({
 			$("#blog_discription").removeClass('emptyfield_focus');
 		}
 
-		if(blog_publish_date == '' || blog_publish_date == null)
-		{
-			$("#blog_publish_date").addClass('emptyfield_focus');
-			$("#blog_publish_date").focus();
-			return false;
-		}else
-		{
-			$("#blog_publish_date").removeClass('emptyfield_focus');
-		}		
+		// if(blog_publish_date == '' || blog_publish_date == null)
+		// {
+		// 	$("#blog_publish_date").addClass('emptyfield_focus');
+		// 	$("#blog_publish_date").focus();
+		// 	return false;
+		// }else
+		// {
+		// 	$("#blog_publish_date").removeClass('emptyfield_focus');
+		// }		
 
 	    if(Session.get("blog_cover_session")){
 		  var blog_cover = Session.get("blog_cover_session");
@@ -118,11 +118,11 @@ Template.display_create_blog.events({
 		}
 
 
-		swal('blog_title: '+blog_title+' blog_type: '+blog_type+' blog_discription: '+blog_discription+' blog_publish_date: '+blog_publish_date);
+		swal('blog_title: '+blog_title+' blog_type: '+blog_type+' blog_discription: '+blog_discription);
 // return false;
 		var logged_in_user = Session.get('userId');
 
-    Meteor.call('save_blog',blog_title,blog_type,blog_discription,blog_publish_date,logged_in_user,blog_cover,function(error,result){
+    Meteor.call('save_blog',blog_title,blog_type,blog_discription,logged_in_user,blog_cover,function(error,result){
               if(error){
                 console.log("Some error occured.");
               }else{ 

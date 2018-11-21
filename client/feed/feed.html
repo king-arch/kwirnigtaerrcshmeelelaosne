@@ -35,12 +35,11 @@
                           </time>
                         </div>
                       </div>
-
-                    
-
-
             </div>
-            
+
+                  <div class="row mini_loader_class div_hide_class" id="loader_class"> </div>
+
+ <i class="fas fa-times pull-right loader_visiblity_block" style="padding-right: 10px" id="display_selected_image_cancel" ></i>                    
                  <img id="display_selected_image" src="{{show_profile_image}}"  class="loader_visiblity_block" style="width: 100%" >
                 <div class="add-options-message">
 
@@ -96,10 +95,10 @@
               <div class="more"><svg class="olymp-three-dots-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-three-dots-icon"></use></svg>
                 <ul class="more-dropdown">
                   <li>
-                      <a href="javascript:void(0)" style="text-align:left !important;"  class="invitation_response editHubPost" id="{{post_id}}" > Edit</a>
+                      <a href="javascript:void(0)" style="text-align:left !important;"  class="pointer invitation_response editHubPost" id="{{post_id}}" > Edit</a>
                   </li>
                   <li>
-                      <a href="javascript:void(0)" style="text-align:left !important;" class="remove_post" id="{{post_id}}"> Delete</a>
+                      <a href="javascript:void(0)" style="text-align:left !important;" class="remove_post pointer" id="{{post_id}}"> Delete</a>
                  </li>
                 </ul>
               </div> 
@@ -270,10 +269,10 @@
               <div class="more"><svg class="olymp-three-dots-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-three-dots-icon"></use></svg>
                 <ul class="more-dropdown">
                   <li>
-                      <a href="javascript:void(0)" style="text-align:left !important;"  class="invitation_response editHubPost" id="{{post_id}}" > Edit</a>
+                      <a href="javascript:void(0)" style="text-align:left !important;"  class="pointer invitation_response editHubPost pointer" id="{{post_id}}" > Edit</a>
                   </li>
                   <li>
-                      <a href="javascript:void(0)" style="text-align:left !important;" class="remove_post" id="{{post_id}}"> Delete</a>
+                      <a href="javascript:void(0) pointer" style="text-align:left !important;" class="pointer remove_post" id="{{post_id}}"> Delete</a>
                  </li>
                 </ul>
               </div>
@@ -448,10 +447,10 @@
                 <ul class="more-dropdown">
 
                   <li>
-                      <a href="javascript:void(0)" style="text-align:left !important;"  class="invitation_response editHubPost" id="{{post_id}}" > Edit</a>
+                      <a href="javascript:void(0)" style="text-align:left !important;"  class="pointer invitation_response editHubPost" id="{{post_id}}" > Edit</a>
                   </li>
                   <li>
-                      <a href="javascript:void(0)" style="text-align:left !important;" class="remove_post" id="{{post_id}}"> Delete</a>
+                      <a href="javascript:void(0)" style="text-align:left !important;" class="remove_post pointer" id="{{post_id}}"> Delete</a>
                  </li>
 
                 </ul>
@@ -483,6 +482,9 @@
                 <img src="{{featured_image}}" alt="photo" target="_blank" >
                 <a href="{{posted_url}}" class="play-video" target="_blank">
                   <svg class="olymp-play-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-play-icon"></use></svg>
+
+                                      <p class="h5_hub_para" style="margin: 10px 10px 10px 0px !important; text-align: left !important;"> {{source}}</p>
+                                      
                 </a>
               </div>
           
