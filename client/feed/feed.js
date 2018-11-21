@@ -20,8 +20,10 @@ Template.feed_design.onDestroyed(function(){
 var tracker;
 
 Template.feed_design.onRendered(function () {
-   Session.set("set_feed_content_limit",3);
+  
+  Session.set("set_feed_content_limit",3);
   var loading;
+
 var block=0;
 var $loading = $('<div class="loading"><img class="loading-icon" src="http://imageserver.webpropartners.com/AdminMedia/SpecialtyImages/CaptchaImages/loading.gif" width="25"></div>');
 var $icon = $loading.find('img');
@@ -56,108 +58,6 @@ $(document).ready(function() {
 
    Session.set("load_lvl1_comments",0);
    Session.set("post_type","text");
-
-$(function() {
-  "use strict";
-  // end by a pace \s or \s$
-  var url = /(([-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?)\s)/gi; 
-  
-
-    $("#post_text").on('paste', function(e) {
-      // swal('klkdslklkds');
-      $(e.target).keyup();
-    });
-
- $("#post_text").on("keyup", function(e) {
-    var urls, lastURL,
-      checkURL = "",
-      output = "";
-
-    if (e.keyCode == 8 && e.keyCode !== 9 && e.keyCode !== 13 && e.keyCode !== 32 && e.keyCode !== 46) {
-        if($("#post_text").val()==""){
-            if(Session.get("post_type")=="metadata_url"){
-                   $("#url_metadata_div").addClass("div_hide_class");
-                   $("#loader_class").addClass("div_hide_class");
-                   Session.set("post_type","text");
-            }
-        };
-      return;
-    }
-   if (e.keyCode == 17) {
-      return;
-    }
-    Session.set("request_send","false");
-    while ((urls = url.exec(this.value)) !== null) {
-      output += urls[0];
-      $("#result").html(output);
-      if($("#post_text").val().trim()==""){
-            if(Session.get("post_type")=="metadata_url"){
-                   $("#url_metadata_div").addClass("div_hide_class");
-                   $("#loader_class").addClass("div_hide_class");
-                   Session.set("post_type","text");
-                   return false;
-            }
-        };
- var urlRegex = /(https?:\/\/[^\s]+)/g;
- if(urlRegex.test($("#post_text").val())){
-
-     fetch_meta_information_in_url(output);
- }
-    }
-  });
-});
-
-function fetch_meta_information_in_url(output){
-
- $("#loader_class").removeClass("div_hide_class");
-      Meteor.call('fetch_url_information',output,function(error,result){
-        if(error){
-          // console.log("Error");
-          swal(error);
-        }else{
-
-         if($("#post_text").val().trim()==""){
-                   $("#url_metadata_div").addClass("div_hide_class");
-                   $("#loader_class").addClass("div_hide_class");
-                   Session.set("post_type","text");
-                   return false;
-        };
-
-          if(Session.get("request_send")=="false"){
-          $("#loader_class").addClass("div_hide_class");
-          $("#url_metadata_div").removeClass("div_hide_class");
-          Session.set("request_send","true");
-          // console.log(JSON.stringify(result));
-          var result_string=JSON.stringify(result);
-          var title=JSON.parse(result_string);          
-          if(result_string.includes("code")){
-            swal("Sorry, Unable to fetch details!!!");
-            return false;
-          }
-          if(title.image!=""){
-            $("#metadata_info_image").attr("src",title.image);
-            Session.set("metadata_image",title.image);
-          }else{
-            $("#metadata_info_image").attr("src","http://www.vayuz.com/logo.png");
-            Session.set("metadata_image","http://www.vayuz.com/logo.png");
-          }
-            Session.set("metadata_url",title.url);
-            var title1=title.title;
-            if(title1.length>38){
-            $("#metadata_info_heading").text(title1.substring(0,35));
-            }else{
-            $("#metadata_info_heading").text(title1);
-            }
-
-            $("#metadata_info_sub_heading").text(title.source);
-            Session.set("post_type","metadata_url")
-            Session.set("metadata_title",title.title);
-            Session.set("metadata_source",title.source);  
-          }
-        }
-      })
-}
-
 
 });
 
@@ -208,7 +108,7 @@ Template.feed_design.helpers({
       var new_result = new Array();
       var count = 1;
       for(var i = 0; i < result.length; i++){
-        console.log(result[i]);
+        // console.log(result[i]);
 
           if(count <= 5 && result[i].user_id != admin_id){
             var result2 = following_list.find({ $and: [{ "following": result[i].user_id },{ "follower": logged_in_user },{current_follow_status: 1} ] }).fetch();
@@ -221,8 +121,8 @@ Template.feed_design.helpers({
           }
         }
 
-      console.log('new array');
-      console.log(new_result);
+      // console.log('new array');
+      // console.log(new_result);
                                 
 
       return new_result;
@@ -471,6 +371,169 @@ Template.feed_design.helpers({
 
   },
 
+  total_liked_on_post_count(post_id){
+            var result = feed.find({
+                                     parent_id: this.post_id,
+                                     post_type: 'like',
+                                     like_status: 1,
+                             }).fetch();
+
+            if(result[0]){
+              if(result == 2){
+                 return result-2 ;  
+              }else{
+                 return 'and'+result-2+'  more';  
+              }
+          }
+  },
+
+ //  friends_name(){
+ //            var result = feed.find({
+ //                                     parent_id: this.post_id,
+ //                                     post_type: 'like',
+ //                                     like_status: 1,
+ //                             }).fetch();
+
+ //      var logged_in_user = Session.get("userId");
+ //      follow_list_all = Meteor.subscribe("follow_list_all");
+ //      var friend_id = 0;
+
+ //      for(var i=0; i<result.length; i++){
+ //         var check_friend = following_list.find({"following": result[0].liked_by,"follower": logged_in_user },{current_follow_status: 1}).fetch(); 
+ //         if(check_friend[0]){
+ //             if(friend_id == 0){
+ //                friend_id = check_friend[0].following;
+ //             }
+ //         }
+ //      }
+
+ // if(friend_id != 0){
+ //    Meteor.subscribe("user_info_based_on_id",user_id);
+ //    var user_name = user_details.find({ user_id: friend_id }).fetch();
+ //    }
+ //            if(friend_id[0]){
+ //              return user_name[0].user_name;
+ //          }
+ //  },
+
+     display_liked_content(post_id){
+        Meteor.subscribe("follow_list_all");
+        var logged_in_user = Session.get("userId");
+        var check_friend = following_list.find({"follower": logged_in_user },{current_follow_status: 1}).fetch(); 
+        
+        var new_friend_list = new Array();
+
+        for(var i=0;i<check_friend.length;i++){
+          new_friend_list.push(check_friend[i].following);
+        }
+        new_friend_list.push(logged_in_user);
+
+        console.log("show_user_listing");
+        console.log(new_friend_list);
+
+        var check_likers = feed.find({
+                         parent_id: this.post_id,
+                         post_type: 'like',
+                         like_status: 1,
+                         liked_by: {$in: new_friend_list },
+                        }).fetch();
+
+        var total_likes = feed.find({
+                         parent_id: this.post_id,
+                         post_type: 'like',
+                         like_status: 1,
+                        }).fetch();
+
+        var final_likers_count = total_likes.length;
+        final_likers_count = parseInt(final_likers_count);
+
+        console.log("check if liked by friend");
+        console.log(check_likers);
+
+        console.log("final_likers_count");
+        console.log(final_likers_count);
+
+        if(check_likers.length == 1){
+          if(check_likers[0].liked_by == logged_in_user){
+            return 'you liked this';
+          }else{
+              Meteor.subscribe("user_info_based_on_id",check_likers[0].liked_by);
+              var user_name = user_details.find({ user_id: check_likers[0].liked_by }).fetch();
+              console.log('show singled liker friend');
+              console.log(user_name[0].user_name);
+              return user_name[0].user_name+' liked this';
+          }
+        }
+        else if(check_likers.length == 2){
+            if(check_likers[0].liked_by == logged_in_user || check_likers[1].liked_by == logged_in_user){
+              
+              if(check_likers[0].liked_by == logged_in_user){
+              
+              Meteor.subscribe("user_info_based_on_id",check_likers[1].liked_by);
+              var user_name = user_details.find({ user_id: check_likers[1].liked_by }).fetch();
+             return 'you & '+user_name[0].user_name+' liked this';
+                            
+              }else{
+              Meteor.subscribe("user_info_based_on_id",check_likers[0].liked_by);
+              var user_name = user_details.find({ user_id: check_likers[0].liked_by }).fetch();
+              return 'you & '+user_name[0].user_name+' liked this';
+              } 
+
+            }
+            else{
+              Meteor.subscribe("user_info_based_on_id",check_likers[0].liked_by);
+              var user_name = user_details.find({ user_id: check_likers[1].liked_by }).fetch();
+              return user_name[0].user_name+' & 1 more liked this';
+            }
+        }
+      else if(check_likers.length > 2){
+        var check_list_friends_who_liked = new Array();
+        for(var i=0; i< check_likers.length; i++){
+          check_list_friends_who_liked.push(check_likers[i].liked_by)
+        }
+          if(check_list_friends_who_liked.includes(logged_in_user)){
+            if(check_list_friends_who_liked[0] == logged_in_user){
+
+              Meteor.subscribe("user_info_based_on_id",check_likers[1].liked_by);
+              var user_name = user_details.find({ user_id: check_likers[1].liked_by }).fetch();
+              return 'you, '+user_name[0].user_name+' & '+(final_likers_count-2) +' more liked this';
+
+            }
+            else{
+              Meteor.subscribe("user_info_based_on_id",check_likers[0].liked_by);
+              var user_name = user_details.find({ user_id: check_likers[0].liked_by }).fetch();
+              return 'you, '+user_name[0].user_name+' & '+(final_likers_count-2) +' more liked this';
+            } 
+          }else{
+              Meteor.subscribe("user_info_based_on_id",check_likers[0].liked_by);
+              var user_name = user_details.find({ user_id: check_likers[0].liked_by }).fetch();
+              return user_name[0].user_name+' & '+(final_likers_count-1 )+' more liked this';            
+          }
+      }
+
+     },
+
+    check_for_user_already_liked_for_listng(){
+          var liked_by = Session.get("userId");
+            var result = feed.find({
+                                     parent_id: this.post_id,
+                                     parent_post_type: 'post',
+                                     liked_by: liked_by,
+                                     post_type: 'like',
+                             }).fetch();
+
+          if(result[0]){
+            if(result[0].like_status > 0){
+                return 'you ,';
+            }
+            else{
+                return false;
+            }
+          }
+          else{
+            return false;
+          }
+    },
 
   show_likes_on_post(post_id){
             var result = feed.find({
@@ -651,9 +714,48 @@ Template.feed_design.helpers({
           }
     },
 
+        check_for_edited_post(post_id){
+      // Meteor.subscribe("comment_based_comment_id",comment_id);
+        var result = feed.find({ post_id: post_id }).fetch()
+        if(result[0])
+        {
+          if(result[0].updated_at)
+          {
+          return true;
+        }
+      }
+  },
+
 });
 
 Template.feed_design.events({
+
+   "keyup #post_text":function(e){
+   var url = /(([-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?)\s)/gi; 
+    var urls, lastURL,
+      checkURL = "",
+      output = "";
+    if (e.keyCode == 8 && e.keyCode !== 9 && e.keyCode !== 13 && e.keyCode !== 32 && e.keyCode !== 46) {
+        if($("#post_text").val()==""){
+            if(Session.get("post_type")=="metadata_url"){
+                   $("#url_metadata_div").addClass("div_hide_class");
+                   $("#loader_gif").addClass("div_hide_class");
+                   Session.set("post_type","text");
+            }
+        };
+      return;
+    }
+      if (e.keyCode == 17) {
+      return;
+    }
+  },
+    "paste #post_text":function(){ Session.set("request_send","false");
+      setTimeout(function(){
+        // alert($("#post_text").val());
+        fetch_meta_information_in_url($("#post_text").val())
+      }, 100);
+    },
+
 
   'click .go_to_detail_page':function(){      
             var post_id = Base64.encode(this.post_id);  
@@ -979,7 +1081,7 @@ Template.feed_design.events({
         if(error){
           swal("error");
         }else{
-           $("#hub_posting_text").val("");
+           $("#post_text").val("");
           $("#url_metadata_div").addClass("div_hide_class");
           // swal("success");
           Session.clear("metadata_image");
@@ -1142,4 +1244,56 @@ function dataURItoBlob(dataURI) {
     }
 
     return new Blob([ia], {type:mimeString});
+}
+
+
+
+function fetch_meta_information_in_url(output){
+ $("#loader_gif").removeClass("div_hide_class");
+      Meteor.call('fetch_url_information',output,function(error,result){
+        if(error){
+          // console.log("Error");
+          swal(error);
+        }else{
+
+         if($("#post_text").val().trim()==""){
+                   $("#url_metadata_div").addClass("div_hide_class");
+                   $("#loader_gif").addClass("div_hide_class");
+                   Session.set("post_type","text");
+                   return false;
+        };
+
+          if(Session.get("request_send")=="false"){
+          $("#loader_gif").addClass("div_hide_class");
+          $("#url_metadata_div").removeClass("div_hide_class");
+          Session.set("request_send","true");
+          // console.log(JSON.stringify(result));
+          var result_string=JSON.stringify(result);
+          var title=JSON.parse(result_string);          
+          if(result_string.includes("code")){
+            swal("Sorry, Unable to fetch details!!!");
+            return false;
+          }
+          if(title.image!=""){
+            $("#metadata_info_image").attr("src",title.image);
+            Session.set("metadata_image",title.image);
+          }else{
+            $("#metadata_info_image").attr("src","http://www.vayuz.com/logo.png");
+            Session.set("metadata_image","http://www.vayuz.com/logo.png");
+          }
+            Session.set("metadata_url",title.url);
+            var title1=title.title;
+            if(title1.length>38){
+            $("#metadata_info_heading").text(title1.substring(0,35));
+            }else{
+            $("#metadata_info_heading").text(title1);
+            }
+
+            $("#metadata_info_sub_heading").text(title.source);
+            Session.set("post_type","metadata_url")
+            Session.set("metadata_title",title.title);
+            Session.set("metadata_source",title.source);  
+          }
+        }
+      })
 }

@@ -257,25 +257,6 @@
               <a href="#" class="reply_to_lvl0" id="{{comment_id}}" >Reply</a>
             </li>
 
-          
-          <li class="comment-item loader_visiblity_block" id="reply_lvl0_{{comment_id}}" >
-               <form class="comment-form inline-items">
-            <div class="post__author author vcard inline-items">
-
-
-              <img src="{{show_logged_inuser_profile_pic}}" alt="author" class="view_profile" >
-              <div class="form-group with-icon-right is-empty">
-
-                <textarea class="form-control c-darkgray" placeholder="Enter your reply here ..." id="comment_lvl_1_{{comment_id}}" ></textarea>
-
-                <div class="add-options-message">
-                </div>
-              <span class="material-input"></span></div>
-            </div>
-            <button class="btn btn-md-2 btn-primary lvl_1_comment_submitted" id="{{comment_id}}">Reply</button>
-          </form>
-
-        </li>
 
     {{#each display_lvl_1_commenting}}
       <li class="comment-item" style="padding-left: 80px;" >
@@ -387,7 +368,28 @@
 
         {{/each}}
 
+              <li class="comment-item loader_visiblity_block" id="reply_lvl0_{{comment_id}}" >
+               <form class="comment-form inline-items">
+            <div class="post__author author vcard inline-items">
+
+
+              <img src="{{show_logged_inuser_profile_pic}}" alt="author" class="view_profile" >
+              <div class="form-group with-icon-right is-empty">
+
+                <textarea class="form-control c-darkgray" placeholder="Enter your reply here ..." id="comment_lvl_1_{{comment_id}}" ></textarea>
+
+                <div class="add-options-message">
+                </div>
+              <span class="material-input"></span></div>
+            </div>
+            <button class="btn btn-md-2 btn-primary lvl_1_comment_submitted" id="{{comment_id}}">Reply</button>
+          </form>
+
+        </li>
+
     {{/each}}
+
+
 
           </ul>
 
@@ -663,25 +665,6 @@
               <a href="#" class="reply_to_lvl0" id="{{comment_id}}" >Reply</a>
             </li>
 
-          
-          <li class="comment-item loader_visiblity_block" id="reply_lvl0_{{comment_id}}" >
-               <form class="comment-form inline-items">
-            <div class="post__author author vcard inline-items">
-
-
-              <img src="{{show_logged_inuser_profile_pic}}" class="view_profile" alt="author">
-              <div class="form-group with-icon-right is-empty">
-
-                <textarea class="form-control c-darkgray" placeholder="Enter your reply here ..." id="comment_lvl_1_{{comment_id}}" ></textarea>
-
-                <div class="add-options-message">
-                </div>
-              <span class="material-input"></span></div>
-            </div>
-            <button class="btn btn-md-2 btn-primary lvl_1_comment_submitted" id="{{comment_id}}">Reply</button>
-          </form>
-        </li>
-
     {{#each display_lvl_1_commenting}}
       <li class="comment-item" style="padding-left: 80px;" >
               <div class="post__author author vcard inline-items">
@@ -753,6 +736,24 @@
 
             </li>
         {{/each}}
+
+        <li class="comment-item loader_visiblity_block" id="reply_lvl0_{{comment_id}}" >
+               <form class="comment-form inline-items">
+            <div class="post__author author vcard inline-items">
+
+
+              <img src="{{show_logged_inuser_profile_pic}}" class="view_profile" alt="author">
+              <div class="form-group with-icon-right is-empty">
+
+                <textarea class="form-control c-darkgray" placeholder="Enter your reply here ..." id="comment_lvl_1_{{comment_id}}" ></textarea>
+
+                <div class="add-options-message">
+                </div>
+              <span class="material-input"></span></div>
+            </div>
+            <button class="btn btn-md-2 btn-primary lvl_1_comment_submitted" id="{{comment_id}}">Reply</button>
+          </form>
+        </li>
     {{/each}}
           </ul>
           
@@ -1045,25 +1046,6 @@
               <a href="#" class="reply_to_lvl0" id="{{comment_id}}" >Reply</a>
             </li>
 
-          
-          <li class="comment-item loader_visiblity_block" id="reply_lvl0_{{comment_id}}" >
-               <form class="comment-form inline-items">
-            <div class="post__author author vcard inline-items">
-
-
-              <img src="{{show_logged_inuser_profile_pic}}" class="view_profile" alt="author">
-              <div class="form-group with-icon-right is-empty">
-
-                <textarea class="form-control c-darkgray" placeholder="Enter your reply here ..." id="comment_lvl_1_{{comment_id}}" ></textarea>
-
-                <div class="add-options-message">
-                </div>
-              <span class="material-input"></span></div>
-            </div>
-            <button class="btn btn-md-2 btn-primary lvl_1_comment_submitted" id="{{comment_id}}">Reply</button>
-          </form>
-        </li>
-
     {{#each display_lvl_1_commenting}}
       <li class="comment-item" style="padding-left: 80px;" >
               <div class="post__author author vcard inline-items">
@@ -1137,11 +1119,30 @@
 
 
         {{/each}}
+          
+          <li class="comment-item loader_visiblity_block" id="reply_lvl0_{{comment_id}}" >
+               <form class="comment-form inline-items">
+            <div class="post__author author vcard inline-items">
 
+
+              <img src="{{show_logged_inuser_profile_pic}}" class="view_profile" alt="author">
+              <div class="form-group with-icon-right is-empty">
+
+                <textarea class="form-control c-darkgray" placeholder="Enter your reply here ..." id="comment_lvl_1_{{comment_id}}" ></textarea>
+
+                <div class="add-options-message">
+                </div>
+              <span class="material-input"></span></div>
+            </div>
+
+        <button class="btn btn-md-2 btn-primary lvl_1_comment_submitted" id="{{comment_id}}">Reply</button>
+
+          </form>
+        </li>
+        
     {{/each}}
 
           </ul>
-
           
 <!-- {{#if check_if_comments_exist}}
       <a href="#" class="more-comments show_more_comments" id="comment_box_{{post_id}}" >View more comments <span>+</span></a>         

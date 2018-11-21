@@ -729,6 +729,7 @@ Template.feed_detail_page.events({
     }else{
           Session.set("toggle_on_reply",true);
           $('#reply_lvl0_'+this.comment_id).removeClass("loader_visiblity_block");
+          $('#comment_lvl_1_'+this.comment_id).focus();
         }
     },
 

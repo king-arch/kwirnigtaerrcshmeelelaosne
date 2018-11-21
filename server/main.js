@@ -876,13 +876,26 @@ if(check_if_exist[0]){
 
     'save_metadata_post':function(post_text,featured_image,featured_title,source,posted_url,logged_in_user)
       {
+
+          var post_type;
+        var is_youtube_video = youtube_parser(posted_url);
+            // console.log("posted_url");
+            // console.log(posted_url);
+          
+        if(is_youtube_video !=false){
+          post_type = "youtube_post";
+          posted_url = is_youtube_video;
+        }else{
+          post_type = "url_metadata";
+        }
+
     var post_id = 'post_id_'+Math.floor((Math.random() * 2465789) + 1);
     var result = feed.insert({
 
                "post_id": post_id,
                "post_text": post_text,
                "post_type": 'post',
-               "post_content_type": 'url_metadata',
+               "post_content_type": post_type,
                "post_by": logged_in_user,
 
                "featured_image":featured_image,
@@ -1874,3 +1887,9 @@ var message = { "msg": "User succesfully created. "}
 }
 
 //******************** email functions End *************************
+
+function youtube_parser(url){
+    var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
+    var match = url.match(regExp);
+    return (match&&match[7].length==11)? match[7] : false;
+}
