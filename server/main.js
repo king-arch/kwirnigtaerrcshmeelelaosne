@@ -64,6 +64,11 @@ import urlMetadata from 'url-metadata';
       return  interest_list.find({});
     });
 
+
+     Meteor.publish('fetch_result_interest_listing', function() {
+      return  interest_list.find({});
+    });
+
      Meteor.publish('fetch_feed_content', function() {
       return  feed.find({});
     });
