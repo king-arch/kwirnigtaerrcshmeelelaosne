@@ -20091,3 +20091,23 @@ box-shadow: rgba(255,255,255, 0.75) 1.5em 0 0 0, rgba(255,255,255, 0.75) 1.1em 1
 .edit a {
     color: #000;
 }
+
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait) {
+
+.hidden-xs{
+display: none !important;
+}
+}
+
+@media only screen and (min-width: 800px) {
+.hidden-xs{
+display: none !important;
+}
+
+}
+
+@media only screen and (min-width: 1200px) {
+.hidden-xs{
+display: block !important;
+}
+}
