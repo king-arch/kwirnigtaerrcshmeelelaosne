@@ -1769,12 +1769,14 @@ function upload_cover_pic(e,template){
             $('#divcrop_cover').addClass('cropper-example-lena');
 
              $('.cropper-example-lena > img').cropper({
-                               aspectRatio: 4 / 1,
+                               aspectRatio: 16 / 4,
                     autoCropArea: 0,
                       viewMode: 1,
                 dragMode: 'move',
                 autoCropArea: 1,
                 restore: true,
+                minContainerWidth: 400,
+                minContainerHeight: 300,
                 modal: true,
                 guides: false,
                 highlight: true,
@@ -1849,10 +1851,13 @@ function upload_profile_pic(e,template){
 
             $('#divcrop_profile').addClass('cropper-example-lena');
              $('.cropper-example-lena > img').cropper({
-                  aspectRatio: 16 / 9,
+                  aspectRatio: 4 / 4,
                     autoCropArea: 0,
                       viewMode: 1,
                 dragMode: 'move',
+
+                minContainerWidth: 400,
+                minContainerHeight: 300,
                 autoCropArea: 1,
                 restore: true,
                 modal: true,

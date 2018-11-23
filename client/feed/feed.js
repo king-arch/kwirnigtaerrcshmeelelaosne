@@ -646,7 +646,7 @@ Template.feed_design.helpers({
       if(profile_pic){
         var result = profile_pic;
       }else{
-        var result = "img/focus.png"
+        var result = "/img/focus.png"
       }
       return result;
     },
@@ -1219,6 +1219,14 @@ function upload_post_image(e,template){
        // console.log(base64data);
 
      Session.set("post_image_session",base64data);
+     if (!$("#url_metadata_div").hasClass("div_hide_class")) {
+       $("#url_metadata_div").addClass("div_hide_class")
+       Session.clear("metadata_image");
+         Session.clear("metadata_url");
+         Session.clear("metadata_title");
+         Session.clear("metadata_source");
+         Session.set("post_type","text");
+     }
      // swal(post_image_session);
     };
    }
@@ -1283,6 +1291,13 @@ function fetch_meta_information_in_url(output){
           }
             Session.set("metadata_url",title.url);
             var title1=title.title;
+          if (!title1) {
+          if(result_string.includes("code")){
+            swal("Sorry, Unable to fetch details!!!");
+            return false;
+          }
+
+          }
             if(title1.length>38){
             $("#metadata_info_heading").text(title1.substring(0,35));
             }else{
@@ -1293,6 +1308,13 @@ function fetch_meta_information_in_url(output){
             Session.set("post_type","metadata_url")
             Session.set("metadata_title",title.title);
             Session.set("metadata_source",title.source);  
+
+
+             if (Session.get("post_image_session")!="") {
+             $('#display_selected_image').addClass('loader_visiblity_block');  
+             $('#display_selected_image_cancel').addClass('loader_visiblity_block');  
+           }
+
           }
         }
       })
