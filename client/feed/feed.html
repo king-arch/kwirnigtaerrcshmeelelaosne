@@ -40,8 +40,8 @@
 <i class="fa fa-spinner fa-pulse fa-fw fa-3x div_hide_class" id="loader_gif" style="margin-left: 45%;" ></i>
               <div class="profile-pic">
                  <img id="display_selected_image" src="{{show_profile_image}}"  class="loader_visiblity_block " style="width: 100%" >
-                 <div class="edit">
- <i class="fas fa-times pull-right loader_visiblity_block" id="display_selected_image_cancel" ></i>     </div>   
+                 <div class="edit loader_visiblity_block"  id="display_selected_image_cancel" >
+ <i class="fas fa-times pull-right" ></i>     </div>   
 </div>
                 <div class="add-options-message">
 
@@ -116,7 +116,7 @@
 
 
 
-        <p id="post_text_{{post_id}}" class="justify go_to_detail_page" >
+        <p id="post_text_{{post_id}}" class="justify" >
                 {{#if check_summary_for_br_tag}}
                   {{#each BreakAsArrayfull}}
                   {{tag}}
@@ -143,7 +143,7 @@
               {{#if check_for_user_already_liked}} 
               <a class="like_event post-add-icon inline-items" >
                 <svg class="olymp-heart-icon" style="fill: #FE5D39 !important;">
-                  <use xlink:href="svg-icons/sprites/icons.svg#olymp-heart-icon"></use>
+                  <use xlink:href="/svg-icons/sprites/icons.svg#olymp-heart-icon"></use>
                 </svg>
                 <span>
                   <a data-toggle="modal" data-target="#show_like_count_on_feed_post_image" class=" get_all_liked_users">  {{total_liked_on_post post_id}}
@@ -155,7 +155,7 @@
                {{else }}      
               <a class="like_event post-add-icon inline-items">               
                 <svg class="olymp-heart-icon">
-                  <use xlink:href="svg-icons/sprites/icons.svg#olymp-heart-icon"></use>
+                  <use xlink:href="/svg-icons/sprites/icons.svg#olymp-heart-icon"></use>
                 </svg>
                 <span>
                   <a data-toggle="modal" data-target="#show_like_count_on_feed_post_image" class=" get_all_liked_users">
@@ -272,7 +272,7 @@
           {{/if}}        
             </div>
           
-        <p id="post_text_{{post_id}}"  class="go_to_detail_page" >
+        <p id="post_text_{{post_id}}"  class="" >
                 {{#if check_summary_for_br_tag}}
                   {{#each BreakAsArrayfull}}
                   {{tag}}
@@ -610,7 +610,7 @@
        {{/if}}    
             </div>
           
-           <p id="post_text_{{post_id}}"  class="go_to_detail_page" >
+           <p id="post_text_{{post_id}}"  class="go_to_detail_page pointer" >
                 {{#if check_summary_for_br_tag}}
                   {{#each BreakAsArrayfull}}
                   {{tag}}

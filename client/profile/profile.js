@@ -1140,7 +1140,7 @@ Template.profile_content.events({
 'change #cover_pic_modal': function() {
             $('#divcrop_cover').addClass('cropper-example-lena');
              $('.cropper-example-lena > img').cropper({
-             aspectRatio: 8 / 8,
+             aspectRatio: 16 / 9,
 viewMode: 1,
   dragMode: 'move',
   cropBoxMovable: false,
@@ -1174,11 +1174,13 @@ viewMode: 1,
 
 
 'change #profile_pic_modal': function() {
-            $('#divcrop_profile').addClass('cropper-example-lena');
-             $('.cropper-example-lena > img').cropper({
-             aspectRatio: 8 / 8,
+$('#divcrop_profile').addClass('cropper-example-lena');
+$('.cropper-example-lena > img').cropper({
+             aspectRatio: 16 / 9,
 viewMode: 1,
   dragMode: 'move',
+  width:600,
+  height:800,
   cropBoxMovable: false,
   cropBoxResizable: false,
   toggleDragModeOnDblclick: false,
@@ -1819,10 +1821,12 @@ console.log(base64data);
 // **********************upload function profile pic START*************************************************
 
 function upload_profile_pic(e,template){
-  $('#my_image_profile').cropper('destroy');
     // e.preventDefault();
     // var files = e.currentTarget.files;
-    if (e.currentTarget.files && e.currentTarget.files[0]) {
+ 
+    
+  $('#my_image_profile').cropper('destroy');
+     if (e.currentTarget.files && e.currentTarget.files[0]) {
      var file = e.currentTarget.files[0];
       if (file) {
    
@@ -1838,13 +1842,14 @@ function upload_profile_pic(e,template){
             $("#my_image_profile").attr("srcset",imagePath);             
             
             $("#crop_profile_modal").attr("src",imagePath);
-            $('#divcrop_profile').addClass('cropper-example-lena');
+           
 
             // var height = 400;
             // var width = 400;
 
+            $('#divcrop_profile').addClass('cropper-example-lena');
              $('.cropper-example-lena > img').cropper({
-                               aspectRatio: 1 / 1,
+                  aspectRatio: 16 / 9,
                     autoCropArea: 0,
                       viewMode: 1,
                 dragMode: 'move',
@@ -1857,9 +1862,13 @@ function upload_profile_pic(e,template){
                 cropBoxResizable: true,
                 zoomable: true,
             });
-
+             setTimeout(function(){
+        
+            $('#divcrop_profile').removeClass('cropper-example-lena');
+            $('#divcrop_profile').addClass('cropper-example-lena');
+             },500);
 };
-    
+
      }  }} 
 
 function crop_image(){

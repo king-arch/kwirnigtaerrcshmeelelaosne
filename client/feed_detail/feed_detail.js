@@ -193,8 +193,8 @@ Template.feed_detail_page.helpers({
 		var user_id = Session.get("userId");
 	  Meteor.subscribe("user_info_based_on_id",user_id);
       var result = user_details.find({ user_id: user_id }).fetch();
-      // console.log('show logged in user detail');
-      // console.log(result);
+      console.log('show logged in user detail');
+      console.log(result);
       if(result[0]){
         Session.set("logged_in_user_profile_pic",result[0].user_profile_pic);
       }
@@ -306,6 +306,13 @@ Template.feed_detail_page.helpers({
          var result = user_details.find({user_id: user_id}).fetch();
          // console.log('show result');
          // console.log(result);
+
+      console.log('show logged in user detail');
+      console.log(result);
+      if(result[0]){
+        Session.set("logged_in_user_profile_pic",result[0].user_profile_pic);
+      }
+
          return result;
     },
 
@@ -723,8 +730,8 @@ Template.feed_detail_page.helpers({
         }
         new_friend_list.push(logged_in_user);
 
-        console.log("show_user_listing");
-        console.log(new_friend_list);
+        // console.log("show_user_listing");
+        // console.log(new_friend_list);
 
         var check_likers = feed.find({
                          parent_id: this.post_id,
@@ -742,11 +749,11 @@ Template.feed_detail_page.helpers({
         var final_likers_count = total_likes.length;
         final_likers_count = parseInt(final_likers_count);
 
-        console.log("check if liked by friend");
-        console.log(check_likers);
+        // console.log("check if liked by friend");
+        // console.log(check_likers);
 
-        console.log("final_likers_count");
-        console.log(final_likers_count);
+        // console.log("final_likers_count");
+        // console.log(final_likers_count);
 
         if(check_likers.length == 1){
           if(check_likers[0].liked_by == logged_in_user){

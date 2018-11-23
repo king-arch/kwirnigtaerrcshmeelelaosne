@@ -258,7 +258,11 @@ var result = send_email_user_created_by_admin(user_id,user_name,user_email,passw
 var check_if_email_exist = user_details.find({user_email: signup_email}).fetch();
 
       if(check_if_email_exist[0]){
-          var message = { "msg" : "email already exist" , "response_status": 0 };
+          var message = { 
+                      "msg" : "email already exist" ,
+                       "response_status": 0,
+                       "email_status": 1,
+                        };
           return message;
       }
       else{
@@ -273,7 +277,12 @@ var check_if_email_exist = user_details.find({user_email: signup_email}).fetch()
             "created_at": Date.now(),
           });
 
-         var message = { "msg" : result ,"response_status": 1 ,"user_id": user_id };
+         var message = { 
+                      "msg" : result ,
+                      "response_status": 1 ,
+                      "user_id": user_id,
+                      "email_status": 0,
+                    };
           return message;
       }
   },

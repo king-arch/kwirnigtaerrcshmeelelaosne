@@ -5622,8 +5622,9 @@ fieldset[disabled] .checkbox input[type=checkbox] {
     display: block;
     position: absolute;
     top: 100%;
+    cursor: pointer;
     right: 0;
-    width: 180px;
+    width: 100px;
     box-shadow: 0 0 34px 0 rgba(63, 66, 87, .1);
     background-color: #fff;
     border-radius: 4px;

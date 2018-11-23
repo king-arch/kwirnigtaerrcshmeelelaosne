@@ -102,6 +102,7 @@ var str2 = str.split("-").join(" ");
 Template.headeroptions.events({
 
   'click #go_to_feed':function(){
+    // window.location.href="/feed";
     Router.go("/feed");
    },
 

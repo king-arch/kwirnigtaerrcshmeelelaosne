@@ -1,8 +1,12 @@
   
 <template name="feed_detail">
-  
- {{> headeroptions}}
- {{> feed_detail_page}}
+  {{> header}}
+    
+ <body class="landing-page">
+    {{> headeroptions}}
+  {{> feed_detail_page}}
+  {{> footer}}
+  </body>
 </template>
 
 <template name="feed_detail_page">
@@ -78,10 +82,11 @@
 
             <div class="post-additional-info inline-items">
 
+             
               {{#if check_for_user_already_liked}} 
               <a class="like_event post-add-icon inline-items" >
                 <svg class="olymp-heart-icon" style="fill: #FE5D39 !important;">
-                  <use xlink:href="svg-icons/sprites/icons.svg#olymp-heart-icon"></use>
+                  <use xlink:href="/svg-icons/sprites/icons.svg#olymp-heart-icon"></use>
                 </svg>
                 <span>
                   <a data-toggle="modal" data-target="#show_like_count_on_feed_post_image" class=" get_all_liked_users">  {{total_liked_on_post post_id}}
@@ -93,7 +98,7 @@
                {{else }}      
               <a class="like_event post-add-icon inline-items">               
                 <svg class="olymp-heart-icon">
-                  <use xlink:href="svg-icons/sprites/icons.svg#olymp-heart-icon"></use>
+                  <use xlink:href="/svg-icons/sprites/icons.svg#olymp-heart-icon"></use>
                 </svg>
                 <span>
                   <a data-toggle="modal" data-target="#show_like_count_on_feed_post_image" class=" get_all_liked_users">
@@ -105,6 +110,7 @@
              
               &nbsp;  &nbsp;
                {{/if}}
+          
           
               <ul class="friends-harmonic">
                   {{#each show_users_liked_on_post}} 

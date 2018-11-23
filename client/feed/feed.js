@@ -455,7 +455,7 @@ Template.feed_design.helpers({
 
         if(check_likers.length == 1){
           if(check_likers[0].liked_by == logged_in_user){
-            return 'you liked this';
+            return 'You liked this';
           }else{
               Meteor.subscribe("user_info_based_on_id",check_likers[0].liked_by);
               var user_name = user_details.find({ user_id: check_likers[0].liked_by }).fetch();
@@ -471,12 +471,12 @@ Template.feed_design.helpers({
               
               Meteor.subscribe("user_info_based_on_id",check_likers[1].liked_by);
               var user_name = user_details.find({ user_id: check_likers[1].liked_by }).fetch();
-             return 'you & '+user_name[0].user_name+' liked this';
+             return 'You & '+user_name[0].user_name+' liked this';
                             
               }else{
               Meteor.subscribe("user_info_based_on_id",check_likers[0].liked_by);
               var user_name = user_details.find({ user_id: check_likers[0].liked_by }).fetch();
-              return 'you & '+user_name[0].user_name+' liked this';
+              return 'You & '+user_name[0].user_name+' liked this';
               } 
 
             }
@@ -496,13 +496,13 @@ Template.feed_design.helpers({
 
               Meteor.subscribe("user_info_based_on_id",check_likers[1].liked_by);
               var user_name = user_details.find({ user_id: check_likers[1].liked_by }).fetch();
-              return 'you, '+user_name[0].user_name+' & '+(final_likers_count-2) +' more liked this';
+              return 'You, '+user_name[0].user_name+' & '+(final_likers_count-2) +' more liked this';
 
             }
             else{
               Meteor.subscribe("user_info_based_on_id",check_likers[0].liked_by);
               var user_name = user_details.find({ user_id: check_likers[0].liked_by }).fetch();
-              return 'you, '+user_name[0].user_name+' & '+(final_likers_count-2) +' more liked this';
+              return 'You, '+user_name[0].user_name+' & '+(final_likers_count-2) +' more liked this';
             } 
           }else{
               Meteor.subscribe("user_info_based_on_id",check_likers[0].liked_by);
@@ -524,7 +524,7 @@ Template.feed_design.helpers({
 
           if(result[0]){
             if(result[0].like_status > 0){
-                return 'you ,';
+                return 'You ,';
             }
             else{
                 return false;

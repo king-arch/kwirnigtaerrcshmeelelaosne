@@ -199,6 +199,7 @@ Template.index_content.events({
                 }else{
                 Session.setPersistent("userId",result.user_id);
                 Session.setPersistent("userEmail",signup_email);
+                Session.setPersistent("email_status",result.email_status);
                 Router.go('/email');
 
                 }
