@@ -30,7 +30,7 @@
   <div class="row">
     <div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
       <div class="ui-block">
-       <div class="container" style="padding-left: 4%;">
+       <div class="container" style="padding: 2%  4% ;">
 
         
         <!-- Forums Table -->
@@ -133,20 +133,13 @@
 
             <td class="topics">
               <button class="edit_blog_details btn-breez btn" id="{{blog_id}}" > Edit </button>
-                     {{#if check_interest_activation_status blog_status}}
-                                    <button  id="{{blog_id}}" class="deactivate_status_blog btn btn-danger" value="0">  
-                                    Make It Inactive
-                                    </button> 
-                                    {{else}}
-                                    <button  id="{{blog_id}}" class="activate_status_blog btn  btn-success" value="1"  >
-                                    Make It Active
-                                    </button> 
-                                    {{/if}}  
-                        </td>
-
-            <td class="freshness">
-              <button class="btn-breez btn" > view </button>
-            </td>
+                {{#if check_interest_activation_status blog_status}}
+                <button  id="{{blog_id}}" class="deactivate_status_blog btn btn-danger" value="0"> Inactive </button> 
+                {{else}}
+                <button  id="{{blog_id}}" class="activate_status_blog btn  btn-success" value="1">  Active </button> 
+                {{/if}}
+                <button class="btn-breez btn" > view </button>
+             </td>          
             
           </tr>
           {{/each}}

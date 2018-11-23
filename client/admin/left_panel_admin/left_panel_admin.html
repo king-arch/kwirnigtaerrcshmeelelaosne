@@ -11,58 +11,58 @@
 		</a>
 
 		<div class="mCustomScrollbar ps ps--theme_default ps--active-x ps--active-y" data-mcs-theme="dark" data-ps-id="719bd36f-6e31-82b4-38c8-5a64dd9a2f28">
-			<ul class="left-menu" style="background-color: #333 !important;">
+			<ul class="left-menu" style="background-color: #333 !important;" id="myDIV">
 
 				<li>
-					<a id="book_management" class="pointer js-sidebar-open" title="Book Management" >
-						<i class="fa fa-book fa-2x" style="color: #fff;" > </i>
+					<a id="book_management" class="pointer js-sidebar-open active btnact" title="Book Management" >
+						<i class="fa fa-book" > </i>
 					</a>
 				</li>
 
 {{#if check_if_editor_or_admin}}
 				<li>
-					<a id="user_management" class="pointer js-sidebar-open" title="User Management" >
-						<i class="fa fa-user fa-2x" style="color: #fff;"></i>
+					<a id="user_management" class="pointer js-sidebar-open btnact" title="User Management" >
+						<i class="fa fa-user"></i>
 					</a>
 				</li>
 
 				<li>
-					<a id="interest_management" class="pointer js-sidebar-open" title="Interest Management" >
-						<i class="fa fa-beer fa-2x" style="color: #fff;"></i>
+					<a id="interest_management" class="pointer js-sidebar-open btnact" title="Interest Management" >
+						<i class="fa fa-beer" ></i>
 					</a>
 				</li>
 
 				<li>
-					<a id="advertisement_management" class="pointer js-sidebar-open" title="Advertisement Management" >
-						<i class="fa fa-beer fa-2x" style="color: #fff;"></i>
+					<a id="advertisement_management" class="pointer js-sidebar-open btnact" title="Advertisement Management" >
+						<i class="fa fa-beer"></i>
 					</a>
 				</li>
 
 {{/if}}
 
 				<li>
-					<a id="blog_management" class="pointer js-sidebar-open" title="Blog Management" >
-						<i class="fa fa-rss fa-2x" style="color: #fff;"></i>
+					<a id="blog_management" class="pointer js-sidebar-open btnact" title="Blog Management" >
+						<i class="fa fa-rss"></i>
 					</a>
 				</li>
 
 {{#if check_if_editor_or_admin}}
 				<li>
-					<a id="admin_settings" class="pointer js-sidebar-open" title="Settings" >
-						<i class="fa fa-cog fa-2x" style="color: #fff;"></i>
+					<a id="admin_settings" class="pointer js-sidebar-open btnact" title="Settings" >
+						<i class="fa fa-cog"></i>
 					</a>
 				</li>
 
 				<li>
-					<a id="report_display" class="pointer js-sidebar-open" title="Reports" >
-						<i class="far fa-chart-bar fa-2x" style="color: #fff;"></i>
+					<a id="report_display" class="pointer js-sidebar-open btnact" title="Reports" >
+						<i class="far fa-chart-bar"></i>
 					</a>
 				</li>
 {{else}}
 
 				<li>
-					<a id="edit_profile" class="pointer js-sidebar-open" title="Edit Profile" >
-						<i class="far fa-edit fa-2x" style="color: #fff;"></i>
+					<a id="edit_profile" class="pointer js-sidebar-open btnact" title="Edit Profile" >
+						<i class="far fa-edit"></i>
 					</a>
 				</li>
 
@@ -113,7 +113,7 @@
 {{/if}}
 				<li>
 					<a id="sign_out" class="js-sidebar-open">
-					<i class="fas fa-sign-out-alt fa-2x" style="color: #fff;"></i>
+					<i class="fas fa-sign-out-alt"></i>
 					</a>
 				</li>
 
@@ -126,14 +126,14 @@
 		<img src="http://www.writersmelon.com/wm/wp-content/uploads/2017/05/cropped-Writersmelon-Logo.png">
 
 		<div class="mCustomScrollbar ps ps--theme_default ps--active-y" data-mcs-theme="dark" data-ps-id="49688335-d61c-275a-78ac-c27de5bcaa39">
-			<ul class="left-menu" style="background-color: #333 !important;">
+			<ul class="left-menu" style="background-color: #333 !important;" id="myDIV">
 				<li>
-					<a href="#"  id="book_management" class="js-sidebar-open" style="color: #fff;">						
+					<a href="#"  id="book_management" class="js-sidebar-open btnact active" style="color: #fff;">						
 						<span class="left-menu-title" id="save_text" style="font-size: 16px;"><i class="fa fa-bookssss fa-2x"></i> Book Management</span>
 					</a>
 				</li>
 				<li>
-					<a id="user_management" href="#" class="js-sidebar-open" style="color: #fff;" >						
+					<a id="user_management" href="#" class="js-sidebar-open btnact" style="color: #fff;" >						
 						<span class="left-menu-title"  style="font-size: 16px;"> <i class="fa fa-times fa-2x"></i> Usersssssssse Management</span>
 					</a>
 				</li>
@@ -210,5 +210,16 @@
 		<div class="ps__scrollbar-x-rail" style="left: 0px; bottom: 0px;"><div class="ps__scrollbar-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps__scrollbar-y-rail" style="top: 0px; height: 667px; right: 0px;"><div class="ps__scrollbar-y" tabindex="0" style="top: 0px; height: 532px;"></div></div></div>
 	</div>
 </div>
-
+<script>
+// Add active class to the current button (highlight it)
+var header = document.getElementById("myDIV");
+var btns = header.getElementsByClassName("btn");
+for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener("click", function() {
+    var current = document.getElementsByClassName("active");
+    current[0].className = current[0].className.replace(" active", "");
+    this.className += " active";
+  });
+}
+</script>
 </template>

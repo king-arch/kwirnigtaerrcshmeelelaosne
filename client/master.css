@@ -1,6 +1,7 @@
 
 body {
     font-family: 'Montserrat';
+    font-weight: 500 !important;
 }
 
 .make_it_circle{
@@ -239,9 +240,9 @@ ul {
 }
 
 .link-find-friend {
-    padding: 25px 15px;
+    padding: 25px 12px;
     color: #fff !important;
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 600;
     display: inline-block;
     cursor: pointer;
@@ -3335,7 +3336,7 @@ svg {
 }
 
 button.btn {
-    padding: 5px 40px;
+    padding: 5px 12px;
 }
 
 button.btn-md {
@@ -3345,7 +3346,7 @@ button.btn-md {
 }
 
 button.btn-md-2 {
-    padding: .8rem 2.1rem;
+    padding: 5px 15px;
     font-size: 13px;
     border-radius: .3rem
 }
@@ -3675,7 +3676,7 @@ img {
 
 .btn {
     color: #fff !important;
-    margin-bottom: 15px !important;
+    margin-bottom: 0px !important;
     position: relative
 }
 
@@ -3746,7 +3747,7 @@ button:hover {
 .btn-md-2 {
     padding: 10px 30px;
     font-size: 12px;
-        font-weight: 400
+        font-weight: 600
 }
 
 @media (max-width:1080px) {
@@ -4183,7 +4184,7 @@ label.control-label {
 }
 
 textarea {
-    min-height: 132px
+    min-height: 20px
 }
 
 .form-group.label-floating textarea {
@@ -4241,7 +4242,7 @@ input {
 .label-floating input,
 .label-floating select {
       padding: 8px 0 8px 0px !important;
-    line-height: 30px;
+    line-height: 24px;
 }
 
 .label-floating textarea.form-control {
@@ -8237,7 +8238,7 @@ ol ol li {
     overflow: hidden;
     border: 2px solid #fff;
     display: block;
-    margin-left: -12px !important;
+    margin-left: -12px ;
 }
 
 .friends-harmonic li {
@@ -8283,7 +8284,7 @@ ol ol li {
 
 .post .btn,
 .post-thumb {
-    margin-bottom: 25px
+    margin-bottom: 25px !important;
 }
 
 .post .h1,
@@ -8957,7 +8958,7 @@ p {
 }
 
 .news-feed-form textarea {
-    min-height: 160px;
+    min-height: 60px;
     border-radius: 0;
     border-top: none;
     border-left: none;
@@ -8970,7 +8971,7 @@ p {
 }
 
 .news-feed-form .options-message {
-    margin-top: 7px
+    margin-top: 0px
 }
 
 .news-feed-form .options-message svg {
@@ -20036,4 +20037,56 @@ box-shadow: rgba(255,255,255, 0.75) 1.5em 0 0 0, rgba(255,255,255, 0.75) 1.1em 1
 
 .padd_10_both{
     padding: 10px !important; 
+}
+
+#Mongol{
+    display: none !important;
+}
+
+.fixed-sidebar-left.sidebar--small .left-menu a {
+  padding: 14px;
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+  font-size: 20px;
+   color: #fff !important;
+}
+
+.fixed-sidebar-left.sidebar--small .left-menu a:hover {
+ background-color: #fff  !important;
+ color: #333 !important;
+}
+
+.fixed-sidebar-left.sidebar--small .left-menu a:active {
+  background-color: #fff !important;
+ color: #333 !important;
+}
+
+/*.cropper-container .cropper-bg{
+    width: 100% !important;
+  height: 300px !important; 
+
+}*/
+
+.profile-pic {
+    position: relative;
+    display: inline-block;
+}
+
+.profile-pic:hover .edit {
+    display: block;
+}
+
+.edit {
+    padding: 10px;
+    background: #ccc !important;
+    position: absolute;
+    right: 0;
+    top: 0;
+    cursor: pointer;
+/*    display: none;
+*/}
+
+.edit a {
+    color: #000;
 }

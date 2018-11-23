@@ -10,12 +10,11 @@
 <div class="container">
  <div class="row">
  <!-- middle feed ends here -->
-    <div class="col col-xl-6 order-xl-2 col-lg-6 order-lg-1 col-sm-12 col-12 ">
+    <div class="col col-xl-9 order-xl-2 col-lg-9 order-lg-1 col-sm-12 col-12 ">
       <div id="newsfeed-items-grid">
-        <div class="ui-block">
         
-        <!-- News Feed Form  -->
-      </div>
+        <!-- Post start   -->
+
 
          {{#each fetch_feed_posts}}
          {{#if equals post_content_type 'Text'}} 
@@ -515,7 +514,7 @@
                            <span id="save_text"> Post Status</span></button>   
         </div>
           
-            <div class="post-thumb">
+            <div class="post-thumb col-lg-12 col-sm-12 col-md-12">
               <img src="{{post_image}}" alt="photo">
             </div>
           
@@ -1221,86 +1220,7 @@
 
     </div>
 <!-- middle feed ends here -->
-    <div class="col col-xl-3 order-xl-1 col-lg-3 order-lg-2 col-md-6 col-sm-12 col-12 visible-lg">
-      <div class="ui-block">
-        
-  {{#each show_logged_in }}    
-
-        <div class="friend-item  text-center">
-          <div class="friend-header-thumb">
-            <img src="{{logged_in_user_cover_pic_display}}" alt="friend">
-          </div>
-        
-          <div class="friend-item-content text-center">
-           
-            <div class="friend-avatar">
-              <div class="author-thumb">
-                <img src="{{user_profile_pic}}" class="view_profile" alt="author">
-              </div>
-              <div class="author-content">
-                <a href="#" class="h5 author-name view_profile">{{user_name}}</a>
-                 <p class="friend-about text-center" data-swiper-parallax="-500">
-                  Author
-                  </p>
-              </div>
-            </div>
-        
-            <div class="swiper-container">
-              <div class="swiper-wrapper">
-                <div class="swiper-slide">
-                  <div class="friend-count" data-swiper-parallax="-500">
-
-                    <a href="#" class="friend-count-item">
-                      <div class="h6">0</div>
-                      <div class="title">Books</div>
-                    </a>
-
-                    <a href="#" class="friend-count-item">
-                      <div class="h6">
-                        {{show_following_count}}
-                      </div>
-                      <div class="title">Following</div>
-                    </a> 
-
-                    <a href="#" class="friend-count-item">
-                      <div class="h6">
-                        {{show_followers_count}}
-                      </div>
-                      <div class="title">Followers</div>
-                    </a>
-                  </div>
-                </div>       
-              </div>
-              
-            </div>
-          </div>
-        </div>
-
-  {{/each}}      
-        <!-- ... end Friend Item -->      </div>
-
-        
-        <div class="ui-block">
-
-        
-        <!-- W-Action -->
-        
-        <div class="widget w-action">
-        
-          <img src="img/logo.png" alt="Olympus">
-          <div class="content">
-            <h4 class="title">WritersMelon</h4>
-            <span>The leeding communitty of book lovers, authors & bloggers</span>
-            <a href="01-LandingPage.html" class="btn btn-bg-secondary btn-md">Promote   book</a>
-          </div>
-        </div>
-        
-        <!-- ... end W-Action -->
-      </div>
-
-     
-
-    </div>
+   
 
     <div class="col col-xl-3 order-xl-3 col-lg-3 order-lg-3 col-md-6 col-sm-12 col-12 visible-lg" style="max-width: 24.8%;">
         <div class="ui-block">

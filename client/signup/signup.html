@@ -1,5 +1,11 @@
 
 <template name="signup">
+  <style type="text/css">
+    
+    button.btn {
+  padding: 5px 40px;
+
+  </style>
  {{> header}}
  <body class="landing-page" >
   {{> signup_content}}
@@ -76,15 +82,15 @@
                         <label class=newbtn>
                           <p></p>
                   <img id="blah2" src="{{show_profile_image}}" style="height:400px; width: 400px">
-                  <input id="signup_profile_pic" class='pis user_profile_pic' type="file" accept="image/x-png,image/gif,image/jpeg" >
+                  <input id="signup_profile_pic" class='pis user_profile_pic' onchange="readURL(this);" type="file" accept="image/x-png,image/gif,image/jpeg" >
               </label>
               <p class="c-darkgray">You can upload a JPG, GIF or PNG file (Image size should be 500*500) </p>
             </div>
             <div class="col col-xl-7 col-lg-7 col-md-12 col-sm-12 col-12">
               <div class="form-group label-floating">
-                <label class="control-label c-darkgray">  Headline works as a brief biography of who you are and what you do </label>
-                
-                <textarea class="form-control c-darkgray" placeholder="" style="border-bottom: 1px solid #333;" id="signup_headline" maxlength="110" ></textarea>
+<!--                 <label class="control-label c-darkgray">   </label>
+ -->                
+                <textarea class="form-control c-darkgray" placeholder="Headline works as a brief biography of who you are and what you do" style="border-bottom: 1px solid #333;" id="signup_headline" maxlength="110" ></textarea>
 
               <span class="material-input"></span></div>
             </div>
@@ -102,11 +108,11 @@
                     <span class="sub_head"> The people, events, stories and news we show you will be more relevant if you add your location. </span>
                     </h5>
                    
-                    <div class="form-group md-form  label-floating is-empty has-error has-success">
+                    <div class="form-group md-form  label-floating is-empty">
             
             <!-- <label for="Name" class="control-label c-darkgray" data-success="right" data-error="wrong" >Location  </label> -->
 
-            <input id="signup_location" class="form-control " required="required"  placeholder="Location" type="text" style="color: black">
+            <input id="signup_location" class="form-control c-darkgray" required="required"  placeholder="Location" type="text"  style="border-bottom: 1px solid #333;">
           </div>
            
           <button class="btn btn-mdb-color btn-rounded nextBtn-3 float-right button-gry" type="button" id="submit_signup_location" >

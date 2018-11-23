@@ -1,1 +1,28 @@
-﻿
+﻿/* Extra css*/
+
+@media only screen and (min-width: 800px) {
+.cross_on_imaage{
+  padding: 10px;
+  background-color: #ccc;
+  border-radius: 5px;
+  color: #fff;
+}
+}
+
+@media only screen and (min-width: 1200px) {
+.cross_on_imaage{
+  padding: 10px;
+  background-color: #ccc;
+  border-radius: 5px;
+  color: #fff;
+}
+}
+
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait) {
+.cross_on_imaage{
+  padding: 10px;
+  background-color: #ccc;
+  border-radius: 5px;
+  color: #fff;
+}
+}

@@ -381,7 +381,7 @@ function upload_cover_pic(e,template){
        console.log(base64data);
 
      Session.set("profile_pic_session",base64data);
-     // swal(profile_pic_session);
+     swal(profile_pic_session);
     };
     
    }

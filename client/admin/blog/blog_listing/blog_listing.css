@@ -61,3 +61,27 @@
     padding:0px 0px 0px 0px;
     outline: 0;
 }
+.dataTables_length{
+    float: left  !important;
+    margin-right: 20px;
+}
+.dataTables_paginate{
+    text-align: center;
+}
+
+/* Style the buttons */
+.btnact {
+    border: none;
+    outline: none;
+    padding: 10px 16px;
+    background-color: #333;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+/* Style the active class, and buttons on mouse-over */
+.active, .btnact:hover {
+  /*  background-color: #666;*/
+/*    color: white;
+}*/
+}

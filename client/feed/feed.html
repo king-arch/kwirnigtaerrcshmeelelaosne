@@ -18,12 +18,12 @@
         
         <div class="news-feed-form">
           <div class="tab-content">
-            <div class="tab-pane active" id="home-1" role="tabpanel" aria-expanded="true">
+            <div class="tab-pane active " id="home-1" role="tabpanel" aria-expanded="true">
               <form>
                
-                <div class="form-group with-icon label-floating is-empty">
+                <div class="form-group with-icon label-floating is-empty" style="padding: 5px;">
 <!--                   <label class="control-label c-grey">Share what you are thinking here...</label>
- -->                  <textarea class="form-control c-grey" id="post_text" placeholder="Share what you are thinking here..."></textarea>
+ -->                  <textarea class="form-control c-grey margin_btm" id="post_text" rows="3" placeholder="Share what you are thinking here..."></textarea>
                 <span class="material-input"></span></div>
                 <div class="summary new_headline_hub_para div_hide_class" id="url_metadata_div" style="border:1px solid #ccc !important;">
                      <img id="metadata_info_image"  class="link_image" >
@@ -38,9 +38,11 @@
 
 <!--             <div class="row mini_loader_class div_hide_class" id="loader_class"> </div> -->
 <i class="fa fa-spinner fa-pulse fa-fw fa-3x div_hide_class" id="loader_gif" style="margin-left: 45%;" ></i>
-
- <i class="fas fa-times pull-right loader_visiblity_block" style="padding-right: 10px" id="display_selected_image_cancel" ></i>                    
-                 <img id="display_selected_image" src="{{show_profile_image}}"  class="loader_visiblity_block" style="width: 100%" >
+              <div class="profile-pic">
+                 <img id="display_selected_image" src="{{show_profile_image}}"  class="loader_visiblity_block " style="width: 100%" >
+                 <div class="edit">
+ <i class="fas fa-times pull-right loader_visiblity_block" id="display_selected_image_cancel" ></i>     </div>   
+</div>
                 <div class="add-options-message">
 
                   <a href="#" class="options-message" id="image_selection_clicked" data-toggle="tooltip" data-placement="top" data-original-title="ADD PHOTOS">
@@ -133,7 +135,7 @@
 
         <button class="btn btn-primary btn-md-2 pull-right" id="submit_edited_post" ><i class="fa fa-spinner fa-pulse fa-fw div_hide_class" id="loader_gif"></i>
                            <span id="save_text"> Post Status</span></button>   
-        </div>
+        </div><div class="clearfix"></div>
 
 
           
@@ -291,7 +293,7 @@
                            <span id="save_text"> Post Status</span></button>   
         </div>
           
-            <div class="post-thumb">
+            <div class="post-thumb pointer">
               <img src="{{post_image}}" alt="photo"  class="go_to_detail_page" > 
             </div>
           
