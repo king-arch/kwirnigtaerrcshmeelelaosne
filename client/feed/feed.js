@@ -206,7 +206,7 @@ Template.feed_design.helpers({
          var user_id = this.liked_by;
          Meteor.subscribe('fetch_feed_content');                
          Meteor.subscribe("user_info_based_on_id",user_id);
-         var result = user_details.find({user_id: user_id}).fetch();
+         var result = user_details.find({user_id: user_id},{limit: 10}).fetch();
          // console.log('show result');
          // console.log(result);
          return result;

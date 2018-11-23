@@ -54,7 +54,7 @@
                     <!-- <div class="clearfix"></div> -->
                   
 
-          <input type="file" style="display: none !important" id="post_image" >
+          <input type="file" style="display: none !important" id="post_image" accept="image/x-png,image/gif,image/jpeg" >
         
                   <button class="btn btn-primary btn-md-2"  id="submit_post"> <i class="fa fa-spinner fa-pulse fa-fw div_hide_class" id="loader_gif"></i> <span id="save_text"> Post Status</span></button>
         
@@ -138,12 +138,11 @@
         </div><div class="clearfix"></div>
 
 
-          
             <div class="post-additional-info inline-items">
 
               {{#if check_for_user_already_liked}} 
               <a class="like_event post-add-icon inline-items" >
-                <svg class="olymp-heart-icon">
+                <svg class="olymp-heart-icon" style="fill: #FE5D39 !important;">
                   <use xlink:href="svg-icons/sprites/icons.svg#olymp-heart-icon"></use>
                 </svg>
                 <span>
@@ -187,13 +186,14 @@
           
               <div class="comments-shared go_to_detail_page">
                 <a href="#" class="post-add-icon inline-items">
-                  <img src="img/comment_gray.png">
+                  <img src="/img/comment_gray.png">
 
                   <span>{{show_comment_count}}</span>
                 </a>
               </div>
 
             </div>
+
           </article>
 
         </div>
@@ -286,7 +286,7 @@
         </p>
           <div id="edit_post_text_{{post_id}}" class="loader_visiblity_block" > 
 
-        <textarea class="loader_visiblity_block updateHiddenPost go_to_detail_page" id="hidden_hub_post_{{post_id}}" resize="none" placeholder="Edit ..." style="padding: 5px; border: 1px solid #e4e4e4; border-radius: 5px; width: 100%; height: auto !important;" >{{post_text}}</textarea>
+        <textarea class="loader_visiblity_block updateHiddenPost" id="hidden_hub_post_{{post_id}}" resize="none" placeholder="Edit ..." style="padding: 5px; border: 1px solid #e4e4e4; border-radius: 5px; width: 100%; height: auto !important;" >{{post_text}}</textarea>
 
 
         <button class="btn btn-primary btn-md-2 pull-right" id="submit_edited_post" ><i class="fa fa-spinner fa-pulse fa-fw div_hide_class" id="loader_gif"></i>
@@ -298,9 +298,10 @@
             </div>
           
             <div class="post-additional-info inline-items">
-          {{#if check_for_user_already_liked}} 
-              <a class="like_event post-add-icon inline-items modal_kholo get_all_liked_users" >
-                <svg class="olymp-heart-icon">
+
+              {{#if check_for_user_already_liked}} 
+              <a class="like_event post-add-icon inline-items" >
+                <svg class="olymp-heart-icon" style="fill: #FE5D39 !important;">
                   <use xlink:href="svg-icons/sprites/icons.svg#olymp-heart-icon"></use>
                 </svg>
                 <span>
@@ -322,10 +323,10 @@
                 </span>
               </a>
                 
+             
               &nbsp;  &nbsp;
-               {{/if}}     
-
-
+               {{/if}}
+          
               <ul class="friends-harmonic">
                   {{#each show_users_liked_on_post}} 
                       {{#each fetch_like_user_info}}     
@@ -344,13 +345,14 @@
           
               <div class="comments-shared go_to_detail_page">
                 <a href="#" class="post-add-icon inline-items">
-                  <img src="img/comment_gray.png">
+                  <img src="/img/comment_gray.png">
 
                   <span>{{show_comment_count}}</span>
                 </a>
               </div>
 
-            </div>          
+            </div>
+          
           </article>
 
         </div>
@@ -447,7 +449,7 @@
  
           <div id="edit_post_text_{{post_id}}" class="loader_visiblity_block" > 
 
-        <textarea class="loader_visiblity_block updateHiddenPost go_to_detail_page" id="hidden_hub_post_{{post_id}}" resize="none" placeholder="Edit ..." style="padding: 5px; border: 1px solid #e4e4e4; border-radius: 5px; width: 100%; height: auto !important;" >{{post_text}}</textarea>
+        <textarea class="loader_visiblity_block updateHiddenPost" id="hidden_hub_post_{{post_id}}" resize="none" placeholder="Edit ..." style="padding: 5px; border: 1px solid #e4e4e4; border-radius: 5px; width: 100%; height: auto !important;" >{{post_text}}</textarea>
 
 
         <button class="btn btn-primary btn-md-2 pull-right" id="submit_edited_post" ><i class="fa fa-spinner fa-pulse fa-fw div_hide_class" id="loader_gif"></i>
@@ -471,11 +473,11 @@
               </div>
             </div>
 
-
             <div class="post-additional-info inline-items">
-    {{#if check_for_user_already_liked}} 
-              <a class="like_event post-add-icon inline-items modal_kholo get_all_liked_users" >
-                <svg class="olymp-heart-icon">
+
+              {{#if check_for_user_already_liked}} 
+              <a class="like_event post-add-icon inline-items" >
+                <svg class="olymp-heart-icon" style="fill: #FE5D39 !important;">
                   <use xlink:href="svg-icons/sprites/icons.svg#olymp-heart-icon"></use>
                 </svg>
                 <span>
@@ -499,7 +501,8 @@
                 
              
               &nbsp;  &nbsp;
-               {{/if}}  
+               {{/if}}
+          
               <ul class="friends-harmonic">
                   {{#each show_users_liked_on_post}} 
                       {{#each fetch_like_user_info}}     
@@ -518,12 +521,14 @@
           
               <div class="comments-shared go_to_detail_page">
                 <a href="#" class="post-add-icon inline-items">
-                  <img src="img/comment_gray.png">
+                  <img src="/img/comment_gray.png">
 
                   <span>{{show_comment_count}}</span>
                 </a>
               </div>
+
             </div>
+
           </article>
 
         </div>
@@ -617,7 +622,7 @@
  
           <div id="edit_post_text_{{post_id}}" class="loader_visiblity_block" > 
 
-        <textarea class="loader_visiblity_block updateHiddenPost go_to_detail_page" id="hidden_hub_post_{{post_id}}" resize="none" placeholder="Edit ..." style="padding: 5px; border: 1px solid #e4e4e4; border-radius: 5px; width: 100%; height: auto !important;" >{{post_text}}</textarea>
+        <textarea class="loader_visiblity_block updateHiddenPost" id="hidden_hub_post_{{post_id}}" resize="none" placeholder="Edit ..." style="padding: 5px; border: 1px solid #e4e4e4; border-radius: 5px; width: 100%; height: auto !important;" >{{post_text}}</textarea>
 
 
         <button class="btn btn-primary btn-md-2 pull-right" id="submit_edited_post" ><i class="fa fa-spinner fa-pulse fa-fw div_hide_class" id="loader_gif"></i>
@@ -626,7 +631,7 @@
 
             <div class="post-video">
 
-              <div class="video-thumb go_to_detail_page">
+              <div class="video-thumb">
                 <img src="{{featured_image}}" alt="photo" target="_blank" style="height: 0px;" >
 
                   <p class="h5_hub_para">
@@ -642,10 +647,12 @@
               </div>
             </div>
 
+   
             <div class="post-additional-info inline-items">
-    {{#if check_for_user_already_liked}} 
-              <a class="like_event post-add-icon inline-items modal_kholo get_all_liked_users" >
-                <svg class="olymp-heart-icon">
+
+              {{#if check_for_user_already_liked}} 
+              <a class="like_event post-add-icon inline-items" >
+                <svg class="olymp-heart-icon" style="fill: #FE5D39 !important;">
                   <use xlink:href="svg-icons/sprites/icons.svg#olymp-heart-icon"></use>
                 </svg>
                 <span>
@@ -669,8 +676,8 @@
                 
              
               &nbsp;  &nbsp;
-               {{/if}}  
-
+               {{/if}}
+          
               <ul class="friends-harmonic">
                   {{#each show_users_liked_on_post}} 
                       {{#each fetch_like_user_info}}     
@@ -689,12 +696,14 @@
           
               <div class="comments-shared go_to_detail_page">
                 <a href="#" class="post-add-icon inline-items">
-                  <img src="img/comment_gray.png">
+                  <img src="/img/comment_gray.png">
 
                   <span>{{show_comment_count}}</span>
                 </a>
               </div>
+
             </div>
+
           </article>
 
         </div>

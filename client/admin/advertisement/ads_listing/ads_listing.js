@@ -62,6 +62,36 @@ console.log('https://en.wikipedia.org/wiki/Greece');
 
 },
 
+promotion_content_trimmed(){
+
+  var promotion_content = this.promotion_content;
+  if(promotion_content.length > 18){
+      return promotion_content.slice(0,18)+'...';
+  }else{
+    return promotion_content;
+  }
+},
+
+promotion_url_trimmed(){
+
+  var promotion_url = this.promotion_url;
+  if(promotion_url.length > 18){
+      return promotion_url.slice(0,18)+'...';
+  }else{
+    return promotion_url;
+  }
+},
+
+promotion_title_trimmed(){
+
+  var promotion_title = this.promotion_title;
+  if(promotion_title.length > 18){
+      return promotion_title.slice(0,18)+'...';
+  }else{
+    return promotion_title;
+  }
+},
+
 });
 
 

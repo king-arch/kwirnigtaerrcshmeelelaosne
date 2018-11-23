@@ -78,7 +78,7 @@
           {{#each show_promotion_details}}       
           <tr>
             <td class="topics">
-              <p class="text">{{promotion_title}}</p>
+              <p class="text">{{promotion_title_trimmed}}</p>
             </td>
 
             <td class="freshness">
@@ -90,7 +90,7 @@
             <td class="posts">
         {{#if equals promotion_type 'Textual'}}
               <div class="author-freshness">
-                {{promotion_content}}
+                {{promotion_content_trimmed}}
               </div>
         {{else}}
               <img src="{{promotion_content}}">
@@ -106,7 +106,7 @@
             </td>
 
             <td class="freshness">
-              <a href="{{promotion_url}}" class="h6 count" target="_blank" >{{promotion_url}}</a>
+              <a href="{{promotion_url}}" class="h6 count" target="_blank" >{{promotion_url_trimmed}}</a>
             </td>
 
             <td class="freshness">

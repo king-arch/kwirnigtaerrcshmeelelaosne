@@ -20038,11 +20038,11 @@ box-shadow: rgba(255,255,255, 0.75) 1.5em 0 0 0, rgba(255,255,255, 0.75) 1.1em 1
 .padd_10_both{
     padding: 10px !important; 
 }
-
+/*
 #Mongol{
     display: none !important;
 }
-
+*/
 .fixed-sidebar-left.sidebar--small .left-menu a {
   padding: 14px;
   display: block;

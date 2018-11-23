@@ -443,15 +443,15 @@ Template.profile_content.helpers({
          return result;
     },
 
-    fetch_like_user_info(){
-         var user_id = this.liked_by;
-         Meteor.subscribe('fetch_feed_content');                
-         Meteor.subscribe("user_info_based_on_id",user_id);
-         var result = user_details.find({user_id: user_id}).fetch();
-         // console.log('show result');
-         // console.log(result);
-         return result;
-    },
+    // fetch_like_user_info(){
+    //      var user_id = this.liked_by;
+    //      Meteor.subscribe('fetch_feed_content');                
+    //      Meteor.subscribe("user_info_based_on_id",user_id);
+    //      var result = user_details.find({user_id: user_id}).fetch();
+    //      // console.log('show result');
+    //      // console.log(result);
+    //      return result;
+    // },
 
 
     fetch_user_info_for_comment(){
@@ -539,26 +539,26 @@ Template.profile_content.helpers({
 
     },
 
-    check_for_user_already_liked(){
-          var liked_by = Session.get("userId");
-            var result = feed.find({
-                                     parent_id: this.post_id,
-                                     parent_post_type: 'post',
-                                     liked_by: liked_by,
-                                     post_type: 'like',
-                             }).fetch();
-          if(result[0]){
-            if(result[0].like_status > 0){
-                return true;
-            }
-            else{
-                return false;
-            }
-          }
-          else{
-            return false;
-          }
-    },
+    // check_for_user_already_liked(){
+    //       var liked_by = Session.get("userId");
+    //         var result = feed.find({
+    //                                  parent_id: this.post_id,
+    //                                  parent_post_type: 'post',
+    //                                  liked_by: liked_by,
+    //                                  post_type: 'like',
+    //                          }).fetch();
+    //       if(result[0]){
+    //         if(result[0].like_status > 0){
+    //             return true;
+    //         }
+    //         else{
+    //             return false;
+    //         }
+    //       }
+    //       else{
+    //         return false;
+    //       }
+    // },
 
     check_for_user_already_liked_on_comment_lvl_0(){
           var liked_by = Session.get("userId");
@@ -602,15 +602,15 @@ Template.profile_content.helpers({
           }
     },
 
-  total_liked_on_post(post_id){
-            var result = feed.find({
-                                     parent_id: this.post_id,
-                                     post_type: 'like',
-                                     like_status: 1,
-                             }).count();
-    return result;  
+  // total_liked_on_post(post_id){
+  //           var result = feed.find({
+  //                                    parent_id: this.post_id,
+  //                                    post_type: 'like',
+  //                                    like_status: 1,
+  //                            }).count();
+  //   return result;  
 
-  },
+  // },
 
   total_liked_on_comment_lvl_0(comment_id){
             var result = feed.find({
@@ -630,16 +630,16 @@ Template.profile_content.helpers({
     return result;  
   },
 
-  show_comment_count(){
+  // show_comment_count(){
 
-    var result = feed.find({
-                              "parent_id": this.post_id,
-                              "post_type": "comment_lvl_0",
-                              "comment_status": 1,
-                      }).count();
-    return result; 
+  //   var result = feed.find({
+  //                             "parent_id": this.post_id,
+  //                             "post_type": "comment_lvl_0",
+  //                             "comment_status": 1,
+  //                     }).count();
+  //   return result; 
 
-  },
+  // },
 
   check_if_comments_exist(){
     var result = feed.find({
@@ -655,14 +655,14 @@ Template.profile_content.helpers({
     }
   },
 
-  show_users_liked_on_post(){
-            var result = feed.find({
-                                     parent_id: this.post_id,
-                                     post_type: 'like',
-                                     like_status: 1,
-                             }).fetch();
-    return result;
-  },
+  // show_users_liked_on_post(){
+  //           var result = feed.find({
+  //                                    parent_id: this.post_id,
+  //                                    post_type: 'like',
+  //                                    like_status: 1,
+  //                            }).fetch();
+  //   return result;
+  // },
 
 
   show_users_liked_on_comment_lvl_0(){
@@ -780,6 +780,174 @@ Template.profile_content.helpers({
           return 0;
           }
     },
+
+        //START feed like structure helpers
+
+
+    check_for_user_already_liked(){
+          var liked_by = Session.get("userId");
+            var result = feed.find({
+                                     parent_id: this.post_id,
+                                     parent_post_type: 'post',
+                                     liked_by: liked_by,
+                                     post_type: 'like',
+                             }).fetch();
+          if(result[0]){
+            if(result[0].like_status > 0){
+                return true;
+            }
+            else{
+                return false;
+            }
+          }
+          else{
+            return false;
+          }
+    },
+
+
+
+  total_liked_on_post(post_id){
+            var result = feed.find({
+                                     parent_id: this.post_id,
+                                     post_type: 'like',
+                                     like_status: 1,
+                             }).count();
+    return result;  
+
+  },
+
+    fetch_like_user_info(){
+         var user_id = this.liked_by;
+         Meteor.subscribe('fetch_feed_content');                
+         Meteor.subscribe("user_info_based_on_id",user_id);
+         var result = user_details.find({user_id: user_id},{limit: 10}).fetch();
+         // console.log('show result');
+         // console.log(result);
+         return result;
+    },
+
+
+  show_users_liked_on_post(){
+            var result = feed.find({
+                                     parent_id: this.post_id,
+                                     post_type: 'like',
+                                     like_status: 1,
+                             }).fetch();
+    return result;
+  },
+
+
+     display_liked_content(post_id){
+        Meteor.subscribe("follow_list_all");
+        var logged_in_user = Session.get("userId");
+        var check_friend = following_list.find({"follower": logged_in_user },{current_follow_status: 1}).fetch(); 
+        
+        var new_friend_list = new Array();
+
+        for(var i=0;i<check_friend.length;i++){
+          new_friend_list.push(check_friend[i].following);
+        }
+        new_friend_list.push(logged_in_user);
+
+        console.log("show_user_listing");
+        console.log(new_friend_list);
+
+        var check_likers = feed.find({
+                         parent_id: this.post_id,
+                         post_type: 'like',
+                         like_status: 1,
+                         liked_by: {$in: new_friend_list },
+                        }).fetch();
+
+        var total_likes = feed.find({
+                         parent_id: this.post_id,
+                         post_type: 'like',
+                         like_status: 1,
+                        }).fetch();
+
+        var final_likers_count = total_likes.length;
+        final_likers_count = parseInt(final_likers_count);
+
+        console.log("check if liked by friend");
+        console.log(check_likers);
+
+        console.log("final_likers_count");
+        console.log(final_likers_count);
+
+        if(check_likers.length == 1){
+          if(check_likers[0].liked_by == logged_in_user){
+            return 'you liked this';
+          }else{
+              Meteor.subscribe("user_info_based_on_id",check_likers[0].liked_by);
+              var user_name = user_details.find({ user_id: check_likers[0].liked_by }).fetch();
+              console.log('show singled liker friend');
+              console.log(user_name[0].user_name);
+              return user_name[0].user_name+' liked this';
+          }
+        }
+        else if(check_likers.length == 2){
+            if(check_likers[0].liked_by == logged_in_user || check_likers[1].liked_by == logged_in_user){
+              
+              if(check_likers[0].liked_by == logged_in_user){
+              
+              Meteor.subscribe("user_info_based_on_id",check_likers[1].liked_by);
+              var user_name = user_details.find({ user_id: check_likers[1].liked_by }).fetch();
+             return 'you & '+user_name[0].user_name+' liked this';
+                            
+              }else{
+              Meteor.subscribe("user_info_based_on_id",check_likers[0].liked_by);
+              var user_name = user_details.find({ user_id: check_likers[0].liked_by }).fetch();
+              return 'you & '+user_name[0].user_name+' liked this';
+              } 
+
+            }
+            else{
+              Meteor.subscribe("user_info_based_on_id",check_likers[0].liked_by);
+              var user_name = user_details.find({ user_id: check_likers[1].liked_by }).fetch();
+              return user_name[0].user_name+' & 1 more liked this';
+            }
+        }
+      else if(check_likers.length > 2){
+        var check_list_friends_who_liked = new Array();
+        for(var i=0; i< check_likers.length; i++){
+          check_list_friends_who_liked.push(check_likers[i].liked_by)
+        }
+          if(check_list_friends_who_liked.includes(logged_in_user)){
+            if(check_list_friends_who_liked[0] == logged_in_user){
+
+              Meteor.subscribe("user_info_based_on_id",check_likers[1].liked_by);
+              var user_name = user_details.find({ user_id: check_likers[1].liked_by }).fetch();
+              return 'you, '+user_name[0].user_name+' & '+(final_likers_count-2) +' more liked this';
+
+            }
+            else{
+              Meteor.subscribe("user_info_based_on_id",check_likers[0].liked_by);
+              var user_name = user_details.find({ user_id: check_likers[0].liked_by }).fetch();
+              return 'you, '+user_name[0].user_name+' & '+(final_likers_count-2) +' more liked this';
+            } 
+          }else{
+              Meteor.subscribe("user_info_based_on_id",check_likers[0].liked_by);
+              var user_name = user_details.find({ user_id: check_likers[0].liked_by }).fetch();
+              return user_name[0].user_name+' & '+(final_likers_count-1 )+' more liked this';            
+          }
+      }
+
+     },
+
+
+       show_comment_count(){
+
+    var result = feed.find({
+                              "parent_id": this.post_id,
+                              "post_type": "comment_lvl_0",
+                              "comment_status": 1,
+                      }).count();
+    return result; 
+
+  },
+
+    //END feed like structure helpers
 
 });
 
@@ -1672,8 +1840,8 @@ function upload_profile_pic(e,template){
             $("#crop_profile_modal").attr("src",imagePath);
             $('#divcrop_profile').addClass('cropper-example-lena');
 
-            var height = 400;
-            var width = 400;
+            // var height = 400;
+            // var width = 400;
 
              $('.cropper-example-lena > img').cropper({
                                aspectRatio: 1 / 1,

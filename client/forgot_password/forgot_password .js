@@ -16,6 +16,11 @@ Template.forgot_password.onDestroyed(function(){
   check_user.stop();
 });
 
+
+Template.forgot_password.onRendered(function(){
+    check_user = Meteor.subscribe('fetch_user_listing');
+});
+
 Template.forgot_password.events({
 
 	"click #send_mail":function(event){
@@ -32,15 +37,13 @@ Template.forgot_password.events({
 			  $("#save_text").removeClass("div_hide_class");
 			  $("#loader_gif").addClass("div_hide_class");
 		}else{
-
+alert('2');
 		var validation_result = ValidateEmail(email_addr);
-
-        check_user = Meteor.subscribe('fetch_user_listing');
-
-		var c = user_details.find({user_email: email_addr}).count();
+		var count = user_details.find({user_email: email_addr}).count();
+		console.log(count);
 		// alert(c);
 		$("#email_addr").removeClass('emptyfield').blur();
-		if(c<1){
+		if(count == 0){
 			//$("#errorlabel").text("This email address does not exist in our system");
 			//$("#errorlabel").addClass("errorlabel");
 			swal("This email address does not exist in our system");
@@ -55,6 +58,7 @@ Template.forgot_password.events({
 		          swal(error);
 		        }else{
 		        	swal(result.msg);
+		        	Router.go("/");
 				}
 			});
 			}
