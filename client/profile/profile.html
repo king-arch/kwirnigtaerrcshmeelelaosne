@@ -144,6 +144,13 @@
               <img src="{{user_profile_pic}}"  alt="author" class="view_profile" >
               <div class="author-date">
                 <a class="h6 post__author-name fn view_profile" href="#">{{user_name}}</a>
+
+                                <span>
+                      {{#if check_for_edited_post ../post_id}}  
+                        (Edited)
+                       {{/if}}
+                    </span>  
+
                 <div class="post__date">
                   <time class="published" datetime="2017-03-24T18:18">
                     {{calculate_time_difference ../created_at}}
@@ -301,6 +308,13 @@
               <img src="{{user_profile_pic}}"  alt="author" class="view_profile">
               <div class="author-date">
                 <a class="h6 post__author-name fn view_profile view_profile" href="#"> {{user_name}}</a>
+
+                                <span>
+                      {{#if check_for_edited_post ../post_id}}  
+                        (Edited)
+                       {{/if}}
+                    </span>  
+
                 <div class="post__date">
                   <time class="published" datetime="2017-03-24T18:18">
                     {{calculate_time_difference ../created_at}}
@@ -464,6 +478,13 @@
           
               <div class="author-date">
                 <a class="h6 post__author-name fn view_profile" href="#">{{user_name}}</a>
+
+                                <span>
+                      {{#if check_for_edited_post ../post_id}}  
+                        (Edited)
+                       {{/if}}
+                    </span>  
+
                 <div class="post__date">
                   <time class="published" datetime="2017-03-24T18:18">
                    {{calculate_time_difference ../created_at}}
@@ -635,6 +656,13 @@
           
               <div class="author-date">
                 <a class="h6 post__author-name fn view_profile" href="#">{{user_name}}</a>
+
+                                <span>
+                      {{#if check_for_edited_post ../post_id}}  
+                        (Edited)
+                       {{/if}}
+                    </span>  
+                    
                 <div class="post__date">
                   <time class="published" datetime="2017-03-24T18:18">
                    {{calculate_time_difference ../created_at}}

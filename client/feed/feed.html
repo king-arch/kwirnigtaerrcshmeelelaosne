@@ -30,7 +30,7 @@
  -->                  <textarea class="form-control c-grey margin_btm" id="post_text" rows="3" placeholder="Share what you are thinking here..."></textarea>
                 <span class="material-input"></span></div>
                 <div class="summary new_headline_hub_para div_hide_class" id="url_metadata_div" style="border:1px solid #ccc !important;">
-                     <img id="metadata_info_image"  class="link_image" style="width: 25%; float: left; margin-right: 13px;" >
+                     <img id="metadata_info_image"  class="link_image" style="width: 25%; float: left; margin-right: 13px; height: 79px;" >
                      <div class="author-date post">
                       <a class="h6 post__author-name" id="metadata_info_heading"></a>
                         <div class="post__date">
@@ -42,7 +42,7 @@
 
 <!--             <div class="row mini_loader_class div_hide_class" id="loader_class"> </div> -->
 <i class="fa fa-spinner fa-pulse fa-fw div_hide_class" id="loader_gif" style="margin-left: 40% !important;" ></i>
-              <div class="profile-pic">
+              <div class="profile-pic" style="width: 100%;">
                  <img id="display_selected_image" src="{{show_profile_image}}"  class="loader_visiblity_block " style="width: 100%" >
                  <div class="edit loader_visiblity_block"  id="display_selected_image_cancel" >
  <i class="fas fa-times pull-right" ></i>     </div>   
@@ -87,7 +87,12 @@
 
               <img src="{{user_profile_pic}}"  alt="author" class="view_profile" >
               <div class="author-date">
-                <a class="h6 post__author-name fn view_profile" href="#">{{user_name}}</a>
+                <a class="h6 post__author-name fn view_profile" href="#">{{user_name}}  </a>
+                    <span>
+                      {{#if check_for_edited_post ../post_id}}  
+                        (Edited)
+                       {{/if}}
+                    </span>               
                 <div class="post__date">
                   <time class="published" datetime="2017-03-24T18:18">
                     {{calculate_time_difference ../created_at}}
@@ -97,11 +102,7 @@
 
         {{/each}}  
         
-               {{#if check_for_edited_post post_id}}
-               <div class="pull-right" style="margin-left: 350px;" >
-                  (Edited)
-                </div> 
-               {{/if}}
+               
 
          {{#if check_if_logged_in_user}}
               <div class="more"><svg class="olymp-three-dots-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-three-dots-icon"></use></svg>
@@ -254,6 +255,11 @@
               <img src="{{user_profile_pic}}"  alt="author" class="view_profile">
               <div class="author-date">
                 <a class="h6 post__author-name fn view_profile view_profile" href="#"> {{user_name}}</a>
+                <span>
+                      {{#if check_for_edited_post ../post_id}}  
+                        (Edited)
+                       {{/if}}
+                    </span>  
                 <div class="post__date">
                   <time class="published" datetime="2017-03-24T18:18">
                     {{calculate_time_difference ../created_at}}
@@ -296,7 +302,7 @@
         <button class="btn btn-primary btn-md-2 pull-right" id="submit_edited_post" ><i class="fa fa-spinner fa-pulse fa-fw div_hide_class" id="loader_gif"></i>
                            <span id="save_text">Update</span></button>   
         </div>
-          
+          <div class="clearfix"></div>
             <div class="post-thumb pointer">
               <img src="{{post_image}}" alt="photo"  class="go_to_detail_page" > 
             </div>
@@ -417,6 +423,11 @@
           
               <div class="author-date">
                 <a class="h6 post__author-name fn view_profile" href="#">{{user_name}}</a>
+                <span>
+                      {{#if check_for_edited_post ../post_id}}  
+                        (Edited)
+                       {{/if}}
+                    </span>  
                 <div class="post__date">
                   <time class="published" datetime="2017-03-24T18:18">
                    {{calculate_time_difference ../created_at}}
@@ -459,7 +470,7 @@
         <button class="btn btn-primary btn-md-2 pull-right" id="submit_edited_post" ><i class="fa fa-spinner fa-pulse fa-fw div_hide_class" id="loader_gif"></i>
                            <span id="save_text">Update</span></button>   
         </div>
-
+<div class="clearfix"></div>
             <div class="post-video">
               <div class="video-thumb go_to_detail_page">
                 <img src="{{featured_image}}" alt="photo" target="_blank" >
@@ -589,7 +600,12 @@
               <img src="{{user_profile_pic}}" class="view_profile" alt="author">
           
               <div class="author-date">
-                <a class="h6 post__author-name fn view_profile" href="#">{{user_name}}</a>
+                <a class="h6 post__author-name fn view_profile" href="#">{{user_name}}</a> 
+                <span>
+                      {{#if check_for_edited_post ../post_id}}  
+                        (Edited)
+                       {{/if}}
+                    </span>  
                 <div class="post__date">
                   <time class="published" datetime="2017-03-24T18:18">
                    {{calculate_time_difference ../created_at}}

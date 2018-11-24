@@ -379,6 +379,30 @@ Template.feed_detail_page.helpers({
     return discussion_detail_array;
   },
 
+      check_for_edited_post(post_id){
+      // Meteor.subscribe("comment_based_comment_id",comment_id);
+        var result = feed.find({ post_id: post_id }).fetch()
+        if(result[0])
+        {
+          if(result[0].updated_at)
+          {
+          return true;
+        }
+      }
+  },
+
+      check_for_edited_comment(comment_id){
+      // Meteor.subscribe("comment_based_comment_id",comment_id);
+        var result = feed.find({ comment_id: comment_id }).fetch()
+        if(result[0])
+        {
+          if(result[0].updated_at)
+          {
+          return true;
+        }
+      }
+  },
+
       check_if_logged_in_user(){
       var logged_in_user = Session.get("userId");
       // swal(this.post_by+' '+logged_in_user);

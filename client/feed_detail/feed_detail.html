@@ -35,6 +35,14 @@
               <img src="{{user_profile_pic}}"  alt="author" class="view_profile" >
               <div class="author-date">
                 <a class="h6 post__author-name fn view_profile" href="#">{{user_name}}</a>
+
+
+                <span>
+                      {{#if check_for_edited_post ../post_id}}  
+                        (Edited)
+                       {{/if}}
+                    </span>  
+
                 <div class="post__date">
                   <time class="published" datetime="2017-03-24T18:18">
                     {{calculate_time_difference ../created_at}}
@@ -150,6 +158,14 @@
                 <img src="{{user_profile_pic}}" class="view_profile" alt="author">
                 <div class="author-date">
                   <a class="h6 post__author-name fn view_profile" href="#">{{user_name}}</a>
+
+
+                <span>
+                      {{#if check_for_edited_comment ../comment_id}}  
+                        (Edited)
+                       {{/if}}
+                    </span>  
+
                   <div class="post__date">
                   <time class="published" datetime="2017-03-24T18:18">
                       {{calculate_time_difference ../created_at}}
@@ -266,6 +282,14 @@
                 <img src="{{user_profile_pic}}" alt="author" class="view_profile" >
                 <div class="author-date">
                   <a class="h6 post__author-name fn view_profile" href="#">{{user_name}}</a>
+
+
+                <span>
+                      {{#if check_for_edited_comment ../comment_id}}  
+                        (Edited)
+                       {{/if}}
+                    </span>  
+
                   <div class="post__date">
                   <time class="published" datetime="2017-03-24T18:18">
                       {{calculate_time_difference ../created_at}}
@@ -471,7 +495,16 @@
   {{#each fetch_user_info}}        
               <img src="{{check_user_profile_pic}}"  alt="author" class="view_profile">
               <div class="author-date">
-                <a class="h6 post__author-name fn view_profile view_profile" href="#"> {{user_name}}</a>
+                <a class="h6 post__author-name fn view_profile view_profile" href="#"> 
+                {{user_name}}</a>
+
+
+                <span>
+                      {{#if check_for_edited_post ../post_id}}  
+                        (Edited)
+                       {{/if}}
+                    </span>  
+
                 <div class="post__date">
                   <time class="published" datetime="2017-03-24T18:18">
                     {{calculate_time_difference ../created_at}}
@@ -524,7 +557,7 @@
               {{#if check_for_user_already_liked}} 
               <a class="like_event post-add-icon inline-items" >
                 <svg class="olymp-heart-icon" style="fill: #FE5D39 !important;">
-                  <use xlink:href="svg-icons/sprites/icons.svg#olymp-heart-icon"></use>
+                  <use xlink:href="/svg-icons/sprites/icons.svg#olymp-heart-icon"></use>
                 </svg>
                 <span>
                   <a data-toggle="modal" data-target="#show_like_count_on_feed_post_image" class=" get_all_liked_users">  {{total_liked_on_post post_id}}
@@ -536,7 +569,7 @@
                {{else }}      
               <a class="like_event post-add-icon inline-items">               
                 <svg class="olymp-heart-icon">
-                  <use xlink:href="svg-icons/sprites/icons.svg#olymp-heart-icon"></use>
+                  <use xlink:href="/svg-icons/sprites/icons.svg#olymp-heart-icon"></use>
                 </svg>
                 <span>
                   <a data-toggle="modal" data-target="#show_like_count_on_feed_post_image" class=" get_all_liked_users">
@@ -586,6 +619,14 @@
                 <img src="{{user_profile_pic}}" class="view_profile" alt="author">
                 <div class="author-date">
                   <a class="h6 post__author-name fn view_profile" href="#">{{user_name}}</a>
+
+
+                <span>
+                      {{#if check_for_edited_comment ../comment_id}}  
+                        (Edited)
+                       {{/if}}
+                    </span>  
+
                   <div class="post__date">
                   <time class="published" datetime="2017-03-24T18:18">
                       {{calculate_time_difference ../created_at}}
@@ -658,6 +699,14 @@
                 <img src="{{user_profile_pic}}" class="view_profile" alt="author">
                 <div class="author-date">
                   <a class="h6 post__author-name fn view_profile" href="#">{{user_name}}</a>
+
+
+                <span>
+                      {{#if check_for_edited_comment ../comment_id}}  
+                        (Edited)
+                       {{/if}}
+                    </span>  
+
                   <div class="post__date">
                   <time class="published" datetime="2017-03-24T18:18">
                       {{calculate_time_difference ../created_at}}
@@ -823,6 +872,14 @@
           
               <div class="author-date">
                 <a class="h6 post__author-name fn view_profile" href="#">{{user_name}}</a>
+
+
+                <span>
+                      {{#if check_for_edited_post ../post_id}}  
+                        (Edited)
+                       {{/if}}
+                    </span>  
+
                 <div class="post__date">
                   <time class="published" datetime="2017-03-24T18:18">
                    {{calculate_time_difference ../created_at}}
@@ -888,7 +945,7 @@
               {{#if check_for_user_already_liked}} 
               <a class="like_event post-add-icon inline-items" >
                 <svg class="olymp-heart-icon" style="fill: #FE5D39 !important;">
-                  <use xlink:href="svg-icons/sprites/icons.svg#olymp-heart-icon"></use>
+                  <use xlink:href="/svg-icons/sprites/icons.svg#olymp-heart-icon"></use>
                 </svg>
                 <span>
                   <a data-toggle="modal" data-target="#show_like_count_on_feed_post_image" class=" get_all_liked_users">  {{total_liked_on_post post_id}}
@@ -900,7 +957,7 @@
                {{else }}      
               <a class="like_event post-add-icon inline-items">               
                 <svg class="olymp-heart-icon">
-                  <use xlink:href="svg-icons/sprites/icons.svg#olymp-heart-icon"></use>
+                  <use xlink:href="/svg-icons/sprites/icons.svg#olymp-heart-icon"></use>
                 </svg>
                 <span>
                   <a data-toggle="modal" data-target="#show_like_count_on_feed_post_image" class=" get_all_liked_users">
@@ -1027,6 +1084,14 @@
                 <img src="{{user_profile_pic}}" class="view_profile" alt="author">
                 <div class="author-date">
                   <a class="h6 post__author-name fn view_profile" href="#">{{user_name}}</a>
+
+
+                <span>
+                      {{#if check_for_edited_comment ../comment_id}}  
+                        (Edited)
+                       {{/if}}
+                    </span>  
+
                   <div class="post__date">
                   <time class="published" datetime="2017-03-24T18:18">
                       {{calculate_time_difference ../created_at}}
@@ -1261,7 +1326,7 @@
               {{#if check_for_user_already_liked}} 
               <a class="like_event post-add-icon inline-items" >
                 <svg class="olymp-heart-icon" style="fill: #FE5D39 !important;">
-                  <use xlink:href="svg-icons/sprites/icons.svg#olymp-heart-icon"></use>
+                  <use xlink:href="/svg-icons/sprites/icons.svg#olymp-heart-icon"></use>
                 </svg>
                 <span>
                   <a data-toggle="modal" data-target="#show_like_count_on_feed_post_image" class=" get_all_liked_users">  {{total_liked_on_post post_id}}
@@ -1273,7 +1338,7 @@
                {{else }}      
               <a class="like_event post-add-icon inline-items">               
                 <svg class="olymp-heart-icon">
-                  <use xlink:href="svg-icons/sprites/icons.svg#olymp-heart-icon"></use>
+                  <use xlink:href="/svg-icons/sprites/icons.svg#olymp-heart-icon"></use>
                 </svg>
                 <span>
                   <a data-toggle="modal" data-target="#show_like_count_on_feed_post_youtube_url" class=" get_all_liked_users">
@@ -1316,10 +1381,8 @@
           
           </article>
 
-
-
-                    <ul class="comments-list">
-    {{#each display_lvl_0_commenting}}
+      <ul class="comments-list">
+          {{#each display_lvl_0_commenting}}
             <li class="comment-item">
               <div class="post__author author vcard inline-items">
           {{#each fetch_user_info_for_comment}}  
@@ -1327,6 +1390,13 @@
                 <img src="{{user_profile_pic}}" class="view_profile" alt="author">
                 <div class="author-date">
                   <a class="h6 post__author-name fn view_profile" href="#">{{user_name}}</a>
+
+                <span>
+                      {{#if check_for_edited_comment ../comment_id}}  
+                        (Edited)
+                       {{/if}}
+                    </span>  
+
                   <div class="post__date">
                   <time class="published" datetime="2017-03-24T18:18">
                       {{calculate_time_difference ../created_at}}
@@ -1400,6 +1470,14 @@
                 <img src="{{user_profile_pic}}" class="view_profile" alt="author">
                 <div class="author-date">
                   <a class="h6 post__author-name fn view_profile" href="#">{{user_name}}</a>
+
+
+                <span>
+                      {{#if check_for_edited_comment ../comment_id}}  
+                        (Edited)
+                       {{/if}}
+                    </span>  
+
                   <div class="post__date">
                   <time class="published" datetime="2017-03-24T18:18">
                       {{calculate_time_difference ../created_at}}

@@ -948,6 +948,21 @@ Template.profile_content.helpers({
   },
 
     //END feed like structure helpers
+    
+    //Start showing edited text in edited post
+            check_for_edited_post(post_id){
+      // Meteor.subscribe("comment_based_comment_id",comment_id);
+        var result = feed.find({ post_id: post_id }).fetch()
+        if(result[0])
+        {
+          if(result[0].updated_at)
+          {
+          return true;
+        }
+      }
+  },
+  //END showing edited text in edited post
+
 
 });
 
