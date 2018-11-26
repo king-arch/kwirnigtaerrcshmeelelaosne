@@ -14,7 +14,7 @@ Template.email_content.onRendered(function(){
   Meteor.subscribe("user_info_based_on_id",Session.get("userId"));
 
     setTimeout(function(){
-
+          $('#loading_div').addClass("loader_visiblity_block");
       // swal('call sending mail function');
        $("#send_mail").click();
     },3000);
@@ -74,15 +74,17 @@ Template.email_content.events({
 
   'click #send_mail':function(event){
 
-$('#loading_div').removeClass("loader_visiblity_block");
-$('#save_text').addClass("loader_visiblity_block");
+    // alert('sending email');
+    $('#loading_div').removeClass("loader_visiblity_block");
+    $('#save_text').addClass("loader_visiblity_block");
+    // return false;
 
-      var userEmail = Session.get("userEmail");
+    var userEmail = Session.get("userEmail");
     Meteor.call('send_email_for_confirmation',Session.get("userId"),userEmail,function(error,result){
     if(error)
-      {
-         console.log('Error');
-      }
+          {
+             console.log('Error');
+          }
       else{
         console.log('sucess: '+result);
           }

@@ -456,6 +456,7 @@ if(check_if_exist[0]){
     },
 
     send_email_for_confirmation:function(userId, userEmail){
+      console.log(userId+' & '+userEmail);
       var result = send_email_for_varification(userId,userEmail);
       return result;
     },
@@ -1732,7 +1733,7 @@ var htmlCode="<html><head><title>Email</title></head><body><div style="+div_styl
 "</tr></tbody></table></div><div style="+div_style11+"><table style ="+div_style12 +" cellspacing="+spacing+" cellpadding="+spacing+"><tbody><tr><td "+
 "colspan="+spacing+">&nbsp;</td></tr><tr><td colspan="+spacing+">&nbsp;</td></tr><tr><td colspan="+spacing+" style="+div_style14+">Hi "+name +",</td></tr><tr><td colspan="+spacing+">Welcome to the Writersmelon"+
 " Family!</td></tr><tr><td colspan="+spacing+">Your account is almost ready, but before you can login you need to complete a brief account verification process.</td></tr><tr><td colspan="+div_style11
-+"><br/><a href=http://localhost:3000/activate_email/"+userID + ">Click here</a> to verify your email ID.  (if you are using the mobile application, after you press on the previous link close the mobile browser and continue from the application).<br/></td></tr><tr><td colspan="+spacing+">&nbsp;</td></tr><tr><td colspan="+spacing
++"><br/><a href=https://writersmelon.herokuapp.com/activate_email/"+userID + ">Click here</a> to verify your email ID.  (if you are using the mobile application, after you press on the previous link close the mobile browser and continue from the application).<br/></td></tr><tr><td colspan="+spacing+">&nbsp;</td></tr><tr><td colspan="+spacing
 +">P.S. If you did not sign up for Writersmelon, just ignore this email; we will never again send you an email.</td></tr><tr><td colspan="+spacing
 +">&nbsp;</td></tr><tr><td colspan="+spacing+">Regards</td></tr><tr><td colspan="+spacing
 +">The Writersmelon Team</td></tr><tr><td colspan="+spacing+">&nbsp;</td></tr><tr><td colspan="+spacing+">&nbsp;</td></tr></tbody></table></div><div style="+div_style15+"><table style="+div_style6+"><tbody><tr><td><center><small style="+div_style6+">This email was intended for "+name+".<br/>Copyright Writersmelon, 2018.</small></center></td></tr></tbody></table></div></td></tr></tbody></table></div></div></body></html>";
@@ -1755,7 +1756,7 @@ var htmlCode="<html><head><title>Email</title></head><body><div style="+div_styl
 var name = result[0].user_name;
 var user_id = result[0].user_id;
 var userId = Base64.encode(user_id);
-var url = 'http://localhost:3000';
+var url = 'https://writersmelon.herokuapp.com';
 
 var div_style= "width:600px;height:auto;margin:auto;font-family:sans-serif;font-weight:normal;font-size:12px; border:10px solid red";
 var div_style2= "width:600px;height:auto;float:left;background-color:#efefef;border:10px solid red !important";
@@ -1806,7 +1807,7 @@ var password = result[0].user_password;
 console.log('Password: ');
 console.log(password);
 var userId = Base64.encode(userid);
-var url = 'http://localhost:3000';
+var url = 'https://writersmelon.herokuapp.com';
 
 var div_style= "width:600px;height:auto;margin:auto;font-family:sans-serif;font-weight:normal;font-size:12px; border:10px solid red";
 var div_style2= "width:600px;height:auto;float:left;background-color:#efefef;border:10px solid red !important";
@@ -1857,7 +1858,7 @@ var password = password;
 console.log('Password: ');
 console.log(password);
 var userId = Base64.encode(user_id);
-var url = 'http://localhost:3000';
+var url = 'https://writersmelon.herokuapp.com';
 
 var div_style= "width:600px;height:auto;margin:auto;font-family:sans-serif;font-weight:normal;font-size:12px; border:10px solid red";
 var div_style2= "width:600px;height:auto;float:left;background-color:#efefef;border:10px solid red !important";
