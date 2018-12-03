@@ -593,21 +593,20 @@
     <input type="checkbox" name="onoffswitch3" class="onoffswitch3-checkbox" id="myonoffswitch3" checked>
     <label class="onoffswitch3-label" for="myonoffswitch3">
         <span class="onoffswitch3-inner">
+
             <span class="onoffswitch3-active">
-<div id="ticker">
-                <marquee class="scroll-text" > 
-  {{#each change_textual_ads}}
+                  <div id="ticker" >
+                                  <marquee class="scroll-text" > 
+                                      {{#each change_textual_ads}}
 
+                                      <a href={{promotion_url}} style="color: #333 !important;" class="update_count" id="OpenNewTab" target="_blank" > <span class="update_count" >{{promotion_content}}</span></a>&nbsp; &nbsp;
 
-  
-       <a href={{promotion_url}} style="color: #333 !important;" class="update_count" id="OpenNewTab" target="_blank" > <span class="update_count" >{{promotion_content}}</span></a>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
-
-   {{/each}}
-                  </marquee>
-</div>
-
+                                      {{/each}}
+                                    </marquee>
+                  </div>
                 <span class="onoffswitch3-switch">Latest </span>
             </span>
+
             <span class="onoffswitch3-inactive"><span class="onoffswitch3-switch">SHOW BREAKING NEWS</span></span>
         </span>
     </label>

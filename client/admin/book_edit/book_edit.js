@@ -12,6 +12,7 @@ import {
 import { Base64 } from 'meteor/ostrio:base64';
 import swal from 'sweetalert';
 import { book_details } from './../../../import/collections/insert.js';
+import { interest_list } from './../../../import/collections/insert.js';
 
 var admin_detailed;
 Template.edit_book_details.onDestroyed(function () {
@@ -22,7 +23,8 @@ Template.edit_book_details.onRendered(function () {
 	$.getScript("https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/pikaday.min.js",function(){
     var picker = new Pikaday({ field: document.getElementById('date_picker'),minDate: new Date() });
   })
-/
+
+admin_detailed = Meteor.subscribe("fetch_result_interest");
 	setTimeout(function () {
 		$('#loading_div').addClass("loader_visiblity_block");
 		click_events();
@@ -35,6 +37,7 @@ Template.edit_book_details.onRendered(function () {
   var book_id = Base64.decode(url);
 // swal('book_id: '+ book_id);
 
+	// setTimeout(function () {
   Meteor.call('fetch_book_details', book_id, function (error, result) {
     if (error) {
       console.log("Some error occured.");
@@ -60,7 +63,8 @@ Template.edit_book_details.onRendered(function () {
       $('#hidden_book_id').val(book_id);
       $('#book_name').val(book_name);
       $('#book_summary').val(book_summary);
-      $('#book_catagries').val(book_catagries);
+
+      // $('#book_catagries').attr('selected="selected"');
       $('#author_name').val(author_name);
 
       $('#author_description').val(author_description);
@@ -86,9 +90,11 @@ Template.edit_book_details.onRendered(function () {
 
       Session.set("book_cover_session",book_cover);
 
+setTimeout(function () {
+      $('#book_catagries').val(book_catagries);
+	}, 2000);
     }
   });
-
 });
 
 
@@ -108,6 +114,11 @@ Template.edit_book_details.onRendered(function () {
 		  var user_cover = Session.get("book_cover_session");
 		  return user_cover;
 		}
+    },
+
+    import_catagries(){
+	    var result = interest_list.find({}).fetch();
+	    return result;
     },
 
 

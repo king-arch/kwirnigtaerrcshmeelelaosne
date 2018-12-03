@@ -441,34 +441,13 @@ border: 0px;
 								<label class="control-label c-darkgray">Book's price</label>
 								<input class="form-control c-darkgray" type="text" placeholder="" id="book_price" onkeypress="return isNumberKey(event)" maxlength="10" minlength="1" >
 
-
 							<label class="control-label c-darkgray">Book Catagries</label>
-							
 								<select  id="book_catagries" >
 									<option value="" >--Select Type--</option>
-									<option value="Self help">Self help</option>
-									<option value="Health">Health</option>
-									<option value="Guide">Guide</option>
-									<option value="Travel">Travel</option>
-									<option value="Children's">Children's</option>
-									<option value="Religion, Spirituality & New Age">Religion, Spirituality & New Age</option>
-									<option value="History">History</option>
-									<option value="Anthology">Anthology</option>
-									<option value="Poetry">Poetry</option>
-									<option value="Encyclopedias">Encyclopedias</option>
-									<option value="Dictionaries">Dictionaries</option>
-									<option value="Art">Art</option>
-									<option value="Cookbooks">Cookbooks</option>
-									<option value="Diaries">Diaries</option>
-									<option value="Journals">Journals</option>
-									<option value="Prayer books">Prayer books</option>
-									<option value="Series">Series</option>
-									<option value="Trilogy">Trilogy</option>
-									<option value="Biographies">Biographies</option>
-									<option value="Autobiographies">Autobiographies</option>
-									<option value="Fantasy">Fantasy</option>
+										{{#each import_catagries}}
+												<option  value="{{interest_title}}" id="{{interest_id}}">{{interest_title}}</option>
+										{{/each}}
 								</select>
-						
 
 								<label class="control-label c-darkgray">Author's Name</label>
 								<input class="form-control c-darkgray" type="text" placeholder="" id="author_name" >

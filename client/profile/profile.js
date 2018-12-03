@@ -968,27 +968,30 @@ Template.profile_content.helpers({
 
 Template.profile_content.events({
 
-    'click .go_to_detail_page':function(){      
-
-            var post_id = Base64.encode(this.post_id);  
-              var url = '/feed_detail/'+post_id;
-            console.log(url);
-            window.location.href = url;
+    'click #clicked_campaign':function(){       
+            Router.go("/campaign_listing"); 
     },  
 
-  'click .click_on_follow':function(){
-    // swal('here');
-    var follow_user_id = this.user_id; 
-    var logged_in_user = Session.get("userId");  
-    
-      Meteor.call('follow_people',follow_user_id,logged_in_user,function(error,result){
-              if(error){
-                swal("Some error occure.");
-              }else{
-                console.log('successfully following ');
-              }
-          });
-  },
+    'click .go_to_detail_page':function(){      
+            var post_id = Base64.encode(this.post_id);  
+              var url = '/feed_detail/'+post_id;  
+            console.log(url);  
+            window.location.href = url;  
+    },   
+      
+  'click .click_on_follow':function(){    
+    // swal('here');    
+    var follow_user_id = this.user_id;    
+    var logged_in_user = Session.get("userId");      
+        
+      Meteor.call('follow_people',follow_user_id,logged_in_user,function(error,result){    
+              if(error){    
+                swal("Some error occure.");     
+              }else{    
+                console.log('successfully following ');   
+              }     
+          });     
+  },   
 
   'click .click_on_unfollow':function(){
     // swal('here');

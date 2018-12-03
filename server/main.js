@@ -12,6 +12,7 @@ import { interest_list } from './../import/collections/insert.js';
 import { feed } from './../import/collections/insert.js';
 import { blog } from './../import/collections/insert.js';
 import { content } from './../import/collections/insert.js';
+import { campaign_details } from './../import/collections/insert.js';
 
 import { Base64 } from 'meteor/ostrio:base64';
 import urlMetadata from 'url-metadata';
@@ -20,21 +21,6 @@ import urlMetadata from 'url-metadata';
       return user_details.find({user_id: "user_admin"});
     });
 
-     Meteor.publish('fetch_book_listing', function() {
-      return book_details.find({});
-    });
-
-     Meteor.publish('fetch_promotion_listing', function() {
-      return promotion.find({});
-    });
-
-     Meteor.publish('fetch_text_promotion_listing', function() {
-      return promotion.find({"promotion_type": "Textual",});
-    });
-
-     Meteor.publish('fetch_promotion_listing_with_id', function(promotion_id) {
-      return promotion.find({promotion_id: promotion_id});
-    });
 
      Meteor.publish('fetch_user_listing', function() {
       return user_details.find({});
@@ -56,6 +42,22 @@ import urlMetadata from 'url-metadata';
       return  user_details.find({});
     });
 
+     Meteor.publish('fetch_book_listing', function() {
+      return book_details.find({});
+    });
+
+     Meteor.publish('fetch_promotion_listing', function() {
+      return promotion.find({});
+    });
+
+     Meteor.publish('fetch_text_promotion_listing', function() {
+      return promotion.find({"promotion_type": "Textual",});
+    });
+
+     Meteor.publish('fetch_promotion_listing_with_id', function(promotion_id) {
+      return promotion.find({promotion_id: promotion_id});
+    });
+
      Meteor.publish('follow_list_all', function() {
       return  following_list.find({});
     });
@@ -63,7 +65,6 @@ import urlMetadata from 'url-metadata';
      Meteor.publish('fetch_result_interest', function() {
       return  interest_list.find({});
     });
-
 
      Meteor.publish('fetch_result_interest_listing', function() {
       return  interest_list.find({});
@@ -116,6 +117,10 @@ import urlMetadata from 'url-metadata';
 
      Meteor.publish('categories_selection_for_user', function(user_id) {
       return  categories_selection.find({user_id: user_id});
+    });
+
+     Meteor.publish('campaign_details', function() {
+      return  campaign_details.find({});
     });
 
 Meteor.startup(() => {
@@ -1683,19 +1688,47 @@ else if(field_name == 'socail_media_handle_shared'){
       return result;
     },
 
-        change_password:function(userid,pass){
-
+    change_password:function(userid,pass){
           var result =  user_details.update({
               user_id: userid,
             }, {
               $set: {
                 "user_password": pass}
             });
-
           var result = send_email_for_changed_password(userid);
           return result;
       },
 
+    save_campaign_details:function(select_package,book_name,book_summary,author_name,
+        author_description,amazon_link,delivery_option,additional_information,book_price,
+        book_catagries,book_cover,final_payment){
+
+console.log(select_package+book_name+book_summary+author_name+author_description+amazon_link+delivery_option+additional_information+book_price+book_catagries+final_payment);
+   var campaign_id = 'campaign_id_'+Math.floor((Math.random() * 2465789) + 1);
+
+                   var result = campaign_details.insert({
+
+                      campaign_id: campaign_id,
+                      select_package: select_package,
+                      book_name: book_name,
+                      book_summary: book_summary,
+
+                      author_name: author_name,
+                      author_description: author_description,
+                      amazon_link: amazon_link,
+
+                      delivery_option: delivery_option,
+                      delivery_option: delivery_option,
+                      additional_information: additional_information,
+                      book_price: book_price,
+                      book_cover: book_cover,
+                      final_payment: final_payment,
+                      book_catagries: book_catagries,
+                      approval_status: 0,
+                      created_at: Date.now()
+      });
+                   return result;
+},
 
 });
 

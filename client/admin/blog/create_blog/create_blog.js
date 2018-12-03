@@ -51,6 +51,8 @@ Template.display_create_blog.helpers({
       if(Session.get("blog_cover_session")){
       var user_cover = Session.get("blog_cover_session");
       return user_cover;
+    }else{
+    	return '/img/last-photo8-large.jpeg';
     }
     },
 
@@ -60,6 +62,11 @@ Template.display_create_blog.events({
 
 	"change #blog_cover":function (e, template) {
 	    upload_cover_pic(e, template);
+	},
+
+
+	"click #go_back":function (e, template) {
+	    window.history.go(-1);
 	},
 
 	'click #create_blog':function()

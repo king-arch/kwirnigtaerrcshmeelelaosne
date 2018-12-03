@@ -11,6 +11,7 @@ import {
 
 import swal from 'sweetalert';
 import { book_details } from './../../../import/collections/insert.js';
+import { interest_list } from './../../../import/collections/insert.js';
 
 // import { daterangepicker } from './../../theme js/daterangepicker.js';
 // import { simplecalendar } from './../../theme js/simplecalendar.js';
@@ -30,7 +31,7 @@ Template.create_book_details.onRendered(function () {
 	})
 
 	Session.set("book_cover_session","");
-
+	admin_detailed = Meteor.subscribe("fetch_result_interest");
 
 	setTimeout(function () {
 		click_events();
@@ -53,7 +54,14 @@ Template.create_book_details.onRendered(function () {
 	    if(Session.get("book_cover_session")){
 		  var user_cover = Session.get("book_cover_session");
 		  return user_cover;
+		}else{
+			return "/img/last-phot13-large.jpg";
 		}
+    },
+
+        import_catagries(){
+	    var result = interest_list.find({}).fetch();
+	    return result;
     },
 
 });
