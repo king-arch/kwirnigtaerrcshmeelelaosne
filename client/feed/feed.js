@@ -6,6 +6,7 @@ import swal from 'sweetalert';
 
 import { user_details }  from './../../import/collections/insert.js';
 import { following_list }  from './../../import/collections/insert.js';
+import { campaign_details }  from './../../import/collections/insert.js';
 import { book_details }  from './../../import/collections/insert.js';
 import { feed }  from './../../import/collections/insert.js';
 import { Base64 } from 'meteor/ostrio:base64';
@@ -460,8 +461,11 @@ Template.feed_design.helpers({
               Meteor.subscribe("user_info_based_on_id",check_likers[0].liked_by);
               var user_name = user_details.find({ user_id: check_likers[0].liked_by }).fetch();
               console.log('show singled liker friend');
-              console.log(user_name[0].user_name);
+              // console.log(user_name[0].user_name);
+              if(user_name[0]){
+
               return user_name[0].user_name+' liked this';
+              }
           }
         }
         else if(check_likers.length == 2){
@@ -471,19 +475,24 @@ Template.feed_design.helpers({
               
               Meteor.subscribe("user_info_based_on_id",check_likers[1].liked_by);
               var user_name = user_details.find({ user_id: check_likers[1].liked_by }).fetch();
+              if(user_name[0]){             
              return 'You & '+user_name[0].user_name+' liked this';
-                            
+               }             
               }else{
               Meteor.subscribe("user_info_based_on_id",check_likers[0].liked_by);
               var user_name = user_details.find({ user_id: check_likers[0].liked_by }).fetch();
-              return 'You & '+user_name[0].user_name+' liked this';
+                if(user_name[0]){
+                   return 'You & '+user_name[0].user_name+' liked this';
+                 }
               } 
 
             }
             else{
               Meteor.subscribe("user_info_based_on_id",check_likers[0].liked_by);
               var user_name = user_details.find({ user_id: check_likers[1].liked_by }).fetch();
+              if(user_name[0]){
               return user_name[0].user_name+' & 1 more liked this';
+            }
             }
         }
       else if(check_likers.length > 2){
@@ -496,19 +505,24 @@ Template.feed_design.helpers({
 
               Meteor.subscribe("user_info_based_on_id",check_likers[1].liked_by);
               var user_name = user_details.find({ user_id: check_likers[1].liked_by }).fetch();
+          if(user_name[0]){
               return 'You, '+user_name[0].user_name+' & '+(final_likers_count-2) +' more liked this';
-
+          }
             }
             else{
               Meteor.subscribe("user_info_based_on_id",check_likers[0].liked_by);
               var user_name = user_details.find({ user_id: check_likers[0].liked_by }).fetch();
-              return 'You, '+user_name[0].user_name+' & '+(final_likers_count-2) +' more liked this';
+                if(user_name[0]){
+                  return 'You, '+user_name[0].user_name+' & '+(final_likers_count-2) +' more liked this';
+            }
             } 
           }else{
               Meteor.subscribe("user_info_based_on_id",check_likers[0].liked_by);
               var user_name = user_details.find({ user_id: check_likers[0].liked_by }).fetch();
-              return user_name[0].user_name+' & '+(final_likers_count-1 )+' more liked this';            
+                if(user_name[0]){
+                  return user_name[0].user_name+' & '+(final_likers_count-1 )+' more liked this';            
           }
+        }
       }
 
      },
@@ -726,6 +740,13 @@ Template.feed_design.helpers({
       }
   },
 
+      show_campaign_listing(){
+
+      Meteor.subscribe("campaign_details_all_list");
+      var result = campaign_details.find({}).fetch();
+      return result;
+    },
+
 });
 
 Template.feed_design.events({
@@ -749,11 +770,19 @@ Template.feed_design.events({
       return;
     }
   },
+  
     "paste #post_text":function(){ Session.set("request_send","false");
       setTimeout(function(){
         // alert($("#post_text").val());
         fetch_meta_information_in_url($("#post_text").val())
       }, 100);
+    },
+
+    "click .go_to_book_detail":function(){ 
+      var book_id = Base64.encode(this.book_id);  
+      var url = '/book_detail/'+book_id;
+            console.log(url);
+            window.location.href = url;
     },
 
 

@@ -859,24 +859,27 @@
     <div class="col col-xl-3 order-xl-3 col-lg-3 order-lg-3 col-md-6 col-sm-12 hidden-xs" style="max-width: 24.8%;">
         <div class="ui-block">
          <div class="ui-block-title">
-          <h6 class="title">Up for review </h6>
+          <h6 class="title">Up for review</h6>
           
         </div>
           <div class="friend-item">
             <div class="friend-item-content">      
             <div class="swiper-container" data-slide="fade">
               <div class="swiper-wrapper">
+  {{#each show_campaign_listing}}
                 <div class="swiper-slide">
                   <div class="friend-count" data-swiper-parallax="-500">
-                    <img src="http://www.writersmelon.com/wm/wp-content/uploads/2018/08/the_heartful_fb_01a-800x509.jpg">
+                    <img src="{{book_cover}}" id="{{campaign_id}}" class="go_to_book_detail" >
+                    <!-- <img src="{{book_cover}}" id="{{campaign_id}}" style="height: 225px;width: 225px;"> -->
                   </div>                 
                 </div>
-        
-                <div class="swiper-slide">
+  {{/each}}        
+<!--            <div class="swiper-slide">
                   <p class="friend-about" data-swiper-parallax="-500">
                       <img src="http://www.writersmelon.com/wm/wp-content/uploads/2018/08/the_heartful_fb_01a-800x509.jpg"> 
                     </p>     
-               </div>
+               </div> -->
+
               </div>
         
               <!-- If we need pagination -->

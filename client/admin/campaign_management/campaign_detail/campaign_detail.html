@@ -66,13 +66,40 @@
               
             </p> 
             <div class="row">
-            <div class="col m6 l6 s6">
-              <a href="#" class="btn btn-blue btn-md with--icon">               
-                <div class="text"> <span class="title">Intersted</span> </div> 
+
+  {{#if check_if_book_already_exist}}
+              <div class="col m6 l6 s6">
+                <a href="javascript:void(0)" class="btn btn-blue btn-md with--icon create_book">               
+                  <div class="text"> <span class="title">Create Book</span> </div> 
+                </a>
+              </div>
+  {{/if}}
+
+  {{#if check_if_book_already_exist}}
+  {{#if equals approval_status 0}}
+            <div class="col m6 l6 s6 text-right">
+              <a href="javascript:void(0)" class="btn btn-blue btn-md with--icon reject_campaign" >               
+                <div class="text"> <span class="title">Reject Campaign</span> </div> 
               </a>
             </div>
+<p> You can accept this campaign only after adding book in the platform.</p>
 
-  {{#if equals approval_status 0}}
+
+  {{else if equals approval_status 1}}
+            <div class="col m6 l6 s6 text-right">
+              <a href="javascript:void(0)" class="btn btn-blue btn-md with--icon ">               
+                <div class="text"> <span class="title">Campaign Accepted</span> </div> 
+              </a>
+            </div>
+  {{else if equals approval_status 2}}
+            <div class="col m6 l6 s6 text-right">
+              <a href="javascript:void(0)" class="btn btn-blue btn-md with--icon ">               
+                <div class="text"> <span class="title">Campaign Rejected</span> </div> 
+              </a>
+            </div>
+  {{/if}}
+  {{else}}
+     {{#if equals approval_status 0}}
             <div class="col m6 l6 s6 text-right">
               <a href="javascript:void(0)" class="btn btn-blue btn-md with--icon reject_campaign" >               
                 <div class="text"> <span class="title">Reject Campaign</span> </div> 
@@ -80,7 +107,7 @@
             </div>
 
             <div class="col m6 l6 s6 text-right">
-              <a href="javascript:void(0)" class="btn btn-blue btn-md with--icon accept_campaign" >               
+              <a href="javascript:void(0)" class="btn btn-blue btn-md with--icon accept_campaign">               
                 <div class="text"> <span class="title">Accept Campaign</span> </div> 
               </a>
             </div>
@@ -98,7 +125,7 @@
               </a>
             </div>
   {{/if}}
-
+  {{/if}}
           </div>
 
       <div class="clearfix"></div>

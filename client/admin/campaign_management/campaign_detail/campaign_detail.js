@@ -13,6 +13,7 @@ import {
 import swal from 'sweetalert';
 import { promotion } from './../../../../import/collections/insert.js';
 import { campaign_details } from './../../../../import/collections/insert.js';
+import { book_details } from './../../../../import/collections/insert.js';
 import { notification_details } from './../../../../import/collections/insert.js';
 import { Base64 } from 'meteor/ostrio:base64';
 
@@ -67,6 +68,32 @@ Template.show_campaign_detail.onRendered(function () {
       }else{
       return "Points will be released to reviewers. reviewers will buy book themselves.";
       }
+    },
+
+    check_if_book_already_exist(){
+
+      var book_name = this.book_name;
+      var author_name = this.author_name;
+
+      // console.log(book_name);
+      Meteor.subscribe("fetch_book_listing");
+      // /^bar$/i
+      // book_name = book_name.toLowerCase();
+            // console.log(book_name);
+      // var query_1 = new RegExp(["^", book_name, "$"].join(""), "i");
+      // var query_1 = new RegExp(book_name,'i'); 
+      // var query_2 = new RegExp(["^", author_name, "$"].join(""), "i");
+               // 
+      var result = book_details.find({
+                        book_name: book_name,
+                      }).fetch();
+
+            console.log(result);
+      if(result[0]){
+        return false;
+      }else{
+        return true;
+      }
 
     },
 
@@ -74,6 +101,14 @@ Template.show_campaign_detail.onRendered(function () {
 
 
 Template.show_campaign_detail.events({
+
+    "click .create_book":function(){
+            var campaign_id = this.campaign_id;
+            var campaign_id = Base64.encode(campaign_id);  
+            var url = '/book_create_campaign/'+campaign_id;
+            console.log(url);
+            window.location.href = url;
+    },
 
     "click .accept_campaign":function(){
         // alert("clicked");
@@ -114,7 +149,7 @@ Template.show_campaign_detail.events({
       var approval_status = 2;
       var logged_in_user = Session.get("userId");
       var campaign_id = this.campaign_id;
-      swal("Do you want to start the campaign ...?", {
+      swal("Do you want to reject this campaign ...?", {
         buttons: {
           cancel: "Cancel",
           catch: {
@@ -130,7 +165,7 @@ Template.show_campaign_detail.events({
             break;
 
           case "catch":
-            Meteor.call('update_campaing_status', logged_in_user, approval_status,campaign_id, function (error, result) {
+            Meteor.call('update_campaigning_status', logged_in_user, approval_status,campaign_id, function (error, result) {
               if (error) {
                 console.log("Some error occured.");
               } else {

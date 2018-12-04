@@ -47,6 +47,10 @@ import urlMetadata from 'url-metadata';
       return book_details.find({});
     });
 
+     Meteor.publish('fetch_book_detail_with_id', function(book_id) {
+      return book_details.find({book_id: book_id});
+    });
+
      Meteor.publish('fetch_promotion_listing', function() {
       return promotion.find({});
     });
@@ -74,7 +78,6 @@ import urlMetadata from 'url-metadata';
      Meteor.publish('fetch_feed_content', function() {
       return  feed.find({});
     });
-
 
      Meteor.publish('fetch_feed_content_details', function(post_id) {
       return  feed.find({post_id: post_id});
@@ -353,6 +356,13 @@ if(check_if_exist[0]){
   fetch_book_details(book_id){
 
    var result = book_details.find({ "book_id": book_id }).fetch();
+   return result;
+
+  },
+
+  fetch_book_detail_from_campaign(campaign_id){
+
+   var result = campaign_details.find({ "campaign_id": campaign_id }).fetch();
    return result;
 
   },
@@ -1709,21 +1719,30 @@ else if(field_name == 'socail_media_handle_shared'){
       },
 
     update_campaigning_status:function(logged_in_user, approval_status,campaign_id){
+
+
       console.log(logged_in_user+' & '+ approval_status+' & '+campaign_id);
           var check_status =  campaign_details.find({campaign_id: campaign_id}).fetch();
           if(check_status[0]){
 
-              var result =  campaign_details.update({
+          if(approval_status == 1){
+
+      var fetch_book_details = book_details.find({
+                        book_name: check_status[0].book_name,
+                      }).fetch();
+
+
+                   var result =  campaign_details.update({
                                 campaign_id: check_status[0].campaign_id,
                               }, {
                                 $set: {
+                                  "book_id": fetch_book_details[0].book_id,
                                   "approval_status": approval_status,
                                   "status_changed_by": logged_in_user,
                                   "status_updated_time": Date.now()
                                 }
                               }); 
 
-          if(approval_status == 1){
 
           var notification_text = "Your campaign was accepted and got started";
                var notification_id = 'notification_id_'+Math.floor((Math.random() * 2465789) + 1);
@@ -1742,6 +1761,17 @@ else if(field_name == 'socail_media_handle_shared'){
             return result;
           }
           else if(approval_status == 2){
+
+                         var result =  campaign_details.update({
+                                campaign_id: check_status[0].campaign_id,
+                              }, {
+                                $set: {
+                                  "approval_status": approval_status,
+                                  "status_changed_by": logged_in_user,
+                                  "status_updated_time": Date.now()
+                                }
+                              }); 
+
                       var notification_text = "Your campaign is rejected";
                var notification_id = 'notification_id_'+Math.floor((Math.random() * 2465789) + 1);
                    
@@ -1829,6 +1859,27 @@ console.log(select_package+book_name+book_summary+author_name+author_description
       });
                    return result;
 },
+
+
+  create_book_details_from_campaign(book_id, book_name, book_summary, book_catagries, author_name,
+   author_description,amazon_link, book_cover, final_release_date,book_price){
+
+   var result = book_details.insert({
+      "book_id": book_id,
+      "book_name": book_name,
+      "book_summary": book_summary,
+      "book_catagries": book_catagries,
+      "author_name": author_name,
+      "author_description": author_description,
+      "amazon_link": amazon_link,
+      "book_cover": book_cover,
+      "book_price": book_price,
+      "final_release_date": final_release_date,
+      "created_at": Date.now(),
+    });
+
+      return result;
+  },
 
 });
 
