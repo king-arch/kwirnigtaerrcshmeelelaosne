@@ -13,4 +13,5 @@ export const feed = new Mongo.Collection('feed');
 export const promotion = new Mongo.Collection('promotion');                                 
 export const content = new Mongo.Collection('content');                                 
 export const blog = new Mongo.Collection('blog');                                 
+export const notification_details = new Mongo.Collection('notification_details');                                 
 

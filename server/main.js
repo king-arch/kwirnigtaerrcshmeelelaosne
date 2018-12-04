@@ -13,6 +13,7 @@ import { feed } from './../import/collections/insert.js';
 import { blog } from './../import/collections/insert.js';
 import { content } from './../import/collections/insert.js';
 import { campaign_details } from './../import/collections/insert.js';
+import { notification_details } from './../import/collections/insert.js';
 
 import { Base64 } from 'meteor/ostrio:base64';
 import urlMetadata from 'url-metadata';
@@ -119,8 +120,16 @@ import urlMetadata from 'url-metadata';
       return  categories_selection.find({user_id: user_id});
     });
 
-     Meteor.publish('campaign_details', function() {
+     Meteor.publish('campaign_details_all_list', function() {
       return  campaign_details.find({});
+    });
+
+     Meteor.publish('campaign_details_with_id', function(campaign_id) {
+      return  campaign_details.find({campaign_id: campaign_id});
+    });
+
+     Meteor.publish('notification_details', function(campaign_id) {
+      return  notification_details.find({campaign_id: campaign_id});
     });
 
 Meteor.startup(() => {
@@ -1699,9 +1708,63 @@ else if(field_name == 'socail_media_handle_shared'){
           return result;
       },
 
-    save_campaign_details:function(select_package,book_name,book_summary,author_name,
+    update_campaigning_status:function(logged_in_user, approval_status,campaign_id){
+      console.log(logged_in_user+' & '+ approval_status+' & '+campaign_id);
+          var check_status =  campaign_details.find({campaign_id: campaign_id}).fetch();
+          if(check_status[0]){
+
+              var result =  campaign_details.update({
+                                campaign_id: check_status[0].campaign_id,
+                              }, {
+                                $set: {
+                                  "approval_status": approval_status,
+                                  "status_changed_by": logged_in_user,
+                                  "status_updated_time": Date.now()
+                                }
+                              }); 
+
+          if(approval_status == 1){
+
+          var notification_text = "Your campaign was accepted and got started";
+               var notification_id = 'notification_id_'+Math.floor((Math.random() * 2465789) + 1);
+                   
+                   var result2 = notification_details.insert({
+
+                      notification_id: notification_id,
+                      notification_text: notification_text,
+
+                      notification_by: logged_in_user,
+                      notification_to: check_status[0].campaigner_id,
+                      campaign_id: check_status[0].campaign_id,
+                      notification_type: "campaign",
+                      created_at: Date.now()
+      });
+            return result;
+          }
+          else if(approval_status == 2){
+                      var notification_text = "Your campaign is rejected";
+               var notification_id = 'notification_id_'+Math.floor((Math.random() * 2465789) + 1);
+                   
+                   var result2 = notification_details.insert({
+
+                      notification_id: notification_id,
+                      notification_text: notification_text,
+
+                      notification_by: logged_in_user,
+                      notification_to: check_status[0].campaigner_id,
+                      campaign_id: check_status[0].campaign_id,
+                      notification_type: "campaign",
+                      created_at: Date.now()
+      });
+             return result;
+          }
+        }
+
+      },
+
+   save_campaign_details_for_admin:function(select_package,book_name,book_summary,author_name,
         author_description,amazon_link,delivery_option,additional_information,book_price,
-        book_catagries,book_cover,final_payment){
+        book_catagries,book_cover,final_payment,logged_in_user){
 
 console.log(select_package+book_name+book_summary+author_name+author_description+amazon_link+delivery_option+additional_information+book_price+book_catagries+final_payment);
    var campaign_id = 'campaign_id_'+Math.floor((Math.random() * 2465789) + 1);
@@ -1709,6 +1772,43 @@ console.log(select_package+book_name+book_summary+author_name+author_description
                    var result = campaign_details.insert({
 
                       campaign_id: campaign_id,
+                      campaigner_id: logged_in_user,
+                      select_package: select_package,
+                      book_name: book_name,
+                      book_summary: book_summary,
+
+                      author_name: author_name,
+                      author_description: author_description,
+                      amazon_link: amazon_link,
+
+                      delivery_option: delivery_option,
+                      delivery_option: delivery_option,
+                      additional_information: additional_information,
+                      book_price: book_price,
+                      book_cover: book_cover,
+                      final_payment: final_payment,
+                      book_catagries: book_catagries,
+                      approval_status: 1,
+
+                      status_changed_by: logged_in_user,
+                      status_updated_time: Date.now(),
+
+                      created_at: Date.now()
+      });
+                   return result;
+},
+
+    save_campaign_details:function(select_package,book_name,book_summary,author_name,
+        author_description,amazon_link,delivery_option,additional_information,book_price,
+        book_catagries,book_cover,final_payment,logged_in_user){
+
+console.log(select_package+book_name+book_summary+author_name+author_description+amazon_link+delivery_option+additional_information+book_price+book_catagries+final_payment);
+   var campaign_id = 'campaign_id_'+Math.floor((Math.random() * 2465789) + 1);
+
+                   var result = campaign_details.insert({
+
+                      campaign_id: campaign_id,
+                      campaigner_id: logged_in_user,
                       select_package: select_package,
                       book_name: book_name,
                       book_summary: book_summary,

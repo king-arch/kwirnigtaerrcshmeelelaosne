@@ -1,5 +1,4 @@
 
-
 import {
   Template
 } from 'meteor/templating';
@@ -11,21 +10,21 @@ import {
 } from 'meteor/session';
 
 import swal from 'sweetalert';
-import { promotion } from './../../../import/collections/insert.js';
-import { campaign_details } from './../../../import/collections/insert.js';
-import { interest_list } from './../../../import/collections/insert.js';
+import { promotion } from './../../../../import/collections/insert.js';
+import { campaign_details } from './../../../../import/collections/insert.js';
+import { interest_list } from './../../../../import/collections/insert.js';
 import { Base64 } from 'meteor/ostrio:base64';
 var book_listing;
 
-Template.create_campaign_detail.onDestroyed(function () {
+Template.create_campaign_detail_admin.onDestroyed(function () {
   book_listing.stop();
 });
 
-Template.create_campaign_detail.onCreated(function eventlistOnCreated(){
+Template.create_campaign_detail_admin.onCreated(function eventlistOnCreated(){
 
 });
 
-Template.create_campaign_detail.onRendered(function () {
+Template.create_campaign_detail_admin.onRendered(function () {
     $.getScript("https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.19/js/jquery.dataTables.min.js",function(){
       // $.getScript("https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css",function(){
             $('#show_promotion_listing').DataTable();
@@ -39,7 +38,7 @@ $(".show_packages").addClass("loader_visiblity_block");
   }, 2000);
 });
 
- Template.create_campaign_detail.helpers({
+ Template.create_campaign_detail_admin.helpers({
 
     show_dates(){
       var array = new Array;
@@ -71,7 +70,7 @@ $(".show_packages").addClass("loader_visiblity_block");
 });
 
 
-Template.create_campaign_detail.events({
+Template.create_campaign_detail_admin.events({
 
     "click #create_promotion":function(){
         Router.go("/create_promotion");
@@ -348,14 +347,14 @@ var final_payment = computing_formula;
 console.log("just above");
 
  var logged_in_user = Session.get("userId");
-      Meteor.call('save_campaign_details',select_package,book_name,book_summary,author_name,author_description,amazon_link,delivery_option,additional_information,book_price,book_catagries,book_cover,final_payment,logged_in_user,function (error, result) {
+      Meteor.call('save_campaign_details_for_admin',select_package,book_name,book_summary,author_name,author_description,amazon_link,delivery_option,additional_information,book_price,book_catagries,book_cover,final_payment,logged_in_user,function (error, result) {
       if (error) {
         swal('Some error occured!');
 
       } else {
        
             swal('Campign request successfully sent. ');
-            window.location.reload('/create_campaign');
+            window.location.reload('/campaign_listing_admin');
         }
     });
 

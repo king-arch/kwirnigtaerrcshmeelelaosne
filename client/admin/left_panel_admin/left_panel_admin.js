@@ -33,7 +33,11 @@ Template.left_panel_admin.onDestroyed(function () {
   },
 
     'click #book_management':function(){
-  		  Router.go("/book_management");
+        Router.go("/book_management");
+  },
+
+    'click #campaign_management':function(){
+  		  Router.go("/campaign_listing_admin");
   },
 
     'click #interest_management':function(){
