@@ -11,9 +11,11 @@ import { following_list } from './../import/collections/insert.js';
 import { interest_list } from './../import/collections/insert.js';
 import { feed } from './../import/collections/insert.js';
 import { blog } from './../import/collections/insert.js';
+
 import { content } from './../import/collections/insert.js';
 import { campaign_details } from './../import/collections/insert.js';
 import { notification_details } from './../import/collections/insert.js';
+import { review_details } from './../import/collections/insert.js';
 
 import { Base64 } from 'meteor/ostrio:base64';
 import urlMetadata from 'url-metadata';
@@ -21,7 +23,6 @@ import urlMetadata from 'url-metadata';
      Meteor.publish('fetch_admin_details', function() {
       return user_details.find({user_id: "user_admin"});
     });
-
 
      Meteor.publish('fetch_user_listing', function() {
       return user_details.find({});
@@ -135,8 +136,21 @@ import urlMetadata from 'url-metadata';
       return  notification_details.find({campaign_id: campaign_id});
     });
 
+
+     Meteor.publish('notification_details_all', function() {
+      return  notification_details.find({});
+    });
+
+     Meteor.publish('review_details_with_campaign_id', function(campaign_id) {
+      return  review_details.find({parent_id: campaign_id});
+    });
+
+     Meteor.publish('review_details_all_pending', function(campaign_id) {
+      return  review_details.find({});
+    });
+
 Meteor.startup(() => {
-  // code to run on server at startup
+  // code to run on server at startup 
 });
 
 smtp = {
@@ -1743,6 +1757,15 @@ else if(field_name == 'socail_media_handle_shared'){
                                 }
                               }); 
 
+                   var result3 =  book_details.update({
+                                book_id: fetch_book_details[0].book_id,
+                              }, {
+                                $set: {
+                                  campaign_id: check_status[0].campaign_id,
+                                  updated_at: Date.now()
+                                }
+                              }); 
+
 
           var notification_text = "Your campaign was accepted and got started";
                var notification_id = 'notification_id_'+Math.floor((Math.random() * 2465789) + 1);
@@ -1878,6 +1901,232 @@ console.log(select_package+book_name+book_summary+author_name+author_description
       "created_at": Date.now(),
     });
 
+      return result;
+  },
+
+
+  send_review_request(logged_in_user,book_id,campaign_id){
+    console.log(logged_in_user+' & '+book_id+ ' & '+campaign_id);
+
+   // var check_for_campaign_id = campaign_details.find({book_id: book_id}).fetch();
+   // if(check_for_campaign_id[0]){
+
+   var review_id = 'review_id_'+Math.floor((Math.random() * 2465789) + 1);
+   var result = review_details.insert({
+      "review_id": review_id,
+      "content_type": "review_request",
+      "parent_id": campaign_id,
+      "approval_status": 0,
+      "review_request_by": logged_in_user,
+      "created_at": Date.now(),
+    });
+
+             var notification_text = "someone requested to review to campaign "+campaign_id;
+               var notification_id = 'notification_id_'+Math.floor((Math.random() * 2465789) + 1);
+                   
+                   var result2 = notification_details.insert({
+
+                      notification_id: notification_id,
+                      notification_text: notification_text,
+
+                      notification_by: logged_in_user,
+                      notification_to: 'writersmelon',
+                      campaign_id: campaign_id,
+                      review_id: review_id,
+                      book_id: book_id,
+                      notification_type: "review_request",
+                      created_at: Date.now()
+      });
+      return result;
+   // }
+  },
+
+  async update_review_request_status(logged_in_user, approval_status,review_id){
+   console.log(logged_in_user+' & '+approval_status+ ' & '+review_id);
+
+          var check_status =  review_details.find({review_id: review_id}).fetch();
+
+if(approval_status == 1){
+
+          var result =  review_details.update({
+              _id: check_status[0]._id,
+            }, {
+              $set: {
+                      "approval_status": 1,
+                      "review_approved_by": logged_in_user,
+                      "update_at": Date.now(),
+                    }
+            });
+
+             var notification_text = "Congrats! Your request for book review got approved";
+               var notification_id = 'notification_id_'+Math.floor((Math.random() * 2465789) + 1);
+                   
+                   var result2 = notification_details.insert({
+
+                      notification_id: notification_id,
+                      notification_text: notification_text,
+
+                      notification_by: logged_in_user,
+                      notification_to: check_status[0].review_request_by,
+                      campaign_id: check_status[0].parent_id,
+                      review_id: review_id,
+                      notification_type: "review_request",
+                      created_at: Date.now()
+      });
+
+          var check_delivery_option =  campaign_details.find({ campaign_id: check_status[0].parent_id }).fetch();
+          if(check_status[0]){
+              if(check_delivery_option[0].delivery_option == 1){
+                console.log("delivery_option");
+                console.log(check_delivery_option[0].delivery_option );
+
+                var user_id = check_status[0].review_request_by;
+                var book_name = check_delivery_option[0].book_name;
+
+                await send_email_to_reviewer_about_book_delivery_option_1(user_id,book_name);
+              }
+              else if(check_delivery_option[0].delivery_option == 2){
+                console.log("delivery_option");
+                console.log(check_delivery_option[0].delivery_option );
+
+                var user_id = check_status[0].review_request_by;
+                var book_name = check_delivery_option[0].book_name;
+                
+                await send_email_to_reviewer_about_book_delivery_option_2(user_id,book_name);
+              }
+          }
+      return result;
+}
+
+else if(approval_status == 2){
+          var result =  review_details.update({
+              _id: check_status[0]._id,
+            }, {
+              $set: {
+                      "approval_status": 2,
+                      "review_approved_by": logged_in_user,
+                      "update_at": Date.now(),
+                    }
+            });
+
+             var notification_text = "Your request for campaign reviewing got rejected!";
+               var notification_id = 'notification_id_'+Math.floor((Math.random() * 2465789) + 1);
+                   
+                   var result2 = notification_details.insert({
+
+                      notification_id: notification_id,
+                      notification_text: notification_text,
+
+                      notification_by: logged_in_user,
+                      notification_to: check_status[0].review_request_by,
+                      campaign_id: check_status[0].parent_id,
+                      review_id: review_id,
+                      notification_type: "review_request",
+                      created_at: Date.now()
+      });
+      return result;
+}
+  },
+
+update_review_submition_status(logged_in_user, approval_status,review_id){
+
+   console.log(logged_in_user+' & '+approval_status+ ' & '+review_id);
+   var check_status =  review_details.find({review_id: review_id}).fetch();
+
+if(approval_status == 1){
+            var result =  review_details.update({
+              _id: check_status[0]._id,
+            }, {
+              $set: {
+                      "approval_status": 1,
+                      "review_approved_by": logged_in_user,
+                      "update_at": Date.now(),
+                    }
+            });
+
+  var notification_text = "Congrats! Your review got approved.";
+}else if(approval_status == 2){
+
+            var result =  review_details.update({
+              _id: check_status[0]._id,
+            }, {
+              $set: {
+                      "approval_status": 2,
+                      "review_approved_by": logged_in_user,
+                      "update_at": Date.now(),
+                    }
+            });
+
+  var notification_text = "Your review got rejected.";
+}
+             var notification_id = 'notification_id_'+Math.floor((Math.random() * 2465789) + 1);
+                   
+                   var result2 = notification_details.insert({
+
+                      notification_id: notification_id,
+                      notification_text: notification_text,
+
+                      notification_by: logged_in_user,
+                      notification_to: check_status[0].review_request_by,
+                      campaign_id: check_status[0].parent_id,
+                      review_id: review_id,
+                      notification_type: "review_approval",
+                      created_at: Date.now()
+      });
+  },
+
+ submit_review(logged_in_user, review_text,good_reads_link,personal_blog_link,amazon_link,additional_text,campaign_id){
+   console.log(logged_in_user+' & '+review_text+ ' & '+good_reads_link+ ' & '+personal_blog_link +' & '+amazon_link +' & '+campaign_id);
+
+            var check_status4 =  review_details.find({"content_type": "review_request","parent_id": campaign_id,"approval_status": 1}).fetch();
+
+if(check_status4[0]){
+
+          var result =  review_details.update({
+              _id: check_status4[0]._id,
+            }, {
+              $set: {
+                      "approval_status": 3,
+                      "review_approved_by": logged_in_user,
+                      "update_at": Date.now(),
+                    }
+            });
+}
+
+   var review_id = 'review_id_'+Math.floor((Math.random() * 2465789) + 1);
+
+   var result = review_details.insert({
+      "review_id": review_id,
+      "content_type": "submit_review",
+      "parent_id": campaign_id,
+      "review_text": review_text,
+      "approval_status": 0,
+
+
+      "good_reads_link": good_reads_link,
+      "personal_blog_link": personal_blog_link,
+      "amazon_link": amazon_link,
+      "additional_text": additional_text,
+
+      "review_request_by": logged_in_user,
+      "created_at": Date.now(),
+    });
+
+             var notification_text = "Someone submitted review on campaign "+campaign_id;
+               var notification_id = 'notification_id_'+Math.floor((Math.random() * 2465789) + 1);
+                   
+                   var result2 = notification_details.insert({
+
+                      notification_id: notification_id,
+                      notification_text: notification_text,
+
+                      notification_by: logged_in_user,
+                      notification_to: 'writersmelon',
+                      campaign_id: campaign_id,
+                      review_id: review_id,
+                      notification_type: "submit_review",
+                      created_at: Date.now()
+      });
       return result;
   },
 
@@ -2076,6 +2325,115 @@ var htmlCode="<html><head><title>Email</title></head><body><div style="+div_styl
             to: user_email,
             from: 'writersmelonteam@gmail.com',
             subject: "Writersmelon | Writermelon New Account credentials",
+            html: htmlCode,
+        };
+
+               Email.send(email);
+               // console.log(htmlCode);
+var message = { "msg": "User succesfully created. "}
+          return message;
+}
+
+ function send_email_to_reviewer_about_book_delivery_option_1(user_id,book_name){
+
+var result = user_details.find({ user_id: user_id }).fetch();
+var name = result[0].user_name;
+var user_email = result[0].user_email;
+var password = result[0].user_password;
+
+console.log('Password: ');
+console.log(password);
+var userId = Base64.encode(user_id);
+
+var url = 'https://writersmelon.herokuapp.com';
+
+var div_style= "width:600px;height:auto;margin:auto;font-family:sans-serif;font-weight:normal;font-size:12px; border:10px solid red";
+var div_style2= "width:600px;height:auto;float:left;background-color:#efefef;border:10px solid red !important";
+var div_style3= "background-color:#fff;border-spacing:0px;width:100%";
+var div_style4= "width:100%;height:50px;float:left;background-color:#fff";
+var div_style5= "background-color:#fff;width:100%";
+var div_style6= "background-color:#fff;width:100%";
+var div_style7= "width:150px;height:auto;float:left;vertical-align: middle;";
+var div_style8= "height: 50px";
+var div_style9= "height: 50px";
+var div_style10= "float: right; margin-right: 15px; color: #666";
+var div_style11= "width:96%;height:auto;float:left;padding:10px";
+var div_style12= "width:100%; border:0";
+var div_style13= "color:#414850;line-height:30px";
+var div_style14= "color:#414850;line-height:30px";
+var div_style15= "width:100%;float:left;background-color:#fff;;margin-top:6px";
+var image_url="http://writersmelon.com/wm/wp-content/uploads/2017/05/cropped-Writersmelon-Logo.png";
+var style="width:150px; height:150px";
+var spacing="2";
+var email = "writersmelonteam@gmail.com";
+var htmlCode="<html><head><title>Email</title></head><body><div style="+div_style+"><div style="+div_style2 +"><table style="+div_style3+"><tbody><tr><td><div style="+div_style4+"><table style="+div_style6+"><tbody><tr><td><div style="+div_style7+"><a> <img src="+image_url+" style="+style+"/></a></div></td><td><p style="+div_style10+"><p></td>"+
+"</tr></tbody></table></div><div style="+div_style11+"><table style ="+div_style12 +" cellspacing="+spacing+" cellpadding="+spacing+"><tbody><tr><td "+
+"colspan="+spacing+">&nbsp;</td></tr><tr><td colspan="+spacing+">&nbsp;</td></tr><tr><td colspan="+spacing+" style="+div_style14+">Hi "+name +",</td></tr><tr><td colspan="+spacing+">Congrats!!! You have been approved for Reviewing Campaign of "+book_name+" and the review book will reach you in next 5 days."+
+"</td></tr><tr><td colspan="+spacing+">&nbsp;</td></tr><tr><td colspan="+spacing
++">If you didnt get book in 5 days, please reach us out through same email thread. We are happy to help you.</td></tr><tr><td colspan="+spacing
++">P.S. If you are not "+name+", just ignore this email; we will never again send you an email.</td></tr><tr><td colspan="+spacing
++">&nbsp;</td></tr><tr><td colspan="+spacing+">Regards</td></tr><tr><td colspan="+spacing
++">The Writersmelon Team</td></tr><tr><td colspan="+spacing+">&nbsp;</td></tr><tr><td colspan="+spacing+">&nbsp;</td></tr></tbody></table></div><div style="+div_style15+"><table style="+div_style6+"><tbody><tr><td><center><small style="+div_style6+">This email was intended for "+name+".<br/>Copyright Writersmelon, 2018.</small></center></td></tr></tbody></table></div></td></tr></tbody></table></div></div></body></html>";
+
+ var email = {
+            to: user_email,
+            from: 'writersmelonteam@gmail.com',
+            subject: "Writersmelon | Review acceptence mail",
+            html: htmlCode,
+        };
+
+               Email.send(email);
+               // console.log(htmlCode);
+var message = { "msg": "User succesfully created. "}
+          return message;
+}
+
+
+ function send_email_to_reviewer_about_book_delivery_option_2(user_id,book_name){
+
+var result = user_details.find({ user_id: user_id }).fetch();
+var name = result[0].user_name;
+var user_email = result[0].user_email;
+var password = result[0].user_password;
+
+console.log('Password: ');
+console.log(password);
+var userId = Base64.encode(user_id);
+
+var url = 'https://writersmelon.herokuapp.com';
+
+var div_style= "width:600px;height:auto;margin:auto;font-family:sans-serif;font-weight:normal;font-size:12px; border:10px solid red";
+var div_style2= "width:600px;height:auto;float:left;background-color:#efefef;border:10px solid red !important";
+var div_style3= "background-color:#fff;border-spacing:0px;width:100%";
+var div_style4= "width:100%;height:50px;float:left;background-color:#fff";
+var div_style5= "background-color:#fff;width:100%";
+var div_style6= "background-color:#fff;width:100%";
+var div_style7= "width:150px;height:auto;float:left;vertical-align: middle;";
+var div_style8= "height: 50px";
+var div_style9= "height: 50px";
+var div_style10= "float: right; margin-right: 15px; color: #666";
+var div_style11= "width:96%;height:auto;float:left;padding:10px";
+var div_style12= "width:100%; border:0";
+var div_style13= "color:#414850;line-height:30px";
+var div_style14= "color:#414850;line-height:30px";
+var div_style15= "width:100%;float:left;background-color:#fff;;margin-top:6px";
+var image_url="http://writersmelon.com/wm/wp-content/uploads/2017/05/cropped-Writersmelon-Logo.png";
+var style="width:150px; height:150px";
+var spacing="2";
+var email = "writersmelonteam@gmail.com";
+var htmlCode="<html><head><title>Email</title></head><body><div style="+div_style+"><div style="+div_style2 +"><table style="+div_style3+"><tbody><tr><td><div style="+div_style4+"><table style="+div_style6+"><tbody><tr><td><div style="+div_style7+"><a> <img src="+image_url+" style="+style+"/></a></div></td><td><p style="+div_style10+"><p></td>"+
+"</tr></tbody></table></div><div style="+div_style11+"><table style ="+div_style12 +" cellspacing="+spacing+" cellpadding="+spacing+"><tbody><tr><td "+
+"colspan="+spacing+">&nbsp;</td></tr><tr><td colspan="+spacing+">&nbsp;</td></tr><tr><td colspan="+spacing+" style="+div_style14+">Hi "+name +",</td></tr><tr><td colspan="+spacing+">Congrats!!! You have been approved for Reviewing Campaign of "+book_name+". We have credited you the Book price in form of reward points(along with delivery changes)."+
+"</td></tr><tr><td colspan="+spacing+">&nbsp;</td></tr><tr><td colspan="+spacing
++">you can reddem these points once you reach minimum reddemption limit. Buy this book from link on book detail page.</td></tr><tr><td colspan="+spacing
++">P.S. If you are not "+name+", just ignore this email; we will never again send you an email.</td></tr><tr><td colspan="+spacing
++">&nbsp;</td></tr><tr><td colspan="+spacing+">Regards</td></tr><tr><td colspan="+spacing
++">The Writersmelon Team</td></tr><tr><td colspan="+spacing+">&nbsp;</td></tr><tr><td colspan="+spacing+">&nbsp;</td></tr></tbody></table></div><div style="+div_style15+"><table style="+div_style6+"><tbody><tr><td><center><small style="+div_style6+">This email was intended for "+name+".<br/>Copyright Writersmelon, 2018.</small></center></td></tr></tbody></table></div></td></tr></tbody></table></div></div></body></html>";
+
+ var email = {
+            to: user_email,
+            from: 'writersmelonteam@gmail.com',
+            subject: "Writersmelon | Review acceptence mail",
             html: htmlCode,
         };
 

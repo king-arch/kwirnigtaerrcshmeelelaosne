@@ -100,6 +100,18 @@ Template.show_campaign_listing_admin.events({
         window.location.href = "create_campaign_admin";
     },
 
+
+    "click #go_to_review_request_listing":function(){
+        // alert("clicked");
+        window.location.href = "review_request_listing";
+    },
+
+
+    "click #go_to_review_approval_listing":function(){
+        // alert("clicked");
+        window.location.href = "review_approval_listing";
+    },
+
     "click .view_detail":function(){
         // alert("clicked");
             var campaign_id = this.campaign_id;

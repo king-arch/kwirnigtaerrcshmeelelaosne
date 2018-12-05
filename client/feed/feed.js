@@ -743,7 +743,7 @@ Template.feed_design.helpers({
       show_campaign_listing(){
 
       Meteor.subscribe("campaign_details_all_list");
-      var result = campaign_details.find({}).fetch();
+      var result = campaign_details.find({approval_status: 1}).fetch();
       return result;
     },
 

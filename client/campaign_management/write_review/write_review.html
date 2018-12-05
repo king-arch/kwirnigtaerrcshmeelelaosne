@@ -4,24 +4,17 @@
  {{> write_review_detail}}
 </template>
 
-
-
 <template name="write_review_detail">
+
 <div class="header-spacer"></div>
 <section class="medium-padding60">
 
 <div class="container">
   <div class="row">
     <div class="col col-xl-12 m-auto col-lg-12 col-md-12 col-sm-12 col-12">
-
       <div class="ui-block-content bg_white border-4">
-
- 
-
-        
         <!-- Form Billing Details -->
         
-        <form class="mb60">
           <div class="crumina-module crumina-heading with-title-decoration">
             <h5 class="heading-title">Write Review</h5>
           </div>
@@ -29,8 +22,43 @@
           <div class="row">               
             <div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">  
               <div class="form-group label-floating">
-                  <label class="control-label c-grey">Write Review (Max 200 words) </label>
-                  <textarea class="form-control c-grey" placeholder=""></textarea>
+                  <textarea class="form-control c-grey" placeholder="Write Review (Max 200 words)" maxlength="200" id="review_text" ></textarea>
+                  <span class="material-input"></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">               
+            <div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">  
+              <div class="form-group label-floating">
+                  <input type="text" class="form-control c-grey" placeholder="Good Reads Link" id="good_reads_link" >
+                  <span class="material-input"></span>
+              </div>
+            </div>
+          </div>
+        
+          <div class="row">               
+            <div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">  
+              <div class="form-group label-floating">
+                  <input type="text" class="form-control c-grey" placeholder="Personal Blog"  id="personal_blog_link" >
+                  <span class="material-input"></span>
+              </div>
+            </div>
+          </div>
+        
+          <div class="row">               
+            <div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">  
+              <div class="form-group label-floating">
+                <input type="text" class="form-control c-grey" placeholder="Amazon Link" id="amazon_link" >
+                  <span class="material-input"></span>
+              </div>
+            </div>
+          </div>
+        
+          <div class="row">               
+            <div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">  
+              <div class="form-group label-floating">
+                <textarea class="form-control c-grey" placeholder="message for admin(Optional)" id="additional_text" ></textarea>
                   <span class="material-input"></span>
               </div>
             </div>
@@ -38,19 +66,12 @@
           <div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
             
             <div class="pull-right">
-              <input type="submit" class="post-add-icon inline-items text-white btn btn-primary btn-md-2">
+              <input type="submit" class="post-add-icon inline-items text-white btn btn-primary btn-md-2" id="submit_review" >
             </div>        
           </div>
-        </form>
-        
-        <!-- ... end Form Billing Details -->
+
  
  </div>
-        <!-- Single Post -->
-        
-     
-        
-        <!-- ... end Single Post -->
 
       </div>
 

@@ -12,16 +12,13 @@
   <div class="row">
     <section>
 
-  
   <!-- Shop Product Detail -->
   
   <div class="shop-product-detail">
     <div class="container">
       <div class="row">
 
-       
         <div class="col col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12 post bg_white">
-
               <img class="main-img" style="width: 100%; height: 300px !important;" alt="product" src="{{book_cover}}" target="_blank">
            
           <div class="shop-product-detail-content post">
@@ -31,7 +28,6 @@
                 <a href="book_detail.html" class="post-category bg-blue-light">{{book_catagries}}</a>
               </div>
       
-            
             </div>
             <div class="row">
              <div class="post__author author vcard inline-items col l6 m6 s6">
@@ -65,21 +61,41 @@
           </div>
 
       <div class="clearfix"></div>
-     
         <h5>Summary</h5> 
                   <p>{{book_summary}}
                   </p>
-      
-   
-  
+
           </div>
           <div class="section_reviews">
-        <div class="ui-block-title">
+          <div class="ui-block-title">
           <div class="h2 title"> Reviews</div>
 
+      {{#each check_if_already_requested_for_review}}
+
+      {{#if equals approval_status 0}}
           <div class="align-right">
-            <a href="javascript:void(0)" class="btn btn-primary btn-md-2 apply_for_review" >Apply for Review</a>
+             <p> You request was sucessfully submited. Admin has not responded to your request yet.</p>
           </div>
+      {{else if equals approval_status 1}}
+           <div class="align-right">
+            <a href="javascript:void(0)" class="btn btn-primary btn-md-2 go_to_write_review_page" >Write Review</a>
+          </div>
+      {{else if equals approval_status 2}}
+          <div class="align-right">
+            <p> You request to be reviewer got rejected.</p>
+          </div>
+      {{else if equals approval_status 3}}
+          <div class="align-right">
+            <p> Thanks for submiting review.</p>
+          </div>
+      {{/if}}
+      {{else}}
+
+          <div class="align-right">
+            <a href="javascript:void(0)" class="btn btn-primary btn-md-2 apply_for_review" >Apply To be a Reviewer</a>
+          </div>
+          
+      {{/each}}           
 <!--           
           <div class="align-right">
             <a href="write_review.html" class="btn btn-primary btn-md-2 " >Write Review</a>
@@ -87,40 +103,38 @@
  -->
           <a href="#" class="more"><svg class="olymp-three-dots-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-three-dots-icon"></use></svg></a>
         </div>
-        
-        
 
-        
-        <!-- Comment Form  -->
-        
-         
-        
+        <!-- Comment Form  -->        
         <!-- ... end Comment Form  -->
      
-              <a href="#" class="more-comments">View more reviews <span>+</span></a>
-
+              <!-- <a href="#" class="more-comments">View more reviews <span>+</span></a> -->
         <ul class="comments-list style-3">
+{{#each show_review_details}}
         <li class="comment-item">
+  {{#each show_user_details}}       
           <div class="post__author-thumb">
-            <img src="/img/avatar1.jpg" alt="author">
+            <img src="{{user_profile_pic}}" alt="author">
           </div>
       
           <div class="comments-content">
+          
             <div class="post__author author vcard margin-bottom-0">
       
               <div class="author-date">
-                <a class="h6 post__author-name fn" href="#">Nicholas Grissom</a>
+                <a class="h6 post__author-name fn" href="#">{{user_name}}</a>
                 <div class="post__date">
                   <time class="published" datetime="2004-07-24T18:18">
-                    27 mins ago
+                    {{calculate_time_difference ../created_at}}
                   </time>
                 </div>
               </div>
       
             </div>
-      
-            <p class="p_cmnt">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium der doloremque laudantium.</p>
-             <div class="post-additional-info inline-items">
+ 
+
+            <p class="p_cmnt">{{../review_text}}</p>
+
+<!--              <div class="post-additional-info inline-items">
           
               <a href="#" class="post-add-icon inline-items">
                 <img src="/img/heart_gray.png">
@@ -172,8 +186,9 @@
               </div>
           
           
-            </div>  
-            <form class="comment-form inline-items" style=" padding-left: 0px;  padding-right: 0px;">
+            </div> -->  
+
+<!--             <form class="comment-form inline-items" style=" padding-left: 0px;  padding-right: 0px;">
 
             <div class="post__author author vcard inline-items">
               <img src="/img/author-page.jpg" alt="author">
@@ -188,60 +203,10 @@
               </div>
             </div>
 
-          </form>
-            <ul class="comments-list">
-          <li class="comment-item" style="padding: 15px 0px;">
-            <div class="post__author author vcard inline-items">
-              <img src="/img/author-page.jpg" alt="author">
+          </form> -->
 
-              <div class="author-date">
-                <a class="h6 post__author-name fn" href="02-ProfilePage.html">James Spiegel</a>
-                <div class="post__date">
-                  <time class="published" datetime="2017-03-24T18:18">
-                    38 mins ago
-                  </time>
-                </div>
-              </div>
+<!--             <ul class="comments-list">
 
-              <a href="#" class="more"><svg class="olymp-three-dots-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-three-dots-icon"></use></svg></a>
-
-            </div>
-
-            <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium der doloremque laudantium.</p>
-
-            <a href="#" class="post-add-icon inline-items">
-               <img src="/img/heart_gray.png">
-              <span>3</span>
-            </a>
-            <a href="#" class="reply">Reply</a>
-          </li>
-          <li class="comment-item" style="padding: 15px 0px;">
-            <div class="post__author author vcard inline-items">
-              <img src="/img/avatar1-sm.jpg" alt="author">
-
-              <div class="author-date">
-                <a class="h6 post__author-name fn" href="#">Mathilda Brinker</a>
-                <div class="post__date">
-                  <time class="published" datetime="2017-03-24T18:18">
-                    1 hour ago
-                  </time>
-                </div>
-              </div>
-
-              <a href="#" class="more"><svg class="olymp-three-dots-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-three-dots-icon"></use></svg></a>
-
-            </div>
-
-            <p>Ratione voluptatem sequi en lod nesciunt. Neque porro quisquam est, quinder dolorem ipsum
-              quia dolor sit amet, consectetur adipisci velit en lorem ipsum duis aute irure dolor in reprehenderit in voluptate velit esse cillum.
-            </p>
-
-            <a href="#" class="post-add-icon inline-items">
-               <img src="/img/heart_gray.png">
-              <span>8</span>
-            </a>
-            <a href="#" class="reply">Reply</a>
-          </li>
           <li class="comment-item" style="padding: 15px 0px;">
             <div class="post__author author vcard inline-items">
               <img src="/img/avatar10-sm.jpg" alt="author">
@@ -267,91 +232,14 @@
             </a>
             <a href="#" class="reply">Reply</a>
           </li>
-        </ul>
+        </ul> -->
             
            
           </div>
       
+  {{/each}}   
         </li>
-        <li class="comment-item" style="padding: 12px 0px;">
-          <div class="post__author-thumb">
-            <img src="/img/avatar2.jpg" alt="author">
-          </div>
-      
-          <div class="comments-content">
-            <div class="post__author author vcard margin-bottom-0">
-      
-              <div class="author-date">
-                <a class="h6 post__author-name fn" href="#">Marina Valentine</a>
-                <div class="post__date">
-                  <time class="published" datetime="2004-07-24T18:18">
-                    4 hours ago
-                  </time>
-                </div>
-              </div>
-      
-            </div>
-      
-            <p class="p_cmnt">Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia
-              consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Sed ut perspiciatis  unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem  aperiam <a href="#">Read more</a>
-            </p>
-      
-         <div class="post-additional-info inline-items">
-          
-              <a href="#" class="post-add-icon inline-items">
-                <img src="/img/heart_gray.png">
-                <span>36</span>
-              </a>
-          
-              <ul class="friends-harmonic">
-                <li>
-                  <a href="#">
-                    <img src="/img/friend-harmonic7.jpeg" alt="friend">
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <img src="/img/friend-harmonic8.jpeg" alt="friend">
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <img src="/img/friend-harmonic9.jpeg" alt="friend">
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <img src="/img/friend-harmonic10.jpeg" alt="friend">
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <img src="/img/friend-harmonic11.jpeg" alt="friend">
-                  </a>
-                </li>
-              </ul>
-          
-              <div class="names-people-likes">
-                <a href="#">You</a>, <a href="#">Elaine</a> and
-                <br>34 more liked this
-              </div>
-          
-          
-              <div class="comments-shared">
-                <a href="#" class="post-add-icon inline-items">
-                  <img src="/img/comment_gray.png">
-
-                  <span>17</span>
-                </a>
-          
-               
-              </div>
-          
-          
-            </div>  
-           
-          </div>
-        </li>
+{{/each}}
       </ul>
       </div>
       

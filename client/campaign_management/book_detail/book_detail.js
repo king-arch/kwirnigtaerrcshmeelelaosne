@@ -13,8 +13,11 @@ import {
 import swal from 'sweetalert';
 import { promotion } from './../../../import/collections/insert.js';
 import { campaign_details } from './../../../import/collections/insert.js';
+import { review_details } from './../../../import/collections/insert.js';
+
 import { book_details } from './../../../import/collections/insert.js';
 import { notification_details } from './../../../import/collections/insert.js';
+import { user_details } from './../../../import/collections/insert.js';
 import { Base64 } from 'meteor/ostrio:base64';
 
 var book_listing;
@@ -49,7 +52,55 @@ Template.book_detail_page.onRendered(function () {
       var result = book_details.find({
                         book_id: book_id,
                       }).fetch();
+      if(result[0]){
+      Meteor.subscribe("review_details_with_campaign_id",result[0].campaign_id);
+      Meteor.subscribe("notification_details",result[0].campaign_id);
+      }
+
       return result;
+    },
+
+    check_if_already_requested_for_review(){
+      
+      Meteor.subscribe("review_details_with_campaign_id",this.campaign_id);
+      console.log("show_detail here");
+      
+      var result = review_details.find({
+                        parent_id: this.campaign_id,
+                        content_type: "review_request",
+                        review_request_by: Session.get("userId")
+                      }).fetch();
+      if(result[0]){
+      return result;
+      }
+
+    },
+
+    show_review_details(){
+      
+      Meteor.subscribe("review_details_with_campaign_id",this.campaign_id);
+      console.log("show_detail here");
+      
+      var result = review_details.find({
+                        parent_id: this.campaign_id,
+                        content_type: "submit_review",
+                        approval_status: 1
+                      }).fetch();
+      if(result[0]){
+        console.log("show_review_details");
+        console.log(result);
+      return result;
+      }
+
+    },
+
+        show_user_details(){
+          console.log(this.review_request_by);
+          Meteor.subscribe("fetch_user_details",this.review_request_by);
+          var result = user_details.find({"user_id": this.review_request_by}).fetch();
+        console.log('show result: ');
+        console.log(result);
+        return result;
     },
 
 });
@@ -57,18 +108,38 @@ Template.book_detail_page.onRendered(function () {
 
 Template.book_detail_page.events({
 
+    "click .go_to_write_review_page":function(){
+          
+            var parent_id = this.parent_id;
+            var parent_id = Base64.encode(parent_id);
+            
+            var url = '/write_review/'+parent_id;
+            console.log(url);
+            window.location.href = url;
+    },
+
     "click .create_book":function(){
             var campaign_id = this.campaign_id;
             var campaign_id = Base64.encode(campaign_id);  
-            var url = '/book_create_campaign/'+campaign_id;
+            var url = '/write_review/'+campaign_id;
             console.log(url);
             window.location.href = url;
     },
 
     "click .apply_for_review":function(){
       alert("apply now");
+      var logged_in_user = Session.get("userId");
+      var book_id = this.book_id;
+      var campaign_id = this.campaign_id;
 
-      
+     Meteor.call('send_review_request',logged_in_user,book_id,campaign_id, function (error, result) {
+              if (error) {
+                console.log("Some error occured.");
+              } else {
+                swal("Review is succesfully submited");
+                window.location.reload();
+              }
+            });
     },
 
     "click .accept_campaign":function(){

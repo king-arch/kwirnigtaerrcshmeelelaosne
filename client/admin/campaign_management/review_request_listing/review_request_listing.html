@@ -1,12 +1,12 @@
 
 
-<template name="campaign_listing_admin">
+<template name="review_request_listing">
   <body>
- {{> show_campaign_listing_admin}}
+ {{> show_review_request_listing}}
  </body>
 </template>
 
-<template name="show_campaign_listing_admin" >
+<template name="show_review_request_listing" >
 
   <div class="loading"  id="loading_div" ></div>
   {{>left_panel_admin}}
@@ -17,49 +17,19 @@
 
       <div class="ui-block responsive-flex1200 bg_trans">
         <div class="ui-block-title pad_0">
-          <h1 style="font-size: 30px; font-weight: 500;">Campaigns</h1>
+          <h1 style="font-size: 30px; font-weight: 500;">Review Request Listing</h1>
         </div>
       </div>
     </div>  
 
-
-
     <div class="col col-xl-1 col-lg-2 col-md-12 col-sm-12 col-12">
     </div>
 
-
     <div class="col col-xl-1 col-lg-1 col-md-12 col-sm-12 col-12">
-       <div class="ui-block responsive-flex1200 bg_trans margin-bottom-0 ">
-        <div class="ui-block-title pad_0">
-           <span style="padding-top: 10px;"> Action </span><div class="more">  <i class="fa fa-angle-down three_dots_listing_page_angle"></i>
-                <ul class="more-dropdown">
-
-                  <li>
-                    <a href="javascript:void(0)" id="go_to_review_request_listing" > Review Request listing</a>
-                  </li>
-
-                  <li>
-                    <a href="javascript:void(0)"  id="go_to_review_approval_listing" > Review Approval Listing</a>
-                  </li>
-
-                </ul>
-              </div>         
-        </div>  
-      </div>
     </div>
 
     <div class="col col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12 ">
-
-      <div class="ui-block responsive-flex1200 bg_trans margin-bottom-0">
-        <div class="ui-block-title pad_0">            
-          
-           <a href="#" class="btn btn-primary btn-md-2 margin-bottom-0" id="create_campaign" >
-            Start Campaign</a>
-            
-        </div>
-      </div>
     </div>
-
 
 <!--     <div class="col col-xl-1 col-lg-1 col-md-12 col-sm-12 col-12">
 
@@ -121,7 +91,7 @@
         
         <!-- Forums Table -->
         
-        <table class="forums-table" id="show_campaign_listing_admin" >
+        <table class="forums-table" id="show_review_request_listing" >
           <thead>
           <tr>          
             <th class="forum">
@@ -129,15 +99,15 @@
             </th>
         
             <th class="posts">
-              Blog Status
+              Requester's Pic
             </th>
 
             <th class="topics">
-              Start Date
+              Requester's Name
             </th>
         
             <th class="posts">
-              End Date
+              Requester's Email
             </th>
           
             <th class="freshness">
@@ -152,6 +122,8 @@
 {{#each show_campaign_listing}}
           <tr>
             <td class="forum">
+
+    {{#each show_book_detail}}
               <div class="forum-item">
                 <img src="{{book_cover}}" width="50" alt="forum" style="height: 80px !important; width: 80px !important;">
                 <div class="content">
@@ -159,29 +131,33 @@
                   <p class="text">{{book_summary}}</p>
                 </div>        
               </div>
-            </td>
-           
-            <td class="posts">
-              {{check_approval_status}}
+    {{/each}}       
             </td>
 
-            <td class="posts">
-              {{#if check_approval_status_for_time_dislay}}
-                {{status_updated_time}}
-              {{else}}
-                -
-              {{/if}}
+          {{#each show_user_details}}       
+
+            <td class="forum">
+              <div class="forum-item">
+                <img src="{{user_profile_pic}}" class="img-responsive" style="height: 90px !important; width: 90px !important;">
+              </div>
             </td>
+
+            <td class="topics">
+              <p class="text">{{user_name}}</p>
+            </td>
+
             <td class="freshness">
-              {{#if check_approval_status_for_time_dislay}}
-                {{select_package}}
-              {{else}}
-                -
-              {{/if}}
+              <div class="author-freshness">{{user_email}}</div>
             </td>
-             
-             <td class="freshness">
-             <a href="javascript:void(0)" class="view_detail btn btn-primary btn-sm full-width" data-toggle="modal" data-target="#edit-my-poll-popup" id="{{campaign_id}}">view</a>
+
+          {{/each}}
+
+            <td class="topics">
+    {{#if equals approval_status 0}}
+              <button class="approve_review_request btn-breez btn" id="{{review_id}}" > Approve </button>
+              
+              <button  id="{{review_id}}" class="reject_review_request deactivate_status_user btn btn-danger" value="1"> Reject</button> 
+    {{/if}}        
             </td>
           </tr>
 {{/each}}        

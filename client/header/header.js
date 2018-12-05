@@ -94,6 +94,15 @@ var str2 = str.split("-").join(" ");
       }
     },
 
+    show_user_details(){
+          var logged_in_user = Session.get("userId");
+          Meteor.subscribe("fetch_user_details",logged_in_user);
+          var result = user_details.find({"user_id": logged_in_user}).fetch();
+        console.log('show result: ');
+        console.log(result);
+        return result;
+    },
+
 });
 
 
