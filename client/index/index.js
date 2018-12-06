@@ -250,6 +250,7 @@ Template.index_content.events({
         }else{
 
           // swal(JSON.stringify(result));
+
           if(result == "No User"){
              var msg='Wrong email or Password';
             swal(msg+""); 
@@ -262,7 +263,7 @@ Template.index_content.events({
             swal(' Your account has been Blocked by Admin');
             return false;
         }
-            swal("Logged in Successfully");
+            // swal("Logged in Successfully");
             var userId = result[0].user_id;
 
           Session.setPersistent("userId",userId);
@@ -271,14 +272,14 @@ Template.index_content.events({
           // $('.form_reset').trigger('reset');
          var login_status = 1;
          var userId = Session.get("userId");
-          storeToken();
+         storeToken();
+
          Meteor.call("update_login_status",login_status,userId,function(error,result){
               if(error){
                 //swal('user login status updation error');
                 console.log('error');
               }
               else{
-                //swal('user is now online');
                  console.log('result');
               }
 
@@ -287,26 +288,23 @@ Template.index_content.events({
             if(result[0]){
               if(result[0].email_status==0){
                 Router.go('/email');
-              }else if(!result[0].user_location){
-                // swal("location empty");
-                    Session.set("emptyField","location");
+              }
+              else if(result[0].user_location == undefined){
                   Router.go("/signup");
-              }else if(!result[0].phone){
-                // swal("phone empty");
-                   Session.set("emptyField","phone");
-                   Router.go("/signup") 
-              }else if(!result[0].disablities){
-                // swal("speech empty");
-                      Session.set("emptyField","speech");
+              }
+              else if(result[0].user_profile_pic == undefined){
+                   Router.go("/signup");
+              }
+              else if(result[0].catagries_status == undefined){
                       Router.go("/signup")
-              }else if(!result[0].profile_pic){
-                    // swal("profile pic empty");
-                       Session.set("emptyField","profile_pic");
+              }
+              else if(result[0].follow_people_status == undefined){
                        Router.go("/signup");                       
-              }else if(!result[0].user_headline){
-                   Session.set("emptyField","headline");
+              }
+              else if(result[0].user_headline == undefined){
                        Router.go("/signup");                       
-              }else{
+              }
+              else{
                 Router.go("/profile");
               }
               
