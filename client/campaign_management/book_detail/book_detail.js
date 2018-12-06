@@ -76,6 +76,21 @@ Template.book_detail_page.onRendered(function () {
 
     },
 
+    check_if_user_is_campaigner(){
+      
+      Meteor.subscribe("campaign_details_with_id",this.campaign_id);
+      var result = campaign_details.find({campaign_id: this.campaign_id}).fetch();
+      if(result[0]){
+        if(result[0].campaigner_id == Session.get("userId")){
+            return false;
+      }else{
+        return true;
+      }
+    }else{
+      return true;
+    }
+    },
+
     show_review_details(){
       
       Meteor.subscribe("review_details_with_campaign_id",this.campaign_id);

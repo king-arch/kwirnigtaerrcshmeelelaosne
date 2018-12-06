@@ -90,6 +90,16 @@ Template.show_campaign_listing_admin.onRendered(function () {
       return end_date;
     },
 
+      book_summary_trimmed(){
+           var book_summary = this.book_summary;
+        if(book_summary.length > 165){
+          book_summary = book_summary.substr(0,164);
+          return book_summary+'...';
+        }else{
+          return book_summary;
+        }
+      },
+
 });
 
 

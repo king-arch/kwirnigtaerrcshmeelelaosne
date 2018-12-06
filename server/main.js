@@ -1941,7 +1941,7 @@ console.log(select_package+book_name+book_summary+author_name+author_description
    // }
   },
 
-  async update_review_request_status(logged_in_user, approval_status,review_id){
+   update_review_request_status(logged_in_user, approval_status,review_id){
    console.log(logged_in_user+' & '+approval_status+ ' & '+review_id);
 
           var check_status =  review_details.find({review_id: review_id}).fetch();
@@ -1983,7 +1983,7 @@ if(approval_status == 1){
                 var user_id = check_status[0].review_request_by;
                 var book_name = check_delivery_option[0].book_name;
 
-                await send_email_to_reviewer_about_book_delivery_option_1(user_id,book_name);
+                 send_email_to_reviewer_about_book_delivery_option_1(user_id,book_name);
               }
               else if(check_delivery_option[0].delivery_option == 2){
                 console.log("delivery_option");
@@ -1992,7 +1992,7 @@ if(approval_status == 1){
                 var user_id = check_status[0].review_request_by;
                 var book_name = check_delivery_option[0].book_name;
                 
-                await send_email_to_reviewer_about_book_delivery_option_2(user_id,book_name);
+                 send_email_to_reviewer_about_book_delivery_option_2(user_id,book_name);
               }
           }
       return result;
@@ -2128,6 +2128,25 @@ if(check_status4[0]){
                       created_at: Date.now()
       });
       return result;
+  },
+
+ update_review_text(review_text,campaign_id,review_id){
+   console.log(review_text +' & '+campaign_id+' & '+review_id);
+   var check_status4 =  review_details.find({"review_id": review_id}).fetch();
+
+if(check_status4[0]){
+
+          var result =  review_details.update({
+              _id: check_status4[0]._id,
+            }, {
+              $set: {
+                      "review_text": review_text,
+                      "update_at": Date.now(),
+                    }
+            });
+      return result;
+}
+
   },
 
 });

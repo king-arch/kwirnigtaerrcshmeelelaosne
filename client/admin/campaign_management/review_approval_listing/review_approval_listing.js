@@ -92,6 +92,22 @@ Template.show_review_approval_listing.onRendered(function () {
 
     },
 
+    show_campaign_listing(){
+
+      Meteor.subscribe("notification_details_all");
+      var result = review_details.find({content_type: "submit_review",approval_status: 0}).fetch();
+      return result;
+
+    },
+
+    show_campaign_listing_for_edit(){
+      var review_id = Session.get("edit_review_id");
+
+      Meteor.subscribe("notification_details_all");
+      var result = review_details.find({review_id:  review_id }).fetch();
+      return result;
+    },
+
     show_book_detail(){
       Meteor.subscribe("notification_details_all");
       var result = campaign_details.find({campaign_id: this.parent_id}).fetch();
@@ -119,6 +135,17 @@ Template.show_review_approval_listing.onRendered(function () {
       return end_date;
     },
 
+    
+      book_summary_trimmed(){
+           var book_summary = this.book_summary;
+        if(book_summary.length > 165){
+          book_summary = book_summary.substr(0,164);
+          return book_summary+'...';
+        }else{
+          return book_summary;
+        }
+      },
+
 });
 
 
@@ -127,6 +154,14 @@ Template.show_review_approval_listing.events({
     "click #create_campaign":function(){
         // alert("clicked");
         window.location.href = "create_campaign_admin";
+    },
+
+
+    "click .save_id_for_edit":function(){
+        // alert("clicked");
+        var review_id = this.review_id;
+        Session.set("edit_review_id",review_id);
+        $("#hidden_modal_click").click();
     },
 
 
@@ -218,6 +253,34 @@ Template.show_review_approval_listing.events({
             var url = '/campaign_detail/'+campaign_id;
             console.log(url);
             window.location.href = url;
+
+    },
+
+
+    "click #edit_review":function(){
+        // alert("clicked");
+        var review_text = $("#review_text").val();
+
+        var logged_in_user = Session.get("userId");
+        var campaign_id =this.parent_id;
+        var review_id =this.review_id;
+
+            if (review_text == '' || review_text == undefined) {
+              $('#review_text').addClass('empty_field').focus();
+              return false;
+            } else {
+              $('#review_text').removeClass('empty_field').blur();
+            }
+
+            Meteor.call('update_review_text',review_text,campaign_id,review_id, function (error, result) {
+              if (error) {
+                console.log("Some error occured.");
+              } else {
+                // swal("Review successfully Edited!");
+                $("#change_review_text").modal("toggle");
+                // window.location.reload();
+              }
+            });
 
     },
 

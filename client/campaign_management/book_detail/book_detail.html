@@ -69,7 +69,7 @@
           <div class="section_reviews">
           <div class="ui-block-title">
           <div class="h2 title"> Reviews</div>
-
+{{#if check_if_user_is_campaigner}}
       {{#each check_if_already_requested_for_review}}
 
       {{#if equals approval_status 0}}
@@ -95,7 +95,8 @@
             <a href="javascript:void(0)" class="btn btn-primary btn-md-2 apply_for_review" >Apply To be a Reviewer</a>
           </div>
           
-      {{/each}}           
+      {{/each}}          
+{{/if}}
 <!--           
           <div class="align-right">
             <a href="write_review.html" class="btn btn-primary btn-md-2 " >Write Review</a>

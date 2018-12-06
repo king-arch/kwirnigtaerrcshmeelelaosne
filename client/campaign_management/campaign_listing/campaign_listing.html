@@ -6,17 +6,27 @@
 </template>
 
 <template name="campaign_listing_detail">
-  
+    <div class="loading"  id="loading_div" ></div>
 <div class="container">
   <div class="row">
      <div class="col col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12">
 
       <div class="ui-block responsive-flex1200 bg_trans">
         <div class="ui-block-title pad_0">
-          <h1 style="font-size: 30px; font-weight: 500;">Campaigns</h1>
+          <h1 style="font-size: 30px; font-weight: 500;">User Campaigns</h1>
         </div>
       </div>
     </div>  
+
+
+    <div class="col col-xl-1 col-lg-1 col-md-12 col-sm-12 col-12">
+
+    </div>
+
+    <div class="col col-xl-1 col-lg-2 col-md-12 col-sm-12 col-12">
+
+    </div>
+
     <div class="col col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12 ">
 
       <div class="ui-block responsive-flex1200 bg_trans margin-bottom-0">
@@ -28,51 +38,7 @@
         </div>
       </div>
     </div>
-    
-    <div class="col col-xl-1 col-lg-1 col-md-12 col-sm-12 col-12">
-       <div class="ui-block responsive-flex1200 bg_trans margin-bottom-0 ">
-        <div class="ui-block-title pad_0">
-           <span style="padding-top: 10px;"> Sort by </span><div class="more">  <i class="fa fa-angle-down three_dots_listing_page_angle"></i>
-                <ul class="more-dropdown">
-                  <li>
-                    <a href="#"><i class="fa fa-check">  </i> &nbsp;&nbsp;  Date > Newest First</a>
-                  </li>
-                  <li>
-                    <a href="#">Date > Oldest First</a>
-                  </li>
-                  <li>
-                    <a href="#">Title > Oldest First</a>
-                  </li>
-                  <li>
-                    <a href="#">Title > Oldest First</a>
-                  </li>
-                 
-                </ul>
-              </div>         
-        </div>  
-      </div>
-    </div>
 
-    <div class="col col-xl-1 col-lg-2 col-md-12 col-sm-12 col-12">
-
-      <div class="ui-block responsive-flex1200 bg_trans margin-bottom-0 ">
-        <div class="ui-block-title pad_0">
-           <span style="padding-top: 10px;">Filter </span><div class="more">  <i class="fa fa-ellipsis-h three_dots_listing_page"></i>
-                <ul class="more-dropdown">
-                  <li>
-                    <a href="#"><i class="fa fa-check">  </i> &nbsp;&nbsp; Active</a>
-                  </li>
-                  <li>
-                    <a href="#">Inactive</a>
-                  </li>
-                  <li>
-                    <a href="#">Pending</a>
-                  </li>
-                </ul>
-              </div>         
-        </div>
-      </div>
-    </div>
 
     
   </div>
@@ -89,7 +55,7 @@
         
         <!-- Forums Table -->
         
-        <table class="forums-table">
+        <table class="forums-table" id="show_campaign_listing" >
         
           <thead>
         
@@ -97,6 +63,11 @@
             <th class="forum">
               Book Title
             </th>
+
+            <th class="posts">
+              Book Status
+            </th>
+
             <th class="topics">
               Start Date
             </th>
@@ -104,185 +75,55 @@
             <th class="posts">
               End Date
             </th>
-          
+<!--           
             <th class="freshness">
               Status
-            </th>
-        
+            </th> -->
           </tr>
-        
           </thead>
         
           <tbody>
+{{#each show_user_campaign_listing}}
+         
           <tr>
             <td class="forum">
               <div class="forum-item">
-                <img src="img/bookdetail.jpg" width="50" alt="forum">
+                <img src="{{book_cover}}" width="50" alt="forum">
                 <div class="content">
-                  <a href="#" class="h6 title">Winning Like Saina : Think & Succeed Like Nehwal</a>
-                  <p class="text">Talk about dinner parties, reunions and more!</p>
-                   <p class="text"> <a href="#" class="color_hyper" data-toggle="modal" data-target="#popup-edit-campaigns"><u>Edit</u></a></p>
+                  <a href="#" class="h6 title">{{book_name}}</a>
+                  <p class="text">{{book_summary_trimmed}}</p>
+              
                 </div>        
               </div>
             </td>
+
+            <td class="posts">
+              {{check_approval_status}}
+            </td>
            
             <td class="posts">
-              Sep 18, 2018
+              {{#if check_approval_status_for_time_dislay}}
+                {{status_updated_time}}
+              {{else}}
+                -
+              {{/if}}
             </td>
             <td class="freshness">
-               Sep 18, 2018
+              {{#if check_approval_status_for_time_dislay}}
+                {{select_package}}
+              {{else}}
+                -
+              {{/if}}
             </td>
              
-             <td class="freshness">
-             <a href="#" class="btn btn-primary btn-sm full-width" data-toggle="modal" data-target="#edit-my-poll-popup">Active</a>
+<!--              <td class="freshness">
+                          <td class="freshness">
+             <a href="javascript:void(0)" class="view_detail btn btn-primary btn-sm full-width" data-toggle="modal" data-target="#edit-my-poll-popup" id="{{campaign_id}}">view</a>
             </td>
+            </td> -->
           </tr>
-        
-          <tr>
-            <td class="forum">
-              <div class="forum-item">
-                 <img src="img/bookdetail.jpg" width="50" alt="forum">
-                <div class="content">
-                  <a href="#" class="h6 title">Winning Like Saina : Think & Succeed Like Nehwa</a>
-                  <p class="text">Talk about dinner parties, reunions and more!</p>
-                   <p class="text"><a href="#" class="color_hyper"><u>Edit</u></a></p>
-                </div>        
-              </div>
-            </td>
-           
-            <td class="posts">
-              Sep 18, 2018
-            </td>
-            <td class="freshness">
-               Sep 18, 2018
-            </td>
-             
-             <td class="freshness">
-             <a href="#" class="btn btn-primary btn-sm full-width" data-toggle="modal" data-target="#edit-my-poll-popup">Active</a>
-            </td>
-          </tr>
-        
-        <tr>
-            <td class="forum">
-              <div class="forum-item">
-                 <img src="img/bookdetail.jpg" width="50" alt="forum">
-                <div class="content">
-                  <a href="#" class="h6 title">Winning Like Saina : Think & Succeed Like Nehwal</a>
-                  <p class="text">Talk about dinner parties, reunions and more!</p>
-                    <p class="text"><a href="#" class="color_hyper"><u>Edit</u></a></p>
-                </div>        
-              </div>
-            </td>
-           
-            <td class="posts">
-              Sep 18, 2018
-            </td>
-            <td class="freshness">
-               Sep 18, 2018
-            </td>
-             
-             <td class="freshness">
-             <a href="#" class="btn btn-primary btn-sm full-width" data-toggle="modal" data-target="#edit-my-poll-popup">Active</a>
-            </td>
-          </tr>
-        
-        <tr>
-            <td class="forum">
-              <div class="forum-item">
-                 <img src="img/bookdetail.jpg" width="50" alt="forum">
-                <div class="content">
-                  <a href="#" class="h6 title">Winning Like Saina : Think & Succeed Like Nehwal</a>
-                  <p class="text">Talk about dinner parties, reunions and more!</p>
-                    <p class="text"><a href="#" class="color_hyper"><u>Edit</u></a></p>
-                </div>        
-              </div>
-            </td>
-           
-            <td class="posts">
-              Sep 18, 2018
-            </td>
-            <td class="freshness">
-               Sep 18, 2018
-            </td>
-             
-             <td class="freshness">
-             <a href="#" class="btn btn-primary btn-sm full-width" data-toggle="modal" data-target="#edit-my-poll-popup">Active</a>
-            </td>
-          </tr>
-        
-        <tr>
-            <td class="forum">
-              <div class="forum-item">
-                 <img src="img/bookdetail.jpg" width="50" alt="forum">
-                <div class="content">
-                  <a href="#" class="h6 title">Winning Like Saina : Think & Succeed Like Nehwal</a>
-                  <p class="text">Talk about dinner parties, reunions and more!</p>
-                    <p class="text"><a href="#" class="color_hyper"><u>Edit</u></a></p>
-                </div>        
-              </div>
-            </td>
-           
-            <td class="posts">
-              Sep 18, 2018
-            </td>
-            <td class="freshness">
-               Sep 18, 2018
-            </td>
-             
-             <td class="freshness">
-             <a href="#" class="btn btn-primary btn-sm full-width" data-toggle="modal" data-target="#edit-my-poll-popup">Pending</a>
-            </td>
-          </tr>
-        
-        <tr>
-            <td class="forum">
-              <div class="forum-item">
-                 <img src="img/bookdetail.jpg" width="50" alt="forum">
-                <div class="content">
-                  <a href="#" class="h6 title">Winning Like Saina : Think & Succeed Like Nehwal</a>
-                  <p class="text">Talk about dinner parties, reunions and more!</p>
-                   <p class="text"><a href="#" class="color_hyper"><u>Edit</u></a></p>
-                </div>        
-              </div>
-            </td>
-           
-            <td class="posts">
-              Sep 18, 2018
-            </td>
-            <td class="freshness">
-               Sep 18, 2018
-            </td>
-             
-             <td class="freshness">
-             <a href="#" class="btn btn-primary bg-gray btn-sm full-width" data-toggle="modal" data-target="#edit-my-poll-popup">Inactive</a>
-            </td>
-          </tr>
-        
-        <tr>
-            <td class="forum">
-              <div class="forum-item">
-                 <img src="img/bookdetail.jpg" width="50" alt="forum">
-                <div class="content">
-                  <a href="#" class="h6 title">Winning Like Saina : Think & Succeed Like Nehwal</a>
-                  <p class="text">Talk about dinner parties, reunions and more!</p>
-                    <p class="text"><a href="#" class="color_hyper"><u>Edit</u></a></p>
-                </div>        
-              </div>
-            </td>
-           
-            <td class="posts">
-              Sep 18, 2018
-            </td>
-            <td class="freshness">
-               Sep 18, 2018
-            </td>
-            
-             <td class="freshness">
-             <a href="#" class="btn btn-primary btn-sm full-width" data-toggle="modal" data-target="#edit-my-poll-popup">Active</a>
-            </td>
-          </tr>
-        
-        
+
+  {{/each}}
           </tbody>
         </table>
         
@@ -358,24 +199,6 @@
 
   
   </div>
-    <!-- Pagination -->
-  
-  <nav aria-label="Page navigation">
-    <ul class="pagination justify-content-center">
-      <li class="page-item disabled">
-        <a class="page-link" href="#" tabindex="-1">Previous</a>
-      </li>
-      <li class="page-item"><a class="page-link" href="#">1<div class="ripple-container"><div class="ripple ripple-on ripple-out" style="left: -10.3833px; top: -16.8333px; background-color: rgb(255, 255, 255); transform: scale(16.7857);"></div></div></a></li>
-      <li class="page-item"><a class="page-link" href="#">2</a></li>
-      <li class="page-item"><a class="page-link" href="#">3</a></li>
-      <li class="page-item"><a class="page-link" href="#">...</a></li>
-      <li class="page-item"><a class="page-link" href="#">12</a></li>
-      <li class="page-item">
-        <a class="page-link" href="#">Next</a>
-      </li>
-    </ul>
-  </nav>
-  
-  <!-- ... end Pagination -->
+
 </div>
 </template>
