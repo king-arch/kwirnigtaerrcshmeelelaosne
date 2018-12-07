@@ -26,6 +26,13 @@ display: none !important;
   padding: 40% 0;
 
  }
+ .fot_size_head{
+  font-size: 25px;
+ }
+ .colo_cat{
+  color: #fff !important;
+  padding: 5px 10px;
+ }
 }
 
 @media only screen and (min-width: 800px) {
@@ -37,6 +44,13 @@ display: none !important;
   text-align: center;
   padding: 20% 0;
 
+ }
+ .fot_size_head{
+  font-size: 30px;
+ }
+ .colo_cat{
+  color: #fff !important;
+  padding: 5px 10px;
  }
 
 }
@@ -50,5 +64,12 @@ display: block !important;
   text-align: center;
   padding: 40% 0;
 
+ }
+ .fot_size_head{
+  font-size: 22px;
+ }
+ .colo_cat{
+  color: #fff !important;
+  padding: 5px 10px;
  }
 }

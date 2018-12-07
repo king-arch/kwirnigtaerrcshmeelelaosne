@@ -1,4 +1,3 @@
-
 <template name="book_detail">
  {{> headeroptions}}
  {{> book_detail_page}}
@@ -8,65 +7,58 @@
 
 <template name="book_detail_page">
 {{#each show_book_detail}}
-<div class="container">
-  <div class="row">
-    <section>
+<div class="shop-product-detail  ">
+  <div class="container">
+    <div class="row">
+        <div class="col col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12 bg_white">
+          <div class="row">
+ <div class="col col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 bg_white">          
+            <div class=" post" style="padding: 20px 0 0 0;"> <img class="main-img" alt="product" src="{{book_cover}}" target="_blank">  </div>
+        </div>
 
-  <!-- Shop Product Detail -->
-  
-  <div class="shop-product-detail">
-    <div class="container">
-      <div class="row">
-
-        <div class="col col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12 post bg_white">
-              <img class="main-img" style="width: 100%; height: 300px !important;" alt="product" src="{{book_cover}}" target="_blank">
-           
-          <div class="shop-product-detail-content post">
+  <div class="col col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12 bg_white">
+          <div class="shop-product-detail-content" style="padding: 20px 0 0 0;">
             <div class="main-content-wrap">
               <div class="block-title">
-                <h2 class="title bold">{{book_name}}</h2> <br/>
-                <a href="book_detail.html" class="post-category bg-blue-light">{{book_catagries}}</a>
+                <p><span class="title bold fot_size_head">{{book_name}} </span><span class="bg-blue-light colo_cat"> {{book_catagries}}</span></p> <br/>
+               
               </div>
       
             </div>
             <div class="row">
-             <div class="post__author author vcard inline-items col l6 m6 s6">
-              <img src="/img/author-page.jpeg" alt="author">
-              <div class="author-date">
-                <a class="h5 post__author-name fn" href="02-ProfilePage.html">{{author_name}}</a>
-                <div class="post__date">
-                  <time class="published" datetime="2017-03-24T18:18">
-                    June, 2018
-                  </time>
+              <div class="col-md-12">
+                 <div class="post__author author vcard inline-items">              
+                  <div class="author-date">
+                    <a class="h5 post__author-name fn" href="02-ProfilePage.html">Wrtten by:  {{author_name}}</a>
+                     <h5>About writer</h5> 
+                     <p>{{author_description}} </p>                 
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="block-price col l6 m6 s6 text-right">
+            <div class="col m6 l6 s6">
+              <div class="block-price col l6 m6 s6 text-left  ">
                <span style="font-size: 20px;"> ₹ </span> <span class="product-price">{{book_price}}</span>
               </div>
-            </div>
-
-             <h5>About Author</h5> 
-            <p>{{author_description}}
-            </p> 
-            <div class="row">
-            <div class="col m6 l6 s6">
-
             </div>
             <div class="col m6 l6 s6 text-right">
               <a href="#" class="btn btn-blue btn-md with--icon ">               
                 <div class="text"> <span class="title">BUY NOW</span> </div> 
               </a>
             </div>
-          </div>
+            
+            </div>
 
-      <div class="clearfix"></div>
-        <h5>Summary</h5> 
-                  <p>{{book_summary}}
-                  </p>
-
+            
+            
           </div>
-          <div class="section_reviews">
+ </div>
+ <div class="col-md-12 product-description post">
+  <h5>Summary</h5> 
+   <p>{{book_summary}} </p>
+ </div>
+ <div class="col-md-12">
+
+                     <div class="section_reviews">
           <div class="ui-block-title">
           <div class="h2 title"> Reviews</div>
 {{#if check_if_user_is_campaigner}}
@@ -92,7 +84,7 @@
       {{else}}
 
           <div class="align-right">
-            <a href="javascript:void(0)" class="btn btn-primary btn-md-2 apply_for_review" >Apply To be a Reviewer</a>
+            <a href="javascript:void(0)" class="btn btn-primary btn-md-2 apply_for_review" >Apply for Reviewer</a>
           </div>
           
       {{/each}}          
@@ -135,106 +127,7 @@
 
             <p class="p_cmnt">{{../review_text}}</p>
 
-<!--              <div class="post-additional-info inline-items">
-          
-              <a href="#" class="post-add-icon inline-items">
-                <img src="/img/heart_gray.png">
-                <span>36</span>
-              </a>
-          
-              <ul class="friends-harmonic">
-                <li>
-                  <a href="#">
-                    <img src="/img/friend-harmonic7.jpeg" alt="friend">
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <img src="/img/friend-harmonic8.jpeg" alt="friend">
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <img src="/img/friend-harmonic9.jpeg" alt="friend">
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <img src="/img/friend-harmonic10.jpeg" alt="friend">
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <img src="/img/friend-harmonic11.jpeg" alt="friend">
-                  </a>
-                </li>
-              </ul>
-          
-              <div class="names-people-likes">
-                <a href="#">You</a>, <a href="#">Elaine</a> and
-                <br>34 more liked this
-              </div>
-          
-          
-              <div class="comments-shared">
-                <a href="#" class="post-add-icon inline-items">
-                  <img src="/img/comment_gray.png">
 
-                  <span>17</span>
-                </a>
-          
-               
-              </div>
-          
-          
-            </div> -->  
-
-<!--             <form class="comment-form inline-items" style=" padding-left: 0px;  padding-right: 0px;">
-
-            <div class="post__author author vcard inline-items">
-              <img src="/img/author-page.jpg" alt="author">
-
-              <div class="form-group with-icon-right ">
-                <textarea class="form-control form-contro2" placeholder="Enter your comment here..." style="border: 1px solid #e6ecf5; "></textarea>
-                <div class="add-options-message">
-                  <a href="#" class="options-message">
-                    <i class="fa fa-paper-plane"> </i>
-                  </a>
-                </div>
-              </div>
-            </div>
-
-          </form> -->
-
-<!--             <ul class="comments-list">
-
-          <li class="comment-item" style="padding: 15px 0px;">
-            <div class="post__author author vcard inline-items">
-              <img src="/img/avatar10-sm.jpg" alt="author">
-
-              <div class="author-date">
-                <a class="h6 post__author-name fn" href="#">Elaine Dreyfuss</a>
-                <div class="post__date">
-                  <time class="published" datetime="2017-03-24T18:18">
-                    5 mins ago
-                  </time>
-                </div>
-              </div>
-
-              <a href="#" class="more"><svg class="olymp-three-dots-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-three-dots-icon"></use></svg></a>
-
-            </div>
-
-            <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium der doloremque laudantium.</p>
-
-            <a href="#" class="post-add-icon inline-items">
-               <img src="/img/heart_gray.png">
-              <span>8</span>
-            </a>
-            <a href="#" class="reply">Reply</a>
-          </li>
-        </ul> -->
-            
            
           </div>
       
@@ -243,9 +136,10 @@
 {{/each}}
       </ul>
       </div>
-      
-        </div>
-        <div class="col col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
+</div>
+</div>
+</div>
+<div class="col col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
        <div class="ui-block">
         <div class="ui-block-title">
           <h6 class="title">New Release book </h6>
@@ -349,19 +243,8 @@
         <!-- .. end W-Playlist -->
       </div>
     </div>
-      </div>
     </div>
   </div>
-  
-  <!-- ... end Shop Product Detail -->
-
-</section>  
-  </div>
-
-
-</div>
-<div class="container">
-  
 </div>
 
 {{/each}}
