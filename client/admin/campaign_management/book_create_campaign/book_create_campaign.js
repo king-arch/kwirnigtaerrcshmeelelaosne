@@ -15,11 +15,11 @@ import { book_details } from './../../../../import/collections/insert.js';
 import { interest_list } from './../../../../import/collections/insert.js';
 
 var admin_detailed;
-Template.book_create_campaign.onDestroyed(function () {
+Template.book_create_campaign_form.onDestroyed(function () {
 	admin_detailed.stop();
 });
 
-Template.book_create_campaign.onRendered(function () {
+Template.book_create_campaign_form.onRendered(function () {
 	$.getScript("https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/pikaday.min.js",function(){
     var picker = new Pikaday({ field: document.getElementById('date_picker'),minDate: new Date() });
   })
@@ -98,7 +98,7 @@ setTimeout(function () {
 });
 
 
- Template.book_create_campaign.helpers({
+ Template.book_create_campaign_form.helpers({
     show_dates(){
       var array = new Array;
       for(var i=1;i<32;i++){

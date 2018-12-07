@@ -33,6 +33,7 @@ Template.create_campaign_detail.onRendered(function () {
     });  
 
 $(".show_packages").addClass("loader_visiblity_block");
+     $('#show_deafult').removeClass('loader_visiblity_block');
 
   setTimeout(function () {
     $('#loading_div').addClass('loader_visiblity_block');
@@ -101,6 +102,7 @@ Template.create_campaign_detail.events({
       $('#show_package_with_days_45').addClass('loader_visiblity_block');
       $('#show_package_with_days_60').addClass('loader_visiblity_block');
       $('#show_package_with_days_90').addClass('loader_visiblity_block');
+                 $('#show_deafult').addClass('loader_visiblity_block');
     }
       else if(select_package == 30){
       // swal('case 30');
@@ -110,6 +112,7 @@ Template.create_campaign_detail.events({
       $('#show_package_with_days_45').addClass('loader_visiblity_block');
       $('#show_package_with_days_60').addClass('loader_visiblity_block');
       $('#show_package_with_days_90').addClass('loader_visiblity_block');
+                 $('#show_deafult').addClass('loader_visiblity_block');
 
     }
       else if(select_package == 45){
@@ -120,6 +123,7 @@ Template.create_campaign_detail.events({
       $('#show_package_with_days_30').addClass('loader_visiblity_block');
       $('#show_package_with_days_60').addClass('loader_visiblity_block');
       $('#show_package_with_days_90').addClass('loader_visiblity_block');
+                 $('#show_deafult').addClass('loader_visiblity_block');
 
     }
       else if(select_package == 60){
@@ -130,6 +134,7 @@ Template.create_campaign_detail.events({
       $('#show_package_with_days_30').addClass('loader_visiblity_block');
       $('#show_package_with_days_45').addClass('loader_visiblity_block');
       $('#show_package_with_days_90').addClass('loader_visiblity_block');
+                 $('#show_deafult').addClass('loader_visiblity_block');
 
     }
       else if(select_package == 90){
@@ -140,15 +145,19 @@ Template.create_campaign_detail.events({
       $('#show_package_with_days_30').addClass('loader_visiblity_block');
       $('#show_package_with_days_45').addClass('loader_visiblity_block');
       $('#show_package_with_days_60').addClass('loader_visiblity_block');
+           $('#show_deafult').addClass('loader_visiblity_block');
 
     }
       else{
       // swal("Empty selection");
+     $('#show_deafult').removeClass('loader_visiblity_block');
+
       $('#show_package_with_days_15').addClass('loader_visiblity_block');
       $('#show_package_with_days_30').addClass('loader_visiblity_block');
       $('#show_package_with_days_45').addClass('loader_visiblity_block');
       $('#show_package_with_days_60').addClass('loader_visiblity_block');
       $('#show_package_with_days_90').addClass('loader_visiblity_block');
+
 
     }
   },

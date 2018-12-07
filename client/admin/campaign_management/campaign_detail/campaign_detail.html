@@ -11,116 +11,120 @@
 
   <!-- <div class="loading"  id="loading_div" ></div> -->
   {{>left_panel_admin}}
-
-<div class="container">
+ <div class="">
+  <div class="content-bg-wrap"></div>
   <div class="row">
-    <section>
+    <div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+      <div class="ui-block responsive-flex">
+        <div class="container ui-block-title" style="padding-left: 4%;">
+          <!-- <div class="h6 title">Interest Management</div>   -->
+           <h1 style="font-size: 30px; font-weight: 500;">Campaign Detail</h1>
 
-  
+        
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
   <!-- Shop Product Detail -->
 {{#each show_campaign_detail}}  
-  <div class="shop-product-detail">
-    <div class="container">
+  <div class="shop-product-detail bg_white">
+    <div class=" bg_white" style="padding: 2% 2% 2% 6%;">
       <div class="row">
-        <div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 post bg_white">
+        <div class="col col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 bg_white">
+              <img class="main-img" alt="product" src="{{book_cover}}" style="width: 100%">
 
-              <img class="main-img" alt="product" src="{{book_cover}}" style="height: 300px !important; width: 100%;" >
-          <div class="shop-product-detail-content post">
+         </div>
+         <div class="col col-xl-8 col-lg-8 col-md-8 col-sm-8 col-8 bg_white">
+          <div class="shop-product-detail-content ">
             <div class="main-content-wrap">
               <div class="block-title">
-                <h2 class="title bold">{{book_name}}</h2> <br/>
-                <a href="book_detail.html" class="post-category bg-blue-light">{{book_catagries}}</a>
+                <span class="title bold c-darkgray" style="font-size: 35px;">{{book_name}} <span><a href="book_detail.html" class="post-category bg-blue-light">{{book_catagries}}</a></span></span><br/>
+                <span class="c-darkgray"><Strong>Written by :</Strong> {{author_name}}</span> <br/>
+                 <span class="c-darkgray"><Strong>About Wriiter :</Strong> {{author_description}}</span>
+                
               </div>
       
             
             </div>
             <div class="row">
-             <div class="post__author author vcard inline-items col l6 m6 s6">
-              <img src="/img/author/default_5.png" alt="author">
-              <div class="author-date">
-                <a class="h5 post__author-name fn" href="02-ProfilePage.html">{{author_name}}</a>
-                <div class="post__date">
-                  <time class="published" datetime="2017-03-24T18:18">
-                    {{created_at}}
-                  </time>
-                </div>
+             
+            <div class="block-price col-md-12">
+               <span style="font-size: 20px;"> ₹ </span> <span class="product-price c-darkgray">{{book_price}}</span>
               </div>
             </div>
-            <div class="block-price col l6 m6 s6 text-right">
-               <span style="font-size: 20px;"> ₹ </span> <span class="product-price">{{book_price}}</span>
-              </div>
-            </div>
-
-             <h5>About Author</h5> 
-            <p>{{author_description}}
-            </p> 
-            
+           
             <p> 
-            <h5> Final Payment : </h5>  {{final_payment}} &nbsp;  &nbsp;  &nbsp;
-            <h5> Delivery option : </h5>  {{delivery_option_display}} &nbsp;  &nbsp;  &nbsp;
-
+            <h5> Final Payment : ₹ <u>  {{final_payment}} </u>  </h5>  
+            <h5> Delivery option :  {{delivery_option_display}}</h5>  
               {{#if status_updated_time}}
               <h5> Campaign starting time : </h5> 
                    {{calculate_time_difference status_updated_time}}
               {{/if}}
               
             </p> 
+            <div class="row marin_top_10">
+        <h5 class="c-darkgray col-md-12">Summary</h5> 
+        <p class="c-darkgray col-md-12"> {{book_summary}} </p>      
+      </div>
             <div class="row">
 
   {{#if check_if_book_already_exist}}
-              <div class="col m6 l6 s6">
-                <a href="javascript:void(0)" class="btn btn-blue btn-md with--icon create_book">               
-                  <div class="text"> <span class="title">Create Book</span> </div> 
-                </a>
+              <div class="col-md-12 c-darkgray">
+                You can accept this campaign only after adding book in the platform.Your book is not added on the platform to add your book<a href="javascript:void(0)" class="create_book pointer" style="color: #ff5e3a;"> <u>click here </u></a>
+                
               </div>
   {{/if}}
 
   {{#if check_if_book_already_exist}}
   {{#if equals approval_status 0}}
-            <div class="col m6 l6 s6 text-right">
-              <a href="javascript:void(0)" class="btn btn-blue btn-md with--icon reject_campaign" >               
-                <div class="text"> <span class="title">Reject Campaign</span> </div> 
-              </a>
-            </div>
-<p> You can accept this campaign only after adding book in the platform.</p>
+ <div class="col-md-12 c-darkgray">
+  If you found something wrong you can also reject this campaign by
+  <a href="javascript:void(0)" class="reject_campaign" style="color: #ff5e3a; padding: 4px 16px;"> <u>click here </u></a>
+            
+
+</div>
 
 
   {{else if equals approval_status 1}}
-            <div class="col m6 l6 s6 text-right">
-              <a href="javascript:void(0)" class="btn btn-blue btn-md with--icon ">               
+            <div class="col-md-3 text-right">
+              <a href="javascript:void(0)" class="btn btn-blue btn-md with--icon " style="padding: 4px 16px;">">               
                 <div class="text"> <span class="title">Campaign Accepted</span> </div> 
               </a>
             </div>
   {{else if equals approval_status 2}}
-            <div class="col m6 l6 s6 text-right">
-              <a href="javascript:void(0)" class="btn btn-blue btn-md with--icon ">               
+            <div class="col-md-3 text-right">
+              <a href="javascript:void(0)" class="btn btn-blue btn-md with--icon " style="padding: 4px 16px;"> 
                 <div class="text"> <span class="title">Campaign Rejected</span> </div> 
               </a>
             </div>
   {{/if}}
   {{else}}
      {{#if equals approval_status 0}}
-            <div class="col m6 l6 s6 text-right">
-              <a href="javascript:void(0)" class="btn btn-blue btn-md with--icon reject_campaign" >               
+     <div class="col-md-3 text-right">
+              <a href="javascript:void(0)" class="btn btn-blue btn-md with--icon accept_campaign" style="padding: 4px 16px;">               
+                <div class="text"> <span class="title">Accept Campaign</span> </div> 
+              </a>
+            </div>
+            <div class="col-md-3 text-right">
+
+              <a href="javascript:void(0)" class="btn btn-blue btn-md with--icon reject_campaign" style="padding: 4px 16px;" >               
                 <div class="text"> <span class="title">Reject Campaign</span> </div> 
               </a>
             </div>
 
-            <div class="col m6 l6 s6 text-right">
-              <a href="javascript:void(0)" class="btn btn-blue btn-md with--icon accept_campaign">               
-                <div class="text"> <span class="title">Accept Campaign</span> </div> 
-              </a>
-            </div>
+            
 
   {{else if equals approval_status 1}}
-            <div class="col m6 l6 s6 text-right">
-              <a href="javascript:void(0)" class="btn btn-blue btn-md with--icon ">               
+            <div class="col-md-3 text-right">
+              <a href="javascript:void(0)" class="btn btn-blue btn-md with--icon " style="padding: 4px 16px;">               
                 <div class="text"> <span class="title">Campaign Accepted</span> </div> 
               </a>
             </div>
   {{else if equals approval_status 2}}
-            <div class="col m6 l6 s6 text-right">
-              <a href="javascript:void(0)" class="btn btn-blue btn-md with--icon ">               
+            <div class="col-md-3 text-right">
+              <a href="javascript:void(0)" class="btn btn-blue btn-md with--icon " style="padding: 4px 16px;">               
                 <div class="text"> <span class="title">Campaign Rejected</span> </div> 
               </a>
             </div>
@@ -128,300 +132,16 @@
   {{/if}}
           </div>
 
-      <div class="clearfix"></div>
-     
-        <h5>Summary</h5> 
-                  <p>
-                     {{book_summary}}
-                    <!-- <a href="#">read more ...</a> -->
-                  </p>
+      <div class="clearfix"></div>     
       
-   
-  
-          </div>
-<!--           <div class="section_reviews">
-        <div class="ui-block-title">
-          <div class="h2 title"> Reviews</div>
-
-          <div class="align-right">
-            <a href="write_review.html" class="btn btn-primary btn-md-2 " >Write Review</a>
-          </div>
-
-          <a href="#" class="more"><svg class="olymp-three-dots-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-three-dots-icon"></use></svg></a>
+      </div>      
         </div>
-     
-              <a href="#" class="more-comments">View more reviews <span>+</span></a>
-
-        <ul class="comments-list style-3">
-        <li class="comment-item">
-          <div class="post__author-thumb">
-            <img src="img/avatar1.jpg" alt="author">
-          </div>
-      
-          <div class="comments-content">
-            <div class="post__author author vcard margin-bottom-0">
-      
-              <div class="author-date">
-                <a class="h6 post__author-name fn" href="#">Nicholas Grissom</a>
-                <div class="post__date">
-                  <time class="published" datetime="2004-07-24T18:18">
-                    27 mins ago
-                  </time>
-                </div>
-              </div>
-            </div>
-      
-            <p class="p_cmnt">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium der doloremque laudantium.</p>
-             <div class="post-additional-info inline-items">
-          
-              <a href="#" class="post-add-icon inline-items">
-                <img src="img/heart_gray.png">
-                <span>36</span>
-              </a>
-          
-              <ul class="friends-harmonic">
-                <li>
-                  <a href="#">
-                    <img src="img/friend-harmonic7.jpeg" alt="friend">
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <img src="img/friend-harmonic8.jpeg" alt="friend">
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <img src="img/friend-harmonic9.jpeg" alt="friend">
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <img src="img/friend-harmonic10.jpeg" alt="friend">
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <img src="img/friend-harmonic11.jpeg" alt="friend">
-                  </a>
-                </li>
-              </ul>
-          
-              <div class="names-people-likes">
-                <a href="#">You</a>, <a href="#">Elaine</a> and
-                <br>34 more liked this
-              </div>
-          
-          
-              <div class="comments-shared">
-                <a href="#" class="post-add-icon inline-items">
-                  <img src="img/comment_gray.png">
-
-                  <span>17</span>
-                </a>
-          
-               
-              </div>
-          
-          
-            </div>  
-            <form class="comment-form inline-items" style=" padding-left: 0px;  padding-right: 0px;">
-
-            <div class="post__author author vcard inline-items">
-              <img src="img/author-page.jpg" alt="author">
-
-              <div class="form-group with-icon-right ">
-                <textarea class="form-control form-contro2" placeholder="Enter your comment here..." style="border: 1px solid #e6ecf5; "></textarea>
-                <div class="add-options-message">
-                  <a href="#" class="options-message">
-                    <i class="fa fa-paper-plane"> </i>
-                  </a>
-                </div>
-              </div>
-            </div>
-
-          </form>
-            <ul class="comments-list">
-          <li class="comment-item" style="padding: 15px 0px;">
-            <div class="post__author author vcard inline-items">
-              <img src="img/author-page.jpg" alt="author">
-
-              <div class="author-date">
-                <a class="h6 post__author-name fn" href="02-ProfilePage.html">James Spiegel</a>
-                <div class="post__date">
-                  <time class="published" datetime="2017-03-24T18:18">
-                    38 mins ago
-                  </time>
-                </div>
-              </div>
-
-              <a href="#" class="more"><svg class="olymp-three-dots-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-three-dots-icon"></use></svg></a>
-
-            </div>
-
-            <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium der doloremque laudantium.</p>
-
-            <a href="#" class="post-add-icon inline-items">
-               <img src="img/heart_gray.png">
-              <span>3</span>
-            </a>
-            <a href="#" class="reply">Reply</a>
-          </li>
-          <li class="comment-item" style="padding: 15px 0px;">
-            <div class="post__author author vcard inline-items">
-              <img src="img/avatar1-sm.jpg" alt="author">
-
-              <div class="author-date">
-                <a class="h6 post__author-name fn" href="#">Mathilda Brinker</a>
-                <div class="post__date">
-                  <time class="published" datetime="2017-03-24T18:18">
-                    1 hour ago
-                  </time>
-                </div>
-              </div>
-
-              <a href="#" class="more"><svg class="olymp-three-dots-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-three-dots-icon"></use></svg></a>
-
-            </div>
-
-            <p>Ratione voluptatem sequi en lod nesciunt. Neque porro quisquam est, quinder dolorem ipsum
-              quia dolor sit amet, consectetur adipisci velit en lorem ipsum duis aute irure dolor in reprehenderit in voluptate velit esse cillum.
-            </p>
-
-            <a href="#" class="post-add-icon inline-items">
-               <img src="img/heart_gray.png">
-              <span>8</span>
-            </a>
-            <a href="#" class="reply">Reply</a>
-          </li>
-          <li class="comment-item" style="padding: 15px 0px;">
-            <div class="post__author author vcard inline-items">
-              <img src="img/avatar10-sm.jpg" alt="author">
-
-              <div class="author-date">
-                <a class="h6 post__author-name fn" href="#">Elaine Dreyfuss</a>
-                <div class="post__date">
-                  <time class="published" datetime="2017-03-24T18:18">
-                    5 mins ago
-                  </time>
-                </div>
-              </div>
-
-              <a href="#" class="more"><svg class="olymp-three-dots-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-three-dots-icon"></use></svg></a>
-
-            </div>
-
-            <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium der doloremque laudantium.</p>
-
-            <a href="#" class="post-add-icon inline-items">
-               <img src="img/heart_gray.png">
-              <span>8</span>
-            </a>
-            <a href="#" class="reply">Reply</a>
-          </li>
-        </ul>
-            
-           
-          </div>
-      
-        </li>
-        <li class="comment-item" style="padding: 12px 0px;">
-          <div class="post__author-thumb">
-            <img src="img/avatar2.jpg" alt="author">
-          </div>
-      
-          <div class="comments-content">
-            <div class="post__author author vcard margin-bottom-0">
-      
-              <div class="author-date">
-                <a class="h6 post__author-name fn" href="#">Marina Valentine</a>
-                <div class="post__date">
-                  <time class="published" datetime="2004-07-24T18:18">
-                    4 hours ago
-                  </time>
-                </div>
-              </div>
-      
-            </div>
-      
-            <p class="p_cmnt">Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia
-              consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Sed ut perspiciatis  unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem  aperiam <a href="#">Read more</a>
-            </p>
-      
-         <div class="post-additional-info inline-items">
-          
-              <a href="#" class="post-add-icon inline-items">
-                <img src="img/heart_gray.png">
-                <span>36</span>
-              </a>
-          
-              <ul class="friends-harmonic">
-                <li>
-                  <a href="#">
-                    <img src="img/friend-harmonic7.jpeg" alt="friend">
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <img src="img/friend-harmonic8.jpeg" alt="friend">
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <img src="img/friend-harmonic9.jpeg" alt="friend">
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <img src="img/friend-harmonic10.jpeg" alt="friend">
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <img src="img/friend-harmonic11.jpeg" alt="friend">
-                  </a>
-                </li>
-              </ul>
-          
-              <div class="names-people-likes">
-                <a href="#">You</a>, <a href="#">Elaine</a> and
-                <br>34 more liked this
-              </div>
-          
-          
-              <div class="comments-shared">
-                <a href="#" class="post-add-icon inline-items">
-                  <img src="img/comment_gray.png">
-
-                  <span>17</span>
-                </a>
-          
-               
-              </div>
-          
-          
-            </div>  
-           
-          </div>
-        </li>
-      </ul>
-      </div> -->
-      
-        </div>
-
       </div>
     </div>
   </div>
   {{/each}}
   <!-- ... end Shop Product Detail -->
 
-</section>  
-  </div>
 
-
-</div>
-
-<div class="container">
-</div>
 
 </template>

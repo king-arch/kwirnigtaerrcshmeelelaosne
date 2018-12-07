@@ -42,7 +42,7 @@ Template.show_campaign_listing_admin.onRendered(function () {
 
     check_approval_status(){
         if(this.approval_status == 0){
-          return 'pending';
+          return 'Pending';
         }
         else if(this.approval_status == 1){
           return 'Accepted';
@@ -128,9 +128,7 @@ Template.show_campaign_listing_admin.events({
             var campaign_id = Base64.encode(campaign_id);  
             var url = '/campaign_detail/'+campaign_id;
             console.log(url);
-            window.location.href = url;
-
-   	},
+            window.location.href = url;   	},
 
 });
 

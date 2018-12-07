@@ -1,4 +1,4 @@
-
+  
 
 <template name="campaign_listing_admin">
   <body>
@@ -10,28 +10,18 @@
 
   <div class="loading"  id="loading_div" ></div>
   {{>left_panel_admin}}
-  
-<div class="container">
+
+  <div class="">
+  <div class="content-bg-wrap"></div>
   <div class="row">
-     <div class="col col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12">
+    <div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+      <div class="ui-block responsive-flex">
+        <div class="container ui-block-title" style="padding-left: 4%;">
+          <!-- <div class="h6 title">Interest Management</div>   -->
+           <h1 style="font-size: 30px; font-weight: 500;">Campaigns</h1>
 
-      <div class="ui-block responsive-flex1200 bg_trans">
-        <div class="ui-block-title pad_0">
-          <h1 style="font-size: 30px; font-weight: 500;">Campaigns</h1>
-        </div>
-      </div>
-    </div>  
-
-
-
-    <div class="col col-xl-1 col-lg-2 col-md-12 col-sm-12 col-12">
-    </div>
-
-
-    <div class="col col-xl-1 col-lg-1 col-md-12 col-sm-12 col-12">
-       <div class="ui-block responsive-flex1200 bg_trans margin-bottom-0 ">
-        <div class="ui-block-title pad_0">
-           <span style="padding-top: 10px;"> Action </span><div class="more">  <i class="fa fa-angle-down three_dots_listing_page_angle"></i>
+          <div class="align-right">
+            <span style="padding-top: 10px;" class="pointer"> Action </span><span class="more pointer ">  <i class="fa fa-angle-down three_dots_listing_page_angle"></i>
                 <ul class="more-dropdown">
 
                   <li>
@@ -43,89 +33,29 @@
                   </li>
 
                 </ul>
-              </div>         
-        </div>  
-      </div>
-    </div>
-
-    <div class="col col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12 ">
-
-      <div class="ui-block responsive-flex1200 bg_trans margin-bottom-0">
-        <div class="ui-block-title pad_0">            
-          
-           <a href="#" class="btn btn-primary btn-md-2 margin-bottom-0" id="create_campaign" >
+              </span> 
+              <a href="#" class="btn btn-primary btn-md-2 margin-bottom-0" id="create_campaign" >
             Start Campaign</a>
-            
+
+
+          </div>
         </div>
       </div>
     </div>
-
-
-<!--     <div class="col col-xl-1 col-lg-1 col-md-12 col-sm-12 col-12">
-
-       <div class="ui-block responsive-flex1200 bg_trans margin-bottom-0 ">
-        <div class="ui-block-title pad_0">
-           <span style="padding-top: 10px;"> Sort by </span><div class="more">  <i class="fa fa-angle-down three_dots_listing_page_angle"></i>
-                <ul class="more-dropdown">
-                  <li>
-                    <a href="#"><i class="fa fa-check">  </i> &nbsp;&nbsp;  Date > Newest First</a>
-                  </li>
-                  <li>
-                    <a href="#">Date > Oldest First</a>
-                  </li>
-                  <li>
-                    <a href="#">Title > Oldest First</a>
-                  </li>
-                  <li>
-                    <a href="#">Title > Oldest First</a>
-                  </li>
-                 
-                </ul>
-              </div>         
-        </div>  
-      </div>
-    </div>
-    <div class="col col-xl-1 col-lg-2 col-md-12 col-sm-12 col-12">
-
-      <div class="ui-block responsive-flex1200 bg_trans margin-bottom-0 ">
-        <div class="ui-block-title pad_0">
-           <span style="padding-top: 10px;">Filter </span><div class="more">  <i class="fa fa-ellipsis-h three_dots_listing_page"></i>
-                <ul class="more-dropdown">
-                  <li>
-                    <a href="#"><i class="fa fa-check">  </i> &nbsp;&nbsp; Active</a>
-                  </li>
-                  <li>
-                    <a href="#">Inactive</a>
-                  </li>
-                  <li>
-                    <a href="#">Pending</a>
-                  </li>
-                </ul>
-              </div>         
-        </div>
-      </div>
-    </div>
- -->
-    
   </div>
-   <hr class="new4">
 </div>
-
-
-<div class="container">
+  
   <div class="row">
     <div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
 
       <div class="ui-block">
-
-        
-        <!-- Forums Table -->
-        
+        <div class="container"  style="padding-left: 2%;">       
+        <!-- Forums Table -->        
         <table class="forums-table" id="show_campaign_listing_admin" >
           <thead>
           <tr>          
             <th class="forum">
-              Book Title
+              Book Titleeeee
             </th>
         
             <th class="posts">
@@ -181,7 +111,7 @@
             </td>
              
              <td class="freshness">
-             <a href="javascript:void(0)" class="view_detail btn btn-primary btn-sm full-width" data-toggle="modal" data-target="#edit-my-poll-popup" id="{{campaign_id}}">view</a>
+             <a href="javascript:void(0)" class="view_detail btn btn-primary btn-sm full-width" data-toggle="modal" data-target="#edit-my-poll-popup" id="{{campaign_id}}">View</a>
             </td>
           </tr>
 {{/each}}        
