@@ -429,8 +429,8 @@ Template.feed_design.helpers({
         }
         new_friend_list.push(logged_in_user);
 
-        console.log("show_user_listing");
-        console.log(new_friend_list);
+        // console.log("show_user_listing");
+        // console.log(new_friend_list);
 
         var check_likers = feed.find({
                          parent_id: this.post_id,
@@ -448,11 +448,11 @@ Template.feed_design.helpers({
         var final_likers_count = total_likes.length;
         final_likers_count = parseInt(final_likers_count);
 
-        console.log("check if liked by friend");
-        console.log(check_likers);
+        // console.log("check if liked by friend");
+        // console.log(check_likers);
 
-        console.log("final_likers_count");
-        console.log(final_likers_count);
+        // console.log("final_likers_count");
+        // console.log(final_likers_count);
 
         if(check_likers.length == 1){
           if(check_likers[0].liked_by == logged_in_user){
@@ -460,7 +460,7 @@ Template.feed_design.helpers({
           }else{
               Meteor.subscribe("user_info_based_on_id",check_likers[0].liked_by);
               var user_name = user_details.find({ user_id: check_likers[0].liked_by }).fetch();
-              console.log('show singled liker friend');
+              // console.log('show singled liker friend');
               // console.log(user_name[0].user_name);
               if(user_name[0]){
 
@@ -634,7 +634,7 @@ Template.feed_design.helpers({
          var liked_by = Session.get("userId");
 
          Meteor.subscribe("fetch_book_listing");
-         var result = book_details.find({}).fetch();
+         var result = book_details.find({},{limit: 5,sort: {created_at: -1}}).fetch();
     return result;
   },
 
@@ -743,7 +743,7 @@ Template.feed_design.helpers({
       show_campaign_listing(){
 
       Meteor.subscribe("campaign_details_all_list");
-      var result = campaign_details.find({approval_status: 1}).fetch();
+      var result = campaign_details.find({approval_status: 1,campaign_end_date: {$gte: Date.now()} }).fetch();
       return result;
     },
 
@@ -781,7 +781,7 @@ Template.feed_design.events({
     "click .go_to_book_detail":function(){ 
       var book_id = Base64.encode(this.book_id);  
       var url = '/book_detail/'+book_id;
-            console.log(url);
+            // console.log(url);
             window.location.href = url;
     },
 
@@ -789,7 +789,7 @@ Template.feed_design.events({
   'click .go_to_detail_page':function(){      
             var post_id = Base64.encode(this.post_id);  
               var url = '/feed_detail/'+post_id;
-            console.log(url);
+            // console.log(url);
             window.location.href = url;
     },  
 
@@ -805,8 +805,8 @@ Template.feed_design.events({
             limit = limit + 3;
             Session.set("set_feed_content_limit",limit);
       }
-      console.log('show feed limit');
-      console.log(Session.get("set_feed_content_limit"));
+      // console.log('show feed limit');
+      // console.log(Session.get("set_feed_content_limit"));
     },  
 
   'click .show_like_count_on_feed_comment_lvl_1_text':function(){ 
@@ -814,8 +814,8 @@ Template.feed_design.events({
     },
 
   'click .show_like_count_on_feed_comment_lvl_0_text':function(){ 
-      console.log("show_comment_lvl_0_id");     
-      console.log(this.comment_id);     
+      // console.log("show_comment_lvl_0_id");     
+      // console.log(this.comment_id);     
       Session.set("show_comment_lvl_0_id",this.comment_id);    
     },  
 
@@ -828,14 +828,14 @@ Template.feed_design.events({
                   // console.log('captured');  
                   // console.log("this.post_by");  
             // console.log(JSON.stringify(this));
-            console.log(this.user_id);
+            // console.log(this.user_id);
             var user_id = Base64.encode(this.user_id);  
             if(this.user_id == Session.get("userId")){
               var url = '/profile';
             }else{
               var url = '/view_profile/'+user_id;
             }
-            console.log(url);
+            // console.log(url);
             window.location.href = url;
     },  
 
@@ -1036,7 +1036,7 @@ Template.feed_design.events({
               if(error){
                 swal("Some error occure.");
               }else{
-                // console.log('successfully following ');
+                console.log('successfully following ');
               }
           });
   },
@@ -1051,7 +1051,7 @@ Template.feed_design.events({
               if(error){
                 swal("Some error occure.");
               }else{
-                // console.log('successfully following ');
+                console.log('successfully following ');
               }
           });
   },
@@ -1085,7 +1085,7 @@ Template.feed_design.events({
               if(error){
                 swal("Some error occure.");
               }else{
-                // console.log('successfully following ');
+                console.log('successfully following ');
                 Session.set("post_image_session","");
                 $('#display_selected_image').addClass('loader_visiblity_block');
               }
@@ -1096,7 +1096,7 @@ Template.feed_design.events({
                 if(error){
                   swal("Some error occure.");
                 }else{
-                  // console.log('successfully following ');
+                  console.log('successfully following ');
                 }
             });
         }

@@ -91,6 +91,17 @@ Template.book_detail_page.onRendered(function () {
     }
     },
 
+    check_if_campaign_expired(){
+      
+      Meteor.subscribe("campaign_details_with_id",this.campaign_id);
+      var result = campaign_details.find({approval_status: 1,campaign_end_date: {$gte: Date.now()} }).fetch();
+      if(result[0]){
+        return true;
+    }else{
+      return false;
+    }
+    },
+
     show_review_details(){
       
       Meteor.subscribe("review_details_with_campaign_id",this.campaign_id);
@@ -142,7 +153,7 @@ Template.book_detail_page.events({
     },
 
     "click .apply_for_review":function(){
-      alert("apply now");
+      // alert("apply now");
       var logged_in_user = Session.get("userId");
       var book_id = this.book_id;
       var campaign_id = this.campaign_id;

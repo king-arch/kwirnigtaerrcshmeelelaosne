@@ -171,7 +171,7 @@ if(good_reads_link == null || good_reads_link == "" || amazon_link == null || am
                 console.log("Some error occured.");
               } else {
                 swal("Review successfully submited!");
-                window.location.reload();
+                window.location.href="/feed";
               }
             });
 
@@ -186,7 +186,7 @@ if(good_reads_link == null || good_reads_link == "" || amazon_link == null || am
                 console.log("Some error occured.");
               } else {
                 swal("Review successfully submited!");
-                window.location.reload();
+                window.location.href="/feed";
               }
             });
             

@@ -58,9 +58,9 @@
             <p> 
             <h5> Final Payment : ₹ <u>  {{final_payment}} </u>  </h5>  
             <h5> Delivery option :  {{delivery_option_display}}</h5>  
-              {{#if status_updated_time}}
+              {{#if campaign_start_date}}
               <h5> Campaign starting time : </h5> 
-                   {{calculate_time_difference status_updated_time}}
+                   {{calculate_time_difference campaign_start_date}}
               {{/if}}
               
             </p> 

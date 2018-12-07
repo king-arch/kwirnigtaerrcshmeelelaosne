@@ -69,17 +69,17 @@ Template.show_campaign_listing_admin.onRendered(function () {
       return result;
     },
 
-    status_updated_time(){
-      var new_year  = moment(this.status_updated_time).format('YYYY');
-      var new_month  = moment(this.status_updated_time).format('MMM');
-      var new_day  = moment(this.status_updated_time).format('DD');
+    campaign_start_date(){
+      var new_year  = moment(this.campaign_start_date).format('YYYY');
+      var new_month  = moment(this.campaign_start_date).format('MMM');
+      var new_day  = moment(this.campaign_start_date).format('DD');
       // console.log("new_year: "+ new_year +" new_month: "+ new_month + " new_day: "+ new_day );
       var new_date = new_month + ' '+new_day+' , '+new_year;
       return new_date;
     },
 
     select_package(){
-      var new_date = moment(this.status_updated_time).add(this.select_package, 'day');
+      var new_date = moment(this.campaign_start_date).add(this.select_package, 'day');
       
       var new_year  = moment(new_date).format('YYYY');
       var new_month  = moment(new_date).format('MMM');

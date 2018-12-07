@@ -364,7 +364,7 @@ console.log("just above");
       } else {
        
             swal('Campign request successfully sent. ');
-            window.location.reload('/create_campaign');
+            window.location.reload('/campaign_listing');
         }
     });
 

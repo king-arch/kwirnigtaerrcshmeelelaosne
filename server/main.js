@@ -1739,12 +1739,13 @@ else if(field_name == 'socail_media_handle_shared'){
           var check_status =  campaign_details.find({campaign_id: campaign_id}).fetch();
           if(check_status[0]){
 
+      var campaign_end_date = moment(check_status[0].campaign_start_date).add(check_status[0].select_package, 'day');
+            campaign_end_date = moment(campaign_end_date).valueOf();
           if(approval_status == 1){
 
       var fetch_book_details = book_details.find({
                         book_name: check_status[0].book_name,
                       }).fetch();
-
 
                    var result =  campaign_details.update({
                                 campaign_id: check_status[0].campaign_id,
@@ -1753,8 +1754,10 @@ else if(field_name == 'socail_media_handle_shared'){
                                   "book_id": fetch_book_details[0].book_id,
                                   "approval_status": approval_status,
                                   "status_changed_by": logged_in_user,
-                                  "status_updated_time": Date.now()
-                                }
+
+                                  "campaign_end_date": campaign_end_date,
+                                  "campaign_start_date": Date.now()
+                                } 
                               }); 
 
                    var result3 =  book_details.update({
@@ -1791,7 +1794,9 @@ else if(field_name == 'socail_media_handle_shared'){
                                 $set: {
                                   "approval_status": approval_status,
                                   "status_changed_by": logged_in_user,
-                                  "status_updated_time": Date.now()
+
+                                  "campaign_end_date": campaign_end_date,
+                                  "campaign_start_date": Date.now()
                                 }
                               }); 
 
@@ -1819,6 +1824,11 @@ else if(field_name == 'socail_media_handle_shared'){
         author_description,amazon_link,delivery_option,additional_information,book_price,
         book_catagries,book_cover,final_payment,logged_in_user){
 
+      var campaign_start_date = Date.now();
+      var campaign_end_date = moment(campaign_start_date).add(select_package, 'day');
+      campaign_end_date = moment(campaign_end_date).valueOf();
+
+
 console.log(select_package+book_name+book_summary+author_name+author_description+amazon_link+delivery_option+additional_information+book_price+book_catagries+final_payment);
    var campaign_id = 'campaign_id_'+Math.floor((Math.random() * 2465789) + 1);
 
@@ -1844,9 +1854,11 @@ console.log(select_package+book_name+book_summary+author_name+author_description
                       approval_status: 1,
 
                       status_changed_by: logged_in_user,
-                      status_updated_time: Date.now(),
 
-                      created_at: Date.now()
+                      campaign_end_date: campaign_end_date,
+                      campaign_start_date: campaign_start_date,
+
+                      created_at: campaign_start_date,
       });
                    return result;
 },
@@ -1885,7 +1897,8 @@ console.log(select_package+book_name+book_summary+author_name+author_description
 
 
   create_book_details_from_campaign(book_id, book_name, book_summary, book_catagries, author_name,
-   author_description,amazon_link, book_cover, final_release_date,book_price){
+   author_description,amazon_link, book_cover, final_release_date,book_price,campaign_id){
+
 
    var result = book_details.insert({
       "book_id": book_id,
@@ -1897,9 +1910,18 @@ console.log(select_package+book_name+book_summary+author_name+author_description
       "amazon_link": amazon_link,
       "book_cover": book_cover,
       "book_price": book_price,
+      "campaign_id": campaign_id,
       "final_release_date": final_release_date,
       "created_at": Date.now(),
     });
+
+                      var result2 =  campaign_details.update({
+                                campaign_id: campaign_id,
+                              }, {
+                                $set: {
+                                  "book_id": book_id,
+                                } 
+                              }); 
 
       return result;
   },

@@ -29,7 +29,7 @@
               <div class="col-md-12">
                  <div class="post__author author vcard inline-items">              
                   <div class="author-date">
-                    <a class="h5 post__author-name fn" href="02-ProfilePage.html">Wrtten by:  {{author_name}}</a>
+                    <a class="h5 post__author-name fn" href="javascript:void(0)">Written by:  {{author_name}}</a>
                      <h5>About writer</h5> 
                      <p>{{author_description}} </p>                 
                   </div>
@@ -41,7 +41,7 @@
               </div>
             </div>
             <div class="col m6 l6 s6 text-right">
-              <a href="#" class="btn btn-blue btn-md with--icon ">               
+              <a href="{{amazon_link}}" class="btn btn-blue btn-md with--icon " target="_blank" >               
                 <div class="text"> <span class="title">BUY NOW</span> </div> 
               </a>
             </div>
@@ -61,33 +61,35 @@
                      <div class="section_reviews">
           <div class="ui-block-title">
           <div class="h2 title"> Reviews</div>
-{{#if check_if_user_is_campaigner}}
-      {{#each check_if_already_requested_for_review}}
+{{#if check_if_campaign_expired}}
+  {{#if check_if_user_is_campaigner}}
+        {{#each check_if_already_requested_for_review}}
 
-      {{#if equals approval_status 0}}
-          <div class="align-right">
-             <p> You request was sucessfully submited. Admin has not responded to your request yet.</p>
-          </div>
-      {{else if equals approval_status 1}}
-           <div class="align-right">
-            <a href="javascript:void(0)" class="btn btn-primary btn-md-2 go_to_write_review_page" >Write Review</a>
-          </div>
-      {{else if equals approval_status 2}}
-          <div class="align-right">
-            <p> You request to be reviewer got rejected.</p>
-          </div>
-      {{else if equals approval_status 3}}
-          <div class="align-right">
-            <p> Thanks for submiting review.</p>
-          </div>
-      {{/if}}
-      {{else}}
+        {{#if equals approval_status 0}}
+            <div class="align-right">
+               <p> You request was sucessfully submited. Admin has not responded to your request yet.</p>
+            </div>
+        {{else if equals approval_status 1}}
+             <div class="align-right">
+              <a href="javascript:void(0)" class="btn btn-primary btn-md-2 go_to_write_review_page" >Write Review</a>
+            </div>
+        {{else if equals approval_status 2}}
+            <div class="align-right">
+              <p> You request to be reviewer got rejected.</p>
+            </div>
+        {{else if equals approval_status 3}}
+            <div class="align-right">
+              <p> Thanks for submiting review.</p>
+            </div>
+        {{/if}}
+        {{else}}
 
-          <div class="align-right">
-            <a href="javascript:void(0)" class="btn btn-primary btn-md-2 apply_for_review" >Apply for Reviewer</a>
-          </div>
-          
-      {{/each}}          
+            <div class="align-right">
+              <a href="javascript:void(0)" class="btn btn-primary btn-md-2 apply_for_review" >Apply for Reviewer</a>
+            </div>
+            
+        {{/each}}          
+  {{/if}}
 {{/if}}
 <!--           
           <div class="align-right">
@@ -121,18 +123,15 @@
                   </time>
                 </div>
               </div>
-      
             </div>
- 
 
             <p class="p_cmnt">{{../review_text}}</p>
-
-
-           
           </div>
       
-  {{/each}}   
+  {{/each}}
         </li>
+  {{else}}
+  <p>No reviews submitted yet</p>   
 {{/each}}
       </ul>
       </div>

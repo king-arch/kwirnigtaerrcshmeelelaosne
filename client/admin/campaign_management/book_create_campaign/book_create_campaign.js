@@ -58,6 +58,7 @@ admin_detailed = Meteor.subscribe("fetch_result_interest");
       var amazon_link = result[0].amazon_link;
       var book_price = result[0].book_price;
       var book_cover = result[0].book_cover;
+      var campaign_id = result[0].campaign_id;
       var final_release_date = result[0].final_release_date;
 
       $('#hidden_book_id').val(book_id);
@@ -70,6 +71,8 @@ admin_detailed = Meteor.subscribe("fetch_result_interest");
       $('#author_description').val(author_description);
       $('#amazon_link').val(amazon_link);
       $('#book_price').val(book_price);
+
+      Session.set("campaign_id",campaign_id);
       // $('#release_date').val(final_release_date);
 
       // var load_date = final_release_date;
@@ -360,9 +363,11 @@ function click_events() {
 
 		var final_release_date = date_picker;
 		var book_id = 'book_id_' + Math.floor((Math.random() * 2465789) + 1);
+
+		var campaign_id = Session.get("campaign_id");
 		
 		Meteor.call('create_book_details_from_campaign', book_id,book_name, book_summary, book_catagries, author_name, author_description,
-		 amazon_link, book_cover, final_release_date,book_price, function (error, result) {
+		 amazon_link, book_cover, final_release_date,book_price,campaign_id, function (error, result) {
 
 			$('#loader_gif').addClass('div_hide_class');
 			$('#save_text').removeClass('div_hide_class');
@@ -372,7 +377,7 @@ function click_events() {
 
 			} else {
 						swal('Book successfully added. ');
-						Router.go('/book_management');
+						Router.go('/campaign_listing_admin');
 					}
 		});
 

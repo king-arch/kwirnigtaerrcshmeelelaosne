@@ -354,10 +354,10 @@ console.log("just above");
       } else {
        
             swal('Campign request successfully sent. ');
-            window.location.reload('/campaign_listing_admin');
+            window.location.href= '/campaign_listing_admin';
         }
     });
-
+window.location.href= '/campaign_listing_admin';
    },
 
 
