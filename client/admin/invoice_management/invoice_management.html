@@ -1,0 +1,137 @@
+
+<template name="invoice_management" >
+
+	<body> {{> invoice_management_details}} </body>
+</template>
+
+<template name="invoice_management_details" >
+	<div class="loading"  id="loading_div" ></div>
+	{{>left_panel_admin}}
+<div class="">
+	<div class="content-bg-wrap"></div>
+			<div class="row">
+				<div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+					<div class="ui-block responsive-flex">
+						<div class="container ui-block-title" style="padding-left: 4%;">
+							<!-- <div class="h6 title">Book Management</div> -->
+							<h1 style="font-size: 30px; font-weight: 500;">Invoice Management</h1>
+<!-- 							<div class="align-right">
+								<a class="js-open-popupbtn btn-primary btn-md-2 c-grey" data-popup-target=".playlist-popup" id="add_book" ><span id="save_text" class="c-white pointer"> Add Book</span></a>
+							</div> -->
+
+						</div>
+					</div>
+				</div>
+			</div>
+
+</div>
+	<div class="row">
+		<div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+			<div class="ui-block ">		
+				<div class="container" style="padding-left: 2%;">		
+					<!-- Forums Table -->				
+					<table class="forums-table table datatable " id="show_book_listing" >				
+						<thead>				
+						<tr>
+							<th class="forum">
+								Cover
+							</th>
+							<th class="forum">
+								Name
+							</th>				
+				
+							<th class="posts">
+								Author Name
+							</th>
+					
+							<th class="posts">
+								Delivery option
+							</th>
+					
+							<th class="freshness">
+								Amazon Affilated Link
+							</th>
+					
+							<th class="freshness">
+								Price
+							</th>
+					
+							<th class="freshness">
+								Campign started on
+							</th>
+
+							<th class="freshness">
+								Campign started off
+							</th>
+					
+							<th class="freshness">
+								Final Payment
+							</th>
+					
+							<th class="freshness">
+								Action
+							</th>					
+						</tr>
+					</thead>
+
+					<tbody>
+						{{#each show_campaigns_details}}				
+						<tr>
+							<td class="forum">
+								<div class="forum-item">
+									<img src="{{book_cover}}" class="img-responsive" >
+									
+								</div>
+							</td>
+							<td class="topics">
+								<p class="text">{{book_name}}</p>
+							</td>
+							<td class="freshness">
+								<div class="author-freshness">
+									{{author_name}}
+								</div>
+							</td>
+							<td class="freshness">
+								<div class="author-freshness">{{delivery_option}}</div>
+							</td>
+							<td class="freshness">
+								<a href="{{amazon_link}}" class="h6 count" target="_blank" >www.amazon.in</a>
+							</td>
+							<td class="freshness">
+							₹ {{book_price}}
+							</td>
+							<td class="freshness">
+								<div class="author-freshness">
+									{{campaign_start_date}}
+								</div>
+							</td>
+							<td class="freshness">
+								<div class="author-freshness">
+									{{campaign_end_date}}
+								</div>
+							</td>
+							<td class="freshness">
+								₹ {{final_payment}}
+							</td>
+							<td class="freshness">
+								<div class="author-freshness">
+									<button class="edit_book_details btn-breez btn" id="{{book_id}}" > Create Invoice </button>
+								</div>
+							</td>
+						</tr>
+					  {{/each}}
+						
+					
+						</tbody>
+					</table>
+
+					<!-- ... end Forums Table -->
+				</div>
+		</div>
+
+		</div>
+
+	</div>
+
+
+</template>

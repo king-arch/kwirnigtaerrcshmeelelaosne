@@ -60,6 +60,11 @@ Template.left_panel_admin.onDestroyed(function () {
         Router.go("/report_analyze");
       },
 
+
+    'click #invoice_management':function(){
+        Router.go("/invoice_management");
+      },
+
     'click #sign_out':function(){
         Session.clear("active_user");
         Session.clear("active_user_type");

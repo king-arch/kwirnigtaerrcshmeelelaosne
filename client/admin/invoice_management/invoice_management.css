@@ -1,0 +1,11 @@
+
+.paging_simple_numbers span{
+	  margin: 10px;
+}
+.dataTables_info{
+	display: none;
+}
+#show_book_listing_wrapper label {
+	
+  text-transform: capitalize;
+}
