@@ -17,9 +17,11 @@ import { interest_list } from './../../../../import/collections/insert.js';
 import { Base64 } from 'meteor/ostrio:base64';
 
 var book_listing;
+var campaign_details_all;
 
 Template.report_analyze_details.onDestroyed(function () {
-	book_listing.stop();
+  book_listing.stop();
+	campaign_details_all.stop();
 });
 
 Template.report_analyze_details.onCreated(function eventlistOnCreated(){
@@ -42,7 +44,7 @@ Template.report_analyze_details.onRendered(function () {
 	book_listing = Meteor.subscribe("fetch_user_listing");
 	setTimeout(function () {
 		$('#loading_div').addClass("loader_visiblity_block");
-
+    var campaign_details_all = Meteor.subscribe('campaign_details_all_list');
 		// click_events();
 		// $('#loading_div').addClass('loader_visiblity_block');
 	}, 2000); 

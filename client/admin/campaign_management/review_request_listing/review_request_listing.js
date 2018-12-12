@@ -36,11 +36,12 @@ Template.show_review_request_listing.onCreated(function eventlistOnCreated(){
 Template.show_review_request_listing.onRendered(function () {
 
     $.getScript("https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.19/js/jquery.dataTables.min.js",function(){            
+       setTimeout(function () {
       $('#show_review_request_listing').DataTable(); 
+        }, 2000);
     });  
        book_listing = Meteor.subscribe("campaign_details_all_list");
        request_listing = Meteor.subscribe("review_details_all_pending");
-  
        user_details_listing = Meteor.subscribe("fetch_user_listing");
 
     $(".show_packages").addClass("loader_visiblity_block");

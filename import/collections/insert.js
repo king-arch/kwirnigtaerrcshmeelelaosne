@@ -15,4 +15,5 @@ export const promotion = new Mongo.Collection('promotion');
 export const content = new Mongo.Collection('content');                                 
 export const blog = new Mongo.Collection('blog');                                 
 export const notification_details = new Mongo.Collection('notification_details');                                 
+export const general_records = new Mongo.Collection('general_records');                                 
 

@@ -109,6 +109,10 @@
             <th class="posts">
               Requester's Email
             </th>
+        
+            <th class="posts">
+              Location(For deliver option 1)
+            </th>
           
             <th class="freshness">
               Action
@@ -151,6 +155,20 @@
             </td>
 
           {{/each}}
+
+
+            <td class="forum">
+              {{#if user_location}}
+                        <div class="forum-item">
+                            {{user_location}}
+                        </div>
+              {{else}}
+                    <div class="forum-item">
+                            -
+                        </div>
+              {{/if}}       
+            </td>
+
 
             <td class="topics">
     {{#if equals approval_status 0}}

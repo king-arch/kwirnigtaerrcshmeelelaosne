@@ -16,6 +16,7 @@ import { content } from './../import/collections/insert.js';
 import { campaign_details } from './../import/collections/insert.js';
 import { notification_details } from './../import/collections/insert.js';
 import { review_details } from './../import/collections/insert.js';
+import { general_records } from './../import/collections/insert.js';
 
 import { Base64 } from 'meteor/ostrio:base64';
 import urlMetadata from 'url-metadata';
@@ -149,9 +150,8 @@ import urlMetadata from 'url-metadata';
       return  review_details.find({});
     });
 
-Meteor.startup(() => {
-  // code to run on server at startup 
-});
+
+//START Email setup function for support mail
 
 smtp = {
   username: 'writersmelonteam@gmail.com',
@@ -160,6 +160,104 @@ smtp = {
   port: 587
 }
 process.env.MAIL_URL = 'smtp://' + encodeURIComponent(smtp.username) + ':' + encodeURIComponent(smtp.password) + '@' + encodeURIComponent(smtp.server) + ':' + smtp.port;
+
+//END Email setup function for support mail
+
+//START crone jobs for capturing the report stats
+
+
+// Meteor.startup(() => {
+//   // code to run on server at startup 
+//       SyncedCron.start();
+// });
+
+
+  // SyncedCron.config({
+  //   collectionName: 'somethingDifferent'
+  // });
+
+  // SyncedCron.add({
+  //   name: 'Get the campaign total counts and total revenue',
+  //   schedule: function(parser) {
+  //     // parser is a later.parse object
+
+  //     // return parser.text('every 1 hours');
+  //     return parser.text('every 10 seconds');
+  //   }, 
+  //   job: function(intendedAt) {
+  //     // console.log('crunching numbers');
+  //     console.log('fetching reports stats: ');
+  //     // console.log(intendedAt);
+  //     var check_campaign_status = campaign_details.find({}).fetch();
+
+  //   if(check_campaign_status[0]){
+  //     for(var i=0; i< check_campaign_status.length; i++){
+
+  //     var book_name = check_campaign_status[i].book_name;
+  //     var approval_status = check_campaign_status[i].approval_status;
+  //     var final_payment = check_campaign_status[i].final_payment;
+
+  //     var campaign_end_date = check_campaign_status[i].campaign_end_date;
+  //     var campaign_start_date = check_campaign_status[i].campaign_start_date;
+  //     var campaign_id = check_campaign_status[i].campaign_id;
+
+  //     console.log(' book_name ' +book_name);
+
+  //     console.log(' approval_status '+approval_status);
+  //     console.log('final_payment ' +final_payment);
+  //     console.log(' campaign_end_date ' +campaign_end_date);
+  //     console.log(' campaign_start_date ' +campaign_start_date);
+
+  //     var todays_date = Date.now();
+  //     if(campaign_end_date > todays_date){
+  //        console.log("show count");
+           
+  //                             var result =  campaign_details.update({
+  //                               campaign_id: campaign_id,
+  //                             }, {
+  //                               $set: {
+  //                                 "approval_status": 4,
+  //                                 "status_changed_by": 'crone_jobs',
+
+  //                                 "update_at": Date.now()
+  //                               } 
+  //                             }); 
+  //             }
+  //            }
+  //          }
+
+  //     var check_campaign_status_for_stats = campaign_details.find({approval_status: 4}).fetch();
+
+  //   if(check_campaign_status_for_stats[0]){
+
+  //     var check_general_records = general_records.find({"record_type": "campaign_count"}).fetch();
+  //       if(check_general_records[0]){
+  //                             var result =  general_records.update({
+  //                               campaign_id: check_general_records[0].campaign_id,
+  //                             }, {
+  //                               $set: {
+  //                                 "record_type": "campaign_count",
+  //                                 "campaign_count": check_campaign_status_for_stats.length,
+
+  //                                 "update_at": Date.now()
+  //                               } 
+  //                             }); 
+  //       }else{
+  //                    var general_record_id = 'general_record_id_'+Math.floor((Math.random() * 2465789) + 1);
+  //          var result = general_records.insert({
+  //                       "general_record_id": general_record_id,
+  //                       "record_type": "campaign_count",
+  //                       "campaign_count": check_campaign_status_for_stats.length,
+  //                       "created_at": Date.now(),
+  //                     });
+  //       }
+
+  //   }
+
+  //       }
+  // });
+
+//END crone jobs for capturing the report stats
 
 
 
@@ -1734,7 +1832,6 @@ else if(field_name == 'socail_media_handle_shared'){
 
     update_campaigning_status:function(logged_in_user, approval_status,campaign_id){
 
-
       console.log(logged_in_user+' & '+ approval_status+' & '+campaign_id);
           var check_status =  campaign_details.find({campaign_id: campaign_id}).fetch();
           if(check_status[0]){
@@ -1770,7 +1867,7 @@ else if(field_name == 'socail_media_handle_shared'){
                               }); 
 
 
-          var notification_text = "Your campaign was accepted and got started";
+          var notification_text = 'Your campaign of book: "'+check_status[0].book_name +'" was accepted and got started';
                var notification_id = 'notification_id_'+Math.floor((Math.random() * 2465789) + 1);
                    
                    var result2 = notification_details.insert({
@@ -1800,7 +1897,7 @@ else if(field_name == 'socail_media_handle_shared'){
                                 }
                               }); 
 
-                      var notification_text = "Your campaign is rejected";
+                      var notification_text = 'Your campaign of book: "'+check_status[0].book_name +'" is rejected';
                var notification_id = 'notification_id_'+Math.floor((Math.random() * 2465789) + 1);
                    
                    var result2 = notification_details.insert({
@@ -1816,6 +1913,35 @@ else if(field_name == 'socail_media_handle_shared'){
       });
              return result;
           }
+          else if(approval_status == 3){
+                         var result =  campaign_details.update({
+                                campaign_id: check_status[0].campaign_id,
+                              }, {
+                                $set: {
+                                  "approval_status": approval_status,
+                                  "review_stopped_by": logged_in_user,
+
+                                  "updated_at": Date.now()
+                                }
+                              }); 
+
+  var notification_text = 'admin has stopped review submition for campaign of book: "'+check_status[0].book_name+'"';
+  var notification_id = 'notification_id_'+Math.floor((Math.random() * 2465789) + 1);
+                   
+                   var result2 = notification_details.insert({
+
+                      notification_id: notification_id,
+                      notification_text: notification_text,
+
+                      notification_by: logged_in_user,
+                      notification_to: check_status[0].campaigner_id,
+                      campaign_id: check_status[0].campaign_id,
+                      notification_type: "campaign",
+                      created_at: Date.now()
+      });
+             return result;
+          }
+
         }
 
       },
@@ -1927,11 +2053,11 @@ console.log(select_package+book_name+book_summary+author_name+author_description
   },
 
 
-  send_review_request(logged_in_user,book_id,campaign_id){
-    console.log(logged_in_user+' & '+book_id+ ' & '+campaign_id);
+  send_review_request(logged_in_user,book_id,campaign_id,user_location){
+    console.log(logged_in_user+' & '+book_id+ ' & '+campaign_id+ ' & '+user_location);
 
-   // var check_for_campaign_id = campaign_details.find({book_id: book_id}).fetch();
-   // if(check_for_campaign_id[0]){
+   var check_for_campaign_id = campaign_details.find({book_id: book_id}).fetch();
+   if(check_for_campaign_id[0]){
 
    var review_id = 'review_id_'+Math.floor((Math.random() * 2465789) + 1);
    var result = review_details.insert({
@@ -1939,11 +2065,12 @@ console.log(select_package+book_name+book_summary+author_name+author_description
       "content_type": "review_request",
       "parent_id": campaign_id,
       "approval_status": 0,
+      "user_location": user_location,
       "review_request_by": logged_in_user,
       "created_at": Date.now(),
     });
 
-             var notification_text = "someone requested to review to campaign "+campaign_id;
+             var notification_text = 'Recived a request on campaign of book : "'+check_for_campaign_id+'"';
                var notification_id = 'notification_id_'+Math.floor((Math.random() * 2465789) + 1);
                    
                    var result2 = notification_details.insert({
@@ -1960,7 +2087,7 @@ console.log(select_package+book_name+book_summary+author_name+author_description
                       created_at: Date.now()
       });
       return result;
-   // }
+   }
   },
 
    update_review_request_status(logged_in_user, approval_status,review_id){

@@ -29,7 +29,9 @@ Template.display_blog_listing.onCreated(function eventlistOnCreated(){
 Template.display_blog_listing.onRendered(function () {
     $.getScript("https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.19/js/jquery.dataTables.min.js",function(){
       // $.getScript("https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css",function(){
-            $('#show_promotion_listing').DataTable();
+  setTimeout(function () {
+              $('#show_promotion_listing').DataTable();
+    }, 2000);
     // });  
     });  
 
@@ -90,7 +92,7 @@ Template.display_blog_listing.onRendered(function () {
          var user_id = this.blog_author;  
          console.log(user_id);            
          Meteor.subscribe("user_info_based_on_id",user_id);
-         var result = user_details.find({user_id: user_id}).fetch();
+         var result = user_details.find({user_id: user_id},{sort: {created_at: -1}}).fetch();
          console.log('show author details');
          console.log(result);
          return result;

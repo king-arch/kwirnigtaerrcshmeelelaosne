@@ -28,7 +28,9 @@ Template.campaign_listing_detail.onCreated(function eventlistOnCreated(){
 Template.campaign_listing_detail.onRendered(function () {
 
     $.getScript("https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.19/js/jquery.dataTables.min.js",function(){            
-      $('#show_campaign_listing').DataTable(); 
+            setTimeout(function () {
+              $('#show_campaign_listing').DataTable(); 
+            }, 2000);
     });  
 
     $(".show_packages").addClass("loader_visiblity_block");
@@ -56,6 +58,9 @@ Template.campaign_listing_detail.onRendered(function () {
         else if(this.approval_status == 2){
           return 'Rejected';
         }
+        else if(this.approval_status == 3){
+          return 'Accepted';
+        }
     },
 
     check_approval_status_for_time_dislay(){
@@ -67,6 +72,9 @@ Template.campaign_listing_detail.onRendered(function () {
         }
         else if(this.approval_status == 2){
           return false;
+        }
+        else if(this.approval_status == 3){
+          return true;
         }
     },
 
@@ -114,7 +122,30 @@ Template.campaign_listing_detail.events({
     "click #create_campaign":function(){
         // alert("clicked");
         window.location.href = "create_campaign";
-   	},
+    },
+
+    "click .view_invoice_detail":function(){
+
+      var campaign_id = Base64.encode(this.campaign_id);  
+      var url = '/invoice_detail/'+campaign_id;
+            console.log(url);
+            window.location.href = url;
+          },
+
+    "click .show_reviewer_details":function(){
+
+      var campaign_id = Base64.encode(this.campaign_id);  
+      var url = '/reviewer_details/'+campaign_id;
+            console.log(url);
+            window.location.href = url;
+          },
+
+    "click .go_to_book_detail":function(){ 
+      var book_id = Base64.encode(this.book_id);  
+      var url = '/book_detail/'+book_id;
+            console.log(url);
+            window.location.href = url;
+    },
 
 
     "click .view_detail":function(){
@@ -124,7 +155,6 @@ Template.campaign_listing_detail.events({
             var url = '/campaign_detail/'+campaign_id;
             console.log(url);
             // window.location.href = url;
-
     },
 
 });

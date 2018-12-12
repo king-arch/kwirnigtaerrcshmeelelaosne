@@ -25,15 +25,13 @@ Template.book_management_details.onCreated(function eventlistOnCreated(){
 
 Template.book_management_details.onRendered(function () {
 
-
-
     $.getScript("https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.19/js/jquery.dataTables.min.js",function(){
       // $.getScript("https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css",function(){
-            $('#show_book_listing').DataTable();
+    	setTimeout(function () {
+    	        $('#show_book_listing').DataTable();
+			}, 2000);
     // });  
     });  
-
-
 
 	book_listing = Meteor.subscribe("fetch_book_listing");
 	setTimeout(function () {
@@ -43,6 +41,7 @@ Template.book_management_details.onRendered(function () {
 		// $('#loading_div').addClass('loader_visiblity_block');
 
 	}, 2000);
+
 });
 
 
@@ -71,11 +70,11 @@ Template.book_management_details.onRendered(function () {
 	                                                 
 	                                  },
 	                                  { author_name: query
-	                                }] }).fetch();
+	                                }] },{sort: {created_at: -1}}).fetch();
 
     }
     else{
-    	var result = book_details.find({}).fetch();
+    	var result = book_details.find({},{sort: {created_at: -1}}).fetch();
     }
     console.log('show result: ');
     console.log(result);

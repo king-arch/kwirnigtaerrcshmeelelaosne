@@ -122,7 +122,7 @@ Template.headeroptions.events({
    },
 
   'click #go_to_book':function(){
-    Router.go("/book");
+    Router.go("/book_listing");
    },
 
   'click #go_to_author':function(){
@@ -130,7 +130,7 @@ Template.headeroptions.events({
    },
 
   'click #go_to_blog':function(){
-    Router.go("/blog");
+    Router.go("/blog_listing");
    },
 
   'click #go_to_profile':function(){

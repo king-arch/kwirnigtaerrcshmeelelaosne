@@ -21,9 +21,13 @@ import { user_details } from './../../../import/collections/insert.js';
 import { Base64 } from 'meteor/ostrio:base64';
 
 var book_listing;
+var user_details_subscribe;
+var campaign_details_subscribe;
 
 Template.book_detail_page.onDestroyed(function () {
   book_listing.stop();
+  user_details_subscribe.stop();
+  campaign_details_subscribe.stop();
 });
 
 Template.book_detail_page.onCreated(function eventlistOnCreated(){
@@ -31,6 +35,7 @@ Template.book_detail_page.onCreated(function eventlistOnCreated(){
 });
 
 Template.book_detail_page.onRendered(function () {
+
 
   var url = window.location.href;
   var new_url = url.split("/");
@@ -41,6 +46,9 @@ Template.book_detail_page.onRendered(function () {
       setTimeout(function () {
         $('#loading_div').addClass('loader_visiblity_block');
       }, 2000);
+
+    user_details_subscribe = Meteor.subscribe("fetch_user_details",Session.get(userId));
+
     });
 
  Template.book_detail_page.helpers({
@@ -158,7 +166,20 @@ Template.book_detail_page.events({
       var book_id = this.book_id;
       var campaign_id = this.campaign_id;
 
-     Meteor.call('send_review_request',logged_in_user,book_id,campaign_id, function (error, result) {
+      var fetch_results = user_details.find({"user_id": logged_in_user}).fetch();
+
+      campaign_details_subscribe = Meteor.subscribe("campaign_details_with_id",this.campaign_id);
+      var fetch_campaign_details = campaign_details.find({campaign_id: this.campaign_id}).fetch();
+
+if(fetch_campaign_details[0]){
+  // alert('case 1');
+  // alert('this');
+  // console.log(this);
+  if(fetch_campaign_details[0].delivery_option == "2"){
+
+        user_location = "";
+
+         Meteor.call('send_review_request',logged_in_user,book_id,campaign_id,user_location, function (error, result) {
               if (error) {
                 console.log("Some error occured.");
               } else {
@@ -166,14 +187,15 @@ Template.book_detail_page.events({
                 window.location.reload();
               }
             });
-    },
 
-    "click .accept_campaign":function(){
-        // alert("clicked");
-      var approval_status = 1;
-      var logged_in_user = Session.get("userId");
-      var campaign_id = this.campaign_id;
-      swal("Do you want to start the campaign ...?", {
+
+  }else{
+
+    user_location = fetch_results[0].user_location;
+        swal('You have entered "'+user_location+'" as your postal address.'+
+'If you want, You can change the postal adress from the edit information section of profile page.'+
+' Make sure you have inserted your fully detailed address.'+
+' If its not complete, we will reject your request as a reviewer.', {
         buttons: {
           cancel: "Cancel",
           catch: {
@@ -189,51 +211,22 @@ Template.book_detail_page.events({
             break;
 
           case "catch":
-            Meteor.call('update_campaigning_status', logged_in_user, approval_status,campaign_id, function (error, result) {
+     Meteor.call('send_review_request',logged_in_user,book_id,campaign_id,user_location, function (error, result) {
               if (error) {
                 console.log("Some error occured.");
               } else {
-                swal("Campaign is succesfully started!");
+                swal("Review is succesfully submited");
                 window.location.reload();
               }
             });
             break;
         }
       });
-    },
 
-    "click .reject_campaign":function(){
-        // alert("clicked");
-      var approval_status = 2;
-      var logged_in_user = Session.get("userId");
-      var campaign_id = this.campaign_id;
-      swal("Do you want to reject this campaign ...?", {
-        buttons: {
-          cancel: "Cancel",
-          catch: {
-            text: "Sure",
-            value: "catch",
-          },
-        },
-      })
-      .then((value) => {
-        switch (value) {
-          case "defeat":
-            swal("Pikachu fainted! You gained 500 XP!");
-            break;
 
-          case "catch":
-            Meteor.call('update_campaigning_status', logged_in_user, approval_status,campaign_id, function (error, result) {
-              if (error) {
-                console.log("Some error occured.");
-              } else {
-                swal("Campaign got Rejected!");
-                window.location.reload();
-              }
-            });
-            break;
-        }
-      });
+  }
+
+}
     },
 
 });

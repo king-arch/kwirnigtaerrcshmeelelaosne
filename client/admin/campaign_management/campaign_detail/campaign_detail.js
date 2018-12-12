@@ -176,6 +176,41 @@ Template.show_campaign_detail.events({
             break;
         }
       });
+    },
+
+
+    "click .stop_review_process":function(){
+        // alert("clicked");
+      var approval_status = 3;
+      var logged_in_user = Session.get("userId");
+      var campaign_id = this.campaign_id;
+      swal("Do you want to stop review submition for this campaign ...?", {
+        buttons: {
+          cancel: "Cancel",
+          catch: {
+            text: "Sure",
+            value: "catch",
+          },
+        },
+      })
+      .then((value) => {
+        switch (value) {
+          case "defeat":
+            swal("Pikachu fainted! You gained 500 XP!");
+            break;
+
+          case "catch":
+            Meteor.call('update_campaigning_status', logged_in_user, approval_status,campaign_id, function (error, result) {
+              if (error) {
+                console.log("Some error occured.");
+              } else {
+                swal("Review submition stopped");
+                // window.location.reload();
+              }
+            });
+            break;
+        }
+      });
    	},
 
 });

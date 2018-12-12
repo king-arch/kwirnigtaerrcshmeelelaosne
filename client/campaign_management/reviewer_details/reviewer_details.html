@@ -1,11 +1,13 @@
 
 
-<template name="campaign_listing">
+<template name="reviewer_details">
+
  {{> headeroptions}}
- {{> campaign_listing_detail}}
+ {{> show_reviewer_details}}
+
 </template>
 
-<template name="campaign_listing_detail">
+<template name="show_reviewer_details">
     <div class="loading"  id="loading_div" ></div>
 <div class="container">
   <div class="row">
@@ -13,7 +15,7 @@
 
       <div class="ui-block responsive-flex1200 bg_trans">
         <div class="ui-block-title pad_0">
-          <h1 style="font-size: 30px; font-weight: 500;">User Campaigns</h1>
+          <h1 style="font-size: 30px; font-weight: 500;">Reviewers List</h1>
         </div>
       </div>
     </div>  
@@ -29,14 +31,6 @@
 
     <div class="col col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12 ">
 
-      <div class="ui-block responsive-flex1200 bg_trans margin-bottom-0">
-        <div class="ui-block-title pad_0">            
-          
-           <a href="#" class="btn btn-primary btn-md-2 margin-bottom-0" id="create_campaign" >
-            Start Campaign</a>
-            
-        </div>
-      </div>
     </div>
 
 
@@ -55,97 +49,44 @@
         
         <!-- Forums Table -->
         
-        <table class="forums-table" id="show_campaign_listing" >
+        <table class="forums-table" id="show_reviewer_details_table" >
         
           <thead>
         
           <tr>          
             <th class="forum">
-              Book Title
+              User Details
             </th>
 
             <th class="posts">
-              Book Status
+              User's Postal Address
             </th>
 
-            <th class="posts">
-              Delivery Option
-            </th>
-
-            <th class="topics">
-              Start Date
-            </th>
-        
-            <th class="posts">
-              End Date
-            </th>
-
-            <th class="freshness">
-              Invoice
-            </th>
-<!--           
-            <th class="freshness">
-              Status
-            </th> -->
           </tr>
           </thead>
         
           <tbody>
-{{#each show_user_campaign_listing}}
+{{#each show_reviewers_listing}}
          
-          <tr>
-            <td class="forum go_to_book_detail">
+<tr>
+          {{#each show_user_details}}       
+            <td class="forum">
               <div class="forum-item">
-                <img src="{{book_cover}}" width="50" alt="forum">
-                <div class="content">
-                  <a href="#" class="h6 title">{{book_name}}</a>
-                  <p class="text">{{book_summary_trimmed}}</p>
-              
-                </div>        
+                <img src="{{user_profile_pic}}" class="img-responsive" style="height: 90px !important; width: 90px !important;">
               </div>
+              <p class="text">{{user_name}}</p>
             </td>
 
-            <td class="posts">
-              {{check_approval_status}}
+
+          {{/each}}
+
+
+
+            <td class="freshness">
+              <div class="author-freshness">{{user_location}}</div>
             </td>
          
-
- <td class="posts">
-
-              {{#if equals delivery_option "1"}}
-                <p>Delivery Option: 1 | Campaigner will send books offline</p>
-              {{else}}
-                <p>Delivery Option: 2 | Points will be released to reviewers. reviewers will buy book themselves
-.</p>      
-              {{/if}}
-            </td>
-
-            <td class="posts">
-              {{#if check_approval_status_for_time_dislay}}
-                {{campaign_start_date}}
-              {{else}}
-                -
-              {{/if}}
-            </td>
-
-            <td class="freshness">
-              {{#if check_approval_status_for_time_dislay}}
-                {{select_package}}
-              {{else}}
-                -
-              {{/if}}
-            </td>
-             
-            <td class="freshness">
-             <a href="javascript:void(0)" class="view_invoice_detail btn btn-primary btn-sm full-width" data-toggle="modal" data-target="#edit-my-poll-popup" id="{{campaign_id}}">View Invoice</a>
-
-            {{#if equals delivery_option "1"}}
-             <a href="javascript:void(0)" class="show_reviewer_details btn btn-breez btn-sm full-width" data-toggle="modal" data-target="#edit-my-poll-popup" id="{{campaign_id}}">Reviewers Details for delivery</a>
-            {{/if}}
-
-            </td>
-          </tr>
-   {{else}}
+</tr>
   {{/each}}
           </tbody>
         </table>

@@ -93,6 +93,13 @@
                 <div class="text"> <span class="title">Campaign Accepted</span> </div> 
               </a>
             </div>
+
+            <div class="col-md-3 text-right">
+              <a href="javascript:void(0)" class="stop_review_process btn btn-blue btn-md with--icon " style="padding: 4px 16px;"> 
+                <div class="text"> <span class="title">Stop Review Submition</span> </div> 
+              </a>
+            </div>
+
   {{else if equals approval_status 2}}
             <div class="col-md-3 text-right">
               <a href="javascript:void(0)" class="btn btn-blue btn-md with--icon " style="padding: 4px 16px;"> 
@@ -122,13 +129,28 @@
                 <div class="text"> <span class="title">Campaign Accepted</span> </div> 
               </a>
             </div>
+
+          <div class="col-md-3 text-right">
+              <a href="javascript:void(0)" class="stop_review_process btn btn-blue btn-md with--icon " style="padding: 4px 16px;"> 
+                <div class="text"> <span class="title">Stop Review Submition</span> </div> 
+              </a>
+            </div>
+
   {{else if equals approval_status 2}}
             <div class="col-md-3 text-right">
               <a href="javascript:void(0)" class="btn btn-blue btn-md with--icon " style="padding: 4px 16px;">               
                 <div class="text"> <span class="title">Campaign Rejected</span> </div> 
               </a>
             </div>
+
+  {{else if equals approval_status 3}}
+            <div class="col-md-3 text-right">
+              <a href="javascript:void(0)" class="btn btn-blue btn-md with--icon " style="padding: 4px 16px;">               
+                <div class="text"> <span class="title">Campaign is Running and Admin has stopped the review process.</span> </div> 
+              </a>
+            </div>
   {{/if}}
+
   {{/if}}
           </div>
 
@@ -141,7 +163,4 @@
   </div>
   {{/each}}
   <!-- ... end Shop Product Detail -->
-
-
-
 </template>

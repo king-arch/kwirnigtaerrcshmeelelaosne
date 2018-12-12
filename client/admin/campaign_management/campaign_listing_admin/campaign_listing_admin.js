@@ -28,7 +28,9 @@ Template.show_campaign_listing_admin.onCreated(function eventlistOnCreated(){
 Template.show_campaign_listing_admin.onRendered(function () {
 
     $.getScript("https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.19/js/jquery.dataTables.min.js",function(){            
-      $('#show_campaign_listing_admin').DataTable(); 
+            setTimeout(function () {
+              $('#show_campaign_listing_admin').DataTable(); 
+                    }, 2000);
     });  
        book_listing = Meteor.subscribe("campaign_details_all_list");
 
@@ -50,6 +52,9 @@ Template.show_campaign_listing_admin.onRendered(function () {
         else if(this.approval_status == 2){
           return 'Rejected';
         }
+        else if(this.approval_status == 3){
+          return 'Accepted';
+        }
     },
 
     check_approval_status_for_time_dislay(){
@@ -62,10 +67,13 @@ Template.show_campaign_listing_admin.onRendered(function () {
         else if(this.approval_status == 2){
           return false;
         }
+        else if(this.approval_status == 3){
+          return true;
+        }
     },
 
     show_campaign_listing(){
-      var result = campaign_details.find({}).fetch();
+      var result = campaign_details.find({},{sort: {created_at: -1} }).fetch();
       return result;
     },
 

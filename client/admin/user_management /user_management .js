@@ -21,8 +21,6 @@ Template.user_management_details.onDestroyed(function () {
 });
 
 Template.user_management_details.onRendered(function () {
-  $('#loading_div').addClass("loader_visiblity_block");
-
   book_listing = Meteor.subscribe("fetch_user_listing");
      // var result  = user_details.find({}).fetch();
      // result = JSON.parse(result);
@@ -30,25 +28,12 @@ Template.user_management_details.onRendered(function () {
     $.getScript("https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.19/js/jquery.dataTables.min.js",function(){
       $.getScript("https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css",function(){
            // alert('show');
-            $('#show_book_listing').DataTable();
-            //             $('#show_book_listing').DataTable({
-            //   "paging": true,
-            //   "processing": true,
-            //   "serverSide": true,
-            //   "ajax": result,
-            //   "columns":[
-            //   {"data": "user_name"},
-            //   {"data": "user_name"},
-            //   {"data": "user_name"},
-            //   {"data": "user_name"},
-            //   {"data": "user_name"},
-            //   {"data": "user_name"},
-            //   {"data": "user_name"},
-            //   ] 
-            // });
-    });  
-    });  
+  setTimeout(function () {
+              $('#show_book_listing').DataTable();
+  }, 2000);
 
+    });  
+    });  
 
 	book_listing = Meteor.subscribe("fetch_user_listing");
 	setTimeout(function () {
@@ -87,7 +72,7 @@ function fetch_data(){
 
     show_user_details(){
 
-    	var result = user_details.find({"user_email": {$ne: "admin@wm.com"}}).fetch();
+    	var result = user_details.find({"user_email": {$ne: "admin@wm.com"}},{sort: {created_at: -1} }).fetch();
     console.log('show result: ');
     console.log(result);
     return result;

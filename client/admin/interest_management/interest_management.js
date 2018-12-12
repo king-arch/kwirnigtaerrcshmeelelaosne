@@ -31,7 +31,9 @@ Template.interest_management_details.onRendered(function () {
 
     $.getScript("https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.19/js/jquery.dataTables.min.js",function(){
       $.getScript("https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css",function(){
-            $('#show_book_listing').DataTable();
+        setTimeout(function () {
+             $('#show_book_listing').DataTable();
+          }, 2000);
 
     });  
     });  

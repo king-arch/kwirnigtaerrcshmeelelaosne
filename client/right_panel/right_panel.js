@@ -71,7 +71,7 @@ Template.right_panel.helpers({
       show_campaign_listing(){
 
       Meteor.subscribe("campaign_details_all_list");
-      var result = campaign_details.find({approval_status: 1,campaign_end_date: {$gte: Date.now()} }).fetch();
+      var result = campaign_details.find({approval_status: 1,campaign_end_date: {$gte: Date.now()} },{sort: {created_at: -1}}).fetch();
       return result;
     },
 

@@ -1230,14 +1230,14 @@ viewMode: 1,
           $('#user_name').removeClass('emptyfield');
         }
         
-        if(user_contact == null || user_contact == "")
-        {
-          $('#user_contact').addClass('emptyfield').focus();
-          return false;
-        }
-        else{
-          $('#user_contact').removeClass('emptyfield');
-        }
+        // if(user_contact == null || user_contact == "")
+        // {
+        //   $('#user_contact').addClass('emptyfield').focus();
+        //   return false;
+        // }
+        // else{
+        //   $('#user_contact').removeClass('emptyfield');
+        // }
         
         if(user_location == null || user_location == "")
         {
@@ -1257,11 +1257,15 @@ viewMode: 1,
           $('#user_headline').removeClass('emptyfield');
         }
 
+        if(user_contact)
+        {
+
         if ( !(user_contact+"").match(/^\d+$/) ) {
            swal('phone number can only have digits');
            return false;
         }
-        // swal('above update');
+
+                // swal('above update');
 
         var check_len = user_contact.length;
         var user_contact = parseFloat(user_contact);
@@ -1271,6 +1275,9 @@ viewMode: 1,
           swal('Phone number should be of 10 degits only');
           return false;   
         }
+        
+      }
+
         var user_id = Session.get("userId");
 
         user_name = user_name.charAt(0).toUpperCase()+ user_name.slice(1);
