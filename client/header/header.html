@@ -22,18 +22,18 @@
   </div>
 
   <div class="header-content-wrapper">
-    <form class="search-bar w-search notification-list friend-requests">
+    <div class="search-bar w-search notification-list friend-requests" action="">
       <div class="form-group with-button">
-        <input class="form-control js-user-search" placeholder="Search here Books & authors ..." type="text">
-        <button>
+        <input class="form-control" placeholder="Search here Books & authors ..." type="text" id="search_text">
+        <button id="submit_search_text" >
          <img src="/img/search_gray.png" style="padding-top: 15px;">
         </button>
       </div>
-    </form>
+    </div>
 
      <a  href="javascript:void(0)" class="link-find-friend" id="go_to_feed" >Feed</a>
      <a  href="javascript:void(0)" class="link-find-friend" id="go_to_book" >Book</a>
-     <a  href="javascript:void(0)" class="link-find-friend" id="go_to_author" >Community</a>
+     <a  href="javascript:void(0)" class="link-find-friend" id="go_to_community" >Community</a>
      <a  href="javascript:void(0)" class="link-find-friend" id="go_to_blog" >Blog</a>
 
     <div class="control-block">      
@@ -173,11 +173,13 @@
               </div> -->
 
               <ul class="account-settings">
+
                 <li>
-                  <a href="#">
-                    <span>My Collections</span>
+                  <a href="javascript:void(0)" id="send_to_my_collections" >
+                      <span>My Collections</span>
                   </a>
                 </li>
+
                 <li>
                   <a href="#">
                     <span id="go_to_profile" >Profile</span>

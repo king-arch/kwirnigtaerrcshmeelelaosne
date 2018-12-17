@@ -18,15 +18,15 @@ import { Base64 } from 'meteor/ostrio:base64';
 
 var book_listing;
 
-Template.display_blog_listing.onDestroyed(function () {
+Template.display_blog_listing_admin.onDestroyed(function () {
   book_listing.stop();
 });
 
-Template.display_blog_listing.onCreated(function eventlistOnCreated(){
+Template.display_blog_listing_admin.onCreated(function eventlistOnCreated(){
 
 });
 
-Template.display_blog_listing.onRendered(function () {
+Template.display_blog_listing_admin.onRendered(function () {
     $.getScript("https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.19/js/jquery.dataTables.min.js",function(){
       // $.getScript("https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css",function(){
   setTimeout(function () {
@@ -45,7 +45,7 @@ Template.display_blog_listing.onRendered(function () {
 
 
 
- Template.display_blog_listing.helpers({
+ Template.display_blog_listing_admin.helpers({
 
     show_dates(){
       var array = new Array;
@@ -56,7 +56,6 @@ Template.display_blog_listing.onRendered(function () {
       console.log(array);
       return array;
     },
-
 
      check_interest_activation_status(user_status) {
         if (user_status == 1) {
@@ -85,23 +84,20 @@ Template.display_blog_listing.onRendered(function () {
 
     },
 
-
-
     fetch_user_info(){
       console.log('ok');
          var user_id = this.blog_author;  
          console.log(user_id);            
          Meteor.subscribe("user_info_based_on_id",user_id);
-         var result = user_details.find({user_id: user_id},{sort: {created_at: -1}}).fetch();
+         var result = user_details.find({user_id: user_id},{sort: {created_at: 1}}).fetch();
          console.log('show author details');
          console.log(result);
          return result;
     },
 
-
-
     show_blog_details(){
-console.log('https://en.wikipedia.org/wiki/Greece');
+    console.log('https://en.wikipedia.org/wiki/Greece');
+    
     var result = blog.find({}).fetch();
 
     console.log('show result: ');
@@ -113,10 +109,10 @@ console.log('https://en.wikipedia.org/wiki/Greece');
 });
 
 
-Template.display_blog_listing.events({
+Template.display_blog_listing_admin.events({
 
     "click #create_blog":function(){
-        Router.go("/create_blog");
+        Router.go("/create_blog_admin");
   },
 
     "click .edit_blog_details":function(){

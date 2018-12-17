@@ -1,0 +1,106 @@
+
+<template name="blog_edit_draft">
+
+ <body class="landing-page">
+ {{> headeroptions}}
+ {{> blog_edit_draft_detail}}
+</body>
+
+</template>
+
+<template name="blog_edit_draft_detail">
+
+    <div class="loading"  id="loading_div" ></div>
+  <div class="container">
+
+  <div class="row">
+    <div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+      <div class="ui-block">
+        <div class="crumina-module with-title-decoration ui-block-title">
+            <h5 class="heading-title">Create Blog</h5>
+          </div>
+        <div class="top-header top-header-favorit">
+          <div class="top-header-thumb">
+            <img src="img/top-header2.jpg" alt="nature">
+            
+          </div>
+          <div class="profile-section" style="padding: 0px;">
+           
+
+            <div class="control-block-button">
+            <div class="btn btn-control bg-primary more">
+                  <i class="fa fa-cog c-white"></i>
+
+                <ul class="more-dropdown more-with-triangle triangle-bottom-right">
+                  <li>
+                    <a href="edit_blog.html" data-toggle="modal" data-target="#update-header-photo">Update Banner</a>
+                  </li>
+                  
+                </ul>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col col-xl-12 m-auto col-lg-12 col-md-12 col-sm-12 col-12">
+
+      <div class="ui-block-content bg_white">
+
+ 
+
+        
+        <!-- Form Billing Details -->
+        
+        <form class="mb60">
+          
+        
+          <div class="row">        
+          <div class="col col-xl-6 col-lg-12 col-md-12 col-sm-12 col-12">  
+            <div class="form-group is-empty">
+                  <input class="form-control" type="text" placeholder="Blog Title">
+                <span class="material-input"></span></div>
+          </div>   
+           <div class="col col-xl-6 col-lg-12 col-md-12 col-sm-12 col-12">  
+            <div class="form-group date-time-picker is-focused">
+                <input type="text" name="datetimepicker" class=" c-grey" value="10/24/1984">
+                <span class="input-group-addon">
+                  <svg class="olymp-month-calendar-icon icon"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="svg-icons/sprites/icons.svg#olymp-month-calendar-icon"></use></svg>
+                </span>
+              </div>
+          </div>     
+            <div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">  
+              <div class="form-group label-floating">
+                  <label class="control-label c-grey">Description(Max 500 words) </label>
+                  <textarea class="form-control c-grey" placeholder=""></textarea>
+                <span class="material-input"></span>
+              </div>
+            </div>
+          </div>
+           <div class="row" style="text-align: right;">
+            <div class="col col-xl-12 col-lg-6 col-md-12 col-sm-12 col-12">  
+              <button class="btn btn-primary btn-md-2">Draft</button>
+              <button class="btn btn-primary btn-md-2">Preview</button>
+              <button class="btn btn-primary btn-md-2">Submit</button>
+             </div>
+        </div>
+          
+        </form>
+        
+        <!-- ... end Form Billing Details -->
+ 
+ </div>
+      </div>
+
+
+    </div>
+
+  </div>
+
+  </template>

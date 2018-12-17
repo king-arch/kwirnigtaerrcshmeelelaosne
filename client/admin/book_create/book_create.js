@@ -297,11 +297,21 @@ function click_events() {
 		var final_release_date = date_picker;
 		var book_id = 'book_id_' + Math.floor((Math.random() * 2465789) + 1);
 
+      if(document.getElementById('check_editors_pic').checked)
+      {
+      	// swal("editors pic selected.");
+      	var editors_pick_status = 1;
+      }else{
+      	// swal("editors pic not selected.");
+      	var editors_pick_status = 0;
+      }
+
+
 		$('#save_text').addClass('div_hide_class');
 	    $('#loader_gif').removeClass('div_hide_class');	
 		
 		Meteor.call('save_book_details', book_id, book_name, book_summary, book_catagries, author_name, author_description,
-		 amazon_link, book_cover, final_release_date,book_price, function (error, result) {
+		 amazon_link, book_cover, final_release_date,book_price,editors_pick_status, function (error, result) {
 
 			$('#loader_gif').addClass('div_hide_class');
 			$('#save_text').removeClass('div_hide_class');

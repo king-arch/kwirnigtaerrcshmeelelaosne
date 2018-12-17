@@ -57,6 +57,8 @@ admin_detailed = Meteor.subscribe("fetch_result_interest");
       var author_description = result[0].author_description;
       var amazon_link = result[0].amazon_link;
       var book_price = result[0].book_price;
+      
+      var editors_pick_status = result[0].editors_pick_status;
       var book_cover = result[0].book_cover;
       var campaign_id = result[0].campaign_id;
       var final_release_date = result[0].final_release_date;
@@ -354,12 +356,21 @@ function click_events() {
 					return false;
 		}
 
-		swal(
-			' book_name: '+book_name+' book_summary: '+book_summary+
-			' book_catagries: '+book_catagries+' author_name: '+author_name+
-			' author_description: '+author_description+' amazon_link: '+amazon_link+
-			' book_price: '+book_price+' book_cover: '+book_cover+' final_release_date: '+final_release_date
-			);
+		// swal(
+		// 	' book_name: '+book_name+' book_summary: '+book_summary+
+		// 	' book_catagries: '+book_catagries+' author_name: '+author_name+
+		// 	' author_description: '+author_description+' amazon_link: '+amazon_link+
+		// 	' book_price: '+book_price+' book_cover: '+book_cover+' final_release_date: '+final_release_date
+		// 	);
+
+      if(document.getElementById('check_editors_pic').checked)
+      {
+      	// swal("editors pic selected.");
+      	var editors_pick_status = 1;
+      }else{
+      	// swal("editors pic not selected.");
+      	var editors_pick_status = 0;
+      }
 
 		var final_release_date = date_picker;
 		var book_id = 'book_id_' + Math.floor((Math.random() * 2465789) + 1);
@@ -367,7 +378,7 @@ function click_events() {
 		var campaign_id = Session.get("campaign_id");
 		
 		Meteor.call('create_book_details_from_campaign', book_id,book_name, book_summary, book_catagries, author_name, author_description,
-		 amazon_link, book_cover, final_release_date,book_price,campaign_id, function (error, result) {
+		 amazon_link, book_cover, final_release_date,book_price,campaign_id,editors_pick_status, function (error, result) {
 
 			$('#loader_gif').addClass('div_hide_class');
 			$('#save_text').removeClass('div_hide_class');

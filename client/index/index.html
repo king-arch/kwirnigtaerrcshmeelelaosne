@@ -20,13 +20,13 @@
 
             <div class="form--login-logout">
                 <form class="form-inline">
-                  
 
-                    <div class="form-group md-form label-floating has-success " style="width: 200px;">
+                    <div class="form-group md-form label-floating" style="width: 200px;">
                         <label for="Email" class="control-label " data-success="right" data-error="wrong">Email</label>
 
                         <input id="login_email" required="required" class="form-control validate " placeholder="" type="text">
                     </div>
+
                     <div class="form-group md-form  label-floating is-empty with-button c-white" style="width: 200px;">
                         <label for="Email" class="control-label c-light-grey" data-success="right" data-error="wrong">Password</label>
 
@@ -85,14 +85,14 @@
                                 <div class="col-md-12">
                                     <h3 class="font-weight-bold pl-0 c-white" style="margin-bottom: 20px !important;"><strong>Join now</strong></h3>
 
-                                    <div class="form-group md-form  label-floating has-success">
+                                    <div class="form-group md-form  label-floating">
                                         <label for="Name" class="control-label c-light-grey" data-success="right" data-error="wrong">Full Name </label>
 
                                         <input id="signup_name" required="required" class="form-control validate c-white" placeholder="" type="text" maxlength="40" autocomplete="off" >
 
                                     </div>
 
-                                    <div class="form-group md-form label-floating has-success">
+                                    <div class="form-group md-form label-floating">
                                        <!-- <div class="form-group md-form label-floating has-success" id="show_response" > -->
                                         <label for="Email" class="control-label c-light-grey" data-success="right">Email</label>
 
@@ -401,8 +401,8 @@
     var email = $('#signup_email').val();
 
     if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
-      $('#show_response').addClass('label-floating has-success');
-    $('#show_response').removeClass('label-floating is-empty has-error');
+    //   $('#show_response').addClass('label-floating has-success');
+    // $('#show_response').removeClass('label-floating is-empty has-error');
       return (true);
     }
 
@@ -413,8 +413,8 @@
       dangerMode: true,
     });
 
-    $('#show_response').addClass('label-floating is-empty has-error');
-      $('#show_response').removeClass('label-floating has-success');
+    // $('#show_response').addClass('label-floating is-empty has-error');
+    //   $('#show_response').removeClass('label-floating has-success');
     return (false)
   }
 

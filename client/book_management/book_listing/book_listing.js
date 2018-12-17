@@ -12,12 +12,15 @@ import {
 import swal from 'sweetalert';
 import { campaign_details } from './../../../import/collections/insert.js';
 import { book_details } from './../../../import/collections/insert.js';
+import { book_collections } from './../../../import/collections/insert.js';
 import { Base64 } from 'meteor/ostrio:base64';
 
-var book_listing;
+var book_added_listing;
+var book_listing_all;
 
 Template.book_listing_detail.onDestroyed(function () {
-	book_listing.stop();
+	book_added_listing.stop();
+	book_listing_all.stop();
 });
 
 Template.book_listing_detail.onCreated(function eventlistOnCreated(){
@@ -35,8 +38,9 @@ Template.book_listing_detail.onRendered(function () {
     	        $('#show_book_listing').DataTable();
 			}, 2000);
     });  
-
-	book_listing = Meteor.subscribe("fetch_book_listing");
+    var logged_in_user = Session.get("userId");
+	book_added_listing = Meteor.subscribe("book_collections_all_with_user_id",logged_in_user);
+	book_listing_all = Meteor.subscribe("fetch_book_listing");
 
 	setTimeout(function () {
 		$('#loading_div').addClass("loader_visiblity_block");
@@ -89,6 +93,7 @@ $(document).ready(function() {
     	var limit = Session.get("set_book_listing_content_limit");
 
     	if(Session.get("filter_content") == 1){
+    		// swal("case 1");
 			var result = book_details.find({},{limit: limit,sort: {created_at: new_sort_order}}).fetch();
 		    var new_array = new Array();
 		    for(var i=0; i < result.length; i++){
@@ -98,7 +103,13 @@ $(document).ready(function() {
 			    }
 		    }
 		    result = new_array;
-    	}else{
+    	}else if(Session.get("filter_content") == 2){
+    		// swal("case 2");
+			var result = book_details.find({editors_pick_status: 1},{limit: limit,sort: {created_at: new_sort_order}}).fetch();
+    	}
+    	else{
+    		// swal("case 3");
+    		// swal("& limit "+limit+" & new_sort_order "+new_sort_order);
 			var result = book_details.find({},{limit: limit,sort: {created_at: new_sort_order}}).fetch();
     	}
 	    return result;
@@ -121,6 +132,17 @@ $(document).ready(function() {
 
     },
 
+    check_if_editors_pic(){	
+      
+      var result = this.editors_pick_status;
+      if(result){
+      	return true
+      }else{	
+      return false;
+      }
+
+    },
+
     check_book_name_length(){
 		var book_name = this.book_name;
 		if(book_name.length > 19){
@@ -134,7 +156,7 @@ $(document).ready(function() {
 
     book_name_trimmed(){
 		var book_name = this.book_name;
-		  console.log("case 1");
+		  // console.log("case 1");
 
 		  if(book_name.length > 27){
 		      return book_name.slice(0,27)+'...';
@@ -144,14 +166,16 @@ $(document).ready(function() {
     },
 
 
-    // newest_selected(){
+    check_if_book_already_added_to_my_collections(){
 
-		  // if(Session.get("filter_content") == 0){
-		  //     return false;
-		  // }else{
-		  //   return true;
-		  // }
-    // },
+       console.log(this.book_id);
+	   var result = book_collections.find({added_book_id: this.book_id, added_by: Session.get("userId") }).fetch();
+		  if(result[0]){
+		  		return true;
+		  }else{
+		  	return false;
+		  } 		
+},
 
 });
 
@@ -164,58 +188,32 @@ Template.book_listing_detail.events({
             window.location.href = url;
     },
 
-	"click .change_sort_by_status":function(){ 
-// alert('clicked');
-// alert(Session.get("new_sort_order"));
-		if(Session.get("new_sort_order") == -1){
-			// alert("case 1");
-	     $("#change_to_increasing_order_with_check").removeClass("loader_visiblity_block");
-	     $("#change_to_decreasing_order").removeClass("loader_visiblity_block");
+	"click #add_to_my_collections":function(){ 
+		// swal("here");
+		var logged_in_user = Session.get("userId");
+		var book_id = this.book_id;
+		var adding_status = 1;
+		var adding_id = 'adding_id_'+Math.floor((Math.random() * 2465789) + 1);
 
-	     $("#change_to_decreasing_order_with_check").addClass("loader_visiblity_block");
-	     $("#change_to_increasing_order").addClass("loader_visiblity_block");	 
-		}else{
-// alert("case 2");
-    	 $("#change_to_decreasing_order_with_check").removeClass("loader_visiblity_block");
-	     $("#change_to_increasing_order").removeClass("loader_visiblity_block");
+		Meteor.call('add_to_my_collections',logged_in_user,book_id,adding_status,adding_id,function(error,result){
+	      if(error){
+	          swal("Error");
+	      }else{
 
-	     $("#change_to_decreasing_order").addClass("loader_visiblity_block");
-	     $("#change_to_increasing_order_with_check").addClass("loader_visiblity_block");
-
-		}
-
-    },
-
-	"click .change_filter_by_status":function(){ 
-// alert('clicked');
-// alert(Session.get("filter_content"));
-		if(Session.get("filter_content") == 0){
-			// alert("case 1");
-	     $("#show_all_books").removeClass("loader_visiblity_block");
-	     $("#show_up_for_review_with_check").removeClass("loader_visiblity_block");
-
-	     $("#show_all_books_with_check").addClass("loader_visiblity_block");
-	     $("#show_up_for_review").addClass("loader_visiblity_block");
-	     	 
-		}else{
-// alert("case 2");
-		 $("#show_all_books_with_check").removeClass("loader_visiblity_block");
-	     $("#show_up_for_review").removeClass("loader_visiblity_block");
-
-	     $("#show_all_books").addClass("loader_visiblity_block");
-	     $("#show_up_for_review_with_check").addClass("loader_visiblity_block");
-
-		}
+	      }
+	    });  
 
     },
 
 	"click #change_to_increasing_order":function(){ 
+
       Session.set("new_sort_order",1);
        Session.set("filter_content",0);
        
     },
 
 	"click #change_to_decreasing_order":function(){ 
+
       Session.set("new_sort_order",-1);
       Session.set("filter_content",0);
       	 
@@ -230,67 +228,76 @@ Template.book_listing_detail.events({
 	"click #show_all_books":function(){ 
       Session.set("filter_content",0);
       Session.set("new_sort_order",-1);	
+    },
+
+	"click #editors_pick":function(){ 
+      Session.set("filter_content",2);
+      Session.set("new_sort_order",-1);
 
     },
 
-'click #id': function(){
-		var email = $('#email').val();
-		var password = $('#password').val();
 
-		if (email == '' || email == undefined) {
-			$('#email').addClass('empty_field').focus();
-			return false;
-		} else {
-			$('#email').removeClass('empty_field').blur();
+	"click .change_sort_by_status":function(){ 
+		
+// alert('clicked');
+// alert(Session.get("new_sort_order"));
+
+		if(Session.get("new_sort_order") == -1){
+			// alert("case 1");
+	     $("#change_to_decreasing_order_with_check").removeClass("loader_visiblity_block");
+	     $("#change_to_increasing_order").removeClass("loader_visiblity_block");
+
+	     $("#change_to_increasing_order_with_check").addClass("loader_visiblity_block");
+	     $("#change_to_decreasing_order").addClass("loader_visiblity_block");	 
+
+		}else if(Session.get("new_sort_order") == 1){
+// alert("case 2");
+    	 $("#change_to_increasing_order_with_check").removeClass("loader_visiblity_block");
+	     $("#change_to_decreasing_order").removeClass("loader_visiblity_block");
+
+	     $("#change_to_increasing_order").addClass("loader_visiblity_block");
+	     $("#change_to_decreasing_order_with_check").addClass("loader_visiblity_block");
+
+		}
+    },
+
+	"click .change_filter_by_status":function(){ 
+// alert('clicked');
+// alert(Session.get("filter_content"));
+		if(Session.get("filter_content") == 0){
+			// alert("case 0");
+	     $("#show_all_books_with_check").removeClass("loader_visiblity_block");
+	     $("#show_up_for_review").removeClass("loader_visiblity_block");
+	     $("#editors_pick").removeClass("loader_visiblity_block");
+
+	     $("#show_all_books").addClass("loader_visiblity_block");
+	     $("#show_up_for_review_with_check").addClass("loader_visiblity_block");
+	     $("#editors_pick_with_check").addClass("loader_visiblity_block");
+	     	 
+		}
+		else if(Session.get("filter_content") == 1){
+		// alert("case 1");
+		 $("#show_up_for_review_with_check").removeClass("loader_visiblity_block");
+	     $("#show_all_books").removeClass("loader_visiblity_block");
+	     $("#editors_pick").removeClass("loader_visiblity_block");
+
+	     $("#show_up_for_review").addClass("loader_visiblity_block");
+	     $("#show_all_books_with_check").addClass("loader_visiblity_block");
+	     $("#editors_pick_with_check").addClass("loader_visiblity_block");
+
 		}
 
-		if (password == '' || password == undefined) {
-			$('#password').addClass('empty_field').focus();
-			return false;
-		} else {
-			$('#password').removeClass('empty_field').blur();
+	     else if(Session.get("filter_content") == 2){
+			// alert("case 2");
+	     $("#show_all_books").removeClass("loader_visiblity_block");
+	     $("#show_up_for_review").removeClass("loader_visiblity_block");
+	     $("#editors_pick_with_check").removeClass("loader_visiblity_block");
+
+	     $("#editors_pick").addClass("loader_visiblity_block");
+	     $("#show_all_books_with_check").addClass("loader_visiblity_block");
+	     $("#show_up_for_review_with_check").addClass("loader_visiblity_block");
+	     	 
 		}
-
-		$('#loader_gif').removeClass('div_hide_class');
-		$('#save_text').addClass('div_hide_class');
-
-		// swal('email: '+email+'password: '+password);
-
-		Meteor.call('Check_admin_login_auth', email, password, function (error, result) {
-
-			$('#loader_gif').addClass('div_hide_class');
-			$('#save_text').removeClass('div_hide_class');
-
-			if (error) {
-				swal({
-					text: 'Some error occured!',
-					button: "ok",
-					icon: "warning",
-					dangerMode: true,
-				});
-
-			} else {
-				if (result) {
-
-					if (result.status == 0) {
-						swal({
-							text: result.msg,
-							button: "ok",
-							icon: "warning",
-							dangerMode: true,
-						});
-					}
-
-					if (result.login_type == 'admin') {
-						Session.setPersistent("active_user", result.active_user);
-						Session.setPersistent("active_user_type", result.login_type);
-						Router.go('/inside');
-
-					}
-				}
-			}
-		});
-
-},
+    },
 
 });

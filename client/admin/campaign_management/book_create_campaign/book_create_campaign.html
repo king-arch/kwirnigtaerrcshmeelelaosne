@@ -69,9 +69,18 @@
 
                             	<label class="control-label c-darkgray">Upload cover</label>
 								<input type="file" id="book_cover" accept="image/x-png,image/gif,image/jpeg" >
+
 								<input type="hidden" id="hidden_book_id" >
-				
+
+              <div class="checkbox clicked">
+                <label>
+                  <input type="checkbox" name="optionsCheckboxes" value="" id="check_editors_pic" class="make_interest_array" ><span class="checkbox-material"></span>
+                  Mark as Editor's Pick
+                </label>
+              </div>
+
 				<img src="{{book_cover}}" >
+
 <br>
 <br>
 						<button class="btn btn-primary btn-lg pull-right" id="add_book" >

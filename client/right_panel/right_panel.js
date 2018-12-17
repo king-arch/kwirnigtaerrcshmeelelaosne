@@ -149,7 +149,6 @@ Template.right_panel.helpers({
 
 Template.right_panel.events({
 
-
     "click .go_to_book_detail":function(){ 
       var book_id = Base64.encode(this.book_id);  
       var url = '/book_detail/'+book_id;
@@ -171,5 +170,21 @@ Template.right_panel.events({
             console.log(url);
             window.location.href = url;
     },  
+
+      'click .click_on_follow':function(){
+    // swal('here');
+    var follow_user_id = this.user_id; 
+    var logged_in_user = Session.get("userId");  
+    // swal('follow_user_id: '+follow_user_id+' logged_in_user: '+logged_in_user);
+
+      Meteor.call('follow_people',follow_user_id,logged_in_user,function(error,result){
+              if(error){
+                swal("Some error occure.");
+              }else{
+                console.log('successfully following ');
+              }
+          });
+  },
+
 
   });

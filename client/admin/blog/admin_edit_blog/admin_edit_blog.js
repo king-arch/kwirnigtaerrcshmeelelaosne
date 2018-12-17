@@ -5,7 +5,7 @@ import { Base64 } from 'meteor/ostrio:base64';
 import { Session } from 'meteor/session';
 import swal from 'sweetalert';
 
-   Template.edit_blog_details.onRendered(function(){
+   Template.edit_blog_adming_details.onRendered(function(){
 	// 	$.getScript("https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/pikaday.min.js",function(){
 	// 	    // swal("loaded: ");
 	// 	    var picker = new Pikaday({ field: document.getElementById('blog_publish_date'),minDate: new Date(), });
@@ -47,7 +47,7 @@ import swal from 'sweetalert';
 
   });
 
-Template.edit_blog_details.helpers({
+Template.edit_blog_adming_details.helpers({
 	frientlist:function()
 	{
 		var userid=Session.get('userId');
@@ -88,7 +88,7 @@ Template.edit_blog_details.helpers({
 
 });
 
-Template.edit_blog_details.events({
+Template.edit_blog_adming_details.events({
 
 	"change #blog_cover":function (e, template) {
 	    upload_cover_pic(e, template);
@@ -163,7 +163,7 @@ Template.edit_blog_details.events({
                 console.log("Some error occured.");
               }else{ 
                	console.log("blog sucessfully saved!");
-                window.location.href="/blog_listing";            
+                window.location.href="/blog_listing_admin";            
               }
           });	
 

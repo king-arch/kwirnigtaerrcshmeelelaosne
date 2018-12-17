@@ -1,0 +1,152 @@
+
+
+
+<template name="blog_create">
+
+ <body class="landing-page">
+ {{> headeroptions}}
+ {{> blog_create_detail}}
+  </body>
+  
+</template>
+
+<template name="blog_create_detail">
+
+    <div class="loading" id="loading_div" ></div>
+
+  <div class="container">
+
+  <div class="row">
+    <div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+      <div class="ui-block">
+        <div class="crumina-module with-title-decoration ui-block-title">
+            <h5 class="heading-title">Create Blog</h5>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col col-xl-12 m-auto col-lg-12 col-md-12 col-sm-12 col-12">
+
+      <div class="ui-block-content bg_white">          
+        
+          <div class="row">        
+          <div class="col col-xl-6 col-lg-12 col-md-12 col-sm-12 col-12">  
+            <div class="form-group is-empty">
+            <label class="change_label_font control-label  c-darkgray">Blog Title</label>
+                  <input class="form-control c-darkgray" type="text" placeholder="" id="blog_title" >
+                <span class="material-input"></span></div>
+          </div>   
+
+           <div class="col col-xl-6 col-lg-12 col-md-12 col-sm-12 col-12">  
+                                <label class="change_label_font control-label">Blog type</label>
+                                <select id="blog_type">
+                                    <option value="">--Blog type--</option>
+                                    <option value="Author">Author</option>
+                                    <option value="Book">Book</option>
+                                    <option value="Textual">Hindi</option>
+                                    <option value="Writing">Writing</option>
+                                </select>
+          </div> 
+
+
+            <div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">  
+
+                                <div id="promotion_discription_box">
+                                    <label class="change_label_font control-label  c-darkgray">Blog discription</label>
+
+                                    <textarea class="form-control  c-darkgray" type="text" placeholder="" id="blog_discription"></textarea>
+                                </div>
+            </div>
+          </div>
+
+
+        <div class="row" style="text-align: right;">
+            <label class="change_label_font control-label">Upload cover</label>
+            <input type="file" id="blog_cover" accept="image/x-png,image/gif,image/jpeg" >
+            <img src="{{book_cover}}" style="height:250px; width:250px;" >
+
+            <br>
+            <br>
+        </div>
+
+   <div class="row" style="text-align: right;">
+            <div class="col col-xl-12 col-lg-6 col-md-12 col-sm-12 col-12">  
+              <button class="btn btn-primary btn-md-2">Draft</button>
+              <button class="btn btn-primary btn-md-2">Preview</button>
+              <button class="btn btn-primary btn-md-2" id="submit_blog" >Submit</button>
+             </div>
+        </div>     
+  
+<!-- <div style="display: none ! important" > -->
+
+   <div class="row" style="text-align: right;">
+      <div class="col col-xl-12 col-lg-6 col-md-12 col-sm-12 col-12">  
+      <div class="col col-xl-12 col-lg-6 col-md-12 col-sm-12 col-12">        <a data-toggle="modal" data-target="#show_default_message" class="" style="display:none;" id="open_default_modal" > click me
+    </a>
+ </div>
+<!-- </div> -->
+
+  <div class="modal fade" new_post="ss" id="show_default_message" tabindex="-1" role="dialog" aria-labelledby="show_default_message" aria-hidden="true">
+
+  <div class="modal-dialog window-popup create-friend-group show_default_message" role="document">
+
+    <div class="modal-content">
+      <a href="#" class="close icon-close" data-dismiss="modal" aria-label="Close">
+        <svg class="olymp-close-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-close-icon"></use></svg>
+      </a>
+
+
+      <div class="modal-header">
+        <h6 class="title">Alert</h6>
+      </div>
+
+      
+
+      <div class="modal-body" style="padding: 0px;">
+      <p>
+1947 में अपनी स्वतंत्रता के बाद से, भारत ने ज्यादातर देशों के साथ सौहार्दपूर्ण संबंध बनाए रखा है। 1950 के दशक में, भारत ने दृढ़ता से अफ्रीका और एशिया में यूरोपीय कालोनियों की स्वतंत्रता का समर्थन किया और गुट निरपेक्ष आंदोलन में एक अग्रणी भूमिका निभाई। 1980 के दशक में भारत ने आमंत्रण पर दो पड़ोसी देशों में संक्षिप्त सैन्य हस्तक्षेप किया। मालदीव, श्रीलंका और अन्य देशों में ऑपरेशन कैक्टस में भारतीय शांति सेना को भेजा गया। हालाँकि, भारत के पड़ोसी देश पाकिस्तान के साथ एक तनावपूर्ण संबंध बने रहे और दोनों देशों में चार बार युध्द (1947, 1965, 1971 और 1999 में) हुए हैं। कश्मीर विवाद इन युद्धों के प्रमुख कारण था, सिवाय 1971 के, जो कि तत्कालीन पूर्वी पाकिस्तान में नागरिक अशांति के लिए किया गया था। 1962 के भारत-चीन युद्ध और पाकिस्तान के साथ 1965 के युद्ध के बाद भारत ने अपनी सैन्य और आर्थिक स्थिति का विकास करने का प्रयास किया। सोवियत संघ के साथ अच्छे संबंधों के कारण सन् 1960 के दशक से, सोवियत संघ भारत का सबसे बड़ा हथियार आपूर्तिकर्ता के रूप में उभरा।
+
+आज रूस के साथ सामरिक संबंधों को जारी रखने के अलावा, भारत विस्तृत इजरायल और फ्रांस के साथ रक्षा संबंध रखा है। हाल के वर्षों में, भारत में क्षेत्रीय सहयोग और विश्व व्यापार संगठन के लिए एक दक्षिण एशियाई एसोसिएशन में प्रभावशाली भूमिका निभाई है। १०,००० राष्ट्र सैन्य और पुलिस कर्मियों को चार महाद्वीपों भर में पैंतीस संयुक्त राष्ट्र शांति अभियानों में सेवा प्रदान की है। भारत भी विभिन्न बहुपक्षीय मंचों, खासकर पूर्वी एशिया शिखर बैठक और जी-८५ बैठक में एक सक्रिय भागीदार रहा है। आर्थिक क्षेत्र में भारत दक्षिण अमेरिका, अफ्रीका और एशिया के विकासशील देशों के साथ घनिष्ठ संबंध रखते है। अब भारत एक "पूर्व की ओर देखो नीति" में भी संयोग किया है। यह "आसियान" देशों के साथ अपनी भागीदारी को मजबूत बनाने के मुद्दों की एक विस्तृत श्रृंखला है जिसमे जापान और दक्षिण कोरिया ने भी मदद किया है। यह विशेष रूप से आर्थिक निवेश और क्षेत्रीय सुरक्षा का प्रयास है।
+
+</p>
+     </div>
+
+  
+    </div>
+  </div>
+</div>
+ 
+ </div>
+      </div>
+
+    </div>
+
+  </div>
+
+    </div>
+
+  </div>
+    <script type="text/javascript">
+        // $('#edit_blog_description').trumbowyg();
+        var trumbowyg = $('#blog_discription').trumbowyg({
+            btnsDef: {
+
+            },
+            btns: [
+                ['strong', 'em', 'del'],
+                ['superscript', 'subscript'],
+                //['link'],
+                // ['insertImage'],
+                ['justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull'],
+                ['orderedList'],
+                ['horizontalRule'],
+                ['removeformat'],
+                // ['fullscreen']
+            ],
+        });
+    </script>
+  </template>

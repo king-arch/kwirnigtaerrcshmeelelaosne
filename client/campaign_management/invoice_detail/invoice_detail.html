@@ -7,28 +7,554 @@
 <template name="invoice_detail_detail">
 
 <div class="header-spacer"></div>
-<section class="medium-padding60">
-
 <div class="container">
   <div class="row">
-    <div class="col col-xl-12 m-auto col-lg-12 col-md-12 col-sm-12 col-12">
-      <div class="ui-block-content bg_white border-4">
-        <!-- Form Billing Details -->
-        
-          <div class="crumina-module crumina-heading with-title-decoration">
-            <h5 class="heading-title">Invoice detail page</h5>
-          </div>
-        
-          <div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-       
-          </div>
- </div>
-
+    <div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+      <div class="ui-block responsive-flex">
+        <div class="ui-block-title">
+          <div class="h6 title">Invoice</div>
+        </div>
       </div>
-
-
     </div>
-
   </div>
-</section>
+</div>
+{{#each show_invoice_details}}
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+            <div class="card">
+                <div class="card-body p-0">
+                    
+                    <hr class="my-5">
+
+                    <div class="row pb-5 p-5">
+                        <div class="col-md-6">
+                            <img src="http://via.placeholder.com/400x90?text=logo">
+                        </div>
+
+                        <div class="col-md-6 text-right">
+                            <p class="font-weight-bold mb-4">Invoice No. 10</p>
+                            <p class="mb-1"><span class="text-muted">June: </span> 2018</p>
+                            <p class="mb-1"><span class="text-muted">Invoice Date: </span> {{invoice_date}}</p>
+                            <p class="mb-1"><span class="text-muted">To: </span> Utpal Mishra</p>
+                        </div>
+                    </div>
+
+                    <div class="row p-5">
+                        <div class="col-md-12">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th class="border-0 text-uppercase small font-weight-bold">S. No.</th>
+                                        <th class="border-0 text-uppercase small font-weight-bold">Title - Author </th>
+                                        <th class="border-0 text-uppercase small font-weight-bold">Publisher/Agent/Author</th>
+                                        <th class="border-0 text-uppercase small font-weight-bold">Campaign duration</th>
+                                       
+                                    </tr>
+                                </thead>
+{{#if equals select_package "15"}}
+                                <tbody>
+
+
+
+                                    <tr>
+                                        <td>1</td>
+                                        <td>T21 In Downs Lane</td>
+                                        <td>Write Place</td>
+                                        <td>{{select_package}} days</td>
+                                        
+                                    </tr>
+                                    <tr>
+                                        <td>S.No.</td>
+                                        <td>Blogger Campaign : Duration 15 days</td>
+                                        <td>&nbsp;</td>
+                                        <td>1st July - 15th July</td>
+                                       
+                                    </tr>
+                                    <tr>
+                                        <td>&nbsp;</td>
+                                        <td>Activity details</td>
+                                        <td>NO. of inserts / Time frame</td>
+                                        <td>Total</td>
+                                        
+                                    </tr>
+                                     <tr>
+                                        <td>1</td>
+                                        <td>Feature on writersmelon:</td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>                                        
+                                    </tr> 
+                                     <tr>
+                                        <td>1a.</td>
+                                        <td>Banner space for 15 days: </td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>                                        
+                                    </tr> 
+                                     <tr>
+                                        <td>  1b.</td>
+                                        <td>Author's corner feature on writersmelon:</td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>                                        
+                                    </tr> 
+                                     <tr>
+                                        <td>2</td>
+                                        <td>Online reviews :</td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>                                        
+                                    </tr> 
+                                     <tr>
+                                        <td>2a.</td>
+                                        <td>Blogger reviews (Excluding Writersmelon):</td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>                                       
+                                    </tr> 
+                                     <tr>
+                                        <td>2b.</td>
+                                        <td>Reviews on Ecommerce site (Flipkart Or Amazon): </td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>                                        
+                                    </tr> 
+                                     <tr>
+                                        <td>2c. </td>
+                                        <td>Reviews on Goodreads: </td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>                                        
+                                    </tr> 
+                                     <tr>
+                                        <td>3</td>
+                                        <td>Social Media posts :</td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>                                        
+                                    </tr> 
+                                     <tr>
+                                        <td>3a</td>
+                                        <td>Best lines from the book - Creatives ( Will be shared on:
+ </td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>                                        
+                                    </tr> 
+                                     <tr>
+                                        <td>3b</td>
+                                        <td>Link sharing of blogger reviews: </td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>                                        
+                                    </tr> 
+                                     <tr>
+                                        <td>3c</td>
+                                        <td>Twitter chat with the author / Contest /Giveaway: </td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>                                        
+                                    </tr> 
+                                </tbody>
+{{else if equals select_package "30"}}
+                                <tbody>
+
+
+
+                                    <tr>
+                                        <td>1</td>
+                                        <td>T21 In Downs Lane</td>
+                                        <td>Write Place</td>
+                                        <td>{{select_package}} days</td>
+                                        
+                                    </tr>
+                                    <tr>
+                                        <td>S.No.</td>
+                                        <td>Blogger Campaign : Duration 30 days</td>
+                                        <td>&nbsp;</td>
+                                        <td>1st July - 15th July</td>
+                                       
+                                    </tr>
+                                    <tr>
+                                        <td>&nbsp;</td>
+                                        <td>Activity details</td>
+                                        <td>NO. of inserts / Time frame</td>
+                                        <td>Total</td>
+                                        
+                                    </tr>
+                                     <tr>
+                                        <td>1</td>
+                                        <td>Feature on writersmelon:</td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>                                        
+                                    </tr> 
+                                     <tr>
+                                        <td>1a.</td>
+                                        <td>Banner space for 15 days: </td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>                                        
+                                    </tr> 
+                                     <tr>
+                                        <td>  1b.</td>
+                                        <td>Author's corner feature on writersmelon:</td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>                                        
+                                    </tr> 
+                                     <tr>
+                                        <td>2</td>
+                                        <td>Online reviews :</td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>                                        
+                                    </tr> 
+                                     <tr>
+                                        <td>2a.</td>
+                                        <td>Blogger reviews (Excluding Writersmelon):</td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>                                       
+                                    </tr> 
+                                     <tr>
+                                        <td>2b.</td>
+                                        <td>Reviews on Ecommerce site (Flipkart Or Amazon): </td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>                                        
+                                    </tr> 
+                                     <tr>
+                                        <td>2c. </td>
+                                        <td>Reviews on Goodreads: </td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>                                        
+                                    </tr> 
+                                     <tr>
+                                        <td>3</td>
+                                        <td>Social Media posts :</td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>                                        
+                                    </tr> 
+                                     <tr>
+                                        <td>3a</td>
+                                        <td>Best lines from the book - Creatives ( Will be shared on:
+ </td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>                                        
+                                    </tr> 
+                                     <tr>
+                                        <td>3b</td>
+                                        <td>Link sharing of blogger reviews: </td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>                                        
+                                    </tr> 
+                                     <tr>
+                                        <td>3c</td>
+                                        <td>Twitter chat with the author / Contest /Giveaway: </td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>                                        
+                                    </tr> 
+                                </tbody>
+{{else if equals select_package "45"}}
+                                <tbody>
+
+
+
+                                    <tr>
+                                        <td>1</td>
+                                        <td>T21 In Downs Lane</td>
+                                        <td>Write Place</td>
+                                        <td>{{select_package}} days</td>
+                                        
+                                    </tr>
+                                    <tr>
+                                        <td>S.No.</td>
+                                        <td>Blogger Campaign : Duration 45 days</td>
+                                        <td>&nbsp;</td>
+                                        <td>1st July - 15th July</td>
+                                       
+                                    </tr>
+                                    <tr>
+                                        <td>&nbsp;</td>
+                                        <td>Activity details</td>
+                                        <td>NO. of inserts / Time frame</td>
+                                        <td>Total</td>
+                                        
+                                    </tr>
+                                     <tr>
+                                        <td>1</td>
+                                        <td>Feature on writersmelon:</td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>                                        
+                                    </tr> 
+                                     <tr>
+                                        <td>1a.</td>
+                                        <td>Banner space for 15 days: </td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>                                        
+                                    </tr> 
+                                     <tr>
+                                        <td>  1b.</td>
+                                        <td>Author's corner feature on writersmelon:</td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>                                        
+                                    </tr> 
+                                     <tr>
+                                        <td>2</td>
+                                        <td>Online reviews :</td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>                                        
+                                    </tr> 
+                                     <tr>
+                                        <td>2a.</td>
+                                        <td>Blogger reviews (Excluding Writersmelon):</td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>                                       
+                                    </tr> 
+                                     <tr>
+                                        <td>2b.</td>
+                                        <td>Reviews on Ecommerce site (Flipkart Or Amazon): </td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>                                        
+                                    </tr> 
+                                     <tr>
+                                        <td>2c. </td>
+                                        <td>Reviews on Goodreads: </td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>                                        
+                                    </tr> 
+                                     <tr>
+                                        <td>3</td>
+                                        <td>Social Media posts :</td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>                                        
+                                    </tr> 
+                                     <tr>
+                                        <td>3a</td>
+                                        <td>Best lines from the book - Creatives ( Will be shared on:
+ </td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>                                        
+                                    </tr> 
+                                     <tr>
+                                        <td>3b</td>
+                                        <td>Link sharing of blogger reviews: </td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>                                        
+                                    </tr> 
+                                     <tr>
+                                        <td>3c</td>
+                                        <td>Twitter chat with the author / Contest /Giveaway: </td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>                                        
+                                    </tr> 
+                                </tbody>
+{{else if equals select_package "60"}}
+                                <tbody>
+
+
+
+                                    <tr>
+                                        <td>1</td>
+                                        <td>T21 In Downs Lane</td>
+                                        <td>Write Place</td>
+                                        <td>{{select_package}} days</td>
+                                        
+                                    </tr>
+                                    <tr>
+                                        <td>S.No.</td>
+                                        <td>Blogger Campaign : Duration 60 days</td>
+                                        <td>&nbsp;</td>
+                                        <td>1st July - 15th July</td>
+                                       
+                                    </tr>
+                                    <tr>
+                                        <td>&nbsp;</td>
+                                        <td>Activity details</td>
+                                        <td>NO. of inserts / Time frame</td>
+                                        <td>Total</td>
+                                        
+                                    </tr>
+                                     <tr>
+                                        <td>1</td>
+                                        <td>Feature on writersmelon:</td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>                                        
+                                    </tr> 
+                                     <tr>
+                                        <td>1a.</td>
+                                        <td>Banner space for 15 days: </td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>                                        
+                                    </tr> 
+                                     <tr>
+                                        <td>  1b.</td>
+                                        <td>Author's corner feature on writersmelon:</td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>                                        
+                                    </tr> 
+                                     <tr>
+                                        <td>2</td>
+                                        <td>Online reviews :</td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>                                        
+                                    </tr> 
+                                     <tr>
+                                        <td>2a.</td>
+                                        <td>Blogger reviews (Excluding Writersmelon):</td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>                                       
+                                    </tr> 
+                                     <tr>
+                                        <td>2b.</td>
+                                        <td>Reviews on Ecommerce site (Flipkart Or Amazon): </td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>                                        
+                                    </tr> 
+                                     <tr>
+                                        <td>2c. </td>
+                                        <td>Reviews on Goodreads: </td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>                                        
+                                    </tr> 
+                                     <tr>
+                                        <td>3</td>
+                                        <td>Social Media posts :</td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>                                        
+                                    </tr> 
+                                     <tr>
+                                        <td>3a</td>
+                                        <td>Best lines from the book - Creatives ( Will be shared on:
+ </td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>                                        
+                                    </tr> 
+                                     <tr>
+                                        <td>3b</td>
+                                        <td>Link sharing of blogger reviews: </td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>                                        
+                                    </tr> 
+                                     <tr>
+                                        <td>3c</td>
+                                        <td>Twitter chat with the author / Contest /Giveaway: </td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>                                        
+                                    </tr> 
+                                </tbody>
+{{else if equals select_package "90"}}
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>T21 In Downs Lane</td>
+                                        <td>Write Place</td>
+                                        <td>{{select_package}} days</td>
+                                        
+                                    </tr>
+                                    <tr>
+                                        <td>S.No.</td>
+                                        <td>Blogger Campaign </td>
+                                        <td>&nbsp;</td>
+                                        <td>1st July - 15th July</td>
+                                       
+                                    </tr>
+                                    <tr>
+                                        <td>&nbsp;</td>
+                                        <td>Activity details</td>
+                                        <td>NO. of inserts / Time frame</td>
+                                        <td>Total</td>
+                                        
+                                    </tr>
+                                     <tr>
+                                        <td>1</td>
+                                        <td>Feature on writersmelon:</td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>                                        
+                                    </tr> 
+                                     <tr>
+                                        <td>1a.</td>
+                                        <td>Banner space </td>
+                                        <td>yes</td>
+                                        <td>&nbsp;</td>                                        
+                                    </tr> 
+                                     <tr>
+                                        <td>  1b.</td>
+                                        <td>Author's corner feature on writersmelon:</td>
+                                        <td>yes</td>
+                                        <td>&nbsp;</td>                                        
+                                    </tr> 
+                                     <tr>
+                                        <td>2</td>
+                                        <td>Online reviews :</td>
+                                        <td>30</td>
+                                        <td>&nbsp;</td>                                        
+                                    </tr> 
+                                     <tr>
+                                        <td>2a.</td>
+                                        <td>Blogger reviews (Excluding Writersmelon):</td>
+                                        <td>10</td>
+                                        <td>&nbsp;</td>                                       
+                                    </tr> 
+                                     <tr>
+                                        <td>2b.</td>
+                                        <td>Reviews on Ecommerce site (Flipkart Or Amazon): </td>
+                                        <td>10</td>
+                                        <td>&nbsp;</td>                                        
+                                    </tr> 
+                                     <tr>
+                                        <td>2c. </td>
+                                        <td>Reviews on Goodreads: </td>
+                                        <td>10</td>
+                                        <td>&nbsp;</td>                                        
+                                    </tr> 
+                                     <tr>
+                                        <td>3</td>
+                                        <td>Social Media posts :</td>
+                                        <td>yes</td>
+                                        <td>&nbsp;</td>                                        
+                                    </tr> 
+                                     <tr>
+                                        <td>3a</td>
+                                        <td>Best lines from the book - Creatives ( Will be shared on:
+ </td>
+                                        <td>yes</td>
+                                        <td>&nbsp;</td>                                        
+                                    </tr> 
+                                     <tr>
+                                        <td>3b</td>
+                                        <td>Link sharing of blogger reviews: </td>
+                                        <td>yes</td>
+                                        <td>&nbsp;</td>                                        
+                                    </tr> 
+                                     <tr>
+                                        <td>3c</td>
+                                        <td>Twitter chat with the author / Contest /Giveaway: </td>
+                                        <td>yes</td>
+                                        <td>&nbsp;</td>                                        
+                                    </tr> 
+                                </tbody>
+{{/if}}
+                            </table>
+                        </div>
+                    </div>
+                    <div class="row p-5">
+                    <p><strong>Payment Terms :</strong> 100% Advance Before <u>1st July 2018</u></p> <div class="clearfix"></div>
+                    <p> <strong>Terms & Conditions </strong> </p>
+<p>1. We donot gurantee positive review & this program needs to be looked as a marketing campaign to generate online visibility of the book.</p>
+<p>2.We do a screening process of the bloggers who show interest to review the book , basis the available sign ups only the final list is decided</p>
+<p>3. We do 2 - 3 follow ups for the review, in case of back out or late submission, we replace with a different blogger</p>
+<p>4. A completion report with promised number of links will be sent by us,/</p>
+<p> 5 The cost of review copies and their courier to be borne by the client - Author or Publishers * Will be charged at actuals.</p>
+<p>6. The review copies in this case will be in paperback format.</p>
+</div>
+                    <div class="d-flex flex-row-reverse bg-dark text-white p-4">
+                        <div class="py-3 px-5 text-right">
+                            <div class="mb-2">Grand Total</div>
+                            <div class="h2 font-weight-light">$234,234</div>
+                        </div>
+
+                        <div class="py-3 px-5 text-right">
+                            <div class="mb-2">Discount</div>
+                            <div class="h2 font-weight-light">10%</div>
+                        </div>
+
+                        <div class="py-3 px-5 text-right">
+                            <div class="mb-2">Sub - Total amount</div>
+                            <div class="h2 font-weight-light">$32,432</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>  
+
+  
+  </div>
+</div>
+{{/each}}
 </template>

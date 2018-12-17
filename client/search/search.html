@@ -1,0 +1,247 @@
+
+<template name="search_listing">
+ <body class="landing-page">
+ {{> headeroptions}}
+ {{> display_search_listing}}
+ </body>
+</template>
+
+<template name="display_search_listing">
+
+    <div class="loading"  id="loading_div" ></div>
+
+      <div class="container">
+         <div class="row">
+
+            <div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+
+               <ul class="nav nav-tabs bg-white width-100 text-center set-center search-tab" style="margin:0 auto" role="tablist">
+                 <li class="nav-item width-20 padding-0-20">
+                     <a class="" >Showing result for "{{show_search_strings}}"
+                     </a>
+                  </li>
+                 
+                  <li class="nav-item width-20 padding-0-20">
+                     <a class="nav-link active" data-toggle="tab" href="#book" role="tab" aria-expanded="false">Books
+                     </a>
+                  </li>
+                 
+                  <li class="nav-item width-20 padding-0-20">
+                     <a class="nav-link" data-toggle="tab" href="#author" role="tab" aria-expanded="false">Community
+                     </a>
+                  </li>
+                 
+                  <li class="nav-item width-20 padding-0-20">
+                     <a class="nav-link" data-toggle="tab" href="#blogs" role="tab" aria-expanded="false">Blogs
+                     </a>
+                  </li>
+               </ul>
+               <!-- Nav tabs end-->
+            </div>
+
+         </div>
+      </div>
+      <section class="blog-post-wrap medium-padding20">
+         <div class="container">
+            <div class="tab-content padding-top-20">
+               <!-- book Start -->
+               <div class="tab-pane active  " id="book" role="tabpanel" aria-expanded="true">
+                  <div class="row sorting-container" id="posts-grid-1" data-layout="masonry">
+
+  {{#each show_books_listing}}    
+      <div class="col col-xl-3 col-lg-3 col-md-6 col-sm-12  sorting-item community">
+        <div class="ui-block">
+          <!-- Post -->
+          <article class="hentry blog-post blog-post-v2">
+            
+            <div class="post-thumb">
+              <a href="javascript:void(0)" class="go_to_book_detail"><img src="{{book_cover}}" alt="photo"></a>
+
+{{#if check_if_up_for_review}}
+                 <div class="top-right">UP FOR REVIEW</div>
+{{/if}} 
+
+{{#if check_if_editors_pic}}
+                 <div class="top_left_editors_pick">
+                    Editor's pick
+                 </div>
+{{/if}} 
+
+            </div>
+
+            <div class="post-content">
+              <a href="javascript:void(0)" class="post-category bg-blue-light go_to_book_detail">{{book_catagries}}</a>
+
+            {{#if check_book_name_length}}
+                  <a href="javascript:void(0)" class="h4 post-title c-darkgray" >{{book_name}} </a><br>
+            {{else}}
+                  <a href="javascript:void(0)" class="h4 post-title c-darkgray">{{book_name_trimmed}} </a>
+            {{/if}}
+
+              <div class="post__author author vcard inline-items">
+                <!-- <img src="img/avatar83-sm.jpg" alt="author"> -->
+
+                <div class="author-date not-uppercase">
+          
+                  <a class="h6 post__author-name fn" href="authors-listing.html">{{author_name}}</a>
+
+                  <div class="post__date">
+                    <time class="published c-grey" datetime="2017-03-24T18:18">
+                      {{calculate_time_difference_ago created_at}}
+                    </time>
+                  </div>
+
+                </div>
+
+          
+              </div>
+
+{{#if check_if_book_already_added_to_my_collections}}
+    <a href="javascript:void(0)" class="post-category bg-blue-light">Added to My collections</a>
+{{else}}
+      <div class="ui-block responsive-flex1200 bg_trans margin-bottom-0 c-darkgray">
+        <div class="ui-block-title pad_0">
+           <span style="padding-top: 10px;">Sort by </span><div class="more">  <i class="fa fa-angle-down three_dots_listing_page_angle"></i>
+                <ul class="more-dropdown">
+                      <li id="add_to_my_collections" class="change_sort_by_status c-darkgray" >
+                        <a href="javascript:void(0)" class="c-darkgray" > Add to my collections </a>
+                      </li>
+                </ul>
+              </div>         
+        </div>
+      </div>
+{{/if}}
+
+            </div>
+          </article>
+
+        </div>
+      </div>
+  {{/each}}
+
+                  </div>
+                  <a id="load-more-button" href="#" class="btn btn-control btn-more " data-load-link="items-to-load.html" data-container="newsfeed-items-grid">
+                  <i class="fa fa-spinner fa-spin loader"></i>
+                  </a>
+               </div>
+               <!-- book End -->
+        
+               <!-- People Start -->
+               <div class="tab-pane" id="author" role="tabpanel" aria-expanded="false">
+                  <div class="row">
+
+   {{#each fetch_user_info_listing}}             
+            <div class="col col-lg-3 col-md-6 col-sm-12 col-12">
+               <div class="ui-block">
+                  <div class="friend-item">
+                     <div class="friend-header-thumb">
+                        <img src="{{user_cover_pic}}" alt="friend" class="view_profile" >
+                     </div>
+                     <div class="friend-item-content text-center">
+
+                        <div class="friend-avatar">
+                           <div class="author-thumb">
+                              <img src="{{user_profile_pic}}" alt="author" class="view_profile" >
+                           </div>
+                           <div class="author-content">
+                              <a href="#" class="h5 author-name view_profile">{{user_name_to_follow}}</a>
+                              <div class="country">{{user_headline_trimmed}}</div>
+                           </div>
+                        </div>            
+
+                        <div class="swiper-container">
+                           <div class="swiper-wrapper">
+                              <div class="swiper-slide">
+                                 <div class="friend-count" data-swiper-parallax="-500">
+
+                                 </div>
+                                 <div class="control-block-button" data-swiper-parallax="-100">
+{{#if check_if_following}}
+    <a class="btn btn-sm bg-breez click_on_unfollow" id={{user_id}} > Unfollow</a>
+ {{else}}
+    <a class="btn btn-sm bg-breez click_on_follow" id={{user_id}} > Follow</a>
+ {{/if}}
+
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>   
+            
+    {{/each}}
+
+                  </div>
+                  <a id="load-more-button" href="#" class="btn btn-control btn-more " data-load-link="items-to-load.html" data-container="newsfeed-items-grid">
+                  <i class="fa fa-spinner fa-spin loader"></i>
+                  </a>
+               </div>
+               <!-- People End -->
+               <!-- Blogs Start -->
+               <div class="tab-pane" id="blogs" role="tabpanel" aria-expanded="false">
+                  <div class="row">
+
+{{#each show_blog_listing}}
+      <div class="col col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
+        <div class="ui-block">
+
+          
+          <!-- Post -->
+          
+          <article class="hentry blog-post">
+          
+            <div class="post-thumb">
+              <img src="{{blog_cover}}" alt="photo" class="go_to_blog_detail" >
+            </div>
+          
+            <div class="post-content">
+              <a href="#" class="post-category bg-blue-light">{{blog_type}}</a>
+              <a href="#" class="h4 post-title go_to_blog_detail">{{blog_title}}</a>
+
+              <!-- <p>{{blog_discription}}</p> -->
+          
+              <div class="author-date">
+                by
+          {{#each fetch_user_info}}   
+                <a class="h6 post__author-name fn" href="#">{{user_name}}</a>
+                <div class="post__date">
+                  <time class="published" datetime="2017-03-24T18:18">
+                    {{calculate_time_difference_ago ../created_at}}
+                  </time>
+                </div>
+          {{/each}}
+                
+              </div>
+          
+              <div class="post-additional-info inline-items">
+               <div class="comments-shared">
+                  <a href="#" class="post-add-icon inline-items">
+                    <img src="img/comment_gray.png">
+                    <span>0</span>
+                  </a>
+                </div>
+          
+              </div>
+            </div>
+          
+          </article>
+          
+          <!-- ... end Post -->
+        </div>
+      </div>
+{{/each}}
+
+                  </div>
+                  <a id="load-more-button" href="#" class="btn btn-control btn-more " data-load-link="items-to-load.html" data-container="newsfeed-items-grid">
+                  <i class="fa fa-spinner fa-spin loader"></i>
+                  </a>
+               </div>
+               <!-- Blogs Start -->
+          
+            </div>
+         </div>
+      </section>
+      <!-- JS Scripts -->
+   </template>

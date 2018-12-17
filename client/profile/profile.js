@@ -978,20 +978,7 @@ Template.profile_content.events({
             console.log(url);  
             window.location.href = url;  
     },   
-      
-  'click .click_on_follow':function(){    
-    // swal('here');    
-    var follow_user_id = this.user_id;    
-    var logged_in_user = Session.get("userId");      
-        
-      Meteor.call('follow_people',follow_user_id,logged_in_user,function(error,result){    
-              if(error){    
-                swal("Some error occure.");     
-              }else{    
-                console.log('successfully following ');   
-              }     
-          });     
-  },   
+
 
   'click .click_on_unfollow':function(){
     // swal('here');

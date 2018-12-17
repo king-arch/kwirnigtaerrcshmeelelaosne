@@ -1,0 +1,279 @@
+
+<template name="blog_detail">
+ <body class="landing-page">
+ {{> headeroptions}}
+ {{> display_blog_detail}}
+ </body>
+</template>
+
+<template name="display_blog_detail">
+
+    <div class="loading"  id="loading_div" ></div>
+{{#each show_blog_details}}
+<div class="container">
+  <div class="row">
+    <div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+      <div class="ui-block">
+        <div class="top-header top-header-favorit">
+          <div class="top-header-thumb">
+            <img src="{{blog_cover}}" alt="nature">
+            
+          </div>
+          <div class="profile-section" style="padding: 0px;">
+           
+
+            <div class="control-block-button">
+            <div class="btn btn-control bg-primary more">
+                  <i class="fa fa-cog c-white"></i>
+
+                <ul class="more-dropdown more-with-triangle triangle-bottom-right">
+                  <li>
+                    <a href="edit_blog.html" data-toggle="modal" data-target="#update-header-photo">Edit Blog</a>
+                  </li>
+                  
+                </ul>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container mb60 ">
+  <div class="row">
+    <div class="col col-xl-12 m-auto col-lg-12 col-md-12 col-sm-12 col-12">
+      <div class="ui-block ui-block-title">
+
+        
+        <!-- Single Post -->
+        
+        <article class="hentry blog-post single-post single-post-v2">
+
+          
+          <a href="#" class="post-category bg-blue-light">{{blog_type}}</a>
+          <h2 class="h1 post-title">{{blog_title}}</h2>
+
+          <div class="single-post-additional inline-items">
+            <div class="post__author author vcard inline-items">
+              <img alt="author" src="/img/top-header2.jpg" class="avatar">
+              <div class="author-date not-uppercase">
+                <a class="h6 post__author-name fn" href="#">{{blog_author}}</a>
+                <div class="author_prof">
+                  Author
+                </div>
+              </div>
+            </div>
+            <div class="post-date-wrap inline-items">
+              <svg class="olymp-calendar-icon">
+                <use xlink:href="icons/icons.svg#olymp-calendar-icon"></use>
+              </svg>
+              <div class="post-date">
+                <a class="h6 date" href="#">2 Months Ago</a>
+                <span>Date</span>
+              </div>
+            </div>
+            <div class="post-comments-wrap inline-items">
+              <svg class="olymp-comments-post-icon">
+                <use xlink:href="icons/icons.svg#olymp-comments-post-icon"></use>
+              </svg>
+              <div class="post-comments">
+                <a class="h6 comments" href="#">14</a>
+                <span>Comments</span>
+              </div>
+            </div>
+          </div>
+
+        
+          <div class="post-content-wrap">
+            <div class="post-content" id="blog_discription" >
+            {{temp_data blog_description}}</div>
+          </div>
+        </article>
+        <!-- ... end Single Post -->
+      </div>
+
+      <div class="ui-block-title ui-block crumina-module crumina-heading with-title-decoration">
+        <h5 class="heading-title">Comments (14)</h5>
+      </div>
+
+      <!-- Comments -->
+      
+      <ul class="comments-list style-3 bg_white">
+        <li class="comment-item">
+          <div class="post__author-thumb">
+            <img src="img/avatar1.jpg" alt="author">
+          </div>
+      
+          <div class="comments-content">
+            <div class="post__author author vcard">
+      
+              <div class="author-date">
+                <a class="h6 post__author-name fn" href="#">Nicholas Grissom</a>
+                <div class="post__date">
+                  <time class="published" datetime="2004-07-24T18:18">
+                    27 mins ago
+                  </time>
+                </div>
+              </div>
+      
+            </div>
+      
+            <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium der doloremque laudantium.</p>
+      
+            <a href="#" class="reply">Reply</a>
+            <a href="#" class="report">Report</a>
+          </div>
+      
+        </li>
+        <li class="comment-item">
+          <div class="post__author-thumb">
+            <img src="img/avatar2.jpg" alt="author">
+          </div>
+      
+          <div class="comments-content">
+            <div class="post__author author vcard">
+      
+              <div class="author-date">
+                <a class="h6 post__author-name fn" href="#">Marina Valentine</a>
+                <div class="post__date">
+                  <time class="published" datetime="2004-07-24T18:18">
+                    4 hours ago
+                  </time>
+                </div>
+              </div>
+      
+            </div>
+      
+            <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia
+              consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Sed ut perspiciatis
+              unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem
+              aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae
+              dicta sunt explicabo.
+            </p>
+      
+            <a href="#" class="reply">Reply</a>
+            <a href="#" class="report">Report</a>
+          </div>
+        </li>
+        <li class="comment-item has-children">
+          <div class="post__author-thumb">
+            <img src="img/avatar2.jpg" alt="author">
+          </div>
+      
+          <div class="comments-content">
+            <div class="post__author author vcard">
+      
+              <div class="author-date">
+                <a class="h6 post__author-name fn" href="#">Mathilda Brinker</a>
+                <div class="post__date">
+                  <time class="published" datetime="2004-07-24T18:18">
+                    12 hours ago
+                  </time>
+                </div>
+              </div>
+      
+            </div>
+      
+            <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
+              laudantium, totame rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae.
+            </p>
+      
+            <a href="#" class="reply">Reply</a>
+            <a href="#" class="report">Report</a>
+          </div>
+      
+          <ul class="children">
+            <li class="comment-item">
+              <div class="post__author-thumb">
+                <img src="img/avatar4.jpg" alt="author">
+              </div>
+      
+              <div class="comments-content">
+                <div class="post__author author vcard">
+      
+                  <div class="author-date">
+                    <a class="h6 post__author-name fn" href="#">James Spiegel</a>
+                    <div class="post__date">
+                      <time class="published" datetime="2004-07-24T18:18">
+                        20 hours ago
+                      </time>
+                    </div>
+                  </div>
+      
+                </div>
+      
+                <p>Consectadipisicing elit, sed do eiusmod por incidid ut labore et dolore magna aliqua.
+                  Ut enim ad minim veniam, quis nostrud lorem exercitation ullamco laboris.
+                </p>
+      
+                <a href="#" class="reply">Reply</a>
+                <a href="#" class="report">Report</a>
+              </div>
+            </li>
+          </ul>
+        </li>
+        <li class="comment-item">
+          <div class="post__author-thumb">
+            <img src="img/avatar5.jpg" alt="author">
+          </div>
+      
+          <div class="comments-content">
+            <div class="post__author author vcard">
+      
+              <div class="author-date">
+                <a class="h6 post__author-name fn" href="#">Elaine Dreyfuss</a>
+                <div class="post__date">
+                  <time class="published" datetime="2004-07-24T18:18">
+                    38 mins ago
+                  </time>
+                </div>
+              </div>
+      
+            </div>
+      
+            <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium der doloremque laudantium.</p>
+      
+            <a href="#" class="reply">Reply</a>
+            <a href="#" class="report">Report</a>
+          </div>
+        </li>
+        <li class="text-center"><a href="#" class="btn btn-purple btn-md mb60 mt60 ">Load More Comments...</a></li>
+      </ul>
+      <div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 bg_white">
+
+      
+      <!-- Comment Form -->
+      
+      <form class="col col-xl-8">
+        <div class="crumina-module crumina-heading with-title-decoration">
+          <h5 class="heading-title">Write a Comment</h5>
+        </div>
+        <div class="row">      
+          <div class="col col-12 col-xl-12 col-lg-12 col-md-12 col-sm-12">
+            <div class="form-group label-floating is-empty">
+              <label class="control-label c-grey">Your Comment</label>
+              <textarea class="form-control c-grey" placeholder=""></textarea>
+            </div>
+            <a href="#" class="btn btn-primary btn-lg full-width">Post your Comment</a>
+          </div>
+        </div>
+      </form>
+      
+      <!-- ... end Comment Form -->
+      
+      
+
+    </div>
+      <!-- ... end Comments -->
+    </div>
+
+  
+
+    
+  </div>
+</div>
+{{/each}}
+</template>

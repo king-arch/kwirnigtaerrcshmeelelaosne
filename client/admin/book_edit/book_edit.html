@@ -462,12 +462,19 @@ border: 0px;
                             <label class="control-label c-darkgray">Release date</label>
 								<input type="text" id="date_picker"   />
 
+				
+              <div class="checkbox clicked">
+                <label>
+                  <input type="checkbox" value="" id="check_editors_pic" ><span class="checkbox-material"></span>
+                  Mark as Editor's Pick
+                </label>
+              </div>
 
                             	<label class="control-label c-darkgray">Upload cover</label>
 								<input type="file" id="book_cover" accept="image/x-png,image/gif,image/jpeg" >
 								<input type="hidden" id="hidden_book_id" >
-				
-				<img src="{{book_cover}}" >
+
+			<img src="{{book_cover}}" >
 <br>
 <br>
 						<button class="btn btn-primary btn-lg pull-right" id="add_book" >
@@ -486,6 +493,8 @@ border: 0px;
 
 	</div>
 </div>
+
+
 
 </body>	
 

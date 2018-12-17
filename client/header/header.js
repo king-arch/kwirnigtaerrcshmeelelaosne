@@ -9,6 +9,7 @@ import { Base64 } from 'meteor/ostrio:base64';
 
 import { Session } from 'meteor/session';
 import {  Email } from 'meteor/email';
+import swal from 'sweetalert';
 
 var user_info_list_all;
 var user_info_based_on_email;
@@ -58,29 +59,6 @@ var str2 = str.split("-").join(" ");
                                                             $ne: 0 
                                                         }
                                         }).fetch();
-
-    // var result = advertisement.find({
-    //                                     $and: [
-    //                                     { promotion_type: 'Textual' },
-    //                                     { promotion_status: 
-    //                                                     {
-    //                                                         $ne: 'Inactive' 
-    //                                                     }
-    //                                     },
-    //                                     { promotion_start_date: 
-    //                                                     {
-    //                                                         $lte: str2
-    //                                                     }
-    //                                     },
-    //                                     { promotion_end_date: 
-    //                                                     {
-    //                                                         $gte : str2
-    //                                                     }
-    //                                      }
-    //                                 ] }).fetch();
-
-    console.log( 'display tickers');
-    console.log(result);
     return result;
   },
 
@@ -98,15 +76,12 @@ var str2 = str.split("-").join(" ");
           var logged_in_user = Session.get("userId");
           Meteor.subscribe("fetch_user_details",logged_in_user);
           var result = user_details.find({"user_id": logged_in_user}).fetch();
-        console.log('show result: ');
-        console.log(result);
+        // console.log('show result: ');
+        // console.log(result);
         return result;
     },
 
 });
-
-
-
 
 Template.headeroptions.events({
 
@@ -115,18 +90,25 @@ Template.headeroptions.events({
     Router.go("/feed");
    },
 
+  'click #send_to_my_collections':function(){
+    // window.location.href="/feed";
+    Router.go("/my_collections");
+   },
+
   'click #sign_out':function(){
+
     Session.clear("userId");
-            var url = '/';
-            window.location.href = url;
+    var url = '/';
+    window.location.href = url;
+
    },
 
   'click #go_to_book':function(){
     Router.go("/book_listing");
    },
 
-  'click #go_to_author':function(){
-    Router.go("/author");
+  'click #go_to_community':function(){
+    Router.go("/community");
    },
 
   'click #go_to_blog':function(){
@@ -135,6 +117,15 @@ Template.headeroptions.events({
 
   'click #go_to_profile':function(){
             var url = '/profile';
+            window.location.href = url;
+   },
+
+  'click #submit_search_text':function(){
+            // alert("submitted");
+            var search_text = $("#search_text").val();
+            
+            // alert(search_text);
+            var url = '/search/'+search_text;
             window.location.href = url;
    },
 

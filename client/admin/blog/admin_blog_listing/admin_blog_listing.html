@@ -1,10 +1,10 @@
-<template name="blog_listing">
+<template name="blog_listing_admin">
  <body>
-  {{> display_blog_listing}}
+  {{> display_blog_listing_admin}}
 </body>
 </template>
 
-<template name="display_blog_listing"> 
+<template name="display_blog_listing_admin"> 
 
 <div class="loading"  id="loading_div" ></div>
 {{>left_panel_admin}}
@@ -25,9 +25,8 @@
       </div>
     </div>
   </div>
-
-
 </div>
+
   <div class="row">
     <div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
       <div class="ui-block">
@@ -54,7 +53,7 @@
             </th>
 
             <th class="topics">
-              Publising Date
+              Publishing Date
             </th>
         
             <th class="posts">
@@ -106,25 +105,25 @@
             <td class="freshness">
               <div class="author-freshness">
 
-      {{#if equals blog_approval_status 0 }}
+      {{#if equals blog_status 0 }}
         <button  id="{{blog_id}}" class="disapproval_status_blog btn btn-danger" value="0">  
-          Reject Approve
+          Reject request
         </button> 
 
         <button  id="{{blog_id}}" class="approval_status_blog btn  btn-success" value="1"  >
-          Approved
+          Approve request
         </button> 
 
-      {{else if equals blog_approval_status 1 }}
-        <button  id="{{blog_id}}" class="disapproval_status_blog btn btn-danger" value="0">  
+      {{else if equals blog_status 2 }}
+      <button  id="{{blog_id}}" class="approval_status_blog btn  btn-success" value="1"  >
+          Approve
+        </button>        
+
+      {{else if equals blog_status 1 }}
+ <button  id="{{blog_id}}" class="disapproval_status_blog btn btn-danger" value="0">  
           Reject
         </button> 
 
-      {{else}}
-
-        <button  id="{{blog_id}}" class="approval_status_blog btn  btn-success" value="1"  >
-          Approved
-        </button> 
 
       {{/if}}  
 

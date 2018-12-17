@@ -47,8 +47,8 @@ Template.display_promotion_listing.onRendered(function () {
       for(var i=1;i<32;i++){
         array.push({'index': i});
       }
-      console.log('here we are: ');
-      console.log(array);
+      // console.log('here we are: ');
+      // console.log(array);
       return array;
     },
 
@@ -56,8 +56,8 @@ Template.display_promotion_listing.onRendered(function () {
 console.log('https://en.wikipedia.org/wiki/Greece');
     var result = promotion.find({}).fetch();
 
-    console.log('show result: ');
-    console.log(result);
+    // console.log('show result: ');
+    // console.log(result);
     return result;
 
 },

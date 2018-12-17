@@ -179,8 +179,7 @@ Template.feed_design.helpers({
          Meteor.subscribe('fetch_feed_content');
          var check_limit = Session.get("set_feed_content_limit");
 
-
-            var result = feed.find({post_by: {$in: all_friends_array },post_status: 1},{sort: {created_at: -1},limit: check_limit}).fetch();
+         var result = feed.find({post_by: {$in: all_friends_array },post_status: 1},{sort: {created_at: -1},limit: check_limit}).fetch();
          // if(Session.get("load_lvl1_comments") == 0){
          //    var result = feed.find({post_by: {$in: all_friends_array },post_status: 1},{sort: {created_at: -1}}).fetch();
          
@@ -824,18 +823,12 @@ Template.feed_design.events({
     },  
 
   'click .view_profile':function(){      
-      // swal('captured');  
-                  // console.log('captured');  
-                  // console.log("this.post_by");  
-            // console.log(JSON.stringify(this));
-            // console.log(this.user_id);
             var user_id = Base64.encode(this.user_id);  
             if(this.user_id == Session.get("userId")){
               var url = '/profile';
             }else{
               var url = '/view_profile/'+user_id;
             }
-            // console.log(url);
             window.location.href = url;
     },  
 

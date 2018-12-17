@@ -1,0 +1,185 @@
+﻿
+<template name="community">
+ {{> headeroptions}}
+ {{> community_detail}}
+</template>
+
+<template name="community_detail">
+
+<!--   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+   -->  <div class="loading"  id="loading_div" ></div>
+<div class="container">
+	<div class="row">
+		<div class="col col-xl-12 order-xl-2 col-lg-12 order-lg-1 col-md-12 col-sm-12 col-12">
+			<div class="ui-block responsive-flex">
+				<div class="ui-block-title">
+					<div class="h6 title">Community</div>
+						<div class="form-group with-button">
+							<input class="form-control c-darkgray search_input_fied" type="text" placeholder="Search People..." id="search_text" >
+							<button class="search_button submit_search_text" id="submit_search_text" >
+								<i class="fa fa-search submit_search_text" id="submit_search_text"></i>
+							</button>
+						</div>
+				</div>
+			</div>
+
+	<div class="row">
+		<div class="col col-xl-12 order-xl-2 col-lg-12 order-lg-1 col-md-12 col-sm-12 col-12">
+			<div class="ui-block responsive-flex">
+				  <ul class="nav nav-tabs nav-justified adjust_community_tab size_comunity_tabs">
+				    <li class="padding_on_li active_community_tab" id="follower_tab" ><a href="javascript:void(0)" >Follower</a></li>
+				    <li class="padding_on_li inactive_community_tab" id="following_tab" ><a href="javascript:void(0)">Following</a></li>
+				  </ul>
+			</div>
+    	</div>
+    </div>
+
+<div class="" id="div_for_following" >
+			<div class="row">
+{{#each display_following_list}}						
+						
+	{{#each fetch_user_info_following}}					
+				<div class="col col-lg-3 col-md-6 col-sm-12 col-12">
+					<div class="ui-block">
+						<div class="friend-item">
+							<div class="friend-header-thumb">
+								<img src="{{user_cover_pic}}" alt="friend">
+							</div>
+							<div class="friend-item-content text-center">
+
+								<div class="friend-avatar">
+									<div class="author-thumb">
+										<img src="{{user_profile_pic}}" alt="author">
+									</div>
+									<div class="author-content">
+										<a href="#" class="h5 author-name">{{user_name_to_follow}}</a>
+										<div class="country">{{user_headline_trimmed}}</div>
+									</div>
+								</div>				
+
+								<div class="swiper-container">
+									<div class="swiper-wrapper">
+										<div class="swiper-slide">
+											<div class="friend-count" data-swiper-parallax="-500">
+<!-- 												<a href="#" class="friend-count-item">
+													<div class="h6">49</div>
+													<div class="title">Books</div>
+																			<a href="#" class="friend-count-item">
+													<div class="h6">49</div>
+													<div class="title">Books</div>
+												</a>
+												<a href="#" class="friend-count-item">
+													<div class="h6">132</div>
+													<div class="title">Followers</div>
+												</a>					</a>
+												<a href="#" class="friend-count-item">
+													<div class="h6">132</div>
+													<div class="title">Followers</div>
+												</a> -->
+											</div>
+											<div class="control-block-button" data-swiper-parallax="-100">
+
+<a class="btn btn-sm bg-breez click_on_unfollow" id={{user_id}} > Unfollow</a>
+
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>	
+				
+    {{/each}}
+
+{{else}}
+	<p>Looks like you dont have any friend</p>	
+    {{/each}}
+
+			</div>
+
+		</div>
+
+<div class="loader_visiblity_block" id="div_for_follower" >
+			<div class="row">
+{{#each display_follower_list}}						
+
+	{{#each fetch_user_info_follower}}		
+				<div class="col col-lg-3 col-md-6 col-sm-12 col-12">
+					<div class="ui-block">
+						
+						<div class="friend-item">			
+							<div class="friend-header-thumb">
+								<img src="{{user_cover_pic}}" alt="friend">
+							</div>
+							<div class="friend-item-content text-center">
+								<div class="friend-avatar">
+									<div class="author-thumb">
+										<img src="{{user_profile_pic}}" alt="author">
+									</div>
+									<div class="author-content">
+										<a href="#" class="h5 author-name">{{user_name_to_follow}}</a>
+										<div class="country">{{user_location}}</div>
+									</div>
+								</div>				
+
+								<div class="swiper-container">
+									<div class="swiper-wrapper">
+										<div class="swiper-slide">
+											<div class="friend-count" data-swiper-parallax="-500">
+<!-- 												<a href="#" class="friend-count-item">
+													<div class="h6">49</div>
+													<div class="title">Books</div>
+																			<a href="#" class="friend-count-item">
+													<div class="h6">49</div>
+													<div class="title">Books</div>
+												</a>
+												<a href="#" class="friend-count-item">
+													<div class="h6">132</div>
+													<div class="title">Followers</div>
+												</a>					</a>
+												<a href="#" class="friend-count-item">
+													<div class="h6">132</div>
+													<div class="title">Followers</div>
+												</a> -->
+											</div>
+											<div class="control-block-button" data-swiper-parallax="-100">
+{{#if check_if_following}}
+    <a class="btn btn-sm bg-breez click_on_unfollow" id={{user_id}} > Unfollow</a>
+ {{else}}
+ 	 <a class="btn btn-sm bg-breez click_on_follow" id={{user_id}} > Follow</a>
+ {{/if}}
+
+											</div>
+										</div>
+									</div>
+								</div>
+
+							</div>
+						</div>
+					</div>
+				</div>	
+    {{/each}}
+	
+    {{/each}}
+
+			</div>
+
+		</div>
+
+	</div>
+
+		
+  </div>
+</div>
+
+
+
+
+<a class="back-to-top" href="#">
+	<img src="/svg-icons/back-to-top.svg" alt="arrow" class="back-icon">
+</a>
+</template>

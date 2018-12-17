@@ -16,7 +16,9 @@ import { content } from './../import/collections/insert.js';
 import { campaign_details } from './../import/collections/insert.js';
 import { notification_details } from './../import/collections/insert.js';
 import { review_details } from './../import/collections/insert.js';
+
 import { general_records } from './../import/collections/insert.js';
+import { book_collections } from './../import/collections/insert.js';
 
 import { Base64 } from 'meteor/ostrio:base64';
 import urlMetadata from 'url-metadata';
@@ -49,6 +51,21 @@ import urlMetadata from 'url-metadata';
       return book_details.find({});
     });
 
+     Meteor.publish('fetch_book_listing_with_search_string', function(search_text) {
+      const query = new RegExp(search_text,'i');  
+      return book_details.find({book_name: query});
+    });
+
+     Meteor.publish('user_info_listing_with_search_string', function(search_text) {
+      const query = new RegExp(search_text,'i');  
+      return user_details.find({user_name: query});
+    });
+
+     Meteor.publish('fetch_blog_content_with_search_string', function(search_text) {
+      const query = new RegExp(search_text,'i');  
+      return blog.find({blog_title: query});
+    });
+
      Meteor.publish('fetch_book_detail_with_id', function(book_id) {
       return book_details.find({book_id: book_id});
     });
@@ -69,6 +86,11 @@ import urlMetadata from 'url-metadata';
       return  following_list.find({});
     });
 
+     Meteor.publish('get_follow_status_with_ids', function(user_id,logged_in_user) {
+      return  following_list.find({following: user_id,follower: logged_in_user,current_follow_status: 1});
+          
+    });
+
      Meteor.publish('fetch_result_interest', function() {
       return  interest_list.find({});
     });
@@ -87,6 +109,10 @@ import urlMetadata from 'url-metadata';
 
      Meteor.publish('fetch_blog_content', function() {
       return  blog.find({});
+    });
+
+     Meteor.publish('fetch_blog_content_with_blog_id', function(blog_id) {
+      return blog.find({ "blog_id": blog_id });
     });
 
      Meteor.publish('show_content_data', function() {
@@ -148,6 +174,10 @@ import urlMetadata from 'url-metadata';
 
      Meteor.publish('review_details_all_pending', function(campaign_id) {
       return  review_details.find({});
+    });
+
+     Meteor.publish('book_collections_all_with_user_id', function(user_id) {
+      return  book_collections.find({added_by: user_id});
     });
 
 
@@ -318,7 +348,7 @@ Meteor.methods({
   },
 
   save_book_details(book_id, book_name, book_summary, book_catagries, author_name,
-   author_description,amazon_link, book_cover, final_release_date,book_price){
+   author_description,amazon_link, book_cover, final_release_date,book_price,editors_pick_status){
 
    var result = book_details.insert({
       "book_id": book_id,
@@ -329,6 +359,7 @@ Meteor.methods({
       "author_description": author_description,
       "amazon_link": amazon_link,
       "book_cover": book_cover,
+      "editors_pick_status": editors_pick_status,
       "book_price": book_price,
       "final_release_date": final_release_date,
       "created_at": Date.now(),
@@ -418,7 +449,7 @@ var check_if_email_exist = user_details.find({user_email: signup_email}).fetch()
 
 
   edit_save_book_details(book_id, book_name, book_summary, book_catagries, author_name,
-   author_description,amazon_link, book_cover, final_release_date,book_price){
+   author_description,amazon_link, book_cover, final_release_date,book_price,editors_pick_status){
     var check_if_exist = book_details.find({ book_id: book_id }).fetch();
 if(check_if_exist[0]){
    var result = book_details.update({
@@ -435,6 +466,7 @@ if(check_if_exist[0]){
       "amazon_link": amazon_link,
       "book_cover": book_cover,
       "book_price": book_price,
+      "editors_pick_status": editors_pick_status,
       "final_release_date": final_release_date,
       "updated_at": Date.now(),
       }
@@ -578,7 +610,7 @@ if(check_if_exist[0]){
         _id: newUser[0]._id,
       }, {
         $set: {
-          blog_approval_status: status,
+          blog_status: status,
           updated_at: Date.now,
         }
       });
@@ -1325,7 +1357,7 @@ var result = promotion.insert({
 return result;
     },       
                                    
-       save_blog: function(blog_title,blog_type,blog_discription,logged_in_user )
+       save_blog: function(blog_title,blog_type,blog_discription,logged_in_user,blog_cover)
       {
         var blog_id = 'blog_id_'+Math.floor((Math.random() * 2465789) + 1);
         // console.log('i am here');
@@ -1336,13 +1368,34 @@ var result = blog.insert({
                       blog_discription: blog_discription,
 
                       blog_status: 1,
-                      blog_approval_status: 1,
+                      // blog_approval_status: 1,
+                      blog_cover: blog_cover,
                       blog_author: logged_in_user,
 
                       created_at: Date.now(),
                 });
                 return result;
-              },
+      },
+                                   
+       submit_blog: function(blog_title,blog_type,blog_discription,logged_in_user,blog_cover)
+      {                      
+        var blog_id = 'blog_id_'+Math.floor((Math.random() * 2465789) + 1);
+        // console.log('i am here');
+var result = blog.insert({
+                      blog_id: blog_id,
+                      blog_title: blog_title,
+                      blog_type: blog_type,
+                      blog_discription: blog_discription,
+
+                      blog_status: 0,
+                      blog_cover: blog_cover,
+                      // blog_approval_status: 0,
+                      blog_author: logged_in_user,
+
+                      created_at: Date.now(),
+                });
+                return result;
+      },
                                    
        update_blog: function(blog_id,blog_cover,blog_title,blog_type,blog_discription,logged_in_user )
       {
@@ -1362,7 +1415,7 @@ console.log(blog_cover+blog_id+blog_title+blog_type+blog_discription+logged_in_u
                       blog_cover: blog_cover,
 
                       blog_status: 1,
-                      blog_approval_status: 1,
+                      // blog_approval_status: 1,
                       blog_author: logged_in_user,
 
                       updated_at: Date.now(),
@@ -1978,6 +2031,7 @@ console.log(select_package+book_name+book_summary+author_name+author_description
                       final_payment: final_payment,
                       book_catagries: book_catagries,
                       approval_status: 1,
+                      payment_status: 1,
 
                       status_changed_by: logged_in_user,
 
@@ -2014,6 +2068,7 @@ console.log(select_package+book_name+book_summary+author_name+author_description
                       book_price: book_price,
                       book_cover: book_cover,
                       final_payment: final_payment,
+                      payment_status: 1,
                       book_catagries: book_catagries,
                       approval_status: 0,
                       created_at: Date.now()
@@ -2023,7 +2078,7 @@ console.log(select_package+book_name+book_summary+author_name+author_description
 
 
   create_book_details_from_campaign(book_id, book_name, book_summary, book_catagries, author_name,
-   author_description,amazon_link, book_cover, final_release_date,book_price,campaign_id){
+   author_description,amazon_link, book_cover, final_release_date,book_price,campaign_id,editors_pick_status){
 
 
    var result = book_details.insert({
@@ -2036,6 +2091,7 @@ console.log(select_package+book_name+book_summary+author_name+author_description
       "amazon_link": amazon_link,
       "book_cover": book_cover,
       "book_price": book_price,
+      "editors_pick_status": editors_pick_status,
       "campaign_id": campaign_id,
       "final_release_date": final_release_date,
       "created_at": Date.now(),
@@ -2251,7 +2307,6 @@ if(check_status4[0]){
       "review_text": review_text,
       "approval_status": 0,
 
-
       "good_reads_link": good_reads_link,
       "personal_blog_link": personal_blog_link,
       "amazon_link": amazon_link,
@@ -2292,6 +2347,34 @@ if(check_status4[0]){
                       "review_text": review_text,
                       "update_at": Date.now(),
                     }
+            });
+      return result;
+}
+
+  },
+
+ add_to_my_collections(logged_in_user,book_id,adding_status,adding_id){
+   console.log(logged_in_user +' & '+book_id+' & '+adding_status+' & '+adding_id);
+   var check_if_already_added =  book_collections.find({"added_book_id": book_id,added_by: logged_in_user}).fetch();
+
+if(check_if_already_added[0]){
+
+          var result =  book_collections.update({
+              _id: check_if_already_added[0]._id,
+            },{
+              $set: {
+                      "adding_status": adding_status,
+                      "update_at": Date.now(),
+                    }
+            });
+      return result;
+}else{
+            var result =  book_collections.insert({
+                      "adding_id": adding_id,
+                      "added_book_id": book_id,
+                      "added_by": logged_in_user,
+                      "adding_status": adding_status,
+                      "created_at": Date.now(),
             });
       return result;
 }

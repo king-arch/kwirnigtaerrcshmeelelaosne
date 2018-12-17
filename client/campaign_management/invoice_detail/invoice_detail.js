@@ -18,10 +18,10 @@ import { book_details } from './../../../import/collections/insert.js';
 import { notification_details } from './../../../import/collections/insert.js';
 import { Base64 } from 'meteor/ostrio:base64';
 
-var book_listing;
+var campaign_detail_subscribe;
 
 Template.invoice_detail_detail.onDestroyed(function () {
-  book_listing.stop();
+  campaign_detail_subscribe.stop();
 });
 
 Template.invoice_detail_detail.onCreated(function eventlistOnCreated(){
@@ -35,6 +35,8 @@ Template.invoice_detail_detail.onRendered(function () {
   url = new_url[new_url.length - 1];
   var campaign_id = Base64.decode(url);
   Session.set("get_campaign_id",campaign_id);
+
+      campaign_detail_subscribe = Meteor.subscribe("campaign_details_with_id",campaign_id);
 
       setTimeout(function () {
         $('#loading_div').addClass('loader_visiblity_block');
@@ -72,6 +74,29 @@ Template.invoice_detail_detail.onRendered(function () {
       return result;
       }
 
+    },
+
+    show_invoice_details(){
+      Meteor.subscribe("review_details_with_campaign_id",this.campaign_id);
+      console.log("show_detail here");
+      var get_campaign_id = Session.get("get_campaign_id");
+
+      var result = campaign_details.find({
+                        campaign_id: get_campaign_id
+                      }).fetch();
+
+      if(result[0]){
+      return result;
+      }
+    },
+
+     invoice_date(){
+      var new_year  = moment(this.created_at).format('YYYY');
+      var new_month  = moment(this.created_at).format('MMM');
+      var new_day  = moment(this.created_at).format('DD');
+      // console.log("new_year: "+ new_year +" new_month: "+ new_month + " new_day: "+ new_day );
+      var new_date = new_month + ' '+new_day+' , '+new_year;
+      return new_date;
     },
 
 });

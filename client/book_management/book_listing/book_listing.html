@@ -1,7 +1,11 @@
 
 <template name="book_listing">
+
+ <body class="landing-page">
  {{> headeroptions}}
  {{> book_listing_detail}}
+ </body>
+
 </template>
 
 
@@ -12,14 +16,15 @@
 
 <div class="container">
   <div class="row">
-     <div class="col col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12">
-
+    
+    <div class="col col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12">
       <div class="ui-block responsive-flex1200 bg_trans">
         <div class="ui-block-title pad_0">
           <h1 style="font-size: 30px; font-weight: 500;">Book</h1>
         </div>
       </div>
-    </div>  
+    </div> 
+
     <div class="col col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12 ">
 
       <div class="ui-block responsive-flex1200 bg_trans margin-bottom-0">
@@ -47,11 +52,19 @@
                       </li>
 
                       <li id="show_up_for_review" class="change_filter_by_status" >
-                        <a href="javascript:void(0)">Date > Up for review</a>
+                        <a href="javascript:void(0)"> Up for review</a>
                       </li>
 
                       <li id="show_up_for_review_with_check" class="change_filter_by_status loader_visiblity_block" >
                         <a href="javascript:void(0)" ><i class="fa fa-check">  </i> &nbsp;&nbsp;  Up for review</a>
+                      </li>
+
+                      <li id="editors_pick" class="change_filter_by_status" >
+                        <a href="javascript:void(0)"> Editor's Pic</a>
+                      </li>
+
+                      <li id="editors_pick_with_check" class="change_filter_by_status loader_visiblity_block" >
+                        <a href="javascript:void(0)" ><i class="fa fa-check">  </i> &nbsp;&nbsp;  Editor's Pic</a>
                       </li>
 
 
@@ -60,11 +73,12 @@
         </div>
       </div>
     </div>
+    
     <div class="col col-xl-1 col-lg-2 col-md-12 col-sm-12 col-12">
 
       <div class="ui-block responsive-flex1200 bg_trans margin-bottom-0 ">
         <div class="ui-block-title pad_0">
-           <span style="padding-top: 10px;">Sort by </span><div class="more">  <i class="fa fa-ellipsis-h three_dots_listing_page"></i>
+           <span style="padding-top: 10px;">Sort by </span><div class="more">  <i class="fa fa-angle-down three_dots_listing_page_angle"></i>
                 <ul class="more-dropdown">
                   
                       <li id="change_to_decreasing_order" class="change_sort_by_status loader_visiblity_block" >
@@ -128,9 +142,17 @@
             
             <div class="post-thumb">
               <a href="javascript:void(0)" class="go_to_book_detail"><img src="{{book_cover}}" alt="photo"></a>
+
 {{#if check_if_up_for_review}}
                  <div class="top-right">UP FOR REVIEW</div>
-{{/if}}
+{{/if}} 
+
+{{#if check_if_editors_pic}}
+                 <div class="top_left_editors_pick">
+                    Editor's pick
+                 </div>
+{{/if}} 
+
             </div>
 
             <div class="post-content">
@@ -144,8 +166,6 @@
 
               <div class="post__author author vcard inline-items">
                 <!-- <img src="img/avatar83-sm.jpg" alt="author"> -->
-
-               <h4> Author |</h4> 
 
                 <div class="author-date not-uppercase">
           
@@ -170,6 +190,24 @@
           
                
               </div>
+
+{{#if check_if_book_already_added_to_my_collections}}
+
+    <a href="javascript:void(0)" class="post-category bg-blue-light">Added to My collections</a>
+{{else}}
+      <div class="ui-block responsive-flex1200 bg_trans margin-bottom-0 c-darkgray">
+        <div class="ui-block-title pad_0">
+           <span style="padding-top: 10px;">Sort by </span><div class="more">  <i class="fa fa-angle-down three_dots_listing_page_angle"></i>
+                <ul class="more-dropdown">
+                      <li id="add_to_my_collections" class="change_sort_by_status c-darkgray" >
+                        <a href="javascript:void(0)" class="c-darkgray" > Add to my collections </a>
+                      </li>
+                </ul>
+              </div>         
+        </div>
+      </div>
+{{/if}}
+
             </div>
           </article>
 

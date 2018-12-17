@@ -1,0 +1,141 @@
+
+<template name="blog_listing">
+
+ <body class="landing-page">
+ {{> headeroptions}}
+ {{> blog_listing_detail}}
+</body>
+
+</template>
+
+<template name="blog_listing_detail">
+
+    <div class="loading"  id="loading_div" ></div>
+
+<div class="container">
+  <div class="row">
+     <div class="col col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+
+      <div class="ui-block responsive-flex1200 bg_trans">
+        <div class="ui-block-title">
+          <h1>Blogs</h1>
+        </div>
+      </div>
+    </div>  
+    <div class="col col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12">
+
+      <div class="ui-block responsive-flex1200 bg_trans">
+        <div class="ui-block-title">
+
+           
+          <div class="w-select text-left">
+            <!-- <div class="title">Filter By:</div> -->
+            <fieldset class="form-group">
+              <select class="selectpicker form-control">
+                <option value="NU">Filter</option>
+                <option value="NU">My Blogs</option>
+                <option value="NU">Draft</option> 
+                <option value="NU">Published by me</option> 
+                <option value="NU">Coming soon</option>
+              </select>
+            </fieldset>
+          </div>    
+
+           
+        </div>
+      </div>
+    </div>
+
+    <div class="col col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12">
+
+      <div class="ui-block responsive-flex1200 bg_trans">
+        <div class="ui-block-title">
+
+         
+          <div class="w-select text-left">
+            <!-- <div class="title">Filter By:</div> -->
+            <fieldset class="form-group">
+              <select class="selectpicker form-control">
+                <option value="NU"><i class="fa fa-check"></i>Sort by</option>
+                              <option value="NU"><i class="fa fa-check"></i>Date > Newest First</option>
+                              <option value="NU">Date > Oldest First</option>
+                              <option value="NU">Title > Oldest First</option>
+                              <option value="NU">Title > Oldest First</option> </select>
+            </fieldset>
+          </div>          
+        </div>
+      </div>
+    </div>
+
+    <div class="col col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12">
+
+      <div class="ui-block responsive-flex1200 bg_trans ">
+        
+        <div class="ui-block-title">            
+           <a href="javascript:void(0)" class="btn btn-primary btn-md-2" id="create_blog" >
+            <i class="fa fa-plus"></i> Create Blog</a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="blog-post-wrap medium-padding20">
+  <div class="container">
+    <div class="row">
+{{#each show_blog_listing}}
+      <div class="col col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
+        <div class="ui-block">
+
+          
+          <!-- Post -->
+          
+          <article class="hentry blog-post">
+          
+            <div class="post-thumb">
+              <img src="{{blog_cover}}" alt="photo" class="go_to_blog_detail" >
+            </div>
+          
+            <div class="post-content">
+              <a href="#" class="post-category bg-blue-light">{{blog_type}}</a>
+              <a href="#" class="h4 post-title go_to_blog_detail">{{blog_title}}</a>
+
+              <!-- <p>{{blog_discription}}</p> -->
+          
+              <div class="author-date">
+                by
+          {{#each fetch_user_info}}   
+                <a class="h6 post__author-name fn" href="#">{{user_name}}</a>
+                <div class="post__date">
+                  <time class="published" datetime="2017-03-24T18:18">
+                    {{calculate_time_difference_ago ../created_at}}
+                  </time>
+                </div>
+          {{/each}}
+                
+              </div>
+          
+              <div class="post-additional-info inline-items">
+               <div class="comments-shared">
+                  <a href="#" class="post-add-icon inline-items">
+                    <img src="img/comment_gray.png">
+                    <span>0</span>
+                  </a>
+                </div>
+          
+              </div>
+            </div>
+          
+          </article>
+          
+          <!-- ... end Post -->
+        </div>
+      </div>
+{{/each}}
+
+    </div>
+  </div>
+
+</section>
+</template>
