@@ -64,25 +64,25 @@
 									<div class="swiper-wrapper">
 										<div class="swiper-slide">
 											<div class="friend-count" data-swiper-parallax="-500">
-<!-- 												<a href="#" class="friend-count-item">
-													<div class="h6">49</div>
-													<div class="title">Books</div>
-																			<a href="#" class="friend-count-item">
-													<div class="h6">49</div>
-													<div class="title">Books</div>
-												</a>
-												<a href="#" class="friend-count-item">
-													<div class="h6">132</div>
-													<div class="title">Followers</div>
-												</a>					</a>
-												<a href="#" class="friend-count-item">
-													<div class="h6">132</div>
-													<div class="title">Followers</div>
-												</a> -->
+
+                    <a href="#" class="friend-count-item">
+                      <div class="h6">
+                        {{show_following_count}}
+                      </div>
+                      <div class="title">Following</div>
+                    </a> 
+
+                    <a href="#" class="friend-count-item">
+                      <div class="h6">
+                        {{show_followers_count}}
+                      </div>
+                      <div class="title">Followers</div>
+                    </a>
+
 											</div>
 											<div class="control-block-button" data-swiper-parallax="-100">
-
-<a class="btn btn-sm bg-breez click_on_unfollow" id={{user_id}} > Unfollow</a>
+<!-- btn btn-block follow -->
+<a class="btn btn-block follow c-darkgray click_on_unfollow" id={{user_id}} > Unfollow</a>
 
 											</div>
 										</div>
@@ -96,7 +96,7 @@
     {{/each}}
 
 {{else}}
-	<p>Looks like you dont have any friend</p>	
+	<p> Looks like you dont have any friend </p>	
     {{/each}}
 
 			</div>
@@ -106,7 +106,6 @@
 <div class="loader_visiblity_block" id="div_for_follower" >
 			<div class="row">
 {{#each display_follower_list}}						
-
 	{{#each fetch_user_info_follower}}		
 				<div class="col col-lg-3 col-md-6 col-sm-12 col-12">
 					<div class="ui-block">
@@ -130,27 +129,27 @@
 									<div class="swiper-wrapper">
 										<div class="swiper-slide">
 											<div class="friend-count" data-swiper-parallax="-500">
-<!-- 												<a href="#" class="friend-count-item">
-													<div class="h6">49</div>
-													<div class="title">Books</div>
-																			<a href="#" class="friend-count-item">
-													<div class="h6">49</div>
-													<div class="title">Books</div>
-												</a>
-												<a href="#" class="friend-count-item">
-													<div class="h6">132</div>
-													<div class="title">Followers</div>
-												</a>					</a>
-												<a href="#" class="friend-count-item">
-													<div class="h6">132</div>
-													<div class="title">Followers</div>
-												</a> -->
+
+                    <a href="#" class="friend-count-item">
+                      <div class="h6">
+                        {{show_following_count}}
+                      </div>
+                      <div class="title">Following</div>
+                    </a> 
+
+                    <a href="#" class="friend-count-item">
+                      <div class="h6">
+                        {{show_followers_count}}
+                      </div>
+                      <div class="title">Followers</div>
+                    </a>
+
 											</div>
 											<div class="control-block-button" data-swiper-parallax="-100">
 {{#if check_if_following}}
-    <a class="btn btn-sm bg-breez click_on_unfollow" id={{user_id}} > Unfollow</a>
+    <a class="btn btn-block follow c-darkgray click_on_unfollow" id={{user_id}} > Unfollow</a>
  {{else}}
- 	 <a class="btn btn-sm bg-breez click_on_follow" id={{user_id}} > Follow</a>
+ 	 <a class="btn btn-block follow c-darkgray click_on_follow" id={{user_id}} > Follow</a>
  {{/if}}
 
 											</div>

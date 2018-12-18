@@ -156,6 +156,11 @@ Template.edit_promotion_details.helpers({
 
 Template.edit_promotion_details.events({
 
+		"click #go_back":function (e, template) {
+			    window.history.go(-1);
+			},
+
+
 		"change #promotion_image":function(e, template) {
 			// swal('ok');
 			upload_cover_pic(e, template);

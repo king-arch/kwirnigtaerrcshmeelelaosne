@@ -65,6 +65,7 @@ $(document).ready(function() {
     if(scrollPercentage > 0.9 && !loading) {
         loading = true;
         var old_post_count = Session.get("set_book_listing_content_limit");
+        
         var close_interval = setInterval(function () {
             $icon.show();
             Session.set("set_book_listing_content_limit",Session.get("set_book_listing_content_limit")+6);

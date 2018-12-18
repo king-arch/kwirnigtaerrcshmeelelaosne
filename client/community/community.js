@@ -184,8 +184,8 @@ $(document).ready(function() {
 
     user_name_to_follow(){
       var user_name = this.user_name;
-      if(user_name.length > 8){
-        return user_name.slice(0, 8)+'...';
+      if(user_name.length > 15){
+        return user_name.slice(0, 15)+'...';
       }
       else{
         return user_name;
@@ -208,9 +208,43 @@ user_headline_trimmed(){
   }
 },
 
+    show_following_count(){
+        var logged_in_user = Session.get("userId"); 
+        // console.log(this);
+        // console.log(user_id);
+        var result = following_list.find({ "follower": this.user_id , "current_follow_status": 1 }).count();
+        if(result > 1){
+        return result;
+        }
+        else{
+        return 0;
+        }
+    },
+
+    show_followers_count(){
+        var logged_in_user = Session.get("userId"); 
+        var result = following_list.find({ "following": this.user_id , "current_follow_status": 1 }).count();
+        if(result > 1){
+          return result;
+          }
+          else{
+          return 0;
+          }
+    },
+
 });
 
 Template.community_detail.events({
+
+    'click .view_profile':function(){      
+            var user_id = Base64.encode(this.user_id);  
+            if(this.user_id == Session.get("userId")){
+              var url = '/profile';
+            }else{
+              var url = '/view_profile/'+user_id;
+            }
+            window.location.href = url;
+    }, 
 
   "click #follower_tab":function(){ 
       // swal("follower");

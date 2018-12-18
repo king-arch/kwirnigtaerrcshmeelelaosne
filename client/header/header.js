@@ -90,6 +90,12 @@ Template.headeroptions.events({
     Router.go("/feed");
    },
 
+
+  'click #got_to_user_setting':function(){
+    // window.location.href="/feed";
+    Router.go("/user_settings");
+   },
+
   'click #send_to_my_collections':function(){
     // window.location.href="/feed";
     Router.go("/my_collections");

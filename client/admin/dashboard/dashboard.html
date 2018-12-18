@@ -1,0 +1,91 @@
+
+<template name="admin_dashboard" >
+<body>	{{> admin_dashboard_details}} </body>
+</template>
+
+<template name="admin_dashboard_details" >
+<div class="loading"  id="loading_div" ></div>
+	{{> left_panel_admin}}
+
+<div class="">
+	<div class="content-bg-wrap"></div>
+	<div class="row">
+		<div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+			<div class="ui-block responsive-flex">
+				<div class="container ui-block-title" style="padding-left: 4%;">
+
+					<div class="">
+						<p> Report Analysis</p>
+					</div>
+
+					<a href="#" class="more"><svg class="olymp-three-dots-icon"><use xlink:href="#olymp-three-dots-icon"></use></svg></a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+</div>
+		<div class="ui-block">
+			<div class="container" style="padding: 2% 0 2% 4%;">
+				<div class="row ">	
+
+					<div class="col l4 m4 s4 text-center"> 
+						<a class="pointer js-sidebar-open" title="terms & service" id="send_to_user_management" >
+							<p style="  padding: 10%;   border: 1px solid #ccc;   border-radius: 6px; margin-bottom: 0px !important; background-color: #FF5E3A; color: #fff;"> New user Total users count:  {{total_user_count}} </p>
+						</a>					
+					</div>
+
+					<div class="col l4 m4 s4 text-center"> 
+						<a class="pointer js-sidebar-open" title="terms & service" id="send_to_book_management" >
+							<p style="  padding: 10%;   border: 1px solid #ccc;   border-radius: 6px; margin-bottom: 0px !important; background-color: #FF5E3A; color: #fff;"> Total books count:  {{total_book_count}} </p>
+						</a>					
+					</div>
+
+
+			</div>
+
+			<div class="row ">	
+					<div class="col l4 m4 s4 text-center"> 
+						<a href="javascript:void(0)" class="pointer js-sidebar-open" title="terms & service" target="_blank" id="send_to_review_management"  >
+							<p style="  padding: 10%;   border: 1px solid #ccc;   border-radius: 6px; margin-bottom: 0px !important; background-color: #FF5E3A; color: #fff;"> Total reviews count:  {{total_review_count}}  </p>
+						</a>
+				</div>
+
+					<div class="col l4 m4 s4 text-center"> 
+						<a href="javascript:void(0)" class="pointer js-sidebar-open" title="terms & service" target="_blank" id="send_to_promotion_management"  >
+							<p style="  padding: 10%;   border: 1px solid #ccc;   border-radius: 6px; margin-bottom: 0px !important; background-color: #FF5E3A; color: #fff;"> Total promotion count:  {{total_promotion_count}} </p>
+						</a>
+				</div>
+			</div>
+
+			<div class="row ">	
+					<div class="col l4 m4 s4 text-center"> 
+						<a href="javascript:void(0)" class="pointer js-sidebar-open" title="terms & service" target="_blank" id="send_to_campaign_management"  >
+							<p style="  padding: 10%;   border: 1px solid #ccc;   border-radius: 6px; margin-bottom: 0px !important; background-color: #FF5E3A; color: #fff;"> Total active campaign count:  {{total_campaign_count}}  </p>
+						</a>
+				</div>
+
+					<div class="col l4 m4 s4 text-center"> 
+						<a href="javascript:void(0)" class="pointer js-sidebar-open" title="terms & service" target="_blank" id="send_to_blog_management"  >
+							<p style="  padding: 10%;   border: 1px solid #ccc;   border-radius: 6px; margin-bottom: 0px !important; background-color: #FF5E3A; color: #fff;"> Total blogs  count:  {{total_blogs_count}} </p>
+						</a>
+				</div>
+			</div>
+
+		</div>
+	</div>
+ 
+
+<script>
+      function isNumberKey(evt)
+      {
+         var charCode = (evt.which) ? evt.which : event.keyCode
+         if (charCode != 46 && charCode > 31 && (charCode < 48 || charCode > 57))
+            return false;
+
+         return true;
+      }
+  </script>         
+
+</template>

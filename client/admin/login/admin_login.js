@@ -100,7 +100,7 @@ Template.admin_login_details.events({
 						Session.setPersistent("active_user", result.active_user);
 						Session.setPersistent("userId", result.active_user);
 						Session.setPersistent("active_user_type", result.login_type);
-						Router.go('/book_management');
+						Router.go('/admin_dashboard');
 					}
 					else if(result.login_type == 'Editor'){
 						Session.setPersistent("active_user", result.active_user);

@@ -1,0 +1,51 @@
+
+<template name="user_settings">
+ <body class="landing-page">
+ {{> headeroptions}}
+ {{> user_settings_content}}
+</body>
+</template>
+
+<template name="user_settings_content">
+         <div class="content-bg-wrap">
+            <section class="medium-padding20">
+                <div class="container">
+                    <div class="row">
+                        <div class="col col-xl-12 col-lg-12 col-md-12 m-auto">
+                            <div class="logout-content text-left">
+                                <!-- Grid row -->
+                                <div class="row  justify-content-left">
+                                    <!-- Grid column -->
+                                    <div class="col-md-12 medium-padding120">
+                                        <!-- First Step -->
+                                        <div class="row setup-content-3" id="step-5">
+                                            <div class="col-md-12">
+                                                <div class="logout-content">
+                                                    <h2 class="c-darkgray"> <i class="fa fa-envelope-o"></i><br/> Change your password </h2>
+
+                                                  <div class="form-group md-form  label-floating is-empty with-button c-white" >
+        <label for="Email" class="control-label c-darkgray" data-success="right" data-error="wrong">Password (atleast 8 chars.)</label>
+
+        <input class="form-control c-darkgray validate c-white" type="password" id="password" autocomplete="off" >
+
+        <a href="#"><span class="trans_bg show_password"> <i class="fa fa-eye c-darkgray"> </i> </span></a>
+
+        </div>
+
+        <!-- <span class="c-darkgray"> <strong> Back to Sign up | Sign in </strong></span> -->
+        <span><button class="btn btn-mdb-color btn-rounded float-right button-gry" type="button" id="update_password" >
+                                  <i class="fa fa-spinner fa-pulse fa-fw div_hide_class c-darkgray" id="loader_gif"></i>
+                               <span id="save_text" class="c-darkgray"> Update Password</span></button>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+</template>

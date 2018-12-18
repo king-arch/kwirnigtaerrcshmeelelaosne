@@ -18,11 +18,11 @@ import { blog } from './../../../import/collections/insert.js';
 import { Base64 } from 'meteor/ostrio:base64';
 
 var book_listing;
-var blog_listing;
+var book_comment_listing;
 
 Template.blog_listing_detail.onDestroyed(function () {
 	book_listing.stop();
-	blog_listing.stop();
+	book_comment_listing.stop();
 });
 
 Template.blog_listing_detail.onCreated(function eventlistOnCreated(){
@@ -41,7 +41,7 @@ Template.blog_listing_detail.onRendered(function () {
 			}, 2000);
     });  
 
-	blog_listing = Meteor.subscribe("fetch_blog_content");
+	  blog_listing = Meteor.subscribe("fetch_blog_content");
 	// book_listing = Meteor.subscribe("fetch_book_listing");
 
 	setTimeout(function () {
@@ -104,6 +104,26 @@ $(document).ready(function() {
          // console.log(result);
          return result;
     },
+
+      comment_count_lvl_0(){
+         var logged_in_user = Session.get("userId");
+         // var blog_id = Session.get("get_blog_id");
+
+         Meteor.subscribe("fetch_blog_comments_with_blog_id",this.blog_id);
+
+         // console.log(this.blog_id);
+         // console.log(logged_in_user);
+                        var result = blog.find({
+                                     parent_id: this.blog_id,
+                                     parent_post_type: 'Blog',
+                                     post_type: 'comment_lvl_0',
+                                     comment_status : 1,
+                             },{$sort: {
+                                      created_at: 1 }}).count();
+// console.log("comment list_new");
+// console.log(result);
+return result;
+  },
 
 });
 

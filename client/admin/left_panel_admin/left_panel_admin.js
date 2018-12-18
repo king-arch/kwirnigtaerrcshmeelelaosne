@@ -32,6 +32,10 @@ Template.left_panel_admin.onDestroyed(function () {
   		  Router.go("/edit_profile");
   },
 
+    'click #admin_dashbaord':function(){
+        Router.go("/admin_dashboard");
+  },
+
     'click #book_management':function(){
         Router.go("/book_management");
   },

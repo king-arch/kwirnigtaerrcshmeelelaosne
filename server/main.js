@@ -111,6 +111,22 @@ import urlMetadata from 'url-metadata';
       return  blog.find({});
     });
 
+     Meteor.publish('fetch_blog_comments_with_blog_id', function(blog_id) {
+      return  blog.find({ parent_id: blog_id, parent_post_type: 'Blog'});
+    });
+
+     Meteor.publish('fetch_blog_comments_with_comment_id', function(comment_id) {
+      return  blog.find({ parent_id: comment_id, post_type: 'like'});
+    });
+
+     Meteor.publish('fetch_blog_comments_like_lvl_0_with_comment_id', function(comment_id) {
+      return  blog.find({ parent_id: comment_id, parent_post_type: 'Blog'});
+    });
+
+     Meteor.publish('fetch_blog_comments_like_lvl_1_with_comment_id', function(comment_id) {
+      return  blog.find({ parent_id: comment_id, parent_post_type: 'comment_lvl_0'});
+    });
+
      Meteor.publish('fetch_blog_content_with_blog_id', function(blog_id) {
       return blog.find({ "blog_id": blog_id });
     });
@@ -2380,6 +2396,104 @@ if(check_if_already_added[0]){
 }
 
   },
+
+         submit_lvl_0_comment_for_blog: function(logged_in_user,blog_id,comment_text )
+      { 
+        var comment_id = 'comment_id_'+Math.floor((Math.random() * 2465789) + 1);
+        
+                    var result = blog.insert({                
+                      comment_id: comment_id,
+                      comment_text: comment_text,
+                      parent_id: blog_id,
+                      parent_post_type: 'Blog',
+                      post_type: 'comment_lvl_0',
+                      comment_status: 1,
+                      comment_by: logged_in_user,
+                      created_at: Date.now() 
+      });
+            return result;
+    },
+                       
+       submit_lvl_1_comment_for_blog: function(logged_in_user,parent_id,comment_text )
+      { 
+console.log(logged_in_user+' & '+parent_id+' & '+comment_text);
+        var comment_id = 'comment_id_'+Math.floor((Math.random() * 2465789) + 1);
+       
+                    var result = blog.insert({
+                      comment_id: comment_id,
+                      comment_text: comment_text,
+                      parent_id: parent_id,
+                      parent_post_type: 'Blog',
+                      post_type: 'comment_lvl_1',
+                      comment_status: 1,
+                      comment_by: logged_in_user,
+                      created_at: Date.now()
+      });
+            return result;
+    },    
+
+      update_blog_like_comment_lvl_0: function(comment_id,liked_by){
+      var checkForAlreadyExists = blog.find({
+                                              parent_id: comment_id,
+                                              parent_post_type: 'comment_lvl_0',
+                                              liked_by: liked_by,
+                                              post_type: 'like',
+
+                                  }).fetch();
+
+          console.log('checkForAlreadyExists: ');
+          console.log(checkForAlreadyExists);
+
+          if(checkForAlreadyExists[0]){
+          if(checkForAlreadyExists[0].like_status == 0){
+                      var result = blog.update({
+                      like_id: checkForAlreadyExists[0].like_id
+                    },
+                    {
+                      $set:
+                      {
+                      like_status: 1,
+                      updated_at: Date.now() 
+                    
+                    }
+                  });
+          }
+          else{
+          var result = blog.update({
+                      like_id: checkForAlreadyExists[0].like_id
+                    },
+                    {
+                      $set:
+                      {
+                      like_status: 0,
+                      updated_at: Date.now() 
+                    
+                    }
+                  });
+        }
+        }else{
+          var like_id = 'like_id_'+Math.floor((Math.random() * 2465789) + 1);
+
+                    var result = blog.insert({
+                      like_id: like_id,
+                      parent_id: comment_id,
+                      parent_post_type: 'comment_lvl_0',
+                      post_type: 'like',
+                      like_status: 1,
+                      liked_by: liked_by,
+                      created_at: Date.now() 
+                    });
+        }
+},
+  
+
+      get_logged_in_user_info: function(logged_in_user){
+      var result = user_details.find({
+                                    user_id: logged_in_user,
+                                  }).fetch();
+      return result;
+},
+
 
 });
 

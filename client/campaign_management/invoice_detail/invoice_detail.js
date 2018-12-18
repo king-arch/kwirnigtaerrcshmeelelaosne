@@ -99,6 +99,14 @@ Template.invoice_detail_detail.onRendered(function () {
       return new_date;
     },
 
+     gst_final_payment(){
+      var gst = (this.final_payment * 18)/100;
+      console.log("gst: ");
+      console.log(gst);
+      swal(gst);
+      return gst;
+    },
+
 });
 
 
