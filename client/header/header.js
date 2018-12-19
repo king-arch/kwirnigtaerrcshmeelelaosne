@@ -90,6 +90,11 @@ Template.headeroptions.events({
     Router.go("/feed");
    },
 
+  'click #got_to_contact_us':function(){
+    // window.location.href="/feed";
+    Router.go("/contact_us");
+   },
+
 
   'click #got_to_user_setting':function(){
     // window.location.href="/feed";

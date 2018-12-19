@@ -1,7 +1,12 @@
 ﻿
 <template name="community">
- {{> headeroptions}}
+
+    {{> header}}
+    
+ <body class="landing-page">
  {{> community_detail}}
+ </body>
+ 
 </template>
 
 <template name="community_detail">
@@ -18,15 +23,62 @@
 				<div class="ui-block-title">
 					<div class="h6 title">Community</div>
 						<div class="form-group with-button">
-							<input class="form-control c-darkgray search_input_fied" type="text" placeholder="Search People..." id="search_text" >
+							<!-- <input class="form-control c-darkgray search_input_fied" type="text" placeholder="Search People..." id="search_text" >
 							<button class="search_button submit_search_text" id="submit_search_text" >
 								<i class="fa fa-search submit_search_text" id="submit_search_text"></i>
-							</button>
+							</button> -->
+
+                 <span style="padding-top: 10px;" >  Filter </span>
+                 <div class="more pull-right">  <i class="fa fa-angle-down three_dots_listing_page_angle"></i>
+                <ul class="more-dropdown">
+                      <li id="show_all_following" class="change_filter_by_status loader_visiblity_block" >
+                        <a href="javascript:void(0)"> Following</a>
+                      </li>
+
+                      <li id="show_all_following_with_check" class="change_filter_by_status " >
+                        <a href="javascript:void(0)" ><i class="fa fa-check">  </i> &nbsp;&nbsp;  Following</a>
+                      </li>
+
+					<li id="show_all_follower" class="change_filter_by_status " >
+                        <a href="javascript:void(0)"  > Follower</a>
+                      </li>
+
+                      <li id="show_all_follower_with_check" class="change_filter_by_status loader_visiblity_block" >
+                        <a href="javascript:void(0)" ><i class="fa fa-check">  </i> &nbsp;&nbsp;  Follower</a>
+                      </li>
+
+
+
+<!-- 				<li class="padding_on_li active_community_tab" id="follower_tab" ><a href="javascript:void(0)" >Follower</a></li>
+
+				<li class="padding_on_li inactive_community_tab" id="following_tab" ><a href="javascript:void(0)">Following</a></li> -->
+
+
+				                  </ul>
+				              </div>   
+
 						</div>
 				</div>
 			</div>
 
-	<div class="row">
+<!--     <div class="col col-xl-1 col-lg-1 col-md-12 col-sm-12 col-12">
+
+       <div class="ui-block responsive-flex1200 bg_trans margin-bottom-0 ">
+        <div class="ui-block-title pad_0">
+           <span style="padding-top: 10px;">  Filter </span><div class="more">  <i class="fa fa-angle-down three_dots_listing_page_angle"></i>
+                <ul class="more-dropdown">
+
+				<li class="padding_on_li active_community_tab" id="follower_tab" ><a href="javascript:void(0)" >Follower</a></li>
+				<li class="padding_on_li inactive_community_tab" id="following_tab" ><a href="javascript:void(0)">Following</a></li>
+
+
+                  </ul>
+              </div>         
+        </div>
+      </div>
+    </div> -->
+
+<!-- 	<div class="row">
 		<div class="col col-xl-12 order-xl-2 col-lg-12 order-lg-1 col-md-12 col-sm-12 col-12">
 			<div class="ui-block responsive-flex">
 				  <ul class="nav nav-tabs nav-justified adjust_community_tab size_comunity_tabs">
@@ -35,7 +87,7 @@
 				  </ul>
 			</div>
     	</div>
-    </div>
+    </div> -->
 
 <div class="" id="div_for_following" >
 			<div class="row">

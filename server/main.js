@@ -2494,6 +2494,11 @@ console.log(logged_in_user+' & '+parent_id+' & '+comment_text);
       return result;
 },
 
+  async send_contact_us_email(user_name, user_email,phone, query_type, text_details){
+
+var result = await send_email_with_contact_us_details_to_admin(user_name, user_email,phone, query_type, text_details);
+   return result;
+  },
 
 });
 
@@ -2799,6 +2804,63 @@ var htmlCode="<html><head><title>Email</title></head><body><div style="+div_styl
             to: user_email,
             from: 'writersmelonteam@gmail.com',
             subject: "Writersmelon | Review acceptence mail",
+            html: htmlCode,
+        };
+
+               Email.send(email);
+               // console.log(htmlCode);
+var message = { "msg": "User succesfully created. "}
+          return message;
+}
+
+
+
+ function send_email_with_contact_us_details_to_admin(user_name, user_email,phone, query_type, text_details){
+
+// user_name, user_email,phone, query_type, text_details
+
+var name = user_name;
+var user_email = user_email;
+var phone = phone;
+var query_type = query_type;
+var text_details = text_details;
+// console.log('Password: ');
+// console.log(password);
+// var userId = Base64.encode(user_id);
+var url = 'https://writersmelon.herokuapp.com';
+
+var div_style= "width:600px;height:auto;margin:auto;font-family:sans-serif;font-weight:normal;font-size:12px; border:10px solid red";
+var div_style2= "width:600px;height:auto;float:left;background-color:#efefef;border:10px solid red !important";
+var div_style3= "background-color:#fff;border-spacing:0px;width:100%";
+var div_style4= "width:100%;height:50px;float:left;background-color:#fff";
+var div_style5= "background-color:#fff;width:100%";
+var div_style6= "background-color:#fff;width:100%";
+var div_style7= "width:150px;height:auto;float:left;vertical-align: middle;";
+var div_style8= "height: 50px";
+var div_style9= "height: 50px";
+var div_style10= "float: right; margin-right: 15px; color: #666";
+var div_style11= "width:96%;height:auto;float:left;padding:10px";
+var div_style12= "width:100%; border:0";
+var div_style13= "color:#414850;line-height:30px";
+var div_style14= "color:#414850;line-height:30px";
+var div_style15= "width:100%;float:left;background-color:#fff;;margin-top:6px";
+var image_url="http://writersmelon.com/wm/wp-content/uploads/2017/05/cropped-Writersmelon-Logo.png";
+var style="width:150px; height:150px";
+var spacing="2";
+var email = "writersmelonteam@gmail.com";
+var htmlCode="<html><head><title>Email</title></head><body><div style="+div_style+"><div style="+div_style2 +"><table style="+div_style3+"><tbody><tr><td><div style="+div_style4+"><table style="+div_style6+"><tbody><tr><td><div style="+div_style7+"><a> <img src="+image_url+" style="+style+"/></a></div></td><td><p style="+div_style10+"><p></td>"+
+"</tr></tbody></table></div><div style="+div_style11+"><table style ="+div_style12 +" cellspacing="+spacing+" cellpadding="+spacing+"><tbody><tr><td "+
+"colspan="+spacing+">&nbsp;</td></tr><tr><td colspan="+spacing+">&nbsp;</td></tr><tr><td colspan="+spacing+" style="+div_style14+">Hi "+name +",</td></tr><tr><td colspan="+spacing+">Hi, someone just contacted you with the contact us form. Down below are this details."+
+"!</td></tr><tr><td colspan="+div_style11
++"><br/><p>Name: "+name+" </p></br><p>Email: "+user_email+" </p></br><p>Phone: "+phone+" </p></br><p>Query Type: "+query_type+" </p></br><p>Message : "+text_details+"</td></tr><tr><td colspan="+spacing+">&nbsp;</td></tr><tr><td colspan="+spacing
++">P.S. If you are not "+name+", just ignore this email; we will never again send you an email.</td></tr><tr><td colspan="+spacing
++">&nbsp;</td></tr><tr><td colspan="+spacing+">Regards</td></tr><tr><td colspan="+spacing
++">The Writersmelon Team</td></tr><tr><td colspan="+spacing+">&nbsp;</td></tr><tr><td colspan="+spacing+">&nbsp;</td></tr></tbody></table></div><div style="+div_style15+"><table style="+div_style6+"><tbody><tr><td><center><small style="+div_style6+">This email was intended for "+name+".<br/>Copyright Writersmelon, 2018.</small></center></td></tr></tbody></table></div></td></tr></tbody></table></div></div></body></html>";
+
+ var email = {
+            to: 'writersmelonteam@gmail.com',
+            from: 'writersmelonteam@gmail.com',
+            subject: "Writersmelon | Writermelon Contact Query",
             html: htmlCode,
         };
 

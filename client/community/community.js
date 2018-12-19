@@ -246,32 +246,6 @@ Template.community_detail.events({
             window.location.href = url;
     }, 
 
-  "click #follower_tab":function(){ 
-      // swal("follower");
-      $("#follower_tab").addClass("active_community_tab");
-      $("#follower_tab").removeClass("inactive_community_tab");
-      
-      $("#following_tab").addClass("inactive_community_tab");
-      $("#following_tab").removeClass("active_community_tab");
-
-
-      $("#div_for_following").removeClass("loader_visiblity_block");
-      $("#div_for_follower").addClass("loader_visiblity_block");
-
-    },
-
-  "click #following_tab":function(){ 
-      // swal("following");
-      $("#following_tab").addClass("active_community_tab");
-      $("#following_tab").removeClass("inactive_community_tab");
-      
-      $("#follower_tab").addClass("inactive_community_tab");
-      $("#follower_tab").removeClass("active_community_tab");
-
-      $("#div_for_follower").removeClass("loader_visiblity_block");
-      $("#div_for_following").addClass("loader_visiblity_block");
-    },
-
       'click .click_on_follow':function(){
     // swal('here');
     var follow_user_id = this.user_id; 
@@ -320,6 +294,46 @@ Template.community_detail.events({
     Session.set("search_query",search_text);
 
   },
+
+    "click #show_all_following":function(){ 
+      Session.set("filter_content",0);
+
+    },
+
+  "click #show_all_follower":function(){ 
+      Session.set("filter_content",1);
+    },
+
+
+    "click .change_filter_by_status":function(){ 
+// alert('clicked');
+// alert(Session.get("filter_content"));
+    if(Session.get("filter_content") == 0){
+      // alert("case 0");
+       $("#show_all_following_with_check").removeClass("loader_visiblity_block");
+       $("#show_all_follower").removeClass("loader_visiblity_block");
+
+       $("#show_all_follower_with_check").addClass("loader_visiblity_block");
+       $("#show_all_following").addClass("loader_visiblity_block");
+
+       $("#div_for_following").removeClass("loader_visiblity_block");
+       $("#div_for_follower").addClass("loader_visiblity_block");
+         
+    }
+    else if(Session.get("filter_content") == 1){
+    // alert("case 1");
+       
+       $("#show_all_follower_with_check").removeClass("loader_visiblity_block");
+       $("#show_all_following").removeClass("loader_visiblity_block");
+
+       $("#show_all_follower").addClass("loader_visiblity_block");
+       $("#show_all_following_with_check").addClass("loader_visiblity_block");
+
+       $("#div_for_following").addClass("loader_visiblity_block");
+       $("#div_for_follower").removeClass("loader_visiblity_block");
+    }
+
+    },
 
 
 });
