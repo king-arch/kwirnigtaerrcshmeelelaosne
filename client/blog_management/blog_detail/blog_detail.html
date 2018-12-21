@@ -1,5 +1,15 @@
 
 <template name="blog_detail">
+
+<head>
+
+<meta property="og:title" content="European Travel Destinations">
+<meta property="og:description" content="Offering tour packages for individuals or groups.">
+<meta property="og:image" content="http://euro-travel-example.com/thumbnail.jpg">
+<meta property="og:url" content="http://euro-travel-example.com/index.htm">
+
+</head>
+
  <body class="landing-page">
  {{> headeroptions}}
  {{> display_blog_detail}}
@@ -81,6 +91,7 @@
                 <span>Date</span>
               </div>
             </div>
+
             <div class="post-comments-wrap inline-items">
               <svg class="olymp-comments-post-icon">
                 <use xlink:href="icons/icons.svg#olymp-comments-post-icon"></use>
@@ -89,6 +100,12 @@
                 <a class="h6 comments" href="#">{{comment_count_lvl_0}}</a>
                 <span>Comments</span>
               </div>
+            </div>
+
+            <div class="post-comments-wrap inline-items">
+<a href="whatsapp://send?text=The text to share!" data-action="share/whatsapp/share" target="_blank" >Share via Whatsapp</a> | 
+<a href="https://www.facebook.com/sharer/sharer.php?u=www.google.com&quote=your text" data-action="share/whatsapp/share" target="_blank" >Share via Facebook</a>
+
             </div>
           </div>
 
