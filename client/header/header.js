@@ -106,6 +106,12 @@ Template.headeroptions.events({
     Router.go("/my_collections");
    },
 
+
+  'click #send_to_reward_detail':function(){
+    // window.location.href="/feed";
+    Router.go("/reward_detail_page");
+   },
+
   'click #sign_out':function(){
 
     Session.clear("userId");

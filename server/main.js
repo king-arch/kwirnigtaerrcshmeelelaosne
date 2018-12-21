@@ -19,6 +19,7 @@ import { review_details } from './../import/collections/insert.js';
 
 import { general_records } from './../import/collections/insert.js';
 import { book_collections } from './../import/collections/insert.js';
+import { reward_details } from './../import/collections/insert.js';
 
 import { Base64 } from 'meteor/ostrio:base64';
 import urlMetadata from 'url-metadata';
@@ -194,6 +195,14 @@ import urlMetadata from 'url-metadata';
 
      Meteor.publish('book_collections_all_with_user_id', function(user_id) {
       return  book_collections.find({added_by: user_id});
+    });
+
+     Meteor.publish('reward_details_all', function() {
+      return  reward_details.find({});
+    });
+
+     Meteor.publish('reward_details_all_with_user_id', function(user_id) {
+      return  reward_details.find({reward_to: user_id});
     });
 
 
@@ -613,7 +622,7 @@ if(check_if_exist[0]){
     }
   },
 
-    "change_blog_approval_status": function (blog_id, status) {
+    "change_blog_approval_status": function (blog_id, status,logged_in_user) {
 
     // console.log(interest_id + ' & ' + status);
     var newUser = blog.find({
@@ -621,6 +630,10 @@ if(check_if_exist[0]){
     }).fetch();
 
     if (newUser[0]) {
+
+      var blog_author = newUser[0].blog_author;
+if(status == 2){
+  console.log("case 1");
       // console.log(newUser[0]);
       var result = blog.update({
         _id: newUser[0]._id,
@@ -631,7 +644,45 @@ if(check_if_exist[0]){
         }
       });
       return result;
+ }else{
+  console.log("case 2");
+  console.log("status: "+status);
+      // console.log(newUser[0]);
+      var result = blog.update({
+        _id: newUser[0]._id,
+      }, {
+        $set: {
+          blog_status: status,
+          updated_at: Date.now,
+        }
+      });
+
+if(blog_author != "user_admin"){
+    var new_result = content.find({
+      "content_type": "reward_points"
+    }).fetch();
+
+    var reward_value = new_result[0].blog_approval;
+    var reward_id = 'reward_id_'+Math.floor((Math.random() * 2465789) + 1);
+
+    var latest_result = reward_details.insert({
+    
+          reward_id: reward_id,
+          reward_value: reward_value,
+          parent_id: blog_id,
+          entry_type: 'reward_point',
+          reward_to: blog_author,
+          reward_trigger_type: "blog_approval",
+
+          reward_redeem_status: 0,
+          created_at: Date.now(),
+
+      });
+}
+
+      return result;
     }
+  }  
   },
 
     FetchUserData:function(userId){
@@ -2347,6 +2398,29 @@ if(check_status4[0]){
                       notification_type: "submit_review",
                       created_at: Date.now()
       });
+
+
+    var new_result = content.find({
+      "content_type": "reward_points"
+    }).fetch();
+
+    var reward_value = new_result[0].review_submition;
+    var reward_id = 'reward_id_'+Math.floor((Math.random() * 2465789) + 1);
+
+    var latest_result = reward_details.insert({
+    
+          reward_id: reward_id,
+          reward_value: reward_value,
+          parent_id: review_id,
+          entry_type: 'reward_point',
+          reward_to: logged_in_user,
+          reward_trigger_type: "review_submition",
+
+          reward_redeem_status: 0,
+          created_at: Date.now(),
+
+      });
+
       return result;
   },
 
@@ -2499,6 +2573,43 @@ console.log(logged_in_user+' & '+parent_id+' & '+comment_text);
 var result = await send_email_with_contact_us_details_to_admin(user_name, user_email,phone, query_type, text_details);
    return result;
   },
+
+
+  send_redeem_request(logged_in_user,requested_value){ 
+
+     var result = reward_details.find({reward_to: logged_in_user}).fetch();
+      if(result[0]){
+      var new_array = new Array();
+            for(var i=0; i< result.length; i++){
+              new_array.push(result[i].reward_id);
+
+               var result_2 =  reward_details.update({
+                                reward_id: result[i].reward_id,
+                              }, {
+                                $set: {
+                                  "reward_redeem_status": 3,
+                                  "update_at": Date.now()
+                                } 
+                              });
+            }
+
+        var request_id = 'reward_id_'+Math.floor((Math.random() * 2465789) + 1);
+        var latest_result = reward_details.insert({
+        
+              request_id: request_id,
+              requested_value: requested_value,
+              requested_by: logged_in_user,
+              entry_type: 'redeem_request',
+              involved_id: new_array,
+
+              request_status: 0,
+              created_at: Date.now(),
+
+          });
+
+   return result; 
+   }
+  }, 
 
 });
 

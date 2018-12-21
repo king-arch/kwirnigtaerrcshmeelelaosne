@@ -18,4 +18,5 @@ export const notification_details = new Mongo.Collection('notification_details')
 
 export const general_records = new Mongo.Collection('general_records');                                 
 export const book_collections = new Mongo.Collection('book_collections');                                 
+export const reward_details = new Mongo.Collection('reward_details');                                 
 

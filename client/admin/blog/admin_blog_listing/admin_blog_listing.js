@@ -17,9 +17,11 @@ import { blog } from './../../../../import/collections/insert.js';
 import { Base64 } from 'meteor/ostrio:base64';
 
 var book_listing;
+var reward_details_all;
 
 Template.display_blog_listing_admin.onDestroyed(function () {
   book_listing.stop();
+  reward_details_all.stop();
 });
 
 Template.display_blog_listing_admin.onCreated(function eventlistOnCreated(){
@@ -36,6 +38,7 @@ Template.display_blog_listing_admin.onRendered(function () {
     });  
 
   book_listing = Meteor.subscribe("fetch_blog_content");
+  reward_details_all = Meteor.subscribe("reward_details_all");
 
   setTimeout(function () {
     $('#loading_div').addClass('loader_visiblity_block');
@@ -98,7 +101,7 @@ Template.display_blog_listing_admin.onRendered(function () {
     show_blog_details(){
     console.log('https://en.wikipedia.org/wiki/Greece');
     
-    var result = blog.find({}).fetch();
+    var result = blog.find({blog_status: { $exists: true}}).fetch();
 
     console.log('show result: ');
     console.log(result);
@@ -213,6 +216,7 @@ Template.display_blog_listing_admin.events({
         // swal(JSON.stringify(this));
     // var interest_id = this.id;
     var blog_id = this.blog_id;
+    var logged_in_user = Session.get("userId");
         // swal(interest_id);
     var status = 2;
     console.log('status');
@@ -235,7 +239,7 @@ Template.display_blog_listing_admin.events({
             break;
 
           case "catch":
-            Meteor.call('change_blog_approval_status', blog_id, status, function (error, result) {
+            Meteor.call('change_blog_approval_status', blog_id, status,logged_in_user, function (error, result) {
               if (error) {
                 console.log("Some error occured.");
               } else {
@@ -254,6 +258,7 @@ Template.display_blog_listing_admin.events({
         // swal(JSON.stringify(this));
     // var interest_id = this.id;
     var blog_id = this.blog_id;
+    var logged_in_user = Session.get("userId");
         // swal(interest_id);
     var status = 1;
     console.log('status');
@@ -276,7 +281,7 @@ Template.display_blog_listing_admin.events({
             break;
 
           case "catch":
-            Meteor.call('change_blog_approval_status', blog_id, status, function (error, result) {
+            Meteor.call('change_blog_approval_status', blog_id, status,logged_in_user, function (error, result) {
               if (error) {
                 console.log("Some error occured.");
               } else {

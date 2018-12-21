@@ -1,0 +1,107 @@
+
+<template name="reward_detail_page">
+    {{> header}}
+    
+ <body class="landing-page">
+    {{> headeroptions}}
+  {{> display_reward_detail_page}}
+</body>
+</template>
+
+<template name="display_reward_detail_page"> 
+<div class="loading"  id="loading_div" ></div>
+
+<div class="container">
+  <div class="row">
+    <div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+
+      <div class="ui-block responsive-flex">
+        <div class="ui-block-title">
+          <div class="h6 title"><!-- Rewards --></div>
+        <h1 style="font-size: 30px; font-weight: 500;">Rewards</h1>
+          <div class="h6 title">Total reward points : {{total_reward_points}}</div>
+        {{#if check_if_eligible_to_redeem}}
+          <a href="javascript:void(0)" class="btn btn-primary btn-md-2 margin-bottom-0" id="send_request_to_redeem" >
+            Send redeem request</a>
+        {{/if}}
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<div class="container">
+  <div class="row">
+    <div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+
+      <div class="ui-block">
+
+        
+        <!-- Forums Table -->
+        
+        <table class="forums-table" id="show_reward_point_listing" >
+          <thead>
+          <tr>          
+            <th class="forum">
+              Reward giving occation
+            </th>
+            <th class="topics">
+              Reward points allocated
+            </th>
+        
+            <th class="posts">
+             Allocated on
+            </th>
+
+<!--           <th class="freshness">
+             Status
+            </th>    -->       
+        
+          </tr>
+        
+          </thead>
+        
+{{#each show_reward_listing}}
+          <tbody>
+          <tr>
+            <td class="forum">
+              <div class="forum-item">
+                <img src="img/forum1.png" alt="forum">
+                <div class="content">
+              {{#if equals reward_trigger_type 'review_submition'}}
+                  <p class="h6 title">Review submition</p>
+              {{else if equals reward_trigger_type 'blog_approval'}}
+                  <p class="h6 title">Blog approval</p>
+              {{/if}}
+                </div>        
+              </div>
+            </td>
+           
+            <td class="posts">
+              {{reward_value}}
+            </td>
+
+             <td class="freshness">
+             <a href="#" data-toggle="modal" data-target="#edit-my-poll-popup">{{reward_distribution_date}}</a>
+            </td>
+
+<!--              <td class="freshness">
+             <a href="#" class="btn btn-primary btn-sm full-width" data-toggle="modal" data-target="#edit-my-poll-popup">Active</a>
+            </td> -->
+          
+          </tr>
+        
+          </tbody>
+{{/each}}
+        </table>
+        
+        <!-- ... end Forums Table -->
+      </div>
+
+    </div>
+  
+  </div>
+</div>
+</template>

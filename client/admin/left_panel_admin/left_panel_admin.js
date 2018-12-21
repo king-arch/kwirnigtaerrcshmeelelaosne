@@ -16,10 +16,10 @@ import swal from 'sweetalert';
 import { book_details } from './../../../import/collections/insert.js';
 import { Base64 } from 'meteor/ostrio:base64';
 
-var book_listing;
+// var book_listing;
 
 Template.left_panel_admin.onDestroyed(function () {
-	book_listing.stop();
+	// book_listing.stop();
 });
 
  Template.left_panel_admin.events({

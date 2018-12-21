@@ -214,27 +214,6 @@ function click_events() {
 	});
 }
 
-function upload_cover_pic(e,template){
-
-		    if (e.currentTarget.files && e.currentTarget.files[0]) {
-		     var file = e.currentTarget.files[0];
-		      if (file) {
-		        var reader = new FileReader();
-		   var base64data="";
-		   reader.readAsDataURL(file);
-		   reader.onload = function () {
-		   console.log(reader.result);
-		   base64data = reader.result;
-		   console.log(base64data);
-
-		 Session.set("user_cover_session",base64data);
-
-		};
-    
-   }
-  }
- } 
-
   function ValidateEmail(user_email) {
     var user_email = $('#user_email').val();
 
