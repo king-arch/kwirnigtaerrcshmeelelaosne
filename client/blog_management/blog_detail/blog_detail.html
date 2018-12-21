@@ -1,14 +1,11 @@
 
 <template name="blog_detail">
 
-<head>
+<!-- <head>
 
-<meta property="og:title" content="European Travel Destinations">
-<meta property="og:description" content="Offering tour packages for individuals or groups.">
-<meta property="og:image" content="http://www.writersmelon.com/wm/wp-content/uploads/2018/08/portrait-of-a-business-woman-working-on-laptop_1303-9733.jpg">
-<meta property="og:url" content="http://euro-travel-example.com/index.htm">
 
-</head>
+
+</head> -->
 
  <body class="landing-page">
  {{> headeroptions}}
@@ -105,7 +102,7 @@
             <div class="post-comments-wrap inline-items">
 <a href="whatsapp://send?text=The text to share!" target="_blank" >Share via Whatsapp</a> | 
 
-<a href="https://www.facebook.com/sharer/sharer.php?u=https://writersmelon.herokuapp.com/blog_detail/YmxvZ19pZF8xMjAyNTI5&picture=http://www.writersmelon.com/wm/wp-content/uploads/2018/08/portrait-of-a-business-woman-working-on-laptop_1303-9733.jpg&quote=akhilesh is my name&description=life is hell" target="_blank" >Share via Facebook</a>
+<a href="https://www.facebook.com/sharer/sharer.php?u=https://writersmelon.herokuapp.com/blog_detail/YmxvZ19pZF8xMjAyNTI5" target="_blank" >Share via Facebook</a>
 <!-- https://writersmelon.herokuapp.com/blog_detail/YmxvZ19pZF8xMjAyNTI5 -->
 
 <!-- https://www.facebook.com/sharer.php?caption=[caption]&description=[description]&u=[website]&picture=[image-url] -->
@@ -419,4 +416,16 @@
   </div>
 </div>
 {{/each}}
+
+
+<script type="text/javascript">
+  $(document).ready(function(){
+     $("head").append('<meta property="og:title" content="European Travel Destinations">'+
+'<meta property="og:description" content="Offering tour packages for individuals or groups.">'+
+'<meta property="og:image" content="http://www.writersmelon.com/wm/wp-content/uploads/2018/08/portrait-of-a-business-woman-working-on-laptop_1303-9733.jpg">'+
+'<meta property="og:url" content="http://euro-travel-example.com/index.htm">');
+  });
+ 
+</script>
+
 </template>
