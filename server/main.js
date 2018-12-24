@@ -923,6 +923,7 @@ if(blog_author != "user_admin"){
                 updated_at: Date.now()
               }
             });
+
           }else{
 
         var follow_id = 'follow_id_'+Math.floor((Math.random() * 2465789) + 1);
@@ -936,6 +937,21 @@ if(blog_author != "user_admin"){
                 created_at: Date.now()
 
               });
+
+
+             var notification_id = 'notification_id_'+Math.floor((Math.random() * 2465789) + 1);
+ 
+                   var result2 = notification_details.insert({
+
+                      notification_id: notification_id,
+                      notification_by: logged_in_user,
+
+                      notification_to: follow_user_id,
+
+                      notification_status: 0,
+                      notification_type: "Follow",
+                      created_at: Date.now()
+      });
 
           }
 
@@ -976,10 +992,10 @@ if(blog_author != "user_admin"){
                 updated_at: Date.now()
               }
             });
+
           }else{
 
         var follow_id = 'follow_id_'+Math.floor((Math.random() * 2465789) + 1);
-            
             var result =  following_list.insert({
 
                 follow_id :follow_id,
@@ -2001,12 +2017,11 @@ else if(field_name == 'socail_media_handle_shared'){
                    var result2 = notification_details.insert({
 
                       notification_id: notification_id,
-                      notification_text: notification_text,
 
                       notification_by: logged_in_user,
                       notification_to: check_status[0].campaigner_id,
                       campaign_id: check_status[0].campaign_id,
-                      notification_type: "campaign",
+                      notification_type: "campaign_accepted",
                       created_at: Date.now()
       });
             return result;
@@ -2031,12 +2046,11 @@ else if(field_name == 'socail_media_handle_shared'){
                    var result2 = notification_details.insert({
 
                       notification_id: notification_id,
-                      notification_text: notification_text,
 
                       notification_by: logged_in_user,
                       notification_to: check_status[0].campaigner_id,
                       campaign_id: check_status[0].campaign_id,
-                      notification_type: "campaign",
+                      notification_type: "campaign_rejected",
                       created_at: Date.now()
       });
              return result;
@@ -2059,12 +2073,12 @@ else if(field_name == 'socail_media_handle_shared'){
                    var result2 = notification_details.insert({
 
                       notification_id: notification_id,
-                      notification_text: notification_text,
 
                       notification_by: logged_in_user,
                       notification_to: check_status[0].campaigner_id,
                       campaign_id: check_status[0].campaign_id,
-                      notification_type: "campaign",
+                      notification_type: "campaign_review_stopped",
+                      notification_status: 0,
                       created_at: Date.now()
       });
              return result;
@@ -2263,7 +2277,8 @@ async make_campaign_payment(final_payment,phone,logged_in_user){
                       campaign_id: campaign_id,
                       review_id: review_id,
                       book_id: book_id,
-                      notification_type: "review_request",
+                       notification_status: 0,
+                      notification_type: "review_request_submitted",
                       created_at: Date.now()
       });
       return result;
@@ -2299,7 +2314,8 @@ if(approval_status == 1){
                       notification_to: check_status[0].review_request_by,
                       campaign_id: check_status[0].parent_id,
                       review_id: review_id,
-                      notification_type: "review_request",
+                      notification_status: 0,
+                      notification_type: "review_request_accepted",
                       created_at: Date.now()
       });
 
@@ -2350,7 +2366,8 @@ else if(approval_status == 2){
                       notification_to: check_status[0].review_request_by,
                       campaign_id: check_status[0].parent_id,
                       review_id: review_id,
-                      notification_type: "review_request",
+                      notification_status: 0,
+                      notification_type: "review_request_rejected",
                       created_at: Date.now()
       });
       return result;
@@ -2373,7 +2390,22 @@ if(approval_status == 1){
                     }
             });
 
-  var notification_text = "Congrats! Your review got approved.";
+             var notification_id = 'notification_id_'+Math.floor((Math.random() * 2465789) + 1);
+                   
+                   var result2 = notification_details.insert({
+
+                      notification_id: notification_id,
+
+                      notification_by: logged_in_user,
+                      notification_to: check_status[0].review_request_by,
+                      campaign_id: check_status[0].parent_id,
+                      review_id: review_id,
+
+                       notification_status: 0,
+                      notification_type: "review_status_approved",
+                      created_at: Date.now()
+      });
+
 }else if(approval_status == 2){
 
             var result =  review_details.update({
@@ -2386,22 +2418,25 @@ if(approval_status == 1){
                     }
             });
 
-  var notification_text = "Your review got rejected.";
-}
              var notification_id = 'notification_id_'+Math.floor((Math.random() * 2465789) + 1);
                    
                    var result2 = notification_details.insert({
 
                       notification_id: notification_id,
-                      notification_text: notification_text,
 
                       notification_by: logged_in_user,
                       notification_to: check_status[0].review_request_by,
                       campaign_id: check_status[0].parent_id,
                       review_id: review_id,
-                      notification_type: "review_approval",
+
+                      notification_status: 0,
+                      notification_type: "review_status_rejected",
                       created_at: Date.now()
       });
+
+}
+
+
   },
 
  submit_review(logged_in_user, review_text,good_reads_link,personal_blog_link,amazon_link,additional_text,campaign_id){
@@ -2452,6 +2487,8 @@ if(check_status4[0]){
                       notification_to: 'writersmelon',
                       campaign_id: campaign_id,
                       review_id: review_id,
+
+                       notification_status: 0,
                       notification_type: "submit_review",
                       created_at: Date.now()
       });
@@ -2711,6 +2748,8 @@ var result = await send_email_with_contact_us_details_to_admin(user_name, user_e
 
                       notification_by: 'writersmelon',
                       notification_to: user_id,
+
+                       notification_status: 0,
                       notification_type: "Welcome_email",
                       created_at: Date.now()
                 });

@@ -1,0 +1,212 @@
+
+<template name="client_notification" >
+    {{> header}}
+    
+   <body class="landing-page">
+      {{> headeroptions}}
+      {{> client_notification_details}}
+   </body>
+
+</template>
+
+<template name="client_notification_details" >
+  <div class="loading"  id="loading_div" ></div>
+
+<div class="container">
+  <div class="row">
+    <div class="col col-xl-9 order-xl-2 col-lg-9 order-lg-2 col-md-12 order-md-1 col-sm-12 col-12">
+      <div class="ui-block">
+        <div class="ui-block-title">
+          <h6 class="title">Notifications</h6>
+          <!-- <a href="#" class="more"><svg class="olymp-three-dots-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-three-dots-icon"></use></svg></a> -->
+        </div>
+
+        
+        <!-- Notification List -->
+        <ul class="notification-list">
+{{#each show_notification_listing}}
+
+{{#if equals notification_type "campaign_accepted"}}
+          <li>
+            <div class="notification-event">
+              Your campaign for book
+              {{#each fetch_bookname_with_campaign}}
+              <a href="javascript:void(0)" class="h6 notification-friend go_to_book_detail">{{book_name}}</a>
+              {{/each}}
+              was accepted and started.
+             <!-- {{../notification_text}} -->
+              <span class="notification-date"><time class="entry-date updated" datetime="2004-07-24T18:18">{{calculate_time_difference_ago created_at}}</time></span>
+            </div>
+
+          </li>
+
+{{else if equals notification_type "campaign_rejected"}}
+          <li>
+            <div class="notification-event">
+              Your campaign for book
+              {{#each fetch_bookname_with_campaign}}
+              <a href="javascript:void(0)" class="h6 notification-friend go_to_book_detail">{{book_name}}</a>
+              {{/each}}
+              was rejected.
+             <!-- {{../notification_text}} -->
+              <span class="notification-date"><time class="entry-date updated" datetime="2004-07-24T18:18">{{calculate_time_difference_ago created_at}}</time></span>
+            </div>
+
+          </li>
+
+
+{{else if equals notification_type "campaign_review_stopped"}}
+          <li>
+            <div class="notification-event">
+              Admin has stopped rview process for campaign of book
+              {{#each fetch_bookname_with_campaign}}
+              <a href="javascript:void(0)" class="h6 notification-friend go_to_book_detail">{{book_name}}</a>
+              {{/each}}
+              .
+             <!-- {{../notification_text}} -->
+              <span class="notification-date"><time class="entry-date updated" datetime="2004-07-24T18:18">{{calculate_time_difference_ago created_at}}</time></span>
+            </div>
+
+          </li>
+
+{{else if equals notification_type "review_request_submitted"}}
+          <li>
+            <div class="notification-event">
+              Hey! you have recived a request for campaign of book 
+              {{#each fetch_bookname_with_campaign}}
+              <a href="javascript:void(0)" class="h6 notification-friend go_to_book_detail">{{book_name}}</a>
+              {{/each}}
+              .
+             <!-- {{../notification_text}} -->
+              <span class="notification-date"><time class="entry-date updated" datetime="2004-07-24T18:18">{{calculate_time_difference_ago created_at}}</time></span>
+            </div>
+
+          </li>
+
+
+{{else if equals notification_type "review_request_accepted"}}
+          <li>
+            <div class="notification-event">
+              Congrats. Your request for review of book
+              {{#each fetch_bookname_with_campaign}}
+              <a href="javascript:void(0)" class="h6 notification-friend go_to_book_detail">{{book_name}}</a>
+              {{/each}}
+              got accepted.
+             <!-- {{../notification_text}} -->
+              <span class="notification-date"><time class="entry-date updated" datetime="2004-07-24T18:18">{{calculate_time_difference_ago created_at}}</time></span>
+            </div>
+
+          </li>
+
+
+{{else if equals notification_type "review_request_rejected"}}
+          <li>
+            <div class="notification-event">
+              Hey! your request for campaign of book 
+              {{#each fetch_bookname_with_campaign}}
+              <a href="javascript:void(0)" class="h6 notification-friend go_to_book_detail">{{book_name}}</a>
+              {{/each}}
+              was rejected.
+             <!-- {{../notification_text}} -->
+              <span class="notification-date"><time class="entry-date updated" datetime="2004-07-24T18:18">{{calculate_time_difference_ago created_at}}</time></span>
+            </div>
+
+          </li>
+
+{{else if equals notification_type "review_status_rejected"}}
+          <li>
+
+            <div class="notification-event">
+              Your Review for campaign of book 
+              {{#each fetch_bookname_with_campaign}}
+              <a href="javascript:void(0)" class="h6 notification-friend go_to_book_detail">{{book_name}}</a>
+              {{/each}}
+              was rejected.
+             <!-- {{../notification_text}} -->
+              <span class="notification-date"><time class="entry-date updated" datetime="2004-07-24T18:18">{{calculate_time_difference_ago created_at}}</time></span>
+            </div>
+
+          </li>
+
+{{else if equals notification_type "Follow"}}
+                    <li>
+         {{#each fetch_user_info_for_follow}}   
+            <div class="author-thumb view_profile">
+              <img src="{{user_profile_pic}}" alt="author" class="" >
+            </div>
+            <div class="notification-event">
+               <a href="javascript:void(0)" class="h6 notification-friend view_profile">{{user_name}}</a> Started  Following you
+              <span class="notification-date"><time class="entry-date updated" datetime="2004-07-24T18:18">{{calculate_time_difference_ago ../created_at}}</time></span>
+            </div>
+
+            {{/each}}
+          </li>
+
+{{else if equals notification_type "submit_review"}}
+
+          <li>
+            <div class="notification-event">
+              Someone has submited review for campaign of book
+              {{#each fetch_bookname_with_campaign}}
+              <a href="javascript:void(0)" class="h6 notification-friend go_to_book_detail">{{book_name}}</a>
+              {{/each}}.
+             <!-- {{../notification_text}} -->
+              <span class="notification-date"><time class="entry-date updated" datetime="2004-07-24T18:18">{{calculate_time_difference_ago created_at}}</time></span>
+            </div>
+          </li>
+
+{{else if equals notification_type "review_status_approved"}}
+
+          <li>
+            <div class="notification-event">
+              Your review for campaign of book
+              {{#each fetch_bookname_with_campaign}}
+              <a href="javascript:void(0)" class="h6 notification-friend go_to_book_detail">{{book_name}}</a>
+              {{/each}} is approved and published.
+             <!-- {{../notification_text}} -->
+              <span class="notification-date"><time class="entry-date updated" datetime="2004-07-24T18:18">{{calculate_time_difference_ago created_at}}</time></span>
+            </div>
+          </li>
+
+{{else if equals notification_type "Welcome_email"}}
+
+          <li>
+         {{#each fetch_user_info_for_request}}   
+            <div class="author-thumb view_profile">
+              <img src="{{user_profile_pic}}" alt="author" class="" >
+            </div>
+            <div class="notification-event">
+              Hi <a href="javascript:void(0)" class="h6 notification-friend view_profile">{{user_name}}</a>, welcome to writersmelon.
+              <span class="notification-date"><time class="entry-date updated" datetime="2004-07-24T18:18">{{calculate_time_difference_ago ../created_at}}</time></span>
+            </div>
+
+            {{/each}}
+          </li>
+{{/if}}
+
+{{else}}
+          <li>
+            <p> No new notification.</p>
+          </li>
+{{/each}}
+        </ul>
+        
+        <!-- ... end Notification List -->
+
+      </div>
+    </div>
+
+    <div class="col col-xl-3 order-xl-1 col-lg-3 order-lg-1 col-md-12 order-md-2 col-sm-12  responsive-display-none">
+      <div class="ui-block">
+        <div class="ui-block-title text-center">
+          <div class="row">
+             <h4 class="col-md-12 col-lg-12 col-sm-12">NOTIFICATIONS</h4>        
+             <div class="col-md-12 col-lg-12 col-sm-12"> You´re all caught up! Check back later for new notifications </div>
+          </div>
+       </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</template>

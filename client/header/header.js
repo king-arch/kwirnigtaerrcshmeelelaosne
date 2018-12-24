@@ -11,29 +11,28 @@ import { Session } from 'meteor/session';
 import {  Email } from 'meteor/email';
 import swal from 'sweetalert';
 
-var user_info_list_all;
-var user_info_based_on_email;
-var follow_list_all;
+  var user_info_list_all;
+  var user_info_based_on_email;
+  var follow_list_all;
 
 
-var ads_listing_ticker;
-var interval_ticker;
+  var ads_listing_ticker;
+  var interval_ticker;
 
- Template.headeroptions.onDestroyed(function(){
-  ads_listing_ticker.stop();
- });
-
+  Template.headeroptions.onDestroyed(function(){
+    ads_listing_ticker.stop();
+  });
 
 Template.headeroptions.onRendered(function(){
 
   ads_listing_ticker = Meteor.subscribe('fetch_text_promotion_listing');
 
-    var user_id = Session.get("userId");
-    user_info_based_on_email = Meteor.subscribe("user_info_based_on_id",user_id);
+      var user_id = Session.get("userId");
+      user_info_based_on_email = Meteor.subscribe("user_info_based_on_id",user_id);
 
-    interval_ticker = setInterval(function() {
-    tick();
-}, 5000); 
+      interval_ticker = setInterval(function() {
+          tick();
+      }, 5000); 
 
   });
 
@@ -88,6 +87,11 @@ Template.headeroptions.events({
   'click #go_to_feed':function(){
     // window.location.href="/feed";
     Router.go("/feed");
+   },
+
+  'click #go_to_notifications':function(){
+    // window.location.href="/feed";
+    Router.go("/client_notification");
    },
 
   'click #got_to_contact_us':function(){
