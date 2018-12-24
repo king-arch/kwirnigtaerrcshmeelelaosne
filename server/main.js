@@ -185,6 +185,10 @@ import urlMetadata from 'url-metadata';
       return  notification_details.find({});
     });
 
+     Meteor.publish('notification_details_for_user', function(user_id) {
+      return  notification_details.find({notification_to: user_id});
+    });
+
      Meteor.publish('review_details_with_campaign_id', function(campaign_id) {
       return  review_details.find({parent_id: campaign_id});
     });
@@ -411,6 +415,7 @@ else{
       "user_profile_pic": user_cover,
       "user_status": 1,
       "email_status": 0,
+      "first_time_signup": 0, 
       "created_at": Date.now(),
     });
 
@@ -452,15 +457,17 @@ var check_if_email_exist = user_details.find({user_email: signup_email}).fetch()
       }
       else{
          var result = user_details.insert({
-      "user_id": user_id,
-      "user_name": signup_name,
-      "user_email": signup_email,
-      "user_password": signup_password,
-      "user_role": "User",
-      "user_status": 1,
-      "email_status": 0,
+
+            "user_id": user_id,
+            "user_name": signup_name,
+            "user_email": signup_email,
+            "user_password": signup_password,
+            "user_role": "User",
+            "user_status": 1,
+            "email_status": 0,
             "created_at": Date.now(),
-          });
+
+      });
 
          var message = { 
                       "msg" : result ,
@@ -1247,7 +1254,7 @@ if(blog_author != "user_admin"){
       },  
 
 
-  user_details_update: function(user_id,user_name,fb_handler,twitter_handler,goodreads_handler,user_contact,user_location,user_headline)
+  user_details_update: function(user_id,user_name,fb_handler,twitter_handler,goodreads_handler,user_contact,user_location,user_headline,account_number)
       {   
 
       var result = user_details.update(
@@ -1262,6 +1269,7 @@ if(blog_author != "user_admin"){
                           'fb_handler': fb_handler,
                           'twitter_handler': twitter_handler,
                           'goodreads_handler': goodreads_handler,
+                          'account_number': account_number,
 
                           'user_headline': user_headline,
                           'updated_at': Date.now()
@@ -2091,7 +2099,6 @@ console.log(select_package+book_name+book_summary+author_name+author_description
                       amazon_link: amazon_link,
 
                       delivery_option: delivery_option,
-                      delivery_option: delivery_option,
                       additional_information: additional_information,
                       book_price: book_price,
                       book_cover: book_cover,
@@ -2112,7 +2119,7 @@ console.log(select_package+book_name+book_summary+author_name+author_description
 
     save_campaign_details:function(select_package,book_name,book_summary,author_name,
         author_description,amazon_link,delivery_option,additional_information,book_price,
-        book_catagries,book_cover,final_payment,logged_in_user){
+        book_catagries,book_cover,final_payment,logged_in_user){ 
 
 console.log(select_package+book_name+book_summary+author_name+author_description+amazon_link+delivery_option+additional_information+book_price+book_catagries+final_payment);
    var campaign_id = 'campaign_id_'+Math.floor((Math.random() * 2465789) + 1);
@@ -2130,19 +2137,69 @@ console.log(select_package+book_name+book_summary+author_name+author_description
                       amazon_link: amazon_link,
 
                       delivery_option: delivery_option,
-                      delivery_option: delivery_option,
                       additional_information: additional_information,
-                      book_price: book_price,
+                      book_price: book_price, 
                       book_cover: book_cover,
+
                       final_payment: final_payment,
-                      payment_status: 1,
+                      payment_status: 0,
                       book_catagries: book_catagries,
                       approval_status: 0,
                       created_at: Date.now()
       });
-                   return result;
+                   return campaign_id;
 },
 
+   payment_campaign_status_with_payment_details:function(payment_id,payment_status,payment_request_id,campaign_id){
+
+      console.log(payment_id+ ' & '+payment_status+ ' & '+payment_request_id+ ' & '+campaign_id);
+      
+          var check_status =  campaign_details.find({campaign_id: campaign_id}).fetch();
+          if(check_status[0]){
+          if(check_status[0].payment_status == 0){
+
+                   var result =  campaign_details.update({
+                                campaign_id: check_status[0].campaign_id,
+                              }, {
+                                $set: {
+                                  "payment_id": payment_id,
+                                  "payment_status": payment_status,
+                                  "payment_request_id": payment_request_id,
+                                  "payment_status": 1,
+
+                                  "updated_at": Date.now()
+                                } 
+                              }); 
+                   return result;
+                }
+                }
+      },
+
+
+async make_campaign_payment(final_payment,phone,logged_in_user){
+
+  console.log(final_payment+ ' & ' +phone+ ' & ' +logged_in_user);
+  var result = user_details.find({ user_id: logged_in_user }).fetch();
+
+  if(result[0]){
+   var user_name = result[0].user_name;
+   var user_email = result[0].user_email;
+  }
+
+  var purpose = 'Campaign Payment';
+  var amount = final_payment;
+  var buyer_name = user_name;
+
+  var send_sms;
+  var email = user_email;
+  
+  console.log(purpose+ ' & ' +amount+ ' & ' +phone+ ' & ' +buyer_name+ ' & ' +email);
+  var result = await make_payment_for_campaign(purpose,amount,phone,buyer_name,email);
+  console.log('returned results');
+  console.log(result);
+  return result;
+
+},
 
   create_book_details_from_campaign(book_id, book_name, book_summary, book_catagries, author_name,
    author_description,amazon_link, book_cover, final_release_date,book_price,campaign_id,editors_pick_status){
@@ -2424,6 +2481,19 @@ if(check_status4[0]){
       return result;
   },
 
+    change_reward_request_status(request_id,status){ 
+  
+           var result_2 =  reward_details.update({
+                                       request_id: request_id,
+                                       }, {
+                                 $set: {
+                                   "request_status": status,
+                                   "update_at": Date.now()
+                                } 
+                              });
+             return result_2;
+            },
+
  update_review_text(review_text,campaign_id,review_id){
    console.log(review_text +' & '+campaign_id+' & '+review_id);
    var check_status4 =  review_details.find({"review_id": review_id}).fetch();
@@ -2575,7 +2645,7 @@ var result = await send_email_with_contact_us_details_to_admin(user_name, user_e
   },
 
 
-  send_redeem_request(logged_in_user,requested_value){ 
+  send_redeem_request(logged_in_user,requested_value,account_number){ 
 
      var result = reward_details.find({reward_to: logged_in_user}).fetch();
       if(result[0]){
@@ -2600,6 +2670,7 @@ var result = await send_email_with_contact_us_details_to_admin(user_name, user_e
               requested_value: requested_value,
               requested_by: logged_in_user,
               entry_type: 'redeem_request',
+              account_number: account_number,
               involved_id: new_array,
 
               request_status: 0,
@@ -2610,6 +2681,45 @@ var result = await send_email_with_contact_us_details_to_admin(user_name, user_e
    return result; 
    }
   }, 
+
+
+  check_for_first_timer_to_send_email(user_id){ 
+
+     var result = user_details.find({user_id: user_id}).fetch();
+      if(result[0]){
+        if(result[0].first_time_signup == 1){
+          return false;
+        }else{
+
+               var result_2 =  user_details.update({
+                                user_id: user_id,
+                              }, {
+                                $set: {
+                                  "first_time_signup": 1,
+                                  "update_at": Date.now()
+                                } 
+                              });
+
+          
+                var notification_text = 'Hi "'+result[0].user_name +'", welcome to writersmelon';
+               var notification_id = 'notification_id_'+Math.floor((Math.random() * 2465789) + 1);
+                   
+                   var result2 = notification_details.insert({
+
+                      notification_id: notification_id,
+                      notification_text: notification_text,
+
+                      notification_by: 'writersmelon',
+                      notification_to: user_id,
+                      notification_type: "Welcome_email",
+                      created_at: Date.now()
+                });
+                      return result2;
+
+        
+        }
+      }
+    },
 
 });
 
@@ -2645,9 +2755,9 @@ var spacing="2";
 var email = "writersmelonteam@gmail.com";
 var htmlCode="<html><head><title>Email</title></head><body><div style="+div_style+"><div style="+div_style2 +"><table style="+div_style3+"><tbody><tr><td><div style="+div_style4+"><table style="+div_style6+"><tbody><tr><td><div style="+div_style7+"><a> <img src="+image_url+" style="+style+"/></a></div></td><td><p style="+div_style10+"><p></td>"+
 "</tr></tbody></table></div><div style="+div_style11+"><table style ="+div_style12 +" cellspacing="+spacing+" cellpadding="+spacing+"><tbody><tr><td "+
-"colspan="+spacing+">&nbsp;</td></tr><tr><td colspan="+spacing+">&nbsp;</td></tr><tr><td colspan="+spacing+" style="+div_style14+">Hi "+name +",</td></tr><tr><td colspan="+spacing+">Welcome to the Writersmelon"+
-" Family!</td></tr><tr><td colspan="+spacing+">Your account is almost ready, but before you can login you need to complete a brief account verification process.</td></tr><tr><td colspan="+div_style11
-+"><br/><a href=https://writersmelon.herokuapp.com/activate_email/"+userID + ">Click here</a> to verify your email ID.  (if you are using the mobile application, after you press on the previous link close the mobile browser and continue from the application).<br/></td></tr><tr><td colspan="+spacing+">&nbsp;</td></tr><tr><td colspan="+spacing
+"colspan="+spacing+">&nbsp;</td></tr><tr><td colspan="+spacing+">&nbsp;</td></tr><tr><td colspan="+spacing+" style="+div_style14+">Dear "+name +",</td></tr><tr><td colspan="+spacing+">ThankYou for your signing up with Writers Melon."+
+"</td></tr><tr><td colspan="+spacing+">Please click on the confirmation link to activate your account.</td></tr><tr><td colspan="+div_style11
++"><br/><a href=https://writersmelon.herokuapp.com/activate_email/"+userID + ">Link</a><br/></td></tr><tr><td colspan="+spacing+">&nbsp;</td></tr><tr><td colspan="+spacing
 +">P.S. If you did not sign up for Writersmelon, just ignore this email; we will never again send you an email.</td></tr><tr><td colspan="+spacing
 +">&nbsp;</td></tr><tr><td colspan="+spacing+">Regards</td></tr><tr><td colspan="+spacing
 +">The Writersmelon Team</td></tr><tr><td colspan="+spacing+">&nbsp;</td></tr><tr><td colspan="+spacing+">&nbsp;</td></tr></tbody></table></div><div style="+div_style15+"><table style="+div_style6+"><tbody><tr><td><center><small style="+div_style6+">This email was intended for "+name+".<br/>Copyright Writersmelon, 2018.</small></center></td></tr></tbody></table></div></td></tr></tbody></table></div></div></body></html>";
@@ -2693,10 +2803,10 @@ var spacing="2";
 var email = "writersmelonteam@gmail.com";
 var htmlCode="<html><head><title>Email</title></head><body><div style="+div_style+"><div style="+div_style2 +"><table style="+div_style3+"><tbody><tr><td><div style="+div_style4+"><table style="+div_style6+"><tbody><tr><td><div style="+div_style7+"><a> <img src="+image_url+" style="+style+"/></a></div></td><td><p style="+div_style10+"><p></td>"+
 "</tr></tbody></table></div><div style="+div_style11+"><table style ="+div_style12 +" cellspacing="+spacing+" cellpadding="+spacing+"><tbody><tr><td "+
-"colspan="+spacing+">&nbsp;</td></tr><tr><td colspan="+spacing+">&nbsp;</td></tr><tr><td colspan="+spacing+" style="+div_style14+">Hi "+name +",</td></tr><tr><td colspan="+spacing+">Your request for Password reset has been processed successfully."+
+"colspan="+spacing+">&nbsp;</td></tr><tr><td colspan="+spacing+">&nbsp;</td></tr><tr><td colspan="+spacing+" style="+div_style14+">Dear "+name +",</td></tr><tr><td colspan="+spacing+">Please click on the Password reset link to change your password. "+
 "</td></tr><tr><td colspan="+div_style11
-+"><br/><p>Please click on the link below to reset your password</p>"+
-"<a href="+url+"/change_forgot_password/"+userId +" </a>Reset Password link</td></tr><tr><td colspan="+spacing+">&nbsp;</td></tr><tr><td colspan="+spacing
++"><br/>"+
+"<a href="+url+"/change_forgot_password/"+userId +"> Reset Password link</a></td></tr><tr><td colspan="+spacing+">&nbsp;</td></tr><tr><td colspan="+spacing
 +">P.S. If you did not sign up for Writersmelon, just ignore this email; we will never again send you an email.</td></tr><tr><td colspan="+spacing
 +">&nbsp;</td></tr><tr><td colspan="+spacing+">Regards</td></tr><tr><td colspan="+spacing
 +">The Writersmelon Team</td></tr><tr><td colspan="+spacing+">&nbsp;</td></tr><tr><td colspan="+spacing+">&nbsp;</td></tr></tbody></table></div><div style="+div_style15+"><table style="+div_style6+"><tbody><tr><td><center><small style="+div_style6+">This email was intended for "+name+".<br/>Copyright Writersmelon, 2018.</small></center></td></tr></tbody></table></div></td></tr></tbody></table></div></div></body></html>";
@@ -2769,8 +2879,8 @@ var message = { "msg": "Password succesfully changed. We also sent your new pass
 var name = user_name;
 var user_email = user_email;
 var password = password;
-console.log('Password: ');
-console.log(password);
+// console.log('Password: ');
+// console.log(password);
 var userId = Base64.encode(user_id);
 var url = 'https://writersmelon.herokuapp.com';
 
@@ -2849,9 +2959,10 @@ var spacing="2";
 var email = "writersmelonteam@gmail.com";
 var htmlCode="<html><head><title>Email</title></head><body><div style="+div_style+"><div style="+div_style2 +"><table style="+div_style3+"><tbody><tr><td><div style="+div_style4+"><table style="+div_style6+"><tbody><tr><td><div style="+div_style7+"><a> <img src="+image_url+" style="+style+"/></a></div></td><td><p style="+div_style10+"><p></td>"+
 "</tr></tbody></table></div><div style="+div_style11+"><table style ="+div_style12 +" cellspacing="+spacing+" cellpadding="+spacing+"><tbody><tr><td "+
-"colspan="+spacing+">&nbsp;</td></tr><tr><td colspan="+spacing+">&nbsp;</td></tr><tr><td colspan="+spacing+" style="+div_style14+">Hi "+name +",</td></tr><tr><td colspan="+spacing+">Congrats!!! You have been approved for Reviewing Campaign of "+book_name+" and the review book will reach you in next 5 days."+
+"colspan="+spacing+">&nbsp;</td></tr><tr><td colspan="+spacing+">&nbsp;</td></tr><tr><td colspan="+spacing+" style="+div_style14+">Hi "+name +",</td></tr><tr><td colspan="+spacing+">Congrats!!! You have been selected for reviewing the book "+book_name+"."+
 "</td></tr><tr><td colspan="+spacing+">&nbsp;</td></tr><tr><td colspan="+spacing
-+">If you didnt get book in 5 days, please reach us out through same email thread. We are happy to help you.</td></tr><tr><td colspan="+spacing
++">The book will be shipped to you once you update your postal address and contact number on your profile . Please inform us if you don't receive it within 7-10 days of this mail. Do share a pic of the book on Twitter/Instagram and tag us. Please submit your review links from your blog + Goodreads + Amazon/Flipkart on write review form. </td></tr><tr><td colspan="+spacing
++">within 15 days of receiving the book. Do read our review policy, if you are participating for the first time. In case you no longer wish to participate in this review program, please cancel your sign up at the earliest.  </td></tr><tr><td colspan="+spacing
 +">P.S. If you are not "+name+", just ignore this email; we will never again send you an email.</td></tr><tr><td colspan="+spacing
 +">&nbsp;</td></tr><tr><td colspan="+spacing+">Regards</td></tr><tr><td colspan="+spacing
 +">The Writersmelon Team</td></tr><tr><td colspan="+spacing+">&nbsp;</td></tr><tr><td colspan="+spacing+">&nbsp;</td></tr></tbody></table></div><div style="+div_style15+"><table style="+div_style6+"><tbody><tr><td><center><small style="+div_style6+">This email was intended for "+name+".<br/>Copyright Writersmelon, 2018.</small></center></td></tr></tbody></table></div></td></tr></tbody></table></div></div></body></html>";
@@ -2904,9 +3015,9 @@ var spacing="2";
 var email = "writersmelonteam@gmail.com";
 var htmlCode="<html><head><title>Email</title></head><body><div style="+div_style+"><div style="+div_style2 +"><table style="+div_style3+"><tbody><tr><td><div style="+div_style4+"><table style="+div_style6+"><tbody><tr><td><div style="+div_style7+"><a> <img src="+image_url+" style="+style+"/></a></div></td><td><p style="+div_style10+"><p></td>"+
 "</tr></tbody></table></div><div style="+div_style11+"><table style ="+div_style12 +" cellspacing="+spacing+" cellpadding="+spacing+"><tbody><tr><td "+
-"colspan="+spacing+">&nbsp;</td></tr><tr><td colspan="+spacing+">&nbsp;</td></tr><tr><td colspan="+spacing+" style="+div_style14+">Hi "+name +",</td></tr><tr><td colspan="+spacing+">Congrats!!! You have been approved for Reviewing Campaign of "+book_name+". We have credited you the Book price in form of reward points(along with delivery changes)."+
+"colspan="+spacing+">&nbsp;</td></tr><tr><td colspan="+spacing+">&nbsp;</td></tr><tr><td colspan="+spacing+" style="+div_style14+">Hi "+name +",</td></tr><tr><td colspan="+spacing+">You have been selected for reviewing the book "+book_name+"."+
 "</td></tr><tr><td colspan="+spacing+">&nbsp;</td></tr><tr><td colspan="+spacing
-+">you can reddem these points once you reach minimum reddemption limit. Buy this book from link on book detail page.</td></tr><tr><td colspan="+spacing
++">Please order the book from Amazon within 2-3 days of this mail. The book cost will be added to your reward points. Do share a pic of the book on Twitter/Instagram and tag us. Please submit your review links from your blog + Goodreads + Amazon/Flipkart on write a review form within 15 days of receiving the book. Do read our review policy if you are participating for the first time. In case you no longer wish to participate in this review program, please cancel your sign up at the earliest.</td></tr><tr><td colspan="+spacing
 +">P.S. If you are not "+name+", just ignore this email; we will never again send you an email.</td></tr><tr><td colspan="+spacing
 +">&nbsp;</td></tr><tr><td colspan="+spacing+">Regards</td></tr><tr><td colspan="+spacing
 +">The Writersmelon Team</td></tr><tr><td colspan="+spacing+">&nbsp;</td></tr><tr><td colspan="+spacing+">&nbsp;</td></tr></tbody></table></div><div style="+div_style15+"><table style="+div_style6+"><tbody><tr><td><center><small style="+div_style6+">This email was intended for "+name+".<br/>Copyright Writersmelon, 2018.</small></center></td></tr></tbody></table></div></td></tr></tbody></table></div></div></body></html>";
@@ -2981,6 +3092,7 @@ var message = { "msg": "User succesfully created. "}
           return message;
 }
 
+
 //******************** email functions End *************************
 
 function youtube_parser(url){
@@ -2988,3 +3100,58 @@ function youtube_parser(url){
     var match = url.match(regExp);
     return (match&&match[7].length==11)? match[7] : false;
 }
+
+function make_payment_for_campaign(purpose,amount,phone,buyer_name,email){
+  console.log('inside make_payment_for_campaign');
+
+  return new Promise((resolve, reject) => {   
+var request= require('request');
+
+var headers = { 'X-Api-Key': 'test_c96c3056543df20652841d869c7', 'X-Auth-Token': 'test_bf665ff124f9ceb90d002e2777f'}
+var payload = {
+  purpose: purpose,
+  amount: amount,
+  phone: phone,
+  buyer_name: buyer_name,
+  redirect_url: 'http://localhost:3000/payment_status',
+  send_email: true,
+  webhook: 'http://www.example.com/webhook/',
+  send_sms: false,
+  email: email,
+  allow_repeated_payments: false}
+
+request.post('https://test.instamojo.com/api/1.1/payment-requests/', {form: payload,  headers: headers}, function(error, response, body){
+
+  console.log(body);
+
+  if(!error && response.statusCode == 201){
+    // console.log(body);
+    resolve(body);
+
+    // return body;
+  }
+    result2 = JSON.parse(body);
+      console.log(result2.message);
+    resolve(body);
+
+});
+});
+}
+
+
+// function get_modality_list(instance_path) {    
+//     return new Promise((resolve, reject) => {   
+//     var request = require("request");
+
+//     var options = { method: 'GET',
+//       url: instance_path,
+//       headers: 
+//        { 'Postman-Token': '76e6c2af-3265-4fc8-b02d-8d96663c911d',
+//          'Cache-Control': 'no-cache' } };
+
+//     request(options, function (error, response, body) {
+//       if (error) throw new Error(error);
+//       resolve(body);
+//       });
+//     });
+// }

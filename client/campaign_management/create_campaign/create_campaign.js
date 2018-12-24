@@ -47,8 +47,8 @@ $(".show_packages").addClass("loader_visiblity_block");
       for(var i=1;i<32;i++){
         array.push({'index': i});
       }
-      console.log('here we are: ');
-      console.log(array);
+      // console.log('here we are: ');
+      // console.log(array);
       return array;
     },
 
@@ -174,6 +174,7 @@ Template.create_campaign_detail.events({
         var delivery_option = $("#delivery_option").val();
         var additional_information = $("#additional_information").val();
 
+        var phone = $("#phone").val();
         var book_price = $("#book_price").val();
         var book_catagries = $("#book_catagries").val();
         var book_cover = $("#book_cover").val();
@@ -228,21 +229,26 @@ Template.create_campaign_detail.events({
          $('#amazon_link').removeClass('empty_field').blur();
        }
 
-            if (book_price == '' || book_price == undefined) {
-
-             $('#book_price').addClass('empty_field').focus();
-             return false;
-
-           } else {
-             $('#book_price').removeClass('empty_field').blur();
-           }
-
+       if (phone == '' || phone == undefined) {
+         $('#phone').addClass('empty_field').focus();
+        return false;
+       } else {
+         $('#phone').removeClass('empty_field').blur();
+       }
 
        if (delivery_option == '' || delivery_option == undefined) {
          $('#delivery_option').addClass('empty_field').focus();
         return false;
        } else {
          $('#delivery_option').removeClass('empty_field').blur();
+       }
+
+      if (book_price == '' || book_price == undefined) {
+
+       $('#book_price').addClass('empty_field').focus();
+         return false;
+        } else {
+         $('#book_price').removeClass('empty_field').blur();
        }
 
        if (Session.get("book_cover_session")){
@@ -269,12 +275,12 @@ Template.create_campaign_detail.events({
        if (additional_information == '' || additional_information == undefined) {
          var additional_information = '';
        }
-console.log("show text");
-       console.log("select_package "+select_package+" & book_name "+book_name+
-        " &  author_name "+author_name+" &  author_description "+author_description+
-        " &  delivery_option "+delivery_option+
-        " &  amazon_link "+amazon_link);
-swal("show text");
+// console.log("show text");
+       // console.log("select_package "+select_package+" & book_name "+book_name+
+       //  " &  author_name "+author_name+" &  author_description "+author_description+
+       //  " &  delivery_option "+delivery_option+
+       //  " &  amazon_link "+amazon_link);
+// swal("show text");
        swal("select_package "+select_package+" & book_name "+book_name+
         " &  author_name "+author_name+" &  author_description "+author_description+
         " &  delivery_option "+delivery_option+
@@ -282,7 +288,7 @@ swal("show text");
 
         if(delivery_option == 1){
                 
-                console.log("case 1");
+                // console.log("case 1");
                 if(select_package == 15){
 
                  var package_value = 7500;
@@ -305,12 +311,12 @@ swal("show text");
                 else if(select_package == 90){
                  var package_value = 60000;
                 }
-console.log("case 1.1");
+// console.log("case 1.1");
           var computing_formula = package_value + (package_value*(18/100) );
         }
         else if(delivery_option == 2){
         
-        console.log("case 2");
+        // console.log("case 2");
         if(select_package == 15){
          var review_count = 5;
          var package_value = 7500;
@@ -338,35 +344,61 @@ console.log("case 1.1");
 
         var net_book_price = parseInt(book_price)+60;
 
-        console.log("case 2.1");
-        console.log(package_value);
-        console.log(package_value*(18/100));
-        console.log(package_value*(10/100));
+        // console.log("case 2.1");
+        // console.log(package_value);
+        // console.log(package_value*(18/100));
+        // console.log(package_value*(10/100));
 
-        console.log(review_count);
-        console.log(net_book_price);
-        console.log(review_count*net_book_price);
+        // console.log(review_count);
+        // console.log(net_book_price);
+        // console.log(review_count*net_book_price);
 
         var computing_formula = package_value + package_value*(18/100)  + review_count*net_book_price + package_value*(10/100);
-        console.log("package_value + package_value*(18/100)  + review_count*net_book_price: | "+package_value +'+'+ package_value +'*'+'(18 '+'/'+'100)' +'+'+ review_count +'*'+net_book_price+'+'+ package_value +'*'+'(10 '+'/'+'100)');
+        // console.log("package_value + package_value*(18/100)  + review_count*net_book_price: | "+package_value +'+'+ package_value +'*'+'(18 '+'/'+'100)' +'+'+ review_count +'*'+net_book_price+'+'+ package_value +'*'+'(10 '+'/'+'100)');
        }
 
 console.log("Payable amount: "+computing_formula);
 swal("Payable amount: "+computing_formula + ' | ' +'package_value '+package_value+' | GST '+package_value*(18/100) + ' | ');
 var final_payment = computing_formula;
-console.log("just above");
+// console.log("just above");
+      var logged_in_user = Session.get("userId");
+      // swal(final_payment+ ' & ' +phone+ ' & ' +logged_in_user);
+      console.log(final_payment+ ' & ' +phone+ ' & ' +logged_in_user);
+      console.log(phone);
 
- var logged_in_user = Session.get("userId");
       Meteor.call('save_campaign_details',select_package,book_name,book_summary,author_name,author_description,amazon_link,delivery_option,additional_information,book_price,book_catagries,book_cover,final_payment,logged_in_user,function (error, result) {
       if (error) {
         swal('Some error occured!');
 
       } else {
-       
             swal('Campign request successfully sent. ');
-            window.location.reload('/campaign_listing');
+            console.log(result);
+            // console.log(result.campaign_id);
+            Session.setPersistent("campaign_id_for_payment_status_update",result);
+            // window.location.reload('/campaign_listing');
         }
     });
+
+
+      Meteor.call('make_campaign_payment',final_payment,phone,logged_in_user,function (error, result) {
+      if (error) {
+        swal('Some error occured!');
+        return false;
+      } else {      
+        console.log(result);
+        result2 = JSON.parse(result);
+
+        if(result2.success == 'true'){
+
+        }
+        console.log(result2.payment_request.longurl);   
+        window.location.href = result2.payment_request.longurl;
+            swal('Payment successfully made. ');
+        }
+    });
+
+// return false;
+
 
    },
 
@@ -384,9 +416,9 @@ function upload_cover_pic(e,template){
        var base64data="";
        reader.readAsDataURL(file);
        reader.onload = function () {
-       console.log(reader.result);
+       // console.log(reader.result);
        base64data = reader.result;
-       console.log(base64data);
+       // console.log(base64data);
 
      Session.set("book_cover_session",base64data);
 

@@ -17,15 +17,19 @@ import swal from 'sweetalert';
 var user_info_list_all;
 var user_info_based_on_email;
 var follow_list_all;
+
 var categories_selected;
 var result_interested;
+var get_notifications;
 
 Template.profile_content.onDestroyed(function(){
   user_info_list_all.stop();
   user_info_based_on_email.stop();
   follow_list_all.stop();
+
   result_interested.stop();
   categories_selected.stop();
+  get_notifications.stop();
 
 });
 
@@ -33,15 +37,8 @@ Template.profile_content.onRendered(function(){
 
    Session.set("intrest_array","");
    result_interested = Meteor.subscribe('fetch_result_interest');
+   get_notifications = Meteor.subscribe('notification_details_for_user',Session.get("userId"));
    categories_selected = Meteor.subscribe('categories_selection_for_user',Session.get("userId"));
-
-   // var results = categories_selection.find({"user_id": Session.get("userId")}).fetch();
-
-
-
-       // if(result[i]){
-         // console.log(results[i].selected_category_id);
-         // new_array.push(results[i].selected_category_id);
 
          Meteor.call('fetch_categories_selection',Session.get("userId"),function(error,result){
               if(error){
@@ -56,6 +53,17 @@ Template.profile_content.onRendered(function(){
                 Session.set("intrest_array",new_array);
             }
         });
+
+       var user_id = Session.get("userId");
+       user_info_based_on_email = Meteor.subscribe("user_info_based_on_id",user_id);
+
+       Meteor.call('check_for_first_timer_to_send_email',user_id,function(error,result){
+              if(error){
+                console.log("Some error occure.");
+              }else{
+                console.log("Successfully Checked");
+              }
+       });
 
   $('#loading_div').addClass("loader_visiblity_block");
   // $.getScript("https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.4.3/cropper.min.js",function(){
@@ -90,8 +98,8 @@ $(document).ready(function() {
             
         }, 2500);
     }
-
  }
+
 });
 
 
@@ -1208,6 +1216,8 @@ viewMode: 1,
         var twitter_handler = $('#twitter_handler').val().trim(); 
         var goodreads_handler = $('#goodreads_handler').val().trim(); 
 
+        var account_number = $('#account_number').val().trim(); 
+
         if(user_name == null || user_name == "")
         {
           $('#user_name').addClass('emptyfield').focus();
@@ -1244,14 +1254,24 @@ viewMode: 1,
           $('#user_headline').removeClass('emptyfield');
         }
 
+
+        if(account_number)
+        {
+            if(account_number.length < 12){
+              $('#account_number').addClass('emptyfield').focus();
+              swal('Account number should not be less then 12');
+              return false;
+            }else{
+              $('#account_number').removeClass('emptyfield');  
+            }
+        }
+
         if(user_contact)
         {
-
         if ( !(user_contact+"").match(/^\d+$/) ) {
            swal('phone number can only have digits');
            return false;
         }
-
                 // swal('above update');
 
         var check_len = user_contact.length;
@@ -1270,7 +1290,7 @@ viewMode: 1,
         user_name = user_name.charAt(0).toUpperCase()+ user_name.slice(1);
         // swal(name+gender+marital_status+phone+datepicker+autocomplete+user_id);
         // user_contact_with_check
-        Meteor.call('user_details_update',user_id,user_name,fb_handler,twitter_handler,goodreads_handler,user_contact,user_location,user_headline,function(){
+        Meteor.call('user_details_update',user_id,user_name,fb_handler,twitter_handler,goodreads_handler,user_contact,user_location,user_headline,account_number,function(){
           if(result){
              console.log('error');
           }else{

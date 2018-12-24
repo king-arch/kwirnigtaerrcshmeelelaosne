@@ -14,6 +14,7 @@ import swal from 'sweetalert';
 import { promotion } from './../../import/collections/insert.js';
 import { reward_details } from './../../import/collections/insert.js';
 import { campaign_details } from './../../import/collections/insert.js';
+import { user_details } from './../../import/collections/insert.js';
 import { Base64 } from 'meteor/ostrio:base64';
 
 var reward_details_all;
@@ -98,14 +99,72 @@ Template.display_reward_detail_page.events({
     "click #send_request_to_redeem":function(){
       var logged_in_user = Session.get("userId");
       var requested_value = Session.get("total_reward_points");
-        Meteor.call('send_redeem_request',logged_in_user,requested_value,function(error,result){
+
+      var fetch_user_account_details = user_details.find({user_id: Session.get("userId")}).fetch();
+
+if(fetch_user_account_details[0]){
+  // alert('case 1');
+  // alert('this');
+  // console.log(this);
+  var account_number = 0;
+  if(fetch_user_account_details[0].account_number){
+
+    account_number = fetch_user_account_details[0].account_number;
+        swal('You have entered "'+account_number+'" account number.'+
+'If you want, You can change this account detail from edit personal infomation section of profile section as it would be used by admin for sending reward points equilent money.'+
+' If its not complete or correct, we will process your request and will reject it.', {
+        buttons: {
+          cancel: "Cancel",
+          catch: {
+            text: "Sure",
+            value: "catch",
+          },
+        },
+      })
+      .then((value) => {
+        switch (value) {
+          case "defeat":
+            swal("Pikachu fainted! You gained 500 XP!");
+            break;
+
+          case "catch":
+        Meteor.call('send_redeem_request',logged_in_user,requested_value,account_number,function(error,result){
           if(error){
               console.log("Error");
           }else{
            swal("Request sent");
           }
     });  
+            break;
+        }
+      });
 
+  }else{
+
+        swal('You havent entered your Account details.'+
+'Admin requires this for sending reward points equilent money.'+
+' If you wish to complete account details, you can do it from edit personal infomation section of profile section.', {
+        buttons: {
+          cancel: "Cancel",
+          catch: {
+            text: "Sure",
+            value: "catch",
+          },
+        },
+      })
+      .then((value) => {
+        switch (value) {
+          case "defeat":
+            swal("Pikachu fainted! You gained 500 XP!");
+            break;
+
+          case "catch":
+return false;
+
+            break;
+        }
+      });
+   }}   
     },
 
 });

@@ -29,7 +29,11 @@ Template.left_panel_admin.onDestroyed(function () {
   },
 
     'click #edit_profile':function(){
-  		  Router.go("/edit_profile");
+        Router.go("/edit_profile");
+  },
+
+    'click #reward_management':function(){
+  		  Router.go("/reward_management");
   },
 
     'click #admin_dashbaord':function(){

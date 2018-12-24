@@ -1,0 +1,110 @@
+
+<template name="reward_management" >
+
+	<body> {{> reward_management_details}} </body>
+</template>
+
+<template name="reward_management_details" >
+	<div class="loading"  id="loading_div" ></div>
+	{{>left_panel_admin}}
+<div class="">
+	<div class="content-bg-wrap"></div>
+			<div class="row">
+				<div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+					<div class="ui-block responsive-flex">
+						<div class="container ui-block-title" style="padding-left: 4%;">
+							<!-- <div class="h6 title">Book Management</div> -->
+							<h1 style="font-size: 30px; font-weight: 500;">Reward Management</h1>
+							
+							<div class="align-right">
+								<button  id="export_file" class="btn btn-success" > export file </button>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+
+</div>
+	<div class="row">
+		<div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+			<div class="ui-block ">		
+				<div class="container" style="padding-left: 2%;">		
+					<!-- Forums Table -->				
+					<table class="forums-table table datatable " id="show_reward_request_listing" >				
+						<thead>				
+						<tr>
+							<th class="forum">
+								Requested amount
+							</th>
+							<th class="forum">
+								Requested By
+							</th>				
+				
+							<th class="posts">
+								Requested On
+							</th>
+
+							<th class="posts">
+								Account Detail
+							</th>
+					
+							<th class="freshness">
+								Requested status
+							</th>			
+						</tr>
+					</thead>
+
+					<tbody>
+						{{#each show_reward_details}}				
+						<tr>
+							<td class="forum">
+								<div class="forum-item">
+									{{requested_value}}
+									
+								</div>
+							</td>
+
+							<td class="freshness">
+								<div class="author-freshness">
+								{{#each fetch_user_info}}   
+								  <div class="post-thumb">
+								    <img src="{{user_profile_pic}}" alt="photo" class="go_to_blog_detail" style="height: 80px !important;width: 80px !important;" >
+								  </div>
+
+					                <a class="h6 post__author-name fn" href="#">{{user_name}}</a>
+					               
+					          {{/each}}
+									
+								</div>
+							</td>
+
+							<td class="freshness">
+								<div class="author-freshness">{{show_request_date}}</div>
+							</td>
+
+							<td class="freshness">
+								<div class="author-freshness">
+									{{account_number}}
+								</div>
+							</td>
+
+        			        <button  id="{{request_id}}" class="reject_redeem_status btn btn-danger" value="0"> Reject request </button>
+
+        			        <button  id="{{request_id}}" class="accept_redeem_status btn btn-success" value="0"> Mark as paid </button> 
+
+						</tr>
+					  {{/each}}
+					  </tbody>
+					</table>
+
+					<!-- ... end Forums Table -->
+				</div>
+		</div>
+
+		</div>
+
+	</div>
+
+
+</template>
