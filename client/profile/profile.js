@@ -5,6 +5,8 @@ import { user_details }  from './../../import/collections/insert.js';
 import { following_list }  from './../../import/collections/insert.js';
 import { interest_list }  from './../../import/collections/insert.js';
 import { feed }  from './../../import/collections/insert.js';
+import { campaign_details }  from './../../import/collections/insert.js';
+
 import { book_details }  from './../../import/collections/insert.js';
 import { categories_selection }  from './../../import/collections/insert.js';
    // import { categories_selection } from './../../import/collections/insert.js';
@@ -970,6 +972,20 @@ Template.profile_content.helpers({
       }
   },
   //END showing edited text in edited post
+
+    show_user_campaign_count(){
+      var logged_in_user = Session.get("userId");
+      Meteor.subscribe("campaign_details_all_list");
+      var result = campaign_details.find({campaigner_id: logged_in_user}).count();
+
+      if(result > 0){
+        return result;
+      }else{
+
+        return 0;
+      }
+      return result;
+    },
 
 
 });

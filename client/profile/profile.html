@@ -37,40 +37,49 @@
             <div class="row">
               <div class="col col-lg-5 col-md-5 col-sm-12 col-12">
                 <ul class="profile-menu">
-                  <li>
+                 <!--  <li>
                     <a href="#" class="friend-count-item">
-                      <div class="h6">58</div>
+                      <div class="h6">0</div>
                       <div class="title">Books</div>
                     </a>
                   </li>
+ -->
                   <li>
-                    <a href="#" class="friend-count-item">
-                      <div class="h6">240</div>
+                  <a href="#" class="friend-count-item">
+                      <div class="h6">
+                        {{show_following_count}}
+                      </div>
                       <div class="title">Following</div>
-                    </a>
+                    </a> 
                   </li>
+
                   <li>
-                    <a href="#" class="friend-count-item">
-                      <div class="h6">12</div>
+                     <a href="#" class="friend-count-item">
+                      <div class="h6">
+                        {{show_followers_count}}
+                      </div>
                       <div class="title">Followers</div>
                     </a>
                   </li>
+
                 </ul>
               </div>
               <div class="col col-lg-5 ml-auto col-md-5 col-sm-12 col-12">
                 <ul class="profile-menu">
                   <li>
                     <a href="javascript:void(0)" class="pointer friend-count-item" id="clicked_campaign" > 
-                      <div class="h6">835</div>
+                      <div class="h6">{{show_user_campaign_count}}</div>
                       <div class="title"> Campaigns </div>
                     </a>
                   </li>
-                  <li>
+
+                  <!-- <li>
                     <a href="#" class="friend-count-item">
                       <div class="h6">12.6K</div>
                       <div class="title">Review</div>
                     </a>
-                  </li>
+                  </li> -->
+
                   <li>
                     <a href="#" class="friend-count-item">
                       <div class="h6">970</div>
