@@ -24,7 +24,7 @@ Template.blog_edit_draft_detail.onDestroyed(function () {
 });
 
 Template.blog_edit_draft_detail.onCreated(function eventlistOnCreated(){
-
+  
 });
 
 Template.blog_edit_draft_detail.onRendered(function () {

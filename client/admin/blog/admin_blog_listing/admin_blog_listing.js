@@ -295,6 +295,13 @@ Template.display_blog_listing_admin.events({
 
   },
 
+      "click .go_to_blog_detail":function(){ 
+      var blog_id = Base64.encode(this.blog_id);  
+      var url = '/admin_blog_detail/'+blog_id;
+            console.log(url);
+            window.location.href = url;
+    },
+
 
 });
 

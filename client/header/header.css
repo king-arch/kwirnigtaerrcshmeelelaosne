@@ -69,3 +69,10 @@
 .scroll-text{
     color: #000;
 }
+
+.show_dot{
+    height: 10px !important;
+    width: 10px !important;
+    top: -5px !important;
+    right: 0 !important;
+}

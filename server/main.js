@@ -189,6 +189,10 @@ import urlMetadata from 'url-metadata';
       return  notification_details.find({notification_to: user_id});
     });
 
+     Meteor.publish('notification_details_for_admin', function(user_id) {
+      return  notification_details.find({notification_to: 'writersmelon'});
+    });
+
      Meteor.publish('review_details_with_campaign_id', function(campaign_id) {
       return  review_details.find({parent_id: campaign_id});
     });
@@ -200,6 +204,10 @@ import urlMetadata from 'url-metadata';
      Meteor.publish('book_collections_all_with_user_id', function(user_id) {
       return  book_collections.find({added_by: user_id});
     });
+
+    //  Meteor.publish('book_collections_all_with_book_id', function(book_id) {
+    //   return  book_collections.find({book_id: book_id});
+    // });
 
      Meteor.publish('reward_details_all', function() {
       return  reward_details.find({});
@@ -625,6 +633,39 @@ if(check_if_exist[0]){
           updated_at: Date.now,
         }
       });
+
+if(newUser[0].blog_author != 'user_admin'){
+if(status == 2){
+ var notification_id = 'notification_id_'+Math.floor((Math.random() * 2465789) + 1);
+                   
+                   var result2 = notification_details.insert({
+
+                      notification_id: notification_id,
+
+                      notification_by: logged_in_user,
+                      notification_to: newUser[0].blog_author,
+                      blog_id: blog_id,
+
+                      notification_status: 0,
+                      notification_type: "blog_rejected",
+                      created_at: Date.now()
+      });
+}else if(status == 1){
+ var notification_id = 'notification_id_'+Math.floor((Math.random() * 2465789) + 1);
+                   
+                   var result2 = notification_details.insert({
+                      notification_id: notification_id,
+
+                      notification_by: logged_in_user,
+                      notification_to: newUser[0].blog_author,
+                      blog_id: blog_id,
+
+                      notification_status: 0,
+                      notification_type: "blog_accepted",
+                      created_at: Date.now()
+      });
+}
+}
       return result;
     }
   },
@@ -650,6 +691,20 @@ if(status == 2){
           updated_at: Date.now,
         }
       });
+       var notification_id = 'notification_id_'+Math.floor((Math.random() * 2465789) + 1);
+                   
+                   var result2 = notification_details.insert({
+                      notification_id: notification_id,
+                      
+                      notification_by: logged_in_user,
+                      notification_to: newUser[0].blog_author,
+                      blog_id: blog_id,
+
+                      notification_status: 0,
+                      notification_type: "blog_rejected",
+                      created_at: Date.now()
+      });
+
       return result;
  }else{
   console.log("case 2");
@@ -684,6 +739,20 @@ if(blog_author != "user_admin"){
           reward_redeem_status: 0,
           created_at: Date.now(),
 
+      });
+
+     var notification_id = 'notification_id_'+Math.floor((Math.random() * 2465789) + 1);
+                   
+                   var result2 = notification_details.insert({
+                      notification_id: notification_id,
+                      
+                      notification_by: logged_in_user,
+                      notification_to: newUser[0].blog_author,
+                      blog_id: blog_id,
+
+                      notification_status: 0,
+                      notification_type: "blog_approved",
+                      created_at: Date.now(),
       });
 }
 
@@ -1301,7 +1370,6 @@ if(blog_author != "user_admin"){
                                               parent_post_type: 'post',
                                               liked_by: liked_by,
                                               post_type: 'like',
-
                                   }).fetch();
 
           console.log('checkForAlreadyExists: ');
@@ -1336,6 +1404,29 @@ if(blog_author != "user_admin"){
                     }
                   });
         }
+
+
+      var fetch_post_creator_for_feed = feed.find({
+                                              post_id: post_id
+                                  }).fetch();
+
+if(liked_by != fetch_post_creator_for_feed[0].post_by){
+var notification_id = 'notification_id_'+Math.floor((Math.random() * 2465789) + 1);
+
+                   var result2 = notification_details.insert({
+
+                      notification_id: notification_id,
+                      notification_by: liked_by,
+                      notification_to: fetch_post_creator_for_feed[0].post_by,
+                      post_id: post_id,
+                      like_id: like_id,
+
+                      notification_status: 0,
+                      notification_type: "feed_like",
+                      created_at: Date.now()
+      });
+}
+
         }else{
           var like_id = 'like_id_'+Math.floor((Math.random() * 2465789) + 1);
 
@@ -1348,6 +1439,28 @@ if(blog_author != "user_admin"){
                       liked_by: liked_by,
                       created_at: Date.now() 
                     });
+
+      var fetch_post_creator_for_feed = feed.find({
+                                              post_id: post_id
+                                  }).fetch();
+
+if(liked_by != fetch_post_creator_for_feed[0].post_by){
+var notification_id = 'notification_id_'+Math.floor((Math.random() * 2465789) + 1);
+
+                   var result2 = notification_details.insert({
+
+                      notification_id: notification_id,
+                      notification_by: liked_by,
+                      notification_to: fetch_post_creator_for_feed[0].post_by,
+                      post_id: post_id,
+                      like_id: like_id,
+
+                      notification_status: 0,
+                      notification_type: "feed_like",
+                      created_at: Date.now()
+      });
+}
+
         }
 },
 
@@ -1485,6 +1598,21 @@ var result = blog.insert({
 
                       created_at: Date.now(),
                 });
+
+      var notification_id = 'notification_id_'+Math.floor((Math.random() * 2465789) + 1);
+                   
+                   var result2 = notification_details.insert({
+
+                      notification_id: notification_id,
+
+                      notification_by: logged_in_user,
+                      notification_to: 'writersmelon',
+                      blog_id: blog_id,
+
+                      notification_status: 0,
+                      notification_type: "blog_request",
+                      created_at: Date.now()
+      });
                 return result;
       },
                                    
@@ -2021,6 +2149,7 @@ else if(field_name == 'socail_media_handle_shared'){
                       notification_by: logged_in_user,
                       notification_to: check_status[0].campaigner_id,
                       campaign_id: check_status[0].campaign_id,
+                      notification_status: 0,
                       notification_type: "campaign_accepted",
                       created_at: Date.now()
       });
@@ -2050,6 +2179,7 @@ else if(field_name == 'socail_media_handle_shared'){
                       notification_by: logged_in_user,
                       notification_to: check_status[0].campaigner_id,
                       campaign_id: check_status[0].campaign_id,
+                      notification_status: 0,
                       notification_type: "campaign_rejected",
                       created_at: Date.now()
       });
@@ -2759,6 +2889,46 @@ var result = await send_email_with_contact_us_details_to_admin(user_name, user_e
         }
       }
     },
+
+
+  change_notification_seen_status(){
+    // console.log(logged_in_user+' & '+book_id+ ' & '+campaign_id+ ' & '+user_location);
+    var fetch_all_unread = notification_details.find({notification_status: 0, notification_to: 'writersmelon'}).fetch();
+    if(fetch_all_unread[0]){
+
+      for(var i=0; i < fetch_all_unread.length; i++){
+                  var result =  notification_details.update({
+                         _id: fetch_all_unread[i]._id,
+                          },{
+                           $set: {
+                                  "notification_status": 1,
+                                  "update_at": Date.now(),
+                                }
+            });
+      }
+      return result;
+}
+  },
+
+  change_notification_seen_status_client(logged_in_user){
+    // console.log(logged_in_user+' & '+book_id+ ' & '+campaign_id+ ' & '+user_location);
+    var fetch_all_unread = notification_details.find({notification_status: {$ne: 1}, notification_to: logged_in_user}).fetch();
+    if(fetch_all_unread[0]){
+
+      for(var i=0; i < fetch_all_unread.length; i++){
+                  var result =  notification_details.update({
+                         _id: fetch_all_unread[i]._id,
+                          },{
+                           $set: {
+                                  "notification_status": 1,
+                                  "update_at": Date.now(),
+                                }
+            });
+      }
+      return result;
+    }
+  },
+
 
 });
 

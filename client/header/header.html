@@ -36,9 +36,15 @@
      <a  href="javascript:void(0)" class="link-find-friend" id="go_to_community" >Community</a>
      <a  href="javascript:void(0)" class="link-find-friend" id="go_to_blog" >Blog</a>
 
-    <div class="control-block">      
+    <div class="control-block">
+
       <div class="control-icon more has-items" id="go_to_notifications" >
+      {{#if notification_pending}}
         <img src="/img/notification_white.png" alt="arrow" class="back-icon" style="width: 21px;">
+        <div class="label-avatar bg-primary show_dot" ></div>
+      {{else}}
+        <img src="/img/notification_white.png" alt="arrow" class="back-icon" style="width: 21px;">
+      {{/if}}
       </div>
 
       <div class="control-icon more has-items">

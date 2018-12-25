@@ -57,7 +57,10 @@ Template.left_panel_admin.onDestroyed(function () {
   },
 
     'click #blog_management':function(){
-  		  Router.go("/blog_listing_admin");
+        Router.go("/blog_listing_admin");
+  },
+    'click #admin_notification':function(){
+  		  Router.go("/admin_notification");
   },
 
     'click #admin_settings':function(){

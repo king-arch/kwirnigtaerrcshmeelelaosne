@@ -5,6 +5,7 @@ import { user_details }  from './../../import/collections/insert.js';
 import { promotion }  from './../../import/collections/insert.js';
 import { following_list }  from './../../import/collections/insert.js';
 import { interest_list }  from './../../import/collections/insert.js';
+import { notification_details }  from './../../import/collections/insert.js';
 import { Base64 } from 'meteor/ostrio:base64';
 
 import { Session } from 'meteor/session';
@@ -14,7 +15,6 @@ import swal from 'sweetalert';
   var user_info_list_all;
   var user_info_based_on_email;
   var follow_list_all;
-
 
   var ads_listing_ticker;
   var interval_ticker;
@@ -27,8 +27,8 @@ Template.headeroptions.onRendered(function(){
 
   ads_listing_ticker = Meteor.subscribe('fetch_text_promotion_listing');
 
-      var user_id = Session.get("userId");
-      user_info_based_on_email = Meteor.subscribe("user_info_based_on_id",user_id);
+      var logged_in_user = Session.get("userId");
+      user_info_based_on_email = Meteor.subscribe("user_info_based_on_id",logged_in_user);
 
       interval_ticker = setInterval(function() {
           tick();
@@ -41,7 +41,6 @@ function tick() {
         $(this).appendTo($('#ticker')).slideDown();
     });
 }
-
 
 Template.headeroptions.helpers({
 
@@ -78,6 +77,20 @@ var str2 = str.split("-").join(" ");
         // console.log('show result: ');
         // console.log(result);
         return result;
+    },
+
+    notification_pending(){
+      var logged_in_user = Session.get("userId");
+      Meteor.subscribe("notification_details_for_user",logged_in_user);
+
+      var result = notification_details.find({notification_to: logged_in_user, notification_status: {$ne : 1}}).fetch();
+      console.log(' check_status for notifications: ');
+      console.log(result);
+      if(result[0]){
+        return true;
+      }else{
+        return false;
+      }                               
     },
 
 });
