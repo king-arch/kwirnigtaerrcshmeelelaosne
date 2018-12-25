@@ -3322,7 +3322,7 @@ var payload = {
   amount: amount,
   phone: phone,
   buyer_name: buyer_name,
-  redirect_url: 'http://localhost:3000/payment_status',
+  redirect_url: 'https://writersmelon.herokuapp.com//payment_status',
   send_email: true,
   webhook: 'http://www.example.com/webhook/',
   send_sms: false,
