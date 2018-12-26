@@ -188,11 +188,8 @@ if(good_reads_link == null || good_reads_link == "" || amazon_link == null || am
                 swal("Review successfully submited!");
                 window.location.href="/feed";
               }
-            });
-            
-}
-
-
+            });           
+        }
     },
 
 });

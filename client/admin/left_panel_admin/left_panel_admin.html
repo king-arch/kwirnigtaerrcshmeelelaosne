@@ -39,7 +39,12 @@
 
 				<li>
 					<a id="admin_notification" class="pointer js-sidebar-open btnact" title="Admin Notification" >
-						<i class="fa fa-bell" > </i>
+					  {{#if notification_pending}}
+				        <img src="/img/notification_white.png" alt="arrow" class="back-icon" style="width: 21px;">
+				        <div class="label-avatar bg-primary show_dot" ></div>
+				      {{else}}
+				        <img src="/img/notification_white.png" alt="arrow" class="back-icon" style="width: 21px;">
+				      {{/if}}
 					</a>
 				</li>
 

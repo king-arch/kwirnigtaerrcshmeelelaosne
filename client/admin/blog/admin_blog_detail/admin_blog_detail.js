@@ -594,6 +594,12 @@ if(fetch_campaign_details[0]){
             }
         },
 
+    "click .edit_blog_details":function(){
+            var blog_id = Base64.encode(this.blog_id);    
+            var url = '/edit_blog_details/'+blog_id;
+            Router.go(url);
+  },
+
 });
 
 function handle_like_comment_lvl_0_event(comment_id)

@@ -1,5 +1,4 @@
 
-
 import {
   Template
 } from 'meteor/templating';
@@ -118,12 +117,10 @@ Template.show_campaign_listing_admin.events({
         window.location.href = "create_campaign_admin";
     },
 
-
     "click #go_to_review_request_listing":function(){
         // alert("clicked");
         window.location.href = "review_request_listing";
     },
-
 
     "click #go_to_review_approval_listing":function(){
         // alert("clicked");
@@ -131,12 +128,28 @@ Template.show_campaign_listing_admin.events({
     },
 
     "click .view_detail":function(){
-        // alert("clicked");
             var campaign_id = this.campaign_id;
             var campaign_id = Base64.encode(campaign_id);  
             var url = '/campaign_detail/'+campaign_id;
             console.log(url);
-            window.location.href = url;   	},
+            window.location.href = url;     
+    },
+
+    "click .view_request_listing":function(){
+            var campaign_id = this.campaign_id;
+            var campaign_id = Base64.encode(campaign_id);  
+            var url = '/review_request_listing_individual/'+campaign_id;
+            console.log(url);
+            window.location.href = url;     
+    },
+
+    "click .view_approval_listing":function(){
+            var campaign_id = this.campaign_id;
+            var campaign_id = Base64.encode(campaign_id);  
+            var url = '/review_approval_listing_individual/'+campaign_id;
+            console.log(url);
+            window.location.href = url;   	
+    },
 
 });
 

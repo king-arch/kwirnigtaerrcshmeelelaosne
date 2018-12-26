@@ -1,0 +1,280 @@
+
+
+<template name="review_approval_listing_individual">
+  <body>
+ {{> show_review_approval_listing_individual}}
+ </body>
+</template>
+
+<template name="show_review_approval_listing_individual" >
+
+  <div class="loading"  id="loading_div" ></div>
+  {{>left_panel_admin}}
+  
+<div class="container">
+  <div class="row">
+
+     <div class="col col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12">
+      <div class="ui-block responsive-flex1200 bg_trans">
+        <div class="ui-block-title pad_0">
+          <h1 style="font-size: 30px; font-weight: 500;">Review Approval Listing</h1>
+        </div>
+      </div>
+    </div>  
+
+    <div class="col col-xl-1 col-lg-2 col-md-12 col-sm-12 col-12">
+    </div>
+
+    <div class="col col-xl-1 col-lg-1 col-md-12 col-sm-12 col-12">
+    </div>
+
+    <div class="col col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12 ">
+    </div>
+
+<!--     <div class="col col-xl-1 col-lg-1 col-md-12 col-sm-12 col-12">
+
+       <div class="ui-block responsive-flex1200 bg_trans margin-bottom-0 ">
+        <div class="ui-block-title pad_0">
+           <span style="padding-top: 10px;"> Sort by </span><div class="more">  <i class="fa fa-angle-down three_dots_listing_page_angle"></i>
+                <ul class="more-dropdown">
+                  <li>
+                    <a href="#"><i class="fa fa-check">  </i> &nbsp;&nbsp;  Date > Newest First</a>
+                  </li>
+                  <li>
+                    <a href="#">Date > Oldest First</a>
+                  </li>
+                  <li>
+                    <a href="#">Title > Oldest First</a>
+                  </li>
+                  <li>
+                    <a href="#">Title > Oldest First</a>
+                  </li>
+                 
+                </ul>
+              </div>         
+        </div>  
+      </div>
+    </div>
+    <div class="col col-xl-1 col-lg-2 col-md-12 col-sm-12 col-12">
+
+      <div class="ui-block responsive-flex1200 bg_trans margin-bottom-0 ">
+        <div class="ui-block-title pad_0">
+           <span style="padding-top: 10px;">Filter </span><div class="more">  <i class="fa fa-ellipsis-h three_dots_listing_page"></i>
+                <ul class="more-dropdown">
+                  <li>
+                    <a href="#"><i class="fa fa-check">  </i> &nbsp;&nbsp; Active</a>
+                  </li>
+                  <li>
+                    <a href="#">Inactive</a>
+                  </li>
+                  <li>
+                    <a href="#">Pending</a>
+                  </li>
+                </ul>
+              </div>         
+        </div>
+      </div>
+    </div>
+ -->
+    
+  </div>
+   <hr class="new4">
+</div>
+
+
+<div class="container">
+  <div class="row">
+    <div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+
+      <div class="ui-block">
+
+        
+        <!-- Forums Table -->
+        
+        <table class="forums-table" id="show_review_approval_listing" >
+          <thead>
+          <tr>          
+            <th class="forum">
+              Book Title
+            </th>
+        
+            <th class="posts">
+              Requester's Pic
+            </th>
+
+            <th class="topics">
+              Requester's Name
+            </th>
+        
+            <th class="posts">
+              Review Content
+            </th>
+
+            <th class="posts">
+              Googreads Link
+            </th>
+
+            <th class="posts">
+              Personal Link
+            </th>
+
+            <th class="posts">
+              Amazon Link
+            </th>
+
+          
+            <th class="freshness">
+              Action
+            </th>
+            <th class="freshness">
+              
+            </th>
+        
+          </tr>
+        
+          </thead>
+        
+          <tbody>
+{{#each show_campaign_listing}}
+          <tr>
+            <td class="forum">
+
+    {{#each show_book_detail}}
+              <div class="forum-item">
+                <img src="{{book_cover}}" width="50" alt="forum" style="height: 80px !important; width: 80px !important;">
+<!--                 <div class="content">
+                  <a href="#" class="h6 title">{{book_name}}</a>
+                  <p class="text">{{book_summary_trimmed}}</p>
+                </div>   -->     
+              </div>
+                <a href="#" class="h6 title">{{book_name}}</a> 
+    {{/each}}       
+            </td>
+
+          {{#each show_user_details}}       
+
+            <td class="forum">
+              <div class="forum-item">
+                <img src="{{user_profile_pic}}" class="img-responsive" style="height: 90px !important; width: 90px !important;">
+              </div>
+            </td>
+
+            <td class="topics">
+              <p class="text">{{user_name}}</p>
+            </td>
+
+
+          {{/each}}
+
+            <td class="freshness">
+              <div class="author-freshness">{{review_text}}</div>
+            </td>
+
+
+            <td class="topics">
+              <p class="text">
+
+                {{#if good_reads_link}}
+                    {{#if good_reads_link}}
+                     
+                       <a href="{{amazon_link}}" target="_blank" >Amazon Link</a>
+                    {{else}}
+                      -
+                    {{/if}}
+                {{else}}
+                  -
+                {{/if}}
+                </p>
+            </td>
+
+
+            <td class="topics">
+              <p class="text">
+               {{#if personal_blog_link}}
+                   <a href="{{personal_blog_link}}" target="_blank" >Personal Blog Link</a>
+                {{else}}
+                  -
+                {{/if}}
+              </p>
+            </td>
+
+
+            <td class="topics">
+              <p class="text">
+                {{#if amazon_link}}
+                 
+                   <a href="{{amazon_link}}" target="_blank" >Amazon Link</a>
+                {{else}}
+                  -
+                {{/if}}
+                </p>
+            </td>
+
+            <td class="topics">
+    {{#if equals approval_status 0}}
+            <button class="approve_review_submition btn-breez btn" id="{{review_id}}" > Approve </button>
+              
+              <button  id="{{review_id}}" class="reject_review_submition deactivate_status_user btn btn-danger" value="1"> Reject</button> 
+    {{/if}}        
+            </td>
+            <td class="freshness">
+              <button class="btn-breez btn modal-trigger save_id_for_edit" > Edit </button>
+            </td>
+
+          </tr>
+              <button class="btn-breez btn modal-trigger" data-toggle="modal" data-target="#change_review_text" id="hidden_modal_click" style="display: none" > Edit </button>
+{{/each}}        
+        
+
+
+          </tbody>
+        </table>
+        
+        <!-- ... end Forums Table -->
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+
+<div class="modal fade" new_post="{{review_id}}" id="change_review_text" tabindex="-1" role="dialog" aria-labelledby="change_review_text" aria-hidden="true">
+
+  <div class="modal-dialog window-popup create-friend-group change_review_text" role="document">
+
+    <div class="modal-content">
+      <a href="#" class="close icon-close" data-dismiss="modal" aria-label="Close">
+        <svg class="olymp-close-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-close-icon"></use></svg>
+      </a>
+
+      <div class="modal-header">
+        <h6 class="title">Edit Submited Review</h6>
+      </div>
+
+{{#each show_campaign_listing_for_edit}}
+
+      <div class="modal-body">
+          <div class="row">               
+            <div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">  
+              <div class="form-group label-floating">
+                  <textarea class="form-control c-grey" placeholder="Write Review (Max 200 words)" maxlength="200" id="review_text" >{{review_text}}</textarea>
+                  <span class="material-input"></span>
+              </div>
+            </div>
+          </div>
+
+      </div>
+
+              <div class="modal-footer"> 
+                  <button class="btn btn-primary btn-sm modal-action modal-close waves-effect waves-green btn-flat " id="edit_review" > Edit </button>
+               </div>
+{{/each}}     
+    </div>
+
+  </div>
+</div>
+
+
+
+</template>

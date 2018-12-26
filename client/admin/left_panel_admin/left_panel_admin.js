@@ -151,6 +151,19 @@ Template.left_panel_admin.onDestroyed(function () {
 		}
 	},
 
+    notification_pending(){
+      var logged_in_user = Session.get("userId");
+      Meteor.subscribe("notification_details_for_user",logged_in_user);
+
+      var result = notification_details.find({notification_to: 'writersmelon', notification_status: {$ne : 1}}).fetch();
+      console.log(' check_status for notifications: ');
+      console.log(result);
+      if(result[0]){
+        return true;
+      }else{
+        return false;
+      }                               
+    },
 
 });
 
