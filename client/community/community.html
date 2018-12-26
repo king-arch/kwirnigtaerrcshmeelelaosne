@@ -1,237 +1,172 @@
-﻿
-<template name="community">
+﻿  <template name="community">
+        {{> header}}
+      <body class="landing-page">
+          {{> headeroptions}} {{> community_detail}}
+      </body>
+  </template>
 
-{{> header}}
-    
- <body class="landing-page">
-    {{> headeroptions}}
- {{> community_detail}}
- </body>
- 
-</template>
+  <template name="community_detail">
+      <div class="container">
+          <div class="row">
+              <div class="col col-xl-11 col-lg-11 col-md-6 col-sm-12 col-12">
+                  <div class="ui-block responsive-flex1200 bg_trans">
+                      <div class="ui-block-title pad_0">
+                          <h1 class="font_head_size">Community</h1>
+                      </div>
+                  </div>
+              </div>
 
-<template name="community_detail">
+              <div class="col col-xl-1 col-lg-1 col-md-6	 col-sm-12 col-12">
+                  <div class="ui-block responsive-flex1200 bg_trans margin-bottom-0 ">
+                      <div class="ui-block-title pad_0">
+                          <span style="padding-top: 10px;">  Filter </span>
+                          <div class="more"> <i class="fa fa-angle-down three_dots_listing_page_angle"></i>
+                              <ul class="more-dropdown">
+                                  <li id="show_all_following" class="change_filter_by_status loader_visiblity_block">
+                                      <a href="javascript:void(0)"> Following</a>
+                                  </li>
 
-<!--   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+                                  <li id="show_all_following_with_check" class="change_filter_by_status ">
+                                      <a href="javascript:void(0)"><i class="fa fa-check">  </i> &nbsp;&nbsp;  Following</a>
+                                  </li>
 
-   -->  <div class="loading"  id="loading_div" ></div>
-<div class="container">
-	<div class="row">
-		<div class="col col-xl-12 order-xl-2 col-lg-12 order-lg-1 col-md-12 col-sm-12 col-12">
-			<div class="ui-block responsive-flex">
-				<div class="ui-block-title">
-					<div class="h6 title">Community</div>
-						<div class="form-group with-button">
-							<!-- <input class="form-control c-darkgray search_input_fied" type="text" placeholder="Search People..." id="search_text" >
-							<button class="search_button submit_search_text" id="submit_search_text" >
-								<i class="fa fa-search submit_search_text" id="submit_search_text"></i>
-							</button> -->
+                                  <li id="show_all_follower" class="change_filter_by_status ">
+                                      <a href="javascript:void(0)"> Follower</a>
+                                  </li>
 
-                 <span style="padding-top: 10px;" >  Filter </span>
-                 <div class="more pull-right">  <i class="fa fa-angle-down three_dots_listing_page_angle"></i>
-                <ul class="more-dropdown">
-                      <li id="show_all_following" class="change_filter_by_status loader_visiblity_block" >
-                        <a href="javascript:void(0)"> Following</a>
-                      </li>
+                                  <li id="show_all_follower_with_check" class="change_filter_by_status loader_visiblity_block">
+                                      <a href="javascript:void(0)"><i class="fa fa-check">  </i> &nbsp;&nbsp;  Follower</a>
+                                  </li>
+                              </ul>
+                          </div>
+                      </div>
+                  </div>
+              </div>
 
-                      <li id="show_all_following_with_check" class="change_filter_by_status " >
-                        <a href="javascript:void(0)" ><i class="fa fa-check">  </i> &nbsp;&nbsp;  Following</a>
-                      </li>
-
-					<li id="show_all_follower" class="change_filter_by_status " >
-                        <a href="javascript:void(0)"  > Follower</a>
-                      </li>
-
-                      <li id="show_all_follower_with_check" class="change_filter_by_status loader_visiblity_block" >
-                        <a href="javascript:void(0)" ><i class="fa fa-check">  </i> &nbsp;&nbsp;  Follower</a>
-                      </li>
-
-
-
-<!-- 				<li class="padding_on_li active_community_tab" id="follower_tab" ><a href="javascript:void(0)" >Follower</a></li>
-
-				<li class="padding_on_li inactive_community_tab" id="following_tab" ><a href="javascript:void(0)">Following</a></li> -->
-
-
-				                  </ul>
-				              </div>   
-
-						</div>
-				</div>
-			</div>
-
-<!--     <div class="col col-xl-1 col-lg-1 col-md-12 col-sm-12 col-12">
-
-       <div class="ui-block responsive-flex1200 bg_trans margin-bottom-0 ">
-        <div class="ui-block-title pad_0">
-           <span style="padding-top: 10px;">  Filter </span><div class="more">  <i class="fa fa-angle-down three_dots_listing_page_angle"></i>
-                <ul class="more-dropdown">
-
-				<li class="padding_on_li active_community_tab" id="follower_tab" ><a href="javascript:void(0)" >Follower</a></li>
-				<li class="padding_on_li inactive_community_tab" id="following_tab" ><a href="javascript:void(0)">Following</a></li>
-
-
-                  </ul>
-              </div>         
-        </div>
+          </div>
+          <hr class="new4">
       </div>
-    </div> -->
+      <div class="loading" id="loading_div"></div>
 
-<!-- 	<div class="row">
-		<div class="col col-xl-12 order-xl-2 col-lg-12 order-lg-1 col-md-12 col-sm-12 col-12">
-			<div class="ui-block responsive-flex">
-				  <ul class="nav nav-tabs nav-justified adjust_community_tab size_comunity_tabs">
-				    <li class="padding_on_li active_community_tab" id="follower_tab" ><a href="javascript:void(0)" >Follower</a></li>
-				    <li class="padding_on_li inactive_community_tab" id="following_tab" ><a href="javascript:void(0)">Following</a></li>
-				  </ul>
-			</div>
-    	</div>
-    </div> -->
-
-<div class="" id="div_for_following" >
-			<div class="row">
-{{#each display_following_list}}						
-						
-	{{#each fetch_user_info_following}}					
-				<div class="col col-lg-3 col-md-6 col-sm-12 col-12">
-					<div class="ui-block">
-						<div class="friend-item">
-							<div class="friend-header-thumb">
-								<img src="{{user_cover_pic}}" alt="friend">
-							</div>
-							<div class="friend-item-content text-center">
-
-								<div class="friend-avatar">
-									<div class="author-thumb">
-										<img src="{{user_profile_pic}}" alt="author">
-									</div>
-									<div class="author-content">
-										<a href="#" class="h5 author-name">{{user_name_to_follow}}</a>
-										<div class="country">{{user_headline_trimmed}}</div>
-									</div>
-								</div>				
-
-								<div class="swiper-container">
-									<div class="swiper-wrapper">
-										<div class="swiper-slide">
-											<div class="friend-count" data-swiper-parallax="-500">
-
-                    <a href="#" class="friend-count-item">
-                      <div class="h6">
-                        {{show_following_count}}
+      <div class="container">
+          <div id="div_for_following">
+              <div class="row">
+                  {{#each display_following_list}} {{#each fetch_user_info_following}}
+                  <div class="col col-lg-3 col-md-6 col-sm-12 col-12">
+                      <div class="ui-block">
+                          <div class="friend-item">
+                              <div class="friend-header-thumb">
+                                  <img src="{{user_cover_pic}}" alt="friend" class="image_users">
+                              </div>
+                              <div class="friend-item-content text-center">
+                                  <div class="friend-avatar">
+                                      <div class="author-thumb">
+                                          <img src="{{user_profile_pic}}" alt="author">
+                                      </div>
+                                      <div class="author-content">
+                                          <a href="#" class="h5 author-name">{{user_name_to_follow}}</a>
+                                          <div class="country">{{user_headline_trimmed}}</div>
+                                      </div>
+                                  </div>
+                                  <div class="swiper-container">
+                                      <div class="swiper-wrapper">
+                                          <div class="swiper-slide">
+                                              <div class="friend-count" data-swiper-parallax="-500">
+                                                  <a href="#" class="friend-count-item">
+                                                      <div class="h6">
+                                                          {{show_following_count}}
+                                                      </div>
+                                                      <div class="title">Following</div>
+                                                  </a>
+                                                  <a href="#" class="friend-count-item">
+                                                      <div class="h6">
+                                                          {{show_followers_count}}
+                                                      </div>
+                                                      <div class="title">Followers</div>
+                                                  </a>
+                                              </div>
+                                              <div class="control-block-button" data-swiper-parallax="-100">
+                                                  <!-- btn btn-block follow -->
+                                                  <a class="btn btn-block follow  click_on_unfollow" id={{user_id}}> Unfollow</a>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
                       </div>
-                      <div class="title">Following</div>
-                    </a> 
+                  </div>
+                  {{/each}} {{else}}
+                  <div class="medium-padding120 m-auto">
+                      <p class=" logout-content">You are not following anyone at this moment. </p>
+                  </div>
+                  {{/each}}
+              </div>
+          </div>
 
-                    <a href="#" class="friend-count-item">
-                      <div class="h6">
-                        {{show_followers_count}}
+          <div class="loader_visiblity_block" id="div_for_follower">
+              <div class="row">
+                  {{#each display_follower_list}} {{#each fetch_user_info_follower}}
+                  <div class="col col-lg-3 col-md-6 col-sm-12 col-12">
+                      <div class="ui-block">
+                          <div class="friend-item">
+                              <div class="friend-header-thumb">
+                                  <img src="{{user_cover_pic}}" alt="friend" class="image_users">
+                              </div>
+                              <div class="friend-item-content text-center">
+                                  <div class="friend-avatar">
+                                      <div class="author-thumb">
+                                          <img src="{{user_profile_pic}}" alt="author">
+                                      </div>
+                                      <div class="author-content">
+                                          <a href="#" class="h5 author-name">{{user_name_to_follow}}</a>
+                                          <div class="country">{{user_location}}</div>
+                                      </div>
+                                  </div>
+
+                                  <div class="swiper-container">
+                                      <div class="swiper-wrapper">
+                                          <div class="swiper-slide">
+                                              <div class="friend-count" data-swiper-parallax="-500">
+
+                                                  <a href="#" class="friend-count-item">
+                                                      <div class="h6">
+                                                          {{show_following_count}}
+                                                      </div>
+                                                      <div class="title">Following</div>
+                                                  </a>
+
+                                                  <a href="#" class="friend-count-item">
+                                                      <div class="h6">
+                                                          {{show_followers_count}}
+                                                      </div>
+                                                      <div class="title">Followers</div>
+                                                  </a>
+
+                                              </div>
+                                              <div class="control-block-button" data-swiper-parallax="-100">
+                                                  {{#if check_if_following}}
+                                                  <a class="btn btn-block follow c-darkgray click_on_unfollow" id={{user_id}}> Unfollow</a> {{else}}
+                                                  <a class="btn btn-block follow c-darkgray click_on_follow" id={{user_id}}> Follow</a> {{/if}}
+
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+
+                              </div>
+                          </div>
                       </div>
-                      <div class="title">Followers</div>
-                    </a>
-
-											</div>
-											<div class="control-block-button" data-swiper-parallax="-100">
-<!-- btn btn-block follow -->
-<a class="btn btn-block follow c-darkgray click_on_unfollow" id={{user_id}} > Unfollow</a>
-
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>	
-				
-    {{/each}}
-
-{{else}}
-	<p> You are not following anyone at this moment. </p>	
-    {{/each}}
-
-			</div>
-
-		</div>
-
-<div class="loader_visiblity_block" id="div_for_follower" >
-			<div class="row">
-{{#each display_follower_list}}						
-	{{#each fetch_user_info_follower}}		
-				<div class="col col-lg-3 col-md-6 col-sm-12 col-12">
-					<div class="ui-block">
-						
-						<div class="friend-item">			
-							<div class="friend-header-thumb">
-								<img src="{{user_cover_pic}}" alt="friend">
-							</div>
-							<div class="friend-item-content text-center">
-								<div class="friend-avatar">
-									<div class="author-thumb">
-										<img src="{{user_profile_pic}}" alt="author">
-									</div>
-									<div class="author-content">
-										<a href="#" class="h5 author-name">{{user_name_to_follow}}</a>
-										<div class="country">{{user_location}}</div>
-									</div>
-								</div>				
-
-								<div class="swiper-container">
-									<div class="swiper-wrapper">
-										<div class="swiper-slide">
-											<div class="friend-count" data-swiper-parallax="-500">
-
-                    <a href="#" class="friend-count-item">
-                      <div class="h6">
-                        {{show_following_count}}
-                      </div>
-                      <div class="title">Following</div>
-                    </a> 
-
-                    <a href="#" class="friend-count-item">
-                      <div class="h6">
-                        {{show_followers_count}}
-                      </div>
-                      <div class="title">Followers</div>
-                    </a>
-
-											</div>
-											<div class="control-block-button" data-swiper-parallax="-100">
-{{#if check_if_following}}
-    <a class="btn btn-block follow c-darkgray click_on_unfollow" id={{user_id}} > Unfollow</a>
- {{else}}
- 	 <a class="btn btn-block follow c-darkgray click_on_follow" id={{user_id}} > Follow</a>
- {{/if}}
-
-											</div>
-										</div>
-									</div>
-								</div>
-
-							</div>
-						</div>
-					</div>
-				</div>	
-    {{/each}}
-	
-    {{/each}}
-
-			</div>
-
-		</div>
-
-	</div>
-
-		
-  </div>
-</div>
-
-
-
-
-<a class="back-to-top" href="#">
-	<img src="/svg-icons/back-to-top.svg" alt="arrow" class="back-icon">
-</a>
-</template>
+                  </div>
+                  {{/each}} {{else}}
+                  <div class="medium-padding120 m-auto">
+                      <p class=" logout-content">You have no followers. </p>
+                  </div>
+                  {{/each}}
+              </div>
+          </div>
+      </div>
+      <a class="back-to-top" href="#">
+          <img src="/svg-icons/back-to-top.svg" alt="arrow" class="back-icon">
+      </a>
+  </template>

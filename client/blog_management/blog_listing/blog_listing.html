@@ -9,131 +9,75 @@
 </template>
 
 <template name="blog_listing_detail">
-
     <div class="loading"  id="loading_div" ></div>
-
 <div class="container">
   <div class="row">
-     <div class="col col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
-
+     <div class="col col-xl-10 col-lg-10 col-md-12 col-sm-12 col-12">
       <div class="ui-block responsive-flex1200 bg_trans">
-        <div class="ui-block-title">
-          <h1>Blogs</h1>
+        <div class="ui-block-title pad_0">
+          <h1 class="font_head_size">Blogs</h1>
         </div>
       </div>
     </div>  
-    <div class="col col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12">
-
-      <div class="ui-block responsive-flex1200 bg_trans">
-        <div class="ui-block-title">
-
-           
-          <div class="w-select text-left">
-            <!-- <div class="title">Filter By:</div> -->
-            <fieldset class="form-group">
-              <select class="selectpicker form-control">
-                <option value="NU">Filter</option>
-                <option value="NU">My Blogs</option>
-                <option value="NU">Draft</option> 
-                <option value="NU">Published by me</option> 
-                <option value="NU">Coming soon</option>
-              </select>
-            </fieldset>
-          </div>    
-
-           
+    <div class="col col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12 ">
+      <div class="ui-block responsive-flex1200 bg_trans margin-bottom-0">
+        <div class="ui-block-title pad_0">      
+          <a href=javascript:void(0)  id="create_blog" class="btn btn-primary btn-md-2 margin-bottom-0">
+           <i class="fa fa-plus"></i> Create Blog</a>
         </div>
-      </div>
-    </div>
-
-    <div class="col col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12">
-      <div class="ui-block responsive-flex1200 bg_trans">
-        <div class="ui-block-title">
-          <div class="w-select text-left">
-            <!-- <div class="title">Filter By:</div> -->
-            <fieldset class="form-group">
-              <select class="selectpicker form-control">
-                <option value="NU"><i class="fa fa-check"></i>Sort by</option>
-                              <option value="NU"><i class="fa fa-check"></i>Date > Newest First</option>
-                              <option value="NU">Date > Oldest First</option>
-                              <option value="NU">Title > Oldest First</option>
-                              <option value="NU">Title > Oldest First</option>
-              </select>
-            </fieldset>
-          </div>          
-        </div>
-      </div>
-    </div>
-
-    <div class="col col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12">
-
-      <div class="ui-block responsive-flex1200 bg_trans ">
-        
-        <div class="ui-block-title">            
-           <a href="javascript:void(0)" class="btn btn-primary btn-md-2" id="create_blog" >
-            <i class="fa fa-plus"></i> Create Blog</a>
-        </div>
-
       </div>
     </div>
   </div>
+   <hr class="new4">
 </div>
+
 
 <section class="blog-post-wrap medium-padding20">
   <div class="container">
     <div class="row">
-{{#each show_blog_listing}}
+    {{#each show_blog_listing}}
       <div class="col col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
         <div class="ui-block">
-
-          
           <!-- Post -->
-          
           <article class="hentry blog-post">
-          
-            <div class="post-thumb">
-              <img src="{{blog_cover}}" alt="photo" class="go_to_blog_detail" >
+            <div class="post-thumb margin_btm">
+              <img src="{{blog_cover}}" alt="photo" class="go_to_blog_detail pointer go_to_blog_detail_img " >
+                <div class="bottom-right"><a href="#" class="post-add-icon inline-items">
+                    <img src="img/comment_white.png">
+                    <span>{{comment_count_lvl_0}}</span>
+                  </a></div>
+<!--               <div class="bottom-left"><a href="#" class="post-add-icon inline-items">
+                    <img src="img/heart_white.png">
+                    <span>27</span>
+                  </a></div> -->
             </div>
-          
-            <div class="post-content">
-              <a href="#" class="post-category bg-blue-light">{{blog_type}}</a>
-              <a href="#" class="h4 post-title go_to_blog_detail">{{blog_title}}</a>
 
-              <!-- <p>{{blog_discription}}</p> -->
-          
+    {{#each fetch_user_info}}   
+            <div class="post-content">
+              <a href="#" class="h4 post-title go_to_blog_detail">{{../blog_title}}</a>
+            
+              <div class="post__author author vcard inline-items">
+              <img src="{{user_profile_pic}}" alt="author" class="view_profile" >
               <div class="author-date">
-                by
-          {{#each fetch_user_info}}   
-                <a class="h6 post__author-name fn" href="#">{{user_name}}</a>
+                <a class="h5 post__author-name fn view_profile" href="javascript:void(0)">{{user_name}}</a> <br/>
                 <div class="post__date">
                   <time class="published" datetime="2017-03-24T18:18">
-                    {{calculate_time_difference_ago ../created_at}}
+                   {{user_headline}}
                   </time>
                 </div>
-          {{/each}}
-                
-              </div>
-          
-              <div class="post-additional-info inline-items">
-               <div class="comments-shared">
-                  <a href="#" class="post-add-icon inline-items">
-                    <img src="img/comment_gray.png">
-                    <span>{{comment_count_lvl_0}}</span>
-                  </a>
-                </div>
-          
               </div>
             </div>
-          
+          </div>
+    {{/each}}    
+
           </article>
           
-          <!-- ... end Post -->
         </div>
       </div>
-{{/each}}
-
+ {{/each}}     
     </div>
   </div>
 
 </section>
+
 </template>

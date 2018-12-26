@@ -1,10 +1,9 @@
 
 <template name="my_collections">
-    {{> header}}
-    
+    {{> header}}    
  <body class="landing-page">
-    {{> headeroptions}}
- {{> my_collections_detail}}
+   {{> headeroptions}}
+   {{> my_collections_detail}}
  </body>
 </template>
 
@@ -69,11 +68,15 @@
         <div class="ui-block">
           
           <article class="hentry blog-post blog-post-v2">
-            <div class="post-thumb">
-               <a href="javascript:void(0)" class="go_to_book_detail" ><img src="{{book_cover}}" alt="photo" class="go_to_book_detail" ></a>
+            <div class="post-thumb margin_btm">
+               <a href="javascript:void(0)" class="go_to_book_detail" >
+                <img src="{{book_cover}}" alt="photo" class="go_to_book_detail" >
+                 <div class="bottom-left">              <a href="javascript:void(0)" class="post-category bg-blue-light  bg-primary">{{book_catagries}}</a>
+</div>
+              </a>
+
             </div>
             <div class="post-content">
-              <a href="javascript:void(0)" class="post-category bg-primary">{{book_catagries}}</a>
               
               <a href="javascript:void(0)" class="h4 post-title c-darkgray go_to_book_detail">{{book_name}}</a>
           
@@ -89,17 +92,15 @@
                   </div>
                 </div>
               </div>         
-<!--               <div class="comments-shared padding-bottom-20">
+              <!--<div class="comments-shared padding-bottom-20">
                 <a href="javascript:void(0)" class="post-add-icon inline-items">
-                  <img src="img/comment_gray.png">
-
-                  <span>17</span>
+                  <img src="img/comment_gray.png"> <span>17</span>
                 </a>
               </div> -->
               <div class="add-collection">
                 <div class="control-block-button">
-                  <a href="javascript:void(0)" class="btn btn-block follow c-darkgray" id="remove_to_my_collections" >
-                    Remove from my collection
+                  <a href="javascript:void(0)" class="btn btn-block follow" id="remove_to_my_collections" >
+                    Remove
                   </a>
                 </div>
               </div>
@@ -111,12 +112,15 @@
         </div>
       </div>
 {{/each}}
+{{else}}
+        <div class="medium-padding120 m-auto"> <p class=" logout-content">You have not added any book in your collection.  </p>  </div>
 {{/each}}
     </div>
 
-    <a id="load-more-button" href="javascript:void(0)" class="btn btn-control btn-more " data-load-link="items-to-load.html" data-container="newsfeed-items-grid">
-                <i class="fa fa-spinner fa-spin loader"></i>
-               </a>
+   <!--  <a id="load-more-button" href="javascript:void(0)" class="btn btn-control btn-more " data-load-link="items-to-load.html" data-container="newsfeed-items-grid">
+          <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+
+               </a> -->
   </div>
 
 </section>

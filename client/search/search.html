@@ -16,10 +16,7 @@
             <div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
 
                <ul class="nav nav-tabs bg-white width-100 text-center set-center search-tab" style="margin:0 auto" role="tablist">
-                 <li class="nav-item width-20 padding-0-20">
-                     <a class="" >Showing result for "{{show_search_strings}}"
-                     </a>
-                  </li>
+                 
                  
                   <li class="nav-item width-20 padding-0-20">
                      <a class="nav-link active" data-toggle="tab" href="#book" role="tab" aria-expanded="false">Books
@@ -43,6 +40,10 @@
       </div>
       <section class="blog-post-wrap medium-padding20">
          <div class="container">
+          <p class="nav-item width-20 padding-0-20">
+                     <a class="" >Showing result for "{{show_search_strings}}"
+                     </a>
+                  </p>
             <div class="tab-content padding-top-20">
                <!-- book Start -->
                <div class="tab-pane active  " id="book" role="tabpanel" aria-expanded="true">
@@ -54,8 +55,10 @@
           <!-- Post -->
           <article class="hentry blog-post blog-post-v2">
             
-            <div class="post-thumb">
-              <a href="javascript:void(0)" class="go_to_book_detail"><img src="{{book_cover}}" alt="photo"></a>
+            <div class="post-thumb margin_btm">
+              <a href="javascript:void(0)" class="go_to_book_detail"><img src="{{book_cover}}" alt="photo" class=""></a>
+              <div class="bottom-left">              <a href="javascript:void(0)" class="post-category bg-blue-light go_to_book_detail">{{book_catagries}}</a>
+</div>
 
 {{#if check_if_up_for_review}}
                  <div class="top-right">UP FOR REVIEW</div>
@@ -70,7 +73,6 @@
             </div>
 
             <div class="post-content">
-              <a href="javascript:void(0)" class="post-category bg-blue-light go_to_book_detail">{{book_catagries}}</a>
 
             {{#if check_book_name_length}}
                   <a href="javascript:void(0)" class="h4 post-title c-darkgray" >{{book_name}} </a><br>
@@ -97,19 +99,10 @@
               </div>
 
 {{#if check_if_book_already_added_to_my_collections}}
-    <a href="javascript:void(0)" class="post-category bg-blue-light">Added to My collections</a>
+    <a href="javascript:void(0)" class="post-category btn btn-block added">Added to My collections</a>
 {{else}}
-      <div class="ui-block responsive-flex1200 bg_trans margin-bottom-0 c-darkgray">
-        <div class="ui-block-title pad_0">
-           <span style="padding-top: 10px;">Sort by </span><div class="more">  <i class="fa fa-angle-down three_dots_listing_page_angle"></i>
-                <ul class="more-dropdown">
-                      <li id="add_to_my_collections" class="change_sort_by_status c-darkgray" >
-                        <a href="javascript:void(0)" class="c-darkgray" > Add to my collections </a>
-                      </li>
-                </ul>
-              </div>         
-        </div>
-      </div>
+<a href="javascript:void(0)" class="post-category btn btn-block follow" style="width: 100%;" id="add_to_my_collections">Add to My collections</a>
+       
 {{/if}}
 
             </div>
