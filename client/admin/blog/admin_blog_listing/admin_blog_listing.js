@@ -18,10 +18,12 @@ import { Base64 } from 'meteor/ostrio:base64';
 
 var book_listing;
 var reward_details_all;
+var notification_listing;
 
 Template.display_blog_listing_admin.onDestroyed(function () {
   book_listing.stop();
   reward_details_all.stop();
+  notification_listing.stop();
 });
 
 Template.display_blog_listing_admin.onCreated(function eventlistOnCreated(){
@@ -39,6 +41,8 @@ Template.display_blog_listing_admin.onRendered(function () {
 
   book_listing = Meteor.subscribe("fetch_blog_content");
   reward_details_all = Meteor.subscribe("reward_details_all");
+  var logged_in_user = Session.get("userId");
+    notification_listing =  Meteor.subscribe("notification_details_for_admin",logged_in_user);
 
   setTimeout(function () {
     $('#loading_div').addClass('loader_visiblity_block');

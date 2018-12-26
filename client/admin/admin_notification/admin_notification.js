@@ -97,7 +97,7 @@ $(document).ready(function() {
     show_notification_listing(){ 
       var logged_in_user = Session.get("userId");
       Meteor.subscribe("notification_details_for_admin",logged_in_user);
-
+    
       var result = notification_details.find({notification_to: 'writersmelon'},{sort: {created_at: -1}}).fetch();
       console.log('book_collections');
       console.log(result);
