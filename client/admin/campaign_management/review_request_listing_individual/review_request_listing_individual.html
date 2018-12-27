@@ -18,6 +18,7 @@
           <h1 style="font-size: 30px; font-weight: 500;">Review Request Listing</h1>
         </div>
       </div>
+
     </div>  
 
     <div class="col col-xl-1 col-lg-2 col-md-12 col-sm-12 col-12">
@@ -33,6 +34,51 @@
    <hr class="new4">
 </div>
 
+  
+<div class="container">
+  <div class="row">
+     <div class="col col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12">
+
+            <div class="ui-block responsive-flex1200 bg_trans">
+        <div class="ui-block-title pad_0">
+
+      {{#each show_book_detail_for_header}}
+              
+              <div class="forum-item">
+                <img src="{{book_cover}}" width="50" alt="forum" style="height: 80px !important; width: 80px !important;">
+                  <a href="#" class="h6 title">{{book_name}}</a>
+                
+                <div class="content">
+
+                <p class="text">Author: 
+                          {{author_name}}
+                </p>
+                
+                </div>
+
+                <div class="content">
+                  <p class="text">{{book_summary_trimmed}}</p>
+                </div>        
+              </div>
+
+      {{/each}}
+
+        </div>
+      </div>
+    </div>  
+
+    <div class="col col-xl-1 col-lg-2 col-md-12 col-sm-12 col-12">
+    </div>
+
+    <div class="col col-xl-1 col-lg-1 col-md-12 col-sm-12 col-12">
+    </div>
+
+    <div class="col col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12 ">
+    </div>
+    
+  </div>
+   <hr class="new4">
+</div>
 
 <div class="container">
   <div class="row">
@@ -46,24 +92,29 @@
         <table class="forums-table" id="show_review_request_listing" >
           <thead>
           <tr>          
-            <th class="forum">
-              Book Title
-            </th>
-        
-            <th class="posts">
-              Requester's Pic
-            </th>
 
             <th class="topics">
-              Requester's Name
+              Requester
             </th>
         
             <th class="posts">
-              Requester's Email
+              Personal Blog
             </th>
         
             <th class="posts">
-              Location(For deliver option 1)
+              Twitter
+            </th>
+        
+            <th class="posts">
+              Facebook
+            </th>
+        
+            <th class="posts">
+              Good-reads
+            </th>
+        
+            <th class="posts">
+              Location
             </th>
           
             <th class="freshness">
@@ -77,33 +128,30 @@
           <tbody>
 {{#each show_campaign_listing}}
           <tr>
-            <td class="forum">
-
-    {{#each show_book_detail}}
-              <div class="forum-item">
-                <img src="{{book_cover}}" width="50" alt="forum" style="height: 80px !important; width: 80px !important;">
-                  <a href="#" class="h6 title">{{book_name}}</a>
-<!--                 <div class="content">
-                  <p class="text">{{book_summary_trimmed}}</p>
-                </div>      -->   
-              </div>
-    {{/each}}       
-            </td>
-
           {{#each show_user_details}}       
 
             <td class="forum">
               <div class="forum-item">
                 <img src="{{user_profile_pic}}" class="img-responsive" style="height: 90px !important; width: 90px !important;">
+                 <p class="text">{{user_name}}</p>
+                 <div class="author-freshness">{{user_email}}</div>
               </div>
             </td>
 
-            <td class="topics">
-              <p class="text">{{user_name}}</p>
+            <td class="freshness">
+              <a href="{{personal_blog}}" target="_blank"  >{{personal_blog}}</a>
             </td>
 
             <td class="freshness">
-              <div class="author-freshness">{{user_email}}</div>
+              <a href="{{goodreads_handler}}" target="_blank" >{{goodreads_handler}}</a>
+            </td>
+
+            <td class="freshness">
+              <a href="{{fb_handler}}" target="_blank"  >{{fb_handler}}</a>
+            </td>
+
+            <td class="freshness">
+              <a href="{{twitter_handler}}" target="_blank"  >{{twitter_handler}}</a>
             </td>
 
           {{/each}}
@@ -127,6 +175,14 @@
               <button class="approve_review_request btn-breez btn" id="{{review_id}}" > Approve </button>
               
               <button  id="{{review_id}}" class="reject_review_request deactivate_status_user btn btn-danger" value="1"> Reject</button> 
+    {{else if equals approval_status 1}}
+      <p> Approved</p>
+
+    {{else if equals approval_status 2}}
+      <p> Rejected</p>
+
+    {{else if equals approval_status 3}}
+      <p> Review published</p>
     {{/if}}        
             </td>
           </tr>

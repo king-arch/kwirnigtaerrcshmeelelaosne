@@ -1,421 +1,304 @@
-  
+
+
 <template name="header">
-      <head>
-     <link rel="icon" sizes="16x16 32x32" href="img/writersmelon_favicon.ico">
-       <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-   
-</head>
+   <head>
+      <link rel="icon" sizes="16x16 32x32" href="img/writersmelon_favicon.ico">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+   </head>
 </template>
-
-<template name="headeroptions"> 
-
-
-<header class="header" id="site-header">
-    
-<div class="container">
-
-  <div class="page-title">
-    <img src="/img/logo_wm.png" style="width: 150px !important;">
-  </div>
-
-  <div class="header-content-wrapper">
-    <div class="search-bar w-search notification-list friend-requests" action="">
-      <div class="form-group with-button">
-        <input class="form-control" placeholder="Search here Books & authors ..." type="text" id="search_text" autocomplete="off" >
-        <button id="submit_search_text" >
-         <img src="/img/search_gray.png" style="padding-top: 15px;">
-        </button>
-      </div>
-    </div>
-
-     <a  href="javascript:void(0)" class="link-find-friend" id="go_to_feed" >Feed</a>
-     <a  href="javascript:void(0)" class="link-find-friend" id="go_to_book" >Book</a>
-     <a  href="javascript:void(0)" class="link-find-friend" id="go_to_community" >Community</a>
-     <a  href="javascript:void(0)" class="link-find-friend" id="go_to_blog" >Blog</a>
-
-    <div class="control-block control_block_mrgin_top">
-
-      <div class="control-icon more has-items" id="go_to_notifications" >
-      {{#if notification_pending}}
-        <img src="/img/notification_white.png" alt="arrow" class="back-icon" style="width: 21px;">
-        <div class="label-avatar bg-primary show_dot" ></div>
-      {{else}}
-        <img src="/img/notification_white.png" alt="arrow" class="back-icon" style="width: 21px;">
-      {{/if}}
-      </div>
-
-      <div class="control-icon more has-items">
-        <img src="/img/briefcase.png" alt="arrow" class="back-icon" style="width: 21px;">     
-        <div class="label-avatar bg-primary">80</div>
-      </div>
-
-      <div class="control-icon more has-items" id="send_to_reward_detail">
-        <img src="/img/medal.png" alt="arrow" class="back-icon" style="width: 21px;">     
-        <!-- <div class="label-avatar bg-primary">80</div> -->
-      </div> 
-
-      <div class="author-page author vcard inline-items more">
-        <div class="author-thumb">
-{{#each show_user_details}}
-          <img alt="author" src="{{user_profile_pic}}" class="avatar">
-{{/each}}
-          <div class="more-dropdown more-with-triangle">
-            <div class="mCustomScrollbar" data-mcs-theme="dark">
-              <!-- <div class="ui-block-title ui-block-title-small">
-                <h6 class="title">Your Account</h6>
-              </div> -->
-
-              <ul class="account-settings">
-
-                <li>
-                  <a href="javascript:void(0)" id="send_to_my_collections" >
-                      <span>My Collections</span>
-                  </a>
-                </li>
-
-                <li>
-                  <a href="javascript:void(0)" id="go_to_profile" >
-                    <span  >Profile</span>
-                  </a>
-                </li>
-
-                 <li>
-                  <a href="javascript:void(0)" id="got_to_user_setting">
-                   <span>Setting</span>
-                  </a>
-                </li>
-
-                 <li>
-                  <a href="javascript:void(0)" id="got_to_contact_us">
-                   <span>Contact Us</span>
-                  </a>
-                </li>
-
-                <li>
-                  <a id="sign_out" href="javascript:void(0)">
-                     <span>Sign Out</span>
-                  </a>
-                </li>
-              </ul>           
-
-            
+<template name="headeroptions">
+   <header class="header" id="site-header">
+      <div class="container">
+         <div class="page-title">
+            <img src="/img/logo_wm.png" style="width: 150px !important;">
+         </div>
+         <div class="header-content-wrapper">
+            <div class="search-bar w-search notification-list friend-requests" action="">
+               <div class="form-group with-button">
+                  <input class="form-control" placeholder="Search here Books & authors ..." type="text" id="search_text" autocomplete="off" >
+                  <button id="submit_search_text" >
+                  <img src="/img/search_gray.png" style="padding-top: 15px;">
+                  </button>
+               </div>
             </div>
-
-          </div>
-        </div>
-        
-      </div>
-
-    </div>
-  </div>
-</div>
-</header>
-
-
-<!-- ... end Header-BP -->
-
-
-<!-- Responsive Header-BP -->
-
-<header class="header header-responsive" id="site-header-responsive">
-
-  <div class="header-content-wrapper">
-    <ul class="nav nav-tabs mobile-app-tabs" role="tablist">
-      <li class="nav-item">
-        <a class="nav-link" data-toggle="tab" href="#request" role="tab">
-          <div class="control-icon has-items">
-            <svg class="olymp-happy-face-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-happy-face-icon"></use></svg>
-            <div class="label-avatar bg-blue">6</div>
-          </div>
-        </a>
-      </li>
-
-      <li class="nav-item">
-        <a class="nav-link" data-toggle="tab" href="#chat" role="tab">
-          <div class="control-icon has-items">
-            <img src="/svg-icons/back-to-top.svg" alt="arrow" class="back-icon">
-            <div class="label-avatar bg-purple">2</div>
-          </div>
-        </a>
-      </li>
-
-      <li class="nav-item">
-        <a class="nav-link" data-toggle="tab" href="#notification" role="tab">
-          <div class="control-icon has-items">
-             <img src="/svg-icons/back-to-top.svg" alt="arrow" class="back-icon">
-
-            <div class="label-avatar bg-primary">8898</div>
-          </div>
-        </a>
-      </li>
-
-      <li class="nav-item">
-        <a class="nav-link" data-toggle="tab" href="#search" role="tab">
-          <svg class="olymp-magnifying-glass-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-magnifying-glass-icon"></use></svg>
-          <svg class="olymp-close-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-close-icon"></use></svg>
-        </a>
-      </li>
-    </ul>
-  </div>
-
-  <!-- Tab panes -->
-  <div class="tab-content tab-content-responsive">
-
-    <div class="tab-pane " id="request" role="tabpanel">
-
-      <div class="mCustomScrollbar" data-mcs-theme="dark">
-        <div class="ui-block-title ui-block-title-small">
-          <h6 class="title">FRIEND REQUESTS</h6>
-          <a href="#">Find Friends</a>
-          <a href="#">Settings</a>
-        </div>
-        <ul class="notification-list friend-requests">
-          <li>
-            <div class="author-thumb">
-              <img src="/img/avatar55-sm.jpeg" alt="author">
-            </div>
-            <div class="notification-event">
-              <a href="#" class="h6 notification-friend">Tamara Romanoff</a>
-              <span class="chat-message-item">Mutual Friend: Sarah Hetfield</span>
-            </div>
-                  <span class="notification-icon">
-                    <a href="#" class="accept-request">
-                      <span class="icon-add without-text">
-                        <svg class="olymp-happy-face-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-happy-face-icon"></use></svg>
-                      </span>
-                    </a>
-
-                    <a href="#" class="accept-request request-del">
-                      <span class="icon-minus">
-                        <svg class="olymp-happy-face-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-happy-face-icon"></use></svg>
-                      </span>
-                    </a>
-
-                  </span>
-
-            <div class="more">
-              <svg class="olymp-three-dots-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-three-dots-icon"></use></svg>
-            </div>
-          </li>
-          <li>
-            <div class="author-thumb">
-              <img src="/img/avatar56-sm.jpeg" alt="author">
-            </div>
-            <div class="notification-event">
-              <a href="#" class="h6 notification-friend">Tony Stevens</a>
-              <span class="chat-message-item">4 Friends in Common</span>
-            </div>
-                  <span class="notification-icon">
-                    <a href="#" class="accept-request">
-                      <span class="icon-add without-text">
-                        <svg class="olymp-happy-face-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-happy-face-icon"></use></svg>
-                      </span>
-                    </a>
-
-                    <a href="#" class="accept-request request-del">
-                      <span class="icon-minus">
-                        <svg class="olymp-happy-face-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-happy-face-icon"></use></svg>
-                      </span>
-                    </a>
-
-                  </span>
-
-            <div class="more">
-              <svg class="olymp-three-dots-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-three-dots-icon"></use></svg>
-            </div>
-          </li>
-          <li class="accepted">
-            <div class="author-thumb">
-              <img src="/img/avatar57-sm.jpeg" alt="author">
-            </div>
-            <div class="notification-event">
-              You and <a href="#" class="h6 notification-friend">Mary Jane Stark</a> just became friends. Write on <a href="#" class="notification-link">her wall</a>.
-            </div>
-                  <span class="notification-icon">
-                    <svg class="olymp-happy-face-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-happy-face-icon"></use></svg>
-                  </span>
-
-            <div class="more">
-              <svg class="olymp-three-dots-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-three-dots-icon"></use></svg>
-              <svg class="olymp-little-delete"><use xlink:href="svg-icons/sprites/icons.svg#olymp-little-delete"></use></svg>
-            </div>
-          </li>
-          <li>
-            <div class="author-thumb">
-              <img src="/img/avatar58-sm.jpeg" alt="author">
-            </div>
-            <div class="notification-event">
-              <a href="#" class="h6 notification-friend">Stagg Clothing</a>
-              <span class="chat-message-item">9 Friends in Common</span>
-            </div>
-                  <span class="notification-icon">
-                    <a href="#" class="accept-request">
-                      <span class="icon-add without-text">
-                        <svg class="olymp-happy-face-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-happy-face-icon"></use></svg>
-                      </span>
-                    </a>
-
-                    <a href="#" class="accept-request request-del">
-                      <span class="icon-minus">
-                        <svg class="olymp-happy-face-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-happy-face-icon"></use></svg>
-                      </span>
-                    </a>
-
-                  </span>
-
-            <div class="more">
-              <svg class="olymp-three-dots-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-three-dots-icon"></use></svg>
-            </div>
-          </li>
-        </ul>
-        <a href="#" class="view-all bg-blue">Check all your Events</a>
-      </div>
-
-    </div>
-
-    <div class="tab-pane " id="chat" role="tabpanel">
-
-      <div class="mCustomScrollbar" data-mcs-theme="dark">
-        <div class="ui-block-title ui-block-title-small">
-          <h6 class="title">Chat / Messages</h6>
-          <a href="#">Mark all as read</a>
-          <a href="#">Settings</a>
-        </div>
-
-        <ul class="notification-list chat-message">
-          <li class="message-unread">
-            <div class="author-thumb">
-              <img src="/img/avatar59-sm.jpeg" alt="author">
-            </div>
-            <div class="notification-event">
-              <a href="#" class="h6 notification-friend">Diana Jameson</a>
-              <span class="chat-message-item">Hi James! It’s Diana, I just wanted to let you know that we have to reschedule...</span>
-              <span class="notification-date"><time class="entry-date updated" datetime="2004-07-24T18:18">4 hours ago</time></span>
-            </div>
-                  <span class="notification-icon">
-                    <svg class="olymp-chat---messages-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-chat---messages-icon"></use></svg>
-                  </span>
-            <div class="more">
-              <svg class="olymp-three-dots-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-three-dots-icon"></use></svg>
-            </div>
-          </li>
-
-          <li>
-            <div class="author-thumb">
-              <img src="/img/avatar60-sm.jpeg" alt="author">
-            </div>
-            <div class="notification-event">
-              <a href="#" class="h6 notification-friend">Jake Parker</a>
-              <span class="chat-message-item">Great, I’ll see you tomorrow!.</span>
-              <span class="notification-date"><time class="entry-date updated" datetime="2004-07-24T18:18">4 hours ago</time></span>
-            </div>
-                  <span class="notification-icon">
-                    <svg class="olymp-chat---messages-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-chat---messages-icon"></use></svg>
-                  </span>
-
-            <div class="more">
-              <svg class="olymp-three-dots-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-three-dots-icon"></use></svg>
-            </div>
-          </li>
-          <li>
-            <div class="author-thumb">
-              <img src="/img/avatar61-sm.jpeg" alt="author">
-            </div>
-            <div class="notification-event">
-              <a href="#" class="h6 notification-friend">Elaine Dreyfuss</a>
-              <span class="chat-message-item">We’ll have to check that at the office and see if the client is on board with...</span>
-              <span class="notification-date"><time class="entry-date updated" datetime="2004-07-24T18:18">Yesterday at 9:56pm</time></span>
-            </div>
-                    <span class="notification-icon">
-                      <svg class="olymp-chat---messages-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-chat---messages-icon"></use></svg>
-                    </span>
-            <div class="more">
-              <svg class="olymp-three-dots-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-three-dots-icon"></use></svg>
-            </div>
-          </li>
-
-          <li class="chat-group">
-            <div class="author-thumb">
-              <img src="/img/avatar11-sm.jpeg" alt="author">
-              <img src="/img/avatar12-sm.jpeg" alt="author">
-              <img src="/img/avatar13-sm.jpeg" alt="author">
-              <img src="/img/avatar10-sm.jpeg" alt="author">
-            </div>
-            <div class="notification-event">
-              <a href="#" class="h6 notification-friend">You, Faye, Ed &amp; Jet +3</a>
-              <span class="last-message-author">Ed:</span>
-              <span class="chat-message-item">Yeah! Seems fine by me!</span>
-              <span class="notification-date"><time class="entry-date updated" datetime="2004-07-24T18:18">March 16th at 10:23am</time></span>
-            </div>
-                    <span class="notification-icon">
-                      <svg class="olymp-chat---messages-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-chat---messages-icon"></use></svg>
-                    </span>
-            <div class="more">
-              <svg class="olymp-three-dots-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-three-dots-icon"></use></svg>
-            </div>
-          </li>
-        </ul>
-
-        <a href="#" class="view-all bg-purple">View All Messages</a>
-      </div>
-
-    </div>
-
-    <div class="tab-pane " id="search" role="tabpanel">
-
-
-        <form class="search-bar w-search notification-list friend-requests">
-          <div class="form-group with-button">
-            <input class="form-control js-user-search" placeholder="Search here people or pages..." type="text">
-          </div>
-        </form>
-
-
-    </div>
-
-  </div>
-  <!-- ... end  Tab panes -->
-
-</header>
-
-
-<!-- ... end Responsive Header-BP -->
-
-<div class="header-spacer"></div>
-<div class="container">
-<div class="onoffswitch3">
-    <input type="checkbox" name="onoffswitch3" class="onoffswitch3-checkbox" id="myonoffswitch3" checked>
-    <label class="onoffswitch3-label" for="myonoffswitch3">
-        <span class="onoffswitch3-inner">
-
-            <span class="onoffswitch3-active">
-                  <div id="ticker" >
-                                  <marquee class="scroll-text" > 
-                                      {{#each change_textual_ads}}
-
-                                      <a href={{promotion_url}} style="color: #333 !important;" class="update_count" id="OpenNewTab" target="_blank" > <span class="update_count" >{{promotion_content}}</span></a>&nbsp; &nbsp;
-
-                                      {{/each}}
-                                    </marquee>
+            <a  href="javascript:void(0)" class="link-find-friend" id="go_to_feed" >Feed</a>
+            <a  href="javascript:void(0)" class="link-find-friend" id="go_to_book" >Book</a>
+            <a  href="javascript:void(0)" class="link-find-friend" id="go_to_community" >Community</a>
+            <a  href="javascript:void(0)" class="link-find-friend" id="go_to_blog" >Blog</a>
+            <div class="control-block control_block_mrgin_top">
+              <div class="control-icon more has-items" id="go_to_notifications" >
+                  {{#if notification_pending}}
+                  <img src="/img/notification_white.png" alt="arrow" class="back-icon" style="width: 21px;">
+                  <div class="label-avatar bg-primary show_dot" ></div>
+                  {{else}}
+                  <img src="/img/notification_white.png" alt="arrow" class="back-icon" style="width: 21px;">
+                  {{/if}}
+              </div>
+              <div class="control-icon more has-items">
+                  <img src="/img/briefcase.png" alt="arrow" class="back-icon" style="width: 21px;">     
+                  <div class="label-avatar bg-primary">80</div>
+              </div>
+              <div class="control-icon more has-items" id="send_to_reward_detail">
+                  <img src="/img/medal.png" alt="arrow" class="back-icon" style="width: 21px;">     
+                  <!-- <div class="label-avatar bg-primary">80</div> -->
+              </div>
+              <div class="author-page author vcard inline-items more">
+                  <div class="author-thumb">
+                     {{#each show_user_details}}
+                     <img alt="author" src="{{user_profile_pic}}" class="avatar">
+                     {{/each}}
+                     <div class="more-dropdown more-with-triangle">
+                        <div class="mCustomScrollbar" data-mcs-theme="dark">
+                           <!-- <div class="ui-block-title ui-block-title-small">
+                              <h6 class="title">Your Account</h6>
+                              </div> -->
+                           <ul class="account-settings">
+                              <li>
+                                 <a href="javascript:void(0)" id="send_to_my_collections" >
+                                 <span>My Collections</span>
+                                 </a>
+                              </li>
+                              <li>
+                                 <a href="javascript:void(0)" id="go_to_profile" >
+                                 <span  >Profile</span>
+                                 </a>
+                              </li>
+                              <li>
+                                 <a href="javascript:void(0)" id="got_to_user_setting">
+                                 <span>Setting</span>
+                                 </a>
+                              </li>
+                              <li>
+                                 <a href="javascript:void(0)" id="got_to_contact_us">
+                                 <span>Contact Us</span>
+                                 </a>
+                              </li>
+                              <li>
+                                 <a id="sign_out" href="javascript:void(0)">
+                                 <span>Sign Out</span>
+                                 </a>
+                              </li>
+                           </ul>
+                        </div>
+                     </div>
                   </div>
-                <span class="onoffswitch3-switch">Latest </span>
+               </div>
+            </div>
+         </div>
+      </div>
+   </header>
+   <!-- ... end Header-BP -->
+   <!-- Responsive Header-BP -->
+   <header class="header header-responsive" id="site-header-responsive">
+      <div class="header-content-wrapper">
+         <!-- <div class="page-title">
+            <img src="/img/logo_wm.png">
+         </div> -->
+         <div class="fixed-sidebar fixed-sidebar-responsive">
+            <div class="fixed-sidebar-left sidebar--small" id="sidebar-left-responsive">
+              <a href="#" class="logo js-sidebar-open active">
+                <img src="img/writersmelon_favicon.ico" alt="WritersMelon">
+              </a>
+            </div>
+            <div class="fixed-sidebar-left sidebar--large" id="sidebar-left-1-responsive">
+              <a href="#" class="logo">
+                <div class="img-wrap">
+                  <img src="/img/logo_wm.png" alt="WritersMelon">
+                </div>
+                
+              </a>
+              <div class="mCustomScrollbar ps ps--theme_default" data-mcs-theme="dark" data-ps-id="e0312573-337a-fa2a-ab34-d098ebbaec02">
+                <div class="control-block">
+                  <div class="author-page author vcard inline-items">
+                    <div class="author-thumb">
+                      <img alt="author" src="img/author-page.jpg" class="avatar">
+                      <span class="icon-status online"></span>
+                    </div>
+                    <a href="02-ProfilePage.html" class="author-name fn">
+                      <div class="author-title">
+                        James Spiegel <svg class="olymp-dropdown-arrow-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-dropdown-arrow-icon"></use></svg>
+                      </div>
+                      <span class="author-subtitle">SPACE COWBOY</span>
+                    </a>
+                  </div>
+                </div>
+
+                <div class="ui-block-title ui-block-title-small">
+                  <h6 class="title">MAIN SECTIONS</h6>
+                </div>
+
+                <ul class="left-menu">
+                  <li>
+                    <a href="#" class="js-sidebar-open">
+                      <svg class="olymp-close-icon left-menu-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-close-icon"></use></svg>
+                      <span class="left-menu-title">Collapse Menu</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="mobile-index.html">
+                      <svg class="olymp-newsfeed-icon left-menu-icon" data-toggle="tooltip" data-placement="right" data-original-title="NEWSFEED"><use xlink:href="svg-icons/sprites/icons.svg#olymp-newsfeed-icon"></use></svg>
+                      <span class="left-menu-title">Newsfeed</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="Mobile-28-YourAccount-PersonalInformation.html">
+                      <svg class="olymp-star-icon left-menu-icon" data-toggle="tooltip" data-placement="right" data-original-title="FAV PAGE"><use xlink:href="svg-icons/sprites/icons.svg#olymp-star-icon"></use></svg>
+                      <span class="left-menu-title">Fav Pages Feed</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="mobile-29-YourAccount-AccountSettings.html">
+                      <svg class="olymp-happy-faces-icon left-menu-icon" data-toggle="tooltip" data-placement="right" data-original-title="FRIEND GROUPS"><use xlink:href="svg-icons/sprites/icons.svg#olymp-happy-faces-icon"></use></svg>
+                      <span class="left-menu-title">Friend Groups</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="Mobile-30-YourAccount-ChangePassword.html">
+                      <svg class="olymp-headphones-icon left-menu-icon" data-toggle="tooltip" data-placement="right" data-original-title="MUSIC&amp;PLAYLISTS"><use xlink:href="svg-icons/sprites/icons.svg#olymp-headphones-icon"></use></svg>
+                      <span class="left-menu-title">Music &amp; Playlists</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="Mobile-31-YourAccount-HobbiesAndInterests.html">
+                      <svg class="olymp-weather-icon left-menu-icon" data-toggle="tooltip" data-placement="right" data-original-title="WEATHER APP"><use xlink:href="svg-icons/sprites/icons.svg#olymp-weather-icon"></use></svg>
+                      <span class="left-menu-title">Weather App</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="Mobile-32-YourAccount-EducationAndEmployement.html">
+                      <svg class="olymp-calendar-icon left-menu-icon" data-toggle="tooltip" data-placement="right" data-original-title="CALENDAR AND EVENTS"><use xlink:href="svg-icons/sprites/icons.svg#olymp-calendar-icon"></use></svg>
+                      <span class="left-menu-title">Calendar and Events</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="Mobile-33-YourAccount-Notifications.html">
+                      <svg class="olymp-badge-icon left-menu-icon" data-toggle="tooltip" data-placement="right" data-original-title="Community Badges"><use xlink:href="svg-icons/sprites/icons.svg#olymp-badge-icon"></use></svg>
+                      <span class="left-menu-title">Community Badges</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="Mobile-34-YourAccount-ChatMessages.html">
+                      <svg class="olymp-cupcake-icon left-menu-icon" data-toggle="tooltip" data-placement="right" data-original-title="Friends Birthdays"><use xlink:href="svg-icons/sprites/icons.svg#olymp-cupcake-icon"></use></svg>
+                      <span class="left-menu-title">Friends Birthdays</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="Mobile-35-YourAccount-FriendsRequests.html">
+                      <svg class="olymp-stats-icon left-menu-icon" data-toggle="tooltip" data-placement="right" data-original-title="Account Stats"><use xlink:href="svg-icons/sprites/icons.svg#olymp-stats-icon"></use></svg>
+                      <span class="left-menu-title">Account Stats</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#">
+                      <svg class="olymp-manage-widgets-icon left-menu-icon" data-toggle="tooltip" data-placement="right" data-original-title="Manage Widgets"><use xlink:href="svg-icons/sprites/icons.svg#olymp-manage-widgets-icon"></use></svg>
+                      <span class="left-menu-title">Manage Widgets</span>
+                    </a>
+                  </li>
+                </ul>
+
+                <div class="ui-block-title ui-block-title-small">
+                  <h6 class="title">YOUR ACCOUNT</h6>
+                </div>
+
+                <ul class="account-settings">
+                  <li>
+                    <a href="#">
+
+                      <svg class="olymp-menu-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-menu-icon"></use></svg>
+
+                      <span>Profile Settings</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#">
+                      <svg class="olymp-star-icon left-menu-icon" data-toggle="tooltip" data-placement="right" data-original-title="FAV PAGE"><use xlink:href="svg-icons/sprites/icons.svg#olymp-star-icon"></use></svg>
+
+                      <span>Create Fav Page</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#">
+                      <svg class="olymp-logout-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-logout-icon"></use></svg>
+
+                      <span>Log Out</span>
+                    </a>
+                  </li>
+                </ul>
+
+                <div class="ui-block-title ui-block-title-small">
+                  <h6 class="title">About Olympus</h6>
+                </div>
+
+                <ul class="about-olympus">
+                  <li>
+                    <a href="#">
+                      <span>Terms and Conditions</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#">
+                      <span>FAQs</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#">
+                      <span>Careers</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#">
+                      <span>Contact</span>
+                    </a>
+                  </li>
+                </ul>
+
+              <div class="ps__scrollbar-x-rail" style="left: 0px; bottom: 0px;"><div class="ps__scrollbar-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps__scrollbar-y-rail" style="top: 0px; right: 0px;"><div class="ps__scrollbar-y" tabindex="0" style="top: 0px; height: 0px;"></div></div></div>
+            </div>
+          </div>
+         <ul class="nav nav-tabs mobile-app-tabs" role="tablist">
+            <li class="nav-item">
+               <a class="nav-link" data-toggle="tab" href="#search" role="tab">
+                  <svg class="olymp-magnifying-glass-icon">
+                     <use xlink:href="svg-icons/sprites/icons.svg#olymp-magnifying-glass-icon"></use>
+                  </svg>
+                  <svg class="olymp-close-icon">
+                     <use xlink:href="svg-icons/sprites/icons.svg#olymp-close-icon"></use>
+                  </svg>
+               </a>
+            </li>
+         </ul>
+      </div>
+   </header>
+  
+   <!-- ... end Responsive Header-BP -->
+   <div class="header-spacer"></div>
+   <div class="container">
+      <div class="onoffswitch3 hidden-xs">
+         <input type="checkbox" name="onoffswitch3" class="onoffswitch3-checkbox" id="myonoffswitch3" checked>
+         <label class="onoffswitch3-label" for="myonoffswitch3">
+            <span class="onoffswitch3-inner">
+               <span class="onoffswitch3-active">
+                  <div id="ticker" >
+                     <marquee class="scroll-text" > 
+                        {{#each change_textual_ads}}
+                        <a href={{promotion_url}} style="color: #333 !important;" class="update_count" id="OpenNewTab" target="_blank" > <span class="update_count" >{{promotion_content}}</span></a>&nbsp; &nbsp;
+                        {{/each}}
+                     </marquee>
+                  </div>
+                  <span class="onoffswitch3-switch">Latest </span>
+               </span>
+               <span class="onoffswitch3-inactive"><span class="onoffswitch3-switch">SHOW BREAKING NEWS</span></span>
             </span>
-
-            <span class="onoffswitch3-inactive"><span class="onoffswitch3-switch">SHOW BREAKING NEWS</span></span>
-        </span>
-    </label>
-</div>
-</div>
-
-<a class="back-to-top" href="#">
-  <img src="/svg-icons/back-to-top.svg" alt="arrow" class="back-icon">
-</a>
-
+         </label>
+      </div>
+   </div>
+   <a class="back-to-top" href="#">
+   <img src="/svg-icons/back-to-top.svg" alt="arrow" class="back-icon">
+   </a>
 </template>
-
 <template name="footer">
-
 </template>
+

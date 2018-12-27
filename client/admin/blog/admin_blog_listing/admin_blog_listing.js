@@ -1,7 +1,4 @@
-
-import {
-  Template
-} from 'meteor/templating';
+import { Template } from 'meteor/templating';
 import {
   ReactiveVar
 } from 'meteor/reactive-var';
@@ -215,48 +212,6 @@ Template.display_blog_listing_admin.events({
 
   },
 
-    'click .disapproval_status_blog': function(event){
-    event.preventDefault();
-        // swal(JSON.stringify(this));
-    // var interest_id = this.id;
-    var blog_id = this.blog_id;
-    var logged_in_user = Session.get("userId");
-        // swal(interest_id);
-    var status = 2;
-    console.log('status');
-    console.log(status);
-
-    swal("Sure you want to reject this detail ?", {
-        buttons: {
-          cancel: "Cancel",
-          catch: {
-            text: "Sure",
-            value: "catch",
-          },
-        },
-      })
-      .then((value) => {
-        switch (value) {
-
-          case "defeat":
-            swal("Pikachu fainted! You gained 500 XP!");
-            break;
-
-          case "catch":
-            Meteor.call('change_blog_approval_status', blog_id, status,logged_in_user, function (error, result) {
-              if (error) {
-                console.log("Some error occured.");
-              } else {
-                // swal("User is successfully De-activated!");
-                window.location.reload();
-              }
-            });
-            break;
-        }
-      });
-
-  },
-
     'click .approval_status_blog': function(event){
     event.preventDefault();
         // swal(JSON.stringify(this));
@@ -299,12 +254,114 @@ Template.display_blog_listing_admin.events({
 
   },
 
-      "click .go_to_blog_detail":function(){ 
+      "click .go_to_blog_detail":function(){  
       var blog_id = Base64.encode(this.blog_id);  
       var url = '/admin_blog_detail/'+blog_id;
             console.log(url);
             window.location.href = url;
-    },
+
+
+      },
+
+        'click .disapproval_status_blog_modal': function(event){
+            // swal("clicked");
+            swal(this.blog_id);
+            $("#open_reject_modal_"+this.blog_id).click();
+        },
+
+    'click .disapproval_status_blog': function(event){
+      
+          event.preventDefault();
+          var reject_comment = $("#reject_comment").val();
+                    var blog_id = this.blog_id;
+          var logged_in_user = Session.get("userId");
+
+          var status = 2;
+          console.log('status');
+          console.log(status);
+
+          swal("Sure you want to reject this blog ?", {
+              buttons: {
+                cancel: "Cancel",
+                catch: {
+                  text: "Sure",
+                  value: "catch",
+                },
+              },
+            })
+            .then((value) => {
+              switch (value) {
+
+                case "defeat":
+                  swal("Pikachu fainted! You gained 500 XP!");
+                  break;
+
+                case "catch":
+
+          if(reject_comment){
+              Meteor.call('change_blog_approval_status_with_comment', blog_id, status,logged_in_user,reject_comment, function (error, result) {
+                    if (error) {
+                      console.log("Some error occured.");
+                    } else {
+                      // swal("User is successfully De-activated!");
+                      // window.location.reload();
+                    }
+                  });
+          }else{
+             Meteor.call('change_blog_approval_status', blog_id, status,logged_in_user, function (error, result) {
+                    if (error) {
+                      console.log("Some error occured.");
+                    } else {
+                      // swal("User is successfully De-activated!");
+                      // window.location.reload();
+                    }
+                  });
+          }  
+                  break;
+              }
+            });
+     },
+
+  //   'click .disapproval_status_blog': function(event){
+  //   event.preventDefault();
+
+  //   var blog_id = this.blog_id;
+  //   var logged_in_user = Session.get("userId");
+
+  //   var status = 2;
+  //   console.log('status');
+  //   console.log(status);
+
+  //   swal("Sure you want to reject this detail ?", {
+  //       buttons: {
+  //         cancel: "Cancel",
+  //         catch: {
+  //           text: "Sure",
+  //           value: "catch",
+  //         },
+  //       },
+  //     })
+  //     .then((value) => {
+  //       switch (value) {
+
+  //         case "defeat":
+  //           swal("Pikachu fainted! You gained 500 XP!");
+  //           break;
+
+  //         case "catch":
+  //           Meteor.call('change_blog_approval_status', blog_id, status,logged_in_user, function (error, result) {
+  //             if (error) {
+  //               console.log("Some error occured.");
+  //             } else {
+  //               // swal("User is successfully De-activated!");
+  //               window.location.reload();
+  //             }
+  //           });
+  //           break;
+  //       }
+  //     });
+
+  // },
 
 
 });

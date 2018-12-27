@@ -10,7 +10,6 @@
 <div class="loading"  id="loading_div" ></div>
 {{>left_panel_admin}}
 
-
 <div class="">
   <div class="content-bg-wrap"></div>
   <div class="row">
@@ -107,7 +106,7 @@
               <div class="author-freshness">
 
       {{#if equals blog_status 0 }}
-        <button  id="{{blog_id}}" class="disapproval_status_blog btn btn-danger" value="0">  
+        <button  id="{{blog_id}}" class="disapproval_status_blog_modal btn btn-danger" value="0">  
           Reject request
         </button> 
 
@@ -121,7 +120,7 @@
         </button>        
 
       {{else if equals blog_status 1 }}
- <button  id="{{blog_id}}" class="disapproval_status_blog btn btn-danger" value="0">  
+ <button  id="{{blog_id}}" class="disapproval_status_blog_modal btn btn-danger" value="0">  
           Reject
         </button> 
 
@@ -139,10 +138,40 @@
                 {{else}}
                 <button  id="{{blog_id}}" class="activate_status_blog btn  btn-success" value="1">  Active </button> 
                 {{/if}}
-                <button class="btn-breez btn go_to_blog_detail" > view </button>
+                <button class="btn-breez btn go_to_blog_detail" > View </button>
              </td>          
-            
           </tr>
+
+
+ <a data-toggle="modal" data-target="#show_default_message_{{blog_id}}" class="" style="display:none;" id="open_default_modal_{{blog_id}}" > click me
+    </a>
+
+  <div class="modal fade" new_post="ss" id="show_default_message_{{blog_id}}" tabindex="-1" role="dialog" aria-labelledby="show_default_message_{{blog_id}}" aria-hidden="true">
+
+  <div class="modal-dialog window-popup create-friend-group show_default_message_{{blog_id}}" role="document">
+
+    <div class="modal-content">
+      <a href="#" class="close icon-close" data-dismiss="modal" aria-label="Close">
+        <svg class="olymp-close-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-close-icon"></use></svg>
+      </a>
+
+      <div class="modal-header">
+        <h6 class="title">Alert</h6>
+      </div>
+
+      <div class="modal-body" style="padding: 0px;">
+      <p>
+            Cover pic : Recommended ratio: 4: 1.
+            Ex: width: 1200  height: 400.
+
+            Please select appropriate catagries for your article. 
+      </p>
+     </div>
+
+    </div>
+  </div>
+</div>
+
           {{/each}}
           
         
@@ -156,5 +185,6 @@
 
   </div>
 </div> 
+
 
 </template>

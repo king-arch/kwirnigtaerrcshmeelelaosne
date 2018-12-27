@@ -113,9 +113,11 @@
 
              <a href="javascript:void(0)" class="view_detail btn btn-primary btn-sm full-width" data-toggle="modal" data-target="#edit-my-poll-popup" id="{{campaign_id}}">View</a>
 
+          {{#if check_approval_status_for_time_dislay}}
              <a href="javascript:void(0)" class="view_request_listing btn btn-breez btn-sm full-width" data-toggle="modal" data-target="#edit-my-poll-popup" id="{{campaign_id}}">Review Request</a>
 
              <a href="javascript:void(0)" class="view_approval_listing btn btn-breez btn-sm full-width" data-toggle="modal" data-target="#edit-my-poll-popup" id="{{campaign_id}}">Review Approval</a>
+          {{/if}}
 
             </td>
           </tr>

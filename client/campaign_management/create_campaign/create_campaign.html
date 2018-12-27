@@ -20,6 +20,20 @@
 </div> 
 
 <div class="container">
+  <div class="row">
+     <div class="col col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12">
+        <div class="ui-block responsive-flex1200 bg_trans">
+          <div class="ui-block-title pad_0">
+             <p >  
+   for further queris write to contact@writersmelon.com  </p>
+          </div>
+        </div>
+     </div>     
+  </div>
+   <hr class="new4">
+</div> 
+
+<div class="container">
   <div class="row bg_white">
     <div class="col col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
 
@@ -133,9 +147,8 @@
               
                 <select  id="delivery_option" >
                   <option value="" >-- Select Delivery Option --</option>
-                  <option value="1" >Select Option 1 - Send Book offline</option>
-                  <option value="2" >Select Option 2 - releaseing the reward points, user can buy 
-                  |ook himself. </option>      
+                  <option value="1" >Select Option 1 - Author will send books</option>
+                  <option value="2" >Select Option 2 - Reviewer will  buy from amazon </option>      
                 </select>
         
           </div>  
@@ -179,6 +192,8 @@
   <div class="ui-block show_packages pad_empty_package" style="border: 2px dashed #9aaf59;" id="show_deafult" >  
    No plan Setected
   </div>
+
+
 
 <div class="ui-block show_packages" style="border: 2px dashed #9aaf59;" id="show_package_with_days_15" >  
   <article class="hentry post" >          
@@ -496,7 +511,7 @@
       {
          var charCode = (evt.which) ? evt.which : event.keyCode
          if (charCode != 46 && charCode > 31 && (charCode < 48 || charCode > 57))
-            return false;
+         return false;
 
          return true;
       }

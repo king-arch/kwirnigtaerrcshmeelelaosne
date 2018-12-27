@@ -1,5 +1,4 @@
 
-
 import {
   Template
 } from 'meteor/templating';
@@ -90,18 +89,22 @@ Template.show_review_request_listing_individual.onRendered(function () {
         return result;
     },
 
-
     show_campaign_listing(){
      Meteor.subscribe("notification_details_all");
      var campaign_id = Session.get("get_campaign_id");
 
-      var result = review_details.find({content_type: "review_request",parent_id: campaign_id, approval_status: 0}).fetch();
+      var result = review_details.find({content_type: "review_request",parent_id: campaign_id}).fetch();
       return result;
     },
 
     show_book_detail(){
       Meteor.subscribe("notification_details_all");
       var result = campaign_details.find({campaign_id: this.parent_id}).fetch();
+      return result;
+    },
+
+    show_book_detail_for_header(){
+      var result = campaign_details.find({campaign_id: Session.get("get_campaign_id")}).fetch();
       return result;
     },
 

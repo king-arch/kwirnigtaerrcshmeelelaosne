@@ -10,7 +10,7 @@
 
   <div class="loading"  id="loading_div" ></div>
   {{>left_panel_admin}}
-  
+
 <div class="container">
   <div class="row">
 
@@ -81,6 +81,48 @@
    <hr class="new4">
 </div>
 
+<div class="container">
+  <div class="row">
+     <div class="col col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12">
+
+            <div class="ui-block responsive-flex1200 bg_trans">
+        <div class="ui-block-title pad_0">
+
+      {{#each show_book_detail_for_header}}
+              
+              <div class="forum-item">
+                <img src="{{book_cover}}" width="50" alt="forum" style="height: 80px !important; width: 80px !important;">
+                  <a href="#" class="h6 title">{{book_name}}</a>
+                
+                <div class="content"><p class="text">Author: 
+           
+               {{author_name}}
+            </p>
+                </div>
+
+                <div class="content">
+                  <p class="text">{{book_summary_trimmed}}</p>
+                </div>        
+              </div>
+
+      {{/each}}
+
+        </div>
+      </div>
+    </div>  
+
+    <div class="col col-xl-1 col-lg-2 col-md-12 col-sm-12 col-12">
+    </div>
+
+    <div class="col col-xl-1 col-lg-1 col-md-12 col-sm-12 col-12">
+    </div>
+
+    <div class="col col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12 ">
+    </div>
+    
+  </div>
+   <hr class="new4">
+</div>
 
 <div class="container">
   <div class="row">
@@ -93,17 +135,10 @@
         
         <table class="forums-table" id="show_review_approval_listing" >
           <thead>
-          <tr>          
-            <th class="forum">
-              Book Title
-            </th>
-        
-            <th class="posts">
-              Requester's Pic
-            </th>
+          <tr>    
 
             <th class="topics">
-              Requester's Name
+              Requester
             </th>
         
             <th class="posts">
@@ -137,19 +172,6 @@
           <tbody>
 {{#each show_campaign_listing}}
           <tr>
-            <td class="forum">
-
-    {{#each show_book_detail}}
-              <div class="forum-item">
-                <img src="{{book_cover}}" width="50" alt="forum" style="height: 80px !important; width: 80px !important;">
-<!--                 <div class="content">
-                  <a href="#" class="h6 title">{{book_name}}</a>
-                  <p class="text">{{book_summary_trimmed}}</p>
-                </div>   -->     
-              </div>
-                <a href="#" class="h6 title">{{book_name}}</a> 
-    {{/each}}       
-            </td>
 
           {{#each show_user_details}}       
 
@@ -157,10 +179,7 @@
               <div class="forum-item">
                 <img src="{{user_profile_pic}}" class="img-responsive" style="height: 90px !important; width: 90px !important;">
               </div>
-            </td>
-
-            <td class="topics">
-              <p class="text">{{user_name}}</p>
+             <p class="text">{{user_name}}</p>
             </td>
 
 
@@ -215,6 +234,11 @@
             <button class="approve_review_submition btn-breez btn" id="{{review_id}}" > Approve </button>
               
               <button  id="{{review_id}}" class="reject_review_submition deactivate_status_user btn btn-danger" value="1"> Reject</button> 
+    {{else if equals approval_status 1}}
+            <p> Approved </p> 
+
+    {{else if equals approval_status 2}}
+            <p> Rejected </p> 
     {{/if}}        
             </td>
             <td class="freshness">

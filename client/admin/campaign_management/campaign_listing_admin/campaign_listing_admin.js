@@ -135,6 +135,18 @@ Template.show_campaign_listing_admin.events({
             window.location.href = url;     
     },
 
+    
+  'click .view_profile':function(){      
+            var user_id = Base64.encode(this.user_id);  
+            if(this.user_id == Session.get("userId")){
+              var url = '/profile';
+            }else{
+              var url = '/view_profile/'+user_id;
+            }
+            window.location.href = url;
+    },  
+
+
     "click .view_request_listing":function(){
             var campaign_id = this.campaign_id;
             var campaign_id = Base64.encode(campaign_id);  

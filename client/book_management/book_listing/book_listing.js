@@ -170,7 +170,7 @@ $(document).ready(function() {
     check_if_book_already_added_to_my_collections(){
 
        console.log(this.book_id);
-	   var result = book_collections.find({added_book_id: this.book_id, added_by: Session.get("userId") }).fetch();
+	   var result = book_collections.find({added_book_id: this.book_id, added_by: Session.get("userId"), adding_status: 1 }).fetch();
 		  if(result[0]){
 		  		return true;
 		  }else{

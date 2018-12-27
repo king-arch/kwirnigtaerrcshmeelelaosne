@@ -259,6 +259,30 @@ user_headline_trimmed(){
 return result;
   },
 
+      show_following_count(){
+        var logged_in_user = Session.get("userId"); 
+        // console.log(this);
+        // console.log(user_id);
+        var result = following_list.find({ "follower": this.user_id , "current_follow_status": 1 }).count();
+        if(result > 1){
+        return result;
+        }
+        else{
+        return 0;
+        }
+    },
+
+    show_followers_count(){
+        var logged_in_user = Session.get("userId"); 
+        var result = following_list.find({ "following": this.user_id , "current_follow_status": 1 }).count();
+        if(result > 1){
+          return result;
+          }
+          else{
+          return 0;
+          }
+    },
+
 
 });
 

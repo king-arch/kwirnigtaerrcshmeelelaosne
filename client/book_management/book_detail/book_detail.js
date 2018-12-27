@@ -1,5 +1,4 @@
 
-
 import {
   Template
 } from 'meteor/templating';
@@ -195,7 +194,7 @@ if(fetch_campaign_details[0]){
         swal('You have entered "'+user_location+'" as your postal address.'+
 'If you want, You can change the postal adress from the edit information section of profile page.'+
 ' Make sure you have inserted your fully detailed address.'+
-' If its not complete, we will reject your request as a reviewer.', {
+' If its not complete, we will reject your request as a reviewer. please make sure your profile is complete to recive review copies. we need atleast 1 link from your blog or social media handle & complete postal address with pincode & phone number. Currently we ar sending physical books only to residents of india', {
         buttons: {
           cancel: "Cancel",
           catch: {
@@ -223,11 +222,8 @@ if(fetch_campaign_details[0]){
         }
       });
 
-
-  }
-
-}
+        }
+      }
     },
 
 });
-

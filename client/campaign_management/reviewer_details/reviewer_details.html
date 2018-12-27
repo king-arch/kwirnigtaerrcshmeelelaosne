@@ -39,6 +39,47 @@
    <hr class="new4">
 </div>
 
+<div class="container">
+  <div class="row">
+     <div class="col col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12">
+
+            <div class="ui-block responsive-flex1200 bg_trans">
+        <div class="ui-block-title pad_0">
+
+      {{#each show_book_detail_for_header}}
+              
+              <div class="forum-item">
+                <img src="{{book_cover}}" width="50" alt="forum" style="height: 80px !important; width: 80px !important;">
+                  <a href="#" class="h6 title">{{book_name}}</a>
+                
+                <div class="content"><p class="text">Author: 
+                    {{author_name}} </p>
+                </div>
+
+
+                <div class="content">
+                  <p class="text">{{book_summary_trimmed}}</p>
+                </div>        
+              </div>
+
+      {{/each}}
+
+        </div>
+      </div>
+    </div>  
+
+    <div class="col col-xl-1 col-lg-2 col-md-12 col-sm-12 col-12">
+    </div>
+
+    <div class="col col-xl-1 col-lg-1 col-md-12 col-sm-12 col-12">
+    </div>
+
+    <div class="col col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12 ">
+    </div>
+    
+  </div>
+   <hr class="new4">
+</div>
 
 <div class="container">
   <div class="row">
@@ -59,7 +100,23 @@
             </th>
 
             <th class="posts">
-              User's Postal Address
+              Personal Blog
+            </th>
+
+            <th class="posts">
+              Goodreads handle
+            </th>
+
+            <th class="posts">
+              Facebook handle
+            </th>
+
+            <th class="posts">
+              twitter handle
+            </th>
+
+            <th class="posts">
+              Location
             </th>
 
           </tr>
@@ -78,14 +135,28 @@
             </td>
 
 
-          {{/each}}
+    
 
+            <td class="freshness">
+              <a href="{{personal_blog}}" target="_blank"  >{{personal_blog}}</a>
+            </td>
 
+            <td class="freshness">
+              <a href="{{goodreads_handler}}" target="_blank" >{{goodreads_handler}}</a>
+            </td>
+
+            <td class="freshness">
+              <a href="{{fb_handler}}" target="_blank"  >{{fb_handler}}</a>
+            </td>
+
+            <td class="freshness">
+              <a href="{{twitter_handler}}" target="_blank"  >{{twitter_handler}}</a>
+            </td>
 
             <td class="freshness">
               <div class="author-freshness">{{user_location}}</div>
             </td>
-         
+       {{/each}}
 </tr>
   {{/each}}
           </tbody>

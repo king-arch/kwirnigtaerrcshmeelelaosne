@@ -42,7 +42,9 @@ Template.show_review_approval_listing_individual.onRendered(function () {
   Session.set("get_campaign_id",campaign_id);
 
     $.getScript("https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.19/js/jquery.dataTables.min.js",function(){            
-      $('#show_review_approval_listing').DataTable(); 
+          setTimeout(function(){
+          $('#show_review_approval_listing').DataTable(); 
+          },2000);
     });  
        book_listing = Meteor.subscribe("campaign_details_all_list");
        request_listing = Meteor.subscribe("review_details_all_pending");
@@ -90,11 +92,16 @@ Template.show_review_approval_listing_individual.onRendered(function () {
     },
 
 
+    show_book_detail_for_header(){
+      var result = campaign_details.find({campaign_id: Session.get("get_campaign_id")}).fetch();
+      return result;
+    },
+
     show_campaign_listing(){
 
       Meteor.subscribe("notification_details_all");
       var campaign_id = Session.get("get_campaign_id");
-      var result = review_details.find({content_type: "submit_review",parent_id: campaign_id,approval_status: 0}).fetch();
+      var result = review_details.find({content_type: "submit_review",parent_id: campaign_id}).fetch();
       return result;
 
     },

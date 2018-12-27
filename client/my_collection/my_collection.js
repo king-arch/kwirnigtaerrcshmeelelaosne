@@ -111,8 +111,9 @@ $(document).ready(function() {
 Template.my_collections_detail.events({
 
 	"click .go_to_book_detail":function(){ 
+    // swal("inside");
       var book_id = Base64.encode(this.book_id); 
-      blog_listing = Meteor.subscribe("book_collections_all_with_user_id",logged_in_user); 
+      blog_listing = Meteor.subscribe("book_collections_all_with_user_id",Session.get("userId")); 
       var url = '/book_detail/'+book_id;
       // console.log(url);
       window.location.href = url;
@@ -120,21 +121,41 @@ Template.my_collections_detail.events({
 
 
   "click #remove_to_my_collections":function(){ 
-
     // swal("here");
     var logged_in_user = Session.get("userId");
     var book_id = this.book_id;
 
     var adding_status = 0;
     var adding_id = 'adding_id_'+Math.floor((Math.random() * 2465789) + 1);
+    swal("Sure you want to remove this book from my collections ?", {
+        buttons: {
+          cancel: "Cancel",
+          catch: {
+            text: "Sure",
+            value: "catch",
+          },
+        },
+      })
+      .then((value) => {
+        switch (value) {
 
-    Meteor.call('add_to_my_collections',logged_in_user,book_id,adding_status,adding_id,function(error,result){
-        if(error){
-            swal("Error");
-        }else{
-            swal("Successfully removed from my collection");
+          case "defeat":
+            swal("Pikachu fainted! You gained 500 XP!");
+            break;
+
+          case "catch":
+           Meteor.call('add_to_my_collections',logged_in_user,book_id,adding_status,adding_id,function(error,result){
+              if(error){
+                  swal("Error");
+                  console.log("Error");
+              }else{
+                  console.log("Successfully removed from my collection");
+              }
+            });  
+            break;
         }
-      });  
+      });
+    
     },
 
   "click #change_to_increasing_order":function(){ 

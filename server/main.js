@@ -761,6 +761,99 @@ if(blog_author != "user_admin"){
   }  
   },
 
+    "change_blog_approval_status_with_comment": function (blog_id, status,logged_in_user,reject_comment) {
+
+    // console.log(interest_id + ' & ' + status);
+    var newUser = blog.find({
+      "blog_id": blog_id
+    }).fetch();
+
+    if (newUser[0]) {
+      var blog_author = newUser[0].blog_author;
+  
+  if(status == 2){
+  console.log("case 1");
+      // console.log(newUser[0]);
+      var result = blog.update({
+        _id: newUser[0]._id,
+      }, {
+        $set: {
+          blog_status: status,
+          reject_comment: reject_comment,
+          updated_at: Date.now,
+        }
+      });
+       var notification_id = 'notification_id_'+Math.floor((Math.random() * 2465789) + 1);
+                   
+                   var result2 = notification_details.insert({
+                      notification_id: notification_id,
+                      
+                      notification_by: logged_in_user,
+                      notification_to: newUser[0].blog_author,
+                      blog_id: blog_id,
+
+                      notification_status: 0,
+                      reject_comment: reject_comment,
+                      notification_type: "blog_rejected",
+                      created_at: Date.now()
+      });
+
+      return result;
+ }else{
+  console.log("case 2");
+  console.log("status: "+status);
+      // console.log(newUser[0]);
+      var result = blog.update({
+        _id: newUser[0]._id,
+      }, {
+        $set: {
+          blog_status: status,
+          updated_at: Date.now,
+        }
+      });
+
+if(blog_author != "user_admin"){
+    var new_result = content.find({
+      "content_type": "reward_points"
+    }).fetch();
+
+    var reward_value = new_result[0].blog_approval;
+    var reward_id = 'reward_id_'+Math.floor((Math.random() * 2465789) + 1);
+
+    var latest_result = reward_details.insert({
+    
+          reward_id: reward_id,
+          reward_value: reward_value,
+          parent_id: blog_id,
+          entry_type: 'reward_point',
+          reward_to: blog_author,
+          reward_trigger_type: "blog_approval",
+
+          reward_redeem_status: 0,
+          created_at: Date.now(),
+
+      });
+
+     var notification_id = 'notification_id_'+Math.floor((Math.random() * 2465789) + 1);
+                   
+                   var result2 = notification_details.insert({
+                      notification_id: notification_id,
+                      
+                      notification_by: logged_in_user,
+                      notification_to: newUser[0].blog_author,
+                      blog_id: blog_id,
+
+                      notification_status: 0,
+                      notification_type: "blog_approved",
+                      created_at: Date.now(),
+      });
+}
+
+      return result;
+    }
+  }  
+  },
+
     FetchUserData:function(userId){
       var newUser = user_details.find({ user_id :userId }).fetch();
       return newUser; 
@@ -1339,7 +1432,7 @@ if(blog_author != "user_admin"){
       },  
 
 
-  user_details_update: function(user_id,user_name,fb_handler,twitter_handler,goodreads_handler,user_contact,user_location,user_headline,account_number)
+  user_details_update: function(user_id,user_name,fb_handler,twitter_handler,goodreads_handler,personal_blog,user_contact,user_location,user_headline,account_number)
       {   
 
       var result = user_details.update(
@@ -1354,6 +1447,7 @@ if(blog_author != "user_admin"){
                           'fb_handler': fb_handler,
                           'twitter_handler': twitter_handler,
                           'goodreads_handler': goodreads_handler,
+                          'personal_blog': personal_blog,
                           'account_number': account_number,
 
                           'user_headline': user_headline,

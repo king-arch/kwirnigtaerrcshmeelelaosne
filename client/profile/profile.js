@@ -1231,6 +1231,7 @@ viewMode: 1,
         var fb_handler = $('#fb_handler').val().trim(); 
         var twitter_handler = $('#twitter_handler').val().trim(); 
         var goodreads_handler = $('#goodreads_handler').val().trim(); 
+        var personal_blog = $('#personal_blog').val().trim(); 
 
         var account_number = $('#account_number').val().trim(); 
 
@@ -1306,7 +1307,7 @@ viewMode: 1,
         user_name = user_name.charAt(0).toUpperCase()+ user_name.slice(1);
         // swal(name+gender+marital_status+phone+datepicker+autocomplete+user_id);
         // user_contact_with_check
-        Meteor.call('user_details_update',user_id,user_name,fb_handler,twitter_handler,goodreads_handler,user_contact,user_location,user_headline,account_number,function(){
+        Meteor.call('user_details_update',user_id,user_name,fb_handler,twitter_handler,goodreads_handler,personal_blog,user_contact,user_location,user_headline,account_number,function(){
           if(result){
              console.log('error');
           }else{

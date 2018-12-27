@@ -62,7 +62,8 @@ Template.show_reviewer_details.onRendered(function () {
 
       var campaign_id = Session.get("get_campaign_id");
       Meteor.subscribe("review_details_with_campaign_id",campaign_id);
-      var result = review_details.find({content_type: "review_request",parent_id: campaign_id,approval_status: 1}).fetch();
+      Meteor.subscribe("campaign_details_with_id",campaign_id);
+      var result = review_details.find({content_type: "review_request",parent_id: campaign_id}).fetch();
       return result;
     },
 
@@ -74,6 +75,20 @@ Template.show_reviewer_details.onRendered(function () {
         return result;
     },
 
+    show_book_detail_for_header(){
+      var result = campaign_details.find({campaign_id: Session.get("get_campaign_id")}).fetch();
+      return result;
+    },
+
+      book_summary_trimmed(){
+           var book_summary = this.book_summary;
+        if(book_summary.length > 165){
+          book_summary = book_summary.substr(0,164);
+          return book_summary+'...';
+        }else{
+          return book_summary;
+        }
+      },
 
 
 });
