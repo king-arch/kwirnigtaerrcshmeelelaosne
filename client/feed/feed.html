@@ -409,6 +409,85 @@
   </div>
 </div>
 
+         {{else if equals post_content_type 'blog_post'}} 
+
+        <div class="ui-block">
+          
+          <article class="hentry post has-post-thumbnail">
+          
+            <div class="post__author author vcard inline-items">
+  {{#each fetch_user_info}}        
+              <img src="{{user_profile_pic}}"  alt="author" class="view_profile">
+              <div class="author-date">
+                <a class="h6 post__author-name fn view_profile view_profile" href="#"> {{user_name}}</a>
+
+                <div class="post__date">
+                  <time class="published" datetime="2017-03-24T18:18">
+                    {{calculate_time_difference ../created_at}}
+                  </time>
+                </div>
+              </div>
+          {{/each}}  
+                 
+            </div>
+  {{#each show_blog_listing}}        
+        <p id="post_text_{{post_id}}"  class="go_to_blog_detail pointer" >
+              published a blog "{{blog_title}}""
+        </p>
+
+          <div class="clearfix"></div>
+            <div class="post-thumb pointer go_to_blog_detail" >
+              <img src="{{blog_cover}}" alt="photo" > 
+            </div>
+  {{/each}}
+          </article>
+
+        </div>
+
+          <div class="modal fade" new_post="{{post_id}}" id="show_like_count_on_feed_post_image" tabindex="-1" role="dialog" aria-labelledby="show_like_count_on_feed_post_image" aria-hidden="true">
+
+</div>
+
+
+         {{else if equals post_content_type 'book_post'}} 
+
+        <div class="ui-block">
+          
+          <article class="hentry post has-post-thumbnail">
+          
+            <div class="post__author author vcard inline-items">
+  {{#each fetch_user_info}}        
+              <img src="{{user_profile_pic}}"  alt="author" class="view_profile">
+              <div class="author-date">
+                <a class="h6 post__author-name fn view_profile view_profile" href="#"> {{user_name}}</a>
+
+                <div class="post__date">
+                  <time class="published" datetime="2017-03-24T18:18">
+                    {{calculate_time_difference ../created_at}}
+                  </time>
+                </div>
+              </div>
+          {{/each}}  
+                 
+            </div>
+  {{#each show_book_listing}}        
+        <p id="post_text_{{post_id}}"  class="go_to_book_detail pointer" >
+              released a book "{{book_name}}""
+        </p>
+
+          <div class="clearfix"></div>
+            <div class="post-thumb pointer go_to_book_detail" >
+              <img src="{{book_cover}}" alt="photo" > 
+            </div>
+  {{/each}}
+          </article>
+
+        </div>
+
+          <div class="modal fade" new_post="{{post_id}}" id="show_like_count_on_feed_post_image" tabindex="-1" role="dialog" aria-labelledby="show_like_count_on_feed_post_image" aria-hidden="true">
+
+</div>
+
 
          {{else if equals post_content_type 'url_metadata'}} 
 

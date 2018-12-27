@@ -112,6 +112,10 @@ import urlMetadata from 'url-metadata';
       return  blog.find({});
     });
 
+     Meteor.publish('fetch_blog_content_with_blog_id', function(blog_id) {
+      return  blog.find({blog_id: blog_id});
+    });
+
      Meteor.publish('fetch_blog_comments_with_blog_id', function(blog_id) {
       return  blog.find({ parent_id: blog_id, parent_post_type: 'Blog'});
     });
@@ -195,6 +199,10 @@ import urlMetadata from 'url-metadata';
 
      Meteor.publish('review_details_with_campaign_id', function(campaign_id) {
       return  review_details.find({parent_id: campaign_id});
+    });
+
+     Meteor.publish('review_details_with_review_id', function(review_id) {
+      return  review_details.find({review_id: review_id});
     });
 
      Meteor.publish('review_details_all_pending', function(campaign_id) {
@@ -401,6 +409,18 @@ Meteor.methods({
       "final_release_date": final_release_date,
       "created_at": Date.now(),
     });
+
+         var post_id = 'post_id_'+Math.floor((Math.random() * 2465789) + 1);
+                  var result2 = feed.insert({
+
+                             "post_id": post_id,
+                             "post_type": 'post',
+                             "post_content_type": 'book_post',
+                             "book_id": book_id,
+                             "post_by": 'writersmelon',
+                             "post_status": 1,
+                             "created_at": Date.now()
+                    });
 
       return result;
   },
@@ -719,6 +739,19 @@ if(status == 2){
         }
       });
 
+                 var post_id = 'post_id_'+Math.floor((Math.random() * 2465789) + 1);
+                  var result2 = feed.insert({
+
+                             "post_id": post_id,
+                             "post_type": 'post',
+                             "post_content_type": 'blog_post',
+                             "blog_id": newUser[0].blog_id,
+                             "post_by": newUser[0].blog_author,
+                             "post_status": 1,
+                             "created_at": Date.now()
+                    });
+
+
 if(blog_author != "user_admin"){
     var new_result = content.find({
       "content_type": "reward_points"
@@ -763,7 +796,7 @@ if(blog_author != "user_admin"){
 
     "change_blog_approval_status_with_comment": function (blog_id, status,logged_in_user,reject_comment) {
 
-    // console.log(interest_id + ' & ' + status);
+    console.log(blog_id + ' & ' + status+ ' & ' + logged_in_user+ ' & ' + reject_comment);
     var newUser = blog.find({
       "blog_id": blog_id
     }).fetch();
@@ -811,6 +844,18 @@ if(blog_author != "user_admin"){
           updated_at: Date.now,
         }
       });
+
+                 var post_id = 'post_id_'+Math.floor((Math.random() * 2465789) + 1);
+                  var result2 = feed.insert({
+
+                             "post_id": post_id,
+                             "post_type": 'post',
+                             "post_content_type": 'blog_post',
+                             "blog_id": newUser[0].blog_id,
+                             "post_by": newUser[0].blog_author,
+                             "post_status": 1,
+                             "created_at": Date.now()
+                    });
 
 if(blog_author != "user_admin"){
     var new_result = content.find({
@@ -1672,6 +1717,19 @@ var result = blog.insert({
 
                       created_at: Date.now(),
                 });
+
+                 var post_id = 'post_id_'+Math.floor((Math.random() * 2465789) + 1);
+                  var result2 = feed.insert({
+
+                             "post_id": post_id,
+                             "post_type": 'post',
+                             "post_content_type": 'blog_post',
+                             "blog_id": blog_id,
+                             "post_by": logged_in_user,
+                             "post_status": 1,
+                             "created_at": Date.now()
+                    });
+
                 return result;
       },
                                    
@@ -1704,7 +1762,7 @@ var result = blog.insert({
                       blog_id: blog_id,
 
                       notification_status: 0,
-                      notification_type: "blog_request",
+                      notification_type: logged_in_user,
                       created_at: Date.now()
       });
                 return result;
@@ -2385,6 +2443,24 @@ console.log(select_package+book_name+book_summary+author_name+author_description
                       approval_status: 0,
                       created_at: Date.now()
       });
+
+    var notification_text = 'Recived a request on campaign of book : "'+check_for_campaign_id+'"';
+               var notification_id = 'notification_id_'+Math.floor((Math.random() * 2465789) + 1);
+                   
+                   var result2 = notification_details.insert({
+
+                      notification_id: notification_id,
+                      notification_text: notification_text,
+
+                      notification_by: logged_in_user,
+                      notification_to: 'writersmelon',
+                      campaign_id: campaign_id,
+                      review_id: review_id,
+                      notification_status: 0,
+                      notification_type: "campaign_request",
+                      created_at: Date.now()
+      });
+
                    return campaign_id;
 },
 
@@ -2466,6 +2542,18 @@ async make_campaign_payment(final_payment,phone,logged_in_user){
                                   "book_id": book_id,
                                 } 
                               }); 
+      
+      var post_id = 'post_id_'+Math.floor((Math.random() * 2465789) + 1);
+                  var result2 = feed.insert({
+
+                             "post_id": post_id,
+                             "post_type": 'post',
+                             "post_content_type": 'book_post',
+                             "book_id": book_id,
+                             "post_by": 'writersmelon',
+                             "post_status": 1,
+                             "created_at": Date.now()
+                    });
 
       return result;
   },

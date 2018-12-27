@@ -50,6 +50,10 @@
             <th class="topics">
               Reward points allocated
             </th>
+
+            <th class="topics">
+              Reward points allocated from
+            </th>
         
             <th class="posts">
              Allocated on
@@ -71,14 +75,59 @@
                 <img src="img/forum1.png" alt="forum">
                 <div class="content">
               {{#if equals reward_trigger_type 'review_submition'}}
+
                   <p class="h6 title">Review submition</p>
+
               {{else if equals reward_trigger_type 'blog_approval'}}
+
                   <p class="h6 title">Blog approval</p>
+
               {{/if}}
                 </div>        
               </div>
             </td>
            
+            <td class="forum">
+              <div class="forum-item">
+                <div class="content">
+              {{#if equals reward_trigger_type 'review_submition'}}
+
+              {{#each show_review_listing}}
+              {{#each show_campaign_listing}}
+                  <p class="h6 title">{{book_name}}</p>
+              {{/each}}
+              {{/each}}
+
+              {{else if equals reward_trigger_type 'blog_approval'}}
+
+              {{#each show_blog_listing}}
+                  <p class="h6 title">{{bolg_title}}</p>
+              {{/each}}
+                  
+              {{/if}}
+                </div>        
+              </div>
+            </td>
+
+
+            <td class="forum">
+              <div class="forum-item">
+                <img src="img/forum1.png" alt="forum">
+                <div class="content">
+              {{#if equals reward_trigger_type 'review_submition'}}
+
+                  <p class="h6 title">Review submition</p>
+
+              {{else if equals reward_trigger_type 'blog_approval'}}
+
+                  <p class="h6 title">Blog approval</p>
+                  
+              {{/if}}
+                </div>        
+              </div>
+            </td>
+
+
             <td class="posts">
               {{reward_value}}
             </td>

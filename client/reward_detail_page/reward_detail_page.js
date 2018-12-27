@@ -13,6 +13,9 @@ import {
 import swal from 'sweetalert';
 import { promotion } from './../../import/collections/insert.js';
 import { reward_details } from './../../import/collections/insert.js';
+import { review_details } from './../../import/collections/insert.js';
+import { blog} from './../../import/collections/insert.js';
+
 import { campaign_details } from './../../import/collections/insert.js';
 import { user_details } from './../../import/collections/insert.js';
 import { Base64 } from 'meteor/ostrio:base64';
@@ -54,6 +57,40 @@ Template.display_reward_detail_page.onRendered(function () {
       var result = reward_details.find({reward_to: logged_in_user}).fetch();
       return result;
     },
+
+    show_campaign_listing(){
+      // Meteor.subscribe("review_details_with_review_id",this.parent_id);
+      Meteor.subscribe("campaign_details_with_id",this.parent_id);
+      var result = campaign_details.find({campaign_id: this.parent_id}).fetch();
+            console.log(this.parent_id);
+            console.log('campaign result');
+      console.log(result);
+      return result;
+    },
+
+        show_review_listing(){
+      Meteor.subscribe("review_details_with_review_id",this.parent_id);
+      // Meteor.subscribe("campaign_details_with_id",this.parent_id);
+      var result = review_details.find({review_id: this.parent_id}).fetch();
+            console.log(this.parent_id);
+            console.log('review result');
+      console.log(result);
+
+      return result;
+    },
+
+
+      show_blog_listing(){  
+
+      Meteor.subscribe("fetch_blog_content_with_blog_id",this.parent_id);
+      var result = blog.find({blog_id: this.parent_id}).fetch();
+            console.log(this.parent_id);
+      console.log('blog result');
+      console.log(result);
+      return result;
+
+    },
+
 
     total_reward_points(){
       var logged_in_user = Session.get("userId");

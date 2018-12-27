@@ -213,12 +213,16 @@
 
 {{else if equals notification_type "blog_rejected"}}
 
-          <li>
+          <li class="highlight" >
             <div class="notification-event">
               Admin/editor has Rejected your blog 
+
               {{#each fetch_blog_name}}
               <a href="javascript:void(0)" class="h6 notification-friend go_to_blog_detail">{{blog_title}}</a>
-              {{/each}}.
+              {{/each}}. 
+              {{#if check_reject_comment}}
+                  Reason for rejection Given by Admin/Editor was: "{{reject_comment}}".
+              {{/if}}
              <!-- {{../notification_text}} -->
               <span class="notification-date"><time class="entry-date updated" datetime="2004-07-24T18:18">{{calculate_time_difference_ago created_at}}</time></span>
             </div>

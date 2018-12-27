@@ -245,12 +245,13 @@ Template.display_blog_listing_admin.events({
                 console.log("Some error occured.");
               } else {
                 // swal("User is successfully De-activated!");
-                window.location.reload();
+                // window.location.reload();
               }
             });
             break;
         }
       });
+
 
   },
 
@@ -265,38 +266,25 @@ Template.display_blog_listing_admin.events({
 
         'click .disapproval_status_blog_modal': function(event){
             // swal("clicked");
-            swal(this.blog_id);
-            $("#open_reject_modal_"+this.blog_id).click();
+            // swal(this.blog_id);
+            Session.set("blog_id_for_reject_modal",this.blog_id);
+            $("#open_reject_modal").click();
         },
 
     'click .disapproval_status_blog': function(event){
       
           event.preventDefault();
           var reject_comment = $("#reject_comment").val();
-                    var blog_id = this.blog_id;
+          var blog_id = Session.get("blog_id_for_reject_modal");
           var logged_in_user = Session.get("userId");
 
           var status = 2;
           console.log('status');
           console.log(status);
 
-          swal("Sure you want to reject this blog ?", {
-              buttons: {
-                cancel: "Cancel",
-                catch: {
-                  text: "Sure",
-                  value: "catch",
-                },
-              },
-            })
-            .then((value) => {
-              switch (value) {
 
-                case "defeat":
-                  swal("Pikachu fainted! You gained 500 XP!");
-                  break;
-
-                case "catch":
+          // swal(reject_comment +' & '+blog_id);
+          // return false;
 
           if(reject_comment){
               Meteor.call('change_blog_approval_status_with_comment', blog_id, status,logged_in_user,reject_comment, function (error, result) {
@@ -317,9 +305,9 @@ Template.display_blog_listing_admin.events({
                     }
                   });
           }  
-                  break;
-              }
-            });
+          $("#reject_comment").val("");
+          $("#show_rejection_box").modal("toggle");
+          Session.set("blog_id_for_reject_modal","");
      },
 
   //   'click .disapproval_status_blog': function(event){

@@ -7,8 +7,11 @@ import swal from 'sweetalert';
 import { user_details }  from './../../import/collections/insert.js';
 import { following_list }  from './../../import/collections/insert.js';
 import { campaign_details }  from './../../import/collections/insert.js';
+
+import { blog }  from './../../import/collections/insert.js';
 import { book_details }  from './../../import/collections/insert.js';
 import { feed }  from './../../import/collections/insert.js';
+
 import { Base64 } from 'meteor/ostrio:base64';
 // import { ServiceConfiguration } from 'meteor/service-configuration';
 
@@ -179,7 +182,7 @@ Template.feed_design.helpers({
          Meteor.subscribe('fetch_feed_content');
          var check_limit = Session.get("set_feed_content_limit");
 
-         var result = feed.find({post_by: {$in: all_friends_array },post_status: 1},{sort: {created_at: -1},limit: check_limit}).fetch();
+         var result = feed.find({$or: [{post_by: {$in: all_friends_array }},{post_by: 'writersmelon'}],post_status: 1},{sort: {created_at: -1},limit: check_limit}).fetch();
          // if(Session.get("load_lvl1_comments") == 0){
          //    var result = feed.find({post_by: {$in: all_friends_array },post_status: 1},{sort: {created_at: -1}}).fetch();
          
@@ -187,7 +190,8 @@ Template.feed_design.helpers({
          // else{
          // var result = feed.find({post_by: {$in: all_friends_array },post_status: 1},{sort: {created_at: -1},limit: Session.get("load_lvl1_comments")}).fetch();
          // }
-
+        // console.log('feed result');
+        // console.log(result);
          return result;
     },
 
@@ -740,11 +744,29 @@ Template.feed_design.helpers({
   },
 
       show_campaign_listing(){
-
       Meteor.subscribe("campaign_details_all_list");
       var result = campaign_details.find({approval_status: 1,campaign_end_date: {$gte: Date.now()} }).fetch();
       return result;
     },
+
+      show_blog_listing(){  
+
+        Meteor.subscribe("fetch_blog_content_with_blog_id",this.blog_id);
+      var result = blog.find({blog_id: this.blog_id}).fetch();
+              console.log('blog result');
+        console.log(result);
+      return result;
+    },
+
+
+  show_book_listing(){
+         var liked_by = Session.get("userId");
+        console.log(this.book_id);
+         Meteor.subscribe("fetch_book_detail_with_id",this.book_id);
+         var result = book_details.find({book_id: this.book_id}).fetch();
+    return result;
+  },
+
 
 });
 
@@ -768,6 +790,14 @@ Template.feed_design.events({
       if (e.keyCode == 17) {
       return;
     }
+  },
+
+
+      "click .go_to_blog_detail":function(){ 
+      var blog_id = Base64.encode(this.blog_id);  
+      var url = '/blog_detail/'+blog_id;
+            // console.log(url);
+            window.location.href = url;
   },
   
     "paste #post_text":function(){ Session.set("request_send","false");

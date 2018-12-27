@@ -142,36 +142,6 @@
              </td>          
           </tr>
 
-
- <a data-toggle="modal" data-target="#show_default_message_{{blog_id}}" class="" style="display:none;" id="open_default_modal_{{blog_id}}" > click me
-    </a>
-
-  <div class="modal fade" new_post="ss" id="show_default_message_{{blog_id}}" tabindex="-1" role="dialog" aria-labelledby="show_default_message_{{blog_id}}" aria-hidden="true">
-
-  <div class="modal-dialog window-popup create-friend-group show_default_message_{{blog_id}}" role="document">
-
-    <div class="modal-content">
-      <a href="#" class="close icon-close" data-dismiss="modal" aria-label="Close">
-        <svg class="olymp-close-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-close-icon"></use></svg>
-      </a>
-
-      <div class="modal-header">
-        <h6 class="title">Alert</h6>
-      </div>
-
-      <div class="modal-body" style="padding: 0px;">
-      <p>
-            Cover pic : Recommended ratio: 4: 1.
-            Ex: width: 1200  height: 400.
-
-            Please select appropriate catagries for your article. 
-      </p>
-     </div>
-
-    </div>
-  </div>
-</div>
-
           {{/each}}
           
         
@@ -185,6 +155,39 @@
 
   </div>
 </div> 
+
+
+
+ <a data-toggle="modal" data-target="#show_rejection_box" class="" style="display:none;" id="open_reject_modal" > click me
+    </a>
+
+  <div class="modal fade" new_post="ss" id="show_rejection_box" tabindex="-1" role="dialog" aria-labelledby="show_rejection_box" aria-hidden="true">
+
+  <div class="modal-dialog window-popup create-friend-group show_rejection_box" role="document">
+
+    <div class="modal-content">
+      <a href="#" class="close icon-close" data-dismiss="modal" aria-label="Close">
+        <svg class="olymp-close-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-close-icon"></use></svg>
+      </a>
+
+      <div class="modal-header">
+        <h6 class="title">Reject Blog</h6>
+      </div>
+
+      <div class="modal-body" style="padding: 0px;">
+      <p>  You can reject this blog with or with out a comment. simple fill some comment if you want to notify the user for rejection of blog.
+      </p>
+
+              <div class="form-group label-floating is-empty">
+                <textarea class="form-control c-darkgray" type="text" placeholder="Reject with comment" id="reject_comment" ></textarea>
+              </div>
+
+                <button class="btn btn-primary btn-lg pull-right disapproval_status_blog" >
+                          Reject</button>
+     </div>
+    </div>
+  </div>
+</div>
 
 
 </template>

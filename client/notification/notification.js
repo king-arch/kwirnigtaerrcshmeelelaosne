@@ -155,6 +155,14 @@ $(document).ready(function() {
              console.log(result);
              return result;
         },
+        check_reject_comment(){
+          var reject_comment = this.reject_comment;
+          if(reject_comment){
+          return reject_comment;
+          }else{
+            return false;
+          }
+        }
 
 });
 
