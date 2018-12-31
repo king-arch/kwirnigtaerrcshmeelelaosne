@@ -11,6 +11,7 @@ import {
 
 import swal from 'sweetalert';
 import { campaign_details } from './../../import/collections/insert.js';
+import { review_details } from './../../import/collections/insert.js';
 import { book_details } from './../../import/collections/insert.js';
 
 import { book_collections } from './../../import/collections/insert.js';
@@ -104,6 +105,29 @@ $(document).ready(function() {
       console.log(this.added_book_id);
       console.log(result);
       return result;
+    },
+
+    
+    show_review_counts(){
+      
+      Meteor.subscribe("review_details_with_campaign_id",this.campaign_id);
+      console.log("show_detail here");
+      
+      console.log(this.campaign_id);
+      var result = review_details.find({
+                        parent_id: this.campaign_id,
+                        content_type: "submit_review",
+                        approval_status: 1
+                      }).count();
+      
+      if(result > 0){
+        console.log("show_review_details");
+        console.log(result);
+      return result;
+      }else{
+        return 0;
+      }
+
     },
 
 });

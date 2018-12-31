@@ -130,7 +130,7 @@ function click_events() {
 
 
 	$('#add_book').click(function (e) {
-		Router.go('/create_book');
+		window.location.href= "/create_book";
 	});
 
 
@@ -138,7 +138,7 @@ function click_events() {
 // swal('here: ');
 		var book_id= Base64.encode(this.id);    
         var url = '/edit_book_details/'+book_id;
-		Router.go(url);
+		window.location.href= url;
 
 	});
 

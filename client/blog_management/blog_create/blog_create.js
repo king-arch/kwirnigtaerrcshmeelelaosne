@@ -137,7 +137,7 @@ Template.blog_create_detail.events({
           $('#blog_cover').addClass('empty_field').focus();
           return false;
     }
-    swal('blog_title: '+blog_title+' blog_type: '+blog_type+' blog_discription: '+blog_discription);
+    // swal('blog_title: '+blog_title+' blog_type: '+blog_type+' blog_discription: '+blog_discription);
     var logged_in_user = Session.get('userId');
     // return false;
 
@@ -145,10 +145,11 @@ Template.blog_create_detail.events({
               if(error){
                 console.log("Some error occured.");
               }else{ 
-                swal("Blog request sucessfully sent!");
+                swal("Thanks for creating the blog. We will review the same and will notify you once it is accepted or rejected.");
                 window.location.href="/blog_listing";            
               }
           }); 
+    
      Session.clear("imagePath_admin_ads");
 
   },

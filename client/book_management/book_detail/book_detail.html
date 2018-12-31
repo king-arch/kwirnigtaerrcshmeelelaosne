@@ -148,109 +148,43 @@
 </div>
 </div>
 </div>
+
 <div class="col col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
-       <div class="ui-block">
+
+      <div class="ui-block">
         <div class="ui-block-title">
           <h6 class="title">New Release book </h6>
-          <a href="#" class="more">
-            <span class="c-green">
-              <svg class="olymp-remove-playlist-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-remove-playlist-icon"></use></svg>
-            </span>
-          </a>
+          
         </div>
 
         <!-- W-Playlist -->
         
         <ol class="widget w-playlist">
-          <li class="js-open-popup" data-popup-target=".playlist-popup">
+    {{#each display_books}}
+          <li class="js-open-popup go_to_book_detail" data-popup-target=".playlist-popup" id="{{book_id}}">
             <div class="playlist-thumb">
-              <img src="/img/playlist6.jpeg" alt="thumb-composition">
+              <img src="{{book_cover}}" alt="thumb-composition">
               <div class="overlay"></div>
-              <a href="#" class="play-icon">
-                <svg class="olymp-music-play-icon-big">
-                  <use xlink:href="svg-icons/sprites/icons-music.svg#olymp-music-play-icon-big"></use>
-                </svg>
-              </a>
+              
             </div>
         
             <div class="composition">
-              <a href="#" class="composition-name">The Past Starts Slow...</a>
-              <a href="#" class="composition-author">System of a Revenge</a>
-            </div>
-          </li>
-        
-          <li class="js-open-popup" data-popup-target=".playlist-popup">
-            <div class="playlist-thumb">
-              <img src="/img/playlist7.jpeg" alt="thumb-composition">
-              <div class="overlay"></div>
-              <a href="#" class="play-icon">
-                <svg class="olymp-music-play-icon-big">
-                  <use xlink:href="svg-icons/sprites/icons-music.svg#olymp-music-play-icon-big"></use>
-                </svg>
-              </a>
-            </div>
-        
-            <div class="composition">
-              <a href="#" class="composition-name">The Pretender</a>
-              <a href="#" class="composition-author">Kung Fighters</a>
+              <a href="#" class="composition-name">{{book_name_trimmed}}</a>
+              <a href="#" class="composition-author">{{author_name}}</a>
             </div>
         
           </li>
-          <li class="js-open-popup" data-popup-target=".playlist-popup">
-            <div class="playlist-thumb">
-              <img src="/img/playlist8.jpeg" alt="thumb-composition">
-              <div class="overlay"></div>
-              <a href="#" class="play-icon">
-                <svg class="olymp-music-play-icon-big">
-                  <use xlink:href="svg-icons/sprites/icons-music.svg#olymp-music-play-icon-big"></use>
-                </svg>
-              </a>
-            </div>
-        
-            <div class="composition">
-              <a href="#" class="composition-name">Blood Brothers</a>
-              <a href="#" class="composition-author">Iron Maid</a>
-            </div>
-        
+          {{else}}
+          <li>
+            
+               <p> No book to display.</p>
+            
           </li>
-          <li class="js-open-popup" data-popup-target=".playlist-popup">
-            <div class="playlist-thumb">
-              <img src="/img/playlist9.jpeg" alt="thumb-composition">
-              <div class="overlay"></div>
-              <a href="#" class="play-icon">
-                <svg class="olymp-music-play-icon-big">
-                  <use xlink:href="svg-icons/sprites/icons-music.svg#olymp-music-play-icon-big"></use>
-                </svg>
-              </a>
-            </div>
-        
-            <div class="composition">
-              <a href="#" class="composition-name">Seven Nation Army</a>
-              <a href="#" class="composition-author">The Black Stripes</a>
-            </div>
-        
-          </li>
-          <li class="js-open-popup" data-popup-target=".playlist-popup">
-            <div class="playlist-thumb">
-              <img src="/img/playlist10.jpeg" alt="thumb-composition">
-              <div class="overlay"></div>
-              <a href="#" class="play-icon">
-                <svg class="olymp-music-play-icon-big">
-                  <use xlink:href="svg-icons/sprites/icons-music.svg#olymp-music-play-icon-big"></use>
-                </svg>
-              </a>
-            </div>
-        
-            <div class="composition">
-              <a href="#" class="composition-name">Killer Queen</a>
-              <a href="#" class="composition-author">Archiduke</a>
-            </div>
-        
-          </li>
+    {{/each}}
         </ol>
         
-        <!-- .. end W-Playlist -->
       </div>
+      
     </div>
     </div>
   </div>

@@ -228,8 +228,9 @@
             </div>
           </li>
 
-{{else if equals notification_type "blog_request"}}
- <li class="highlight" >
+{{else if equals notification_type "blog_submit_request"}}
+
+<li class="highlight" >
           {{#each fetch_user_info_for_request}} 
             <div class="author-thumb view_profile">
               <img src="{{user_profile_pic}}" alt="author" class="" >
@@ -242,7 +243,7 @@
               <span class="notification-date"><time class="entry-date updated" datetime="2004-07-24T18:18">{{calculate_time_difference_ago ../created_at}}</time></span>
             </div>
             {{/each}}
-          </li>
+</li>
 
 {{/if}}
 

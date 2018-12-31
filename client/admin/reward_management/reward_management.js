@@ -26,15 +26,13 @@ Template.reward_management_details.onCreated(function eventlistOnCreated(){
 
 Template.reward_management_details.onRendered(function () {
 
-
-
     $.getScript("https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.19/js/jquery.dataTables.min.js",function(){
       // $.getScript("https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css",function(){
+      setTimeout(function () {
             $('#show_reward_request_listing').DataTable();
+              }, 2000);
     // });  
     });  
-
-
 
 	book_listing = Meteor.subscribe("reward_details_all");
 	// book_listing = Meteor.subscribe("fetch_book_listing");

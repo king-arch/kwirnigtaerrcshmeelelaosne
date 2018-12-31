@@ -101,14 +101,23 @@ Template.display_blog_listing_admin.onRendered(function () {
 
     show_blog_details(){
     console.log('https://en.wikipedia.org/wiki/Greece');
-    
     var result = blog.find({blog_status: { $exists: true}}).fetch();
 
     console.log('show result: ');
     console.log(result);
     return result;
 
-},
+    },    
+
+    blog_release_date(){
+      var new_year  = moment(this.updated_at).format('YYYY');
+      var new_month  = moment(this.updated_at).format('MMM');
+      var new_day  = moment(this.updated_at).format('DD');
+      // console.log("new_year: "+ new_year +" new_month: "+ new_month + " new_day: "+ new_day );
+      var new_date = new_month + ' '+new_day+' , '+new_year;
+      return new_date;
+    },
+
 
 });
 

@@ -1750,7 +1750,7 @@ var result = blog.insert({
 
                       created_at: Date.now(),
                 });
-
+// console.log("notification_type: blog_submit_request");
       var notification_id = 'notification_id_'+Math.floor((Math.random() * 2465789) + 1);
                    
                    var result2 = notification_details.insert({
@@ -1760,10 +1760,10 @@ var result = blog.insert({
                       notification_by: logged_in_user,
                       notification_to: 'writersmelon',
                       blog_id: blog_id,
+                      notification_type: "blog_submit_request",
 
                       notification_status: 0,
-                      notification_type: logged_in_user,
-                      created_at: Date.now()
+                      created_at: Date.now(),
       });
                 return result;
       },

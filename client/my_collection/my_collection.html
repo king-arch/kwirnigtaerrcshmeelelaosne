@@ -29,19 +29,19 @@
                 <ul class="more-dropdown">
                   
                       <li id="change_to_decreasing_order" class="change_sort_by_status loader_visiblity_block" >
-                        <a href="javascript:void(0)"  > Date > Newest First</a>
+                        <a href="javascript:void(0)"  > Newest</a>
                       </li>
 
                       <li id="change_to_decreasing_order_with_check" class="change_sort_by_status" >
-                        <a href="javascript:void(0)" ><i class="fa fa-check"></i> &nbsp;&nbsp; Date > Newest First</a>
+                        <a href="javascript:void(0)" ><i class="fa fa-check"></i> &nbsp;&nbsp; Newest </a>
                       </li>
 
                       <li id="change_to_increasing_order" class="change_sort_by_status" >
-                        <a href="javascript:void(0)">Date > Oldest First</a>
+                        <a href="javascript:void(0)"> Oldest </a>
                       </li>
 
                       <li id="change_to_increasing_order_with_check" class="change_sort_by_status loader_visiblity_block" >
-                        <a href="javascript:void(0)" ><i class="fa fa-check"></i> &nbsp;&nbsp; Date > Oldest First</a>
+                        <a href="javascript:void(0)" ><i class="fa fa-check"></i> &nbsp;&nbsp; Oldest </a>
                       </li>
 
                 </ul>
@@ -82,7 +82,6 @@
           
               <div class="post__author author vcard inline-items">
                <!--  <img src="img/avatar84-sm.jpg" alt="author"> -->
-          
                 <div class="author-date not-uppercase">
                   <a class="h6 post__author-name fn c-darkgray" href="javascript:void(0)" >{{author_name}}</a>
                   <div class="post__date">
@@ -92,11 +91,13 @@
                   </div>
                 </div>
               </div>         
-              <!--<div class="comments-shared padding-bottom-20">
+
+              <div class="comments-shared padding-bottom-20">
                 <a href="javascript:void(0)" class="post-add-icon inline-items">
-                  <img src="img/comment_gray.png"> <span>17</span>
+                  <img src="img/comment_gray.png"> <span>{{show_review_counts}}</span>
                 </a>
-              </div> -->
+              </div> 
+
               <div class="add-collection">
                 <div class="control-block-button">
                   <a href="javascript:void(0)" class="btn btn-block follow" id="remove_to_my_collections" >

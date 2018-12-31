@@ -8,6 +8,7 @@ import { feed }  from './../../import/collections/insert.js';
 import { campaign_details }  from './../../import/collections/insert.js';
 
 import { book_details }  from './../../import/collections/insert.js';
+import { reward_details }  from './../../import/collections/insert.js';
 import { categories_selection }  from './../../import/collections/insert.js';
    // import { categories_selection } from './../../import/collections/insert.js';
 import { Base64 } from 'meteor/ostrio:base64';
@@ -405,6 +406,25 @@ Template.profile_content.helpers({
         return true;
       }
     },
+
+
+    total_reward_points(){
+      var logged_in_user = Session.get("userId");
+      reward_details_all = Meteor.subscribe("reward_details_all");
+      var result = reward_details.find({reward_to: logged_in_user,reward_redeem_status: 0}).fetch();
+
+      var total_count = 0;
+      if(result[0]){
+            for(var i=0; i< result.length; i++){
+
+              total_count = total_count + parseInt(result[i].reward_value);
+            }
+      }
+      Session.set("total_reward_points",total_count);
+      return total_count;
+
+    },
+
 
     fetch_feed_posts(){
    var user_id = Session.get("userId");
@@ -1736,6 +1756,13 @@ viewMode: 1,
     $('#comment_lvl0_text_'+this.comment_id).removeClass("loader_visiblity_block");
     
   },
+
+    'click #send_to_reward_detail':function(){
+    // window.location.href="/feed";
+    Router.go("/reward_detail_page");
+   },
+
+
 
   'click #submit_edited_comment_lvl1':function(){
 

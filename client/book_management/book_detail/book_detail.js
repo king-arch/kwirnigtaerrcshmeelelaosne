@@ -119,6 +119,7 @@ Template.book_detail_page.onRendered(function () {
                         content_type: "submit_review",
                         approval_status: 1
                       }).fetch();
+
       if(result[0]){
         console.log("show_review_details");
         console.log(result);
@@ -136,17 +137,46 @@ Template.book_detail_page.onRendered(function () {
         return result;
     },
 
+    display_books(){
+         var liked_by = Session.get("userId");
+
+         Meteor.subscribe("fetch_book_listing");
+
+         var get_book_id = Session.get("get_book_id");
+         var result = book_details.find({book_id: {$ne: get_book_id} },{limit: 5,sort: {created_at: -1}}).fetch();
+    return result;
+  },
+
+    book_name_trimmed(){
+         var logged_in_user = Session.get("userId");
+
+         var book_name = this.book_name;
+
+         if(book_name.length > 21){
+            return book_name.slice(0, 21)+'...';
+         }
+         else{
+            return book_name; 
+         } 
+  },
+
 });
 
 
 Template.book_detail_page.events({
 
     "click .go_to_write_review_page":function(){
-          
             var parent_id = this.parent_id;
             var parent_id = Base64.encode(parent_id);
             
             var url = '/write_review/'+parent_id;
+            console.log(url);
+            window.location.href = url;
+    },
+
+        "click .go_to_book_detail":function(){ 
+      var book_id = Base64.encode(this.book_id);  
+      var url = '/book_detail/'+book_id;
             console.log(url);
             window.location.href = url;
     },

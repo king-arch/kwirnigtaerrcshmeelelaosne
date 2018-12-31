@@ -224,6 +224,13 @@ Template.display_blog_detail.onRendered(function () {
          return result;
     },
 
+        fetch_user_info_comment(){
+         var user_id = Session.get("userId");  
+         Meteor.subscribe("user_info_based_on_id",user_id);
+         var result = user_details.find({user_id: user_id},{sort: {created_at: -1}}).fetch();
+         return result;
+    },
+
     blog_creation_date(){
       var new_year  = moment(this.created_at).format('YYYY');
       var new_month  = moment(this.created_at).format('MMM');
@@ -576,7 +583,7 @@ if(fetch_campaign_details[0]){
             swal("Error"); 
         }else{ 
           // console.log('successfully removed');   
-          swal('successfully replied');   
+          // swal('successfully replied');   
           $("#comment_lvl_1_"+comment_id).val("");  
           $('#reply_lvl0_'+comment_id).addClass("loader_visiblity_block");
         }  
