@@ -24,12 +24,12 @@
                   </button>
                </div>
             </div>
-            <a  href="javascript:void(0)" class="link-find-friend" id="go_to_feed" >Feed</a>
-            <a  href="javascript:void(0)" class="link-find-friend" id="go_to_book" >Book</a>
-            <a  href="javascript:void(0)" class="link-find-friend" id="go_to_community" >Community</a>
-            <a  href="javascript:void(0)" class="link-find-friend" id="go_to_blog" >Blog</a>
+            <a  href="javascript:void(0)" class="link-find-friend" id="go_to_feed"  title="Feed" >Feed</a>
+            <a  href="javascript:void(0)" class="link-find-friend" id="go_to_book"  title="Book" >Book</a>
+            <a  href="javascript:void(0)" class="link-find-friend" id="go_to_community"  title="Community"  >Community</a>
+            <a  href="javascript:void(0)" class="link-find-friend" id="go_to_blog"  title="Blog" >Blog</a>
             <div class="control-block control_block_mrgin_top">
-              <div class="control-icon more has-items" id="go_to_notifications" >
+              <div class="control-icon more has-items" id="go_to_notifications"  title="Notifications" >
                   {{#if notification_pending}}
                   <img src="/img/notification_white.png" alt="arrow" class="back-icon" style="width: 21px;">
                   <div class="label-avatar bg-primary show_dot" ></div>
@@ -37,12 +37,12 @@
                   <img src="/img/notification_white.png" alt="arrow" class="back-icon" style="width: 21px;">
                   {{/if}}
               </div>
-              <div class="control-icon more has-items">
+              <div class="control-icon more has-items" id="campaign_listing" title="User Campaign" >
                   <img src="/img/briefcase.png" alt="arrow" class="back-icon" style="width: 21px;">     
-                  <div class="label-avatar bg-primary">80</div>
+                  <!-- <div class="label-avatar bg-primary">80</div> -->
               </div>
               <div class="control-icon more has-items" id="send_to_reward_detail">
-                  <img src="/img/medal.png" alt="arrow" class="back-icon" style="width: 21px;">     
+                  <img src="/img/medal.png" alt="arrow" class="back-icon" style="width: 21px;" title="Reward Management"  >     
                   <!-- <div class="label-avatar bg-primary">80</div> -->
               </div>
               <div class="author-page author vcard inline-items more">

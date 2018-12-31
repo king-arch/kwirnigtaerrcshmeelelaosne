@@ -102,6 +102,12 @@ Template.headeroptions.events({
     Router.go("/feed");
    },
 
+
+  'click #campaign_listing':function(){
+    // window.location.href="/feed";
+    Router.go("/campaign_listing");
+   },
+
   'click #go_to_notifications':function(){
     // window.location.href="/feed";
     Router.go("/client_notification");
