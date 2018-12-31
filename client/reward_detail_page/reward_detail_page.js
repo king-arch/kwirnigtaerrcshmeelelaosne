@@ -54,7 +54,7 @@ Template.display_reward_detail_page.onRendered(function () {
     show_reward_listing(){
       var logged_in_user = Session.get("userId");
       reward_details_all = Meteor.subscribe("reward_details_all");
-      var result = reward_details.find({reward_to: logged_in_user}).fetch();
+      var result = reward_details.find({reward_to: logged_in_user},{sort: {created_at: -1} }).fetch();
       return result;
     },
 

@@ -814,6 +814,11 @@ Template.feed_design.events({
             window.location.href = url;
     },
 
+    "click #send_to_create_campaign":function(){ 
+            // console.log(url);
+            window.location.href = '/create_campaign';
+    },
+
 
   'click .go_to_detail_page':function(){      
             var post_id = Base64.encode(this.post_id);  
