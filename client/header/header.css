@@ -29,7 +29,7 @@
 
 .onoffswitch3-inner .onoffswitch3-active {
     padding-left: 10px;
-    background-color: #fff; color: #FFFFFF;
+    background-color: transparent; color: #FFFFFF;
 }
 
 .onoffswitch3-inner .onoffswitch3-inactive {

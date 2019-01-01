@@ -19654,6 +19654,18 @@ font-size: 24px !important;
             background-color: #9aaf59;
             color: #fff !important;
         }
+
+        
+.unfollow{
+    background-color: #fff;
+            color: #9aaf59 !important;
+}
+.unfollow:hover{
+    border: 1px solid #9aaf59;
+            width: 50%;
+            margin: 0 auto;
+            color: #fff !important;
+}
 .background{
             background-color: #9aaf59;
             color:#fff ;

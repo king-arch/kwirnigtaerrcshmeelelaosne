@@ -13,7 +13,6 @@
 <template name="view_profile_content">  
 
 {{#each show_logged_in_user_info}}
-
 <div class="container">
   <div class="row">
     <div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
@@ -34,7 +33,7 @@
               <div class="country">{{user_location}} ,   {{#if check_if_already_following}} 
                   <span class="click_on_follow pointer c-orange" id={{user_id}} ><u> Follow </u></span>
           {{else}}
-                  <span class="click_on_unfollow pointer c-lightgray" id={{user_id}} ><u>  Following </u> </span>
+                  
         {{/if}}</div>
                <!-- <div class="country pointer"><u>Follow</u></div> -->
        
@@ -86,7 +85,11 @@
                 </ul>
               </div>
             </div>
-
+            <div class="row" style="width:100%">
+              <div class="col-md-12" style="text-align: center">
+                <span class="click_on_unfollow pointer c-lightgray" id={{user_id}} ><u>  Following </u> </span>
+              </div>
+            </div>
               <input type="file" name="cover_pic" id="upload_cover" style="display:none !important;" accept="image/x-png,image/gif,image/jpeg">  
 
              <input type="hidden" data-toggle="modal" data-target="#update_cover_pic_modal" class="btn modal-trigger" id="cover_pic_modal" >

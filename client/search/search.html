@@ -213,9 +213,9 @@
                       </div>
                       <div class="control-block-button" data-swiper-parallax="-100">
 {{#if check_if_following}}
-    <a class="btn btn-block follow c-darkgray click_on_unfollow" id={{user_id}} > Unfollow</a>
+    <a class="btn btn-block follow unfollow c-darkgray click_on_unfollow" id={{user_id}} > Unfollow</a>
  {{else}}
-    <a class="btn btn-block follow c-darkgray click_on_follow" id={{user_id}} > Follow</a>
+    <a class="btn btn-block follow  click_on_follow" id={{user_id}} > Follow</a>
  {{/if}}
                       </div>
                     </div>
@@ -248,29 +248,44 @@
           
           <article class="hentry blog-post">
           
-            <div class="post-thumb">
-              <img src="{{blog_cover}}" alt="photo" class="go_to_blog_detail" >
+            <div class="post-thumb margin_btm">
+              <img src="{{blog_cover}}" alt="photo" class="go_to_blog_detail pointer go_to_blog_detail_img" >
+               <div class="bottom-right"><a href="#" class="post-add-icon inline-items">
+                    <img src="/img/comment_white.png">
+                    <span>{{comment_count_lvl_0}}</span>
+                  </a></div>
             </div>
           
             <div class="post-content">
-              <a href="#" class="post-category bg-blue-light">{{blog_type}}</a>
+              <!-- <a href="#" class="post-category bg-blue-light">{{blog_type}}</a> -->
               <a href="#" class="h4 post-title go_to_blog_detail">{{blog_title}}</a>
 
               <!-- <p>{{blog_discription}}</p> -->
-          
+              {{#each fetch_user_info}} 
+              <div class="post__author author vcard inline-items">
+                <img src="{{user_profile_pic}}" alt="author" class="view_profile" >
+                <div class="author-date">
+                  <a class="h5 post__author-name fn view_profile" href="javascript:void(0)">{{user_name}}</a> <br/>
+                  <div class="post__date">
+                    <time class="published" datetime="2017-03-24T18:18">
+                     {{user_headline}}
+                    </time>
+                  </div>
+                </div>
+              </div>
+              {{/each}} 
+              <!-- 
+              <div class="post__author author vcard inline-items">
+              <img src="{{user_profile_pic}}" alt="author" class="view_profile" >
               <div class="author-date">
-                by
-          {{#each fetch_user_info}}   
-                <a class="h6 post__author-name fn" href="#">{{user_name}}</a>
+                <a class="h5 post__author-name fn view_profile" href="javascript:void(0)">{{user_name}}</a> <br/>
                 <div class="post__date">
                   <time class="published" datetime="2017-03-24T18:18">
-                    {{calculate_time_difference_ago ../created_at}}
+                   {{user_headline}}
                   </time>
                 </div>
-          {{/each}}
-                
               </div>
-          
+            </div>
               <div class="post-additional-info inline-items">
                <div class="comments-shared">
                   <a href="#" class="post-add-icon inline-items">
@@ -278,8 +293,7 @@
                     <span>{{comment_count_lvl_0}}</span>
                   </a>
                 </div>
-          
-              </div>
+              </div> -->
             </div>
           
           </article>
