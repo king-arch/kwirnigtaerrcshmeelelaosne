@@ -35,8 +35,8 @@ Template.index_content.helpers({
       Meteor.subscribe("fetch_book_listing");
       var result = book_details.find({},{ limit: 4 }).fetch();
 
-    console.log('show result: ');
-    console.log(result);
+    // console.log('show result: ');
+    // console.log(result);
     return result;
 
 },
@@ -46,19 +46,19 @@ Template.index_content.helpers({
           Meteor.subscribe("fetch_blog_content");
           var result = blog.find({},{ limit: 4 }).fetch();
 
-          console.log('show result: ');
-          console.log(result);
+          // console.log('show result: ');
+          // console.log(result);
           return result;
     },
 
     fetch_user_info(){
-      console.log('ok');
+      // console.log('ok');
          var user_id = this.blog_author;  
-         console.log(user_id);            
+         // console.log(user_id);            
          Meteor.subscribe("user_info_based_on_id",user_id);
          var result = user_details.find({user_id: user_id}).fetch();
-         console.log('show author details');
-         console.log(result);
+         // console.log('show author details');
+         // console.log(result);
          return result;
     },
 
@@ -75,6 +75,11 @@ Template.index_content.helpers({
 });
 
 Template.index_content.events({
+
+'click #clicked_on_gmail': function(){
+  // swal("lets click");
+    $("#google_login").click();
+},
 
 'click #forgot_password': function(){
     window.location.href = "/forgot_password";

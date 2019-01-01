@@ -3112,6 +3112,101 @@ var result = await send_email_with_contact_us_details_to_admin(user_name, user_e
   },
 
 
+      check_for_google_login:function(getEmail,getName,getImageUrl,source){
+        //alert(userid);
+        var check_similar_mail_exists = user_details.find({user_email: getEmail , source: source}).fetch();
+
+        if(check_similar_mail_exists[0]){
+
+          if(check_similar_mail_exists[0].headline){
+
+            var userID = check_similar_mail_exists[0].user_id;
+              var message = {
+                "send_url": '/feed',"userID": userID
+              }
+
+              return message;
+          }
+          else{
+
+            var userID = check_similar_mail_exists[0].user_id;
+              var message = {
+                "send_url": '/signup',"userID": userID
+              }
+
+              return message;
+}
+        }else{
+
+    var userID = 'user_'+Math.floor((Math.random() * 2465789) + 1);
+
+                    var result =  user_details.insert({
+                      user_id:userID,
+                      user_name: getName,
+                      user_email: getEmail,
+                      email_status: 1,
+                      source: source,
+                      user_status: '',
+                      user_profile_pic: getImageUrl,
+                      createdAt: Date.now() 
+                    });
+
+              var message = {
+                "send_url": '/signup',"userID": userID
+              }
+              
+              return message;
+          }
+      },
+
+
+      check_for_facebook_login:function(getEmail,getName,getImageUrl,source){
+        //alert(userid);
+        var check_similar_mail_exists = user_details.find({user_email: getEmail , source: source}).fetch();
+        if(check_similar_mail_exists[0]){
+
+          if(check_similar_mail_exists[0].headline){
+            var userID = check_similar_mail_exists[0].user_id;
+              var message = {
+                "send_url": '/feed',"userID": userID
+              }
+
+              return message;
+          }
+          else{
+
+            var userID = check_similar_mail_exists[0].user_id;
+              var message = {
+                "send_url": '/signup',"userID": userID
+              }
+
+              return message;
+}
+        }else{
+
+    var userID = 'user_'+Math.floor((Math.random() * 2465789) + 1);
+
+                    var result =  user_details.insert({
+                      user_id:userID,
+                      user_name: getName,
+                      user_email: getEmail,
+                      email_status: 1,
+                      source: source,
+                      user_status: '',
+                      user_profile_pic: getImageUrl,
+                      createdAt: Date.now() 
+                    });
+
+              var message = {
+                "send_url": '/signup',"userID": userID
+              }
+
+              return message;
+
+        }
+
+      },
+
 });
 
 //******************** email functions Start ***********************

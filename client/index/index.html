@@ -1,6 +1,12 @@
 
 
 <template name="index">
+
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+<script src="https://connect.facebook.net/en_US/all/debug.js" async defer></script>
+
+<meta name="google-signin-client_id" content="335819699102-a8ukb4755trrurg154vrqgh5m1otpjp7.apps.googleusercontent.com">
+
    {{> header}}
    {{> index_content}}
 </template>
@@ -106,8 +112,10 @@
                                     By clicking <a>Sign up </a>, you agree to<b> WritersMelon's </b><a href="#" class="c-white"><u>User Agreement</u></a>, <a href="#" class="c-white"><u>Privacy </u></a> and <a href="#" class="c-white"><u>Cookie Policies </u></a>.
                                  </div>
                                  <span>
-                                 <button class="btn btn-mdb-color btn-rounded float-right button" type="button" id="submit_signup" ><span> Sign up </span></button>
+
+                                 <button class="btn btn-mdb-color btn-rounded float-right button" type="button" id="submit_signup" style="display: none !important" ><span> Sign up </span></button>
                                  </span>
+
                               </div>
                               <div class="col-lg-12 col-md-12 col-sm-12 text-center">
                                  <p class="c-white" style="font-size: 20px;">or Sign in with</p>
@@ -117,11 +125,24 @@
                                  <img src="img/facebook.png" style="width: 16px;"> </a>
                               </div>
                               <div class="col-lg-6 col-md-12 col-sm-12 text-center">
-                                 <a href="#" class="btn btn-md btn-border c-white" style="width: 100%;">
+                                 <a href="javascript:void(0)" class="btn btn-md btn-border c-white" style="width: 100%;" id="clicked_on_gmail" >
                                  <img src="img/google-plus.png" style="width: 16px;"> </a>
+
+
                               </div>
+
+
                            </div>
                         </form>
+
+         <!-- <button class="g-signin2" id="google_login" data-onsuccess="onSignIn" onclick="click_google_login()" ></button>   -->
+            <a class="btn fb_bt btn-home format_join join_btn_signup height_sub login-btn mouse_ani" data-toggle="tooltip" data-placement="top" title="Facebook" id="login_with_facebook" onclick="login()" >
+              <i class="fa fa-facebook login_social_icon"></i>
+              <span class="hidden-xs"></span>
+            </a>
+         <div class="g-signin2" data-onsuccess="onSignIn" onclick="click_google_login()"  id="google_login" ></div>
+  
+
                      </div>
                      <!-- Grid column -->
                   </div>
@@ -289,46 +310,7 @@
             </div>
          </div>
       </section>
-      <!-- JS Scripts -->
-      <!-- 
-         <script src="js/jquery-3.2.1.js"></script>
-         <script src="js/jquery.appear.js"></script>
-         <script src="js/jquery.mousewheel.js"></script>
-         <script src="js/perfect-scrollbar.js"></script>
-         <script src="js/jquery.matchHeight.js"></script>
-         <script src="js/svgxuse.js"></script>
-         <script src="js/imagesloaded.pkgd.js"></script>
-         <script src="js/Headroom.js"></script>
-         <script src="js/velocity.js"></script>
-         <script src="js/ScrollMagic.js"></script>
-         <script src="js/jquery.waypoints.js"></script>
-         <script src="js/jquery.countTo.js"></script>
-         <script src="js/popper.min.js"></script>
-         <script src="js/material.min.js"></script>
-         <script src="js/bootstrap-select.js"></script>
-         <script src="js/smooth-scroll.js"></script>
-         <script src="js/selectize.js"></script>
-         <script src="js/swiper.jquery.js"></script>
-         <script src="js/moment.js"></script>
-         <script src="js/daterangepicker.js"></script>
-         <script src="js/simplecalendar.js"></script>
-         <script src="js/fullcalendar.js"></script>
-         <script src="js/isotope.pkgd.js"></script>
-         <script src="js/ajax-pagination.js"></script>
-         <script src="js/Chart.js"></script>
-         <script src="js/chartjs-plugin-deferred.js"></script>
-         <script src="js/circle-progress.js"></script>
-         <script src="js/loader.js"></script>
-         <script src="js/run-chart.js"></script>
-         <script src="js/jquery.magnific-popup.js"></script>
-         <script src="js/jquery.gifplayer.js"></script>
-         <script src="js/mediaelement-and-player.js"></script>
-         <script src="js/mediaelement-playlist-plugin.min.js"></script>
-         
-         <script src="js/base-init.js"></script>
-         <script defer src="fonts/fontawesome-all.js"></script>
-         
-         <script src="Bootstrap/dist/js/bootstrap.bundle.js"></script> -->
+
    </body>
    <script type="text/javascript">
       function ValidateEmail(mail) {
@@ -354,5 +336,144 @@
       }
       
    </script>
+
+<script type="text/javascript">
+
+    function click_google_login(){
+      // alert("inside");
+      Session.set("check_for_login",true);
+   }
+
+   function onSignIn(googleUser) {
+   // alert("case 1");
+   if(Session.get("check_for_login") == true){
+   // if(check_for_login == true){
+   // alert("case 2");
+
+  var profile = googleUser.getBasicProfile();
+  console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+  console.log('Name: ' + profile.getName());
+  console.log('Image URL: ' + profile.getImageUrl());
+  console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+
+var getEmail = profile.getEmail();
+var getName = profile.getName();
+var getImageUrl = profile.getImageUrl();
+
+var source = "Google";
+
+        Meteor.call('check_for_google_login',getEmail,getName,getImageUrl,source,function(error,result){
+              if(error){
+                alert("Some error occure.");
+              
+              }else{
+
+                  console.log('successfull login');
+                  console.log(result);
+                  var url = result.send_url;
+
+                  if(url == '/feed'){
+                      var userID = result.userID;
+                      Session.setPersistent("userId",userID);
+                      Router.go(url);
+                  }
+                  else{
+                var userID = result.userID;
+                Session.setPersistent("userId",userID);
+                Router.go(url);
+
+                  }
+
+
+                }
+          });
+ }
+}
+</script>
+
+<div id="fb-root"></div>
+
+<script>
+window.fbAsyncInit = function () {
+
+      FB.init({
+      appId      : '333621360803966',                        // App ID from the app dashboard
+      status     : true,                                 // Check Facebook Login status
+      xfbml      : true                                  // Look for social plugins on the page
+    });
+    }
+
+    FB.AppEvents.logPageView(); 
+
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "https://connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+
+  function login(){
+        FB.login(function(response){
+            if(response.status === 'connected'){
+              testAPI();//getInfo();
+              // alert('we are connected');
+            } else if(response.status === 'not_authorized') {
+                 show_alert("Not authorized");
+            } else {
+                show_alert("you are not logged in to Facebook");
+            }
+
+        },{scope: 'email'});
+    }
+
+    function testAPI() {
+    console.log('Welcome!  Fetching your information.... ');
+   
+    FB.api('/me','GET', {fields: 'first_name,last_name,email,name,id'}, function(response) {
+      console.log('Successful login for: ' + response.name);
+      console.log(response);
+      if(response.email == "" || response.email == undefined){
+          show_alert("Your privacy for Email is not public");
+          return false;
+      }
+      // show_loading_alert("Loading, please wait");
+
+var getEmail = response.email;
+var getName = response.name;
+var getImageUrl = "http://graph.facebook.com/"+response.id+"/picture?type=large";
+
+// alert(' getEmail: '+getEmail+' getName: '+getName+' getImageUrl: '+getImageUrl);
+var source = "Facebook";
+
+      Meteor.call("check_for_facebook_login",getEmail,getName,getImageUrl,source, function(error,result){
+        if(error){
+          show_alert("Something went wrong while fetching details")
+        }else{
+                  console.log('successfull login');
+                  // alert('successfull login');
+                  console.log(result);
+                  var url = result.send_url;
+
+                  if(url == '/feed'){
+                      var userID = result.userID;
+                      Session.setPersistent("userId",userID);
+                      Router.go(url);
+                  }
+                  else{
+                var userID = result.userID;
+                Session.setPersistent("userId",userID);
+                Router.go(url);
+
+                  }
+      }
+      });
+    });
+  }
+
+
+
+</script>
 </template>
 

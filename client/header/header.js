@@ -163,7 +163,16 @@ Template.headeroptions.events({
   'click #submit_search_text':function(){
             // alert("submitted");
             var search_text = $("#search_text").val();
-            
+           
+            if(search_text == null || search_text == '') 
+              { 
+                $("#search_text").addClass('emptyfield2').focus();  
+                return false; 
+              } 
+              else 
+              { 
+               $("#search_text").removeClass('emptyfield2');  
+              } 
             // alert(search_text);
             var url = '/search/'+search_text;
             window.location.href = url;
