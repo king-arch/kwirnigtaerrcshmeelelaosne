@@ -43,14 +43,22 @@
     display: block; width: 50%; margin: 0px; text-align: center; 
     border: 0px solid #999999;border-radius: 0px; 
     position: absolute; top: 0; bottom: 0;
+    background: #FF5E3A;
+    left: 0;
+    font-weight: 600;
+    width: 160px;
 }
 .onoffswitch3-active .onoffswitch3-switch {
     background: #FF5E3A; left: 0; font-weight: 600;
     width: 160px;
 }
 .onoffswitch3-inactive{
-    background: #A1A1A1; right: 0;
-    width: 20px;
+    /*background: #A1A1A1; right: 0;
+    width: 20px;*/
+    background: #FF5E3A;
+    left: 0;
+    font-weight: 600;
+    width: 160px;
 }
 .onoffswitch3-checkbox:checked + .onoffswitch3-label .onoffswitch3-inner {
     margin-left: 0;

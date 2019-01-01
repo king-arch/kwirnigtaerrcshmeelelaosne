@@ -1,129 +1,108 @@
 
+
 <template name="my_collections">
-    {{> header}}    
- <body class="landing-page">
-   {{> headeroptions}}
-   {{> my_collections_detail}}
- </body>
+   {{> header}}    
+   <body class="landing-page">
+      {{> headeroptions}}
+      {{> my_collections_detail}}
+   </body>
 </template>
-
 <template name="my_collections_detail">
-
-    <div class="loading"  id="loading_div" ></div>
-<div class="container">
-
-						<div class="row">
-              <div class="col col-xl-11 col-lg-11 col-md-12 col-sm-12 col-12">
-
-      <div class="ui-block responsive-flex1200 bg_trans">
-        <div class="ui-block-title pad_0">
-          <h1 style="font-size: 30px; font-weight: 500;">My Collection</h1>
-        </div>
-      </div>
-    </div>
-                <div class="col col-xl-1 col-lg-1 col-md-12 col-sm-12 col-12">
-
-       <div class="ui-block responsive-flex1200 bg_trans margin-bottom-0 ">
-        <div class="ui-block-title pad_0">
-           <span style="padding-top: 10px;"> Sort by </span><div class="more">  <i class="fa fa-angle-down three_dots_listing_page_angle"></i>
-                <ul class="more-dropdown">
-                  
-                      <li id="change_to_decreasing_order" class="change_sort_by_status loader_visiblity_block" >
-                        <a href="javascript:void(0)"  > Newest</a>
-                      </li>
-
-                      <li id="change_to_decreasing_order_with_check" class="change_sort_by_status" >
-                        <a href="javascript:void(0)" ><i class="fa fa-check"></i> &nbsp;&nbsp; Newest </a>
-                      </li>
-
-                      <li id="change_to_increasing_order" class="change_sort_by_status" >
-                        <a href="javascript:void(0)"> Oldest </a>
-                      </li>
-
-                      <li id="change_to_increasing_order_with_check" class="change_sort_by_status loader_visiblity_block" >
-                        <a href="javascript:void(0)" ><i class="fa fa-check"></i> &nbsp;&nbsp; Oldest </a>
-                      </li>
-
-                </ul>
-              </div>         
-        </div>
-      </div>
-    </div>
-							
-						</div>
-			
-      
-   
-<hr class="new4">
- </div>        
-
-
-<section class="blog-post-wrap medium-padding20">
-  <div class="container">
-    <div class="row sorting-container" id="posts-grid-1" data-layout="masonry">
-
-{{#each show_my_collection_books}}
-{{#each show_book_details}}
-      <div class="col col-xl-3 col-lg-3 col-md-6 col-sm-12  sorting-item news">
-        <div class="ui-block">
-          
-          <article class="hentry blog-post blog-post-v2">
-            <div class="post-thumb margin_btm">
-               <a href="javascript:void(0)" class="go_to_book_detail pointer" >
-                <img src="{{book_cover}}" alt="photo" class="go_to_book_detail pointer" >
-                 <div class="bottom-left">              <a href="javascript:void(0)" class="post-category bg-blue-light  bg-primary">{{book_catagries}}</a>
-</div>
-              </a>
-
+   <div class="loading"  id="loading_div" ></div>
+   <div class="container">
+      <div class="row">
+         <div class="col col-xl-11 col-lg-11 col-md-12 col-sm-12 col-12">
+            <div class="ui-block responsive-flex1200 bg_trans">
+               <div class="ui-block-title pad_0">
+                  <h1 style="font-size: 30px; font-weight: 500;">My Collection</h1>
+               </div>
             </div>
-            <div class="post-content">
-              
-              <a href="javascript:void(0)" class="h4 post-title c-darkgray go_to_book_detail pointer">{{book_name}}</a>
-          
-              <div class="post__author author vcard inline-items">
-               <!--  <img src="img/avatar84-sm.jpg" alt="author"> -->
-                <div class="author-date not-uppercase">
-                  <a class="h6 post__author-name fn c-darkgray" href="javascript:void(0)" >{{author_name}}</a>
-                  <div class="post__date">
-                    <time class="published c-grey" datetime="2017-03-24T18:18">
-                      {{calculate_time_difference_ago ../created_at}}
-                    </time>
+         </div>
+         <div class="col col-xl-1 col-lg-1 col-md-12 col-sm-12 col-12">
+            <div class="ui-block responsive-flex1200 bg_trans margin-bottom-0 ">
+               <div class="ui-block-title pad_0">
+                  <span style="padding-top: 10px;"> Sort by </span>
+                  <div class="more">
+                     <i class="fa fa-angle-down three_dots_listing_page_angle"></i>
+                     <ul class="more-dropdown">
+                        <li id="change_to_decreasing_order" class="change_sort_by_status loader_visiblity_block" >
+                           <a href="javascript:void(0)"  > Newest</a>
+                        </li>
+                        <li id="change_to_decreasing_order_with_check" class="change_sort_by_status" >
+                           <a href="javascript:void(0)" ><i class="fa fa-check"></i> &nbsp;&nbsp; Newest </a>
+                        </li>
+                        <li id="change_to_increasing_order" class="change_sort_by_status" >
+                           <a href="javascript:void(0)"> Oldest </a>
+                        </li>
+                        <li id="change_to_increasing_order_with_check" class="change_sort_by_status loader_visiblity_block" >
+                           <a href="javascript:void(0)" ><i class="fa fa-check"></i> &nbsp;&nbsp; Oldest </a>
+                        </li>
+                     </ul>
                   </div>
-                </div>
-              </div>         
-
-              <div class="comments-shared padding-bottom-20">
-                <a href="javascript:void(0)" class="post-add-icon inline-items">
-                  <img src="img/comment_gray.png"> <span>{{show_review_counts}}</span>
-                </a>
-              </div> 
-
-              <div class="add-collection">
-                <div class="control-block-button">
-                  <a href="javascript:void(0)" class="btn btn-block follow" id="remove_to_my_collections" >
-                    Remove
-                  </a>
-                </div>
-              </div>
+               </div>
             </div>
-          </article>
-          
-          <!-- ... end Post -->
-
-        </div>
+         </div>
       </div>
-{{/each}}
-{{else}}
-        <div class="medium-padding120 m-auto"> <p class=" logout-content">You have not added any book in your collection.  </p>  </div>
-{{/each}}
-    </div>
-
-   <!--  <a id="load-more-button" href="javascript:void(0)" class="btn btn-control btn-more " data-load-link="items-to-load.html" data-container="newsfeed-items-grid">
-          <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
-
-               </a> -->
-  </div>
-
-</section>
-
+      <hr class="new4">
+   </div>
+   <section class="blog-post-wrap medium-padding20">
+      <div class="container">
+         <div class="row sorting-container" id="posts-grid-1" data-layout="masonry">
+            {{#each show_my_collection_books}}
+            {{#each show_book_details}}
+            <div class="col col-xl-3 col-lg-3 col-md-6 col-sm-12  sorting-item news">
+               <div class="ui-block">
+                  <article class="hentry blog-post blog-post-v2">
+                     <div class="post-thumb margin_btm">
+                        <a href="javascript:void(0)" class="go_to_book_detail pointer" >
+                            <img src="{{book_cover}}" alt="photo" class="go_to_book_detail pointer" >
+                            <div class="bottom-left">              
+                              <a href="javascript:void(0)" class="post-category bg-blue-light  ">{{book_catagries}}</a>
+                            </div>
+                        </a>
+                     </div>
+                     <div class="post-content">
+                        <a href="javascript:void(0)" class="h4 post-title c-darkgray go_to_book_detail pointer">{{book_name}}</a>
+                        <div class="post__author author vcard inline-items">
+                           <!--  <img src="img/avatar84-sm.jpg" alt="author"> -->
+                           <div class="author-date not-uppercase">
+                              <a class="h6 post__author-name fn c-darkgray" href="javascript:void(0)" >{{author_name}}</a>
+                              <div class="post__date">
+                                 <time class="published c-grey" datetime="2017-03-24T18:18">
+                                 {{calculate_time_difference_ago ../created_at}}
+                                 </time>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="comments-shared padding-bottom-20">
+                           <a href="javascript:void(0)" class="post-add-icon inline-items">
+                           <img src="img/comment_gray.png"> <span>{{show_review_counts}}</span>
+                           </a>
+                        </div>
+                        <div class="add-collection">
+                           <div class="control-block-button">
+                              <a href="javascript:void(0)" class="btn btn-block follow" id="remove_to_my_collections" >
+                              Remove
+                              </a>
+                           </div>
+                        </div>
+                     </div>
+                  </article>
+                  <!-- ... end Post -->
+               </div>
+            </div>
+            {{/each}}
+            {{else}}
+            <div class="medium-padding120 m-auto">
+               <p class=" logout-content">You have not added any book in your collection.  </p>
+            </div>
+            {{/each}}
+         </div>
+         <!--  <a id="load-more-button" href="javascript:void(0)" class="btn btn-control btn-more " data-load-link="items-to-load.html" data-container="newsfeed-items-grid">
+            <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+            
+                 </a> -->
+      </div>
+   </section>
 </template>
+

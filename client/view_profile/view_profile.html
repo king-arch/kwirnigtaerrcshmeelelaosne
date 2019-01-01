@@ -29,12 +29,8 @@
               <!-- <img src="img/author-main1.jpg" alt="author"> -->
             </a>
             <div class="author-content">
-              <a href="02-ProfilePage.html" class="h4 author-name">{{user_name}}</a>
-              <div class="country">{{user_location}} ,   {{#if check_if_already_following}} 
-                  <span class="click_on_follow pointer c-orange" id={{user_id}} ><u> Follow </u></span>
-          {{else}}
-                  
-        {{/if}}</div>
+              <a href="#" class="h4 author-name">{{user_name}}</a>
+              <div class="country">{{user_location}}</div>
                <!-- <div class="country pointer"><u>Follow</u></div> -->
        
             </div>
@@ -85,29 +81,25 @@
                 </ul>
               </div>
             </div>
-            <div class="row" style="width:100%">
-              <div class="col-md-12" style="text-align: center">
-                <span class="click_on_unfollow pointer c-lightgray" id={{user_id}} ><u>  Following </u> </span>
+            <input type="file" name="cover_pic" id="upload_cover" style="display:none !important;" accept="image/x-png,image/gif,image/jpeg">  
+            <input type="hidden" data-toggle="modal" data-target="#update_cover_pic_modal" class="btn modal-trigger" id="cover_pic_modal" >
+            <input type="file" id="upload_profile" accept="image/x-png,image/gif,image/jpeg"  style="display:none"/>
+            <input type="hidden" data-toggle="modal" data-target="#update_profile_pic_modal" class="btn modal-trigger" id="profile_pic_modal" >
+          </div>
+          <div class="row" style="width:100%">
+              <div class="col-md-12" style="text-align: center; margin: -10px 0 10px 0">
+                {{#if check_if_already_following}} 
+                <span class="click_on_follow pointer follow" id={{user_id}} style="padding: 3px 5px; border-radius:3px" > Follow </span>
+                {{else}}
+                <span class="click_on_unfollow pointer followdisplay c-lightgray" id={{user_id}} >  Following </span>
+                {{/if}}
               </div>
             </div>
-              <input type="file" name="cover_pic" id="upload_cover" style="display:none !important;" accept="image/x-png,image/gif,image/jpeg">  
-
-             <input type="hidden" data-toggle="modal" data-target="#update_cover_pic_modal" class="btn modal-trigger" id="cover_pic_modal" >
-
-              <input type="file" id="upload_profile" accept="image/x-png,image/gif,image/jpeg"  style="display:none"/>
-
-            <input type="hidden" data-toggle="modal" data-target="#update_profile_pic_modal" class="btn modal-trigger" id="profile_pic_modal" >
-
-
-
-          </div>
-          
         </div>
       </div>
     </div>
   </div>
 </div>
-
 
 <!-- ... end Top Header-Profile -->
 <div class="container">
