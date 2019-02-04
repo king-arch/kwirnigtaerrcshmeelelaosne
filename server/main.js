@@ -52,6 +52,10 @@ import urlMetadata from 'url-metadata';
       return book_details.find({});
     });
 
+     Meteor.publish('fetch_book_listing_with_limit', function(limit) {
+      return book_details.find({},{limit: limit ,sort: {created_at: -1}});
+    });
+
      Meteor.publish('fetch_book_listing_with_search_string', function(search_text) {
       const query = new RegExp(search_text,'i');  
       return book_details.find({book_name: query});
@@ -83,15 +87,6 @@ import urlMetadata from 'url-metadata';
       return promotion.find({promotion_id: promotion_id});
     });
 
-     Meteor.publish('follow_list_all', function() {
-      return  following_list.find({});
-    });
-
-     Meteor.publish('get_follow_status_with_ids', function(user_id,logged_in_user) {
-      return  following_list.find({following: user_id,follower: logged_in_user,current_follow_status: 1});
-          
-    });
-
      Meteor.publish('fetch_result_interest', function() {
       return  interest_list.find({});
     });
@@ -100,22 +95,10 @@ import urlMetadata from 'url-metadata';
       return  interest_list.find({});
     });
 
-     Meteor.publish('fetch_feed_content', function() {
-      return  feed.find({});
-    });
-
-     Meteor.publish('fetch_feed_content_details', function(post_id) {
-      return  feed.find({post_id: post_id});
-    });
-
      Meteor.publish('fetch_blog_content', function() {
       return  blog.find({});
     });
-
-     Meteor.publish('fetch_blog_content_with_blog_id', function(blog_id) {
-      return  blog.find({blog_id: blog_id});
-    });
-
+     
      Meteor.publish('fetch_blog_comments_with_blog_id', function(blog_id) {
       return  blog.find({ parent_id: blog_id, parent_post_type: 'Blog'});
     });
@@ -168,48 +151,40 @@ import urlMetadata from 'url-metadata';
       return  content.find({content_type: "work_with_us"});
     });
 
-     Meteor.publish('categories_selection_for_user', function(user_id) {
+     Meteor.publish('categories_selection_for_user', function(user_id){
       return  categories_selection.find({user_id: user_id});
     });
 
-     Meteor.publish('campaign_details_all_list', function() {
-      return  campaign_details.find({});
-    });
-
-     Meteor.publish('campaign_details_with_id', function(campaign_id) {
-      return  campaign_details.find({campaign_id: campaign_id});
-    });
-
-     Meteor.publish('notification_details', function(campaign_id) {
+     Meteor.publish('notification_details', function(campaign_id){
       return  notification_details.find({campaign_id: campaign_id});
     });
 
 
-     Meteor.publish('notification_details_all', function() {
+     Meteor.publish('notification_details_all', function(){
       return  notification_details.find({});
     });
 
-     Meteor.publish('notification_details_for_user', function(user_id) {
+     Meteor.publish('notification_details_for_user', function(user_id){
       return  notification_details.find({notification_to: user_id});
     });
 
-     Meteor.publish('notification_details_for_admin', function(user_id) {
+     Meteor.publish('notification_details_for_admin', function(user_id){
       return  notification_details.find({notification_to: 'writersmelon'});
     });
 
-     Meteor.publish('review_details_with_campaign_id', function(campaign_id) {
+     Meteor.publish('review_details_with_campaign_id', function(campaign_id){
       return  review_details.find({parent_id: campaign_id});
     });
 
-     Meteor.publish('review_details_with_review_id', function(review_id) {
+     Meteor.publish('review_details_with_review_id', function(review_id){
       return  review_details.find({review_id: review_id});
     });
 
-     Meteor.publish('review_details_all_pending', function(campaign_id) {
+     Meteor.publish('review_details_all_pending', function(campaign_id){
       return  review_details.find({});
     });
 
-     Meteor.publish('book_collections_all_with_user_id', function(user_id) {
+     Meteor.publish('book_collections_all_with_user_id', function(user_id){
       return  book_collections.find({added_by: user_id});
     });
 
@@ -221,7 +196,7 @@ import urlMetadata from 'url-metadata';
       return  reward_details.find({});
     });
 
-     Meteor.publish('reward_details_all_with_user_id', function(user_id) {
+     Meteor.publish('reward_details_all_with_user_id', function(user_id){
       return  reward_details.find({reward_to: user_id});
     });
 
@@ -236,103 +211,159 @@ smtp = {
 }
 process.env.MAIL_URL = 'smtp://' + encodeURIComponent(smtp.username) + ':' + encodeURIComponent(smtp.password) + '@' + encodeURIComponent(smtp.server) + ':' + smtp.port;
 
-//END Email setup function for support mail
+// END Email setup function for support mail
 
-//START crone jobs for capturing the report stats
-
-
-// Meteor.startup(() => {
-//   // code to run on server at startup 
-//       SyncedCron.start();
-// });
+// START crone jobs for capturing the report stats
 
 
-  // SyncedCron.config({
-  //   collectionName: 'somethingDifferent'
-  // });
+Meteor.startup(() => {
+  // code to run on server at startup 
+      SyncedCron.start();
+});
 
-  // SyncedCron.add({
-  //   name: 'Get the campaign total counts and total revenue',
-  //   schedule: function(parser) {
-  //     // parser is a later.parse object
 
-  //     // return parser.text('every 1 hours');
-  //     return parser.text('every 10 seconds');
-  //   }, 
-  //   job: function(intendedAt) {
-  //     // console.log('crunching numbers');
-  //     console.log('fetching reports stats: ');
-  //     // console.log(intendedAt);
-  //     var check_campaign_status = campaign_details.find({}).fetch();
+  SyncedCron.config({
+    collectionName: 'somethingDifferent'
+  });
 
-  //   if(check_campaign_status[0]){
-  //     for(var i=0; i< check_campaign_status.length; i++){
+  SyncedCron.add({
+    name: 'Get the campaign total counts and total revenue',
+    schedule: function(parser) {
+      // parser is a later.parse object
 
-  //     var book_name = check_campaign_status[i].book_name;
-  //     var approval_status = check_campaign_status[i].approval_status;
-  //     var final_payment = check_campaign_status[i].final_payment;
+      // return parser.text('every 1 hours');
+      return parser.text('every 20 seconds');
+    }, 
+    job: function(intendedAt) {
+      // console.log('crunching numbers');
+      console.log('fetching reports stats: ');
+      // console.log(intendedAt);
 
-  //     var campaign_end_date = check_campaign_status[i].campaign_end_date;
-  //     var campaign_start_date = check_campaign_status[i].campaign_start_date;
-  //     var campaign_id = check_campaign_status[i].campaign_id;
+      console.log( Date.now() );
+      var check_campaign_status = campaign_details.find({approval_status: 1}).fetch();
 
-  //     console.log(' book_name ' +book_name);
+    if(check_campaign_status[0]){
 
-  //     console.log(' approval_status '+approval_status);
-  //     console.log('final_payment ' +final_payment);
-  //     console.log(' campaign_end_date ' +campaign_end_date);
-  //     console.log(' campaign_start_date ' +campaign_start_date);
+      for(var i=0; i< check_campaign_status.length; i++){
 
-  //     var todays_date = Date.now();
-  //     if(campaign_end_date > todays_date){
-  //        console.log("show count");
+      var book_name = check_campaign_status[i].book_name;
+      var approval_status = check_campaign_status[i].approval_status;
+      var final_payment = check_campaign_status[i].final_payment;
+
+      var campaign_end_date = check_campaign_status[i].campaign_end_date;
+      var campaign_start_date = check_campaign_status[i].campaign_start_date;
+      var campaign_id = check_campaign_status[i].campaign_id;
+      var campaigner_id = check_campaign_status[i].campaigner_id;
+
+      var todays_date = Date.now();
+
+      if(campaign_end_date < todays_date){
+
+      console.log(' book_name ' +book_name);
+      console.log(' approval_status '+approval_status);
+      console.log('final_payment ' +final_payment);
+      
+      console.log(' campaign_end_date ' +campaign_end_date);
+      console.log(' campaign_start_date ' +campaign_start_date);
+      console.log(" todays_date: "+todays_date);
            
-  //                             var result =  campaign_details.update({
-  //                               campaign_id: campaign_id,
-  //                             }, {
-  //                               $set: {
-  //                                 "approval_status": 4,
-  //                                 "status_changed_by": 'crone_jobs',
+if(approval_status != 4){
+              var result =  campaign_details.update({
+                                campaign_id: campaign_id,
+                              }, {
+                                $set: {
+                                  "approval_status": 4,
+                                  "status_changed_by": 'crone_jobs',
 
-  //                                 "update_at": Date.now()
-  //                               } 
-  //                             }); 
-  //             }
-  //            }
-  //          }
+                                  "update_at": Date.now()
+                                } 
+                      }); 
 
-  //     var check_campaign_status_for_stats = campaign_details.find({approval_status: 4}).fetch();
+              console.log(result);
+      
+      var check_campaign_status_2 = review_details.find({parent_id: campaign_id, content_type: "submit_review",approval_status: 1}).fetch();
+      // var check_campaign_status = review_details.find({parent_id: campaign_id}).fetch();
+      console.log("get campaign reviews");
+      // console.log(check_campaign_status_2);
+      var new_array_2 = new Array();
 
-  //   if(check_campaign_status_for_stats[0]){
+      if(check_campaign_status_2[0]){
 
-  //     var check_general_records = general_records.find({"record_type": "campaign_count"}).fetch();
-  //       if(check_general_records[0]){
-  //                             var result =  general_records.update({
-  //                               campaign_id: check_general_records[0].campaign_id,
-  //                             }, {
-  //                               $set: {
-  //                                 "record_type": "campaign_count",
-  //                                 "campaign_count": check_campaign_status_for_stats.length,
+          for(var i=0; i< check_campaign_status_2.length;i++){
+             new_array_2.push(check_campaign_status_2[i].review_id);
+          }
 
-  //                                 "update_at": Date.now()
-  //                               } 
-  //                             }); 
-  //       }else{
-  //                    var general_record_id = 'general_record_id_'+Math.floor((Math.random() * 2465789) + 1);
-  //          var result = general_records.insert({
-  //                       "general_record_id": general_record_id,
-  //                       "record_type": "campaign_count",
-  //                       "campaign_count": check_campaign_status_for_stats.length,
-  //                       "created_at": Date.now(),
-  //                     });
-  //       }
+      // console.log("reviewer array");
+      // console.log(new_array_2);
 
-  //   }
+      var report_id = 'report_id_'+Math.floor((Math.random() * 2465789) + 1);
+      console.log(report_id);
+                               var result = campaign_details.insert({
 
-  //       }
-  // });
+                                  entry_type: "campaign_completion_report",
+                                  report_id: report_id,
+                                  campaign_id: campaign_id,
+                                  campaigner_id: campaigner_id,
+                                  review_listing: new_array_2,
 
-//END crone jobs for capturing the report stats
+                                  campaign_started_on: campaign_start_date,
+                                  campaign_completed_on: Date.now(),
+                  });
+
+                var notification_id = 'notification_id_'+Math.floor((Math.random() * 2465789) + 1);
+                  var result2 = notification_details.insert({
+
+                                notification_id: notification_id,
+                                notification_by: "crone_jobs",
+                                notification_to: campaigner_id,
+
+                                campaign_id: campaign_id,
+                                notification_status: 0,
+
+                                report_id: report_id,
+                                notification_type: "campaign_completion_report",
+                                created_at: Date.now()
+                });
+
+      console.log("succes inserted");
+      }
+              console.log(i);
+              console.log( "******************************************" );
+
+//next line is for getting the completed campaigns count directly fron the campaign_detail table
+      var check_campaign_status_for_stats = campaign_details.find({approval_status: 4}).fetch();
+
+      var check_general_records = general_records.find({"record_type": "campaign_count"}).fetch();
+        if(check_general_records[0]){
+                              var result =  general_records.update({
+                                campaign_id: check_general_records[0].general_record_id,
+                              }, {
+                                $set: {
+                                  "campaign_count": check_campaign_status_for_stats.length,
+                                  "update_at": Date.now()
+                                } 
+                              }); 
+          }else{
+
+             var general_record_id = 'general_record_id_'+Math.floor((Math.random() * 2465789) + 1);
+             var result = general_records.insert({
+                          "general_record_id": general_record_id,
+                          "record_type": "campaign_count",
+                          "campaign_count": check_campaign_status_for_stats.length,
+                          "created_at": Date.now(),
+                        });
+              }
+
+              }
+
+           }
+         }
+              console.log("stop");
+           }
+        }
+  });
+
+// END crone jobs for capturing the report stats
 
 
 
@@ -559,29 +590,20 @@ if(check_if_exist[0]){
 
   fetch_book_details(book_id){
 
-   var result = book_details.find({ "book_id": book_id }).fetch();
-   return result;
-
-  },
-
-  fetch_book_detail_from_campaign(campaign_id){
-
-   var result = campaign_details.find({ "campaign_id": campaign_id }).fetch();
-   return result;
+      var result = book_details.find({ "book_id": book_id }).fetch();
+      return result;
 
   },
 
   fetch_blog_details(blog_id){
-
-   var result = blog.find({ "blog_id": blog_id }).fetch();
-   return result;
-
+      var result = blog.find({ "blog_id": blog_id }).fetch();
+      return result;
   },
 
   fetch_interest_list(interest_id){
 
-   var result = interest_list.find({ "interest_id": interest_id }).fetch();
-   return result;
+      var result = interest_list.find({ "interest_id": interest_id }).fetch();
+      return result;
 
   },
 
@@ -1114,55 +1136,6 @@ if(blog_author != "user_admin"){
 
         },   
 
-    follow_people:function(follow_user_id,logged_in_user){
-
-    // console.log(follow_user_id+' & '+logged_in_user);
-    var newUser = following_list.find({ $and: [{ "following": follow_user_id},{"follower": logged_in_user} ] }).fetch();
-                  
-          if(newUser[0]){
-          var result =  following_list.update({
-              _id: newUser[0]._id,
-            }, {
-              $set: {
-                following :follow_user_id,
-                follower :logged_in_user,
-                current_follow_status: 1,
-                updated_at: Date.now()
-              }
-            });
-
-          }else{
-
-        var follow_id = 'follow_id_'+Math.floor((Math.random() * 2465789) + 1);
-            
-            following_list.insert({
-
-                follow_id :follow_id,
-                following :follow_user_id,
-                follower :logged_in_user,
-                current_follow_status: 1,
-                created_at: Date.now()
-
-              });
-
-
-             var notification_id = 'notification_id_'+Math.floor((Math.random() * 2465789) + 1);
- 
-                   var result2 = notification_details.insert({
-
-                      notification_id: notification_id,
-                      notification_by: logged_in_user,
-
-                      notification_to: follow_user_id,
-
-                      notification_status: 0,
-                      notification_type: "Follow",
-                      created_at: Date.now()
-      });
-
-          }
-
-        }, 
 
     change_follow_status:function(logged_in_user){
 
@@ -1181,42 +1154,7 @@ if(blog_author != "user_admin"){
           return result;
         }, 
 
-    unfollow_people:function(follow_user_id,logged_in_user){
-
-    // console.log(follow_user_id+' & '+logged_in_user);
-    
-    var newUser = following_list.find({ $and: [{ "following": follow_user_id},{"follower": logged_in_user} ] }).fetch();
-                 // console.log('newUser'); 
-                 // console.log(newUser); 
-          if(newUser[0]){
-          var result =  following_list.update({
-              _id: newUser[0]._id,
-            }, {
-              $set: {
-                following :follow_user_id,
-                follower :logged_in_user,
-                current_follow_status: 0,
-                updated_at: Date.now()
-              }
-            });
-
-          }else{
-
-        var follow_id = 'follow_id_'+Math.floor((Math.random() * 2465789) + 1);
-            var result =  following_list.insert({
-
-                follow_id :follow_id,
-                following :follow_user_id,
-                follower :logged_in_user,
-                current_follow_status: 1,
-                created_at: Date.now()
-
-              });
-
-          }
-
-          return result;
-        },    
+ 
 
       "user_login":function(user_email,user_password){  
       var result =  user_details.find({user_email: user_email, user_password: user_password}).fetch(); 
@@ -1321,162 +1259,6 @@ if(blog_author != "user_admin"){
     return result;
     },
 
-    save_feed_post: function(post_text,logged_in_user)
-      {
-    var post_id = 'post_id_'+Math.floor((Math.random() * 2465789) + 1);
-    var result = feed.insert({
-
-               "post_id": post_id,
-               "post_type": 'post',
-               "post_content_type": 'Text',
-               "post_text": post_text,
-               "post_by": logged_in_user,
-               "post_status": 1,
-               "created_at": Date.now()
-      });
-    return result;
-    },
-
-    save_feed_post_with_image: function(post_text,logged_in_user,post_image)
-      {
-    var post_id = 'post_id_'+Math.floor((Math.random() * 2465789) + 1);
-    var result = feed.insert({
-
-               "post_id": post_id,
-               "post_type": 'post',
-               "post_content_type": 'Image',
-               "post_text": post_text,
-               "post_image": post_image,
-               "post_by": logged_in_user,
-               "post_status": 1,
-               "created_at": Date.now()
-      });
-    return result;
-    },
-
-    'save_metadata_post':function(post_text,featured_image,featured_title,source,posted_url,logged_in_user)
-      {
-
-          var post_type;
-        var is_youtube_video = youtube_parser(posted_url);
-            // console.log("posted_url");
-            // console.log(posted_url);
-          
-        if(is_youtube_video !=false){
-          post_type = "youtube_post";
-          posted_url = is_youtube_video;
-        }else{
-          post_type = "url_metadata";
-        }
-
-    var post_id = 'post_id_'+Math.floor((Math.random() * 2465789) + 1);
-    var result = feed.insert({
-
-               "post_id": post_id,
-               "post_text": post_text,
-               "post_type": 'post',
-               "post_content_type": post_type,
-               "post_by": logged_in_user,
-
-               "featured_image":featured_image,
-               "featured_title":featured_title,
-               "source":source,
-               "posted_url":posted_url,
-
-               "post_status": 1,
-               "created_at": Date.now()
-      });
-    return result;
-    },
-
-    save_updated_feed_post: function(post_id,post_text,logged_in_user)
-      {
-    var newUser = feed.find({post_id: post_id}).fetch();
-          if(newUser[0]){
-          var result =  feed.update({
-              _id: newUser[0]._id,
-            }, {
-              $set: {
-                       post_text: post_text,
-                       updated_at: Date.now()
-                    }
-            });
-          }
-          return result;
-    },
-
-    save_updated_comment_lvl0: function(comment_id,comment_text)
-      {
-    var newUser = feed.find({comment_id: comment_id}).fetch();
-          if(newUser[0]){
-          var result =  feed.update({
-              _id: newUser[0]._id,
-            }, {
-              $set: {
-                       comment_text: comment_text,
-                       updated_at: Date.now()
-                    }
-            });
-          }
-          return result;
-    },
-
-    save_updated_comment_lvl1: function(comment_id,comment_text)
-      {
-    var newUser = feed.find({comment_id: comment_id}).fetch();
-          if(newUser[0]){
-          var result =  feed.update({
-              _id: newUser[0]._id,
-            }, {
-              $set: {
-                       comment_text: comment_text,
-                       updated_at: Date.now()
-                    }
-            });
-          }
-          return result;
-    },
-
-    remove_post_from_feed:function(currentUserId,post_id){
-        console.log(post_id);
-
-        var result = feed.update({ 
-            post_id: post_id,
-          }, {  
-            $set: {                
-                     post_status: 0,
-                }
-          });
-        return result;
-      },  
-
-    remove_comment_from_lvl0:function(currentUserId,comment_id){
-        console.log(comment_id);
-
-        var result = feed.update({ 
-            comment_id: comment_id,
-          }, {  
-            $set: {                
-                     comment_status: 0,
-                }
-          });
-        return result;
-      },  
-
-  remove_comment_from_lvl1:function(currentUserId,comment_id){
-        console.log(comment_id);
-
-        var result = feed.update({ 
-            comment_id: comment_id,
-          }, {  
-            $set: {                
-                     comment_status: 0,
-                }
-          });
-        return result;
-      },  
-
-
   user_details_update: function(user_id,user_name,fb_handler,twitter_handler,goodreads_handler,personal_blog,user_contact,user_location,user_headline,account_number)
       {   
 
@@ -1501,179 +1283,6 @@ if(blog_author != "user_admin"){
                       });
     return result;
     },
-
-      update_hub_like: function(post_id,liked_by){
-
-      var checkForAlreadyExists = feed.find({
-                                              parent_id: post_id,
-                                              parent_post_type: 'post',
-                                              liked_by: liked_by,
-                                              post_type: 'like',
-                                  }).fetch();
-
-          console.log('checkForAlreadyExists: ');
-          console.log(checkForAlreadyExists);
-
-          if(checkForAlreadyExists[0]){
-          if(checkForAlreadyExists[0].like_status == 0){
-
-                      var result = feed.update({
-                      like_id: checkForAlreadyExists[0].like_id
-                    },
-                    {
-                      $set:
-                      {
-                      like_status: 1,
-                      updated_at: Date.now() 
-                    
-                    }
-                  });
-          }
-          else{
-            
-          var result = feed.update({
-                      like_id: checkForAlreadyExists[0].like_id
-                    },
-                    {
-                      $set:
-                      {
-                      like_status: 0,
-                      updated_at: Date.now() 
-                    
-                    }
-                  });
-        }
-
-
-      var fetch_post_creator_for_feed = feed.find({
-                                              post_id: post_id
-                                  }).fetch();
-
-if(liked_by != fetch_post_creator_for_feed[0].post_by){
-var notification_id = 'notification_id_'+Math.floor((Math.random() * 2465789) + 1);
-
-                   var result2 = notification_details.insert({
-
-                      notification_id: notification_id,
-                      notification_by: liked_by,
-                      notification_to: fetch_post_creator_for_feed[0].post_by,
-                      post_id: post_id,
-                      like_id: like_id,
-
-                      notification_status: 0,
-                      notification_type: "feed_like",
-                      created_at: Date.now()
-      });
-}
-
-        }else{
-          var like_id = 'like_id_'+Math.floor((Math.random() * 2465789) + 1);
-
-                    var result = feed.insert({
-                      like_id: like_id,
-                      parent_id: post_id,
-                      parent_post_type: 'post',
-                      post_type: 'like',
-                      like_status: 1,
-                      liked_by: liked_by,
-                      created_at: Date.now() 
-                    });
-
-      var fetch_post_creator_for_feed = feed.find({
-                                              post_id: post_id
-                                  }).fetch();
-
-if(liked_by != fetch_post_creator_for_feed[0].post_by){
-var notification_id = 'notification_id_'+Math.floor((Math.random() * 2465789) + 1);
-
-                   var result2 = notification_details.insert({
-
-                      notification_id: notification_id,
-                      notification_by: liked_by,
-                      notification_to: fetch_post_creator_for_feed[0].post_by,
-                      post_id: post_id,
-                      like_id: like_id,
-
-                      notification_status: 0,
-                      notification_type: "feed_like",
-                      created_at: Date.now()
-      });
-}
-
-        }
-},
-
-      update_hub_like_comment_lvl_0: function(comment_id,liked_by){
-      var checkForAlreadyExists = feed.find({
-                                              parent_id: comment_id,
-                                              parent_post_type: 'comment_lvl_0',
-                                              liked_by: liked_by,
-                                              post_type: 'like',
-
-                                  }).fetch();
-          console.log('checkForAlreadyExists: ');
-          console.log(checkForAlreadyExists);
-
-          if(checkForAlreadyExists[0]){
-          if(checkForAlreadyExists[0].like_status == 0){
-                      var result = feed.update({
-                      like_id: checkForAlreadyExists[0].like_id
-                    },
-                    {
-                      $set:
-                      {
-                      like_status: 1,
-                      updated_at: Date.now() 
-                    
-                    }
-                  });
-          }
-          else{
-          var result = feed.update({
-                      like_id: checkForAlreadyExists[0].like_id
-                    },
-                    {
-                      $set:
-                      {
-                      like_status: 0,
-                      updated_at: Date.now() 
-                    
-                    }
-                  });
-        }
-        }else{
-          var like_id = 'like_id_'+Math.floor((Math.random() * 2465789) + 1);
-
-                    var result = feed.insert({
-                      like_id: like_id,
-                      parent_id: comment_id,
-                      parent_post_type: 'comment_lvl_0',
-                      post_type: 'like',
-                      like_status: 1,
-                      liked_by: liked_by,
-                      created_at: Date.now() 
-                    });
-        }
-},
-
-
-      async fetch_url_information(url){
-       const data = await urlMetadata(url).then(
-          function (metadata) { // success handler
-       console.log(metadata);
-       return metadata;
-        },
-        function (error) { // failure handler
-          console.log(error)
-         return error;
-        }).then(
-        function(success){
-         return success;
-        },function(error){
-          console.log("log");
-        })
-        return data;
-      },
 
 //***************** promotion ( For admin ) Starting **************************//
                           
@@ -1834,41 +1443,7 @@ console.log("case 2");
         var result = promotion.find({ promotion_id: promotion_id }).fetch()
         return result;
     },
-                        
-       submit_lvl_0_comment: function(logged_in_user,post_id,comment_text )
-      { 
-        var comment_id = 'comment_id_'+Math.floor((Math.random() * 2465789) + 1);
-        
-                    var result = feed.insert({                
-                      comment_id: comment_id,
-                      comment_text: comment_text,
-                      parent_id: post_id,
-                      parent_post_type: 'Image',
-                      post_type: 'comment_lvl_0',
-                      comment_status: 1,
-                      comment_by: logged_in_user,
-                      created_at: Date.now() 
-      });
-            return result;
-    },
-                       
-       submit_lvl_1_comment: function(logged_in_user,parent_id,comment_text )
-      { 
-
-        var comment_id = 'comment_id_'+Math.floor((Math.random() * 2465789) + 1);
-       
-                    var result = feed.insert({
-                      comment_id: comment_id,
-                      comment_text: comment_text,
-                      parent_id: parent_id,
-                      parent_post_type: 'Image',
-                      post_type: 'comment_lvl_1',
-                      comment_status: 1,
-                      comment_by: logged_in_user,
-                      created_at: Date.now()
-      });
-            return result;
-    },         
+                         
 
 //****************** promotion ( For admin ) Ending **************************//
 
@@ -2254,266 +1829,6 @@ else if(field_name == 'socail_media_handle_shared'){
           return result;
       },
 
-    update_campaigning_status:function(logged_in_user, approval_status,campaign_id){
-
-      console.log(logged_in_user+' & '+ approval_status+' & '+campaign_id);
-          var check_status =  campaign_details.find({campaign_id: campaign_id}).fetch();
-          if(check_status[0]){
-
-      var campaign_end_date = moment(check_status[0].campaign_start_date).add(check_status[0].select_package, 'day');
-            campaign_end_date = moment(campaign_end_date).valueOf();
-          if(approval_status == 1){
-
-      var fetch_book_details = book_details.find({
-                        book_name: check_status[0].book_name,
-                      }).fetch();
-
-                   var result =  campaign_details.update({
-                                campaign_id: check_status[0].campaign_id,
-                              }, {
-                                $set: {
-                                  "book_id": fetch_book_details[0].book_id,
-                                  "approval_status": approval_status,
-                                  "status_changed_by": logged_in_user,
-
-                                  "campaign_end_date": campaign_end_date,
-                                  "campaign_start_date": Date.now()
-                                } 
-                              }); 
-
-                   var result3 =  book_details.update({
-                                book_id: fetch_book_details[0].book_id,
-                              }, {
-                                $set: {
-                                  campaign_id: check_status[0].campaign_id,
-                                  updated_at: Date.now()
-                                }
-                              }); 
-
-
-          var notification_text = 'Your campaign of book: "'+check_status[0].book_name +'" was accepted and got started';
-               var notification_id = 'notification_id_'+Math.floor((Math.random() * 2465789) + 1);
-                   
-                   var result2 = notification_details.insert({
-
-                      notification_id: notification_id,
-
-                      notification_by: logged_in_user,
-                      notification_to: check_status[0].campaigner_id,
-                      campaign_id: check_status[0].campaign_id,
-                      notification_status: 0,
-                      notification_type: "campaign_accepted",
-                      created_at: Date.now()
-      });
-            return result;
-          }
-          else if(approval_status == 2){
-
-                         var result =  campaign_details.update({
-                                campaign_id: check_status[0].campaign_id,
-                              }, {
-                                $set: {
-                                  "approval_status": approval_status,
-                                  "status_changed_by": logged_in_user,
-
-                                  "campaign_end_date": campaign_end_date,
-                                  "campaign_start_date": Date.now()
-                                }
-                              }); 
-
-                      var notification_text = 'Your campaign of book: "'+check_status[0].book_name +'" is rejected';
-               var notification_id = 'notification_id_'+Math.floor((Math.random() * 2465789) + 1);
-                   
-                   var result2 = notification_details.insert({
-
-                      notification_id: notification_id,
-
-                      notification_by: logged_in_user,
-                      notification_to: check_status[0].campaigner_id,
-                      campaign_id: check_status[0].campaign_id,
-                      notification_status: 0,
-                      notification_type: "campaign_rejected",
-                      created_at: Date.now()
-      });
-             return result;
-          }
-          else if(approval_status == 3){
-                         var result =  campaign_details.update({
-                                campaign_id: check_status[0].campaign_id,
-                              }, {
-                                $set: {
-                                  "approval_status": approval_status,
-                                  "review_stopped_by": logged_in_user,
-
-                                  "updated_at": Date.now()
-                                }
-                              }); 
-
-  var notification_text = 'admin has stopped review submition for campaign of book: "'+check_status[0].book_name+'"';
-  var notification_id = 'notification_id_'+Math.floor((Math.random() * 2465789) + 1);
-                   
-                   var result2 = notification_details.insert({
-
-                      notification_id: notification_id,
-
-                      notification_by: logged_in_user,
-                      notification_to: check_status[0].campaigner_id,
-                      campaign_id: check_status[0].campaign_id,
-                      notification_type: "campaign_review_stopped",
-                      notification_status: 0,
-                      created_at: Date.now()
-      });
-             return result;
-          }
-
-        }
-
-      },
-
-   save_campaign_details_for_admin:function(select_package,book_name,book_summary,author_name,
-        author_description,amazon_link,delivery_option,additional_information,book_price,
-        book_catagries,book_cover,final_payment,logged_in_user){
-
-      var campaign_start_date = Date.now();
-      var campaign_end_date = moment(campaign_start_date).add(select_package, 'day');
-      campaign_end_date = moment(campaign_end_date).valueOf();
-
-
-console.log(select_package+book_name+book_summary+author_name+author_description+amazon_link+delivery_option+additional_information+book_price+book_catagries+final_payment);
-   var campaign_id = 'campaign_id_'+Math.floor((Math.random() * 2465789) + 1);
-
-                   var result = campaign_details.insert({
-
-                      campaign_id: campaign_id,
-                      campaigner_id: logged_in_user,
-                      select_package: select_package,
-                      book_name: book_name,
-                      book_summary: book_summary,
-
-                      author_name: author_name,
-                      author_description: author_description,
-                      amazon_link: amazon_link,
-
-                      delivery_option: delivery_option,
-                      additional_information: additional_information,
-                      book_price: book_price,
-                      book_cover: book_cover,
-                      final_payment: final_payment,
-                      book_catagries: book_catagries,
-                      approval_status: 1,
-                      payment_status: 1,
-
-                      status_changed_by: logged_in_user,
-
-                      campaign_end_date: campaign_end_date,
-                      campaign_start_date: campaign_start_date,
-
-                      created_at: campaign_start_date,
-      });
-                   return result;
-},
-
-    save_campaign_details:function(select_package,book_name,book_summary,author_name,
-        author_description,amazon_link,delivery_option,additional_information,book_price,
-        book_catagries,book_cover,final_payment,logged_in_user){ 
-
-console.log(select_package+book_name+book_summary+author_name+author_description+amazon_link+delivery_option+additional_information+book_price+book_catagries+final_payment);
-   var campaign_id = 'campaign_id_'+Math.floor((Math.random() * 2465789) + 1);
-
-                   var result = campaign_details.insert({
-
-                      campaign_id: campaign_id,
-                      campaigner_id: logged_in_user,
-                      select_package: select_package,
-                      book_name: book_name,
-                      book_summary: book_summary,
-
-                      author_name: author_name,
-                      author_description: author_description,
-                      amazon_link: amazon_link,
-
-                      delivery_option: delivery_option,
-                      additional_information: additional_information,
-                      book_price: book_price, 
-                      book_cover: book_cover,
-
-                      final_payment: final_payment,
-                      payment_status: 0,
-                      book_catagries: book_catagries,
-                      approval_status: 0,
-                      created_at: Date.now()
-      });
-
-    var notification_text = 'Recived a request on campaign of book : "'+check_for_campaign_id+'"';
-               var notification_id = 'notification_id_'+Math.floor((Math.random() * 2465789) + 1);
-                   
-                   var result2 = notification_details.insert({
-
-                      notification_id: notification_id,
-                      notification_text: notification_text,
-
-                      notification_by: logged_in_user,
-                      notification_to: 'writersmelon',
-                      campaign_id: campaign_id,
-                      review_id: review_id,
-                      notification_status: 0,
-                      notification_type: "campaign_request",
-                      created_at: Date.now()
-      });
-
-                   return campaign_id;
-},
-
-   payment_campaign_status_with_payment_details:function(payment_id,payment_status,payment_request_id,campaign_id){
-
-      console.log(payment_id+ ' & '+payment_status+ ' & '+payment_request_id+ ' & '+campaign_id);
-      
-          var check_status =  campaign_details.find({campaign_id: campaign_id}).fetch();
-          if(check_status[0]){
-          if(check_status[0].payment_status == 0){
-
-                   var result =  campaign_details.update({
-                                campaign_id: check_status[0].campaign_id,
-                              }, {
-                                $set: {
-                                  "payment_id": payment_id,
-                                  "payment_status": payment_status,
-                                  "payment_request_id": payment_request_id,
-                                  "payment_status": 1,
-
-                                  "updated_at": Date.now()
-                                } 
-                              }); 
-                   return result;
-                }
-                }
-      },
-
-
-async make_campaign_payment(final_payment,phone,logged_in_user){
-
-  console.log(final_payment+ ' & ' +phone+ ' & ' +logged_in_user);
-  var result = user_details.find({ user_id: logged_in_user }).fetch();
-
-  if(result[0]){
-   var user_name = result[0].user_name;
-   var user_email = result[0].user_email;
-  }
-
-  var purpose = 'Campaign Payment';
-  var amount = final_payment;
-  var buyer_name = user_name;
-
-  var send_sms;
-  var email = user_email;
-  
-  console.log(purpose+ ' & ' +amount+ ' & ' +phone+ ' & ' +buyer_name+ ' & ' +email);
-  var result = await make_payment_for_campaign(purpose,amount,phone,buyer_name,email);
-  console.log('returned results');
-  console.log(result);
-  return result;
-
-},
 
   create_book_details_from_campaign(book_id, book_name, book_summary, book_catagries, author_name,
    author_description,amazon_link, book_cover, final_release_date,book_price,campaign_id,editors_pick_status){
@@ -2558,277 +1873,6 @@ async make_campaign_payment(final_payment,phone,logged_in_user){
       return result;
   },
 
-
-  send_review_request(logged_in_user,book_id,campaign_id,user_location){
-    console.log(logged_in_user+' & '+book_id+ ' & '+campaign_id+ ' & '+user_location);
-
-   var check_for_campaign_id = campaign_details.find({book_id: book_id}).fetch();
-   if(check_for_campaign_id[0]){
-
-   var review_id = 'review_id_'+Math.floor((Math.random() * 2465789) + 1);
-   var result = review_details.insert({
-      "review_id": review_id,
-      "content_type": "review_request",
-      "parent_id": campaign_id,
-      "approval_status": 0,
-      "user_location": user_location,
-      "review_request_by": logged_in_user,
-      "created_at": Date.now(),
-    });
-
-             var notification_text = 'Recived a request on campaign of book : "'+check_for_campaign_id+'"';
-               var notification_id = 'notification_id_'+Math.floor((Math.random() * 2465789) + 1);
-                   
-                   var result2 = notification_details.insert({
-
-                      notification_id: notification_id,
-                      notification_text: notification_text,
-
-                      notification_by: logged_in_user,
-                      notification_to: 'writersmelon',
-                      campaign_id: campaign_id,
-                      review_id: review_id,
-                      book_id: book_id,
-                       notification_status: 0,
-                      notification_type: "review_request_submitted",
-                      created_at: Date.now()
-      });
-      return result;
-   }
-  },
-
-   update_review_request_status(logged_in_user, approval_status,review_id){
-   console.log(logged_in_user+' & '+approval_status+ ' & '+review_id);
-
-          var check_status =  review_details.find({review_id: review_id}).fetch();
-
-if(approval_status == 1){
-
-          var result =  review_details.update({
-              _id: check_status[0]._id,
-            }, {
-              $set: {
-                      "approval_status": 1,
-                      "review_approved_by": logged_in_user,
-                      "update_at": Date.now(),
-                    }
-            });
-
-             var notification_text = "Congrats! Your request for book review got approved";
-               var notification_id = 'notification_id_'+Math.floor((Math.random() * 2465789) + 1);
-                   
-                   var result2 = notification_details.insert({
-
-                      notification_id: notification_id,
-                      notification_text: notification_text,
-
-                      notification_by: logged_in_user,
-                      notification_to: check_status[0].review_request_by,
-                      campaign_id: check_status[0].parent_id,
-                      review_id: review_id,
-                      notification_status: 0,
-                      notification_type: "review_request_accepted",
-                      created_at: Date.now()
-      });
-
-          var check_delivery_option =  campaign_details.find({ campaign_id: check_status[0].parent_id }).fetch();
-          if(check_status[0]){
-              if(check_delivery_option[0].delivery_option == 1){
-                console.log("delivery_option");
-                console.log(check_delivery_option[0].delivery_option );
-
-                var user_id = check_status[0].review_request_by;
-                var book_name = check_delivery_option[0].book_name;
-
-                 send_email_to_reviewer_about_book_delivery_option_1(user_id,book_name);
-              }
-              else if(check_delivery_option[0].delivery_option == 2){
-                console.log("delivery_option");
-                console.log(check_delivery_option[0].delivery_option );
-
-                var user_id = check_status[0].review_request_by;
-                var book_name = check_delivery_option[0].book_name;
-                
-                 send_email_to_reviewer_about_book_delivery_option_2(user_id,book_name);
-              }
-          }
-      return result;
-}
-
-else if(approval_status == 2){
-          var result =  review_details.update({
-              _id: check_status[0]._id,
-            }, {
-              $set: {
-                      "approval_status": 2,
-                      "review_approved_by": logged_in_user,
-                      "update_at": Date.now(),
-                    }
-            });
-
-             var notification_text = "Your request for campaign reviewing got rejected!";
-               var notification_id = 'notification_id_'+Math.floor((Math.random() * 2465789) + 1);
-                   
-                   var result2 = notification_details.insert({
-
-                      notification_id: notification_id,
-                      notification_text: notification_text,
-
-                      notification_by: logged_in_user,
-                      notification_to: check_status[0].review_request_by,
-                      campaign_id: check_status[0].parent_id,
-                      review_id: review_id,
-                      notification_status: 0,
-                      notification_type: "review_request_rejected",
-                      created_at: Date.now()
-      });
-      return result;
-}
-  },
-
-update_review_submition_status(logged_in_user, approval_status,review_id){
-
-   console.log(logged_in_user+' & '+approval_status+ ' & '+review_id);
-   var check_status =  review_details.find({review_id: review_id}).fetch();
-
-if(approval_status == 1){
-            var result =  review_details.update({
-              _id: check_status[0]._id,
-            }, {
-              $set: {
-                      "approval_status": 1,
-                      "review_approved_by": logged_in_user,
-                      "update_at": Date.now(),
-                    }
-            });
-
-             var notification_id = 'notification_id_'+Math.floor((Math.random() * 2465789) + 1);
-                   
-                   var result2 = notification_details.insert({
-
-                      notification_id: notification_id,
-
-                      notification_by: logged_in_user,
-                      notification_to: check_status[0].review_request_by,
-                      campaign_id: check_status[0].parent_id,
-                      review_id: review_id,
-
-                       notification_status: 0,
-                      notification_type: "review_status_approved",
-                      created_at: Date.now()
-      });
-
-}else if(approval_status == 2){
-
-            var result =  review_details.update({
-              _id: check_status[0]._id,
-            }, {
-              $set: {
-                      "approval_status": 2,
-                      "review_approved_by": logged_in_user,
-                      "update_at": Date.now(),
-                    }
-            });
-
-             var notification_id = 'notification_id_'+Math.floor((Math.random() * 2465789) + 1);
-                   
-                   var result2 = notification_details.insert({
-
-                      notification_id: notification_id,
-
-                      notification_by: logged_in_user,
-                      notification_to: check_status[0].review_request_by,
-                      campaign_id: check_status[0].parent_id,
-                      review_id: review_id,
-
-                      notification_status: 0,
-                      notification_type: "review_status_rejected",
-                      created_at: Date.now()
-      });
-
-}
-
-
-  },
-
- submit_review(logged_in_user, review_text,good_reads_link,personal_blog_link,amazon_link,additional_text,campaign_id){
-   console.log(logged_in_user+' & '+review_text+ ' & '+good_reads_link+ ' & '+personal_blog_link +' & '+amazon_link +' & '+campaign_id);
-
-            var check_status4 =  review_details.find({"content_type": "review_request","parent_id": campaign_id,"approval_status": 1}).fetch();
-
-if(check_status4[0]){
-
-          var result =  review_details.update({
-              _id: check_status4[0]._id,
-            }, {
-              $set: {
-                      "approval_status": 3,
-                      "review_approved_by": logged_in_user,
-                      "update_at": Date.now(),
-                    }
-            });
-}
-
-   var review_id = 'review_id_'+Math.floor((Math.random() * 2465789) + 1);
-
-   var result = review_details.insert({
-      "review_id": review_id,
-      "content_type": "submit_review",
-      "parent_id": campaign_id,
-      "review_text": review_text,
-      "approval_status": 0,
-
-      "good_reads_link": good_reads_link,
-      "personal_blog_link": personal_blog_link,
-      "amazon_link": amazon_link,
-      "additional_text": additional_text,
-
-      "review_request_by": logged_in_user,
-      "created_at": Date.now(),
-    });
-
-             var notification_text = "Someone submitted review on campaign "+campaign_id;
-               var notification_id = 'notification_id_'+Math.floor((Math.random() * 2465789) + 1);
-                   
-                   var result2 = notification_details.insert({
-
-                      notification_id: notification_id,
-                      notification_text: notification_text,
-
-                      notification_by: logged_in_user,
-                      notification_to: 'writersmelon',
-                      campaign_id: campaign_id,
-                      review_id: review_id,
-
-                       notification_status: 0,
-                      notification_type: "submit_review",
-                      created_at: Date.now()
-      });
-
-
-    var new_result = content.find({
-      "content_type": "reward_points"
-    }).fetch();
-
-    var reward_value = new_result[0].review_submition;
-    var reward_id = 'reward_id_'+Math.floor((Math.random() * 2465789) + 1);
-
-    var latest_result = reward_details.insert({
-    
-          reward_id: reward_id,
-          reward_value: reward_value,
-          parent_id: review_id,
-          entry_type: 'reward_point',
-          reward_to: logged_in_user,
-          reward_trigger_type: "review_submition",
-
-          reward_redeem_status: 0,
-          created_at: Date.now(),
-
-      });
-
-      return result;
-  },
 
     change_reward_request_status(request_id,status){ 
   

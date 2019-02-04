@@ -227,6 +227,27 @@
               <span class="notification-date"><time class="entry-date updated" datetime="2004-07-24T18:18">{{calculate_time_difference_ago created_at}}</time></span>
             </div>
           </li>
+
+{{else if equals notification_type "campaign_completion_report"}}
+
+          <li>
+
+         {{#each fetch_user_info_for_request}}   
+            <div class="author-thumb view_profile">
+              <img src="{{user_profile_pic}}" alt="author" class="" >
+            </div>
+            <div class="notification-event">
+               <a href="javascript:void(0)" class="h6 notification-friend view_profile">{{user_name}}</a>, your campaign for 
+                  {{#each fetch_bookname_with_campaign ../campaign_id}}
+                     <a href="javascript:void(0)" class="h6 notification-friend go_to_book_detail">{{book_name}}</a>
+                  {{/each}}
+               is finished.
+              <span class="notification-date"><time class="entry-date updated" datetime="2004-07-24T18:18">{{calculate_time_difference_ago ../created_at}}</time></span>
+            </div>
+
+            {{/each}}
+
+          </li>
 {{/if}}
 
 {{else}}

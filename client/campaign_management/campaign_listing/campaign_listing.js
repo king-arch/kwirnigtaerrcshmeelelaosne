@@ -44,7 +44,7 @@ Template.campaign_listing_detail.onRendered(function () {
     show_user_campaign_listing(){
       var logged_in_user = Session.get("userId");
       Meteor.subscribe("campaign_details_all_list");
-      var result = campaign_details.find({campaigner_id: logged_in_user}).fetch();
+      var result = campaign_details.find({campaigner_id: logged_in_user, entry_type: {$ne: "campaign_completion_report"} }).fetch();
       return result;
     },
 
@@ -60,6 +60,9 @@ Template.campaign_listing_detail.onRendered(function () {
         }
         else if(this.approval_status == 3){
           return 'Accepted';
+        }
+        else if(this.approval_status == 4){
+          return 'Finished';
         }
     },
 
@@ -138,7 +141,15 @@ Template.campaign_listing_detail.events({
       var url = '/reviewer_details/'+campaign_id;
             console.log(url);
             window.location.href = url;
-          },
+    },
+
+    "click .view_completion_report":function(){
+
+      var campaign_id = Base64.encode(this.campaign_id);  
+      var url = '/campaign_completion_report/'+campaign_id;
+            console.log(url);
+            window.location.href = url;
+    },
 
     "click .go_to_book_detail":function(){ 
       var book_id = Base64.encode(this.book_id);  

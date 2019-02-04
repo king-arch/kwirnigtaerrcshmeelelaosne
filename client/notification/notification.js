@@ -102,8 +102,8 @@ $(document).ready(function() {
       return result;
     },
 
-        fetch_bookname_with_campaign(){ 
-             var campaign_id = this.campaign_id;  
+        fetch_bookname_with_campaign(campaign_id){ 
+             // var campaign_id = this.campaign_id;  
              Meteor.subscribe("campaign_details_with_id",campaign_id);
 
              var result = campaign_details.find({ campaign_id: campaign_id }).fetch();

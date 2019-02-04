@@ -77,8 +77,13 @@ Template.index_content.helpers({
 Template.index_content.events({
 
 'click #clicked_on_gmail': function(){
-  // swal("lets click");
+  swal("lets click 1");
     $("#google_login").click();
+},
+
+'click #google_login': function(){
+  swal("lets click 2");
+   
 },
 
 'click #forgot_password': function(){

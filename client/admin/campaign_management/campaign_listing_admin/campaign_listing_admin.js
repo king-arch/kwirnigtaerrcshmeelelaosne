@@ -15,9 +15,11 @@ import { campaign_details } from './../../../../import/collections/insert.js';
 import { Base64 } from 'meteor/ostrio:base64';
 
 var book_listing;
+var gerneral_count;
 
 Template.show_campaign_listing_admin.onDestroyed(function () {
   book_listing.stop();
+  gerneral_count.stop();
 });
 
 Template.show_campaign_listing_admin.onCreated(function eventlistOnCreated(){
@@ -32,6 +34,7 @@ Template.show_campaign_listing_admin.onRendered(function () {
                     }, 2000);
     });  
        book_listing = Meteor.subscribe("campaign_details_all_list");
+       gerneral_count = Meteor.subscribe("get_campaign_count");
 
     $(".show_packages").addClass("loader_visiblity_block");
       setTimeout(function () {
@@ -54,6 +57,9 @@ Template.show_campaign_listing_admin.onRendered(function () {
         else if(this.approval_status == 3){
           return 'Accepted';
         }
+        else if(this.approval_status == 4){
+          return 'Finished';
+        }
     },
 
     check_approval_status_for_time_dislay(){
@@ -72,7 +78,7 @@ Template.show_campaign_listing_admin.onRendered(function () {
     },
 
     show_campaign_listing(){
-      var result = campaign_details.find({},{sort: {created_at: -1} }).fetch();
+      var result = campaign_details.find({ entry_type: {$ne: "campaign_completion_report"} },{sort: {created_at: -1} }).fetch();
       return result;
     },
 
@@ -86,15 +92,13 @@ Template.show_campaign_listing_admin.onRendered(function () {
     },
 
     select_package(){
-      var new_date = moment(this.campaign_start_date).add(this.select_package, 'day');
-      
-      var new_year  = moment(new_date).format('YYYY');
-      var new_month  = moment(new_date).format('MMM');
-      var new_day  = moment(new_date).format('DD');
 
-      // console.log("new_day: "+ new_day+" new_year: "+ new_year);
-      var end_date = new_month + ' '+new_day+' , '+new_year;
-      return end_date;
+      var new_year  = moment(this.campaign_end_date).format('YYYY');
+      var new_month  = moment(this.campaign_end_date).format('MMM');
+      var new_day  = moment(this.campaign_end_date).format('DD');
+      // console.log("new_year: "+ new_year +" new_month: "+ new_month + " new_day: "+ new_day );
+      var new_date = new_month + ' '+new_day+' , '+new_year;
+      return new_date;
     },
 
       book_summary_trimmed(){
@@ -106,7 +110,6 @@ Template.show_campaign_listing_admin.onRendered(function () {
           return book_summary;
         }
       },
-
 });
 
 

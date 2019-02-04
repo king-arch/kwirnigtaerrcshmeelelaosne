@@ -70,7 +70,7 @@ Template.right_panel.helpers({
 
       show_campaign_listing(){
 
-      Meteor.subscribe("campaign_details_all_list");
+      Meteor.subscribe("campaign_details_all_active");
       var result = campaign_details.find({approval_status: 1,campaign_end_date: {$gte: Date.now()} },{sort: {created_at: -1}}).fetch();
       return result;
     },
@@ -81,16 +81,13 @@ Template.right_panel.helpers({
       var logged_in_user = Session.get("userId");
       var admin_id = "user_admin";
 
-      follow_list_all = Meteor.subscribe("follow_list_all");
-      follow_list_all = Meteor.subscribe("fetch_user_listing");
-          Meteor.subscribe("fetch_user_listing");
-       var result = user_details.find({ user_id: {  $ne: logged_in_user  }}).fetch();
+      Meteor.subscribe("people_you_may_follow_listing",follow_user_id,logged_in_user);
+        Meteor.subscribe("fetch_user_listing");
 
+      var result = user_details.find({ user_id: {  $ne: logged_in_user  }}).fetch();
       var new_result = new Array();
       var count = 1;
       for(var i = 0; i < result.length; i++){
-        // console.log(result[i]);
-
           if(count <= 5 && result[i].user_id != admin_id){
             var result2 = following_list.find({ $and: [{ "following": result[i].user_id },{ "follower": logged_in_user },{current_follow_status: 1} ] }).fetch();
              if(result2[0]){
@@ -101,11 +98,6 @@ Template.right_panel.helpers({
              }    
           }
         }
-
-      // console.log('new array');
-      // console.log(new_result);
-                                
-
       return new_result;
     },
 
@@ -123,24 +115,21 @@ Template.right_panel.helpers({
 
       var follow_user_id = this.user_id;
       var logged_in_user = Session.get("userId");
-      follow_list_all = Meteor.subscribe("follow_list_all");
+      Meteor.subscribe("get_follow_status_with_ids",user_id,logged_in_user);
+     
       var result = following_list.find({ $and: [{ "following": follow_user_id },{ "follower": logged_in_user },{current_follow_status: 1} ] }).fetch();    
-      // console.log('showing user list all with check');
-      // console.log(result);
       if(result[0]){
-        // console.log('case 1');
         return false;
       }else{
-        // console.log('case 2');
         return true;
       }
     },
 
       display_books(){
          var liked_by = Session.get("userId");
-
-         Meteor.subscribe("fetch_book_listing");
-         var result = book_details.find({},{limit: 5,sort: {created_at: -1}}).fetch();
+         var limit = 5;
+         Meteor.subscribe("fetch_book_listing_with_limit",limit);
+         var result = book_details.find({},{limit: limit,sort: {created_at: -1}}).fetch();
     return result;
   },
 
