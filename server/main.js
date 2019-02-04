@@ -231,8 +231,15 @@ Meteor.startup(() => {
     schedule: function(parser) {
       // parser is a later.parse object
 
-      // return parser.text('every 1 hours');
-      return parser.text('every 20 seconds');
+      return parser.text('every  hours');
+      // return parser.text('every 20 seconds');
+
+        // fires at 10:15am every day
+  // var cron1 = later.parse.cron('15 10 ? * *');
+
+  // fires every 5 minutes starting at 2pm and ending at 2:55pm, every day
+  // var cron2 = later.parse.cron('0 0/5 14 * * ?', true);
+
     }, 
     job: function(intendedAt) {
       // console.log('crunching numbers');
