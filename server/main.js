@@ -22,7 +22,7 @@ import { book_collections } from './../import/collections/insert.js';
 import { reward_details } from './../import/collections/insert.js';
 
 import { Base64 } from 'meteor/ostrio:base64';
-// import urlMetadata from 'url-metadata';
+import urlMetadata from 'url-metadata';
 
      Meteor.publish('fetch_admin_details', function() {
       return user_details.find({user_id: "user_admin"});
