@@ -15,7 +15,7 @@ import { book_details } from './../import/collections/insert.js';
 
 import { Meteor } from 'meteor/meteor';
 import { Base64 } from 'meteor/ostrio:base64';
-import urlMetadata from 'url-metadata';
+// import urlMetadata from 'url-metadata';
 
 
      Meteor.publish('campaign_details_all_list', function() {

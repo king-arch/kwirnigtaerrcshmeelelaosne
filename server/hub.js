@@ -8,7 +8,7 @@ import { notification_details } from './../import/collections/insert.js';
 import { UserInfo } from './../import/collections/insert.js';
 
 import { Base64 } from 'meteor/ostrio:base64';
-import urlMetadata from 'url-metadata';
+// import urlMetadata from 'url-metadata';
 
      Meteor.publish('fetch_feed_content', function() {
       return  feed.find({});
