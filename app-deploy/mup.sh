@@ -1,0 +1,2 @@
+
+ mup setup && mup deploy
