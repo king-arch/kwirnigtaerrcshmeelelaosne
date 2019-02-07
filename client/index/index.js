@@ -35,9 +35,13 @@ Template.index_content.helpers({
       Meteor.subscribe("fetch_book_listing");
       var result = book_details.find({},{ limit: 4 }).fetch();
 
-    // console.log('show result: ');
-    // console.log(result);
-    return result;
+      var new_array = new Array();
+       for( var i=0; i<result.length;i++){
+          new_array.push({"index": i ,"book_cover": result[i].book_cover,"book_name": result[i].book_name});
+       }
+    console.log('show result: ');
+    console.log(new_array);
+    return new_array;
 
 },
 
