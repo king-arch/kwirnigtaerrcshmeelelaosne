@@ -101,7 +101,7 @@ ul {
 
 .header-spacer {
     display: block;
-    height: 80px
+    height: 70px
 }
 
 .header-spacer-small {
@@ -1179,7 +1179,7 @@ blockquote p:before {
 
 .landing-page {
     position: relative;
-    min-height: 100vh
+   /* min-height: 100vh*/
 }
 
 .landing-page .content-bg-wrap {
@@ -1199,6 +1199,18 @@ blockquote p:before {
     background-color: rgba(255, 255, 255, 0.95);
     opacity: 1;
     z-index: auto
+}
+
+.content-bg-wrap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  box-sizing: border-box;
 }
 
 @-webkit-keyframes sidedownscroll {
@@ -2335,7 +2347,7 @@ section {
 }
 
 .stunning-header {
-    padding-bottom: 120px;
+    padding-bottom: 20px;
     position: relative;
     color: #fff
 }
@@ -4245,12 +4257,7 @@ input {
     padding-right: 60px
 }
 
-.label-floating .form-control,
-.label-floating input,
-.label-floating select {
-       padding: 13px 0 8px 0px !important;
-  line-height: 8px;
-}
+
 
 .label-floating textarea.form-control {
     padding: 1.5rem 1.1rem .2rem
@@ -13036,7 +13043,7 @@ p {
 
 @media (max-width:800px) {
     .medium-padding80 {
-        padding: 35px 0
+        padding: 95px 0
     }
 }
 
@@ -20185,9 +20192,6 @@ a{
 .mbm {
   margin-bottom: 0px !important;
 }
-.btm_height_home_page{
-    height: 180px !important;
-}
 
 ._4-u2 {
   background: #fff;
@@ -20401,11 +20405,11 @@ div._2ix0 {
 #profile-grid .panel-thumbnail { overflow: hidden; }
 #profile-grid .img-rounded { border-radius: 4px 4px 0 0;}
 
-.carousel-control-next-icon, .carousel-control-prev-icon{
+/*.carousel-control-next-icon, .carousel-control-prev-icon{
     background-color: #000!important;
     padding:10px !important;
 }
-
+*/
 
 @media (max-width: 360px){
     .day-wethear-item {
@@ -20414,3 +20418,7 @@ div._2ix0 {
 }
 }
 
+
+#Mongol{
+    display: none !important;
+}
