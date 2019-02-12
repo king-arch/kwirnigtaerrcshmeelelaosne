@@ -1,4 +1,3 @@
-
 {
   "name": "writersmelon",
   "private": true,
@@ -10,22 +9,25 @@
   },
   "dependencies": {
     "@babel/runtime": "7.0.0-beta.55",
+    "async": "^2.6.1",
+    "aws-sdk": "^2.398.0",
     "desandro-matches-selector": "^2.0.2",
-
+    "ev-emitter": "^1.1.1",
+    "express": "^4.16.4",
+    "express-fileupload": "^1.1.1-alpha.1",
     "fizzy-ui-utils": "^2.0.7",
     "get-size": "^2.0.3",
     "isotope": "^1.0.0-alpha.3",
     "jquery": "^3.3.1",
     "masonry-layout": "^4.2.2",
-
     "meteor-node-stubs": "^0.4.1",
     "microplugin": "0.0.3",
     "moment": "^2.22.2",
     "npm": "^6.4.1",
-    
     "outlayer": "^2.1.1",
     "sifter": "^0.5.3",
-    "sweetalert": "^2.1.0"
+    "sweetalert": "^2.1.0",
+    "url-metadata": "^2.1.7"
   },
   "meteor": {
     "mainModule": {
