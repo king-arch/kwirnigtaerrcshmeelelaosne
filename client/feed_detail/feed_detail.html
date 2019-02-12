@@ -11,7 +11,7 @@
 
 <template name="feed_detail_page">
 
-<div class="container">
+<div class="container margin_top_for__header">
  <div class="row">
  <!-- middle feed ends here -->
     <div class="col col-xl-9 order-xl-2 col-lg-9 order-lg-1 col-sm-12 col-12 ">
@@ -211,7 +211,7 @@
               </a> -->
           {{#if check_for_user_already_liked_on_comment_lvl_0}}    
 
-              <a class="like_event_comment_lvl_0 post-add-icon inline-items">
+              <a class="like_event_comment_lvl_0 post-add-icon inline-items" style="margin-right: 0px !important;" > 
                <img src="/img/heart_gray.png">
               </a>
                                 <span><a data-toggle="modal" data-target="#show_like_count_on_feed_comment_lvl_0_text" class=" get_all_liked_users show_like_count_on_feed_comment_lvl_0_text"><span>{{total_liked_on_comment_lvl_0 comment_id}}
@@ -221,7 +221,7 @@
               
                &nbsp;  &nbsp;
                {{else }}
-                    <a class="like_event_comment_lvl_0 post-add-icon inline-items">
+                    <a class="like_event_comment_lvl_0 post-add-icon inline-items" style="margin-right: 0px !important;" >
                <img src="/img/heart_gray.png">
                </a>  
                                 <span><a data-toggle="modal" data-target="#show_like_count_on_feed_comment_lvl_0_text" class=" get_all_liked_users show_like_count_on_feed_comment_lvl_0_text"><span>{{total_liked_on_comment_lvl_0 comment_id}}
@@ -1517,7 +1517,7 @@
         </div>                  
           {{#if check_for_user_already_liked_on_comment_lvl_1}}    
 
-              <a class="like_event_comment_lvl_0 post-add-icon inline-items">
+              <a class="like_event_comment_lvl_0 post-add-icon inline-items" style="margin-right: 0px !important;" >
                <img src="/img/heart_gray.png">
               </a>
                 <span><a data-toggle="modal" data-target="#show_like_count_on_feed_comment_lvl_1_text" class=" get_all_liked_users show_like_count_on_feed_comment_lvl_1_text"><span>{{total_liked_on_comment_lvl_1 comment_id}}
@@ -1527,7 +1527,7 @@
               
                &nbsp;  &nbsp;
                {{else }}
-                    <a class="like_event_comment_lvl_0 post-add-icon inline-items">
+                    <a class="like_event_comment_lvl_0 post-add-icon inline-items" style="margin-right: 0px !important;" >
                <img src="/img/heart_gray.png">
                </a>  
                                 <span><a data-toggle="modal" data-target="#show_like_count_on_feed_comment_lvl_1_text" class=" get_all_liked_users show_like_count_on_feed_comment_lvl_1_text"><span>{{total_liked_on_comment_lvl_1 comment_id}}
@@ -1649,7 +1649,7 @@
 <!-- middle feed ends here -->
    
 
-    <div class="col col-xl-3 order-xl-3 col-lg-3 order-lg-3 col-md-6 col-sm-12 col-12 visible-lg" style="max-width: 24.8%;">
+    <div class="col col-xl-3 order-xl-3 col-lg-3 order-lg-3 col-md-6 col-sm-12 col-12 not_show_buttons" style="max-width: 24.8%;">
         <div class="ui-block">
          <div class="ui-block-title">
           <h6 class="title">Up for review </h6>

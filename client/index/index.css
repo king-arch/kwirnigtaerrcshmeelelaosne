@@ -1,6 +1,19 @@
 ﻿
 @media only screen and (min-width:320px) and (max-width: 767px)
 {
+  .hedaer_banner_for_detail_page{
+    height: 150px !important;
+  }
+  .line_height_blog_title{
+      top: 18px;
+  font-size: 14px;
+  line-height: 0px !important;
+  left: 0px;
+  }
+
+  .font_size_author_writter{
+    font-size: 15px !important;
+  }
 
   .not_show_buttons{
     display: none;
@@ -22,9 +35,25 @@
 .mrgin_btm_10{
     margin-bottom: 10px !important;
 }
+.btm_height_home_page{
+    height: 150px !important;
+}
+.label-floating .form-control,
+    .label-floating input,
+    .label-floating select {
+        padding: 13px 0 8px 0px !important;
+        line-height: 16px !important;
+    }
 }
 
   @media only screen and (min-width : 800px) {
+     .hedaer_banner_for_detail_page{
+    height: 150px !important;
+  }
+     .font_size_author_writter{
+    font-size: 20px !important;
+  }
+
       .not_show_buttons{
     display: none;
   }
@@ -44,7 +73,7 @@
     .label-floating input,
     .label-floating select {
         padding: 13px 0 8px 0px !important;
-        line-height: 13px;
+        line-height: 13px ;
     }
 
 .btm_height_home_page{
@@ -70,6 +99,13 @@ width: 6% !important;
 
 
 @media only screen and (min-width : 1200px) {
+   .hedaer_banner_for_detail_page{
+    height: 400px !important;
+    overflow: -moz-hidden-unscrollable !important;
+  }
+     .font_size_author_writter{
+    font-size: 14px !important;
+  }
     .not_show_buttons{
     display: block;
   }
@@ -94,11 +130,11 @@ width: 6% !important;
 .label-floating input,
 .label-floating select {
        padding: 13px 0 8px 0px !important;
-  line-height: 8px;
+  line-height: 20px !important;
 }
 
 .btm_height_home_page{
-    height: 180px !important;
+    height: 150px !important;
 }
 .carousel-control-prev-icon{
 
@@ -118,6 +154,12 @@ width: 3% !important;
 
     }
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait) {
+   .hedaer_banner_for_detail_page{
+    height: 150px !important;
+  }
+     .font_size_author_writter{
+    font-size: 20px !important;
+  }
     .not_show_buttons{
     display: none;
   }
@@ -149,6 +191,9 @@ width: 3% !important;
 }
 }
    @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: landscape) {
+       .font_size_author_writter{
+    font-size: 20px !important;
+  }
       .not_show_buttons{
     display: none;
   }
@@ -183,3 +228,5 @@ width: 3% !important;
 #submit_signup{
     margin-bottom: 15px !important;
 }
+
+

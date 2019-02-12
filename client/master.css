@@ -552,8 +552,8 @@ ul {
     left: 0;
     width: 100%;
     height: 100%;
-    box-shadow: inset 0 -120px 55px -30px rgba(0, 0, 0, .5)
-}
+/*    box-shadow: inset 0 -120px 55px -30px rgba(0, 0, 0, .5)
+*/}
 
 .column-tittle:after,
 blockquote p:before {
@@ -3590,7 +3590,7 @@ img {
     .responsive-flex1200 .ui-block-title {
         display: -webkit-box;
         display: -ms-flexbox;
-        display: flex;
+        display: inline-table;
         -webkit-box-orient: vertical;
         -webkit-box-direction: normal;
         -ms-flex-direction: column;
@@ -4262,6 +4262,8 @@ input {
 
 .label-floating textarea.form-control {
     padding: 1em !important;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
 }
 
 .label-floating.with-icon .form-control,
@@ -7013,7 +7015,7 @@ fieldset[disabled] .checkbox input[type=checkbox] {
 
 @media (max-width:360px) {
     .notification-list .notification-event {
-        max-width: 60%
+        max-width: 100%
     }
     .chat-message-field .notification-date {
         float: none;
@@ -8401,7 +8403,7 @@ ol ol li {
 
 .community .post-thumb img {
     width: 100%;
-    height: 200px;
+   /* height: 200px;*/
 }
 
 .post__author {
@@ -8596,7 +8598,7 @@ p {
         top: -13px
     }
     .post__author .more {
-        margin-right: -16px
+        margin-right: 0px
     }
 }
 
@@ -8605,7 +8607,7 @@ p {
         -webkit-box-orient: vertical;
         -webkit-box-direction: normal;
         -ms-flex-direction: column;
-        flex-direction: column;
+        flex-direction: inherit;
         -webkit-box-align: start;
         -ms-flex-align: start;
         align-items: flex-start
@@ -8614,10 +8616,10 @@ p {
         margin-right: 0
     }
     .post-additional-info>*+* {
-        margin-top: 10px
+        margin-top: 0px
     }
     .post-additional-info>:last-child {
-        margin-left: 0
+        margin-left: auto
     }
 }
 
@@ -8637,8 +8639,8 @@ p {
 }
 
 .comments-list .post__author img {
-    width: 26px;
-    height: 26px
+    width: 35px;
+    height: 35px;
 }
 
 .comments-list.style-2 .comment-item .post__author img {
@@ -19528,8 +19530,8 @@ margin-top: 0.5rem; }
 
 .top-right {
     position: absolute;
-    top: 8px;
-    right: 16px;
+    top: 6px;
+    right: 9px;
     background-color: #ff5e3a;
    
     padding: 5px 10px;
@@ -19566,9 +19568,9 @@ margin-top: 0.5rem; }
 }
 .bottom-left {
     position: absolute;
-    bottom: 2px;
-    left: 4px;
-    background-color:#d53c60;;
+      bottom: -12px;
+  left: -2px;
+    /*background-color:#d53c60;*/
     color: #FFF;
     padding: 5px 10px;
     font-weight: 500;
@@ -19577,7 +19579,7 @@ margin-top: 0.5rem; }
    color: #fff !important;
 }
 .pad_0{
-    padding: 0px;
+    padding: 0px !important;
 }
 .three_dot_margin{
       margin-top: -8px;
@@ -19773,7 +19775,7 @@ margin-bottom:0 !important;
     padding-top: 10px;
 }
 #posts-grid-1 .post-thumb img{
-    height:200px;
+    /*height:200px;*/
     width:100%;
 }
 
@@ -20430,4 +20432,17 @@ div._2ix0 {
 
 .mrgin_top_btm_ticker{
     margin: 20px 0 !important;
+}
+.trumbowyg-box{
+    margin: 0 0 20px 0 !important;
+    
+}
+
+.padd_10_default{
+    padding: 10% !important;
+text-align: center !important;
+}
+
+.color_white{
+    color:#fff !important;
 }

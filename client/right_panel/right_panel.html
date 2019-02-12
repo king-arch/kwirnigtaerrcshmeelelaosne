@@ -9,18 +9,17 @@
           <div class="friend-item">
             <div class="friend-item-content">      
             <div class="swiper-container" data-slide="fade">
-              <div class="swiper-wrapper">
-  {{#each show_campaign_listing}}
-                <div class="swiper-slide pointer">
-                  <div class="friend-count" data-swiper-parallax="-500">
-                    <img src="{{book_cover}}" id="{{campaign_id}}" class="go_to_book_detail" >                   
-                  </div>                 
-  
-                </div>
- {{else}}
- <p>No</p>
-  <p>Loading</p>
-  {{/each}}   
+              <div class="swiper-wrapper text-center">
+                  {{#each show_campaign_listing}}
+                                <div class="swiper-slide pointer">
+                                      <div class="friend-count" data-swiper-parallax="-500">
+                                        <img src="{{book_cover}}" id="{{campaign_id}}" class="go_to_book_detail" > 
+                                      </div>            
+                                </div>
+                 {{else}}
+                                <p class="col 12">No books available</p>
+                  
+                  {{/each}}   
             </div>
         
               <!-- If we need pagination -->
@@ -30,58 +29,45 @@
         </div>
       </div>
       
- <div class="ui-block">
-        <div class="ui-block-title">
-          <h6 class="title"> You may follow </h6>
-         
-        </div>
-
-            {{#each show_user_info}} 
-       
-                <div class="birthday-item inline-items">
-                  <div class="author-thumb">
-                    <img src="{{check_user_profile_pic}}" class="view_profile" alt="author">
-                  </div>
-                  <div class="birthday-author-name">
-                    <a href="#" class="h6 author-name view_profile">{{user_name_to_follow}}  </a>
-                    <!-- <div class="birthday-date">Author</div> -->
-                  </div>
-
-                  <a class="btn btn-sm bg-breez click_on_follow" id={{user_id}} > Follow</a>
-                </div>
-
-    {{/each}}
-
-</div>
+              <div class="ui-block">
+                  <div class="ui-block-title"> <h6 class="title"> You may follow </h6>  </div>
+                    {{#each show_user_info}}        
+                        <div class="birthday-item inline-items text-center">
+                          <div class="author-thumb">
+                            <img src="{{check_user_profile_pic}}" class="view_profile" alt="author">
+                          </div>
+                          <div class="birthday-author-name">
+                            <a href="#" class="h6 author-name view_profile">{{user_name_to_follow}}  </a>
+                            <!-- <div class="birthday-date">Author</div> -->
+                          </div>
+                          <a class="btn btn-sm bg-breez click_on_follow" id={{user_id}} > Follow</a>
+                        </div>
+                        {{else}}
+                        <p class="col 12 padd_10_default">Your have nothing to follow </p>
+                  {{/each}}
+              </div>
 
 
       <div class="ui-block">
-        <div class="ui-block-title">
-          <h6 class="title">New Release book </h6>
-          
-        </div>
+        <div class="ui-block-title"> <h6 class="title">New release book </h6> </div>
 
         <!-- W-Playlist -->
         
         <ol class="widget w-playlist">
-    {{#each display_books}}
-          <li class="js-open-popup go_to_book_detail" data-popup-target=".playlist-popup" id="{{book_id}}">
-            <div class="playlist-thumb">
-              <img src="{{book_cover}}" alt="thumb-composition">
-              <div class="overlay"></div>
-              
-            </div>
-        
-            <div class="composition">
-              <a href="#" class="composition-name">{{book_name_trimmed}}</a>
-              <a href="#" class="composition-author">{{author_name}}</a>
-            </div>
-        
-          </li>
-          {{else}}
-          <li>
-            
-               <p> No book to display.</p>
+            {{#each display_books}}
+                  <li class="js-open-popup go_to_book_detail" data-popup-target=".playlist-popup" id="{{book_id}}">
+                    <div class="playlist-thumb">
+                      <img src="{{book_cover}}" alt="thumb-composition">
+                      <div class="overlay"></div>                      
+                    </div>                
+                    <div class="composition">
+                      <a href="#" class="composition-name">{{book_name_trimmed}}</a>
+                      <a href="#" class="composition-author">{{author_name}}</a>
+                    </div>                
+                  </li>
+            {{else}}
+          <li >          
+              <p class="col 12 padd_10_default"> No book to display.</p>
             
           </li>
     {{/each}}

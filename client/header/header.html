@@ -14,23 +14,25 @@
 <template name="headeroptions">
 <!--   <div class="logo_bg"><img src="img/logo_wm.png" style="width: 150px !important;"></div>
  -->       <header class="hiddev_sme_items_on_web">
-      <link rel="stylesheet" href="navbar/css/styles.css">
-      <script src="navbar/js/responsive-nav.js"></script>
- <script src="navbar/js/fastclick.js"></script>
-    <script src="navbar/js/scroll.js"></script>
-    <script src="navbar/js/fixed-responsive-nav.js"></script>
-    <p style="text-align: center;"><a><img src="img/logo_wm.png" style="width: 150px !important;"></a></p>
-      <a href="#home" class="logo icn_mob_header" data-scroll><i class="fa fa-user"></i></a>
-       <a href="#home" class="logo icn_mob_header" data-scroll><i class="fa fa-search"></i></a>
-        <a href="#home" class="logo icn_mob_header" data-scroll><i class="fa fa-bell-o"></i></a>
+      <link rel="stylesheet" href="../navbar/css/styles.css">
+      <script src="../navbar/js/responsive-nav.js"></script>
+ <script src="../navbar/js/fastclick.js"></script>
+    <script src="../navbar/js/scroll.js"></script>
+    <script src="../navbar/js/fixed-responsive-nav.js"></script>
+    <p style="text-align: center;"><a><img src="../img/logo_wm.png" style="width: 150px !important;"></a></p>
+      <a id="go_to_profile" class="logo icn_mob_header" data-scroll><i class="fa fa-user color_white"></i></a>
+       <a id="campaign_listing" class="logo icn_mob_header" data-scroll><i class="fa fa-briefcase color_white"></i></a>
+        <a id="send_to_reward_detail" class="logo icn_mob_header" data-scroll><i class="fa fa-certificate color_white"></i></a>
 
       <nav class="nav-collapse">
         <ul>
-          <li class="menu-item active"><a href="#home" data-scroll>Feed</a></li>
-          <li class="menu-item"><a href="#about" data-scroll>Book</a></li>
-          <li class="menu-item"><a href="#projects" data-scroll>Community</a></li>
-          <li class="menu-item"><a href="#blog" data-scroll>Blog</a></li>
-          <li class="menu-item"><a href="http://www.google.com" target="_blank">Google</a></li>
+          <li class="menu-item active"><a id="go_to_feed" class="color_white" data-scroll>Feed</a></li>
+          <li class="menu-item"><a id="go_to_book" class="color_white"  data-scroll>Book</a></li>
+          <li class="menu-item"><a id="go_to_community" class="color_white" data-scroll>Community</a></li>
+          <li class="menu-item"><a id="go_to_blog" class="color_white" data-scroll>Blog</a></li>
+          <li class="menu-item"><a id="send_to_my_collections" class="color_white" target="_blank">My Collection</a></li>
+          <li class="menu-item"><a id="got_to_user_setting" class="color_white" target="_blank">Settings</a></li>
+          <li class="menu-item"><a id="got_to_contact_us" class="color_white" target="_blank">Settings</a></li>
         </ul>
 
       </nav>
@@ -76,7 +78,7 @@
               <div class="author-page author vcard inline-items more">
                   <div class="author-thumb">
                      {{#each show_user_details}}
-                     <img alt="author" src="{{user_profile_pic}}" class="avatar">
+                     <img alt="author" src="{{user_profile_pic}}" class="avatar" style="  max-width: inherit;">
                      {{/each}}
                      <div class="more-dropdown more-with-triangle">
                         <div class="mCustomScrollbar" data-mcs-theme="dark">

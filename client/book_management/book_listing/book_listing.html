@@ -1,6 +1,7 @@
 <template name="book_listing">
+         {{> header}}
    <body class="landing-page">
-      {{> header}}
+
       {{> headeroptions}}
       {{> book_listing_detail}}
    </body>
@@ -90,7 +91,7 @@
                <div class="ui-block">
                   <!-- Post --> 
                   <article class="hentry blog-post blog-post-v2">
-                     <div class="post-thumb margin_btm">
+                     <div class="post-thumb margin_btm btm_height_home_page">
                         <a href="javascript:void(0)" class="go_to_book_detail"><img src="{{book_cover}}" alt="photo"></a>
                         <div class="bottom-left"><a href="javascript:void(0)" class="post-category bg-blue-light go_to_book_detail">{{book_catagries}}</a></div>
                         {{#if check_if_up_for_review}}

@@ -13,7 +13,7 @@
 <template name="view_profile_content">  
 
 {{#each show_logged_in_user_info}}
-<div class="container">
+<div class="container margin_top_for__header">
   <div class="row">
     <div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
       <div class="ui-block">
@@ -38,12 +38,12 @@
             <div class="row">
               <div class="col col-lg-5 col-md-5 col-sm-12 col-12">
                 <ul class="profile-menu">
-                  <li>
+                  <!-- <li>
                     <a href="#" class="friend-count-item">
                       <div class="h6">58</div>
                       <div class="title">Books</div>
                     </a>
-                  </li>
+                  </li> -->
                   <li>
                     <a href="#" class="friend-count-item">
                       <div class="h6">240</div>
@@ -66,12 +66,12 @@
                       <div class="title"> Canpaigns </div>
                     </a>
                   </li>
-                  <li>
+                 <!--  <li>
                     <a href="#" class="friend-count-item">
                       <div class="h6">12.6K</div>
                       <div class="title">Review</div>
                     </a>
-                  </li>
+                  </li> -->
                   <li>
                     <a href="#" class="friend-count-item">
                       <div class="h6">970</div>
@@ -844,28 +844,16 @@
     <!-- Left Sidebar -->
 
     <div class="col col-xl-3 order-xl-1 col-lg-6 order-lg-2 col-md-6 col-sm-12 col-12">
-      <div class="ui-block">
+      <div class="ui-block ">
+        <div class="ui-block-title">
+          <h6 class="title">Personal Information</h6>
+          
+        </div>
         
         <!-- Friend Item -->
         
         <div class="friend-item">
-          <article class="hentry post">
-        
-            <div class="post__author author vcard inline-items margin-bottom-0">
-          <div class="author-date">
-                <a class="h6 post__author-name fn" href="02-ProfilePage.html">Personal Infomation</a>
-                
-              </div>
-<!--               <div class="more">
-                <i class="fa fa-ellipsis-h"></i>
-                <ul class="more-dropdown">
-                  <li>
-                    <a data-toggle="modal" data-target="#edit_user_details" href="#" >Edit Personal Information</a>
-                  </li>
-                </ul>
-              </div> -->
-
-            </div></article>
+         
          <div class="modal fade" id="edit_user_details" tabindex="-1" role="dialog" aria-labelledby="edit_user_details" aria-hidden="true">
   <div class="modal-dialog window-popup edit_user_details" role="document">
     <div class="modal-content">

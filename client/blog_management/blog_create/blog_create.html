@@ -1,6 +1,6 @@
 
 <template name="blog_create">
-
+{{> header}}
  <body class="landing-page">
  {{> headeroptions}}
  {{> blog_create_detail}}
@@ -12,16 +12,16 @@
 
     <div class="loading" id="loading_div" ></div>
 
-  <div class="container">
+  <div class="container margin_top_for__header">
 
-  <div class="row">
-    <div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-      <div class="ui-block">
-        <div class="crumina-module with-title-decoration ui-block-title">
-            <h5 class="heading-title">Create Blog</h5>
-          </div>
+   <div class="row">
+     <div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+      <div class="ui-block responsive-flex1200 bg_trans">
+        <div class="ui-block-title pad_0">
+          <h1 class="font_head_size">Create Blog</h1>
+        </div>
       </div>
-    </div>
+    </div>  
   </div>
 </div>
 
@@ -33,14 +33,22 @@
         
           <div class="row">        
           <div class="col col-xl-6 col-lg-12 col-md-12 col-sm-12 col-12">  
-            <div class="form-group is-empty">
-            <label class="change_label_font control-label  c-darkgray">Blog Title</label>
+            <div class="form-group md-form  label-floating">
+                                    <label for="Name" class="control-label c-darkgray line_height_blog_title" data-success="right" data-error="wrong">Blog Title</label>
+                                    <input id="blog_title"  type="text" placeholder=""  class="form-control c-darkgray" >
+                                     <span class="material-input"></span>
+                                 </div>
+            <!-- <div class="form-group is-empty">
+                <label class="change_label_font control-label  c-darkgray">Blog Title</label>
                   <input class="form-control c-darkgray" type="text" placeholder="" id="blog_title" >
-                <span class="material-input"></span></div>
+                <span class="material-input"></span>
+             </div> -->
           </div>   
 
            <div class="col col-xl-6 col-lg-12 col-md-12 col-sm-12 col-12">  
-                                <label class="change_label_font control-label">Blog type</label>
+             <div class="form-group md-form  label-floating">
+
+                                <!-- <label class="change_label_font control-label">Blog type</label> -->
                                 <select id="blog_type">
                                     <option value="">--Blog type--</option>
                                     <option value="Author">Author</option>
@@ -48,6 +56,7 @@
                                     <option value="Textual">Hindi</option>
                                     <option value="Writing">Writing</option>
                                 </select>
+              </div>
           </div> 
 
 
@@ -62,12 +71,14 @@
           </div>
 
 
-        <div class="row" style="text-align: right;">
+        <div class="row">
+          <div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">  
             <label class="change_label_font control-label">Upload cover</label>
             <input type="file" id="blog_cover" accept="image/x-png,image/gif,image/jpeg" >
-            <img src="{{book_cover}}" style="height:300px; width:100%;margin-top:20px; margin-bottom: 20px" >
+            <img src="{{book_cover}}" class="btm_height_home_page" >
             <br>
             <br>
+          </div>
         </div>
 
    <div class="row" style="text-align: right;">
@@ -107,7 +118,6 @@
       <p class="text-center">
             Cover pic : Recommended ratio: 4: 1.
             Ex: width: 1200  height: 400.
-
             Please select appropriate catagries for your article. 
       </p>
      </div>
