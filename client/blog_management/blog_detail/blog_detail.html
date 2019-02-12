@@ -3,6 +3,7 @@
 <template name="blog_detail">
    <!-- <head>
       </head> -->
+       {{> header}}
    <body class="landing-page">
       {{> headeroptions}}
       {{> display_blog_detail}}
@@ -11,7 +12,7 @@
 <template name="display_blog_detail">
    <div class="loading"  id="loading_div" ></div>
    {{#each show_blog_details}}
-   <div class="container">
+   <div class="container margin_top_for__header">
       <div class="row">
          <div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
             <div class="ui-block">

@@ -1672,7 +1672,7 @@ blockquote p:before {
         display: none
     }*/
     .header {
-        padding-left: 70px
+        padding-left: 30px
     }
     .header.header--logout {
         padding-left: 0
@@ -1689,7 +1689,8 @@ blockquote p:before {
 
 @media (max-width:1024px) {
     .control-icon {
-        margin-right: 20px
+        margin-right: 20px;
+        margin-left:20px;
     }
     .author-page {
         margin-left: 10px
@@ -1738,7 +1739,7 @@ blockquote p:before {
         position: relative;
         bottom: 20px;
         color: #888da8;
-        margin-top: 20px
+        margin-top: -80px
     }
     .top-header-author .author-name {
         color: #515365
@@ -2369,7 +2370,7 @@ section {
     z-index: 5;
     text-align: center;
     position: relative;
-    padding: 0 10px
+    padding: 30px 10px;
 }
 
 .bg-primary-opacity {
@@ -4260,7 +4261,7 @@ input {
 
 
 .label-floating textarea.form-control {
-    padding: 1.5rem 1.1rem .2rem
+    padding: 1em !important;
 }
 
 .label-floating.with-icon .form-control,
@@ -6780,7 +6781,7 @@ fieldset[disabled] .checkbox input[type=checkbox] {
 }
 
 .add-options-message {
-    padding: 20px 25px;
+    padding: 10px 10px;
     float: left;
     width: 100%
 }
@@ -6975,10 +6976,10 @@ fieldset[disabled] .checkbox input[type=checkbox] {
         margin-left: 15px
     }
     .add-options-message button {
-        float: none;
+        float: right;
         margin-left: 0;
         display: block;
-        margin-top: 10px
+        margin-top: 0px
     }
     .add-options-message button+button {
         margin-right: 0
@@ -8282,10 +8283,12 @@ ol ol li {
 }
 
 .post {
-    padding: 20px;
+    padding: 10px;
     border-bottom: 1px solid #e6ecf5
 }
-
+.post-thumb img{
+    width: 100% !important;
+}
 .post p {
     margin: 10px 0;
 }
@@ -8410,8 +8413,8 @@ p {
 }
 
 .post__author img {
-    width: 30px;
-    height: 30px;
+    width: 40px;
+    height: 40px;
     border-radius: 100%;
     overflow: hidden;
     margin-right: 12px
@@ -8424,7 +8427,7 @@ p {
 }
 
 .post-additional-info {
-   padding: 20px 0 0;
+   padding: 10px 0 0;
     border-top: 1px solid #e6ecf5;
     display: -webkit-box;
     display: -ms-flexbox;
@@ -8475,7 +8478,7 @@ p {
 .post-add-icon img,
 .post-add-icon svg {
     margin-right: 8px;
-    width: 20px;
+    width: 20px !important;
     height: 20px
 }
 
@@ -10260,7 +10263,7 @@ p {
 }
 
 .forums-table thead th {
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 700;
     padding: 15px 25px;
     color: #ff5e3a;
@@ -20121,11 +20124,13 @@ box-shadow: rgba(255,255,255, 0.75) 1.5em 0 0 0, rgba(255,255,255, 0.75) 1.1em 1
 
 .edit {
     padding: 10px;
-    background: #ccc !important;
+    background: #C32A4A !important;
     position: absolute;
     right: 0;
     top: 0;
     cursor: pointer;
+    color: #fff !important;
+
 /*    display: none;
 */}
 
@@ -20421,4 +20426,8 @@ div._2ix0 {
 
 #Mongol{
     display: none !important;
+}
+
+.mrgin_top_btm_ticker{
+    margin: 20px 0 !important;
 }

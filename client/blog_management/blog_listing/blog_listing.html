@@ -1,7 +1,8 @@
 
 <template name="blog_listing">
-
+{{> header}}
  <body class="landing-page">
+
  {{> headeroptions}}
  {{> blog_listing_detail}}
 </body>
@@ -10,16 +11,16 @@
 
 <template name="blog_listing_detail">
     <div class="loading"  id="loading_div" ></div>
-<div class="container">
+<div class="container margin_top_for__header">
   <div class="row">
-     <div class="col col-xl-10 col-lg-10 col-md-12 col-sm-12 col-12">
+     <div class="col col-xl-10 col-lg-10 col-md-12 col-sm-12 col-6">
       <div class="ui-block responsive-flex1200 bg_trans">
         <div class="ui-block-title pad_0">
           <h1 class="font_head_size">Blogs</h1>
         </div>
       </div>
     </div>  
-    <div class="col col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12 ">
+    <div class="col col-xl-2 col-lg-2 col-md-12 col-sm-12 col-6 ">
       <div class="ui-block responsive-flex1200 bg_trans margin-bottom-0">
         <div class="ui-block-title pad_0">      
           <a href=javascript:void(0)  id="create_blog" class="btn btn-primary btn-md-2 margin-bottom-0">
@@ -28,8 +29,8 @@
       </div>
     </div>
   </div>
-   <hr class="new4">
-</div>
+<!--    <hr class="new4">
+ --></div>
 
 
 <section class="blog-post-wrap medium-padding20">

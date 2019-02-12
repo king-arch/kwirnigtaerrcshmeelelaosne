@@ -1,6 +1,6 @@
 
 <template name="book_detail">
-
+       {{> header}}
  <body class="landing-page">
  {{> headeroptions}}
  {{> book_detail_page}}
@@ -10,7 +10,7 @@
 <template name="book_detail_page">
 {{#each show_book_detail}}
 <div class="shop-product-detail  ">
-  <div class="container mb60">
+  <div class="container mb60 margin_top_for__header">
     <div class="row">
         <div class="col col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12 bg_white">
           <div class="row">

@@ -1,6 +1,8 @@
   
 <template name="feed">
     {{> header}}
+  
+    
     
  <body class="landing-page">
     {{> headeroptions}}
@@ -11,7 +13,7 @@
 
 <template name="feed_design">
 
-<div class="container">
+<div class="container margin_top_for__header">
  <div class="row">
  <!-- middle feed ends here -->
     <div class="col col-xl-6 order-xl-2 col-lg-6 order-lg-1 col-sm-12 col-xs-12 ">
@@ -471,7 +473,7 @@
             </div>
   {{#each show_book_listing}}        
         <p id="post_text_{{post_id}}"  class="go_to_book_detail pointer" >
-              released a book "{{book_name}}""
+              Released a book "{{book_name}}""
         </p>
 
           <div class="clearfix"></div>

@@ -1,73 +1,66 @@
-
 <template name="reward_detail_page">
-    {{> header}}
-    
+{{> header}}    
  <body class="landing-page">
-    {{> headeroptions}}
+  {{> headeroptions}}
   {{> display_reward_detail_page}}
 </body>
 </template>
 
 <template name="display_reward_detail_page"> 
 <div class="loading"  id="loading_div" ></div>
+<div class="container margin_top_for__header">
+        <div class="row">
+              <div class="col col-xl-10 col-lg-10 col-md-12 col-sm-12 col-6">
+                  <div class="ui-block responsive-flex1200 bg_trans">
+                     <div class="ui-block-title pad_0">
+                        <h1 class="font_head_size">Rewards</h1>
+                     </div>
+                  </div>
+               </div>
 
-<div class="container">
-  <div class="row">
-    <div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-
-      <div class="ui-block responsive-flex">
-        <div class="ui-block-title">
-          <div class="h6 title"><!-- Rewards --></div>
-        <h1 style="font-size: 30px; font-weight: 500;">Rewards</h1>
-          <div class="h6 title">Total reward points : {{total_reward_points}}</div>
-        {{#if check_if_eligible_to_redeem}}
-        <a href="javascript:void(0)" class="btn btn-primary btn-md-2 margin-bottom-0" id="send_request_to_redeem" >
-            Send redeem request</a>
-        {{/if}}
-        </div>
-      </div>
-
-    </div>
-  </div>
+                <div class="col col-xl-2 col-lg-2 col-md-12 col-sm-12 col-6">
+                  <div class="ui-block responsive-flex1200 bg_trans margin-bottom-0 ">
+                    <div class="ui-block-title pad_0">    
+                        <div class="h6 title">Total reward points : {{total_reward_points}}</div>
+                        {{#if check_if_eligible_to_redeem}}
+                        <a href="javascript:void(0)" class="btn btn-primary btn-md-2 margin-bottom-0" id="send_request_to_redeem" >
+                        Send redeem request</a>
+                        {{/if}}                        
+                    </div>
+                  </div>
+               </div>
+        </div>  
 </div>
 
 
+
+
 <div class="container">
   <div class="row">
     <div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-
-      <div class="ui-block">
-
-        
-        <!-- Forums Table -->
-        
+      <div class="ui-block padd_10_both">        
+        <!-- Forums Table -->        
         <table class="forums-table" id="show_reward_point_listing" >
           <thead>
-          <tr>          
-            <th class="forum">
-              Reward giving occasion
-            </th>
-            <th class="topics">
-              Reward points allocated
-            </th>
+              <tr>          
+                <th class="forum">
+                  Reward giving occasion
+                </th>
+                <th class="topics">
+                  Reward points allocated
+                </th>
 
-            <th class="topics">
-              Reward points allocated from
-            </th>
-        
-            <th class="posts">
-             Allocated on
-            </th>
-
-<!--           <th class="freshness">
-             Status
-            </th>    -->       
-        
-          </tr>
-        
-          </thead>
-        
-{{#each show_reward_listing}}
+              <!--   <th class="topics">
+                  Reward points allocated from
+                </th> -->
+            
+                <th class="posts">
+                 Allocated on
+                </th>
+                <!--<th class="freshness"> Status  </th>    -->               
+              </tr>        
+          </thead>        
+            {{#each show_reward_listing}}
           <tbody>
           <tr>
             <td class="forum">
@@ -75,19 +68,15 @@
                 <img src="img/forum1.png" alt="forum">
                 <div class="content">
               {{#if equals reward_trigger_type 'review_submition'}}
-
                   <p class="h6 title">Review submition</p>
-
               {{else if equals reward_trigger_type 'blog_approval'}}
-
                   <p class="h6 title">Blog approval</p>
-
               {{/if}}
                 </div>        
               </div>
             </td>
            
-            <td class="forum">
+           <!--  <td class="forum">
               <div class="forum-item">
                 <div class="content">
               {{#if equals reward_trigger_type 'review_submition'}}
@@ -107,10 +96,10 @@
               {{/if}}
                 </div>        
               </div>
-            </td>
+            </td> -->
 
 
-            <td class="forum">
+            <!-- <td class="forum">
               <div class="forum-item">
                 <img src="img/forum1.png" alt="forum">
                 <div class="content">
@@ -125,7 +114,7 @@
               {{/if}}
                 </div>        
               </div>
-            </td>
+            </td> -->
 
 
             <td class="posts">

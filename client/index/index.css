@@ -1,6 +1,16 @@
 ﻿
 @media only screen and (min-width:320px) and (max-width: 767px)
 {
+
+  .not_show_buttons{
+    display: none;
+  }
+  .hiddev_sme_items_on_web{
+    display: block;
+  }
+   .margin_top_for__header{
+      margin-top: 60px !important;
+    }
     .default_text{
       font-size: 15px !important;
       text-align: center;
@@ -15,6 +25,15 @@
 }
 
   @media only screen and (min-width : 800px) {
+      .not_show_buttons{
+    display: none;
+  }
+    ..hiddev_sme_items_on_web{
+    display: block;
+  }
+    .margin_top_for__header{
+      margin-top: 60px !important;
+    }
 .mrgin_btm_10{
     margin-bottom: 10px !important;
 }
@@ -51,6 +70,18 @@ width: 6% !important;
 
 
 @media only screen and (min-width : 1200px) {
+    .not_show_buttons{
+    display: block;
+  }
+   .iconn_header_width{
+      width: 21px !important;
+    }
+  .hiddev_sme_items_on_web{
+    display: none;
+  }
+   .margin_top_for__header{
+      margin-top: 0px !important;
+    }
        .btn {
   margin-bottom: 10px !important;
 }
@@ -87,6 +118,15 @@ width: 3% !important;
 
     }
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait) {
+    .not_show_buttons{
+    display: none;
+  }
+   .hiddev_sme_items_on_web{
+    display: block;
+  }
+   .margin_top_for__header{
+      margin-top: 10px !important;
+    }
        .btn {
   margin-bottom: 10px !important;
 }
@@ -109,6 +149,15 @@ width: 3% !important;
 }
 }
    @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: landscape) {
+      .not_show_buttons{
+    display: none;
+  }
+    .iconn_header_width{
+      width: 31px !important;
+    }
+    .hiddev_sme_items_on_web{
+    display: none;
+  }
        .btn {
   margin-bottom: 10px !important;
 }
