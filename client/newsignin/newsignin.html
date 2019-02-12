@@ -1,0 +1,64 @@
+<template name="newsignin">
+     <style type="text/css">
+    
+    button.btn {
+  padding: 5px 40px;
+
+  </style>
+    {{> header}}
+
+    <body class="landing-page">
+        {{> newsignincontent}} {{> footer}}
+    </body>
+</template>
+
+<template name="newsignincontent">
+  
+        <div class="content-bg-wrap">
+            <section class="medium-padding20">
+                <div class="container">
+                    <div class="row">
+                        <div class="col col-xl-5 col-lg-5 col-md-12 col-sm-12 col-12 pl-md-0" style="  padding: 10% 10%;">
+                        <form role="form" action="" method="post">
+                           <!-- First Step -->
+                           <div class="row setup-content-3" id="step-5" style="background-color: rgba(203, 18, 48, 1);   padding: 5%; border: 1px solid #cb1230;     border-radius: 10px;">
+                              <div class="col-md-12">
+                                 <h3 class="font-weight-bold pl-0 c-white" style="margin-bottom: 20px !important;"><strong>Sign in</strong></h3>
+                                 
+                                 <div class="form-group md-form label-floating">
+                                    <!-- <div class="form-group md-form label-floating has-success" id="show_response" > -->
+                                    <label for="Email" class="control-label c-light-grey" data-success="right">Email</label>
+                                    <!--                                         <input id="signup_email" required="required" class="form-control validate c-white" placeholder="" type="text" > -->
+                                    <input id="signup_email" required="required" class="form-control validate c-white" placeholder="" type="text"  onfocusout="ValidateEmail(event)" autocomplete="off" >
+                                 </div>
+                                 <div class="form-group md-form  label-floating is-empty with-button c-white" >
+                                    <label for="Email" class="control-label c-light-grey" data-success="right" data-error="wrong">Password (atleast 8 chars.)</label>
+                                    <input class="form-control validate c-white" type="password" id="signup_password" autocomplete="off" >
+                                    <a href="#"><span class="trans_bg show_signup_password"> <i class="fa fa-eye"> </i> </span></a>
+                                 </div>
+                                 
+                                 <span>
+
+                                 <button class="btn btn-mdb-color btn-rounded float-right button" type="button" id="submit_signup"><span> Sign in </span></button>
+                                 </span>
+
+                              </div>
+                              
+                           </div>
+                        </form>
+
+         <!-- <button class="g-signin2" id="google_login" data-onsuccess="onSignIn" onclick="click_google_login()" ></button>   -->
+            <a  style="display: none;" class="btn fb_bt btn-home format_join join_btn_signup height_sub login-btn mouse_ani" data-toggle="tooltip" data-placement="top" title="Facebook" id="login_with_facebook" onclick="login()" >
+              <i class="fa fa-facebook login_social_icon"></i>
+              <span class="hidden-xs"></span>
+            </a>
+         <div class="g-signin2" style="display: none;" data-onsuccess="onSignIn" onclick="click_google_login()"  id="google_login" ></div>
+  
+
+                     </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+</template>

@@ -1,31 +1,31 @@
-
-
 <template name="book_listing">
+         {{> header}}
    <body class="landing-page">
+
       {{> headeroptions}}
       {{> book_listing_detail}}
    </body>
 </template>
 <template name="book_listing_detail">
    <div class="loading"  id="loading_div" ></div>
-   <div class="container">
+   <div class="container margin_top_for__header">
       <div class="row">
-         <div class="col col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12">
+         <div class="col col-xl-10 col-lg-8 col-md-12 col-sm-12 col-4">
             <div class="ui-block responsive-flex1200 bg_trans">
                <div class="ui-block-title pad_0">
                   <h1 class="font_head_size">Book</h1>
                </div>
             </div>
          </div>
-         <div class="col col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12 ">
+         <!-- <div class="col col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12 ">
             <div class="ui-block responsive-flex1200 bg_trans margin-bottom-0">
                <div class="ui-block-title pad_0">
-                  <!-- <a href="create_blog.html" class="btn btn-primary btn-md-2 margin-bottom-0">
-                     Add a Book</a> -->
+                  <a href="create_blog.html" class="btn btn-primary btn-md-2 margin-bottom-0">
+                     Add a Book</a> 
                </div>
             </div>
-         </div>
-         <div class="col col-xl-1 col-lg-1 col-md-12 col-sm-12 col-12">
+         </div> -->
+         <div class="col col-xl-1 col-lg-2 col-md-12 col-sm-12 col-4">
             <div class="ui-block responsive-flex1200 bg_trans margin-bottom-0 ">
                <div class="ui-block-title pad_0">
                   <span style="padding-top: 10px;">  Filter </span>
@@ -55,7 +55,7 @@
                </div>
             </div>
          </div>
-         <div class="col col-xl-1 col-lg-2 col-md-12 col-sm-12 col-12">
+         <div class="col col-xl-1 col-lg-2 col-md-12 col-sm-12 col-4">
             <div class="ui-block responsive-flex1200 bg_trans margin-bottom-0 ">
                <div class="ui-block-title pad_0">
                   <span style="padding-top: 10px;">Sort by </span>
@@ -80,37 +80,18 @@
             </div>
          </div>
       </div>
-      <hr class="new4">
+     <!--  <hr class="new4"> -->
    </div>
    <section class="blog-post-wrap medium-padding20">
       <div class="container">
-         <div class="row sorting-container" id="posts-grid-1" data-layout="masonry">
-            <!-- <div class="col col-xl-3 col-lg-3 col-md-6 col-sm-12  sorting-item community">
-               <div class="ui-block">
-               
-                 
-                 
-                 
-                 <article class="hentry blog-post blog-post-v2 padding40 photo-album-item create-album" style="  border: 2px dashed #9aaf59;">
-                    <div class="post-content">
-                       <a href="javascript:void(0)" class="btn btn-control bg-primary go_to_campaign_creation" data-toggle="modal" data-target="#create-photo-album" style="padding: 9% 7%;">
-                          <i class="fa fa-plus"></i>
-                         </a><br/>
-                         <a href="javascript:void(0)" class="title h5 go_to_campaign_creation" data-toggle="modal" data-target="#create-photo-album">Promote Book</a>
-                         <span class="sub-title c-grey">It only takes a few minutes!</span>
-                   </div>
-                 </article>
-                 
-                 
-               
-               </div>
-               </div> -->
+         <div class="row sorting-container"  data-layout="masonry">
+           
             {{#each show_books_listing}}    
-            <div class="col col-xl-3 col-lg-3 col-md-6 col-sm-12  sorting-item community">
+            <div class="col col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12 sorting-item community">
                <div class="ui-block">
                   <!-- Post --> 
                   <article class="hentry blog-post blog-post-v2">
-                     <div class="post-thumb margin_btm">
+                     <div class="post-thumb margin_btm btm_height_home_page">
                         <a href="javascript:void(0)" class="go_to_book_detail"><img src="{{book_cover}}" alt="photo"></a>
                         <div class="bottom-left"><a href="javascript:void(0)" class="post-category bg-blue-light go_to_book_detail">{{book_catagries}}</a></div>
                         {{#if check_if_up_for_review}}

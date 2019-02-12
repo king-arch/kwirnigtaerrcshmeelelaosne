@@ -1,8 +1,5 @@
-
-
 <template name="blog_detail">
-   <!-- <head>
-      </head> -->
+       {{> header}}
    <body class="landing-page">
       {{> headeroptions}}
       {{> display_blog_detail}}
@@ -11,30 +8,15 @@
 <template name="display_blog_detail">
    <div class="loading"  id="loading_div" ></div>
    {{#each show_blog_details}}
-   <div class="container">
+   <div class="container margin_top_for__header">
       <div class="row">
          <div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
             <div class="ui-block">
                <div class="top-header">
-                  <div class="top-header-thumb">
-                     <img src="{{blog_cover}}" alt="nature" class="" style="height: 300px !important;">
+                  <div class="top-header-thumb hedaer_banner_for_detail_page">
+                     <img src="{{blog_cover}}" alt="nature">
                   </div>
-                  <div class="profile-section" style="padding: 0px;">
-                     <!-- 
-                        <div class="control-block-button">
-                        <div class="btn btn-control bg-primary more">
-                              <i class="fa fa-cog c-white"></i>
-                        
-                            <ul class="more-dropdown more-with-triangle triangle-bottom-right">
-                              <li>
-                                <a href="edit_blog.html" data-toggle="modal" data-target="#update-header-photo">Edit Blog</a>
-                              </li>
-                              
-                            </ul>
-                          </div>
-                        
-                        </div> -->
-                  </div>
+                 
                </div>
             </div>
          </div>
@@ -45,7 +27,7 @@
          <div class="col col-xl-12 m-auto col-lg-12 col-md-12 col-sm-12 col-12">
             <div class="ui-block ui-block-title">
                <!-- Single Post -->
-               <article class="hentry blog-post single-post single-post-v2">
+               <article class="hentry blog-post single-post">
                   <a href="#" class="post-category bg-blue-light">{{blog_type}}</a>
                   <h2 class="h1 post-title">{{blog_title}}</h2>
                   <div class="single-post-additional inline-items">
@@ -86,7 +68,7 @@
                      </div>
                   </div>
                   <div class="post-content-wrap">
-                     <div class="post-content" id="blog_discription" >
+                     <div class="post-content pad_0" id="blog_discription" >
                         <p class="section profile-info" id="temp_data">
                            {{{blog_discription}}}
                         </p>
@@ -155,7 +137,7 @@
                     </span>
                     &nbsp;  &nbsp;
                     {{else }}
-                    <a class="like_event_comment_lvl_0 post-add-icon inline-items">
+                    <a class="like_event_comment_lvl_0 post-add-icon inline-items" style="margin-right: 0px;">
                     <img src="/img/heart_gray.png">
                     </a>  
                     <span><a data-toggle="modal" data-target="#show_like_count_on_feed_comment_lvl_0_text" class=" get_all_liked_users show_like_count_on_feed_comment_lvl_0_text"><span>{{total_liked_on_comment_lvl_0 comment_id}}
@@ -190,11 +172,11 @@
                                       </li>
                                       {{/each}}
                                    </ul>
-                                   <div class="ps__scrollbar-x-rail" style="left: 0px; bottom: 0px;">
-                                      <div class="ps__scrollbar-x" tabindex="0" style="left: 0px; width: 0px;"></div>
+                                   <div class="ps__scrollbar-x-rail">
+                                      <div class="ps__scrollbar-x" tabindex="0"></div>
                                    </div>
-                                   <div class="ps__scrollbar-y-rail" style="top: 0px; height: 300px; right: 0px;">
-                                      <div class="ps__scrollbar-y" tabindex="0" style="top: 0px; height: 241px;"></div>
+                                   <div class="ps__scrollbar-y-rail" >
+                                      <div class="ps__scrollbar-y" tabindex="0" ></div>
                                    </div>
                                 </div>
                              </div>
@@ -246,7 +228,7 @@
                        <span id="save_text"> Post Status</span></button>   
                     </div>
                     {{#if check_for_user_already_liked_on_comment_lvl_1}}    
-                    <a class="like_event_comment_lvl_0 post-add-icon inline-items">
+                    <a class="like_event_comment_lvl_0 post-add-icon inline-items" style="margin-right: 0px;">
                     <img src="/img/heart_gray.png">
                     </a>
                     <span><a data-toggle="modal" data-target="#show_like_count_on_feed_comment_lvl_1_text" class=" get_all_liked_users show_like_count_on_feed_comment_lvl_1_text"><span>{{total_liked_on_comment_lvl_1 comment_id}}
@@ -255,7 +237,7 @@
                     </span>
                     &nbsp;  &nbsp;
                     {{else }}
-                    <a class="like_event_comment_lvl_0 post-add-icon inline-items">
+                    <a class="like_event_comment_lvl_0 post-add-icon inline-items" style="margin-right: 0px;">
                     <img src="/img/heart_gray.png">
                     </a>  
                     <span><a data-toggle="modal" data-target="#show_like_count_on_feed_comment_lvl_1_text" class=" get_all_liked_users show_like_count_on_feed_comment_lvl_1_text"><span>{{total_liked_on_comment_lvl_1 comment_id}}
@@ -321,18 +303,18 @@
                     </div>
                  </li>
                  {{else}}
-                 <p style="padding:20px"> No comments</p>
+                <div class="medium-padding120 m-auto"><p class="logout-content">No comments</p>  </div>
                  {{/each}}
                </ul>
             </div>
             
             <!-- Comment Form -->
-            <div class="col col-xl-12 ui-block">
-               <div class="ui-block-title crumina-module crumina-heading with-title-decoration" style="border-bottom:0px;">
-                  <h5 class="heading-title">Write a Comment</h5>
-               </div>
-               <div class="row">
-                  <div class="col col-12 col-xl-12 col-lg-12 col-md-12 col-sm-12" style="margin-bottom: 20px">
+            <div class="ui-block">
+               <div class="ui-block-title crumina-module  with-title-decoration" >
+                
+                  <div class="row">
+                      <h5 class="heading-title">Write a Comment</h5>
+                  <div class="col col-12 col-xl-12 col-lg-12 col-md-12 col-sm-12">
                      <div class="form-group label-floating is-empty">
                         <label class="control-label c-grey">Your Comment</label>
                         <textarea class="form-control c-grey" placeholder="" id="comment_lvl_0_{{blog_id}}"></textarea>
@@ -341,6 +323,8 @@
                      >Post your Comment</a>
                   </div>
                </div>
+               </div>
+               
             </div>
             <!-- ... end Comment Form -->
             <!-- ... End Comments -->

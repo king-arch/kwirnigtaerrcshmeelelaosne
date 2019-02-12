@@ -1,33 +1,27 @@
-
-
 <template name="campaign_listing">
+ {{> header}}
+ <body class="landing-page">
  {{> headeroptions}}
  {{> campaign_listing_detail}}
+</body>
 </template>
 
 <template name="campaign_listing_detail">
     <div class="loading"  id="loading_div" ></div>
-<div class="container">
+<div class="container margin_top_for__header">
   <div class="row">
-     <div class="col col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12">
+     <div class="col col-xl-10 col-lg-10 col-md-12 col-sm-12 col-6">
 
       <div class="ui-block responsive-flex1200 bg_trans">
         <div class="ui-block-title pad_0">
-          <h1 style="font-size: 30px; font-weight: 500;">User Campaigns</h1>
+          <h1 class="font_head_size">User Campaigns</h1>
         </div>
       </div>
     </div>  
 
 
-    <div class="col col-xl-1 col-lg-1 col-md-12 col-sm-12 col-12">
 
-    </div>
-
-    <div class="col col-xl-1 col-lg-2 col-md-12 col-sm-12 col-12">
-
-    </div>
-
-    <div class="col col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12 ">
+    <div class="col col-xl-2 col-lg-2 col-md-12 col-sm-12 col-6 ">
 
       <div class="ui-block responsive-flex1200 bg_trans margin-bottom-0">
         <div class="ui-block-title pad_0">            
@@ -42,7 +36,7 @@
 
     
   </div>
-   <hr class="new4">
+<!--    <hr class="new4"> -->
 </div>
 
 
@@ -80,7 +74,7 @@
               End Date
             </th>
 
-            <th class="freshness">
+            <th class="freshness not_show_buttons">
               Invoice
             </th>
 <!--           
@@ -137,7 +131,7 @@
               {{/if}} -->
             </td>
              
-            <td class="freshness">
+            <td class="freshness not_show_buttons">
              <a href="javascript:void(0)" class="view_invoice_detail btn btn-primary btn-sm full-width" data-toggle="modal" data-target="#edit-my-poll-popup" id="{{campaign_id}}">View Invoice</a>
 
             {{#if equals delivery_option "1"}}

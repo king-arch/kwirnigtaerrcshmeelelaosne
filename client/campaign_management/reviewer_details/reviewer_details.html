@@ -2,53 +2,58 @@
 
 <template name="reviewer_details">
 
+<body class="landing-page">
+    {{> header}}
  {{> headeroptions}}
  {{> show_reviewer_details}}
-
+</body>
 </template>
 
 <template name="show_reviewer_details">
     <div class="loading"  id="loading_div" ></div>
 <div class="container">
   <div class="row">
-     <div class="col col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12">
+     <div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
 
       <div class="ui-block responsive-flex1200 bg_trans">
         <div class="ui-block-title pad_0">
-          <h1 style="font-size: 30px; font-weight: 500;">Reviewers List</h1>
+          <h1 class="font_head_size">Reviewers List</h1>
         </div>
       </div>
     </div>  
 
 
-    <div class="col col-xl-1 col-lg-1 col-md-12 col-sm-12 col-12">
-
-    </div>
-
-    <div class="col col-xl-1 col-lg-2 col-md-12 col-sm-12 col-12">
-
-    </div>
-
-    <div class="col col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12 ">
-
-    </div>
-
 
     
   </div>
-   <hr class="new4">
+  
 </div>
 
 <div class="container">
   <div class="row">
-     <div class="col col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12">
+     <div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
 
-            <div class="ui-block responsive-flex1200 bg_trans">
-        <div class="ui-block-title pad_0">
+            <div class="ui-block responsive-flex1200">
+        <div class="ui-block-title ">
+          <div class="row">
+             {{#each show_book_detail_for_header}}
+            <div class="col col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12">
+              <img src="{{book_cover}}" width="50" alt="forum" style="height: 80px !important; width: 80px !important;">
+            </div>
+          <div class="col col-xl-10 col-lg-10 col-md-12 col-sm-12 col-12">
+            <a href="#" class="h6 title">{{book_name}}</a>
+            <p class="text">Author: {{author_name}} </p>
+          </div>
+            {{/each}}
 
-      {{#each show_book_detail_for_header}}
+        </div>
+     
+        </div>
+      </div>
+    </div>  
+
               
-              <div class="forum-item">
+            <!--   <div class="forum-item">
                 <img src="{{book_cover}}" width="50" alt="forum" style="height: 80px !important; width: 80px !important;">
                   <a href="#" class="h6 title">{{book_name}}</a>
                 
@@ -60,34 +65,22 @@
                 <div class="content">
                   <p class="text">{{book_summary_trimmed}}</p>
                 </div>        
-              </div>
+              </div> -->
 
-      {{/each}}
-
-        </div>
-      </div>
-    </div>  
-
-    <div class="col col-xl-1 col-lg-2 col-md-12 col-sm-12 col-12">
-    </div>
-
-    <div class="col col-xl-1 col-lg-1 col-md-12 col-sm-12 col-12">
-    </div>
-
-    <div class="col col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12 ">
-    </div>
+    
+   
     
   </div>
-   <hr class="new4">
+  <!--  <hr class="new4"> -->
 </div>
 
 <div class="container">
   <div class="row">
     <div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
 
-      <div class="ui-block">
+      <div class="ui-block padd_10_both">
 
-        
+         
         <!-- Forums Table -->
         
         <table class="forums-table" id="show_reviewer_details_table" >
@@ -99,19 +92,19 @@
               User Details
             </th>
 
-            <th class="posts">
+            <th class="posts not_show_buttons">
               Personal Blog
             </th>
 
-            <th class="posts">
+            <th class="posts not_show_buttons">
               Goodreads handle
             </th>
 
-            <th class="posts">
+            <th class="posts not_show_buttons">
               Facebook handle
             </th>
 
-            <th class="posts">
+            <th class="posts not_show_buttons">
               twitter handle
             </th>
 

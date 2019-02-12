@@ -101,7 +101,7 @@ ul {
 
 .header-spacer {
     display: block;
-    height: 80px
+    height: 70px
 }
 
 .header-spacer-small {
@@ -552,8 +552,8 @@ ul {
     left: 0;
     width: 100%;
     height: 100%;
-    box-shadow: inset 0 -120px 55px -30px rgba(0, 0, 0, .5)
-}
+/*    box-shadow: inset 0 -120px 55px -30px rgba(0, 0, 0, .5)
+*/}
 
 .column-tittle:after,
 blockquote p:before {
@@ -1179,7 +1179,7 @@ blockquote p:before {
 
 .landing-page {
     position: relative;
-    min-height: 100vh
+   /* min-height: 100vh*/
 }
 
 .landing-page .content-bg-wrap {
@@ -1199,6 +1199,18 @@ blockquote p:before {
     background-color: rgba(255, 255, 255, 0.95);
     opacity: 1;
     z-index: auto
+}
+
+.content-bg-wrap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  box-sizing: border-box;
 }
 
 @-webkit-keyframes sidedownscroll {
@@ -1660,7 +1672,7 @@ blockquote p:before {
         display: none
     }*/
     .header {
-        padding-left: 70px
+        padding-left: 30px
     }
     .header.header--logout {
         padding-left: 0
@@ -1677,7 +1689,8 @@ blockquote p:before {
 
 @media (max-width:1024px) {
     .control-icon {
-        margin-right: 20px
+        margin-right: 20px;
+        margin-left:20px;
     }
     .author-page {
         margin-left: 10px
@@ -1726,7 +1739,7 @@ blockquote p:before {
         position: relative;
         bottom: 20px;
         color: #888da8;
-        margin-top: 20px
+        margin-top: -80px
     }
     .top-header-author .author-name {
         color: #515365
@@ -2335,7 +2348,7 @@ section {
 }
 
 .stunning-header {
-    padding-bottom: 120px;
+    padding-bottom: 20px;
     position: relative;
     color: #fff
 }
@@ -2357,7 +2370,7 @@ section {
     z-index: 5;
     text-align: center;
     position: relative;
-    padding: 0 10px
+    padding: 30px 10px;
 }
 
 .bg-primary-opacity {
@@ -3577,7 +3590,7 @@ img {
     .responsive-flex1200 .ui-block-title {
         display: -webkit-box;
         display: -ms-flexbox;
-        display: flex;
+        display: inline-table;
         -webkit-box-orient: vertical;
         -webkit-box-direction: normal;
         -ms-flex-direction: column;
@@ -4245,15 +4258,12 @@ input {
     padding-right: 60px
 }
 
-.label-floating .form-control,
-.label-floating input,
-.label-floating select {
-       padding: 13px 0 8px 0px !important;
-  line-height: 8px;
-}
+
 
 .label-floating textarea.form-control {
-    padding: 1.5rem 1.1rem .2rem
+    padding: 1em !important;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
 }
 
 .label-floating.with-icon .form-control,
@@ -6773,7 +6783,7 @@ fieldset[disabled] .checkbox input[type=checkbox] {
 }
 
 .add-options-message {
-    padding: 20px 25px;
+    padding: 10px 10px;
     float: left;
     width: 100%
 }
@@ -6968,10 +6978,10 @@ fieldset[disabled] .checkbox input[type=checkbox] {
         margin-left: 15px
     }
     .add-options-message button {
-        float: none;
+        float: right;
         margin-left: 0;
         display: block;
-        margin-top: 10px
+        margin-top: 0px
     }
     .add-options-message button+button {
         margin-right: 0
@@ -7005,7 +7015,7 @@ fieldset[disabled] .checkbox input[type=checkbox] {
 
 @media (max-width:360px) {
     .notification-list .notification-event {
-        max-width: 60%
+        max-width: 100%
     }
     .chat-message-field .notification-date {
         float: none;
@@ -8275,10 +8285,12 @@ ol ol li {
 }
 
 .post {
-    padding: 20px;
+    padding: 10px;
     border-bottom: 1px solid #e6ecf5
 }
-
+.post-thumb img{
+    width: 100% !important;
+}
 .post p {
     margin: 10px 0;
 }
@@ -8391,7 +8403,7 @@ ol ol li {
 
 .community .post-thumb img {
     width: 100%;
-    height: 200px;
+   /* height: 200px;*/
 }
 
 .post__author {
@@ -8403,8 +8415,8 @@ p {
 }
 
 .post__author img {
-    width: 30px;
-    height: 30px;
+    width: 40px;
+    height: 40px;
     border-radius: 100%;
     overflow: hidden;
     margin-right: 12px
@@ -8417,7 +8429,7 @@ p {
 }
 
 .post-additional-info {
-   padding: 20px 0 0;
+   padding: 10px 0 0;
     border-top: 1px solid #e6ecf5;
     display: -webkit-box;
     display: -ms-flexbox;
@@ -8468,7 +8480,7 @@ p {
 .post-add-icon img,
 .post-add-icon svg {
     margin-right: 8px;
-    width: 20px;
+    width: 20px !important;
     height: 20px
 }
 
@@ -8586,7 +8598,7 @@ p {
         top: -13px
     }
     .post__author .more {
-        margin-right: -16px
+        margin-right: 0px
     }
 }
 
@@ -8595,7 +8607,7 @@ p {
         -webkit-box-orient: vertical;
         -webkit-box-direction: normal;
         -ms-flex-direction: column;
-        flex-direction: column;
+        flex-direction: inherit;
         -webkit-box-align: start;
         -ms-flex-align: start;
         align-items: flex-start
@@ -8604,10 +8616,10 @@ p {
         margin-right: 0
     }
     .post-additional-info>*+* {
-        margin-top: 10px
+        margin-top: 0px
     }
     .post-additional-info>:last-child {
-        margin-left: 0
+        margin-left: auto
     }
 }
 
@@ -8627,8 +8639,8 @@ p {
 }
 
 .comments-list .post__author img {
-    width: 26px;
-    height: 26px
+    width: 35px;
+    height: 35px;
 }
 
 .comments-list.style-2 .comment-item .post__author img {
@@ -10253,7 +10265,7 @@ p {
 }
 
 .forums-table thead th {
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 700;
     padding: 15px 25px;
     color: #ff5e3a;
@@ -13036,7 +13048,7 @@ p {
 
 @media (max-width:800px) {
     .medium-padding80 {
-        padding: 35px 0
+        padding: 95px 0
     }
 }
 
@@ -19518,8 +19530,8 @@ margin-top: 0.5rem; }
 
 .top-right {
     position: absolute;
-    top: 8px;
-    right: 16px;
+    top: 6px;
+    right: 9px;
     background-color: #ff5e3a;
    
     padding: 5px 10px;
@@ -19556,9 +19568,9 @@ margin-top: 0.5rem; }
 }
 .bottom-left {
     position: absolute;
-    bottom: 2px;
-    left: 4px;
-    background-color:#d53c60;;
+      bottom: -12px;
+  left: -2px;
+    /*background-color:#d53c60;*/
     color: #FFF;
     padding: 5px 10px;
     font-weight: 500;
@@ -19567,7 +19579,7 @@ margin-top: 0.5rem; }
    color: #fff !important;
 }
 .pad_0{
-    padding: 0px;
+    padding: 0px !important;
 }
 .three_dot_margin{
       margin-top: -8px;
@@ -19763,7 +19775,7 @@ margin-bottom:0 !important;
     padding-top: 10px;
 }
 #posts-grid-1 .post-thumb img{
-    height:200px;
+    /*height:200px;*/
     width:100%;
 }
 
@@ -20114,11 +20126,13 @@ box-shadow: rgba(255,255,255, 0.75) 1.5em 0 0 0, rgba(255,255,255, 0.75) 1.1em 1
 
 .edit {
     padding: 10px;
-    background: #ccc !important;
+    background: #C32A4A !important;
     position: absolute;
     right: 0;
     top: 0;
     cursor: pointer;
+    color: #fff !important;
+
 /*    display: none;
 */}
 
@@ -20184,9 +20198,6 @@ a{
 
 .mbm {
   margin-bottom: 0px !important;
-}
-.btm_height_home_page{
-    height: 180px !important;
 }
 
 ._4-u2 {
@@ -20401,11 +20412,11 @@ div._2ix0 {
 #profile-grid .panel-thumbnail { overflow: hidden; }
 #profile-grid .img-rounded { border-radius: 4px 4px 0 0;}
 
-.carousel-control-next-icon, .carousel-control-prev-icon{
+/*.carousel-control-next-icon, .carousel-control-prev-icon{
     background-color: #000!important;
     padding:10px !important;
 }
-
+*/
 
 @media (max-width: 360px){
     .day-wethear-item {
@@ -20414,3 +20425,24 @@ div._2ix0 {
 }
 }
 
+
+#Mongol{
+    display: none !important;
+}
+
+.mrgin_top_btm_ticker{
+    margin: 20px 0 !important;
+}
+.trumbowyg-box{
+    margin: 0 0 20px 0 !important;
+    
+}
+
+.padd_10_default{
+    padding: 10% !important;
+text-align: center !important;
+}
+
+.color_white{
+    color:#fff !important;
+}
