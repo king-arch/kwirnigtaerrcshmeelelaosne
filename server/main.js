@@ -216,159 +216,159 @@ process.env.MAIL_URL = 'smtp://' + encodeURIComponent(smtp.username) + ':' + enc
 // START crone jobs for capturing the report stats
 
 
-Meteor.startup(() => {
-  // code to run on server at startup 
-      SyncedCron.start();
-});
+// Meteor.startup(() => {
+//   // code to run on server at startup 
+//       SyncedCron.start();
+// });
 
 
-  SyncedCron.config({
-    collectionName: 'somethingDifferent'
-  });
+//   SyncedCron.config({
+//     collectionName: 'somethingDifferent'
+//   });
 
-  SyncedCron.add({
-    name: 'Get the campaign total counts and total revenue',
-    schedule: function(parser) {
-      // parser is a later.parse object
+//   SyncedCron.add({
+//     name: 'Get the campaign total counts and total revenue',
+//     schedule: function(parser) {
+//       // parser is a later.parse object
 
-      return parser.text('every  hours');
-      // return parser.text('every 20 seconds');
+//       return parser.text('every  hours');
+//       // return parser.text('every 20 seconds');
 
-        // fires at 10:15am every day
-  // var cron1 = later.parse.cron('15 10 ? * *');
+//         // fires at 10:15am every day
+//   // var cron1 = later.parse.cron('15 10 ? * *');
 
-  // fires every 5 minutes starting at 2pm and ending at 2:55pm, every day
-  // var cron2 = later.parse.cron('0 0/5 14 * * ?', true);
+//   // fires every 5 minutes starting at 2pm and ending at 2:55pm, every day
+//   // var cron2 = later.parse.cron('0 0/5 14 * * ?', true);
 
-    }, 
-    job: function(intendedAt) {
-      // console.log('crunching numbers');
-      console.log('fetching reports stats: ');
-      // console.log(intendedAt);
+//     }, 
+//     job: function(intendedAt) {
+//       // console.log('crunching numbers');
+//       console.log('fetching reports stats: ');
+//       // console.log(intendedAt);
 
-      console.log( Date.now() );
-      var check_campaign_status = campaign_details.find({approval_status: 1}).fetch();
+//       console.log( Date.now() );
+//       var check_campaign_status = campaign_details.find({approval_status: 1}).fetch();
 
-    if(check_campaign_status[0]){
+//     if(check_campaign_status[0]){
 
-      for(var i=0; i< check_campaign_status.length; i++){
+//       for(var i=0; i< check_campaign_status.length; i++){
 
-      var book_name = check_campaign_status[i].book_name;
-      var approval_status = check_campaign_status[i].approval_status;
-      var final_payment = check_campaign_status[i].final_payment;
+//       var book_name = check_campaign_status[i].book_name;
+//       var approval_status = check_campaign_status[i].approval_status;
+//       var final_payment = check_campaign_status[i].final_payment;
 
-      var campaign_end_date = check_campaign_status[i].campaign_end_date;
-      var campaign_start_date = check_campaign_status[i].campaign_start_date;
-      var campaign_id = check_campaign_status[i].campaign_id;
-      var campaigner_id = check_campaign_status[i].campaigner_id;
+//       var campaign_end_date = check_campaign_status[i].campaign_end_date;
+//       var campaign_start_date = check_campaign_status[i].campaign_start_date;
+//       var campaign_id = check_campaign_status[i].campaign_id;
+//       var campaigner_id = check_campaign_status[i].campaigner_id;
 
-      var todays_date = Date.now();
+//       var todays_date = Date.now();
 
-      if(campaign_end_date < todays_date){
+//       if(campaign_end_date < todays_date){
 
-      console.log(' book_name ' +book_name);
-      console.log(' approval_status '+approval_status);
-      console.log('final_payment ' +final_payment);
+//       console.log(' book_name ' +book_name);
+//       console.log(' approval_status '+approval_status);
+//       console.log('final_payment ' +final_payment);
       
-      console.log(' campaign_end_date ' +campaign_end_date);
-      console.log(' campaign_start_date ' +campaign_start_date);
-      console.log(" todays_date: "+todays_date);
+//       console.log(' campaign_end_date ' +campaign_end_date);
+//       console.log(' campaign_start_date ' +campaign_start_date);
+//       console.log(" todays_date: "+todays_date);
            
-if(approval_status != 4){
-              var result =  campaign_details.update({
-                                campaign_id: campaign_id,
-                              }, {
-                                $set: {
-                                  "approval_status": 4,
-                                  "status_changed_by": 'crone_jobs',
+// if(approval_status != 4){
+//               var result =  campaign_details.update({
+//                                 campaign_id: campaign_id,
+//                               }, {
+//                                 $set: {
+//                                   "approval_status": 4,
+//                                   "status_changed_by": 'crone_jobs',
 
-                                  "update_at": Date.now()
-                                } 
-                      }); 
+//                                   "update_at": Date.now()
+//                                 } 
+//                       }); 
 
-              console.log(result);
+//               console.log(result);
       
-      var check_campaign_status_2 = review_details.find({parent_id: campaign_id, content_type: "submit_review",approval_status: 1}).fetch();
-      // var check_campaign_status = review_details.find({parent_id: campaign_id}).fetch();
-      console.log("get campaign reviews");
-      // console.log(check_campaign_status_2);
-      var new_array_2 = new Array();
+//       var check_campaign_status_2 = review_details.find({parent_id: campaign_id, content_type: "submit_review",approval_status: 1}).fetch();
+//       // var check_campaign_status = review_details.find({parent_id: campaign_id}).fetch();
+//       console.log("get campaign reviews");
+//       // console.log(check_campaign_status_2);
+//       var new_array_2 = new Array();
 
-      if(check_campaign_status_2[0]){
+//       if(check_campaign_status_2[0]){
 
-          for(var i=0; i< check_campaign_status_2.length;i++){
-             new_array_2.push(check_campaign_status_2[i].review_id);
-          }
+//           for(var i=0; i< check_campaign_status_2.length;i++){
+//              new_array_2.push(check_campaign_status_2[i].review_id);
+//           }
 
-      // console.log("reviewer array");
-      // console.log(new_array_2);
+//       // console.log("reviewer array");
+//       // console.log(new_array_2);
 
-      var report_id = 'report_id_'+Math.floor((Math.random() * 2465789) + 1);
-      console.log(report_id);
-                               var result = campaign_details.insert({
+//       var report_id = 'report_id_'+Math.floor((Math.random() * 2465789) + 1);
+//       console.log(report_id);
+//                                var result = campaign_details.insert({
 
-                                  entry_type: "campaign_completion_report",
-                                  report_id: report_id,
-                                  campaign_id: campaign_id,
-                                  campaigner_id: campaigner_id,
-                                  review_listing: new_array_2,
+//                                   entry_type: "campaign_completion_report",
+//                                   report_id: report_id,
+//                                   campaign_id: campaign_id,
+//                                   campaigner_id: campaigner_id,
+//                                   review_listing: new_array_2,
 
-                                  campaign_started_on: campaign_start_date,
-                                  campaign_completed_on: Date.now(),
-                  });
+//                                   campaign_started_on: campaign_start_date,
+//                                   campaign_completed_on: Date.now(),
+//                   });
 
-                var notification_id = 'notification_id_'+Math.floor((Math.random() * 2465789) + 1);
-                  var result2 = notification_details.insert({
+//                 var notification_id = 'notification_id_'+Math.floor((Math.random() * 2465789) + 1);
+//                   var result2 = notification_details.insert({
 
-                                notification_id: notification_id,
-                                notification_by: "crone_jobs",
-                                notification_to: campaigner_id,
+//                                 notification_id: notification_id,
+//                                 notification_by: "crone_jobs",
+//                                 notification_to: campaigner_id,
 
-                                campaign_id: campaign_id,
-                                notification_status: 0,
+//                                 campaign_id: campaign_id,
+//                                 notification_status: 0,
 
-                                report_id: report_id,
-                                notification_type: "campaign_completion_report",
-                                created_at: Date.now()
-                });
+//                                 report_id: report_id,
+//                                 notification_type: "campaign_completion_report",
+//                                 created_at: Date.now()
+//                 });
 
-      console.log("succes inserted");
-      }
-              console.log(i);
-              console.log( "******************************************" );
+//       console.log("succes inserted");
+//       }
+//               console.log(i);
+//               console.log( "******************************************" );
 
-//next line is for getting the completed campaigns count directly fron the campaign_detail table
-      var check_campaign_status_for_stats = campaign_details.find({approval_status: 4}).fetch();
+// //next line is for getting the completed campaigns count directly fron the campaign_detail table
+//       var check_campaign_status_for_stats = campaign_details.find({approval_status: 4}).fetch();
 
-      var check_general_records = general_records.find({"record_type": "campaign_count"}).fetch();
-        if(check_general_records[0]){
-                              var result =  general_records.update({
-                                campaign_id: check_general_records[0].general_record_id,
-                              }, {
-                                $set: {
-                                  "campaign_count": check_campaign_status_for_stats.length,
-                                  "update_at": Date.now()
-                                } 
-                              }); 
-          }else{
+//       var check_general_records = general_records.find({"record_type": "campaign_count"}).fetch();
+//         if(check_general_records[0]){
+//                               var result =  general_records.update({
+//                                 campaign_id: check_general_records[0].general_record_id,
+//                               }, {
+//                                 $set: {
+//                                   "campaign_count": check_campaign_status_for_stats.length,
+//                                   "update_at": Date.now()
+//                                 } 
+//                               }); 
+//           }else{
 
-             var general_record_id = 'general_record_id_'+Math.floor((Math.random() * 2465789) + 1);
-             var result = general_records.insert({
-                          "general_record_id": general_record_id,
-                          "record_type": "campaign_count",
-                          "campaign_count": check_campaign_status_for_stats.length,
-                          "created_at": Date.now(),
-                        });
-              }
+//              var general_record_id = 'general_record_id_'+Math.floor((Math.random() * 2465789) + 1);
+//              var result = general_records.insert({
+//                           "general_record_id": general_record_id,
+//                           "record_type": "campaign_count",
+//                           "campaign_count": check_campaign_status_for_stats.length,
+//                           "created_at": Date.now(),
+//                         });
+//               }
 
-              }
+//               }
 
-           }
-         }
-              console.log("stop");
-           }
-        }
-  });
+//            }
+//          }
+//               console.log("stop");
+//            }
+//         }
+//   });
 
 // END crone jobs for capturing the report stats
 

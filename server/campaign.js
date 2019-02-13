@@ -159,7 +159,6 @@ console.log(select_package+book_name+book_summary+author_name+author_description
                 }
       },
 
-
 async make_campaign_payment(final_payment,phone,logged_in_user){
 
   console.log(final_payment+ ' & ' +phone+ ' & ' +logged_in_user);
