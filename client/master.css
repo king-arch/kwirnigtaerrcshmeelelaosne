@@ -1183,8 +1183,8 @@ blockquote p:before {
 }
 
 .landing-page .content-bg-wrap {
-    background: url(../img/landing-users.png);
-    /*-webkit-animation: sidedownscroll 30s linear infinite;
+/*    background: url(../img/landing-users.png);
+*/    /*-webkit-animation: sidedownscroll 30s linear infinite;
     animation: sidedownscroll 30s linear infinite*/
 }
 
@@ -13042,7 +13042,7 @@ p {
 
 @media (max-width:1024px) {
     .medium-padding80 {
-        padding: 45px 0
+        padding: 75px 0
     }
 }
 
@@ -14449,6 +14449,9 @@ p {
     .day-wethear-item {
         width: 33%
     }
+    .container {
+    max-width: 700px !important;
+}
 }
 
 @media (max-width:480px) {
@@ -20156,9 +20159,9 @@ box-shadow: rgba(255,255,255, 0.75) 1.5em 0 0 0, rgba(255,255,255, 0.75) 1.1em 1
 height: 100px !important;
 }
 
-.go_to_blog_detail_img {
+/*.go_to_blog_detail_img {
     height: 150px !important
-}
+}*/
 
 .font_head_size{
     font-size: 30px; font-weight: 600;
@@ -20445,4 +20448,9 @@ text-align: center !important;
 
 .color_white{
     color:#fff !important;
+}
+
+.bg_light_blue{
+    background-color: #EDF2F6 !important;
+
 }

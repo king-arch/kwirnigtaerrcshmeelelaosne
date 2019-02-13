@@ -1,6 +1,13 @@
 ﻿
 @media only screen and (min-width:320px) and (max-width: 767px)
 {
+   .position_fixed_left{
+    position: fixed;
+    display: none;
+  }
+     .margn_left_for_fixed{
+    margin-left:0;
+  }
   .hedaer_banner_for_detail_page{
     height: 150px !important;
   }
@@ -22,7 +29,7 @@
     display: block;
   }
    .margin_top_for__header{
-      margin-top: 60px !important;
+      margin-top: 100px !important;
     }
     .default_text{
       font-size: 15px !important;
@@ -47,6 +54,12 @@
 }
 
   @media only screen and (min-width : 800px) {
+       .margn_left_for_fixed{
+    margin-left:0;
+  }
+   .margn_left_for_fixed{
+    margin-left: 27%;
+  }
      .hedaer_banner_for_detail_page{
     height: 150px !important;
   }
@@ -60,9 +73,7 @@
     ..hiddev_sme_items_on_web{
     display: block;
   }
-    .margin_top_for__header{
-      margin-top: 60px !important;
-    }
+    
 .mrgin_btm_10{
     margin-bottom: 10px !important;
 }
@@ -95,13 +106,20 @@ width: 6% !important;
 width: 6% !important;
 }
 
-    }
+}
 
 
 @media only screen and (min-width : 1200px) {
+   .position_fixed_left{
+    position: relative;
+    display: block;
+  }
+    .margn_left_for_fixed{
+    margin-left:0;
+  }
    .hedaer_banner_for_detail_page{
     height: 400px !important;
-    overflow: -moz-hidden-unscrollable !important;
+    overflow: hidden !important;
   }
      .font_size_author_writter{
     font-size: 14px !important;
@@ -154,9 +172,25 @@ width: 3% !important;
 
     }
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait) {
+  .container {
+    max-width: 700px;
+}
+  .position_fixed_left{
+    position: relative;
+    display: none;
+  }
+  .margn_left_for_fixed{
+    margin-left: 0%;
+  }
+  .margin_top_for__header{
+      margin-top: 30px !important;
+    }
    .hedaer_banner_for_detail_page{
     height: 150px !important;
   }
+   .iconn_header_width{
+      width: 71px !important;
+    }
      .font_size_author_writter{
     font-size: 20px !important;
   }
@@ -167,7 +201,7 @@ width: 3% !important;
     display: block;
   }
    .margin_top_for__header{
-      margin-top: 10px !important;
+      margin-top: 110px !important;
     }
        .btn {
   margin-bottom: 10px !important;
@@ -179,7 +213,7 @@ width: 3% !important;
     }
 
 .btm_height_home_page{
-    height: 10px !important;
+    height: 150px !important;
 }
 .carousel-control-prev-icon{
 
@@ -190,9 +224,21 @@ width: 3% !important;
     background-image:url(https://image.flaticon.com/icons/svg/523/523030.svg) !important;
 }
 }
+
+
    @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: landscape) {
+     .position_fixed_left{
+    position: fixed;
+    display: block;
+  }
+   .margn_left_for_fixed{
+    margin-left: 27%;
+  }
+    .margin_top_for__header{
+      margin-top: 30px !important;
+    }
        .font_size_author_writter{
-    font-size: 20px !important;
+    font-size: 15px !important;
   }
       .not_show_buttons{
     display: none;
