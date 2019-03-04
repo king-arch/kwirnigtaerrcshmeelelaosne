@@ -279,8 +279,14 @@ Template.index_content.events({
         }
             // swal("Logged in Successfully");
             var userId = result[0].user_id;
+            var user_email = result[0].user_email;
+            var user_status = result[0].user_status;
+            var email_status = result[0].email_status;
 
           Session.setPersistent("userId",userId);
+          Session.setPersistent("userEmail",user_email);
+          Session.setPersistent("email_status",email_status);
+
           Session.set("coming_from_login","true");
 
           // $('.form_reset').trigger('reset');
@@ -318,7 +324,7 @@ Template.index_content.events({
               else if(result[0].user_headline == undefined){
                        Router.go("/signup");                       
               }
-              else{
+              else if(result[0].user_headline){
                 Router.go("/profile");
               }
               

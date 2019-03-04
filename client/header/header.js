@@ -138,6 +138,7 @@ Template.headeroptions.events({
   'click #sign_out':function(){
 
     Session.clear("userId");
+    Session.setPersistent("userId","");
     var url = '/';
     window.location.href = url;
 
