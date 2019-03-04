@@ -1,21 +1,18 @@
 
 import { Template } from 'meteor/templating';
 import { user_details }  from './../../import/collections/insert.js';
-
 import { Base64 } from 'meteor/ostrio:base64';
 import { Session } from 'meteor/session';
 import {  Email } from 'meteor/email';
+
 import swal from 'sweetalert';
 
 Template.email_content.onRendered(function(){
-
-
-
+console.log("i am here...");
   Meteor.subscribe("user_info_based_on_id",Session.get("userId"));
-
+    
     setTimeout(function(){
-          $('#loading_div').addClass("loader_visiblity_block");
-      // swal('call sending mail function');
+       $('#loading_div').addClass("loader_visiblity_block");
        $("#send_mail").click();
     },3000);
 

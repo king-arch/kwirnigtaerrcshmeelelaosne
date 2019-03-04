@@ -7196,7 +7196,7 @@ body:before {
 }
 
 body {
-    overflow-x: hidden
+    /*overflow-x: hidden*/
 }
 
 body:before {
@@ -20087,12 +20087,7 @@ box-shadow: rgba(255,255,255, 0.75) 1.5em 0 0 0, rgba(255,255,255, 0.75) 1.1em 1
 .padd_20_both{
     padding: 20px !important; 
 }
-/
-/*
-#Mongol{
-    display: none !important;
-}
-*/
+
 .fixed-sidebar-left.sidebar--small .left-menu a {
   padding: 14px;
   display: block;
@@ -20171,9 +20166,6 @@ height: 100px !important;
     background-color: #9aaf59 !important;
     color: #fff !important
 }
-/*#Mongol{
-    display: none !important;
-}*/
 
 .control_block_mrgin_top{
     margin-top: 12px !important;
@@ -20426,11 +20418,6 @@ div._2ix0 {
   width: 100% !important;
   height: auto !important;
 }
-}
-
-
-#Mongol{
-    display: none !important;
 }
 
 .mrgin_top_btm_ticker{
