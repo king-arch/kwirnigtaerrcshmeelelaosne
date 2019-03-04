@@ -163,58 +163,82 @@
             </div>
 
             <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="4000">
+
         <div class="carousel-inner row w-100 mx-auto" role="listbox">
-            <div class="carousel-item col-md-3  ">
+
+<!--             <div class="carousel-item col-md-3  ">
                <div class="panel panel-default">
                   <div class="panel-thumbnail">
                     <a href="#" title="image 1" class="thumb">
-                      <img class="img-fluid d-block" src="//via.placeholder.com/200x200?text=1" alt="slide 1">
+                      <img class="img-fluid d-block" src="//via.placeholder.com/200x200?text=3" alt="slide 1">
                     </a>
-                     <div class="post-content padd_20_both"><a href="#" class="h5 post-title margin_btm">Book Name 1</a> </div>
+                     <div class="post-content padd_20_both"><a href="#" class="h5 post-title margin_btm">ssss</a> </div>
                   </div>
                 </div>
             </div>
+
             <div class="carousel-item col-md-3 ">
                <div class="panel panel-default">
                   <div class="panel-thumbnail">
-                    <a href="#" title="image 3" class="thumb">
-                     <img class="img-fluid d-block" src="//via.placeholder.com/200x200?text=2" alt="slide 2">
+                    <a href="#" title="image 1" class="thumb">
+                     <img class="img-fluid d-block" src="//via.placeholder.com/200x200?text=4" alt="slide 1">
                     </a>
-                    <div class="post-content padd_20_both"><a href="#" class="h5 post-title margin_btm">Book Name 1</a> </div>
+                    <div class="post-content padd_20_both"><a href="#" class="h5 post-title margin_btm">4444</a> </div>
                   </div>
                 </div>
             </div>
+
             <div class="carousel-item col-md-3 ">
                <div class="panel panel-default">
                   <div class="panel-thumbnail">
                     <a href="#" title="image 4" class="thumb">
-                     <img class="img-fluid d-block" src="//via.placeholder.com/200x200?text=3" alt="slide 3">
+                     <img class="img-fluid d-block" src="//via.placeholder.com/200x200?text=3" alt="slide 1">
                     </a>
-                    <div class="post-content padd_20_both"><a href="#" class="h5 post-title margin_btm">Book Name 1</a> </div>
+                    <div class="post-content padd_20_both"><a href="#" class="h5 post-title margin_btm">vvvv</a> </div>
                   </div>
                 </div>
-            </div>
+            </div> -->
+
             <div class="carousel-item col-md-3 active">
                 <div class="panel panel-default">
                   <div class="panel-thumbnail">
                     <a href="#" title="image 5" class="thumb">
-                     <img class="img-fluid d-block" src="//via.placeholder.com/200x200?text=4" alt="slide 4">
+                     <img class="img-fluid d-block" src="//via.placeholder.com/200x200?text=4" alt="slide 1">
                     </a>
-                    <div class="post-content padd_20_both"><a href="#" class="h5 post-title margin_btm">Book Name 1</a> </div>
+                    <div class="post-content padd_20_both"><a href="#" class="h5 post-title margin_btm">wwwwwwwwwwwwwww</a> </div>
                   </div>
                 </div>
             </div>
-            <div class="carousel-item col-md-3 ">
-              <div class="panel panel-default">
+
+          {{#each show_book_details }}
+ <!-- {{#if equals index 0}} -->
+            <div class="carousel-item col-md-3" >
+               <div class="panel panel-default">
                   <div class="panel-thumbnail">
-                    <a href="#" title="image 6" class="thumb">
-                      <img class="img-fluid d-block" src="//via.placeholder.com/200x200?text=5" alt="slide 5">
+                    <a href="#" title="image 1" class="thumb">
+                      <img class="img-fluid d-block" src="{{book_cover}}" alt="slide 1" style="height: 262.5px !important; width: 262.5px !important" >
                     </a>
-                    <div class="post-content padd_20_both"><a href="#" class="h5 post-title margin_btm">Book Name 1</a> </div>
+                     <div class="post-content padd_20_both"><a href="#" class="h5 post-title margin_btm">{{book_name}}</a> </div>
                   </div>
                 </div>
             </div>
-            <div class="carousel-item col-md-3 ">
+
+<!--             {{else}}
+            <div class="carousel-item col-md-3" >
+               <div class="panel panel-default">
+                  <div class="panel-thumbnail">
+                    <a href="#" title="image 1" class="thumb">
+
+                      <img class="img-fluid d-block" src="{{book_cover}}" alt="slide 1" style="height: 262.5px !important; width: 262.5px !important" >
+                    </a>
+                     <div class="post-content padd_20_both"><a href="#" class="h5 post-title margin_btm">{{book_name}}</a> </div>
+                  </div>
+                </div>
+            </div>            
+{{/if}} -->
+          {{/each}}
+
+<!--             <div class="carousel-item col-md-3 ">
                <div class="panel panel-default">
                   <div class="panel-thumbnail">
                     <a href="#" title="image 7" class="thumb">
@@ -244,17 +268,8 @@
                   </div>
                   
                 </div>
-            </div>
-<div class="carousel-item col-md-3  ">
-                <div class="panel panel-default">
-                  <div class="panel-thumbnail">
-                    <a href="#" title="image 2" class="thumb">
-                     <img class="img-fluid mx-auto d-block" src="//via.placeholder.com/200x200?text=8" alt="slide 9">
-                    </a>
-                  </div>
-                  
-                </div>
-            </div>
+            </div> -->
+
         </div>
         <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>

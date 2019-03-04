@@ -39,14 +39,14 @@ Template.index_content.helpers({
        for( var i=0; i<result.length;i++){
           new_array.push({"index": i ,"book_cover": result[i].book_cover,"book_name": result[i].book_name});
        }
-    console.log('show result: ');
+    console.log('show result book: ');
     console.log(new_array);
     return new_array;
 
 },
 
     show_blog_details(){
-      console.log('https://en.wikipedia.org/wiki/Greece');
+      // console.log('https://en.wikipedia.org/wiki/Greece');
           Meteor.subscribe("fetch_blog_content");
           var result = blog.find({},{ limit: 4 }).fetch();
 
