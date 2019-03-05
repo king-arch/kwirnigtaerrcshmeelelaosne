@@ -20,50 +20,128 @@ Template.index_content.onDestroyed(function(){
 Template.index_content.onDestroyed(function () {
   Session.set("makeUserActive","");
   tracker.stop();
+
 });
 
 var tracker;
+
 Template.index_content.onRendered(function () {
 
+      setTimeout(function(){
+          $(".feed_loader").addClass("loader_visiblity_block");
+          $(".myCarousel_display").removeClass("loader_visiblity_block");
+      },3000);
+
+      // Meteor.call('check_book_count',function(error,result){
+      //         if(error){
+      //           swal("Some error occure.");
+      //         }else{
+      //           swal("Some error occure.");
+      //              }
+      //       });                       
 });
 
 Template.index_content.helpers({
 
-
     show_book_details(){
 
-      Meteor.subscribe("fetch_book_listing");
-      var result = book_details.find({},{ limit: 4 }).fetch();
-
+      Meteor.subscribe("fetch_book_for_slider");
+      var result = book_details.find({},{limit: 10,sort: {created_at: -1 } }).fetch();
       var new_array = new Array();
-       for( var i=0; i<result.length;i++){
-          new_array.push({"index": i ,"book_cover": result[i].book_cover,"book_name": result[i].book_name});
-       }
-    console.log('show result book: ');
-    console.log(new_array);
+          for( var i=0; i<result.length;i++){
+            if(i != 0){
+              new_array.push({"index": i ,"book_cover": result[i].book_cover,"book_name": result[i].book_name});
+            }
+          }
+
+          for( var i=0; i<result.length;i++){
+            if(i != 0){
+              new_array.push({"index": i ,"book_cover": result[i].book_cover,"book_name": result[i].book_name});
+            }
+          }
+
+           for( var i=0; i<result.length;i++){
+            if(i != 0){
+              new_array.push({"index": i ,"book_cover": result[i].book_cover,"book_name": result[i].book_name});
+            }
+          }
+    // console.log('show result book: ');
+    // console.log(new_array);
     return new_array;
 
-},
-
-    show_blog_details(){
-      // console.log('https://en.wikipedia.org/wiki/Greece');
-          Meteor.subscribe("fetch_blog_content");
-          var result = blog.find({},{ limit: 4 }).fetch();
-
-          // console.log('show result: ');
-          // console.log(result);
-          return result;
     },
 
+    show_book_details_deafult_slider(){
+
+      var result = book_details.find({},{limit: 1,sort: {created_at: -1 } }).fetch();
+      var new_array = new Array();
+      new_array.push({"index": 0 ,"book_cover": result[0].book_cover,"book_name": result[0].book_name});
+      return new_array;
+
+    },
+
+    show_blog_details(){
+
+          Meteor.subscribe("fetch_blog_content_for_slider");
+          var result = blog.find({},{ limit: 10 ,sort: { created_at: -1 } }).fetch();
+
+          console.log("blog general listing");
+          console.log(result);
+
+          var new_array = new Array();
+          for( var i=0; i<result.length;i++){
+            if(i != 0){
+              new_array.push({
+                              "index": i ,
+                              "blog_cover": result[i].blog_cover,
+                              "blog_title": result[i].blog_title,
+                              "blog_id": result[i].blog_id
+                            });
+            }
+          }
+
+          for( var i=0; i<result.length;i++){
+            if(i != 0){
+              new_array.push({
+                              "index": i ,
+                              "blog_cover": result[i].blog_cover,
+                              "blog_title": result[i].blog_title,
+                              "blog_id": result[i].blog_id
+                            });
+            }
+          }
+
+          for( var i=0; i<result.length;i++){
+            if(i != 0){
+              new_array.push({
+                              "index": i ,
+                              "blog_cover": result[i].blog_cover,
+                              "blog_title": result[i].blog_title,
+                              "blog_id": result[i].blog_id
+                            });
+            }
+          }
+console.log(new_array.length);
+console.log(new_array);
+          return new_array;
+
+    },
+
+
+    show_blog_details_deafult_slider(){
+
+          var result = blog.find({},{limit: 1,sort: { created_at: -1 } }).fetch();
+          return result;
+
+  },
+
     fetch_user_info(){
-      // console.log('ok');
+
          var user_id = this.blog_author;  
-         // console.log(user_id);            
          Meteor.subscribe("user_info_based_on_id",user_id);
          var result = user_details.find({user_id: user_id}).fetch();
-         // console.log('show author details');
-         // console.log(result);
          return result;
+
     },
 
     book_name_with_trim(){

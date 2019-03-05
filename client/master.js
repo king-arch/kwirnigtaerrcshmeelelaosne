@@ -3,6 +3,10 @@
       return a === b;
     });
 
+    Template.registerHelper('!equals', function (a, b) {
+      return a === b;
+    });
+
    Template.registerHelper('calculate_time_difference', function (a) {
 
     var dt = new Date(a);

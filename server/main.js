@@ -52,6 +52,10 @@ import urlMetadata from 'url-metadata';
       return book_details.find({});
     });
 
+     Meteor.publish('fetch_book_for_slider', function() {
+      return book_details.find({},{ limit: 10, fields: { book_id: 1,book_name: 1,book_cover: 1 ,created_at: 1 } });
+    });
+
      Meteor.publish('fetch_book_listing_with_limit', function(limit) {
       return book_details.find({},{limit: limit ,sort: {created_at: -1}});
     });
@@ -97,6 +101,10 @@ import urlMetadata from 'url-metadata';
 
      Meteor.publish('fetch_blog_content', function() {
       return  blog.find({});
+    });
+     
+     Meteor.publish('fetch_blog_content_for_slider', function() {
+      return  blog.find({},{ limit: 10, fields: { blog_id: 1,blog_cover: 1,blog_title: 1 ,created_at: 1 } });
     });
      
      Meteor.publish('fetch_blog_comments_with_blog_id', function(blog_id) {
