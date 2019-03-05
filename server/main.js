@@ -124,6 +124,12 @@ import urlMetadata from 'url-metadata';
     });
 
      Meteor.publish('fetch_blog_content_with_blog_id', function(blog_id) {
+      var v1 = blog.find({ "blog_id": blog_id }).fetch();
+      console.log("new blog loggin subscription");
+
+      console.log(blog_id);
+      console.log(v1);
+      
       return blog.find({ "blog_id": blog_id });
     });
 

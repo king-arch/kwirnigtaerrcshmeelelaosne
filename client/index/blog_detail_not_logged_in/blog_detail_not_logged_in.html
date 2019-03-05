@@ -1,0 +1,96 @@
+
+<template name="blog_detail_not_logged_in">
+       {{> header}}
+   <body class="landing-page">
+      {{> header_not_logged_in}}
+      {{> display_blog_detail_not_logged_in}}
+   </body>
+</template>
+
+<template name="display_blog_detail_not_logged_in">
+   <div class="loading"  id="loading_div" ></div>
+   {{#each show_blog_details}}
+   <div class="container margin_top_for__header">
+      <div class="row">
+         <div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="ui-block">
+               <div class="top-header">
+                  <div class="top-header-thumb hedaer_banner_for_detail_page">
+                     <img src="{{blog_cover}}" alt="nature">
+                  </div>
+                 
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+   <div class="container mb60 ">
+      <div class="row">
+         <div class="col col-xl-12 m-auto col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="ui-block ui-block-title">
+               <!-- Single Post -->
+               <article class="hentry blog-post single-post">
+                  <a href="#" class="post-category bg-blue-light">{{blog_type}}</a>
+                  <h2 class="h1 post-title">{{blog_title}}</h2>
+                  <div class="single-post-additional inline-items">
+                     {{#each fetch_user_info}}   
+                     <div class="post__author author vcard inline-items">
+                        <img alt="author" src="{{user_profile_pic}}" class="avatar">
+                        <div class="author-date not-uppercase">
+                           <a class="h6 post__author-name fn" href="#">{{user_name}}</a>
+                           <div class="author_prof">
+                              Author
+                           </div>
+                        </div>
+                     </div>
+                     {{/each}}
+                     <div class="post-date-wrap inline-items">
+                        <svg class="olymp-calendar-icon">
+                           <use xlink:href="icons/icons.svg#olymp-calendar-icon"></use>
+                        </svg>
+                        <div class="post-date">
+                           <a class="h6 date" href="#">{{blog_creation_date}}</a>
+                           <span>Date</span>
+                        </div>
+                     </div>
+                     <div class="post-comments-wrap inline-items">
+                        <svg class="olymp-comments-post-icon">
+                           <use xlink:href="icons/icons.svg#olymp-comments-post-icon"></use>
+                        </svg>
+                        <div class="post-comments">
+                           <a class="h6 comments" href="#">{{comment_count_lvl_0}}</a>
+                           <span>Comments</span>
+                        </div>
+                     </div>
+                     <div class="post-comments-wrap inline-items">
+                   <!--      <a href="whatsapp://send?text=The text to share!" target="_blank" >Share via Whatsapp</a> |  -->
+                        <a href="https://www.facebook.com/sharer/sharer.php?u=http://13.233.93.182/blog_detail_not_logged_in/{{get_id_in_base64}}" target="_blank" >Share via Facebook</a>
+                        <!-- https://writersmelon.herokuapp.com/blog_detail/YmxvZ19pZF8xMjAyNTI5 -->
+                        <!-- https://www.facebook.com/sharer.php?caption=[caption]&description=[description]&u=[website]&picture=[image-url] -->
+                     </div>
+                  </div>
+                  <div class="post-content-wrap">
+                     <div class="post-content pad_0" id="blog_discription" >
+                        <p class="section profile-info" id="temp_data">
+                           {{{blog_discription}}}
+                        </p>
+                     </div>
+                  </div>
+               </article>
+            </div>
+
+         </div>
+      </div>
+   </div>
+   {{/each}}
+   <script type="text/javascript">
+      $(document).ready(function(){
+         $("head").append('<meta property="og:title" content="European Travel Destinations">'+
+      '<meta property="og:description" content="Offering tour packages for individuals or groups.">'+
+      '<meta property="og:image" content="http://www.writersmelon.com/wm/wp-content/uploads/2018/08/portrait-of-a-business-woman-working-on-laptop_1303-9733.jpg">'+
+      '<meta property="og:url" content="http://euro-travel-example.com/index.htm">');
+      });
+      
+   </script>
+</template>
+

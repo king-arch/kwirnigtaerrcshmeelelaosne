@@ -7,6 +7,7 @@ import swal from 'sweetalert';
 import { user_details }  from './../../import/collections/insert.js';
 import { book_details }  from './../../import/collections/insert.js';
 import { blog }  from './../../import/collections/insert.js';
+import { Base64 } from 'meteor/ostrio:base64';
 
 // import { ServiceConfiguration } from 'meteor/service-configuration';
 
@@ -300,8 +301,10 @@ Template.index_content.events({
       },
 
   'click .redirect_to_login':function(event){
-    swal("we need to sign-in first.");
-    $('#login_email').focus();
+      var blog_id = Base64.encode(this.blog_id);
+      alert(this.blog_id);  
+      var url = '/blog_detail_not_logged_in/'+blog_id;
+      window.location.href = url;
   },
 
   'click #login_submit':function(event){

@@ -8,6 +8,40 @@
       <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
+
+
+
+<!-- HTML Meta Tags -->
+<title>Writersmelon | Blog Detail</title>
+<meta name="description" content="Discover great books & authors. Find useful articles on writing, publishing, book marketing & the ever changing digital world. If you are an author, blogger or a book lover, there is nowhere else on earth you would rather be. Welcome to Writersmelon. Take a slice in writing !">
+
+<!-- Google / Search Engine Tags -->
+<meta itemprop="name" content="Writersmelon | Blog Detail">
+
+<meta itemprop="description" content="Discover great books & authors. Find useful articles on writing, publishing, book marketing & the ever changing digital world. If you are an author, blogger or a book lover, there is nowhere else on earth you would rather be. Welcome to Writersmelon. Take a slice in writing !">
+
+<meta itemprop="image" content="http://13.233.93.182/img/comment_gray.png">
+
+<!-- Facebook Meta Tags -->
+<meta property="og:url" content="http://13.233.93.182">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Writersmelon | Blog Detail">
+<meta property="og:description" content="Discover great books & authors. Find useful articles on writing, publishing, book marketing & the ever changing digital world. If you are an author, blogger or a book lover, there is nowhere else on earth you would rather be. Welcome to Writersmelon. Take a slice in writing !">
+
+<meta property="og:image" content="http://13.233.93.182/img/comment_gray.png">
+
+
+<!-- Twitter Meta Tags -->
+<meta name="twitter:card" content="summary_large_image">
+
+<meta name="twitter:title" content="Writersmelon | Blog Detail">
+
+<meta name="twitter:description" content="Discover great books & authors. Find useful articles on writing, publishing, book marketing & the ever changing digital world. If you are an author, blogger or a book lover, there is nowhere else on earth you would rather be. Welcome to Writersmelon. Take a slice in writing !">
+
+<meta name="twitter:image" content="http://13.233.93.182/img/comment_gray.png">
+
+<!-- Meta Tags Generated via http://heymeta.com -->
+
    </head>
 </template>
                                                                                                             
@@ -153,6 +187,75 @@
    <img src="/svg-icons/back-to-top.svg" alt="arrow" class="back-icon">
    </a>
 </template>
+                                                                                                            
+<template name="header_not_logged_in">
+     <header class="hiddev_sme_items_on_web">
+      <link rel="stylesheet" href="../navbar/css/styles.css">
+      <script src="../navbar/js/responsive-nav.js"></script>
+ <script src="../navbar/js/fastclick.js"></script>
+    <script src="../navbar/js/scroll.js"></script>
+    <script src="../navbar/js/fixed-responsive-nav.js"></script>
+    <p style="text-align: center;"><a><img src="../img/logo_wm.png" style="width: 150px !important;"></a></p>
+      <a id="go_to_profile" class="logo icn_mob_header" data-scroll><i class="fa fa-user color_white"></i></a>
+       <a id="campaign_listing" class="logo icn_mob_header" data-scroll><i class="fa fa-briefcase color_white"></i></a>
+        <a id="send_to_reward_detail" class="logo icn_mob_header" data-scroll><i class="fa fa-certificate color_white"></i></a>
+
+      <nav class="nav-collapse">
+        <ul>
+
+          <li class="menu-item"><a id="go_to_book" class="color_white"  data-scroll>Sign-in/sign-up</a></li>
+
+        </ul>
+
+      </nav>
+
+    </header>
+
+
+   <header class="header" id="site-header">
+      <div class="container">
+         <div class="page-title">
+            <img src="/img/logo_wm.png" style="width: 150px !important;">
+         </div>
+         <div class="header-content-wrapper">
+            <a  href="/" class="link-find-friend pull-right"  title="Feed" >Sign-in/sign-up</a>
+         </div>
+      </div>
+   </header>
+   <!-- ... end Header-BP -->
+
+   <!-- Responsive Header-BP -->
+   
+  
+   <!-- ... end Responsive Header-BP -->
+   <div class="header-spacer"></div>
+   <div class="container ">
+    <div class="mrgin_top_btm_ticker">
+      <div class="onoffswitch3 hidden-xs">
+         <input type="checkbox" name="onoffswitch3" class="onoffswitch3-checkbox" id="myonoffswitch3" checked>
+         <label class="onoffswitch3-label" for="myonoffswitch3">
+            <span class="onoffswitch3-inner">
+               <span class="onoffswitch3-active">
+                  <div id="ticker" >
+                     <marquee class="scroll-text" > 
+                        {{#each change_textual_ads}}
+                        <a href={{promotion_url}} style="color: #333 !important;" class="update_count" id="OpenNewTab" target="_blank" > <span class="update_count" >{{promotion_content}}</span></a>&nbsp; &nbsp;
+                        {{/each}}
+                     </marquee>
+                  </div>
+                  <span class="onoffswitch3-switch" style="display: block">Latest </span>
+               </span>
+               <span class="onoffswitch3-inactive"><span class="onoffswitch3-switch">Latest</span></span>
+            </span>
+         </label>
+      </div>
+    </div>
+   </div>
+   <a class="back-to-top" href="#">
+   <img src="/svg-icons/back-to-top.svg" alt="arrow" class="back-icon">
+   </a>
+</template>
+
 <template name="footer">
 </template>
 
