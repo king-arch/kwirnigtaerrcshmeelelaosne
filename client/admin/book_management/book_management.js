@@ -101,6 +101,16 @@ Template.book_management_details.onRendered(function () {
 		}
 	},
 
+	    book_name_with_trim(){
+      var book_name = this.book_name;
+      if(book_name.length > 40){ 
+        return book_name.slice(0, 40)+'...';
+      }
+      else{
+        return book_name;
+      }
+    },
+
 
 });
 

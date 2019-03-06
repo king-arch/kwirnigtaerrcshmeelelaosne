@@ -43,8 +43,22 @@ Template.display_blog_detail.onRendered(function () {
   var url = window.location.href;
   var new_url = url.split("/");
   url = new_url[new_url.length - 1];
-  var blog_id = Base64.decode(url);
+
+            if(url.length > 20){
+            
+          var get_blog_id = url.split("?");
+          var blog_id = get_blog_id[0];
+          Session.set("get_encrypted_blog_id",blog_id);
+          blog_id = Base64.decode(blog_id);
+
+          }else{
+            var blog_id = Base64.decode(url);
+            Session.set("get_encrypted_blog_id",url);
+          }
+
   Session.set("get_blog_id",blog_id);
+
+
 
       setTimeout(function () {
         $('#loading_div').addClass('loader_visiblity_block');
@@ -57,18 +71,17 @@ Template.display_blog_detail.onRendered(function () {
 
  Template.display_blog_detail.helpers({
 
+    get_id_in_base64(){
+      var get_encrypted_blog_id = Session.get("get_encrypted_blog_id");
+      return get_encrypted_blog_id;
+    },
+
     show_blog_details(){
-
-      // console.log("show_detail here");
       var blog_id = Session.get("get_blog_id");
-      // console.log(blog_id);
       Meteor.subscribe("fetch_blog_content_with_blog_id",blog_id);
-
       var result = blog.find({
                         blog_id: blog_id,
                       }).fetch();
-      // console.log("show blog result: ");
-      // console.log(result);
       return result;
     },
 

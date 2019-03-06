@@ -142,18 +142,28 @@ console.log(new_array);
          Meteor.subscribe("user_info_based_on_id",user_id);
          var result = user_details.find({user_id: user_id}).fetch();
          return result;
-
     },
 
     book_name_with_trim(){
       var book_name = this.book_name;
-      if(book_name.length > 40){ 
-        return book_name.slice(0, 40)+'...';
+      if(book_name.length > 25){ 
+        return book_name.slice(0, 25)+'...';
       }
       else{
         return book_name;
       }
     },
+
+    blog_title_trimmed(){
+         var blog_title = this.blog_title;
+
+         if(blog_title.length > 25){
+            return blog_title.slice(0, 25)+'...';
+         }
+         else{
+            return blog_title; 
+         } 
+  },
 
 });
 
@@ -302,7 +312,7 @@ Template.index_content.events({
 
   'click .redirect_to_login':function(event){
       var blog_id = Base64.encode(this.blog_id);
-      alert(this.blog_id);  
+      // alert(this.blog_id);  
       var url = '/blog_detail_not_logged_in/'+blog_id;
       window.location.href = url;
   },
