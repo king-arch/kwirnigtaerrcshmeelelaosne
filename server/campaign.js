@@ -579,3 +579,43 @@ if(check_status4[0]){
       },
 
 });
+
+
+
+function make_payment_for_campaign(purpose,amount,phone,buyer_name,email){
+  console.log('inside make_payment_for_campaign');
+
+  return new Promise((resolve, reject) => {   
+var request= require('request');
+
+var headers = { 'X-Api-Key': 'test_c96c3056543df20652841d869c7', 'X-Auth-Token': 'test_bf665ff124f9ceb90d002e2777f'}
+var payload = {
+  purpose: purpose,
+  amount: amount,
+  phone: phone,
+  buyer_name: buyer_name,
+  redirect_url: 'http://13.233.93.182/payment_status',
+  send_email: true,
+  webhook: 'http://www.example.com/webhook/',
+  send_sms: false,
+  email: email,
+  allow_repeated_payments: false}
+
+request.post('https://test.instamojo.com/api/1.1/payment-requests/', {form: payload,  headers: headers}, function(error, response, body){
+
+  console.log(body);
+
+  if(!error && response.statusCode == 201){
+    // console.log(body);
+    resolve(body);
+
+    // return body;
+  }
+    result2 = JSON.parse(body);
+      console.log(result2.message);
+    resolve(body);
+
+});
+});
+}
+

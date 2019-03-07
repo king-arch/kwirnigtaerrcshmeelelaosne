@@ -62,7 +62,7 @@
                         </a>
                      </div>
                      <div class="post-content">
-                        <a href="javascript:void(0)" class="h4 post-title c-darkgray go_to_book_detail pointer">{{book_name}}</a>
+                        <a href="javascript:void(0)" class="h4 post-title c-darkgray go_to_book_detail pointer">{{book_name_trimmed}}</a>
                         <div class="post__author author vcard inline-items">
                            <!--  <img src="img/avatar84-sm.jpg" alt="author"> -->
                            <div class="author-date not-uppercase">
@@ -93,9 +93,32 @@
             </div>
             {{/each}}
             {{else}}
-            <div class="medium-padding120 m-auto">
+
+
+
+       <div class="medium-padding120 m-auto div_hide_class" id="no_books_in_collection_div" >
                <p class=" logout-content">You have not added any book in your collection.  </p>
             </div>
+
+
+    <div class="container" id="no_books_in_collection_loader_div" >
+         <div class="row">
+
+             <div class="col m3 s3 l3">
+               <p class="noreq_screen none_listing"> {{> feed_loader}}</p>
+             </div>
+
+             <div class="col m3 s3 l3">
+               <p class="noreq_screen none_listing"> {{> feed_loader}}</p>
+             </div>
+             <div class="col m3 s3 l3">
+               <p class="noreq_screen none_listing"> {{> feed_loader}}</p>
+             </div>
+             <div class="col m3 s3 l3">
+               <p class="noreq_screen none_listing"> {{> feed_loader}}</p>
+             </div>
+         </div>
+   </div> 
             {{/each}}
          </div>
          <!--  <a id="load-more-button" href="javascript:void(0)" class="btn btn-control btn-more " data-load-link="items-to-load.html" data-container="newsfeed-items-grid">

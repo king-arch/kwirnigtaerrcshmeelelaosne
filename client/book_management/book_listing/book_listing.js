@@ -43,7 +43,6 @@ Template.book_listing_detail.onRendered(function () {
     });  
     var logged_in_user = Session.get("userId");
 	book_added_listing = Meteor.subscribe("book_collections_all_with_user_id",logged_in_user);
-	book_listing_all = Meteor.subscribe("fetch_book_listing");
 
 	setTimeout(function () {
 		$('#loading_div').addClass("loader_visiblity_block");
@@ -83,6 +82,9 @@ $(document).ready(function() {
  }
 });
 
+fetch_all_book_count();
+// fetch_editors_pic_count();
+// fetch_up_for_review_book_count();
 
 });
 
@@ -92,9 +94,9 @@ $(document).ready(function() {
  Template.book_listing_detail.helpers({
 
     show_books_listing(){	
-
     	var new_sort_order = Session.get("new_sort_order");
     	var limit = Session.get("set_book_listing_content_limit");
+      Meteor.subscribe("fetch_book_listing_optimized",limit,new_sort_order);
 
     	if(Session.get("filter_content") == 1){
     		// swal("case 1");
@@ -108,19 +110,16 @@ $(document).ready(function() {
 		    }
 		    result = new_array;
     	}else if(Session.get("filter_content") == 2){
-    		// swal("case 2");
 			var result = book_details.find({editors_pick_status: 1},{limit: limit,sort: {created_at: new_sort_order}}).fetch();
     	}
     	else{
-    		// swal("case 3");
-    		// swal("& limit "+limit+" & new_sort_order "+new_sort_order);
 			var result = book_details.find({},{limit: limit,sort: {created_at: new_sort_order}}).fetch();
     	}
 	    return result;
+      // return false;
     },
 
     check_if_up_for_review(){	
-
       var logged_in_user = Session.get("userId");
       Meteor.subscribe("campaign_details_all_list");
       
@@ -161,8 +160,8 @@ $(document).ready(function() {
 		var book_name = this.book_name;
 		  // console.log("case 1");
 
-		  if(book_name.length > 27){
-		      return book_name.slice(0,27)+'...';
+		  if(book_name.length > 18){
+		      return book_name.slice(0,18)+'...';
 		  }else{
 		    return book_name;
 		  }
@@ -183,9 +182,9 @@ $(document).ready(function() {
     show_review_counts(){
       
       Meteor.subscribe("review_details_with_campaign_id",this.campaign_id);
-      console.log("show_detail here");
+      // console.log("show_detail here");
       
-      console.log(this.campaign_id);
+      // console.log(this.campaign_id);
       var result = review_details.find({
                         parent_id: this.campaign_id,
                         content_type: "submit_review",
@@ -193,8 +192,8 @@ $(document).ready(function() {
                       }).count();
       
       if(result > 0){
-        console.log("show_review_details");
-        console.log(result);
+        // console.log("show_review_details");
+        // console.log(result);
       return result;
       }else{
       	return 0;
@@ -248,20 +247,21 @@ Template.book_listing_detail.events({
 	"click #show_up_for_review":function(){ 
       Session.set("filter_content",1);
       Session.set("new_sort_order",-1);
-
+      fetch_up_for_review_book_count();
     },
 
 	"click #show_all_books":function(){ 
       Session.set("filter_content",0);
       Session.set("new_sort_order",-1);	
+
     },
 
 	"click #editors_pick":function(){ 
       Session.set("filter_content",2);
       Session.set("new_sort_order",-1);
-
+       
+      fetch_editors_pic_count();
     },
-
 
 	"click .change_sort_by_status":function(){ 
 		
@@ -327,3 +327,73 @@ Template.book_listing_detail.events({
     },
 
 });
+
+function fetch_all_book_count(){
+  Meteor.call("fetch_all_book_count",function(error,result){
+          if(error){
+
+          }else{
+            console.log(result);
+                      if(result == 0){
+                            console.log("case 1");
+
+                        $("#no_book_div").removeClass("div_hide_class");
+                        $("#no_editors_pic_div").addClass("div_hide_class");
+                        $("#no_up_for_review_div").addClass("div_hide_class");
+
+                        $("#no_book_loader_div").addClass("div_hide_class");
+                        $("#no_editors_pic_loader_div").addClass("div_hide_class");
+                        $("#no_up_for_review_loader_div").addClass("div_hide_class");
+                      }
+
+               }
+  });
+}
+
+
+function fetch_editors_pic_count(){
+  Meteor.call("fetch_editors_pic_count",function(error,result){
+          if(error){
+
+          }else{
+            console.log(result);
+                      if(result == 0){
+                        console.log("case 1");
+
+                        $("#no_book_div").addClass("div_hide_class");
+                        $("#no_editors_pic_div").removeClass("div_hide_class");
+                        $("#no_up_for_review_div").addClass("div_hide_class");
+                        
+                        $("#no_book_loader_div").addClass("div_hide_class");
+                        $("#no_editors_pic_loader_div").addClass("div_hide_class");
+                        $("#no_up_for_review_loader_div").addClass("div_hide_class");
+                      }
+
+               }
+  });
+}
+
+
+
+function fetch_up_for_review_book_count(){
+  console.log("i am here");
+  Meteor.call("fetch_up_for_review_book_count",function(error,result){
+          if(error){
+
+          }else{
+            console.log(result);
+                      if(result == 0){
+                            console.log("case 1");
+
+                        $("#no_book_div").addClass("div_hide_class");
+                        $("#no_editors_pic_div").addClass("div_hide_class");
+                        $("#no_up_for_review_div").removeClass("div_hide_class");
+                        
+                        $("#no_book_loader_div").addClass("div_hide_class");
+                        $("#no_editors_pic_loader_div").addClass("div_hide_class");
+                        $("#no_up_for_review_loader_div").addClass("div_hide_class");
+                      }
+
+               }
+  });
+}

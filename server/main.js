@@ -48,23 +48,6 @@ import urlMetadata from 'url-metadata';
       return  user_details.find({});
     });
 
-     Meteor.publish('fetch_book_listing', function() {
-      return book_details.find({});
-    });
-
-     Meteor.publish('fetch_book_for_slider', function() {
-      return book_details.find({},{ limit: 10, fields: { book_id: 1,book_name: 1,book_cover: 1 ,created_at: 1 } });
-    });
-
-     Meteor.publish('fetch_book_listing_with_limit', function(limit) {
-      return book_details.find({},{limit: limit ,sort: {created_at: -1}});
-    });
-
-     Meteor.publish('fetch_book_listing_with_search_string', function(search_text) {
-      const query = new RegExp(search_text,'i');  
-      return book_details.find({book_name: query});
-    });
-
      Meteor.publish('user_info_listing_with_search_string', function(search_text) {
       const query = new RegExp(search_text,'i');  
       return user_details.find({user_name: query});
@@ -198,9 +181,7 @@ import urlMetadata from 'url-metadata';
       return  review_details.find({});
     });
 
-     Meteor.publish('book_collections_all_with_user_id', function(user_id){
-      return  book_collections.find({added_by: user_id});
-    });
+
 
     //  Meteor.publish('book_collections_all_with_book_id', function(book_id) {
     //   return  book_collections.find({book_id: book_id});
@@ -1927,35 +1908,7 @@ if(check_status4[0]){
 
   },
 
- add_to_my_collections(logged_in_user,book_id,adding_status,adding_id){
-   console.log(logged_in_user +' & '+book_id+' & '+adding_status+' & '+adding_id);
-   var check_if_already_added =  book_collections.find({"added_book_id": book_id,added_by: logged_in_user}).fetch();
-
-if(check_if_already_added[0]){
-
-          var result =  book_collections.update({
-              _id: check_if_already_added[0]._id,
-            },{
-              $set: {
-                      "adding_status": adding_status,
-                      "update_at": Date.now(),
-                    }
-            });
-      return result;
-}else{
-            var result =  book_collections.insert({
-                      "adding_id": adding_id,
-                      "added_book_id": book_id,
-                      "added_by": logged_in_user,
-                      "adding_status": adding_status,
-                      "created_at": Date.now(),
-            });
-      return result;
-}
-
-  },
-
-         submit_lvl_0_comment_for_blog: function(logged_in_user,blog_id,comment_text )
+ submit_lvl_0_comment_for_blog: function(logged_in_user,blog_id,comment_text )
       { 
         var comment_id = 'comment_id_'+Math.floor((Math.random() * 2465789) + 1);
         
@@ -2650,43 +2603,6 @@ function youtube_parser(url){
     var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
     var match = url.match(regExp);
     return (match&&match[7].length==11)? match[7] : false;
-}
-
-function make_payment_for_campaign(purpose,amount,phone,buyer_name,email){
-  console.log('inside make_payment_for_campaign');
-
-  return new Promise((resolve, reject) => {   
-var request= require('request');
-
-var headers = { 'X-Api-Key': 'test_c96c3056543df20652841d869c7', 'X-Auth-Token': 'test_bf665ff124f9ceb90d002e2777f'}
-var payload = {
-  purpose: purpose,
-  amount: amount,
-  phone: phone,
-  buyer_name: buyer_name,
-  redirect_url: 'http://13.233.93.182/payment_status',
-  send_email: true,
-  webhook: 'http://www.example.com/webhook/',
-  send_sms: false,
-  email: email,
-  allow_repeated_payments: false}
-
-request.post('https://test.instamojo.com/api/1.1/payment-requests/', {form: payload,  headers: headers}, function(error, response, body){
-
-  console.log(body);
-
-  if(!error && response.statusCode == 201){
-    // console.log(body);
-    resolve(body);
-
-    // return body;
-  }
-    result2 = JSON.parse(body);
-      console.log(result2.message);
-    resolve(body);
-
-});
-});
 }
 
 

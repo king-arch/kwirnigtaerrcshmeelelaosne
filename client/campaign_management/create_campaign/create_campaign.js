@@ -368,7 +368,7 @@ var final_payment = computing_formula;
 
       Meteor.call('save_campaign_details',select_package,book_name,book_summary,author_name,author_description,amazon_link,delivery_option,additional_information,book_price,book_catagries,book_cover,final_payment,logged_in_user,function (error, result) {
       if (error) {
-        swal('Some error occured!');
+        console('Some error occured!');
 
       } else {
             swal('Campign request successfully sent. ');

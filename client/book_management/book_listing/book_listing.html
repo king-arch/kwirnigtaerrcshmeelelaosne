@@ -141,7 +141,84 @@
                   </article>
                </div>
             </div>
+            {{else}}
+
+   <div class="row div_hide_class" id="no_book_div">
+      <div class="col m12 s12 l12">
+         <p class="noreq_screen none_listing"> No book found</p>
+      </div>
+   </div>
+
+    <div class="container" id="no_book_loader_div" >
+         <div class="row">
+
+             <div class="col m3 s3 l3">
+               <p class="noreq_screen none_listing"> {{> feed_loader}}</p>
+             </div>
+
+             <div class="col m3 s3 l3">
+               <p class="noreq_screen none_listing"> {{> feed_loader}}</p>
+             </div>
+             <div class="col m3 s3 l3">
+               <p class="noreq_screen none_listing"> {{> feed_loader}}</p>
+             </div>
+             <div class="col m3 s3 l3">
+               <p class="noreq_screen none_listing"> {{> feed_loader}}</p>
+             </div>
+         </div>
+   </div> 
+
+   <div class="row div_hide_class" id="no_editors_pic_div">
+      <div class="col m12 s12 l12">
+         <p class="noreq_screen none_listing"> No book is marked as editor's pic.</p>
+      </div>
+   </div>
+
+    <div class="container" id="no_editors_pic_loader_div" >
+         <div class="row">
+
+             <div class="col m3 s3 l3">
+               <p class="noreq_screen none_listing"> {{> feed_loader}}</p>
+             </div>
+
+             <div class="col m3 s3 l3">
+               <p class="noreq_screen none_listing"> {{> feed_loader}}</p>
+             </div>
+             <div class="col m3 s3 l3">
+               <p class="noreq_screen none_listing"> {{> feed_loader}}</p>
+             </div>
+             <div class="col m3 s3 l3">
+               <p class="noreq_screen none_listing"> {{> feed_loader}}</p>
+             </div>
+         </div>
+   </div> 
+
+   <div class="row div_hide_class" id="no_up_for_review_div">
+      <div class="col m12 s12 l12">
+         <p class="noreq_screen none_listing"> No book is up for review</p>
+      </div>
+   </div>
+
+    <div class="container" id="no_up_for_review_loader_div" >
+         <div class="row">
+
+             <div class="col m3 s3 l3">
+               <p class="noreq_screen none_listing"> {{> feed_loader}}</p>
+             </div>
+
+             <div class="col m3 s3 l3">
+               <p class="noreq_screen none_listing"> {{> feed_loader}}</p>
+             </div>
+             <div class="col m3 s3 l3">
+               <p class="noreq_screen none_listing"> {{> feed_loader}}</p>
+             </div>
+             <div class="col m3 s3 l3">
+               <p class="noreq_screen none_listing"> {{> feed_loader}}</p>
+             </div>
+         </div>
+   </div> 
             {{/each}}
+
          </div>
          <a id="load_more_button" href="#" class="btn btn-control btn-more loader_visiblity_block">
          <i class="fa-li fa fa-spinner fa-spin"></i>

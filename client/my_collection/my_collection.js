@@ -35,6 +35,9 @@ Template.my_collections_detail.onRendered(function () {
            Session.set("new_sort_order",-1);
            Session.set("filter_content",0);
 
+
+    Session.set("set_book_listing_content_limit",8);
+
     $.getScript("https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.19/js/jquery.dataTables.min.js",function(){
       // $.getScript("https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css",function(){
     	setTimeout(function () {
@@ -43,7 +46,8 @@ Template.my_collections_detail.onRendered(function () {
     });  
   
   var logged_in_user = Session.get("userId");
-  blog_listing = Meteor.subscribe("book_collections_all_with_user_id",logged_in_user);
+
+fetch_all_book_in_my_collections_count();
 
 	// book_listing = Meteor.subscribe("fetch_book_listing");
 
@@ -51,7 +55,7 @@ Template.my_collections_detail.onRendered(function () {
 		$('#loading_div').addClass("loader_visiblity_block");
 	}, 3000);
 
-	  Session.set("set_book_listing_content_limit",7);
+	  Session.set("set_book_listing_content_limit",8);
   var loading;
 
 var block=0;
@@ -82,15 +86,30 @@ $(document).ready(function() {
      }  
    }
   });
+
+
 });
 
  Template.my_collections_detail.helpers({
 
-    show_my_collection_books(){ 
+    book_name_trimmed(){
+    var book_name = this.book_name;
+      // console.log("case 1");
+      if(book_name.length > 18){
+          return book_name.slice(0,18)+'...';
+      }else{
+        return book_name;
+      }
+    },
+
+    show_my_collection_books(logged_in_user,limit,new_sort_order){ 
       var logged_in_user = Session.get("userId");
       var new_sort_order = Session.get("new_sort_order");
+      var limit = Session.get("set_book_listing_content_limit");
 
-      var result = book_collections.find({added_by: logged_in_user,adding_status: {$ne: 0} },{limit: 100,sort: {created_at: new_sort_order}}).fetch();
+      Meteor.subscribe("book_collections_all_with_user_id_optimized",logged_in_user,limit,new_sort_order);
+
+      var result = book_collections.find({added_by: logged_in_user,adding_status: {$ne: 0} },{limit: limit,sort: {created_at: new_sort_order}}).fetch();
       console.log('book_collections');
       console.log(result);
       return result;
@@ -98,9 +117,10 @@ $(document).ready(function() {
 
     show_book_details(){  
       var logged_in_user = Session.get("userId");
+      var limit = Session.get("set_book_listing_content_limit");
 
       blog_listing = Meteor.subscribe("fetch_book_detail_with_id",this.added_book_id);
-      var result = book_details.find({book_id: this.added_book_id},{limit: 100,sort: {created_at: -1}}).fetch();
+      var result = book_details.find({book_id: this.added_book_id},{limit: limit,sort: {created_at: -1}}).fetch();
       console.log('book_details');
       console.log(this.added_book_id);
       console.log(result);
@@ -137,7 +157,6 @@ Template.my_collections_detail.events({
 	"click .go_to_book_detail":function(){ 
     // swal("inside");
       var book_id = Base64.encode(this.book_id); 
-      blog_listing = Meteor.subscribe("book_collections_all_with_user_id",Session.get("userId")); 
       var url = '/book_detail/'+book_id;
       // console.log(url);
       window.location.href = url;
@@ -213,3 +232,25 @@ Template.my_collections_detail.events({
     },
 
 });
+
+function fetch_all_book_in_my_collections_count(){
+
+      var logged_in_user = Session.get("userId");
+      var new_sort_order = Session.get("new_sort_order");
+      var limit = Session.get("set_book_listing_content_limit");
+
+  Meteor.call("fetch_all_book_in_my_collections_count",logged_in_user,limit,new_sort_order,function(error,result){
+          if(error){
+
+          }else{
+            console.log(result);
+                      if(result == 0){
+                            console.log("case 1");
+
+                        $("#no_books_in_collection_div").removeClass("div_hide_class");
+                        $("#no_books_in_collection_loader_div").addClass("div_hide_class");
+                      }
+
+               }
+  });
+}
