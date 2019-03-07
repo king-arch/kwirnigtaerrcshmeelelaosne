@@ -82,40 +82,6 @@ import urlMetadata from 'url-metadata';
       return  interest_list.find({});
     });
 
-     Meteor.publish('fetch_blog_content', function() {
-      return  blog.find({});
-    });
-     
-     Meteor.publish('fetch_blog_content_for_slider', function() {
-      return  blog.find({},{ limit: 10, fields: { blog_id: 1,blog_cover: 1,blog_title: 1 ,created_at: 1 } });
-    });
-     
-     Meteor.publish('fetch_blog_comments_with_blog_id', function(blog_id) {
-      return  blog.find({ parent_id: blog_id, parent_post_type: 'Blog'});
-    });
-
-     Meteor.publish('fetch_blog_comments_with_comment_id', function(comment_id) {
-      return  blog.find({ parent_id: comment_id, post_type: 'like'});
-    });
-
-     Meteor.publish('fetch_blog_comments_like_lvl_0_with_comment_id', function(comment_id) {
-      return  blog.find({ parent_id: comment_id, parent_post_type: 'Blog'});
-    });
-
-     Meteor.publish('fetch_blog_comments_like_lvl_1_with_comment_id', function(comment_id) {
-      return  blog.find({ parent_id: comment_id, parent_post_type: 'comment_lvl_0'});
-    });
-
-     Meteor.publish('fetch_blog_content_with_blog_id', function(blog_id) {
-      var v1 = blog.find({ "blog_id": blog_id }).fetch();
-      console.log("new blog loggin subscription");
-
-      console.log(blog_id);
-      console.log(v1);
-      
-      return blog.find({ "blog_id": blog_id });
-    });
-
      Meteor.publish('show_content_data', function() {
       return  content.find({content_type: "reward_points"});
     });
@@ -1390,7 +1356,6 @@ console.log(blog_cover+blog_id+blog_title+blog_type+blog_discription+logged_in_u
               _id: newUser[0]._id,
             }, {
               $set: {
-
                       blog_title: blog_title,
                       blog_type: blog_type,
                       blog_discription: blog_discription,
@@ -1398,7 +1363,7 @@ console.log(blog_cover+blog_id+blog_title+blog_type+blog_discription+logged_in_u
 
                       blog_status: 1,
                       // blog_approval_status: 1,
-                      blog_author: logged_in_user,
+                      // blog_author: logged_in_user,
 
                       updated_at: Date.now(),
                 }});
@@ -2604,7 +2569,6 @@ function youtube_parser(url){
     var match = url.match(regExp);
     return (match&&match[7].length==11)? match[7] : false;
 }
-
 
 // function get_modality_list(instance_path) {    
 //     return new Promise((resolve, reject) => {   

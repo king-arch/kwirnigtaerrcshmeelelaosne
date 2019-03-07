@@ -34,21 +34,14 @@ Template.blog_listing_detail.onRendered(function () {
            Session.set("new_sort_order",-1);
            Session.set("filter_content",0);
 
-    $.getScript("https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.19/js/jquery.dataTables.min.js",function(){
-      // $.getScript("https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css",function(){
-    	setTimeout(function () {
-    	        $('#show_book_listing').DataTable();
-			}, 2000);
-    });  
-
-	  blog_listing = Meteor.subscribe("fetch_blog_content");
+fetch_all_blogs_listing_count();
 	// book_listing = Meteor.subscribe("fetch_book_listing");
 
 	setTimeout(function () {
 		$('#loading_div').addClass("loader_visiblity_block");
 	}, 3000);
 
-	  Session.set("set_book_listing_content_limit",7);
+	  Session.set("set_blog_listing_content_limit",8);
   var loading;
 
 var block=0;
@@ -66,11 +59,11 @@ $(document).ready(function() {
     var scrollPercentage = (scrollTop / bodyHeight);
     if(scrollPercentage > 0.9 && !loading) {
         loading = true;
-        var old_post_count = Session.get("set_book_listing_content_limit");
+        var old_post_count = Session.get("set_blog_listing_content_limit");
         var close_interval = setInterval(function () {
             $icon.show();
-            Session.set("set_book_listing_content_limit",Session.get("set_book_listing_content_limit")+6);
-              if(Session.get("set_book_listing_content_limit") !=old_post_count){
+            Session.set("set_blog_listing_content_limit",Session.get("set_blog_listing_content_limit")+6);
+              if(Session.get("set_blog_listing_content_limit") !=old_post_count){
               loading = false;
               clearInterval(close_interval)
             }
@@ -81,21 +74,19 @@ $(document).ready(function() {
  }
 });
 
-
 });
 
 
-
-
  Template.blog_listing_detail.helpers({
-
+    
     show_blog_listing(){	
-
-	    var result = blog.find({blog_status: 1},{limit: 10,sort: {created_at: -1}}).fetch();
-	    return result;
+       var limit = Session.get("set_blog_listing_content_limit");
+       blog_listing = Meteor.subscribe("fetch_blog_content_with_optimization",limit);
+	    var result = blog.find({blog_status: 1},{limit: limit,sort: {created_at: -1}}).fetch();
+      return result;
     },
 
-        fetch_user_info(){
+    fetch_user_info(){
          var user_id = this.blog_author;  
          // console.log(user_id);            
          Meteor.subscribe("user_info_based_on_id",user_id);
@@ -125,6 +116,24 @@ $(document).ready(function() {
 return result;
   },
 
+    blog_title_trimmed(blog_title){
+
+      if(blog_title.length > 18){
+          return blog_title.slice(0,18)+'...';
+      }else{
+        return blog_title;
+      }
+    },
+
+    user_headline_trimmed(user_headline){
+
+      if(user_headline.length > 18){
+          return user_headline.slice(0,18)+'...';
+      }else{
+        return user_headline;
+      }
+    },
+
 });
 
 Template.blog_listing_detail.events({
@@ -141,3 +150,22 @@ Template.blog_listing_detail.events({
   },
 
 });
+
+function fetch_all_blogs_listing_count(){
+
+      var limit = Session.get("set_blog_listing_content_limit");
+      Meteor.call("fetch_all_blogs_listing_count",limit,function(error,result){
+          if(error){
+
+          }else{
+                      console.log(result);
+                      if(result == 0){
+                      console.log("case 1");
+
+                        $("#no_blogs_div").removeClass("div_hide_class");
+                        $("#no_blogs_loader_div").addClass("div_hide_class");
+                      }
+
+               }
+  });
+}

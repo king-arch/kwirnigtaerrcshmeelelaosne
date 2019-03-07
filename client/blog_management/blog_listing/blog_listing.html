@@ -55,7 +55,7 @@
 
             {{#each fetch_user_info}}   
             <div class="post-content">
-              <a href="#" class="h4 post-title go_to_blog_detail">{{../blog_title}}</a>
+              <a href="#" class="h4 post-title go_to_blog_detail">{{blog_title_trimmed ../blog_title}}</a>
             
               <div class="post__author author vcard inline-items">
               <img src="{{user_profile_pic}}" alt="author" class="view_profile" >
@@ -63,7 +63,7 @@
                 <a class="h5 post__author-name fn view_profile" href="javascript:void(0)">{{user_name}}</a> <br/>
                 <div class="post__date">
                   <time class="published" datetime="2017-03-24T18:18">
-                   {{user_headline}}
+                   {{user_headline_trimmed user_headline}}
                   </time>
                 </div>
               </div>
@@ -75,6 +75,30 @@
           
         </div>
       </div>
+
+{{else}}
+
+         <div class="medium-padding120 m-auto div_hide_class" id="no_blogs_div" >
+                 <p class=" logout-content">No blog Published yet.  </p>
+         </div>
+
+    <div class="container" id="no_blogs_loader_div" >
+         <div class="row">
+             <div class="col m3 s3 l3">
+               <p class="noreq_screen none_listing"> {{> feed_loader}}</p>
+             </div>
+             <div class="col m3 s3 l3">
+               <p class="noreq_screen none_listing"> {{> feed_loader}}</p>
+             </div>
+             <div class="col m3 s3 l3">
+               <p class="noreq_screen none_listing"> {{> feed_loader}}</p>
+             </div>
+             <div class="col m3 s3 l3">
+               <p class="noreq_screen none_listing"> {{> feed_loader}}</p>
+             </div>
+         </div>
+   </div> 
+
  {{/each}}     
     </div>
   </div>

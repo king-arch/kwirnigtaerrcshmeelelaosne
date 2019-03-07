@@ -1,13 +1,7 @@
 
-import {
-	Template
-} from 'meteor/templating';
-import {
-	ReactiveVar
-} from 'meteor/reactive-var';
-import {
-	Session
-} from 'meteor/session';
+import { 	Template } from 'meteor/templating';
+import { 	ReactiveVar } from 'meteor/reactive-var';
+import { 	Session } from 'meteor/session';
 
 import swal from 'sweetalert';
 import { campaign_details } from './../../import/collections/insert.js';
