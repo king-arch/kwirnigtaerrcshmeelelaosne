@@ -23,16 +23,16 @@ import { Base64 } from 'meteor/ostrio:base64';
 var book_listing;
 var blog_listing;
 
-Template.privacy_content.onDestroyed(function () {
+Template.preview_content.onDestroyed(function () {
 	book_listing.stop();
 	blog_listing.stop();
 });
 
-Template.privacy_content.onCreated(function eventlistOnCreated(){
+Template.preview_content.onCreated(function eventlistOnCreated(){
 
 });
 
-Template.privacy_content.onRendered(function () {
+Template.preview_content.onRendered(function () {
     $.getScript("https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.19/js/jquery.dataTables.min.js",function(){
     	setTimeout(function () {
     	        $('#show_book_listing').DataTable();
@@ -45,13 +45,13 @@ Template.privacy_content.onRendered(function () {
 
 });
 
- Template.privacy_content.helpers({
+ Template.preview_content.helpers({
 
-    privacy_policy_content(){ 
+    preview_policy_content(){ 
       
-      Meteor.subscribe("show_privacy_policy");
-      var result = content.find({content_type: "privacy_policy"}).fetch();
-      console.log('privacy_content');
+      Meteor.subscribe("show_review_policy");
+      var result = content.find({content_type: "review_policy"}).fetch();
+      console.log('preview_content');
       console.log(result);
       return result;
     },

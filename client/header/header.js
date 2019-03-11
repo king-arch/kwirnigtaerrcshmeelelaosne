@@ -28,7 +28,7 @@ Template.headeroptions.onRendered(function(){
   ads_listing_ticker = Meteor.subscribe('fetch_text_promotion_listing');
 
       var logged_in_user = Session.get("userId");
-      user_info_based_on_email = Meteor.subscribe("user_info_based_on_id",logged_in_user);
+      user_info_based_on_email = Meteor.subscribe("user_info_based_on_id_logged_in_user",logged_in_user);
 
       interval_ticker = setInterval(function() {
           tick();
@@ -72,7 +72,7 @@ var str2 = str.split("-").join(" ");
 
     show_user_details(){
           var logged_in_user = Session.get("userId");
-          Meteor.subscribe("fetch_user_details",logged_in_user);
+          // Meteor.subscribe("fetch_user_details",logged_in_user);
           var result = user_details.find({"user_id": logged_in_user}).fetch();
         // console.log('show result: ');
         // console.log(result);
@@ -149,7 +149,7 @@ Template.headeroptions.events({
    },
 
   'click #go_to_community':function(){
-    Router.go("/community");
+    Router.go("/community/followers");
    },
 
   'click #go_to_blog':function(){

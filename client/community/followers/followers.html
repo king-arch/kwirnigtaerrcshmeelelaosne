@@ -1,0 +1,165 @@
+
+<template name="followers">
+{{> header}}    
+ <body class="landing-page">
+ {{> headeroptions}}
+ {{> followers_detail}}
+ </body> 
+</template>
+
+<template name="followers_detail">
+   <div class="loading"  id="loading_div" ></div>
+			<div class="container margin_top_for__header">
+				<div class="row">
+					<div class="col col-xl-11 col-lg-10 col-md-12 col-sm-12 col-11">
+			            <div class="ui-block responsive-flex1200 bg_trans">
+			               <div class="ui-block-title pad_0">
+			                  <h1 class="font_head_size">Community | followers ({{get_followers_count}})</h1>
+			               </div>
+			            </div>
+			         </div>
+
+			          <div class="col col-xl-1 col-lg-2 col-md-12 col-sm-12 col-1">
+			            <div class="ui-block responsive-flex1200 bg_trans margin-bottom-0 ">
+							<div class="ui-block-title pad_0">		
+								<span style="padding-top: 10px;">  Filter </span>
+			                 	<div class="more">  
+			                 		<i class="fa fa-angle-down three_dots_listing_page_angle"></i>
+			               			<ul class="more-dropdown">
+
+					                      <li id="show_all_follower" class="change_filter_by_status " >
+					                        <a href="javascript:void(0)" ><i class="fa fa-check">  </i> &nbsp;&nbsp;  followers</a>
+					                      </li>
+
+					                      <li id="show_all_following" class="change_filter_by_status" >
+					                        <a href="javascript:void(0)"> Following</a>
+					                      </li>
+
+							          </ul>
+							      </div>  
+							</div>
+						</div>
+			         </div>
+			 	</div>	
+			</div>
+
+ <div class="container">
+
+<div class="" id="div_for_follower" >
+			<div class="row">
+{{#each display_follower_list}}						
+	{{#each fetch_user_info_follower}}		
+				<div class="col col-lg-3 col-md-6 col-sm-12 col-12">
+					<div class="ui-block">
+						
+						<div class="friend-item">			
+							<div class="friend-header-thumb">
+								<img src="{{user_cover_pic}}" alt="friend">
+							</div>
+							<div class="friend-item-content text-center">
+								<div class="friend-avatar">
+									<div class="author-thumb">
+										<img src="{{user_profile_pic}}" alt="author" class="pointer view_profile" >
+									</div>
+									<div class="author-content">
+										<a href="#" class="h5 author-name pointer ">{{user_name_to_follow}}</a>
+										<div class="country">{{user_headline_trimmed}}</div>
+									</div>
+								</div>				
+
+								<div class="swiper-container">
+									<div class="swiper-wrapper">
+										<div class="swiper-slide">
+											<div class="friend-count" data-swiper-parallax="-500">
+
+                    <a href="#" class="friend-count-item">
+                      <div class="h6">
+                        {{show_following_count}}
+                      </div>
+                      <div class="title">Following</div>
+                    </a> 
+
+                    <a href="#" class="friend-count-item">
+                      <div class="h6">
+                        {{show_followers_count}}
+                      </div>
+                      <div class="title">Followers</div>
+                    </a>
+
+											</div>
+											<div class="control-block-button" data-swiper-parallax="-100">
+{{#if check_if_following}}
+    <a class="btn btn-block follow c-darkgray click_on_unfollow" id={{user_id}} > Unfollow</a>
+ {{else}}
+ 	 <a class="btn btn-block follow c-darkgray click_on_follow" id={{user_id}} > Follow</a>
+ {{/if}}
+
+											</div>
+										</div>
+									</div>
+								</div>
+
+							</div>
+						</div>
+					</div>
+				</div>	
+    {{/each}}
+	{{else}}
+        <div class="medium-padding120 m-auto div_hide_class" id="no_followers_div" >
+                 <p class=" logout-content">No followers found.  </p>
+        </div>
+
+	    <div class="container" id="no_followers_loader_div" >
+	         <div class="row">
+	             <div class="col m3 s3 l3">
+	               <p class="noreq_screen none_listing"> {{> feed_loader}}</p>
+	             </div>
+	             <div class="col m3 s3 l3">
+	               <p class="noreq_screen none_listing"> {{> feed_loader}}</p>
+	             </div>
+	             <div class="col m3 s3 l3">
+	               <p class="noreq_screen none_listing"> {{> feed_loader}}</p>
+	             </div>
+	             <div class="col m3 s3 l3">
+	               <p class="noreq_screen none_listing"> {{> feed_loader}}</p>
+	             </div>
+	         </div>
+	         	         <div class="row">
+	             <div class="col m3 s3 l3">
+	               <p class="noreq_screen none_listing"> {{> feed_loader}}</p>
+	             </div>
+	             <div class="col m3 s3 l3">
+	               <p class="noreq_screen none_listing"> {{> feed_loader}}</p>
+	             </div>
+	             <div class="col m3 s3 l3">
+	               <p class="noreq_screen none_listing"> {{> feed_loader}}</p>
+	             </div>
+	             <div class="col m3 s3 l3">
+	               <p class="noreq_screen none_listing"> {{> feed_loader}}</p>
+	             </div>
+	         </div>
+	         	         <div class="row">
+	             <div class="col m3 s3 l3">
+	               <p class="noreq_screen none_listing"> {{> feed_loader}}</p>
+	             </div>
+	             <div class="col m3 s3 l3">
+	               <p class="noreq_screen none_listing"> {{> feed_loader}}</p>
+	             </div>
+	             <div class="col m3 s3 l3">
+	               <p class="noreq_screen none_listing"> {{> feed_loader}}</p>
+	             </div>
+	             <div class="col m3 s3 l3">
+	               <p class="noreq_screen none_listing"> {{> feed_loader}}</p>
+	             </div>
+	         </div>
+	   </div> 
+
+    {{/each}}
+
+			</div>
+
+		</div>
+
+
+</div>
+</template>

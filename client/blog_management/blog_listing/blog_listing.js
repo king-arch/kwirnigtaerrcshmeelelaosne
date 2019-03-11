@@ -76,7 +76,6 @@ $(document).ready(function() {
 
 });
 
-
  Template.blog_listing_detail.helpers({
     
     show_blog_listing(){	
@@ -87,23 +86,15 @@ $(document).ready(function() {
     },
 
     fetch_user_info(){
-         var user_id = this.blog_author;  
-         // console.log(user_id);            
-         Meteor.subscribe("user_info_based_on_id",user_id);
+         var user_id = this.blog_author;        
+         Meteor.subscribe("user_info_based_on_id_for_blog",user_id);
          var result = user_details.find({user_id: user_id},{sort: {created_at: -1}}).fetch();
-         // console.log('show author details');
-         // console.log(result);
          return result;
     },
 
       comment_count_lvl_0(){
-         var logged_in_user = Session.get("userId");
-         // var blog_id = Session.get("get_blog_id");
-
-         Meteor.subscribe("fetch_blog_comments_with_blog_id",this.blog_id);
-
-         // console.log(this.blog_id);
-         // console.log(logged_in_user);
+          var logged_in_user = Session.get("userId");
+          Meteor.subscribe("fetch_blog_comments_with_blog_id",this.blog_id);
                         var result = blog.find({
                                      parent_id: this.blog_id,
                                      parent_post_type: 'Blog',
@@ -111,13 +102,10 @@ $(document).ready(function() {
                                      comment_status : 1,
                              },{$sort: {
                                       created_at: 1 }}).count();
-// console.log("comment list_new");
-// console.log(result);
-return result;
-  },
+          return result;
+      },
 
     blog_title_trimmed(blog_title){
-
       if(blog_title.length > 18){
           return blog_title.slice(0,18)+'...';
       }else{
@@ -126,7 +114,6 @@ return result;
     },
 
     user_headline_trimmed(user_headline){
-
       if(user_headline.length > 18){
           return user_headline.slice(0,18)+'...';
       }else{
@@ -145,8 +132,7 @@ Template.blog_listing_detail.events({
   "click .go_to_blog_detail":function(){ 
       var blog_id = Base64.encode(this.blog_id);  
       var url = '/blog_detail/'+blog_id;
-            // console.log(url);
-            window.location.href = url;
+      window.location.href = url;
   },
 
 });

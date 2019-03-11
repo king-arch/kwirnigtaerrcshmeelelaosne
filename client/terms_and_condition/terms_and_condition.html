@@ -1,16 +1,15 @@
 
-<template name="privacy">
+<template name="terms">
     {{> header}}
 
     <body class="landing-page">
-        {{> privacy_content}} {{> footer}}
+        {{> terms_content}} {{> footer}}
     </body>
 </template>
 
-<template name="privacy_content">
+<template name="terms_content">
 
     <div class="loading"  id="loading_div" ></div>
-
 
         <div class="content-bg-wrap">
             <section class="medium-padding20">
@@ -28,10 +27,10 @@
                                             <div class="ui-block" style="padding: 20px !important" >
                                             <div class="post-content">
                                             <h3>PRIVACY POLICY</h3>
-                        {{#each privacy_policy_content}}
+            {{#each terms_and_condition_content}}
                                             <p class="clearfix"></p>
-                                              <p>{{{privacy_policy_text}}}</p>
-                        {{/each}}
+                                            <p>{{{privacy_policy_text}}}</p>
+            {{/each}}
                                             </div>
                                             </div>
                                             </div>

@@ -600,8 +600,8 @@ Template.view_profile_content.helpers({
     },
 
     show_following_count(){
-        var logged_in_user = Session.get("userId"); 
-        var result = following_list.find({ "follower": logged_in_user , "current_follow_status": 1 }).count();
+        var view_user_profile_id = Session.get("view_user_profile_id"); 
+        var result = following_list.find({ "follower": view_user_profile_id , "current_follow_status": 1 }).count();
         if(result > 1){
         return result;
         }
@@ -611,8 +611,8 @@ Template.view_profile_content.helpers({
     },
 
     show_followers_count(){
-        var logged_in_user = Session.get("userId"); 
-        var result = following_list.find({ "following": logged_in_user , "current_follow_status": 1 }).count();
+        var view_user_profile_id = Session.get("view_user_profile_id"); 
+        var result = following_list.find({ "following": view_user_profile_id , "current_follow_status": 1 }).count();
         if(result > 1){
           return result;
           }

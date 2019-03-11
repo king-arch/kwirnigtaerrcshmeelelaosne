@@ -677,7 +677,6 @@ Template.feed_design.helpers({
       return result;
     },
 
-
   show_book_listing(){
          var liked_by = Session.get("userId");
         console.log(this.book_id);
@@ -686,6 +685,27 @@ Template.feed_design.helpers({
     return result;
   },
 
+  post_text(){
+    var post_text = this.post_text;
+      // console.log("case 1");
+
+      if(post_text.length > 280){
+          return post_text.slice(0,280)+'...';
+      }else{
+        return post_text;
+      }
+  },
+
+  post_text_greater_then_limit(){
+    var post_text = this.post_text;
+      // console.log("case 1");
+
+      if(post_text.length > 280){
+         return true;
+      }else{
+        return false;
+      }
+  },
 
 });
 

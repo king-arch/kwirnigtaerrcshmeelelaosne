@@ -17,15 +17,15 @@ import { Base64 } from 'meteor/ostrio:base64';
 
 var book_listing;
 
-Template.edit_work_with_us_details.onDestroyed(function () {
+Template.edit_about_us_details.onDestroyed(function () {
   book_listing.stop();
 });
 
-Template.edit_work_with_us_details.onCreated(function eventlistOnCreated(){
+Template.edit_about_us_details.onCreated(function eventlistOnCreated(){
 
 });
 
-Template.edit_work_with_us_details.onRendered(function () {
+Template.edit_about_us_details.onRendered(function () {
 
     $.getScript("https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.19/js/jquery.dataTables.min.js",function(){
       $.getScript("https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css",function(){
@@ -34,7 +34,7 @@ Template.edit_work_with_us_details.onRendered(function () {
     });  
     });  
 
-  book_listing = Meteor.subscribe("show_work_with_us");
+  book_listing = Meteor.subscribe("show_about_us");
   setTimeout(function () {
     $('#loading_div').addClass("loader_visiblity_block");
 
@@ -42,15 +42,15 @@ Template.edit_work_with_us_details.onRendered(function () {
     // $('#loading_div').addClass('loader_visiblity_block');
   }, 2000);
 
-      Meteor.call('display_work_with_us',function(error,result){
+      Meteor.call('display_about_us',function(error,result){
       if(error){
           console.log("Error");
       }else{
       
        console.log("terms and conditions succesfully fetched.");
 
-      var work_with_us_text = result[0].work_with_us_text;
-      $('#work_with_us').trumbowyg('html',work_with_us_text);
+      var about_us_text = result[0].about_us_text;
+      $('#about_us').trumbowyg('html',about_us_text);
        
       }
     });  
@@ -58,7 +58,7 @@ Template.edit_work_with_us_details.onRendered(function () {
 });
 
 
- Template.edit_work_with_us_details.helpers({
+ Template.edit_about_us_details.helpers({
 
     show_dates(){
       var array = new Array;
@@ -76,7 +76,7 @@ Template.edit_work_with_us_details.onRendered(function () {
   },
 });
 
-Template.edit_work_with_us_details.events({
+Template.edit_about_us_details.events({
 
     'click #go_back': function(){
       window.history.go(-1);
@@ -104,23 +104,23 @@ Template.edit_work_with_us_details.events({
       window.location.href="/content_listing";
     },
 
- 'click #submit_work_with_us': function(){
-    var work_with_us = $("#work_with_us").val();
+ 'click #submit_about_us': function(){
+    var about_us = $("#about_us").val();
 
-    if(work_with_us == null || work_with_us == '')
+    if(about_us == null || about_us == '')
               {
-                $("#work_with_us").addClass('emptyfield2').focus();
+                $("#about_us").addClass('emptyfield2').focus();
                 return false;
               }
     else
               {
-                $("#work_with_us").removeClass('emptyfield2');
+                $("#about_us").removeClass('emptyfield2');
               }
-// swal(' work_with_us '+work_with_us);
+// swal(' about_us '+about_us);
     $('#loader_gif').removeClass('div_hide_class');
     $('#save_text').addClass('div_hide_class');
 
-    Meteor.call('update_work_with_us',work_with_us,function(error,result){
+    Meteor.call('update_about_us',about_us,function(error,result){
 
     $('#loader_gif').addClass('div_hide_class');
     $('#save_text').removeClass('div_hide_class');

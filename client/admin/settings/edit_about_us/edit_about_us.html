@@ -1,9 +1,9 @@
 
-<template name="edit_work_with_us" >
- <body>  {{> edit_work_with_us_details}}  </body>
+<template name="edit_about_us" >
+ <body>  {{> edit_about_us_details}}  </body>
 </template>
 
-<template name="edit_work_with_us_details" >
+<template name="edit_about_us_details" >
 <div class="loading"  id="loading_div" ></div>
   {{> left_panel_admin}}
   <div class="content-bg-wrap"></div>
@@ -11,17 +11,18 @@
         <div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
           <div class="ui-block responsive-flex">
            <div class="container ui-block-title" style="padding-left: 4%;">
-              <div class="">  <p> Work with us</p>  </div>
+              <div class="">  <p> About us</p>  </div>
               <a href="#" class="more"><svg class="olymp-three-dots-icon"><use xlink:href="#olymp-three-dots-icon"></use></svg></a>
             </div>
           </div>
         </div>
       </div>
+      
     <div class="row ui-block">
         <div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">        
             <div class="container" style="padding: 2% 0 2% 4%;">         
-               <textarea class="form-control c-darkgray" placeholder="Enter Work With Us" id="work_with_us" > </textarea>            
-                <button class="btn btn-md-2 btn-primary pull-right" id="submit_work_with_us">
+               <textarea class="form-control c-darkgray" placeholder="Enter Work With Us" id="about_us" > </textarea>            
+                <button class="btn btn-md-2 btn-primary pull-right" id="submit_about_us">
                   <i class="fa fa-spinner fa-pulse fa-fw div_hide_class" id="loader_gif"></i> <span id="save_text"> Update</span> 
                 </button>
                 <button class="btn btn-grey btn-md-2 pull-right" id="go_back" style="margin-right: 14px !important;">
@@ -32,7 +33,7 @@
 
      <script type="text/javascript">
       // $('#edit_blog_description').trumbowyg();
-        var trumbowyg = $('#work_with_us').trumbowyg(
+        var trumbowyg = $('#about_us').trumbowyg(
       {
       btnsDef: {
         

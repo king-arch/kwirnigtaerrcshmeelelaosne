@@ -119,17 +119,25 @@
 
 
         <p id="post_text_{{post_id}}" class="justify" >
+
                 {{#if check_summary_for_br_tag}}
+
                   {{#each BreakAsArrayfull}}
-                  {{tag}}
+                    {{tag}}
                   {{/each}}
+
                   {{else}}
-                  {{post_text}}
+                    {{post_text}}
                   {{/if}}
 
-            <!-- <p>{{post_text}}
-            </p> -->
+        {{#if post_text_greater_then_limit}}
+            <span id="" style="color: red" class="pointer go_to_detail_page" >Read more</span>
+        {{/if}}
+
         </p>
+
+
+
         <div id="edit_post_text_{{post_id}}" class="loader_visiblity_block" > 
 
         <textarea class="loader_visiblity_block updateHiddenPost" id="hidden_hub_post_{{post_id}}" resize="none" placeholder="Edit ..." style="padding: 5px; border: 1px solid #e4e4e4; border-radius: 5px; width: 100%; height: auto !important;" >{{post_text}}</textarea>
@@ -288,8 +296,9 @@
                   {{post_text}}
                   {{/if}}
 
-            <!-- <p>{{post_text}}
-            </p> -->
+        {{#if post_text_greater_then_limit}}
+            <span id="" style="color: red" class="pointer go_to_detail_page" >Read more</span>
+        {{/if}}
         </p>
           <div id="edit_post_text_{{post_id}}" class="loader_visiblity_block" > 
 
@@ -536,6 +545,10 @@
                   {{else}}
                   {{post_text}}
                   {{/if}}
+
+        {{#if post_text_greater_then_limit}}
+            <span id="" style="color: red" class="pointer go_to_detail_page" >Read more</span>
+        {{/if}}
            </p>
  
           <div id="edit_post_text_{{post_id}}" class="loader_visiblity_block" > 
@@ -714,6 +727,10 @@
                   {{else}}
                   {{post_text}}
                   {{/if}}
+
+        {{#if post_text_greater_then_limit}}
+            <span id="" style="color: red" class="pointer go_to_detail_page" >Read more</span>
+        {{/if}}
            </p>
  
           <div id="edit_post_text_{{post_id}}" class="loader_visiblity_block" > 

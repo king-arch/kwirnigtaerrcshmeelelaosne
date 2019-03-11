@@ -1,0 +1,36 @@
+﻿
+
+.size_comunity_tabs{
+	font-size:16px;
+}
+
+.adjust_community_tab{
+	padding: 3px;
+}
+
+.active_community_tab{
+    border-bottom-color: white !important;
+    border: 1px solid #e6ecf5;
+
+}
+
+.inactive_community_tab{
+	border-bottom-color: #e6ecf5 !important;
+    border: 1px solid white;
+}
+
+.padding_on_li{
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.search_button{
+	height: 85%  !important;
+	background-color: #FF5E3A !important;
+}
+
+.search_input_fied{
+	margin-right: 550px !important;
+	width: 300px !important;
+	margin-left: 70% !important;
+}

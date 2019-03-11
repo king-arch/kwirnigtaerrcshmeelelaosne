@@ -1,7 +1,6 @@
 
 
 import { Meteor } from 'meteor/meteor';
-
 import { feed } from './../import/collections/insert.js';
 import { following_list } from './../import/collections/insert.js';
 import { book_collections } from './../import/collections/insert.js';
@@ -12,12 +11,29 @@ import { UserInfo } from './../import/collections/insert.js';
 import { campaign_details } from './../import/collections/insert.js';
 import { blog } from './../import/collections/insert.js';
 
+import { user_details } from './../import/collections/insert.js';
+
 import { Base64 } from 'meteor/ostrio:base64';
 import urlMetadata from 'url-metadata';
 
      Meteor.publish('fetch_blog_content', function() {
       return  blog.find({});
     });
+
+      Meteor.publish('user_info_based_on_id_for_blog', function(user_id) {
+         return  user_details.find({
+                                      user_id: user_id
+                                   },
+                                   { 
+                                      fields:
+                                      {
+                                          "user_id": 1,  
+                                          "user_name": 1,
+                                          "user_headline": 1,
+                                          "user_profile_pic": 1,
+                                      } 
+                                    });
+      });
 
      Meteor.publish('fetch_blog_content_with_optimization', function(limit) {
       return  blog.find({blog_status: 1},{limit: limit,sort: {created_at: -1}});

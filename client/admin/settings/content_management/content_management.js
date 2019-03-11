@@ -120,8 +120,8 @@ Template.content_management_details.events({
       window.location.href="/edit_reward_policy";
     },
 
-    'click #edit_work_with_us': function(){
-    	window.location.href="/edit_work_with_us";
+    'click #edit_about_us': function(){
+    	window.location.href="/edit_about_us";
     },
 
  'click #submit_reward_rate': function(){

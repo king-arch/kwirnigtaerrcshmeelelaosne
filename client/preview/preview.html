@@ -1,13 +1,13 @@
 
-<template name="privacy">
+<template name="preview">
     {{> header}}
 
     <body class="landing-page">
-        {{> privacy_content}} {{> footer}}
+        {{> preview_content}} {{> footer}}
     </body>
 </template>
 
-<template name="privacy_content">
+<template name="preview_content">
 
     <div class="loading"  id="loading_div" ></div>
 
@@ -27,11 +27,12 @@
                                             <div class="col-md-12">
                                             <div class="ui-block" style="padding: 20px !important" >
                                             <div class="post-content">
-                                            <h3>PRIVACY POLICY</h3>
-                        {{#each privacy_policy_content}}
+                                            <h3>PREVIEW POLICY</h3>
+                    {{#each preview_policy_content}}
                                             <p class="clearfix"></p>
-                                              <p>{{{privacy_policy_text}}}</p>
-                        {{/each}}
+                                              <p>{{{review_policy_text}}}</p>
+                    {{/each}}
+
                                             </div>
                                             </div>
                                             </div>
@@ -44,7 +45,6 @@
                 </div>
             </section>
         </div>
-
 
 
 </template>

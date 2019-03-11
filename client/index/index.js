@@ -169,6 +169,11 @@ console.log(new_array);
 
 Template.index_content.events({
 
+// 'click #go_to_privacy': function(){
+//   // swal("lets click 1");
+//     Router.go("/privacy");
+// },
+
 'click #clicked_on_gmail': function(){
   swal("lets click 1");
     $("#google_login").click();

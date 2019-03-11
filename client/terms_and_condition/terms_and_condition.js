@@ -23,16 +23,16 @@ import { Base64 } from 'meteor/ostrio:base64';
 var book_listing;
 var blog_listing;
 
-Template.privacy_content.onDestroyed(function () {
+Template.terms_content.onDestroyed(function () {
 	book_listing.stop();
 	blog_listing.stop();
 });
 
-Template.privacy_content.onCreated(function eventlistOnCreated(){
+Template.terms_content.onCreated(function eventlistOnCreated(){
 
 });
 
-Template.privacy_content.onRendered(function () {
+Template.terms_content.onRendered(function () {
     $.getScript("https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.19/js/jquery.dataTables.min.js",function(){
     	setTimeout(function () {
     	        $('#show_book_listing').DataTable();
@@ -45,16 +45,30 @@ Template.privacy_content.onRendered(function () {
 
 });
 
- Template.privacy_content.helpers({
+ Template.terms_content.helpers({
 
-    privacy_policy_content(){ 
+    terms_and_condition_content(){ 
       
-      Meteor.subscribe("show_privacy_policy");
-      var result = content.find({content_type: "privacy_policy"}).fetch();
-      console.log('privacy_content');
+      Meteor.subscribe("show_terms_and_condition");
+      var result = content.find({content_type: "terms_and_condition"}).fetch();
+      console.log('terms_and_condition');
       console.log(result);
       return result;
     },
 
+
+});
+
+Template.terms_content.events({
+
+    'click .view_profile':function(){  
+            var user_id = Base64.encode(this.user_id);  
+            if(this.user_id == Session.get("userId")){
+              var url = '/profile';
+            }else{
+              var url = '/view_profile/'+user_id;
+            }
+            window.location.href = url;
+    }, 
 
 });
